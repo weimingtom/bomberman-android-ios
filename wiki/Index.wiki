@@ -5,22 +5,25 @@
 === SVN ===
 [http://maven.apache.org/guides/index.html Maven 3.0.2]
 
-Structure par défaut d'un projet Maven : <br/><br/>
-|-- src <br/>
-| |-- main<br/>
-| | |-- java      > Contient le code source java<br/>
-| | |-- resources > Contient les ressources à inclure dans le jar produit (configuration, ...)<br/>
-| | |-- filters   > Filtres permettant de modifier les ressources lors de l'assemblage du jar<br/>
-| | |-- assembly  > Descripteur pour les assemblées Maven<br/>
-| | |-- config    > Fichier de configurations extérieurs au jar<br/>
-| | |-- webapp    > Le contenu de l'application web (projet web)<br/>
-| |-- test<br/>
-| | |-- java      > Contient le code source java des tests<br/>
-| | |-- resources > Contient les ressources pour les tests<br/>
-| | |-- filters   > Filtres à appliquer aux ressources de test<br/>
-| |-- site        > Le site de documentation<br/>
-|-- target        > Répertoire où Maven génére ses fichiers/artefacts<br/>
-|-- pom.xml       > Descripteur du projet<br/>
+<tr><td class="titre_code">Structure par défaut d'un projet Maven</td></tr>
+<tr><td class="code"><pre>
+|-- src
+| |-- main
+| | |-- java      > Contient le code source java
+| | |-- resources > Contient les ressources à inclure dans le jar produit (configuration, ...)
+| | |-- filters   > Filtres permettant de modifier les ressources lors de l'assemblage du jar
+| | |-- assembly  > Descripteur pour les assemblées Maven
+| | |-- config    > Fichier de configurations extérieurs au jar
+| | |-- webapp    > Le contenu de l'application web (projet web)
+| |-- test
+| | |-- java      > Contient le code source java des tests
+| | |-- resources > Contient les ressources pour les tests
+| | |-- filters   > Filtres à appliquer aux ressources de test
+| |-- site        > Le site de documentation
+|-- target        > Répertoire où Maven génére ses fichiers/artefacts
+|-- pom.xml       > Descripteur du projet
+</pre></td></tr>
+
 
 
 === Android ===
