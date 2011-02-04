@@ -28,7 +28,7 @@ Structure par défaut d'un projet Maven
 
 Maven pour Eclipse
 
-[http://m2eclipse.sonatype.org/index.html Site officiel]
+[http://m2eclipse.sonatype.org/index.html Site officiel] </br>
 [http://m2eclipse.sonatype.org/installing-m2eclipse.html Installation]
 
 === <u>Android</u> ===
