@@ -1,3 +1,5 @@
+<wiki:toc max_depth="5" />
+
 = Accueil =
 
 == Sommaire ==
