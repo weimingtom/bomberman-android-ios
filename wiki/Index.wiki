@@ -24,6 +24,12 @@ Structure par défaut d'un projet Maven
 |-- pom.xml       > Descripteur du projet
 </pre>
 
+==== [http://m2eclipse.sonatype.org/index.html m2eclipse] ====
+
+Maven pour Eclipse
+
+[http://m2eclipse.sonatype.org/installing-m2eclipse.html Installation]
+
 === Android ===
 
 [http://developer.android.com/index.html Documentation officielle]
