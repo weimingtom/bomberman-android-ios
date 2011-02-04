@@ -5,8 +5,8 @@
 === SVN ===
 [http://maven.apache.org/guides/index.html Maven 3.0.2]
 
-<tr><td class="titre_code">Structure par défaut d'un projet Maven</td></tr>
-<tr><td class="code"><pre>
+Structure par défaut d'un projet Maven
+<pre>
 |-- src
 | |-- main
 | | |-- java      > Contient le code source java
@@ -22,9 +22,7 @@
 | |-- site        > Le site de documentation
 |-- target        > Répertoire où Maven génére ses fichiers/artefacts
 |-- pom.xml       > Descripteur du projet
-</pre></td></tr>
-
-
+</pre>
 
 === Android ===
 
