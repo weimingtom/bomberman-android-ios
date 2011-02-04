@@ -1,8 +1,8 @@
 #sidebar Menu
 
-== Documentation ==
+== <u>Documentation</u> ==
 
-=== SVN ===
+=== <u>SVN</u> ===
 [http://maven.apache.org/guides/index.html Maven 3.0.2]
 
 Structure par défaut d'un projet Maven
@@ -24,16 +24,17 @@ Structure par défaut d'un projet Maven
 |-- pom.xml       > Descripteur du projet
 </pre>
 
-==== [http://m2eclipse.sonatype.org/index.html m2eclipse] ====
+==== <u>M2ECLIPSE</u> ====
 
 Maven pour Eclipse
 
+[http://m2eclipse.sonatype.org/index.html Site officiel]
 [http://m2eclipse.sonatype.org/installing-m2eclipse.html Installation]
 
-=== Android ===
+=== <u>Android</u> ===
 
 [http://developer.android.com/index.html Documentation officielle]
 
-=== iOS ===
+=== <u>iOS</u> ===
 
 [http://developer.apple.com/devcenter/ios/index.action Documentation officielle]
