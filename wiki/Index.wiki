@@ -1,6 +1,3 @@
-#sidebar TableOfContents
-* [Articles Acceuil]
-
 = Accueil =
 
 == Sommaire ==
@@ -18,4 +15,3 @@ Android:
 
 iOS:
 [http://developer.apple.com/devcenter/ios/index.action Documentation officielle]
-
