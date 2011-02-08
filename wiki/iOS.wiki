@@ -1,3 +1,4 @@
+#labels iOS,SDK,iPhone,Xcode
 = Description du fonctionnement du développement sur iOS =
 
 == Présentation ==
@@ -22,14 +23,17 @@
 || Products || Ce dernier dossier contient les éléments générés par le compilateur. ||
 
 
-== Différents types de fichiers ==
+== Les fichiers ==
+
+=== Les différents types de fichiers ===
  * _.h_: fichiers d'en-tête
  * _.m_: fichiers source
  * _.xib_: fichiers de description de l'interface graphique
+ * _.nib_:
  * _.plist_ (property list): fichiers xml 
 
 
-== Principaux fichiers ==
+=== Principaux fichiers ===
  * _main.m_: contient la fonction main() classique d'un programme en C, c'est le point d'entrée de notre application.
  * _Info.plist_: décrit l'application, voici les principales propriétés:
   # _CFBundleIconFile_: permet d'indiquer le nom de l'icône (png de 57x57pixels)  de l'application, si la propriété n'est pas indiquée, le fichier Icon.png sera cherché.
