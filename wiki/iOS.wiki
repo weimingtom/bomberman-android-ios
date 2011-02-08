@@ -1,4 +1,6 @@
+#summary Description du fonctionnement du développement sur iOS
 #labels iOS,SDK,iPhone,Xcode
+
 = Description du fonctionnement du développement sur iOS =
 
 == Présentation ==
