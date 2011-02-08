@@ -23,35 +23,48 @@
 	\subsection{Chargement de l'application}
 	
 		\hypertarget{Chargement de l'application}{}
+		\label{Chargement de l'application}
 
 		\input{./img/0_Chargement_de_l_application}
 		
-		\begin{enumerate}
-		  \item Fond d'écran
-		  \item Spinner
-		\end{enumerate}
+		\subsubsection{Déscription des zones}
+
+			\begin{tabular}{|c|c|c|c|c|} \hline
+				Numéro de zone & Type  & Description & Evenement &	Règle \\\hline 
+				1 & Image & Fond d'écran présent dans l'archive, &Lancement de l'application &RG001\\\ 
+				 &  & stocké sur le téléphone &	&\\\hline
+				2 & Image & Spinner présent dansl'archive, & Lancement de l'application &	RG001\\
+				 & & stocké sur le téléphone & &\\\hline
+			\end{tabular}
 		
-		$\,$	
-			
-		Lorsque l'application démarre l'utilisateur est d'abord confronté à cette
-		page. \\
-		A cet instant sont chargés la page d'accueil%
-		\footnote[1]{
-			\hyperlink{Page d'accueil}{Page d'accueil}
-			\og voir section \ref{accueil}, page \pageref{accueil}.\fg
-		}
-		ainsi que la page de création du profil%
-		\footnote[2]{
-			\hyperlink{Création du profil}{Page de création du profil}
-			\og voir section \ref{profil}, page \pageref{profil}.\fg
-		}
-		si aucun profil	local n'est trouvé (première utilisation) si c'est le cas
-		elle sera affichée directement sinon la page d'accueil%
-		\footnotemark[1]
-		est affichée. \\
-		Cette page est détruite définitivement par la suite.
-			
-		$\,$
+		\subsubsection{Description des règles}
+		
+		\underline{RG001 :}
+		\begin{quote}
+			Déclenchée au démarrage de l'application.\\
+			Affichage du fond d'écran recadré en fonction de la taille de l'écran.\\
+			Affichage du spinner montrant le chargement de l'application.\\
+			\underline{Chargement de l'application :}
+				\begin{quote}
+					Chargement de la page d'accueil%
+					\footnote[1]{
+						\hyperlink{Page d'accueil}{Page d'accueil}
+						\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+					}.\\
+					Vérification d'un compte local existant (stocké sur le téléphone).\\
+					Si aucun compte n'est trouvé alors la page de création du profil%
+					\footnote[2]{
+						\hyperlink{Création du profil}{Page de création du profil}
+						\og voir section \ref{profil}, page \pageref{profil}.\fg
+					}
+					est chargée puis affichée.\\
+					Sinon la page d'accueil%
+					\footnotemark[1]
+					est affichée directement. \\
+					La page représentant le chargement de l'application est détruite une fois le chargement de l'application terminé.\\
+				\end{quote}
+		\end{quote}
+
 	
 \newpage
 
