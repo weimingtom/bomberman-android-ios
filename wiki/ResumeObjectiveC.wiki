@@ -1,0 +1,58 @@
+#summary Résumer du langage
+#labels Objective-C,iOS,Développement,iPhone,Apple
+
+= Résumer du langage =
+
+== Messages ==
+Les expressions message sont encadrées pas des crochets <br/>
+{{{
+[receveur messsage]
+}}}
+
+Le receveur peut être:
+ * Une variable ou une expression qui renvoie un objet (incluant le variable _self_)
+ * Le nom d'un classe
+ * _super_
+Le message est le nom d'une méthode plus ses paramètres.
+
+
+== Les nouveaux types ==
+|| Type || Définition ||
+|| id || ... ||
+|| Class || ... ||
+|| SEL || ... ||
+|| IMP || ... ||
+|| BOOL || Une valeur Boolean, soit _YES_ soit _NO_  ||
+...
+
+
+== Directives du préprocesseur ==
+Le préprocesseur comprend ces notations:
+|| Notation || Définition ||
+|| _#import_ || ... ||
+|| _//_ || ... ||
+
+
+== Directives du compilateur ==
+
+
+
+== Classes ==
+
+
+== Catégories ==
+
+
+== Format des Protocols ==
+
+
+== Déclarations de méthode ==
+
+
+== L'implémentations de méthode ==
+
+
+== Désapprobation syntaxique ==
+
+
+== Conventions de nommage ==
