@@ -1,0 +1,326 @@
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{a4wide}
+
+\usepackage{pstricks}
+
+\usepackage{hyperref}
+
+\begin{document}
+
+\chapter{Annexes}
+
+	\section{Scénarios}
+	
+		Description de la partie \ldots
+		
+		\newpage
+
+\newpage
+	
+	\subsection{Chargement de l'application}
+	
+		\hypertarget{Chargement de l'application}{}
+
+		\input{./img/0_Chargement_de_l_application}
+		
+		\begin{enumerate}
+		  \item Fond d'écran
+		  \item Spinner
+		\end{enumerate}
+		
+		$\,$	
+			
+		Lorsque l'application démarre l'utilisateur est d'abord confronté à cette
+		page. \\
+		A cet instant sont chargés la page d'accueil%
+		\footnote[1]{
+			\hyperlink{Page d'accueil}{Page d'accueil}
+			\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+		}
+		ainsi que la page de création du profil%
+		\footnote[2]{
+			\hyperlink{Création du profil}{Page de création du profil}
+			\og voir section \ref{profil}, page \pageref{profil}.\fg
+		}
+		si aucun profil	local n'est trouvé (première utilisation) si c'est le cas
+		elle sera affichée directement sinon la page d'accueil%
+		\footnotemark[1]
+		est affichée. \\
+		Cette page est détruite définitivement par la suite.
+			
+		$\,$
+	
+\newpage
+
+	\subsection{Création du profil}
+		\hypertarget{Création du profil}{}
+		\label{profil}
+	
+		\input{./img/1_Creation_profil}
+		
+		\begin{enumerate}
+		  \item Fond d'écran
+		  \item Champs de texte
+		  \item Bouton \hyperlink{Page d'accueil}{Valider}
+		\end{enumerate}
+			
+		$\,$
+		
+		Lors de l'appui sur le bouton de validation une vérification a lieu afin de
+		voir si un compte portant le même n'existe pas déjà ou que les caractères
+		entrés sont valides (pas d'espace, etc \ldots). \\		
+		
+		$\,$
+	
+\newpage
+
+	\subsection{Page d'accueil}
+		\hypertarget{Page d'accueil}{}
+		\label{accueil}
+	
+		\input{./img/2_Accueil}
+		
+		\begin{enumerate}
+		  \item Fond d'écran
+		  \item Bouton ``\hyperlink{Creer partie solo}{Jouer en solo}''
+		  \item Bouton ``\hyperlink{Connexion multi-joueurs}{Jouer en multi-joueurs}''
+		  \item Bouton ``\hyperlink{Options}{Options}''
+		  \item Bouton ``\hyperlink{Statistiques}{Mes statistiques}''
+		  \item Bouton ``''
+		  \item Bouton ``\hyperlink{Aide}{Aide}''
+		  \item Liste déroulante ``Comptes hors lignes''
+		  \item Bouton ``\hyperlink{Création du profil}{+}'' 
+		\end{enumerate}
+		
+		$\,$
+		
+		Décrire les autres boutons ? \\		
+		La liste déroulante contient la totalité des comptes hors lignes crées stockés
+		sur le téléphone. \\
+		Le bouton \hyperlink{Création du profil}{+} permet de créer un nouveau compte
+		hors ligne, pour cela il redirige l'utilisateur vers la page de création du profil%
+		\footnote[1]{
+			\hyperlink{Création du profil}{Page de création du profil}
+			\og voir section \ref{profil}, page \pageref{profil}.\fg
+		}
+		
+		$\,$
+	
+\newpage
+
+	\subsection{Créer partie solo}
+	
+		\hypertarget{Creer partie solo}{}
+		\label{Creer partie solo}
+	
+		\input{./img/3_Creer_partie_solo}
+		
+		\begin{enumerate}
+		  \item Fond d'écran
+		  \item Carte sélectionnée
+		  \item Carte précédente
+		  \item Carte suivante
+		  \item Nom de la carte sélectionnée
+		  \item Liste déroulante ``Type de partie''
+		  \item Liste déroulante ``Nombre d'ennemis''
+		  \item Liste déroulante ``Difficulté des ennemis''
+		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
+		  \item Bouton ``Lancer'' 
+		\end{enumerate}
+		
+		$\,$
+		
+		(2) permet à l'utilisateur de choisir une carte parmi celles présentes sur le
+		téléphone en ayant un aperçu de la précédente (3) et de la suivante (4), tout
+		en ayant le nom de celle sélectionnée (5). Une fois sa carte choisie il peut 
+		régler différents paramètres comme le type de la partie (6) qui liste les
+		différents types de parties stockées sur le téléphone, le nombre d'ennemis (7)
+		compris entre 1 et 3 ainsi que la difficulté des ennemis (8).
+		Le bouton ``\hyperlink{Page d'accueil}{Retour}'' (9) permet de revenir à la page d'accueil%
+		\footnote[1]{
+			\hyperlink{Page d'accueil}{Page d'accueil}
+			\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+		}
+		(les paramètres choisis seront oubliés).\\
+		Le bouton ``Lancer" (10) permet, une fois les paramètres sélectionnés de
+		lancer une partie locale.
+		
+		$\,$
+	
+\newpage
+
+	\subsection{Création d'un compte multi-joueurs}
+	
+		\hypertarget{Creation compte multi-joueurs}{}
+		\label{Creation compte multi-joueurs}
+	
+		\input{./img/4_Creation_compte_multi_joueurs}
+		
+		\begin{enumerate}
+		  \item Fond d'écran
+		  \item Pseudonyme du compte hors ligne utilisé
+		  \item Cadre contenant l'erreur survenue
+		  \item Champs de texte ``Nom utilisateur''
+		  \item Champs de texte ``Mot de passe''
+		  \item Champs de texte ``Vérification''
+		  \item Check Box ``Connexion auto''
+		  \item Bouton ``\hyperlink{Connexion multi-joueurs}{Retour}''
+		  \item Bouton ``\hyperlink{Accueil multi-joueurs}{Valider}''
+		\end{enumerate}
+		
+		$\,$
+		
+		Une fois le bouton ``Validé'' pressé une vérification des paramètres a alors
+		lieu (caractères entrés, concordance des deux mots de passes, etc \ldots), si
+		tout est valide une connexion a alors lieu avec le serveur afin de rajouter le
+		nouvel utilisateur.
+		Là aussi une nouvelle vérification a lieu (utilisateur non existant,
+		concordance des deux mots de passes%
+		\footnote[1]{
+			Les mots de passes sont vérifiés du côté client pour éviter une connexion
+			inutile au serveur et une fois sur le serveur au cas où une application
+			client n'aurait pas fait ce test.
+		}
+		, etc \ldots).\\
+		Si aucune erreur n'a lieu, le joueur est redirigé vers la page d'accueil
+		multi-joueurs%
+		\footnote[2]{
+			\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
+			\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
+		}
+		sinon le serveur la renvoie à l'application cliente qui l'affichera grâce au
+		cadre défini à cette effigie (3).\\
+		Le bouton ``Annuler'' permet à l'utilisateur de revenir à la page de connexion
+		multi-joueurs
+		\footnotemark[1]
+		La check box ``Connexion auto'' permet à l'utilisateur d'être connecté
+		automatiquement lors de ses prochaines parties en ligne.
+				
+		$\,$
+	
+\newpage
+
+	\subsection{Connexion multi-joueurs}
+	
+		\hypertarget{Connexion multi-joueurs}{}
+		\label{Connexion multi-joueurs}
+	
+		\input{./img/4bis_Connexion_multi_joueurs}
+		
+		\begin{enumerate}
+		  \item Fond d'écran
+		  \item Pseudonyme du compte hors ligne utilisé
+		  \item Bouton ``\hyperlink{Creation compte multi-joueurs}{Inscription}''
+		  \item Cadre contenant l'erreur survenue
+		  \item Champs de texte ``Nom utilisateur''
+		  \item Champs de texte ``Mot de passe''
+		  \item Check Box ``Connexion auto''
+		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
+		  \item Bouton ``\hyperlink{Accueil multi-joueurs}{Connexion}''
+		\end{enumerate}
+		
+		
+\newpage
+
+	\subsection{Accueil multi-joueurs}
+
+		\hypertarget{Accueil multi-joueurs}{}
+		\label{Accueil multi-joueurs}
+	
+		\input{./img/5_Accueil_multi_joueur}
+		
+		\begin{enumerate}
+		  \item Fond d'écran
+		  \item Champs de texte ``Filtrer''
+		  \item Bouton ``Rafraichir''
+		  \item Cadre contenant les différentes parties en ligne en cours
+		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
+		  \item Bouton ``\hyperlink{Creer partie multi-joueurs}{Créer partie}''
+		\end{enumerate}
+	
+\newpage
+
+	\subsection{Créer partie multi-joueurs}
+	
+		\hypertarget{Creer partie multi-joueurs}{}
+		\label{Creer partie multi-joueurs}
+	
+		\input{./img/6_Creer_partie_multi_joueurs}
+		
+		\begin{enumerate}
+		  \item Fond d'écran
+		  \item Champs de texte ``Nom de la partie''
+		  \item Carte sélectionnée
+		  \item Carte précédente
+		  \item Carte suivante
+		  \item Nom de la carte sélectionnée
+		  \item Liste déroulante ``Type de partie''
+		  \item Liste déroulante ``Nombre d'ennemis''
+		  \item Liste déroulante ``Difficulté des ennemis''
+		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
+		  \item Bouton ``Lancer'' 
+		\end{enumerate}
+	
+	
+\newpage
+
+	\subsection{Options}
+	
+		\hypertarget{Options}{}
+		\label{Options}
+	
+		\input{./img/9_Options}
+		
+		\begin{enumerate}
+		  \item Fond d'écran
+		  \item Barre de volume
+		  \item Check box ``Muet''
+		  \item Liste déroulante ``Langues''
+		  \item Bouton ``\hyperlink{Page d'accueil}{Gestion du profil}''
+		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
+		\end{enumerate}
+
+	
+\newpage
+
+	\subsection{Gestion du profil}
+	
+		\hypertarget{Gestion du profil}{}
+		\label{Gestion du profil}
+		
+		\input{./img/10_Gestion_profil}
+		
+		\begin{enumerate}
+		  \item Fond d'écran
+		  \item Champs de texte ``Pseudo''
+		  \item Liste déroulante ``Couleur joueur''
+		  \item Champs de texte ``Nom d'utilisateur''
+		  \item Bouton ``Modifier''
+		  \item Liste déroulante ``Position menu de la partie''
+		  \item Bouton ``\hyperlink{Options}{Valider}''
+		  \item Bouton ``\hyperlink{Options}{Retour}''
+		\end{enumerate}
+	
+\newpage
+
+	\subsection{Mes statistiques}
+	
+		\input{./img/11_Mes_statistiques}
+		
+		\hypertarget{Statistiques}{}
+		\label{Statistiques}
+		
+		\begin{enumerate}
+		  \item Fond d'écran
+		  \item Nom du compte hors ligne utilisé
+		  \item Text Box ``Statistiques''
+		  \item Bouton ``\hyperlink{Acceuil}{Retour}''
+		\end{enumerate}
+	
+\newpage
+	
+
+\end{document}
