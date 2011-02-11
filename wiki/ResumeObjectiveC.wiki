@@ -1,7 +1,7 @@
-#summary Résumer du langage
+#summary Résumé du langage
 #labels Objective-C,iOS,Développement,iPhone,Apple
 
-= Résumer du langage =
+= Résumé du langage =
 
 == Messages ==
 Les expressions message sont encadrées pas des crochets <br/>
@@ -10,8 +10,8 @@ Les expressions message sont encadrées pas des crochets <br/>
 }}}
 
 Le receveur peut être:
- * Une variable ou une expression qui renvoie un objet (incluant le variable _self_)
- * Le nom d'un classe
+ * Une variable ou une expression qui renvoie un objet (incluant la variable _self_)
+ * Le nom d'une classe
  * _super_
 Le message est le nom d'une méthode plus ses paramètres.
 
