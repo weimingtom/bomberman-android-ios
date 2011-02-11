@@ -25,24 +25,29 @@
 		\hypertarget{Chargement de l'application}{}
 		\label{Chargement de l'application}
 
-		\input{./img/0_Chargement_de_l_application}
+		\begin{center}
+			\input{./img/0_Chargement_de_l_application}
+		\end{center}
+		
+		\begin{enumerate}
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone).
+		  \item Spinner (présent dans l'archive stocké sur le téléphone).
+		\end{enumerate}
 		
 		\subsubsection{Déscription des zones}
 
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evenement &	Règle \\\hline 
-				1 & Image & Fond d'écran présent dans l'archive, &Lancement de l'application &RG001\\\ 
-				 &  & stocké sur le téléphone &	&\\\hline
-				2 & Image & Spinner présent dansl'archive, & Lancement de l'application &	RG001\\
-				 & & stocké sur le téléphone & &\\\hline
+				2 & Barre de & Montre l'avancement du & Chargement de & RG0-01\\
+				  & chargement & chargement de l'application & l'application &\\\hline
 			\end{tabular}
 		
 		\subsubsection{Description des règles}
+		Lancement de l’application 
 		
-		\underline{RG001 :}
+		\underline{RG0-01 :}
 		\begin{quote}
 			Déclenchée au démarrage de l'application.\\
-			Affichage du fond d'écran recadré en fonction de la taille de l'écran.\\
 			Affichage du spinner montrant le chargement de l'application.\\
 			\underline{Chargement de l'application :}
 				\begin{quote}
@@ -73,20 +78,43 @@
 		\label{profil}
 	
 		\input{./img/1_Creation_profil}
+
+		\subsubsection{Déscription des zones}
+				
+			\begin{tabular}{|c|c|c|c|c|} \hline
+				Numéro de zone & Type  & Description & Evenement &	Règle \\\hline 
+				1 & Image & Fond d'écran présent dans l'archive, &  &\\\ 
+				  &       & stocké sur le téléphone              &	&\\\hline
+				2 & Zone de saisie & Définition du pseudonyme & Perte du focus & RG1-01 \\\hline
+				3 & Label d'erreur & Affichage d'erreurs      & Erreur         &  \\\hline
+				4 & Bouton         & Bouton de validation     & Cliqué & RG1-02 \\\hline
+			\end{tabular}
+
+		\subsubsection{Description des règles}
 		
-		\begin{enumerate}
-		  \item Fond d'écran
-		  \item Champs de texte
-		  \item Bouton \hyperlink{Page d'accueil}{Valider}
-		\end{enumerate}
-			
-		$\,$
-		
-		Lors de l'appui sur le bouton de validation une vérification a lieu afin de
-		voir si un compte portant le même n'existe pas déjà ou que les caractères
-		entrés sont valides (pas d'espace, etc \ldots). \\		
-		
-		$\,$
+		\underline{RG1-01 :}
+			\begin{quote}
+				Vérification de la zone de saisie :
+				\begin{itemize}
+				  \item Non vide.
+				  \item Pseudonyme entré inexistant.
+				\end{itemize}
+				Si la vérification est correcte un nouveau compte hors ligne ayant pour
+				pseudonyme celui entré dans la zone de saisie est crée dans la base de donnée
+				du téléphone.\\
+				Sinon une erreur est renvoyée et affichée via le label d'erreur (3).
+			\end{quote}
+
+		\underline{RG1-02 :}
+			\begin{quote}
+				RG1-01.\\
+				Afficher la page d'accueil%
+					\footnote[1]{
+						\hyperlink{Page d'accueil}{Page d'accueil}
+						\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+					}.\\
+				Cacher la page de création du profil.
+			\end{quote}
 	
 \newpage
 
@@ -95,6 +123,15 @@
 		\label{accueil}
 	
 		\input{./img/2_Accueil}
+		
+		\begin{tabular}{|c|c|c|c|c|} \hline
+			Numéro de zone & Type  & Description & Evenement &	Règle \\\hline 
+			1 & Image & Fond d'écran présent dans l'archive, &  &\\\ 
+			  &       & stocké sur le téléphone              &	&\\\hline
+			2 & Zone de saisie & Définition du pseudonyme & Perte du focus & RG1-01 \\\hline
+			3 & Label d'erreur & Affichage d'erreurs      & Erreur         &  \\\hline
+			4 & Bouton         & Bouton de validation     & Cliqué & RG1-02 \\\hline
+		\end{tabular}
 		
 		\begin{enumerate}
 		  \item Fond d'écran
