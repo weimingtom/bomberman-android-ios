@@ -26,7 +26,7 @@
 		\label{Chargement de l'application}
 
 		\begin{center}
-			\input{./img/0_Chargement_de_l_application}
+			\input{./tex/0_Chargement_de_l_application}
 		\end{center}
 		
 		\begin{enumerate}
@@ -76,18 +76,25 @@
 	\subsection{Création du profil}
 		\hypertarget{Création du profil}{}
 		\label{profil}
-	
-		\input{./img/1_Creation_profil}
+
+		\begin{center}
+			\input{./tex/1_Creation_profil}
+		\end{center}
+
+		\begin{enumerate}
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone).
+		  \item Zone de saisie.
+		  \item Label d'erreur.
+		  \item Bouton de validation.
+		\end{enumerate}
 
 		\subsubsection{Déscription des zones}
 				
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evenement &	Règle \\\hline 
-				1 & Image & Fond d'écran présent dans l'archive, &  &\\\ 
-				  &       & stocké sur le téléphone              &	&\\\hline
 				2 & Zone de saisie & Définition du pseudonyme & Perte du focus & RG1-01 \\\hline
-				3 & Label d'erreur & Affichage d'erreurs      & Erreur         &  \\\hline
-				4 & Bouton         & Bouton de validation     & Cliqué & RG1-02 \\\hline
+				3 & Label d'erreur & Affichage d'erreurs      & Erreur         & RG1-02
+				\\\hline 4 & Bouton         & Bouton de validation     & Cliqué & RG1-03 \\\hline
 			\end{tabular}
 
 		\subsubsection{Description des règles}
@@ -102,10 +109,15 @@
 				Si la vérification est correcte un nouveau compte hors ligne ayant pour
 				pseudonyme celui entré dans la zone de saisie est crée dans la base de donnée
 				du téléphone.\\
-				Sinon une erreur est renvoyée et affichée via le label d'erreur (3).
+				Sinon une erreur est renvoyée et affichée via le label d'erreur (3) RG.
 			\end{quote}
+			
+		\underline{RG1-03 :}
+			\begin{quote}
+			
+			\end{quote}		
 
-		\underline{RG1-02 :}
+		\underline{RG1-03 :}
 			\begin{quote}
 				RG1-01.\\
 				Afficher la page d'accueil%
@@ -122,7 +134,7 @@
 		\hypertarget{Page d'accueil}{}
 		\label{accueil}
 	
-		\input{./img/2_Accueil}
+		\input{./tex/2_Accueil}
 		
 		\begin{tabular}{|c|c|c|c|c|} \hline
 			Numéro de zone & Type  & Description & Evenement &	Règle \\\hline 
