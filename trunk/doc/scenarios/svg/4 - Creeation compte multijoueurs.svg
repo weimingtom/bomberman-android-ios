@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   width="560"
+   height="600"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:docname="4 - Création compte multijoueurs.svg">
+  <sodipodi:namedview
+     inkscape:window-height="949"
+     inkscape:window-width="1280"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="true"
+     inkscape:zoom="1.2"
+     inkscape:cx="270.34701"
+     inkscape:cy="295.64003"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3207"
+       visible="true"
+       enabled="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 324.67999 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="519.09003 : 324.67999 : 1"
+       inkscape:persp3d-origin="259.54501 : 216.45333 : 1"
+       id="perspective58" />
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       id="Arrow2Mstart"
+       style="overflow:visible">
+      <path
+         d="M 8.7185878,4.0337352 L -2.2072895,0.01601326 L 8.7185884,-4.0017078 C 6.97309,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 L 8.7185878,4.0337352 L 8.7185878,4.0337352 z"
+         transform="scale(0.6,0.6)"
+         id="path5217"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round" />
+    </marker>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,106.99948)"
+     id="layer1">
+    <rect
+       width="355.04434"
+       height="595.04437"
+       ry="30.646187"
+       x="102.47783"
+       y="-104.52168"
+       id="rect2385"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.95566034;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       width="319.8877"
+       height="349.9686"
+       ry="41.478687"
+       x="120.00764"
+       y="33.078003"
+       id="rect5176"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       x="330"
+       y="352.7352"
+       id="text2932"
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       sodipodi:linespacing="125%"><tspan
+         x="330"
+         y="352.7352"
+         id="tspan2934">Valider</tspan></text>
+    <text
+       x="150.08359"
+       y="352.8548"
+       id="text2936"
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       sodipodi:linespacing="125%"><tspan
+         x="150.08359"
+         y="352.8548"
+         id="tspan2938">Annuler</tspan></text>
+    <rect
+       width="179.96443"
+       height="29.816738"
+       ry="0"
+       x="149.98285"
+       y="12.983362"
+       id="rect2946"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       x="130"
+       y="133.00052"
+       id="text3720"
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       sodipodi:linespacing="125%"><tspan
+         x="130"
+         y="133.00052"
+         id="tspan3722">       Nom </tspan><tspan
+         x="130"
+         y="163.00052"
+         id="tspan3724">d'utilisateur</tspan></text>
+    <text
+       x="130"
+       y="213.00052"
+       id="text3726"
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       sodipodi:linespacing="125%"><tspan
+         x="130"
+         y="213.00052"
+         id="tspan3728">Mot de passe</tspan></text>
+    <text
+       x="140"
+       y="253.00052"
+       id="text3730"
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       sodipodi:linespacing="125%"><tspan
+         x="140"
+         y="253.00052"
+         id="tspan3732">Vérification</tspan></text>
+    <text
+       x="117.7131"
+       y="299.06052"
+       id="text5178"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       sodipodi:linespacing="125%"><tspan
+         x="117.7131"
+         y="299.06052"
+         id="tspan5180" /></text>
+    <text
+       x="40"
+       y="-46.999481"
+       id="text6190"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       sodipodi:linespacing="125%"><tspan
+         x="40"
+         y="-46.999481"
+         id="tspan6192">1</tspan></text>
+    <text
+       x="40"
+       y="33.000519"
+       id="text6194"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       sodipodi:linespacing="125%"><tspan
+         x="40"
+         y="33.000519"
+         id="tspan6196">2</tspan></text>
+    <text
+       x="40"
+       y="93.000519"
+       id="text6198"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       sodipodi:linespacing="125%"><tspan
+         x="40"
+         y="93.000519"
+         id="tspan6200">3</tspan></text>
+    <text
+       x="500"
+       y="143.00052"
+       id="text6202"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       sodipodi:linespacing="125%"><tspan
+         x="500"
+         y="143.00052"
+         id="tspan6204">4</tspan></text>
+    <rect
+       width="259.98187"
+       height="40.052006"
+       ry="0"
+       x="149.9985"
+       y="63.081612"
+       id="rect6216"
+       style="fill:#ffffff;fill-opacity:1;stroke:#ff0000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:8,8;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       width="160.56223"
+       height="29.186663"
+       ry="10.809874"
+       x="269.95023"
+       y="-152.58905"
+       transform="scale(1,-1)"
+       id="rect6444"
+       style="fill:#000000;fill-opacity:0.11636365000000000;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <text
+       x="500"
+       y="213.00052"
+       id="text6500"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       sodipodi:linespacing="125%"><tspan
+         x="500"
+         y="213.00052"
+         id="tspan6502">5</tspan></text>
+    <rect
+       width="150.6506"
+       height="27.761969"
+       ry="10.282209"
+       x="280"
+       y="-220.76248"
+       transform="scale(1,-1)"
+       id="rect6533"
+       style="fill:#000000;fill-opacity:0.11636365000000000;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       width="150.05251"
+       height="29.801455"
+       ry="11.037575"
+       x="280"
+       y="-263.00052"
+       transform="scale(1,-1)"
+       id="rect6535"
+       style="fill:#000000;fill-opacity:0.11636365000000000;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       width="129.38765"
+       height="29.734667"
+       ry="11.012837"
+       x="130.61235"
+       y="-362.7352"
+       transform="scale(1,-1)"
+       id="rect6537"
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       width="120.13267"
+       height="31.551233"
+       ry="11.68564"
+       x="310.47968"
+       y="-363.00052"
+       transform="scale(1,-1)"
+       id="rect6539"
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <text
+       x="-25.144033"
+       y="566.20172"
+       id="text2903"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       sodipodi:linespacing="125%"><tspan
+         x="-25.144033"
+         y="566.20172"
+         id="tspan2905" /></text>
+    <text
+       x="500"
+       y="253.00052"
+       id="text4771"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="500"
+         y="253.00052"
+         id="tspan4773">6</tspan></text>
+    <text
+       x="500"
+       y="303.00052"
+       id="text4775"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="500"
+         y="303.00052"
+         id="tspan4777">7</tspan></text>
+    <text
+       x="40"
+       y="353.00052"
+       id="text4779"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="40"
+         y="353.00052"
+         id="tspan4781">8</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8,8;marker-start:url(#Arrow2Mstart);stroke-dashoffset:0"
+       d="M 150,50 L 60,50"
+       id="path3209"
+       transform="translate(0,-106.99948)" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8,8;marker-start:url(#Arrow2Mstart);stroke-dashoffset:0"
+       d="M 170,130 L 60,130"
+       id="path3211"
+       transform="translate(0,-106.99948)" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
+       d="M 170,190 L 60,190"
+       id="path3213"
+       transform="translate(0,-106.99948)" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8,8;marker-start:url(#Arrow2Mstart);stroke-dashoffset:0"
+       d="M 410,240 L 500,240"
+       id="path3215"
+       transform="translate(0,-106.99948)" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8,8;marker-start:url(#Arrow2Mstart);stroke-dashoffset:0"
+       d="M 410,310 L 500,310"
+       id="path3217"
+       transform="translate(0,-106.99948)" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
+       d="M 410,350 L 500,350"
+       id="path3219"
+       transform="translate(0,-106.99948)" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;marker-start:url(#Arrow2Mstart);stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 410,342.73518 L 500,342.73518"
+       id="path3221" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;marker-start:url(#Arrow2Mstart);stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 150,342.73518 L 60,342.73518"
+       id="path3223" />
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Utopia;-inkscape-font-specification:Utopia"
+       x="140"
+       y="303.00052"
+       id="text2430"><tspan
+         sodipodi:role="line"
+         id="tspan2432"
+         x="140"
+         y="303.00052">Connexion auto</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2434"
+       width="20"
+       height="20"
+       x="330"
+       y="283.00052"
+       ry="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
+       d="M 340,400 L 500,400"
+       id="path3212"
+       transform="translate(0,-106.99948)" />
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Utopia;-inkscape-font-specification:Utopia"
+       x="500"
+       y="353.00052"
+       id="text3729"><tspan
+         sodipodi:role="line"
+         id="tspan3731"
+         x="500"
+         y="353.00052">9</tspan></text>
+  </g>
+</svg>
