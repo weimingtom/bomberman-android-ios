@@ -1,18 +1,19 @@
 \documentclass{report}
 
 \usepackage[utf8]{inputenc}
-\usepackage[french]{babel}
+\usepackage[francais]{babel}
 \usepackage{a4wide}
 
 \usepackage{pstricks}
 
-\usepackage{hyperref}
+\usepackage[colorlinks, linkcolor=blue]{hyperref}
+
 
 \begin{document}
 
 \chapter{Annexes}
 
-	\section{Scénarios}
+	\section{Scenarios}
 	
 		Description de la partie \ldots
 		
@@ -34,10 +35,10 @@
 		  \item Spinner (présent dans l'archive stocké sur le téléphone).
 		\end{enumerate}
 		
-		\subsubsection{Déscription des zones}
+		\subsubsection{Description des zones}
 
 			\begin{tabular}{|c|c|c|c|c|} \hline
-				Numéro de zone & Type  & Description & Evenement &	Règle \\\hline 
+				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline 
 				2 & Barre de & Montre l'avancement du & Chargement de & RG0-01\\
 				  & chargement & chargement de l'application & l'application &\\\hline
 			\end{tabular}
@@ -74,7 +75,7 @@
 \newpage
 
 	\subsection{Création du profil}
-		\hypertarget{Création du profil}{}
+		\hypertarget{profil}{}
 		\label{profil}
 
 		\begin{center}
@@ -85,16 +86,15 @@
 		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone).
 		  \item Zone de saisie.
 		  \item Label d'erreur.
-		  \item Bouton de validation.
+		  \item Bouton ``Valider".
 		\end{enumerate}
 
-		\subsubsection{Déscription des zones}
+		\subsubsection{Description des zones}
 				
 			\begin{tabular}{|c|c|c|c|c|} \hline
-				Numéro de zone & Type  & Description & Evenement &	Règle \\\hline 
+				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline 
 				2 & Zone de saisie & Définition du pseudonyme & Perte du focus & RG1-01 \\\hline
-				3 & Label d'erreur & Affichage d'erreurs      & Erreur         & RG1-02
-				\\\hline 4 & Bouton         & Bouton de validation     & Cliqué & RG1-03 \\\hline
+				4 & Bouton         & Bouton de validation     & Cliqué & RG1-02 \\\hline
 			\end{tabular}
 
 		\subsubsection{Description des règles}
@@ -107,17 +107,12 @@
 				  \item Pseudonyme entré inexistant.
 				\end{itemize}
 				Si la vérification est correcte un nouveau compte hors ligne ayant pour
-				pseudonyme celui entré dans la zone de saisie est crée dans la base de donnée
+				pseudonyme celui entré dans la zone de saisie est créé dans la base de données
 				du téléphone.\\
 				Sinon une erreur est renvoyée et affichée via le label d'erreur (3) RG.
 			\end{quote}
 			
 		\underline{RG1-02 :}
-			\begin{quote}
-			
-			\end{quote}		
-
-		\underline{RG1-03 :}
 			\begin{quote}
 				RG1-01.\\
 				Afficher la page d'accueil%
@@ -133,52 +128,161 @@
 	\subsection{Page d'accueil}
 		\hypertarget{Page d'accueil}{}
 		\label{accueil}
-	
-		\input{./tex/2_Accueil}
-		
-		\begin{tabular}{|c|c|c|c|c|} \hline
-			Numéro de zone & Type  & Description & Evenement &	Règle \\\hline 
-			1 & Image & Fond d'écran présent dans l'archive, &  &\\\ 
-			  &       & stocké sur le téléphone              &	&\\\hline
-			2 & Zone de saisie & Définition du pseudonyme & Perte du focus & RG1-01 \\\hline
-			3 & Label d'erreur & Affichage d'erreurs      & Erreur         &  \\\hline
-			4 & Bouton         & Bouton de validation     & Cliqué & RG1-02 \\\hline
-		\end{tabular}
-		
+
+		\begin{center}	
+			\input{./tex/2_Accueil}
+		\end{center}
+
 		\begin{enumerate}
-		  \item Fond d'écran
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone).
 		  \item Bouton ``\hyperlink{Creer partie solo}{Jouer en solo}''
 		  \item Bouton ``\hyperlink{Connexion multi-joueurs}{Jouer en multi-joueurs}''
 		  \item Bouton ``\hyperlink{Options}{Options}''
 		  \item Bouton ``\hyperlink{Statistiques}{Mes statistiques}''
-		  \item Bouton ``''
+		  \item Bouton ``\hyperlink{Creer niveau}{Créer niveau}''
 		  \item Bouton ``\hyperlink{Aide}{Aide}''
 		  \item Liste déroulante ``Comptes hors lignes''
-		  \item Bouton ``\hyperlink{Création du profil}{+}'' 
+		  \item Bouton ``\hyperlink{profil}{+}'' 
 		\end{enumerate}
+
+		\subsubsection{Description des zones}
 		
-		$\,$
+		\begin{tabular}{|c|c|c|c|c|} \hline
+			Numéro de zone & Type  & Description & Evènement &	Règle \\\hline 
+			2 & Bouton & Affiche l'écran de création d'un partie solitaire & Cliqué & RG2-01 \\\hline
+			3 & Bouton & Affiche l'écran de connexion multi-joueurs & Cliqué & RG2-02 \\\hline
+			4 & Bouton & Affiche l'écran des options & Cliqué & RG2-03 \\\hline
+			5 & Bouton & Affiche l'écran des statistiques & Cliqué & RG2-04 \\\hline
+			6 & Bouton & Affiche l'écran de création de niveaux & Cliqué & RG2-05 \\\hline
+			7 & Bouton & Affiche l'écran d'aide & Cliqué & RG2-06 \\\hline
+			8 & Liste & Permet de sélectionner le compte hors ligne voulu & Cliqué & RG2-07 \\ 
+			  & déroulante & Affiche par défaut le compte en cours d'utilisation & & \\
+			  & & Taille : ??? & & \\\hline
+			9 & Bouton & Affiche l'écran de création du profil & Cliqué & RG2-09 \\\hline
+			
+		\end{tabular}
 		
-		Décrire les autres boutons ? \\		
-		La liste déroulante contient la totalité des comptes hors lignes crées stockés
-		sur le téléphone. \\
-		Le bouton \hyperlink{Création du profil}{+} permet de créer un nouveau compte
-		hors ligne, pour cela il redirige l'utilisateur vers la page de création du profil%
-		\footnote[1]{
-			\hyperlink{Création du profil}{Page de création du profil}
-			\og voir section \ref{profil}, page \pageref{profil}.\fg
-		}
+\newpage
+
+		\subsubsection{Description des règles}
 		
-		$\,$
+		\underline{RG2-01 :}
+			\begin{quote}
+				Charger la page de création d'une partie solitaire%
+					\footnote[1]{
+						\hyperlink{Creer partie solo}{Création d'une partie solitaire}
+						\og voir section \ref{Creer partie solo}, page \pageref{Creer partie solo}.\fg
+					}
+				et l'afficher.\\
+				Cacher la page d'accueil%
+					\footnote[2]{
+						\hyperlink{Page d'accueil}{Page d'accueil}
+						\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+					}.\\ 
+			\end{quote}
+
+
+		\underline{RG2-02 :}
+			\begin{quote}
+				Charger la page de connexion multi-joueurs%
+					\footnote[3]{
+						\hyperlink{Connexion multi-joueurs}{Connexion multi-joueurs}
+						\og voir section \ref{Connexion multi-joueurs}, page \pageref{Connexion multi-joueurs}.\fg
+					}
+				et l'afficher.\\			
+				Cacher la page d'accueil%
+					\footnotemark[2]
+				.\\
+			\end{quote}
+
+		
+		\underline{RG2-03 :}
+			\begin{quote}
+				Charger la page des options%
+					\footnote[4]{
+						\hyperlink{Options}{Options}
+						\og voir section \ref{Options}, page \pageref{Options}.\fg
+					}
+				et l'afficher.\\			
+				Cacher la page d'accueil%
+					\footnotemark[2]
+				.\\	
+			\end{quote}
+
+
+		\underline{RG2-04 :}
+			\begin{quote}
+				Charger la page des statistiques%
+					\footnote[5]{
+						\hyperlink{Statistiques}{Statistiques}
+						\og voir section \ref{Statistiques}, page \pageref{Statistiques}.\fg
+					}
+				et l'afficher.\\				
+				Cacher la page d'accueil%
+					\footnotemark[2]
+				.\\		
+			\end{quote}
+
+
+		\underline{RG2-05 :}
+			\begin{quote}
+				Charger la page de création de niveaux%
+					\footnote[6]{
+						\hyperlink{Creation de niveaux}{Création de niveaux}
+						\og voir section \ref{Creation de niveaux}, page \pageref{Creation de niveaux}.\fg
+					}
+				et l'afficher.\\
+				Cacher la page d'accueil%
+					\footnotemark[2]
+				.\\		
+			\end{quote}
+
+
+		\underline{RG2-06 :}
+			\begin{quote}
+				Charger la page d'aide%
+					\footnote[7]{
+						\hyperlink{Aide}{Aide}
+						\og voir section \ref{Aide}, page \pageref{Aide}.\fg
+					}
+				et l'afficher.\\
+				Cacher la page d'accueil%
+					\footnotemark[2]	
+				.\\		
+			\end{quote}
+			
+			
+		\underline{RG2-07 :}
+			\begin{quote}
+				Récupérer la liste des comptes hors ligne présents sur le téléphone.
+				Les afficher en premier plan.	
+			\end{quote}			
+
+
+		\underline{RG2-08 :}
+			\begin{quote}
+				Charger la page de création du profil%
+					\footnote[8]{
+						\hyperlink{profil}{Création du profil}
+						\og voir section \ref{profil}, page \pageref{profil}.\fg
+					}
+				et l'afficher.\\
+				Cacher la page d'accueil%
+					\footnotemark[2]
+				.\\			
+			\end{quote}
+
 	
 \newpage
 
-	\subsection{Créer partie solo}
+	\subsection{Création d'une partie solitaire}
 	
 		\hypertarget{Creer partie solo}{}
 		\label{Creer partie solo}
-	
-		\input{./tex/3_Creer_partie_solo}
+
+		\begin{center}
+			\input{./tex/3_Creer_partie_solo}		
+		\end{center}
 		
 		\begin{enumerate}
 		  \item Fond d'écran
@@ -193,25 +297,75 @@
 		  \item Bouton ``Lancer'' 
 		\end{enumerate}
 		
-		$\,$
+		\subsubsection{Description des zones}
 		
-		(2) permet à l'utilisateur de choisir une carte parmi celles présentes sur le
-		téléphone en ayant un aperçu de la précédente (3) et de la suivante (4), tout
-		en ayant le nom de celle sélectionnée (5). Une fois sa carte choisie il peut 
-		régler différents paramètres comme le type de la partie (6) qui liste les
-		différents types de parties stockées sur le téléphone, le nombre d'ennemis (7)
-		compris entre 1 et 3 ainsi que la difficulté des ennemis (8).
-		Le bouton ``\hyperlink{Page d'accueil}{Retour}'' (9) permet de revenir à la page d'accueil%
-		\footnote[1]{
-			\hyperlink{Page d'accueil}{Page d'accueil}
-			\og voir section \ref{accueil}, page \pageref{accueil}.\fg
-		}
-		(les paramètres choisis seront oubliés).\\
-		Le bouton ``Lancer" (10) permet, une fois les paramètres sélectionnés de
-		lancer une partie locale.
-		
-		$\,$
-	
+			\begin{tabular}{|c|c|c|c|c|} \hline
+				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+				2,3,4 & Sélecteur & Permet de sélectionner la carte voulue & Cliqué & RG3-01 \\\hline
+				5 & Label & Affiche le nom de la carte choisie & RG3-01 & RG3-02 \\\hline
+				6 & Liste déroulante & Permet de choisir le type de partie & Cliqué & RG3-03 \\\hline
+				7 & Liste déroulante & Permet de choisir le nombre d'ennemis & Cliqué & RG3-04 \\
+				  &                  & (1, 2 ou 3). & & \\\hline
+				8 & Liste      & Permet de choisir la difficulté  & Cliqué & RG3-05 \\
+				  & déroulante & de l'intelligence artificielle   &        & \\
+				  &            & (facile/moyenne/difficile). & & \\\hline				  
+				9 & Bouton & Affiche l'écran d'accueil & Cliqué & RG3-06 \\\hline
+				10& Bouton & Lance une partie selon les paramètres choisis & Cliqué & RG3-07 \\\hline
+			\end{tabular}
+
+\newpage
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG3-01 :}
+				\begin{quote}
+					Décaler les cartes vers la droite ou la gauche.\\
+					RG3-02\\
+				\end{quote}
+				
+				
+			\underline{RG3-02 :}
+				\begin{quote}
+					Afficher le nom de la carte choisie.\\
+				\end{quote}
+
+
+			\underline{RG3-03 :}
+				\begin{quote}
+					Dérouler la liste.\\
+				\end{quote}
+
+
+			\underline{RG3-04 :}
+				\begin{quote}
+					Dérouler la liste.\\				
+				\end{quote}	
+				
+
+			\underline{RG3-05 :}
+				\begin{quote}
+					Dérouler la liste.\\				
+				\end{quote}	
+
+
+			\underline{RG3-06 :}
+				\begin{quote}
+					Afficher la page d'accueil%
+						\footnote[1]{
+							\hyperlink{Page d'accueil}{Page d'accueil}
+							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+						}.\\
+					Cacher la page de création d'une partie solitaire.\\
+				\end{quote}
+
+
+			\underline{RG3-03 :}
+				\begin{quote}
+					 Lancer une partie selon les paramètres choisis.\\
+					 Supprimer la page de création d'une partie solitaire.\\
+				\end{quote}	
+
+
 \newpage
 
 	\subsection{Création d'un compte multi-joueurs}
@@ -219,7 +373,9 @@
 		\hypertarget{Creation compte multi-joueurs}{}
 		\label{Creation compte multi-joueurs}
 	
-		\input{./tex/4_Creation_compte_multi_joueurs}
+		\begin{center}
+			\input{./tex/4_Creation_compte_multi_joueurs}
+		\end{center}
 		
 		\begin{enumerate}
 		  \item Fond d'écran
@@ -233,35 +389,81 @@
 		  \item Bouton ``\hyperlink{Accueil multi-joueurs}{Valider}''
 		\end{enumerate}
 		
-		$\,$
+		\subsubsection{Description des zones}
 		
-		Une fois le bouton ``Validé'' pressé une vérification des paramètres a alors
-		lieu (caractères entrés, concordance des deux mots de passes, etc \ldots), si
-		tout est valide une connexion a alors lieu avec le serveur afin de rajouter le
-		nouvel utilisateur.
-		Là aussi une nouvelle vérification a lieu (utilisateur non existant,
-		concordance des deux mots de passes%
-		\footnote[1]{
-			Les mots de passes sont vérifiés du côté client pour éviter une connexion
-			inutile au serveur et une fois sur le serveur au cas où une application
-			client n'aurait pas fait ce test.
-		}
-		, etc \ldots).\\
-		Si aucune erreur n'a lieu, le joueur est redirigé vers la page d'accueil
-		multi-joueurs%
-		\footnote[2]{
-			\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
-			\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
-		}
-		sinon le serveur la renvoie à l'application cliente qui l'affichera grâce au
-		cadre défini à cette effigie (3).\\
-		Le bouton ``Annuler'' permet à l'utilisateur de revenir à la page de connexion
-		multi-joueurs
-		\footnotemark[1]
-		La check box ``Connexion auto'' permet à l'utilisateur d'être connecté
-		automatiquement lors de ses prochaines parties en ligne.
+			\begin{tabular}{|c|c|c|c|c|} \hline
+				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+				2 & Label & Affiche le pseudonyme du compte & Chargement de la page & RG4-01 \\
+				  &       & hors ligne en cours d'utilisation & & \\\hline
+				3 & Label & Affiche l'erreur & RG4-03 & RG4-02 \\
+				  &       & rencontré par l'utilisateur & RG4-04 & \\\hline
+				4 & Champs de texte & & Perte du focus & RG4-03 \\
+				 & & & RG4-07 & \\\hline 
+				6 & Champs de texte & & Perte du focus & RG4-04 \\
+				 & & & RG4-07 & \\\hline 
+				7 & Check box & Permet la connexion automatique & Cliqué & RG4-05 \\
+				  &           & lors des prochaines utilisations&        & \\				
+				  &           & du multi-joueurs                &        & \\\hline
+				8 & Bouton & Permet de revenir à la page & Cliqué & RG4-06 \\
+				  &        & de connexion multi-joueurs \footnotemark[1] & & \\\hline
+				9 & Bouton & Valide les paramètres entrés & Cliqué & RG4-07 \\\hline
+			\end{tabular}
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG4-01 :}
+				\begin{quote}
+					Récupérer le pseudonyme du compte hors ligne en cours d'utilisation stocké sur le téléphone.\\
+					Afficher le pseudonyme.\\
+				\end{quote}
+
+			\underline{RG4-02 :}
+				\begin{quote}
+					Afficher l'erreur rencontrée.\\
+				\end{quote}
 				
-		$\,$
+			\underline{RG4-03 :}
+				\begin{quote}
+					Vérifier les caractères entrés.\\
+					Si une erreur est rencontrée RG4-02.\\
+				\end{quote}
+				
+			\underline{RG4-04 :}
+				\begin{quote}
+					Vérifier que les caractères entrés soient identiques à ceux entrés dans la zone 5.\\
+					Si ce n'est pas le cas RG4-02.\\					
+				\end{quote}	
+				
+			\underline{RG4-05 :}
+				\begin{quote}
+					
+				\end{quote}
+				
+			\underline{RG4-06 :}
+				\begin{quote}
+					Afficher la page de connexion multi-joueurs%
+						\footnote[1]{
+							\hyperlink{Connexion multi-joueurs}{Connexion multi-joueurs}
+							\og voir section \ref{Connexion multi-joueurs}, page \pageref{Connexion multi-joueurs}.\fg
+						}.\\
+					Cacher la page de création d'un compte multi-joueurs.\\
+				\end{quote}
+
+			\underline{RG4-07 :}
+				\begin{quote}
+					RG4-03.\\
+					RG4-04.\\
+					Si aucune erreur n'a été détectée alors une connexion avec le serveur distant
+					a lieu afin d'ajouter le nouveau compte.\\
+					Il est possible que le serveur renvoie une erreur.\\
+					Si c'est le cas alors elle sera affichée sous la forme d'un pop-up.\\
+					Sinon l'utilisateur sera redirigé vers l'accueil multi-joueurs%
+						\footnote[2]{
+							\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
+							\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
+						}.\\
+					RG4-05.\\
+				\end{quote}
 	
 \newpage
 
@@ -270,7 +472,9 @@
 		\hypertarget{Connexion multi-joueurs}{}
 		\label{Connexion multi-joueurs}
 	
-		\input{./tex/4bis_Connexion_multi_joueurs}
+		\begin{center}
+			\input{./tex/5_Connexion_multi_joueurs}		
+		\end{center}
 		
 		\begin{enumerate}
 		  \item Fond d'écran
@@ -283,7 +487,31 @@
 		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
 		  \item Bouton ``\hyperlink{Accueil multi-joueurs}{Connexion}''
 		\end{enumerate}
+
+		\subsubsection{Description des zones}
 		
+			\begin{tabular}{|c|c|c|c|c|} \hline
+				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+				2 & Label & Affiche le pseudonyme du compte & Chargement de la page & RG5-01 \\
+				  &       & hors ligne en cours d'utilisation & & \\\hline
+				3 & Bouton & Permet à l'utilisateur d'être redirigé & Cliqué & RG5-02\\
+				  &        & sur la page de création  & & \\
+				  &        & s d'un compte multi-joueurs & & \\\hline
+				4 & Label & Affiche l'erreur & Serveur distant & RG5-03 \\\hline
+				7 & Check box & Permet la connexion automatique & Cliqué & RG5-04 \\
+				  &           & lors des prochaines utilisations&        & \\				
+				  &           & du multi-joueurs                &        & \\\hline
+				8 & Bouton & Permet de revenir à la page & Cliqué & RG5-05 \\
+				  &        & de connexion multi-joueurs \footnotemark[1] & & \\\hline
+				9 & Bouton & Valide les paramètres entrés & Cliqué & RG5-06 \\\hline
+			\end{tabular}
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG5-01 :}
+				\begin{quote}
+				
+				\end{quote}		
 		
 \newpage
 
@@ -292,7 +520,9 @@
 		\hypertarget{Accueil multi-joueurs}{}
 		\label{Accueil multi-joueurs}
 	
-		\input{./tex/5_Accueil_multi_joueur}
+		\begin{center}
+			\input{./tex/6_Accueil_multi_joueurs}
+		\end{center}
 		
 		\begin{enumerate}
 		  \item Fond d'écran
@@ -302,6 +532,19 @@
 		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
 		  \item Bouton ``\hyperlink{Creer partie multi-joueurs}{Créer partie}''
 		\end{enumerate}
+		
+		\subsubsection{Description des zones}
+		
+			\begin{tabular}{|c|c|c|c|c|} \hline
+				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+			\end{tabular}
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG5-01 :}
+				\begin{quote}
+				
+				\end{quote}		
 	
 \newpage
 
@@ -310,7 +553,9 @@
 		\hypertarget{Creer partie multi-joueurs}{}
 		\label{Creer partie multi-joueurs}
 	
-		\input{./tex/6_Creer_partie_multi_joueurs}
+		\begin{center}
+			\input{./tex/7_Creer_partie_multi_joueurs}
+		\end{center}
 		
 		\begin{enumerate}
 		  \item Fond d'écran
@@ -325,7 +570,19 @@
 		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
 		  \item Bouton ``Lancer'' 
 		\end{enumerate}
-	
+
+		\subsubsection{Description des zones}
+		
+			\begin{tabular}{|c|c|c|c|c|} \hline
+				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+			\end{tabular}
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG6-01 :}
+				\begin{quote}
+				
+				\end{quote}	
 	
 \newpage
 
@@ -345,6 +602,18 @@
 		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
 		\end{enumerate}
 
+		\subsubsection{Description des zones}
+		
+			\begin{tabular}{|c|c|c|c|c|} \hline
+				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+			\end{tabular}
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG7-01 :}
+				\begin{quote}
+				
+				\end{quote}
 	
 \newpage
 
@@ -365,10 +634,23 @@
 		  \item Bouton ``\hyperlink{Options}{Valider}''
 		  \item Bouton ``\hyperlink{Options}{Retour}''
 		\end{enumerate}
+
+		\subsubsection{Description des zones}
+		
+			\begin{tabular}{|c|c|c|c|c|} \hline
+				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+			\end{tabular}
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG8-01 :}
+				\begin{quote}
+				
+				\end{quote}
 	
 \newpage
 
-	\subsection{Mes statistiques}
+	\subsection{Statistiques}
 	
 		\input{./tex/11_Mes_statistiques}
 		
@@ -379,8 +661,21 @@
 		  \item Fond d'écran
 		  \item Nom du compte hors ligne utilisé
 		  \item Text Box ``Statistiques''
-		  \item Bouton ``\hyperlink{Acceuil}{Retour}''
+		  \item Bouton ``\hyperlink{Accueil}{Retour}''
 		\end{enumerate}
+
+		\subsubsection{Description des zones}
+		
+			\begin{tabular}{|c|c|c|c|c|} \hline
+				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+			\end{tabular}
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG9-01 :}
+				\begin{quote}
+				
+				\end{quote}
 	
 \newpage
 	
