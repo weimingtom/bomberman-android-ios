@@ -130,7 +130,7 @@
 						\hyperlink{Page d'accueil}{Page d'accueil}
 						\og voir section \ref{accueil}, page \pageref{accueil}.\fg
 					}.\\
-				Cacher la page de création du profil.
+				Supprimer la page de création du profil.
 			\end{quote}
 	
 \newpage
@@ -178,12 +178,12 @@
 		
 		\underline{RG2-01 :}
 			\begin{quote}
-				Charger la page de création d'une partie solitaire%
+				Charger la page de création d'une partie hors ligne%
 					\footnote[1]{
 						\hyperlink{Creer partie solo}{Création d'une partie solitaire}
 						\og voir section \ref{Creer partie solo}, page \pageref{Creer partie solo}.\fg
-					}
-				et l'afficher.\\
+					}.\\
+				Afficher la page de création d'une partie hors ligne\footnote[1].\\
 				Cacher la page d'accueil%
 					\footnote[2]{
 						\hyperlink{Page d'accueil}{Page d'accueil}
@@ -198,11 +198,9 @@
 					\footnote[3]{
 						\hyperlink{Connexion multi-joueurs}{Connexion multi-joueurs}
 						\og voir section \ref{Connexion multi-joueurs}, page \pageref{Connexion multi-joueurs}.\fg
-					}
-				et l'afficher.\\			
-				Cacher la page d'accueil%
-					\footnotemark[2]
-				.\\
+					}.\\
+				Afficher la page de connexion multi-joueurs\footnotemark[3].\\			
+				Cacher la page d'accueil\footnotemark[2].\\
 			\end{quote}
 
 		
@@ -212,11 +210,9 @@
 					\footnote[4]{
 						\hyperlink{Options}{Options}
 						\og voir section \ref{Options}, page \pageref{Options}.\fg
-					}
-				et l'afficher.\\			
-				Cacher la page d'accueil%
-					\footnotemark[2]
-				.\\	
+					}.\\
+				Afficher la page des options\footnotemark[4].\\			
+				Cacher la page d'accueil\footnotemark[2].\\	
 			\end{quote}
 
 
@@ -226,11 +222,9 @@
 					\footnote[5]{
 						\hyperlink{Statistiques}{Statistiques}
 						\og voir section \ref{Statistiques}, page \pageref{Statistiques}.\fg
-					}
-				et l'afficher.\\				
-				Cacher la page d'accueil%
-					\footnotemark[2]
-				.\\		
+					}.\\
+				Afficher la page des statistiques\footnotemark[5].\\				
+				Cacher la page d'accueil\footnotemark[2].\\		
 			\end{quote}
 
 
@@ -240,11 +234,9 @@
 					\footnote[6]{
 						\hyperlink{Creation de niveaux}{Création de niveaux}
 						\og voir section \ref{Creation de niveaux}, page \pageref{Creation de niveaux}.\fg
-					}
-				et l'afficher.\\
-				Cacher la page d'accueil%
-					\footnotemark[2]
-				.\\		
+					}.\\
+				Afficher la page de création de niveaux\footnotemark[6].\\
+				Cacher la page d'accueil\footnotemark[2].\\		
 			\end{quote}
 
 
@@ -254,18 +246,16 @@
 					\footnote[7]{
 						\hyperlink{Aide}{Aide}
 						\og voir section \ref{Aide}, page \pageref{Aide}.\fg
-					}
-				et l'afficher.\\
-				Cacher la page d'accueil%
-					\footnotemark[2]	
-				.\\		
+					}.\\
+				Afficher la page d'aide\footnotemark[7].\\
+				Cacher la page d'accueil\footnotemark[2].\\		
 			\end{quote}
 			
 			
 		\underline{RG2-07 :}
 			\begin{quote}
-				Récupérer la liste des comptes hors ligne présents sur le téléphone.
-				Les afficher en premier plan.	
+				Récupérer la liste des comptes hors ligne présents sur le téléphone.\\
+				Les afficher en premier plan.\\
 			\end{quote}			
 
 
@@ -275,17 +265,15 @@
 					\footnote[8]{
 						\hyperlink{profil}{Création du profil}
 						\og voir section \ref{profil}, page \pageref{profil}.\fg
-					}
-				et l'afficher.\\
-				Cacher la page d'accueil%
-					\footnotemark[2]
-				.\\			
+					}.\\
+				Afficher la page de création du profil\footnotemark[8].\\
+				Cacher la page d'accueil\footnotemark[2].\\			
 			\end{quote}
 
 	
 \newpage
 
-	\subsection{Création d'une partie solitaire}
+	\subsection{Création d'une partie hors ligne}
 	
 		\hypertarget{Creer partie solo}{}
 		\label{Creer partie solo}
@@ -435,13 +423,19 @@
 			\underline{RG4-03 :}
 				\begin{quote}
 					Vérifier les caractères entrés.\\
-					Si une erreur est rencontrée RG4-02.\\
+					Si une erreur est rencontrée alors
+					\begin{quote}
+						RG4-02.
+					\end{quote}
 				\end{quote}
 				
 			\underline{RG4-04 :}
 				\begin{quote}
 					Vérifier que les caractères entrés soient identiques à ceux entrés dans la zone 5.\\
-					Si ce n'est pas le cas RG4-02.\\					
+					Si ce n'est pas le cas alors
+					\begin{quote}
+						RG4-02.
+					\end{quote}					
 				\end{quote}	
 				
 			\underline{RG4-05 :}
@@ -463,22 +457,24 @@
 				\begin{quote}
 					RG4-03.\\
 					RG4-04.\\
-					Si aucune erreur n'a été détectée alors une connexion avec le serveur distant
-					a lieu afin d'ajouter le nouveau compte.\\
-					Si le serveur renvoie une erreur alors \\
-					\begin{quote}
-						Elle sera affichée sous la forme d'un pop-up.
-					\end{quote}	
-					Sinon
-					\begin{quote}
-						L'utilisateur sera redirigé vers l'accueil multi-joueurs%
-						\footnote[2]{
-							\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
-							\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
-						}.\\
-						RG4-05.\\
-						Supprimer toutes les pages existantes.					
-					\end{quote}		
+					Si aucune erreur n'a été détectée alors
+						\begin{quote}
+							Une connexion avec le serveur distant a lieu afin d'ajouter le nouveau compte.\\
+							Si le serveur renvoie une erreur alors \\
+							\begin{quote}
+								Elle sera affichée sous la forme d'un pop-up.
+							\end{quote}	
+							Sinon
+							\begin{quote}
+								L'utilisateur sera redirigé vers l'accueil multi-joueurs%
+								\footnote[2]{
+									\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
+									\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
+								}.\\
+								RG4-05.\\
+								Supprimer toutes les pages existantes.					
+							\end{quote}
+						\end{quote}
 				\end{quote}
 	
 \newpage
@@ -512,13 +508,13 @@
 				  &       & hors ligne en cours d'utilisation & & \\\hline
 				3 & Bouton & Permet à l'utilisateur d'être redirigé & Cliqué & RG5-01\\
 				  &        & sur la page de création  & & \\
-				  &        & d'un compte multi-joueurs & & \\\hline
+				  &        & d'un compte multi-joueurs \footnotemark[1] & & \\\hline
 				4 & Label & Affiche l'erreur & Serveur distant & RG5-02 \\\hline
 				7 & Check box & Permet la connexion automatique & Cliqué & RG5-03 \\
 				  &           & lors des prochaines utilisations&        & \\				
 				  &           & du multi-joueurs                &        & \\\hline
 				8 & Bouton & Permet de revenir à la page & Cliqué & RG5-04 \\
-				  &        & de connexion multi-joueurs \footnotemark[1] & & \\\hline
+				  &        & de connexion multi-joueurs \footnotemark[2] & & \\\hline
 				9 & Bouton & Valide les paramètres entrés & Cliqué & RG5-05 \\\hline
 			\end{tabular}
 			
@@ -526,10 +522,28 @@
 
 			\underline{RG5-01 :}
 				\begin{quote}
-					Charger la page de création d'un compte multi-joueurs.
-					Afficher la page de création d'un compte multi-joueurs.
-					Cacher la page de connexion multi-joueurs.
-				\end{quote}		
+					Charger la page de création d'un compte multi-joueurs%
+						\footnote[1]{
+							\hyperlink{Creation compte multi-joueurs}{Creation compte multi-joueurs}
+							\og voir section \ref{Creation compte multi-joueurs}, page \pageref{Creation compte multi-joueurs}.\fg
+						}.\\
+					Afficher la page de création d'un compte multi-joueurs\footnotemark[1].\\
+					Cacher la page de connexion multi-joueurs%
+						\footnote[2]{
+							\hyperlink{Connexion multi-joueurs}{Connexion multi-joueurs}
+							\og voir section \ref{Connexion multi-joueurs}, page \pageref{Connexion multi-joueurs}.\fg
+						}.\\
+				\end{quote}	
+				
+			\underline{RG5-02 :}
+				\begin{quote}
+				
+				\end{quote}	
+				
+			\underline{RG5-03 :}
+				\begin{quote}
+				
+				\end{quote}
 
 \newpage
 
