@@ -31,8 +31,8 @@
 		\end{center}
 		
 		\begin{enumerate}
-		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone).
-		  \item Spinner (présent dans l'archive stocké sur le téléphone).
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
+		  \item Spinner (présent dans l'archive stocké sur le téléphone)
 		\end{enumerate}
 		
 		\subsubsection{Description des zones}
@@ -83,7 +83,7 @@
 		\end{center}
 
 		\begin{enumerate}
-		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone).
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Zone de saisie.
 		  \item Label d'erreur.
 		  \item Bouton ``Valider".
@@ -144,7 +144,7 @@
 		\end{center}
 
 		\begin{enumerate}
-		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone).
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Bouton ``\hyperlink{Creer partie solo}{Jouer en solo}''
 		  \item Bouton ``\hyperlink{Connexion multi-joueurs}{Jouer en multi-joueurs}''
 		  \item Bouton ``\hyperlink{Options}{Options}''
@@ -306,7 +306,7 @@
 		\end{center}
 		
 		\begin{enumerate}
-		  \item Fond d'écran
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone).
 		  \item Carte sélectionnée
 		  \item Carte précédente
 		  \item Carte suivante
@@ -380,7 +380,7 @@
 				\end{quote}
 
 
-			\underline{RG3-03 :}
+			\underline{RG3-07 :}
 				\begin{quote}
 					 Lancer une partie selon les paramètres choisis.\\
 					 Supprimer la page de création d'une partie solitaire.\\
@@ -399,7 +399,7 @@
 		\end{center}
 		
 		\begin{enumerate}
-		  \item Fond d'écran
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone).
 		  \item Pseudonyme du compte hors ligne utilisé
 		  \item Cadre contenant l'erreur survenue
 		  \item Champs de texte ``Nom utilisateur''
@@ -512,7 +512,7 @@
 		\end{center}
 		
 		\begin{enumerate}
-		  \item Fond d'écran
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Pseudonyme du compte hors ligne utilisé
 		  \item Bouton ``\hyperlink{Creation compte multi-joueurs}{Inscription}''
 		  \item Cadre contenant l'erreur survenue
@@ -593,7 +593,7 @@
 				\begin{quote}
 					Vérification des paramètres passés.\\
 					Connexion au serveur distant.\\
-					Si le nom du compte et le password sont bon alors
+					Si le nom du compte et le password sont bons alors
 					\begin{quote}					
 						Charger la page d'accueil multi-joueurs%
 							\footnote[4]{
@@ -617,7 +617,7 @@
 		\end{center}
 
 		\begin{enumerate}
-		  \item Fond d'écran
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Champs de texte ``Filtrer''
 		  \item Bouton ``Rafraichir''
 		  \item Cadre contenant les différentes parties en ligne en cours
@@ -629,18 +629,89 @@
 
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+				2 & Champs de texte & Permet de filtrer les parties & Perte du focus & RG6-01 \\
+				  &                 & selon le texte tapé par l'utilisateur & & \\\hline
+				3 & Bouton & Rafraichi la liste des parties & Cliqué & RG6-02 \\
+				  &        & en cours & & \\\hline
+				4 & Label & Liste des parties en cours & Chargement de la page & RG6-03 \\
+				  &       &                            & RG6-01 & RG6-04 \\
+				  &       &                            & RG6-02 & RG6-03 \\
+				  &       &                            & Cliqué & RG6-05 \\\hline
+				5 & Bouton & Permet à l'utilisateur de & Cliqué & RG6-06 \\
+				  &        & revenir à la page d'acceuil & & \\\hline
+				6 & Bouton & Affiche la page de création de & Cliqué & RG6-07 \\
+				  &        & création d'une partie multi-joueurs & & \\\hline    
 			\end{tabular}
 
 		\subsubsection{Description des règles}
 
-			\underline{RG5-01 :}
+			\underline{RG6-01 :}
 				\begin{quote}
-
-				\end{quote}		
+					Si le champs de texte (2) n'est pas vide alors
+					\begin{quote}	
+						Envoyer le contenu à RG6-04.\\
+					\end{quote}					
+				\end{quote}	
+		
+				
+			\underline{RG6-02 :}
+				\begin{quote}	
+					RG6-03.\\
+				\end{quote}
 	
+				
+			\underline{RG6-03 :}
+				\begin{quote}
+					Requête au serveur distant afin de récupérer la liste des parties en cours.\\
+					Si la liste n'est pas vide
+					\begin{quote}
+						Afficher la liste.\\
+					\end{quote}								
+				\end{quote}
+
+
+			\underline{RG6-04 :}
+				\begin{quote}
+					Filtrer l'affichage du label (4) selon le texte reçu.\\
+				\end{quote}
+
+				
+			\underline{RG6-05 :}
+				\begin{quote}
+					Connexion au serveur distant afin de rejoindre la partie.\\
+				\end{quote}
+
+				
+			\underline{RG6-06 :}
+				\begin{quote}
+					Charger la page d'accueil%
+						\footnote[1]{
+							\hyperlink{Page d'accueil}{Page d'accueil}
+							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+						}.\\
+					Afficher la page d'accueil\footnotemark[1].\\
+					Supprimer la page d'accueil multi-joueurs%
+						\footnote[2]{
+							\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
+							\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
+						}.\\
+				\end{quote}
+
+
+			\underline{RG6-07 :}
+				\begin{quote}
+					Charger la page de création d'une partie multi-joueurs.%
+						\footnote[3]{
+							\hyperlink{Creer partie multi-joueurs}{Créer partie multi-joueurs}
+							\og voir section \ref{Creer partie multi-joueurs}, page \pageref{Creer partie multi-joueurs}.\fg
+						}.\\
+					Afficher la page de création d'une partie multi-joueurs\footnotemark[3].\\
+					Supprimer la page d'accueil multi-joueurs\footnotemark[2].\\
+				\end{quote}
+
 \newpage
 
-	\subsection{Créer partie multi-joueurs}
+	\subsection{Créer une partie multi-joueurs}
 	
 		\hypertarget{Creer partie multi-joueurs}{}
 		\label{Creer partie multi-joueurs}
@@ -650,7 +721,7 @@
 		\end{center}
 		
 		\begin{enumerate}
-		  \item Fond d'écran
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Champs de texte ``Nom de la partie''
 		  \item Carte sélectionnée
 		  \item Carte précédente
@@ -667,13 +738,79 @@
 		
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+				2 & Champs de texte & Nom de la partie désiré & Perte du focus & RG7-01 \\\hline
+				3,4,5 & Sélecteur & Permet de sélectionner la carte voulue & Cliqué & RG7-02 \\\hline
+				6 & Label & Affiche le nom de la carte choisie & RG7-02 & RG7-03 \\\hline
+				7 & Liste déroulante & Permet de choisir le type de partie & Cliqué & RG7-04 \\\hline
+				8 & Liste déroulante & Permet de choisir le nombre d'ennemis & Cliqué & RG7-05 \\
+				  &                  & (1, 2 ou 3) & & \\\hline
+				9 & Liste      & Permet de choisir la difficulté  & Cliqué & RG7-06 \\
+				  & déroulante & de l'intelligence artificielle   &        & \\
+				  &            & (facile/moyenne/difficile) & & \\\hline				  
+				10& Bouton & Affiche l'écran d'accueil & Cliqué & RG7-07 \\\hline
+				11& Bouton & Lance une partie selon & Cliqué & RG7-08 \\
+				  &        & les paramètres choisis &        & \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
-			\underline{RG6-01 :}
+			\underline{RG7-02 :}
 				\begin{quote}
+					Si le champs est vide alors 
+					\begin{quote}
+						Afficher l'erreur.
+					\end{quote}
+				\end{quote}
 				
+
+			\underline{RG7-02 :}
+				\begin{quote}
+					Décaler les cartes vers la droite ou la gauche.\\
+					RG3-03\\
+				\end{quote}
+				
+				
+			\underline{RG7-03 :}
+				\begin{quote}
+					Afficher le nom de la carte choisie.\\
+				\end{quote}
+
+
+			\underline{RG7-04 :}
+				\begin{quote}
+					Dérouler la liste.\\
+				\end{quote}
+
+
+			\underline{RG7-05 :}
+				\begin{quote}
+					Dérouler la liste.\\				
+				\end{quote}	
+				
+
+			\underline{RG7-06 :}
+				\begin{quote}
+					Dérouler la liste.\\				
+				\end{quote}	
+
+
+			\underline{RG73-07 :}
+				\begin{quote}
+					Afficher la page d'accueil%
+						\footnote[1]{
+							\hyperlink{Page d'accueil}{Page d'accueil}
+							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+						}.\\
+					Supprimer la page de création d'une partie solitaire.\\
+				\end{quote}
+
+
+			\underline{RG7-08 :}
+				\begin{quote}
+					 Connexion au serveur distant
+					 Créer la partie.
+					 Lancer la partie.
+					 Supprimer la page de création d'une partie solitaire.\\
 				\end{quote}	
 	
 \newpage
@@ -686,7 +823,7 @@
 		\input{./tex/9_Options}
 		
 		\begin{enumerate}
-		  \item Fond d'écran
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Barre de volume
 		  \item Check box ``Muet''
 		  \item Liste déroulante ``Langues''
@@ -717,7 +854,7 @@
 		\input{./tex/10_Gestion_profil}
 		
 		\begin{enumerate}
-		  \item Fond d'écran
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Champs de texte ``Pseudo''
 		  \item Liste déroulante ``Couleur joueur''
 		  \item Champs de texte ``Nom d'utilisateur''
@@ -750,7 +887,7 @@
 		\label{Statistiques}
 		
 		\begin{enumerate}
-		  \item Fond d'écran
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Nom du compte hors ligne utilisé
 		  \item Text Box ``Statistiques''
 		  \item Bouton ``\hyperlink{Accueil}{Retour}''
