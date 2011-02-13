@@ -106,15 +106,25 @@
 				  \item Non vide.
 				  \item Pseudonyme entré inexistant.
 				\end{itemize}
-				Si la vérification est correcte un nouveau compte hors ligne ayant pour
-				pseudonyme celui entré dans la zone de saisie est créé dans la base de données
-				du téléphone.\\
-				Sinon une erreur est renvoyée et affichée via le label d'erreur (3) RG.
+				Si la vérification est incorrecte alors
+				\begin{quote}
+					Une erreur est renvoyée et affichée via le label d'erreur (3).
+				\end{quote}
 			\end{quote}
 			
 		\underline{RG1-02 :}
 			\begin{quote}
 				RG1-01.\\
+				Si la vérification est correcte alors
+				\begin{quote}
+					Un nouveau compte hors ligne ayant pour pseudonyme celui
+					entré dans la zone de saisie est créé dans la base de
+					données du téléphone.
+				\end{quote}				
+				Sinon
+				\begin{quote}
+					Une erreur est renvoyée et affichée via le label d'erreur (3).
+				\end{quote}
 				Afficher la page d'accueil%
 					\footnote[1]{
 						\hyperlink{Page d'accueil}{Page d'accueil}
@@ -455,14 +465,20 @@
 					RG4-04.\\
 					Si aucune erreur n'a été détectée alors une connexion avec le serveur distant
 					a lieu afin d'ajouter le nouveau compte.\\
-					Il est possible que le serveur renvoie une erreur.\\
-					Si c'est le cas alors elle sera affichée sous la forme d'un pop-up.\\
-					Sinon l'utilisateur sera redirigé vers l'accueil multi-joueurs%
+					Si le serveur renvoie une erreur alors \\
+					\begin{quote}
+						Elle sera affichée sous la forme d'un pop-up.
+					\end{quote}	
+					Sinon
+					\begin{quote}
+						L'utilisateur sera redirigé vers l'accueil multi-joueurs%
 						\footnote[2]{
 							\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
 							\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
 						}.\\
-					RG4-05.\\
+						RG4-05.\\
+						Supprimer toutes les pages existantes.					
+					\end{quote}		
 				\end{quote}
 	
 \newpage
@@ -492,38 +508,40 @@
 		
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
-				2 & Label & Affiche le pseudonyme du compte & Chargement de la page & RG5-01 \\
+				2 & Label & Affiche le pseudonyme du compte & Chargement de la page & RG4-01 \\
 				  &       & hors ligne en cours d'utilisation & & \\\hline
-				3 & Bouton & Permet à l'utilisateur d'être redirigé & Cliqué & RG5-02\\
+				3 & Bouton & Permet à l'utilisateur d'être redirigé & Cliqué & RG5-01\\
 				  &        & sur la page de création  & & \\
-				  &        & s d'un compte multi-joueurs & & \\\hline
-				4 & Label & Affiche l'erreur & Serveur distant & RG5-03 \\\hline
-				7 & Check box & Permet la connexion automatique & Cliqué & RG5-04 \\
+				  &        & d'un compte multi-joueurs & & \\\hline
+				4 & Label & Affiche l'erreur & Serveur distant & RG5-02 \\\hline
+				7 & Check box & Permet la connexion automatique & Cliqué & RG5-03 \\
 				  &           & lors des prochaines utilisations&        & \\				
 				  &           & du multi-joueurs                &        & \\\hline
-				8 & Bouton & Permet de revenir à la page & Cliqué & RG5-05 \\
+				8 & Bouton & Permet de revenir à la page & Cliqué & RG5-04 \\
 				  &        & de connexion multi-joueurs \footnotemark[1] & & \\\hline
-				9 & Bouton & Valide les paramètres entrés & Cliqué & RG5-06 \\\hline
+				9 & Bouton & Valide les paramètres entrés & Cliqué & RG5-05 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
 			\underline{RG5-01 :}
 				\begin{quote}
-				
+					Charger la page de création d'un compte multi-joueurs.
+					Afficher la page de création d'un compte multi-joueurs.
+					Cacher la page de connexion multi-joueurs.
 				\end{quote}		
-		
+
 \newpage
 
 	\subsection{Accueil multi-joueurs}
 
 		\hypertarget{Accueil multi-joueurs}{}
 		\label{Accueil multi-joueurs}
-	
+
 		\begin{center}
 			\input{./tex/6_Accueil_multi_joueurs}
 		\end{center}
-		
+
 		\begin{enumerate}
 		  \item Fond d'écran
 		  \item Champs de texte ``Filtrer''
@@ -532,18 +550,18 @@
 		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
 		  \item Bouton ``\hyperlink{Creer partie multi-joueurs}{Créer partie}''
 		\end{enumerate}
-		
+
 		\subsubsection{Description des zones}
-		
+
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
 			\end{tabular}
-			
+
 		\subsubsection{Description des règles}
 
 			\underline{RG5-01 :}
 				\begin{quote}
-				
+
 				\end{quote}		
 	
 \newpage
