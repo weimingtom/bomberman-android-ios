@@ -179,13 +179,13 @@
 		\underline{RG2-01 :}
 			\begin{quote}
 				Charger la page de création d'une partie hors ligne%
-					\footnote[1]{
-						\hyperlink{Creer partie solo}{Création d'une partie solitaire}
+					\footnote{
+						\hyperlink{Creer partie solo}{Création d'une partie hors ligne}
 						\og voir section \ref{Creer partie solo}, page \pageref{Creer partie solo}.\fg
 					}.\\
-				Afficher la page de création d'une partie hors ligne\footnote[1].\\
+				Afficher la page de création d'une partie hors ligne \footnotemark[1].\\
 				Cacher la page d'accueil%
-					\footnote[2]{
+					\footnote{
 						\hyperlink{Page d'accueil}{Page d'accueil}
 						\og voir section \ref{accueil}, page \pageref{accueil}.\fg
 					}.\\ 
@@ -194,12 +194,35 @@
 
 		\underline{RG2-02 :}
 			\begin{quote}
-				Charger la page de connexion multi-joueurs%
-					\footnote[3]{
-						\hyperlink{Connexion multi-joueurs}{Connexion multi-joueurs}
-						\og voir section \ref{Connexion multi-joueurs}, page \pageref{Connexion multi-joueurs}.\fg
+				Si la connexion automatique est activée alors
+				\begin{quote}
+					Si le nom d'utilisateur et le mot de passe existent alors
+					\begin{quote}
+						Se connecter au serveur distant.\\
+						Si la connexion est validée alors
+						\begin{quote}
+							Charger la page d'accueil multi-joueurs%
+					\footnote{
+						\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
+						\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
 					}.\\
-				Afficher la page de connexion multi-joueurs\footnotemark[3].\\			
+							Afficher la page d'accueil multi-joueurs\footnotemark[3].\\
+						\end{quote}
+					\end{quote}	
+				\end{quote}
+				Si la connexion automatique est desactivée ou qu'une erreur est survenue alors 
+				\begin{quote}		
+					Charger la page de connexion multi-joueurs%
+						\footnote{
+							\hyperlink{Connexion multi-joueurs}{Connexion multi-joueurs}
+							\og voir section \ref{Connexion multi-joueurs}, page \pageref{Connexion multi-joueurs}.\fg
+						}.\\
+					Afficher la page de connexion multi-joueurs\footnotemark[4].
+					Si une erreur est survenue
+					\begin{quote}
+						Afficher l'erreur dans la page de connexion multi-joueurs\footnotemark[4].
+					\end{quote}
+				\end{quote}
 				Cacher la page d'accueil\footnotemark[2].\\
 			\end{quote}
 
@@ -207,11 +230,11 @@
 		\underline{RG2-03 :}
 			\begin{quote}
 				Charger la page des options%
-					\footnote[4]{
+					\footnote{
 						\hyperlink{Options}{Options}
 						\og voir section \ref{Options}, page \pageref{Options}.\fg
 					}.\\
-				Afficher la page des options\footnotemark[4].\\			
+				Afficher la page des options\footnotemark[5].\\			
 				Cacher la page d'accueil\footnotemark[2].\\	
 			\end{quote}
 
@@ -219,11 +242,11 @@
 		\underline{RG2-04 :}
 			\begin{quote}
 				Charger la page des statistiques%
-					\footnote[5]{
+					\footnote{
 						\hyperlink{Statistiques}{Statistiques}
 						\og voir section \ref{Statistiques}, page \pageref{Statistiques}.\fg
 					}.\\
-				Afficher la page des statistiques\footnotemark[5].\\				
+				Afficher la page des statistiques\footnotemark[6].\\				
 				Cacher la page d'accueil\footnotemark[2].\\		
 			\end{quote}
 
@@ -231,11 +254,11 @@
 		\underline{RG2-05 :}
 			\begin{quote}
 				Charger la page de création de niveaux%
-					\footnote[6]{
+					\footnote{
 						\hyperlink{Creation de niveaux}{Création de niveaux}
 						\og voir section \ref{Creation de niveaux}, page \pageref{Creation de niveaux}.\fg
 					}.\\
-				Afficher la page de création de niveaux\footnotemark[6].\\
+				Afficher la page de création de niveaux\footnotemark[7].\\
 				Cacher la page d'accueil\footnotemark[2].\\		
 			\end{quote}
 
@@ -243,11 +266,11 @@
 		\underline{RG2-06 :}
 			\begin{quote}
 				Charger la page d'aide%
-					\footnote[7]{
+					\footnote{
 						\hyperlink{Aide}{Aide}
 						\og voir section \ref{Aide}, page \pageref{Aide}.\fg
 					}.\\
-				Afficher la page d'aide\footnotemark[7].\\
+				Afficher la page d'aide\footnotemark[8].\\
 				Cacher la page d'accueil\footnotemark[2].\\		
 			\end{quote}
 			
@@ -262,7 +285,7 @@
 		\underline{RG2-08 :}
 			\begin{quote}
 				Charger la page de création du profil%
-					\footnote[8]{
+					\footnote{
 						\hyperlink{profil}{Création du profil}
 						\og voir section \ref{profil}, page \pageref{profil}.\fg
 					}.\\
@@ -353,7 +376,7 @@
 							\hyperlink{Page d'accueil}{Page d'accueil}
 							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
 						}.\\
-					Cacher la page de création d'une partie solitaire.\\
+					Supprimer la page de création d'une partie solitaire.\\
 				\end{quote}
 
 
@@ -450,7 +473,7 @@
 							\hyperlink{Connexion multi-joueurs}{Connexion multi-joueurs}
 							\og voir section \ref{Connexion multi-joueurs}, page \pageref{Connexion multi-joueurs}.\fg
 						}.\\
-					Cacher la page de création d'un compte multi-joueurs.\\
+					Supprimer la page de création d'un compte multi-joueurs.\\
 				\end{quote}
 
 			\underline{RG4-07 :}
@@ -534,16 +557,53 @@
 							\og voir section \ref{Connexion multi-joueurs}, page \pageref{Connexion multi-joueurs}.\fg
 						}.\\
 				\end{quote}	
+
 				
 			\underline{RG5-02 :}
 				\begin{quote}
 				
 				\end{quote}	
+
 				
 			\underline{RG5-03 :}
 				\begin{quote}
-				
+					Si la check box est cochée alors
+					\begin{quote}
+						
+					\end{quote}
+					Sinon
+					\begin{quote}
+					
+					\end{quote}
 				\end{quote}
+
+				
+			\underline{RG5-04 :}
+				\begin{quote}
+					Afficher la page d'accueil%
+						\footnote[3]{
+							\hyperlink{Page d'accueil}{Page d'accueil}
+							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+						}.\\
+					Supprimer la page de connexion multi-joueurs \footnotemark[2].\\			
+				\end{quote}	
+				
+				
+			\underline{RG5-05 :}
+				\begin{quote}
+					Vérification des paramètres passés.\\
+					Connexion au serveur distant.\\
+					Si le nom du compte et le password sont bon alors
+					\begin{quote}					
+						Charger la page d'accueil multi-joueurs%
+							\footnote[4]{
+								\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
+								\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
+							}.\\
+						Afficher la page d'accueil multi-joueurs \footnotemark[4].\\
+						Supprimer la page de connexion multi-joueurs \footnotemark[2].\\
+					\end{quote}	
+				\end{quote}	
 
 \newpage
 
