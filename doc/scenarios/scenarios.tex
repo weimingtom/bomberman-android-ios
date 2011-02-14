@@ -168,7 +168,7 @@
 			8 & Liste & Permet de sélectionner le compte hors ligne voulu & Cliqué & RG2-07 \\ 
 			  & déroulante & Affiche par défaut le compte en cours d'utilisation & & \\
 			  & & Taille : ??? & & \\\hline
-			9 & Bouton & Affiche l'écran de création du profil & Cliqué & RG2-09 \\\hline
+			9 & Bouton & Affiche l'écran de création du profil & Cliqué & RG2-08 \\\hline
 			
 		\end{tabular}
 		
@@ -184,7 +184,7 @@
 						\og voir section \ref{Creer partie solo}, page \pageref{Creer partie solo}.\fg
 					}.\\
 				Afficher la page de création d'une partie hors ligne \footnotemark[1].\\
-				Cacher la page d'accueil%
+				Supprimer la page d'accueil%
 					\footnote{
 						\hyperlink{Page d'accueil}{Page d'accueil}
 						\og voir section \ref{accueil}, page \pageref{accueil}.\fg
@@ -223,7 +223,7 @@
 						Afficher l'erreur dans la page de connexion multi-joueurs\footnotemark[4].
 					\end{quote}
 				\end{quote}
-				Cacher la page d'accueil\footnotemark[2].\\
+				Supprimer la page d'accueil\footnotemark[2].\\
 			\end{quote}
 
 		
@@ -235,7 +235,7 @@
 						\og voir section \ref{Options}, page \pageref{Options}.\fg
 					}.\\
 				Afficher la page des options\footnotemark[5].\\			
-				Cacher la page d'accueil\footnotemark[2].\\	
+				Supprimer la page d'accueil\footnotemark[2].\\	
 			\end{quote}
 
 
@@ -247,7 +247,7 @@
 						\og voir section \ref{Statistiques}, page \pageref{Statistiques}.\fg
 					}.\\
 				Afficher la page des statistiques\footnotemark[6].\\				
-				Cacher la page d'accueil\footnotemark[2].\\		
+				Supprimer la page d'accueil\footnotemark[2].\\		
 			\end{quote}
 
 
@@ -259,7 +259,7 @@
 						\og voir section \ref{Creation de niveaux}, page \pageref{Creation de niveaux}.\fg
 					}.\\
 				Afficher la page de création de niveaux\footnotemark[7].\\
-				Cacher la page d'accueil\footnotemark[2].\\		
+				Supprimer la page d'accueil\footnotemark[2].\\		
 			\end{quote}
 
 
@@ -271,7 +271,7 @@
 						\og voir section \ref{Aide}, page \pageref{Aide}.\fg
 					}.\\
 				Afficher la page d'aide\footnotemark[8].\\
-				Cacher la page d'accueil\footnotemark[2].\\		
+				Supprimer la page d'accueil\footnotemark[2].\\		
 			\end{quote}
 			
 			
@@ -290,7 +290,7 @@
 						\og voir section \ref{profil}, page \pageref{profil}.\fg
 					}.\\
 				Afficher la page de création du profil\footnotemark[8].\\
-				Cacher la page d'accueil\footnotemark[2].\\			
+				Supprimer la page d'accueil\footnotemark[2].\\			
 			\end{quote}
 
 	
@@ -495,7 +495,7 @@
 									\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
 								}.\\
 								RG4-05.\\
-								Supprimer toutes les pages existantes.					
+								Supprimer toutes les pages existantes sauf la page d'acceuil multi-joueurs\footnotemark[2].					
 							\end{quote}
 						\end{quote}
 				\end{quote}
@@ -533,12 +533,12 @@
 				  &        & sur la page de création  & & \\
 				  &        & d'un compte multi-joueurs \footnotemark[1] & & \\\hline
 				4 & Label & Affiche l'erreur & Serveur distant & RG5-02 \\\hline
-				7 & Check box & Permet la connexion automatique & Cliqué & RG5-03 \\
+				7 & Check box & Permet la connexion automatique & Cliqué & RG4-05 \\
 				  &           & lors des prochaines utilisations&        & \\				
 				  &           & du multi-joueurs                &        & \\\hline
-				8 & Bouton & Permet de revenir à la page & Cliqué & RG5-04 \\
+				8 & Bouton & Permet de revenir à la page & Cliqué & RG5-03 \\
 				  &        & de connexion multi-joueurs \footnotemark[2] & & \\\hline
-				9 & Bouton & Valide les paramètres entrés & Cliqué & RG5-05 \\\hline
+				9 & Bouton & Valide les paramètres entrés & Cliqué & RG5-04 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
@@ -551,7 +551,7 @@
 							\og voir section \ref{Creation compte multi-joueurs}, page \pageref{Creation compte multi-joueurs}.\fg
 						}.\\
 					Afficher la page de création d'un compte multi-joueurs\footnotemark[1].\\
-					Cacher la page de connexion multi-joueurs%
+					Supprimer la page de connexion multi-joueurs%
 						\footnote[2]{
 							\hyperlink{Connexion multi-joueurs}{Connexion multi-joueurs}
 							\og voir section \ref{Connexion multi-joueurs}, page \pageref{Connexion multi-joueurs}.\fg
@@ -567,19 +567,6 @@
 				
 			\underline{RG5-03 :}
 				\begin{quote}
-					Si la check box est cochée alors
-					\begin{quote}
-						
-					\end{quote}
-					Sinon
-					\begin{quote}
-					
-					\end{quote}
-				\end{quote}
-
-				
-			\underline{RG5-04 :}
-				\begin{quote}
 					Afficher la page d'accueil%
 						\footnote[3]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
@@ -589,7 +576,7 @@
 				\end{quote}	
 				
 				
-			\underline{RG5-05 :}
+			\underline{RG5-04 :}
 				\begin{quote}
 					Vérification des paramètres passés.\\
 					Connexion au serveur distant.\\
@@ -601,8 +588,12 @@
 								\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
 							}.\\
 						Afficher la page d'accueil multi-joueurs \footnotemark[4].\\
-						Supprimer la page de connexion multi-joueurs \footnotemark[2].\\
+						Supprimer la page de connexion multi-joueurs \footnotemark[2].
 					\end{quote}	
+					Sinon
+					\begin{quote}
+						Afficher l'erreur dans le label d'erreur (4).
+					\end{quote}					
 				\end{quote}	
 
 \newpage
@@ -629,7 +620,7 @@
 
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
-				2 & Champs de texte & Permet de filtrer les parties & Perte du focus & RG6-01 \\
+				2 & Champs de texte & Permet de filtrer les parties & Texte saisi & RG6-01 \\
 				  &                 & selon le texte tapé par l'utilisateur & & \\\hline
 				3 & Bouton & Rafraichi la liste des parties & Cliqué & RG6-02 \\
 				  &        & en cours & & \\\hline
@@ -794,25 +785,25 @@
 				\end{quote}	
 
 
-			\underline{RG73-07 :}
+			\underline{RG7-07 :}
 				\begin{quote}
 					Afficher la page d'accueil%
 						\footnote[1]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
 							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
 						}.\\
-					Supprimer la page de création d'une partie solitaire.\\
+					Supprimer la page de création d'une partie multi-joueurs.\\
 				\end{quote}
 
 
 			\underline{RG7-08 :}
 				\begin{quote}
-					 Connexion au serveur distant
-					 Créer la partie.
-					 Lancer la partie.
+					 Connexion au serveur distant.\\
+					 Créer la partie.\\
+					 Lancer la partie.\\
 					 Supprimer la page de création d'une partie solitaire.\\
 				\end{quote}	
-	
+	 
 \newpage
 
 	\subsection{Options}
@@ -820,8 +811,10 @@
 		\hypertarget{Options}{}
 		\label{Options}
 	
-		\input{./tex/9_Options}
-		
+		\begin{center}
+			\input{./tex/8_Options}
+		\end{center}
+				
 		\begin{enumerate}
 		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Barre de volume
@@ -835,15 +828,61 @@
 		
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+				2 & & Barre de volume & Cliqué & RG8-01 \\\hline
+				3 & Check box & Permet de passer le volume à muet & Cliqué & RG4-05 \\\hline
+				4 & Liste déroulante & Permet de choisir la langue voulu pour le jeu & Cliqué & RG8-02 \\\hline
+				5 & Bouton & Ouvre la page de gestion de profil & Cliqué & RG8-03 \\\hline
+				6 & Bouton & Permet de revenir à l'accueil principal & Cliqué & RG8-04 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
-			\underline{RG7-01 :}
+			\underline{RG8-01 :}
 				\begin{quote}
-				
+					Enregistrer le volume selectionné.\\
 				\end{quote}
-	
+
+
+			\underline{RG8-02 :}
+				\begin{quote}
+					Utile ? \\
+				\end{quote}
+
+
+			\underline{RG8-03 :}
+				\begin{quote}
+					Si la langue a changé alors
+					\begin{quote}
+						Appliquer la nouvelle langue.
+					\end{quote}
+					Charger la page de gestion du profil%
+						\footnote[1]{
+							\hyperlink{Gestion du profil}{Gestion du profil}
+							\og voir section \ref{Gestion du profil}, page \pageref{Gestion du profil}.\fg
+						}.\\
+					Afficher la page de gestion du profil\footnotemark[1].\\
+					Supprimer la page des options%
+						\footnote[2]{
+							\hyperlink{Options}{Options}
+							\og voir section \ref{Options}, page \pageref{Options}.\fg
+						}.\\						
+				\end{quote}
+				
+				
+			\underline{RG8-04 :}
+				\begin{quote}
+					Charger la page d'accueil%
+						\footnote[3]{
+							\hyperlink{Page d'accueil}{Page d'accueil}
+							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+						}.\\
+					Afficher la page d'accueil\footnotemark[3].\\
+					Supprimer la page des options%
+						\footnote[2]{
+							\hyperlink{Options}{Options}
+							\og voir section \ref{Options}, page \pageref{Options}.\fg
+						}.\\		
+				\end{quote}
 \newpage
 
 	\subsection{Gestion du profil}
@@ -851,8 +890,10 @@
 		\hypertarget{Gestion du profil}{}
 		\label{Gestion du profil}
 		
-		\input{./tex/10_Gestion_profil}
-		
+		\begin{center}
+			\input{./tex/9_Gestion_profil}
+		\end{center}
+				
 		\begin{enumerate}
 		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Champs de texte ``Pseudo''
@@ -868,11 +909,21 @@
 		
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+				2 & Champs de texte & Pseudonyme de l'utilisateur & Chargement de la page & RG9-01 \\
+				  &                 &                             & Perte du focus & RG9-02 \\\hline
+				3 & Champs de texte & Couleur du personnage souhaitée & Chargement de la page & RG9-01 \\
+				  &                 &                             & Perte du focus & RG9-03 \\\hline
+				4 & Champs de texte & Nom de l'utilisateur pour & Chargement de la page & RG9-01 \\
+				  &                 & les parties en ligne      & Perte du focus & RG9-04 \\\hline
+				5 & Bouton & Permet la modification du mot de & Cliqué & RG9-05 \\
+				  &        & passe pour les parties multi-joueurs & & \\\hline
+				6 & Check box & Permet la connexion automatique & Chargement de la page & RG9-01 \\
+				  &           & lors des parties multi-joueurs            & Cliquée               & RG9-06 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
-			\underline{RG8-01 :}
+			\underline{RG9-01 :}
 				\begin{quote}
 				
 				\end{quote}
@@ -880,11 +931,13 @@
 \newpage
 
 	\subsection{Statistiques}
-	
-		\input{./tex/11_Mes_statistiques}
 		
 		\hypertarget{Statistiques}{}
 		\label{Statistiques}
+			
+		\begin{center}
+			\input{./tex/10_Mes_statistiques}
+		\end{center}
 		
 		\begin{enumerate}
 		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
