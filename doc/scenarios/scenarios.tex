@@ -16,8 +16,6 @@
 	\section{Scenarios}
 	
 		Description de la partie \ldots
-		
-		\newpage
 
 \newpage
 	
@@ -49,25 +47,31 @@
 		\underline{RG0-01 :}
 		\begin{quote}
 			Déclenchée au démarrage de l'application.\\
-			Affichage du spinner montrant le chargement de l'application.\\
+			Afficher le spinner montrant le chargement de l'application.\\
 			\underline{Chargement de l'application :}
 				\begin{quote}
-					Chargement de la page d'accueil%
-					\footnote[1]{
-						\hyperlink{Page d'accueil}{Page d'accueil}
-						\og voir section \ref{accueil}, page \pageref{accueil}.\fg
-					}.\\
 					Vérification d'un compte local existant (stocké sur le téléphone).\\
-					Si aucun compte n'est trouvé alors la page de création du profil%
-					\footnote[2]{
-						\hyperlink{Création du profil}{Page de création du profil}
-						\og voir section \ref{profil}, page \pageref{profil}.\fg
-					}
-					est chargée puis affichée.\\
-					Sinon la page d'accueil%
-					\footnotemark[1]
-					est affichée directement. \\
-					La page représentant le chargement de l'application est détruite une fois le chargement de l'application terminé.\\
+					Si aucun compte n'est trouvé alors 
+					\begin{quote}
+						Créer la page de création du profil%
+						\footnote[1]{
+							\hyperlink{Création du profil}{Page de création du profil}
+							\og voir section \ref{profil}, page \pageref{profil}.\fg
+						}
+						Afficher la page de création du profil\footnotemark[1].\\
+					\end{quote}
+					Sinon
+					\begin{quote}
+						Créer la classe utilisateur.
+						Mettre à jour les informations de la classe utilisateur.
+						Charger de la page d'accueil%
+						\footnote[2]{
+							\hyperlink{Page d'accueil}{Page d'accueil}
+							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+						}.\\
+						Afficher la page d'accueil\footnotemark[2].
+					\end{quote}
+					Supprimer la page de chargement de l'application.\\
 				\end{quote}
 		\end{quote}
 
@@ -108,7 +112,7 @@
 				\end{itemize}
 				Si la vérification est incorrecte alors
 				\begin{quote}
-					Une erreur est renvoyée et affichée via le label d'erreur (3).
+					Afficher l'erreur via le label d'erreur (3).
 				\end{quote}
 			\end{quote}
 			
@@ -117,20 +121,17 @@
 				RG1-01.\\
 				Si la vérification est correcte alors
 				\begin{quote}
-					Un nouveau compte hors ligne ayant pour pseudonyme celui
-					entré dans la zone de saisie est créé dans la base de
-					données du téléphone.
-				\end{quote}				
-				Sinon
-				\begin{quote}
-					Une erreur est renvoyée et affichée via le label d'erreur (3).
+					Créer un nouveau compte hors ligne ayant pour pseudonyme celui entré.
+					Créer la classe utilisateur.
+					Mettre à jour la classe utilisateur.
+					Créer la page d'accueil%
+						\footnote[1]{
+							\hyperlink{Page d'accueil}{Page d'accueil}
+							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+						}.\\
+					Afficher la page d'acceuil\footnotemark[1] 
+					Supprimer la page de création du profil.
 				\end{quote}
-				Afficher la page d'accueil%
-					\footnote[1]{
-						\hyperlink{Page d'accueil}{Page d'accueil}
-						\og voir section \ref{accueil}, page \pageref{accueil}.\fg
-					}.\\
-				Supprimer la page de création du profil.
 			\end{quote}
 	
 \newpage
@@ -166,7 +167,7 @@
 			6 & Bouton & Affiche l'écran de création de niveaux & Cliqué & RG2-05 \\\hline
 			7 & Bouton & Affiche l'écran d'aide & Cliqué & RG2-06 \\\hline
 			8 & Liste & Permet de sélectionner le compte hors ligne voulu & Cliqué & RG2-07 \\ 
-			  & déroulante & Affiche par défaut le compte en cours d'utilisation & & \\
+			  & déroulante & Affiche par défaut le compte en cours d'utilisation & Perte du focus & RG2-08\\
 			  & & Taille : ??? & & \\\hline
 			9 & Bouton & Affiche l'écran de création du profil & Cliqué & RG2-08 \\\hline
 			
@@ -183,7 +184,7 @@
 						\hyperlink{Creer partie solo}{Création d'une partie hors ligne}
 						\og voir section \ref{Creer partie solo}, page \pageref{Creer partie solo}.\fg
 					}.\\
-				Afficher la page de création d'une partie hors ligne \footnotemark[1].\\
+				Afficher la page de création d'une partie hors ligne\footnotemark[1].\\
 				Supprimer la page d'accueil%
 					\footnote{
 						\hyperlink{Page d'accueil}{Page d'accueil}
@@ -202,10 +203,10 @@
 						Si la connexion est validée alors
 						\begin{quote}
 							Charger la page d'accueil multi-joueurs%
-					\footnote{
-						\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
-						\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
-					}.\\
+								\footnote{
+									\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
+									\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
+								}.\\
 							Afficher la page d'accueil multi-joueurs\footnotemark[3].\\
 						\end{quote}
 					\end{quote}	
@@ -234,8 +235,8 @@
 						\hyperlink{Options}{Options}
 						\og voir section \ref{Options}, page \pageref{Options}.\fg
 					}.\\
-				Afficher la page des options\footnotemark[5].\\			
-				Supprimer la page d'accueil\footnotemark[2].\\	
+				Afficher la page des options\footnotemark[5].\\
+				Supprimer la page d'accueil\footnotemark[2].\\
 			\end{quote}
 
 
@@ -246,8 +247,8 @@
 						\hyperlink{Statistiques}{Statistiques}
 						\og voir section \ref{Statistiques}, page \pageref{Statistiques}.\fg
 					}.\\
-				Afficher la page des statistiques\footnotemark[6].\\				
-				Supprimer la page d'accueil\footnotemark[2].\\		
+				Afficher la page des statistiques\footnotemark[6].\\
+				Supprimer la page d'accueil\footnotemark[2].\\
 			\end{quote}
 
 
@@ -279,10 +280,16 @@
 			\begin{quote}
 				Récupérer la liste des comptes hors ligne présents sur le téléphone.\\
 				Les afficher en premier plan.\\
-			\end{quote}			
+			\end{quote}
 
 
 		\underline{RG2-08 :}
+			\begin{quote}
+				Mettre à jour la classe utilisateur.
+			\end{quote}
+
+
+		\underline{RG2-09 :}
 			\begin{quote}
 				Charger la page de création du profil%
 					\footnote{
@@ -290,7 +297,7 @@
 						\og voir section \ref{profil}, page \pageref{profil}.\fg
 					}.\\
 				Afficher la page de création du profil\footnotemark[8].\\
-				Supprimer la page d'accueil\footnotemark[2].\\			
+				Supprimer la page d'accueil\footnotemark[2].\\
 			\end{quote}
 
 	
