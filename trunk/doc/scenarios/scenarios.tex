@@ -830,10 +830,10 @@
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
 				2 & & Barre de volume & Cliqué & RG8-01 \\\hline
-				3 & Check box & Permet de passer le volume à muet & Cliqué & RG4-05 \\\hline
-				4 & Liste déroulante & Permet de choisir la langue voulu pour le jeu & Perte du focus & RG8-02 \\\hline 
-				5 & Bouton & Ouvre la page de gestion de profil &
-				Cliqué & RG8-03 \\\hline 6 & Bouton & Permet de revenir à l'accueil principal & Cliqué & RG8-04 \\\hline
+				3 & Check box & Permet de passer le volume à muet & Cliqué & RG8-02 \\\hline
+				4 & Liste déroulante & Permet de choisir la langue voulu pour le jeu & Perte du focus & RG8-03 \\\hline 
+				5 & Bouton & Ouvre la page de gestion de profil & Cliqué & RG8-04 \\\hline 
+				6 & Bouton & Permet de revenir à l'accueil principal & Cliqué & RG8-05 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
@@ -842,9 +842,15 @@
 				\begin{quote}
 					Enregistrer le volume selectionné dans le fichier de paramètre.\\
 				\end{quote}
-
+				
 
 			\underline{RG8-02 :}
+				\begin{quote}
+					Enregistrer le volume à 0 dans le fichier paramètre.\\
+				\end{quote}
+				
+
+			\underline{RG8-03 :}
 				\begin{quote}
 					Si la langue a changé alors
 					\begin{quote}
@@ -853,7 +859,7 @@
 				\end{quote}
 
 
-			\underline{RG8-03 :}
+			\underline{RG8-04 :}
 				\begin{quote}
 					Recharger la classe utilisateur.\\
 					Charger la page de gestion du profil%
@@ -870,8 +876,9 @@
 				\end{quote}
 				
 				
-			\underline{RG8-04 :}
+			\underline{RG8-05 :}
 				\begin{quote}
+					Recharger la classe utilisateur.\\
 					Charger la page d'accueil%
 						\footnote[3]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
@@ -901,7 +908,8 @@
 		  \item Liste déroulante ``Couleur joueur''
 		  \item Champs de texte ``Nom d'utilisateur''
 		  \item Bouton ``Modifier''
-		  \item Liste déroulante ``Position menu de la partie''
+		  \item Bouton ``Connexion automatique''
+		  \item Liste déroulante ``Type''
 		  \item Bouton ``\hyperlink{Options}{Valider}''
 		  \item Bouton ``\hyperlink{Options}{Retour}''
 		\end{enumerate}
@@ -919,23 +927,59 @@
 				5 & Bouton & Permet la modification du mot de & Cliqué & RG9-05 \\
 				  &        & passe pour les parties multi-joueurs & & \\\hline
 				6 & Check box & Permet la connexion automatique & Chargement de la page & RG9-06 \\
-				  &           & lors des parties multi-joueurs  & Cliquée               & RG9-07 \\\hline
+				  &           & lors des parties multi-joueurs  & Cliquée               & RG4-05 \\\hline
+				7 & Liste déroulante & Permet de choisir le type & Chargement de la page & RG9-07 \\
+				  &				     & de l'affichage            & Perte du focus & RG9-08 \\
+				  &				     & (droitier/gaucher)        & & \\\hline
+				8 & Bouton & Annule les modifications & Cliqué & RG9-09 \\
+				  &        & Renvoie à l'écran des options &   &        \\\hline
+				9 & Bouton & Valide les modifications & Cliqué & RG9-10 \\
+				  &        & Renvoie à l'écran des options &   &        \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
 			\underline{RG9-01 :}
 				\begin{quote}
-					Récuperer dans la classe utilisateur la couleur utilisée.
+					Récuperer dans la classe utilisateur la couleur utilisée.\\
 				\end{quote}
 
 
 			\underline{RG9-02 :}
 				\begin{quote}
-					Modifier la couleur dans la classe utilisateur.
-					Modifier la couleur dans
+					Modifier la couleur dans le fichier utilisateur.\\
 				\end{quote}
-	
+
+				
+			\underline{RG9-03 :}
+				\begin{quote}
+					Récuperer dans la classe utilisateur le nom du compte hors ligne utilisé.\\
+				\end{quote}		
+
+
+			\underline{RG9-04 :}
+				\begin{quote}
+					Modifier le nom d'utilisateur pour les parties en ligne dans le fichier utilisateur.\\
+				\end{quote}
+				
+
+			\underline{RG9-05 :}
+				\begin{quote}
+					Lancer une sous activité pour la modification du mot de passe.\\
+				\end{quote}
+
+
+			\underline{RG9-06 :}
+				\begin{quote}
+					Récuperer dans la classe utilisateur la valeur de la connexion automatique.\\
+				\end{quote}
+			 
+
+			\underline{RG9-07 :}
+				\begin{quote}
+					Récuperer dans la classe utilisateur le type de l'affichage.\\
+				\end{quote}
+									
 \newpage
 
 	\subsection{Statistiques}
