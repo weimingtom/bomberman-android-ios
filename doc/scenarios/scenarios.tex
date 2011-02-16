@@ -1,7 +1,10 @@
 \documentclass{report}
 
 \usepackage[utf8]{inputenc}
-\usepackage[francais]{babel}
+\usepackage[frenchb]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
 \usepackage{a4wide}
 
 \usepackage{pstricks}
@@ -67,11 +70,11 @@
 						Charger la page d'accueil%
 						\footnote[2]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
-							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
 						}.\\
 						Afficher la page d'accueil\footnotemark[2].
 					\end{quote}
-					Supprimer la page de chargement de l'application.\\
+					Supprimer la page de chargement de l'application.
 				\end{quote}
 		\end{quote}
 
@@ -90,7 +93,7 @@
 		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Zone de saisie.
 		  \item Label d'erreur.
-		  \item Bouton ``Valider".
+		  \item Bouton ``\hyperlink{Accueil}{Valider}".
 		\end{enumerate}
 
 		\subsubsection{Description des zones}
@@ -127,7 +130,7 @@
 					Créer la page d'accueil%
 						\footnote[1]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
-							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
 						}.\\
 					Afficher la page d'acceuil\footnotemark[1].\\
 					Supprimer la page de création du profil.
@@ -137,8 +140,8 @@
 \newpage
 
 	\subsection{Page d'accueil}
-		\hypertarget{Page d'accueil}{}
-		\label{accueil}
+		\hypertarget{Accueil}{}
+		\label{Accueil}
 
 		\begin{center}	
 			\input{./tex/2_Accueil}
@@ -166,9 +169,8 @@
 			5 & Bouton & Affiche l'écran des statistiques & Cliqué & RG2-04 \\\hline
 			6 & Bouton & Affiche l'écran de création de niveaux & Cliqué & RG2-05 \\\hline
 			7 & Bouton & Affiche l'écran d'aide & Cliqué & RG2-06 \\\hline
-			8 & Liste & Permet de sélectionner le compte hors ligne voulu & Cliqué & RG2-07 \\ 
-			  & déroulante & Affiche par défaut le compte en cours d'utilisation & Perte du focus & RG2-08\\
-			  & & Taille : ??? & & \\\hline
+			8 & Liste & Permet de sélectionner un compte hors ligne & Cliqué & RG2-07 \\ 
+			  & déroulante & Affiche le compte en cours d'utilisation & Perte du focus & RG2-08\\\hline
 			9 & Bouton & Affiche l'écran de création du profil & Cliqué & RG2-08 \\\hline
 			
 		\end{tabular}
@@ -179,7 +181,7 @@
 		
 		\underline{RG2-01 :}
 			\begin{quote}
-				Charger la page de création d'une partie hors ligne%
+				Charger la page de création d'une partie hors ligne
 					\footnote{
 						\hyperlink{Creer partie solo}{Création d'une partie hors ligne}
 						\og voir section \ref{Creer partie solo}, page \pageref{Creer partie solo}.\fg
@@ -188,10 +190,11 @@
 				Supprimer la page d'accueil%
 					\footnote{
 						\hyperlink{Page d'accueil}{Page d'accueil}
-						\og voir section \ref{accueil}, page \pageref{accueil}.\fg
-					}.\\ 
+						\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
+					}.
 			\end{quote}
 
+		$\,$
 
 		\underline{RG2-02 :}
 			\begin{quote}
@@ -207,7 +210,7 @@
 									\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
 									\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
 								}.\\
-							Afficher la page d'accueil multi-joueurs\footnotemark[3].\\
+							Afficher la page d'accueil multi-joueurs\footnotemark[3].
 						\end{quote}
 					\end{quote}	
 				\end{quote}
@@ -224,9 +227,10 @@
 						Afficher l'erreur dans la page de connexion multi-joueurs\footnotemark[4].
 					\end{quote}
 				\end{quote}
-				Supprimer la page d'accueil\footnotemark[2].\\
+				Supprimer la page d'accueil\footnotemark[2].
 			\end{quote}
 
+		$\,$
 		
 		\underline{RG2-03 :}
 			\begin{quote}
@@ -236,9 +240,11 @@
 						\og voir section \ref{Options}, page \pageref{Options}.\fg
 					}.\\
 				Afficher la page des options\footnotemark[5].\\
-				Supprimer la page d'accueil\footnotemark[2].\\
+				Supprimer la page d'accueil\footnotemark[2].
 			\end{quote}
 
+
+		$\,$
 
 		\underline{RG2-04 :}
 			\begin{quote}
@@ -248,21 +254,23 @@
 						\og voir section \ref{Statistiques}, page \pageref{Statistiques}.\fg
 					}.\\
 				Afficher la page des statistiques\footnotemark[6].\\
-				Supprimer la page d'accueil\footnotemark[2].\\
+				Supprimer la page d'accueil\footnotemark[2].
 			\end{quote}
 
+		$\,$
 
 		\underline{RG2-05 :}
 			\begin{quote}
 				Charger la page de création de niveaux%
 					\footnote{
-						\hyperlink{Creation de niveaux}{Création de niveaux}
-						\og voir section \ref{Creation de niveaux}, page \pageref{Creation de niveaux}.\fg
+						\hyperlink{Creer niveau}{Créer niveau}
+						\og voir section \ref{Creer niveau}, page \pageref{Creer niveau}.\fg
 					}.\\
 				Afficher la page de création de niveaux\footnotemark[7].\\
-				Supprimer la page d'accueil\footnotemark[2].\\		
+				Supprimer la page d'accueil\footnotemark[2].		
 			\end{quote}
 
+		$\,$
 
 		\underline{RG2-06 :}
 			\begin{quote}
@@ -285,9 +293,10 @@
 
 		\underline{RG2-08 :}
 			\begin{quote}
-				Mettre à jour la classe utilisateur.\\
+				Mettre à jour la classe utilisateur.
 			\end{quote}
 
+		$\,$
 
 		\underline{RG2-09 :}
 			\begin{quote}
@@ -297,9 +306,10 @@
 						\og voir section \ref{profil}, page \pageref{profil}.\fg
 					}.\\
 				Afficher la page de création du profil\footnotemark[9].\\
-				Supprimer la page d'accueil\footnotemark[2].\\
+				Supprimer la page d'accueil\footnotemark[2].
 			\end{quote}
 
+		$\,$
 	
 \newpage
 
@@ -321,7 +331,7 @@
 		  \item Liste déroulante ``Type de partie''
 		  \item Liste déroulante ``Nombre d'ennemis''
 		  \item Liste déroulante ``Difficulté des ennemis''
-		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
+		  \item Bouton ``\hyperlink{Accueil}{Retour}''
 		  \item Bouton ``Lancer'' 
 		\end{enumerate}
 		
@@ -381,7 +391,7 @@
 					Afficher la page d'accueil%
 						\footnote[1]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
-							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
 						}.\\
 					Supprimer la page de création d'une partie solitaire.\\
 				\end{quote}
@@ -526,7 +536,7 @@
 		  \item Champs de texte ``Nom utilisateur''
 		  \item Champs de texte ``Mot de passe''
 		  \item Check Box ``Connexion auto''
-		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
+		  \item Bouton ``\hyperlink{Accueil}{Retour}''
 		  \item Bouton ``\hyperlink{Accueil multi-joueurs}{Connexion}''
 		\end{enumerate}
 
@@ -571,11 +581,12 @@
 					Afficher la page d'accueil%
 						\footnote[3]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
-							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
 						}.\\
-					Supprimer la page de connexion multi-joueurs \footnotemark[2].\\			
+					Supprimer la page de connexion multi-joueurs \footnotemark[2].		
 				\end{quote}	
 				
+			$\,$
 				
 			\underline{RG5-03 :}
 				\begin{quote}
@@ -613,7 +624,7 @@
 		  \item Champs de texte ``Filtrer''
 		  \item Bouton ``Rafraichir''
 		  \item Cadre contenant les différentes parties en ligne en cours
-		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
+		  \item Bouton ``\hyperlink{Accueil}{Retour}''
 		  \item Bouton ``\hyperlink{Creer partie multi-joueurs}{Créer partie}''
 		\end{enumerate}
 
@@ -641,54 +652,60 @@
 				\begin{quote}
 					Si le champs de texte (2) n'est pas vide alors
 					\begin{quote}	
-						Envoyer le contenu à RG6-04.\\
+						Envoyer le contenu à RG6-04
 					\end{quote}					
 				\end{quote}	
 		
+			$\,$
 				
 			\underline{RG6-02 :}
 				\begin{quote}	
-					RG6-03.\\
+					RG6-03
 				\end{quote}
-	
+
+			$\,$	
 				
 			\underline{RG6-03 :}
 				\begin{quote}
 					Requête au serveur distant afin de récupérer la liste des parties en cours.\\
 					Si la liste n'est pas vide
 					\begin{quote}
-						Afficher la liste.\\
+						Afficher la liste.
 					\end{quote}								
 				\end{quote}
 
+			$\,$
 
 			\underline{RG6-04 :}
 				\begin{quote}
-					Filtrer l'affichage du label (4) selon le texte reçu.\\
+					Filtrer l'affichage du label (4) selon le texte reçu.
 				\end{quote}
 
+			$\,$
 				
 			\underline{RG6-05 :}
 				\begin{quote}
-					Connexion au serveur distant afin de rejoindre la partie.\\
+					Connexion au serveur distant afin de rejoindre la partie.
 				\end{quote}
 
+			$\,$
 				
 			\underline{RG6-06 :}
 				\begin{quote}
 					Charger la page d'accueil%
 						\footnote[1]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
-							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
 						}.\\
 					Afficher la page d'accueil\footnotemark[1].\\
 					Supprimer la page d'accueil multi-joueurs%
 						\footnote[2]{
 							\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
 							\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
-						}.\\
+						}.
 				\end{quote}
 
+			$\,$
 
 			\underline{RG6-07 :}
 				\begin{quote}
@@ -698,7 +715,7 @@
 							\og voir section \ref{Creer partie multi-joueurs}, page \pageref{Creer partie multi-joueurs}.\fg
 						}.\\
 					Afficher la page de création d'une partie multi-joueurs\footnotemark[3].\\
-					Supprimer la page d'accueil multi-joueurs\footnotemark[2].\\
+					Supprimer la page d'accueil multi-joueurs\footnotemark[2].
 				\end{quote}
 
 \newpage
@@ -722,7 +739,7 @@
 		  \item Liste déroulante ``Type de partie''
 		  \item Liste déroulante ``Nombre d'ennemis''
 		  \item Liste déroulante ``Difficulté des ennemis''
-		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
+		  \item Bouton ``\hyperlink{Accueil multi-joueurs}{Retour}''
 		  \item Bouton ``Lancer'' 
 		\end{enumerate}
 
@@ -758,52 +775,60 @@
 			\underline{RG7-02 :}
 				\begin{quote}
 					Décaler les cartes vers la droite ou la gauche.\\
-					RG3-03\\
+					RG3-03
 				\end{quote}
 				
+			$\,$				
 				
 			\underline{RG7-03 :}
 				\begin{quote}
-					Afficher le nom de la carte choisie.\\
+					Afficher le nom de la carte choisie.
 				\end{quote}
 
+			$\,$
 
 			\underline{RG7-04 :}
 				\begin{quote}
-					Dérouler la liste.\\
+					Dérouler la liste.
 				\end{quote}
 
+			$\,$
 
 			\underline{RG7-05 :}
 				\begin{quote}
-					Dérouler la liste.\\				
+					Dérouler la liste.			
 				\end{quote}	
 				
+			$\,$
 
 			\underline{RG7-06 :}
 				\begin{quote}
-					Dérouler la liste.\\				
-				\end{quote}	
+					Dérouler la liste.		
+				\end{quote}
 
+			$\,$
 
 			\underline{RG7-07 :}
 				\begin{quote}
 					Afficher la page d'accueil%
 						\footnote[1]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
-							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
 						}.\\
-					Supprimer la page de création d'une partie multi-joueurs.\\
+					Supprimer la page de création d'une partie multi-joueurs.
 				\end{quote}
-
+				
+			$\,$
 
 			\underline{RG7-08 :}
 				\begin{quote}
 					 Connexion au serveur distant.\\
 					 Créer la partie.\\
 					 Lancer la partie.\\
-					 Supprimer la page de création d'une partie solitaire.\\
-				\end{quote}	
+					 Supprimer la page de création d'une partie solitaire.
+				\end{quote}
+				
+			$\,$
 	 
 \newpage
 
@@ -821,8 +846,8 @@
 		  \item Barre de volume
 		  \item Check box ``Muet''
 		  \item Liste déroulante ``Langues''
-		  \item Bouton ``\hyperlink{Page d'accueil}{Gestion du profil}''
-		  \item Bouton ``\hyperlink{Page d'accueil}{Retour}''
+		  \item Bouton ``\hyperlink{Gestion du profil}{Gestion du profil}''
+		  \item Bouton ``\hyperlink{Accueil}{Retour}''
 		\end{enumerate}
 
 		\subsubsection{Description des zones}
@@ -882,7 +907,7 @@
 					Charger la page d'accueil%
 						\footnote[3]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
-							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
 						}.\\
 					Afficher la page d'accueil\footnotemark[3].\\
 					Supprimer la page des options%
@@ -1041,7 +1066,7 @@
 					Charger la page d'accueil%
 						\footnote[3]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
-							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
 						}.\\
 					Afficher la page d'accueil\footnotemark[3].\\
 					Supprimer la page des statistiques%
@@ -1053,5 +1078,135 @@
 	
 \newpage
 	
+	\subsection{Créer niveau}
+		
+		\hypertarget{Creer niveau}{}
+		\label{Creer niveau}
+			
+		\begin{center}
+			\input{./tex/11_Creer_niveau}
+		\end{center}
 
+		\begin{enumerate}
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
+		  \item Champs de texte ``Nom du niveau''
+		  \item Liste déroulante ``Largeur''
+		  \item Liste déroulante ``Hauteur''
+		  \item Bouton ``\hyperlink{Charger}{Charger niveau}''
+		  \item Bouton ``\hyperlink{Accueil}{Retour}''
+		  \item Bouton ``\hyperlink{Editeur}{Valider}''
+		\end{enumerate}
+
+		\subsubsection{Description des zones}
+		
+			\begin{tabular}{|c|c|c|c|c|} \hline
+				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+				5 & Bouton & Affiche une sous activée pour la selection de niveau & Cliqué & RG11-01 \\
+				  &        & Seuls les niveaux non officiels peuvent être chargés &        &         \\\hline
+				6 & Bouton & Permet de revenir à la page d'accueil & Cliqué & RG11-02 \\\hline
+				7 & Bouton & Lance l'éditeur de niveau selon les paramètres choisis & Cliqué & RG11-03 \\\hline 
+			\end{tabular}
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG11-01 :}
+				\begin{quote}
+					Charger la page de selection de niveau%
+						\footnote[1]{
+							\hyperlink{Charger un niveau}{Charger un niveau}
+							\og voir section \ref{Charger}, page \pageref{Charger}.\fg
+						}.\\
+					Afficher la page de selection de niveau\footnotemark[1].
+					Supprimer la page
+				\end{quote}
+				
+			$\,$
+
+			\underline{RG11-02 :}
+				\begin{quote}
+					Charger la page d'accueil%
+						\footnote[2]{
+							\hyperlink{Page d'accueil}{Page d'accueil}
+							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
+						}.\\
+					Afficher la page d'accueil\footnotemark[2].\\
+					Supprimer la page de création de niveau%
+					\footnote[3]{
+						\hyperlink{Creer niveau}{Créer niveau}
+						\og voir section \ref{Creer niveau}, page \pageref{Creer niveau}.\fg
+					}.
+				\end{quote}
+				
+			$\,$
+			
+			\underline{RG11-03 :}
+				\begin{quote}
+					Charger la page d'edition de carte%
+					\footnote[2]{
+							\hyperlink{Editeur}{Editeur de niveau}
+							\og voir section \ref{Editeur}, page \pageref{Editeur}.\fg
+						}.\\
+					Afficher la page d'editeur de carte\footnotemark[2].\\
+					Supprimer la page de création de niveau%
+					\footnote[3]{
+						\hyperlink{Creer niveau}{Créer niveau}
+						\og voir section \ref{Creer niveau}, page \pageref{Creer niveau}.\fg
+					}.
+				\end{quote}
+				
+\newpage
+	
+	\subsection{Charger un niveau}
+		
+		\hypertarget{Charger niveau}{}
+		\label{Charger niveau}
+			
+		\begin{center}
+
+		\end{center}
+
+		\begin{enumerate}
+		  \item 
+		\end{enumerate}
+
+		\subsubsection{Description des zones}
+		
+			\begin{tabular}{|c|c|c|c|c|} \hline
+				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+			\end{tabular}
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG12-01 :}
+				\begin{quote}
+				
+				\end{quote}
+				
+\newpage
+	
+	\subsection{Aide}
+		
+		\hypertarget{Aide}{}
+		\label{Aide}
+			
+		\begin{center}
+			\input{./tex/13_Aide}
+		\end{center}
+
+		\begin{enumerate}
+		  \item 
+		\end{enumerate}
+
+		\subsubsection{Description des zones}
+		
+			\begin{tabular}{|c|c|c|c|c|} \hline
+				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+			\end{tabular}
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG13-01 :}
+				\begin{quote}
+				
+				\end{quote}	
 \end{document}
