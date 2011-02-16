@@ -57,14 +57,14 @@
 						\footnote[1]{
 							\hyperlink{Création du profil}{Page de création du profil}
 							\og voir section \ref{profil}, page \pageref{profil}.\fg
-						}
-						Afficher la page de création du profil\footnotemark[1].\\
+						}.\\
+						Afficher la page de création du profil\footnotemark[1].
 					\end{quote}
 					Sinon
 					\begin{quote}
-						Créer la classe utilisateur.
-						Mettre à jour les informations de la classe utilisateur.
-						Charger de la page d'accueil%
+						Créer la classe utilisateur.\\
+						Mettre à jour les informations de la classe utilisateur.\\
+						Charger la page d'accueil%
 						\footnote[2]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
 							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
@@ -121,15 +121,15 @@
 				RG1-01.\\
 				Si la vérification est correcte alors
 				\begin{quote}
-					Créer un nouveau compte hors ligne ayant pour pseudonyme celui entré.
-					Créer la classe utilisateur.
-					Mettre à jour la classe utilisateur.
+					Créer un nouveau compte hors ligne ayant pour pseudonyme celui entré.\\
+					Créer la classe utilisateur.\\
+					Mettre à jour la classe utilisateur.\\
 					Créer la page d'accueil%
 						\footnote[1]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
 							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
 						}.\\
-					Afficher la page d'acceuil\footnotemark[1] 
+					Afficher la page d'acceuil\footnotemark[1].\\
 					Supprimer la page de création du profil.
 				\end{quote}
 			\end{quote}
@@ -285,7 +285,7 @@
 
 		\underline{RG2-08 :}
 			\begin{quote}
-				Mettre à jour la classe utilisateur.
+				Mettre à jour la classe utilisateur.\\
 			\end{quote}
 
 
@@ -296,7 +296,7 @@
 						\hyperlink{profil}{Création du profil}
 						\og voir section \ref{profil}, page \pageref{profil}.\fg
 					}.\\
-				Afficher la page de création du profil\footnotemark[8].\\
+				Afficher la page de création du profil\footnotemark[9].\\
 				Supprimer la page d'accueil\footnotemark[2].\\
 			\end{quote}
 
@@ -441,7 +441,7 @@
 
 			\underline{RG4-01 :}
 				\begin{quote}
-					Récupérer le pseudonyme du compte hors ligne en cours d'utilisation stocké sur le téléphone.\\
+					Récupérer le pseudonyme du compte hors ligne en cours d'utilisation dans la classe utilisateur.\\
 					Afficher le pseudonyme.\\
 				\end{quote}
 
@@ -539,13 +539,13 @@
 				3 & Bouton & Permet à l'utilisateur d'être redirigé & Cliqué & RG5-01\\
 				  &        & sur la page de création  & & \\
 				  &        & d'un compte multi-joueurs \footnotemark[1] & & \\\hline
-				4 & Label & Affiche l'erreur & Serveur distant & RG5-02 \\\hline
+				4 & Label & Affiche l'erreur & Serveur distant & RG4-02 \\\hline
 				7 & Check box & Permet la connexion automatique & Cliqué & RG4-05 \\
 				  &           & lors des prochaines utilisations&        & \\				
 				  &           & du multi-joueurs                &        & \\\hline
-				8 & Bouton & Permet de revenir à la page & Cliqué & RG5-03 \\
+				8 & Bouton & Permet de revenir à la page & Cliqué & RG5-02 \\
 				  &        & de connexion multi-joueurs \footnotemark[2] & & \\\hline
-				9 & Bouton & Valide les paramètres entrés & Cliqué & RG5-04 \\\hline
+				9 & Bouton & Valide les paramètres entrés & Cliqué & RG5-03 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
@@ -568,12 +568,6 @@
 				
 			\underline{RG5-02 :}
 				\begin{quote}
-				
-				\end{quote}	
-
-				
-			\underline{RG5-03 :}
-				\begin{quote}
 					Afficher la page d'accueil%
 						\footnote[3]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
@@ -583,7 +577,7 @@
 				\end{quote}	
 				
 				
-			\underline{RG5-04 :}
+			\underline{RG5-03 :}
 				\begin{quote}
 					Vérification des paramètres passés.\\
 					Connexion au serveur distant.\\
@@ -837,31 +831,31 @@
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
 				2 & & Barre de volume & Cliqué & RG8-01 \\\hline
 				3 & Check box & Permet de passer le volume à muet & Cliqué & RG4-05 \\\hline
-				4 & Liste déroulante & Permet de choisir la langue voulu pour le jeu & Cliqué & RG8-02 \\\hline
-				5 & Bouton & Ouvre la page de gestion de profil & Cliqué & RG8-03 \\\hline
-				6 & Bouton & Permet de revenir à l'accueil principal & Cliqué & RG8-04 \\\hline
+				4 & Liste déroulante & Permet de choisir la langue voulu pour le jeu & Perte du focus & RG8-02 \\\hline 
+				5 & Bouton & Ouvre la page de gestion de profil &
+				Cliqué & RG8-03 \\\hline 6 & Bouton & Permet de revenir à l'accueil principal & Cliqué & RG8-04 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
 			\underline{RG8-01 :}
 				\begin{quote}
-					Enregistrer le volume selectionné.\\
+					Enregistrer le volume selectionné dans le fichier de paramètre.\\
 				\end{quote}
 
 
 			\underline{RG8-02 :}
 				\begin{quote}
-					Utile ? \\
+					Si la langue a changé alors
+					\begin{quote}
+						Appliquer la nouvelle langue dans le fichier de paramètre.
+					\end{quote}
 				\end{quote}
 
 
 			\underline{RG8-03 :}
 				\begin{quote}
-					Si la langue a changé alors
-					\begin{quote}
-						Appliquer la nouvelle langue.
-					\end{quote}
+					Recharger la classe utilisateur.\\
 					Charger la page de gestion du profil%
 						\footnote[1]{
 							\hyperlink{Gestion du profil}{Gestion du profil}
@@ -916,23 +910,30 @@
 		
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
-				2 & Champs de texte & Pseudonyme de l'utilisateur & Chargement de la page & RG9-01 \\
-				  &                 &                             & Perte du focus & RG9-02 \\\hline
+				2 & Champs de texte & Pseudonyme de l'utilisateur & Chargement de la page & RG4-02 \\
+				  &                 &                             & Perte du focus & RG1-01 \\\hline
 				3 & Champs de texte & Couleur du personnage souhaitée & Chargement de la page & RG9-01 \\
-				  &                 &                             & Perte du focus & RG9-03 \\\hline
-				4 & Champs de texte & Nom de l'utilisateur pour & Chargement de la page & RG9-01 \\
+				  &                 &                             & Perte du focus & RG9-02 \\\hline
+				4 & Champs de texte & Nom de l'utilisateur pour & Chargement de la page & RG9-03 \\
 				  &                 & les parties en ligne      & Perte du focus & RG9-04 \\\hline
 				5 & Bouton & Permet la modification du mot de & Cliqué & RG9-05 \\
 				  &        & passe pour les parties multi-joueurs & & \\\hline
-				6 & Check box & Permet la connexion automatique & Chargement de la page & RG9-01 \\
-				  &           & lors des parties multi-joueurs            & Cliquée               & RG9-06 \\\hline
+				6 & Check box & Permet la connexion automatique & Chargement de la page & RG9-06 \\
+				  &           & lors des parties multi-joueurs  & Cliquée               & RG9-07 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
 			\underline{RG9-01 :}
 				\begin{quote}
-				
+					Récuperer dans la classe utilisateur la couleur utilisée.
+				\end{quote}
+
+
+			\underline{RG9-02 :}
+				\begin{quote}
+					Modifier la couleur dans la classe utilisateur.
+					Modifier la couleur dans
 				\end{quote}
 	
 \newpage
@@ -961,7 +962,7 @@
 			
 		\subsubsection{Description des règles}
 
-			\underline{RG9-01 :}
+			\underline{RG10-01 :}
 				\begin{quote}
 				
 				\end{quote}
