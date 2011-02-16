@@ -41,5 +41,5 @@ Maven pour Eclipse
 [http://developer.apple.com/devcenter/ios/index.action Documentation officielle]
 
 === <u>Doxygen</u> ===
-[http://www.duckrowing.com/2010/03/18/documenting-objective-c-with-doxygen-part-i/ Tutoriel Doxygen Part1]
+[http://www.duckrowing.com/2010/03/18/documenting-objective-c-with-doxygen-part-i/ Tutoriel Doxygen Part1]<br/>
 [http://www.duckrowing.com/2010/03/18/documenting-objective-c-with-doxygen-part-ii/ Tutoriel Doxygen Part2]
