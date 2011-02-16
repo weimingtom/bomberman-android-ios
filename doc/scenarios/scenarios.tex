@@ -931,10 +931,8 @@
 				7 & Liste déroulante & Permet de choisir le type & Chargement de la page & RG9-07 \\
 				  &				     & de l'affichage            & Perte du focus & RG9-08 \\
 				  &				     & (droitier/gaucher)        & & \\\hline
-				8 & Bouton & Annule les modifications & Cliqué & RG9-09 \\
-				  &        & Renvoie à l'écran des options &   &        \\\hline
-				9 & Bouton & Valide les modifications & Cliqué & RG9-10 \\
-				  &        & Renvoie à l'écran des options &   &        \\\hline
+				8 & Bouton & Renvoie à l'écran des options & Cliqué & RG9-09 \\\hline
+
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
@@ -979,7 +977,31 @@
 				\begin{quote}
 					Récuperer dans la classe utilisateur le type de l'affichage.\\
 				\end{quote}
-									
+
+
+			\underline{RG9-08 :}
+				\begin{quote}
+					Modifier le type de l'affichage dans le fichier utilisateur.\\
+				\end{quote}		
+				
+				
+			\underline{RG9-09 :}
+				\begin{quote}
+					Recharger la classe utilisateur.\\
+					Charger la page des options%
+						\footnote[1]{
+							\hyperlink{Options}{Options}
+							\og voir section \ref{Options}, page \pageref{Options}.\fg
+						}.\\
+					Afficher la page des options\footnotemark[1].\\
+					Supprimer la page de gestion du profil%
+						\footnote[2]{
+							\hyperlink{Gestion du profil}{Gestion du profil}
+							\og voir section \ref{Gestion du profil}, page \pageref{Gestion du profil}.\fg
+						}.\\
+				\end{quote}
+				
+
 \newpage
 
 	\subsection{Statistiques}
@@ -993,7 +1015,7 @@
 		
 		\begin{enumerate}
 		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
-		  \item Nom du compte hors ligne utilisé
+		  \item Pseudonyme du compte hors ligne utilisé
 		  \item Text Box ``Statistiques''
 		  \item Bouton ``\hyperlink{Accueil}{Retour}''
 		\end{enumerate}
@@ -1002,13 +1024,31 @@
 		
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+				2 & Label & Pseudonyme hors ligne utilisé & Chargement de la page & RG4-01 \\\hline
+				3 & Label & Statistiques du joueur & Chargement de la page & RG10-01 \\\hline
+				4 & Bouton & Permet de revenir à la page d'accueil & Cliqué & RG10-02 \\\hline 
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
 			\underline{RG10-01 :}
 				\begin{quote}
+					Récuperer dans la classe utilisateur la valeur de la connexion automatique.\\
+				\end{quote}
 				
+			\underline{RG10-02 :}
+				\begin{quote}
+					Charger la page d'accueil%
+						\footnote[3]{
+							\hyperlink{Page d'accueil}{Page d'accueil}
+							\og voir section \ref{accueil}, page \pageref{accueil}.\fg
+						}.\\
+					Afficher la page d'accueil\footnotemark[3].\\
+					Supprimer la page des statistiques%
+						\footnote[2]{
+							\hyperlink{Statistiques}{Statistiques}
+							\og voir section \ref{Statistiques}, page \pageref{Statistiques}.\fg
+						}.\\		
 				\end{quote}
 	
 \newpage
