@@ -3,43 +3,30 @@
 
 == <u>Documentation</u> ==
 
-=== <u>SVN</u> ===
-[http://maven.apache.org/guides/index.html Maven 3.0.2]
+----
+=== Systèmes d'exploitations ===
+----
 
-Structure par défaut d'un projet Maven
-<pre>
-|-- src
-| |-- main
-| | |-- java      > Contient le code source java
-| | |-- resources > Contient les ressources à inclure dans le jar produit (configuration, ...)
-| | |-- filters   > Filtres permettant de modifier les ressources lors de l'assemblage du jar
-| | |-- assembly  > Descripteur pour les assemblées Maven
-| | |-- config    > Fichier de configurations extérieurs au jar
-| | |-- webapp    > Le contenu de l'application web (projet web)
-| |-- test
-| | |-- java      > Contient le code source java des tests
-| | |-- resources > Contient les ressources pour les tests
-| | |-- filters   > Filtres à appliquer aux ressources de test
-| |-- site        > Le site de documentation
-|-- target        > Répertoire où Maven génére ses fichiers/artefacts
-|-- pom.xml       > Descripteur du projet
-</pre>
-
-==== <u>M2ECLIPSE</u> ====
-
-Maven pour Eclipse
-
-[http://m2eclipse.sonatype.org/index.html Site officiel] <br/>
-[http://m2eclipse.sonatype.org/installing-m2eclipse.html Installation]
-
-=== <u>Android</u> ===
+==== <u>Android</u> ====
 
 [http://developer.android.com/index.html Documentation officielle]
 
-=== <u>iOS</u> ===
+==== <u>iOS</u> ====
 
 [http://developer.apple.com/devcenter/ios/index.action Documentation officielle]
 
-=== <u>Doxygen</u> ===
+----
+=== Documentation ===
+----
+
+==== <u>Doxygen</u> ====
 [http://www.duckrowing.com/2010/03/18/documenting-objective-c-with-doxygen-part-i/ Tutoriel Doxygen Part1]<br/>
 [http://www.duckrowing.com/2010/03/18/documenting-objective-c-with-doxygen-part-ii/ Tutoriel Doxygen Part2]
+
+----
+=== Moteurs physiques ===
+----
+
+==== <u>Tile Mapping</u> ====
+
+[http://www.siteduzero.com/tutoriel-3-198472-tile-mapping.html Tutoriel du site du zéro]
