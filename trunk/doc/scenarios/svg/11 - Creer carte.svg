@@ -2,14 +2,59 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
    width="560"
    height="600"
-   id="svg2">
+   id="svg2"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="11 - Creer carte.svg">
+  <metadata
+     id="metadata71">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1440"
+     inkscape:window-height="852"
+     id="namedview69"
+     showgrid="false"
+     inkscape:zoom="1.1125147"
+     inkscape:cx="238.47641"
+     inkscape:cy="445.86993"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
   <defs
      id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 300 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="560 : 300 : 1"
+       inkscape:persp3d-origin="280 : 200 : 1"
+       id="perspective73" />
     <marker
        refX="0"
        refY="0"
@@ -155,30 +200,30 @@
          y="123.44498"
          id="tspan10925">1</tspan></text>
     <text
-       x="428.42975"
-       y="223.44498"
+       x="432.02521"
+       y="190.18698"
        id="text10927"
        xml:space="preserve"
        style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-         x="428.42975"
-         y="223.44498"
+         x="432.02521"
+         y="190.18698"
          id="tspan10929">2</tspan></text>
     <rect
        width="130"
        height="31.000002"
        ry="13.38073"
-       x="238.42975"
-       y="202.44498"
+       x="242.02521"
+       y="169.18698"
        id="rect3688"
        style="font-size:24px;fill:#000000;fill-opacity:0.11636365;stroke:#000000;stroke-width:1.5675832;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <text
-       x="38.429756"
-       y="223.44498"
+       x="42.025215"
+       y="190.18698"
        id="text3690"
        xml:space="preserve"
        style="font-size:24px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="38.429756"
-         y="223.44498"
+         x="42.025215"
+         y="190.18698"
          id="tspan3692">Nom du niveau</tspan></text>
     <text
        x="69.429749"
@@ -266,7 +311,7 @@
          y="623.44501"
          id="tspan3742">Valider</tspan></text>
     <path
-       d="m 339.42975,213.44498 89,0"
+       d="m 343.02521,180.18699 89,0"
        id="path3746"
        style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
     <path
@@ -294,40 +339,34 @@
        style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
     <text
        x="429.42975"
-       y="313.44498"
-       id="text3961"
-       xml:space="preserve"
-       style="font-size:24px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="429.42975"
-         y="313.44498"
-         id="tspan3963">3</tspan></text>
-    <text
-       x="429.42975"
-       y="363.44498"
+       y="312.20969"
        id="text3965"
        xml:space="preserve"
-       style="font-size:24px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+       style="font-size:32;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
          x="429.42975"
-         y="363.44498"
-         id="tspan3967">4</tspan></text>
+         y="312.20969"
+         id="tspan3967"
+         style="font-size:32;-inkscape-font-specification:Utopia;font-family:Utopia;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">4</tspan></text>
     <text
-       x="-20.57025"
-       y="623.44501"
+       x="430.65976"
+       y="360.0777"
        id="text3969"
        xml:space="preserve"
-       style="font-size:24px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="-20.57025"
-         y="623.44501"
-         id="tspan3971">5</tspan></text>
+       style="font-size:32;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="430.65976"
+         y="360.0777"
+         id="tspan3971"
+         style="font-size:32;-inkscape-font-specification:Utopia;font-family:Utopia;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">5</tspan></text>
     <text
-       x="429.42975"
-       y="623.44501"
+       x="427.63202"
+       y="476.93008"
        id="text3973"
        xml:space="preserve"
-       style="font-size:24px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="429.42975"
-         y="623.44501"
-         id="tspan3975">6</tspan></text>
+       style="font-size:32px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="427.63202"
+         y="476.93008"
+         id="tspan3975"
+         style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Utopia;-inkscape-font-specification:Utopia">6</tspan></text>
     <path
        d="m 79.429753,423.44498 249.999997,0"
        id="path2875"
@@ -349,5 +388,55 @@
          x="119.42975"
          y="473.44498"
          id="tspan3704">Charger niveau</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#ff0000;stroke-width:1.68641448;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6.74565776, 6.74565776;stroke-dashoffset:0"
+       id="rect2879"
+       width="267.27637"
+       height="34.470436"
+       x="73.99015"
+       y="206.55249"
+       ry="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
+       id="path3907"
+       d="m 319.42975,303.44498 110,0" />
+    <text
+       style="font-size:32px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"
+       id="text3909"
+       y="232.54716"
+       x="431.22748"><tspan
+         id="tspan3911"
+         y="232.54716"
+         x="431.22748"
+         style="font-size:32px;-inkscape-font-specification:Utopia;font-family:Utopia;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">3</tspan></text>
+    <path
+       d="m 323.0252,222.54717 110,0"
+       id="path3913"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
+    <path
+       d="m 294.7069,467.03878 133.73437,0"
+       id="path3915"
+       style="fill:none;stroke:#000000;stroke-width:2.17922544;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.71690214, 8.71690214;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       x="-27.424751"
+       y="621.98468"
+       id="text3917"><tspan
+         sodipodi:role="line"
+         id="tspan3919"
+         x="-27.424751"
+         y="621.98468">7</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       x="430.99615"
+       y="621.98468"
+       id="text3921"><tspan
+         sodipodi:role="line"
+         id="tspan3923"
+         x="430.99615"
+         y="621.98468">8</tspan></text>
   </g>
 </svg>
