@@ -100,31 +100,41 @@
 				
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline 
-				2 & Zone de saisie & Définition du pseudonyme & Perte du focus & RG1-01 \\\hline
-				4 & Bouton         & Bouton de validation     & Cliqué & RG1-02 \\\hline
+				2 & Champs de texte & Définition du pseudonyme & Perte du focus & RG1-01 \\\hline
+				3 & Label & Affiche une des erreurs survenues lors de & RG1-01 & RG1-02 \\
+				  &       & la vérification de la zone de saisie (1) &  & \\\hline
+				4 & Bouton         & Bouton validant le pseudonyme entré & Cliqué & RG1-03 \\\hline
 			\end{tabular}
 
 		\subsubsection{Description des règles}
 		
 		\underline{RG1-01 :}
 			\begin{quote}
-				Vérification de la zone de saisie :
-				\begin{itemize}
-				  \item Non vide.
-				  \item Pseudonyme entré inexistant.
-				\end{itemize}
-				Si la vérification est incorrecte alors
+				Si le champs de texte (2) est vide alors
 				\begin{quote}
-					Afficher l'erreur via le label d'erreur (3).
+					RG1-02 (``Champs de texte vide'').
 				\end{quote}
+				Sinon si le champs de texte (2) correspond à un pseudo existant alors
+				\begin{quote}
+					RG1-02 (``Pseudonyme déjà utilisé'').
+				\end{quote}		
 			\end{quote}
-			
+		
+		$\,$	
+		
 		\underline{RG1-02 :}
 			\begin{quote}
-				RG1-01.\\
-				Si la vérification est correcte alors
+				Afficher dans le label de la zone (3) l'erreur rencontrée.
+			\end{quote}
+			
+		$\,$
+
+		\underline{RG1-03 :}
+			\begin{quote}
+				Si RG1-01 est correcte alors
 				\begin{quote}
 					Créer un nouveau compte hors ligne ayant pour pseudonyme celui entré.\\
+					Créer un fichier utilisateur.\\
 					Créer la classe utilisateur.\\
 					Mettre à jour la classe utilisateur.\\
 					Créer la page d'accueil%
@@ -156,7 +166,7 @@
 		  \item Bouton ``\hyperlink{Creer niveau}{Créer niveau}''
 		  \item Bouton ``\hyperlink{Aide}{Aide}''
 		  \item Liste déroulante ``Comptes hors lignes''
-		  \item Bouton ``\hyperlink{profil}{+}'' 
+		  \item Bouton ``\hyperlink{profil}{+}''
 		\end{enumerate}
 
 		\subsubsection{Description des zones}

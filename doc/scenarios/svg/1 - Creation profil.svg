@@ -7,51 +7,12 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
    width="560"
    height="600"
-   id="svg2"
-   sodipodi:version="0.32"
-   inkscape:version="0.47 r22583"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   sodipodi:docname="1 - Creation profil.svg">
-  <sodipodi:namedview
-     inkscape:window-height="856"
-     inkscape:window-width="1280"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     guidetolerance="10.0"
-     gridtolerance="10.0"
-     objecttolerance="10.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
-     pagecolor="#ffffff"
-     id="base"
-     showgrid="true"
-     inkscape:zoom="1.2"
-     inkscape:cx="242.14004"
-     inkscape:cy="301.81438"
-     inkscape:window-x="43"
-     inkscape:window-y="0"
-     inkscape:current-layer="layer1"
-     inkscape:window-maximized="0">
-    <inkscape:grid
-       type="xygrid"
-       id="grid3177"
-       visible="true"
-       enabled="true" />
-  </sodipodi:namedview>
+   id="svg2">
   <defs
      id="defs4">
-    <inkscape:perspective
-       sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="0 : 317.67999 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_z="523.09003 : 317.67999 : 1"
-       inkscape:persp3d-origin="261.54501 : 211.78666 : 1"
-       id="perspective28" />
     <marker
        refX="0"
        refY="0"
@@ -59,7 +20,7 @@
        id="Arrow2Mstart"
        style="overflow:visible">
       <path
-         d="M 8.7185878,4.0337352 L -2.2072895,0.01601326 L 8.7185884,-4.0017078 C 6.97309,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 L 8.7185878,4.0337352 z"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 l 0,0 z"
          transform="scale(0.6,0.6)"
          id="path5770"
          style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round" />
@@ -73,13 +34,13 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     id="layer1"
-     transform="translate(94.870058,-16.302108)">
+     transform="translate(94.870058,-16.302108)"
+     id="layer1">
     <rect
        width="355.04019"
        height="596.05029"
@@ -87,7 +48,7 @@
        x="7.6098514"
        y="17.771906"
        id="rect2385"
-       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.95981836;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.95981836;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <rect
        width="279.19727"
        height="150.09908"
@@ -114,7 +75,7 @@
        x="155.12019"
        y="266.32373"
        id="rect11538"
-       style="fill:#000000;fill-opacity:0.15686275000000000;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#000000;fill-opacity:0.15686275;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <rect
        width="119.99962"
        height="29.485796"
@@ -152,62 +113,59 @@
          y="856.64789"
          id="tspan14371" /></text>
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
-       d="M 150,70 L 60,70"
+       d="M 150,70 60,70"
+       transform="translate(-94.870058,16.302108)"
        id="path3179"
-       transform="translate(-94.870058,16.302108)" />
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
-       d="M 370,270 L 500,270"
+       d="m 370,270 130,0"
+       transform="translate(-94.870058,16.302108)"
        id="path3181"
-       transform="translate(-94.870058,16.302108)" />
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
-       d="M 230,340 L 60,340"
+       d="M 230,340 60,340"
+       transform="translate(-94.870058,16.302108)"
        id="path3183"
-       transform="translate(-94.870058,16.302108)" />
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
     <text
-       xml:space="preserve"
-       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Utopia;-inkscape-font-specification:Utopia"
        x="-54.870056"
        y="96.302109"
-       id="text4730"><tspan
-         sodipodi:role="line"
-         id="tspan4732"
-         x="-54.870056"
-         y="96.302109">1</tspan></text>
-    <text
+       id="text4730"
        xml:space="preserve"
-       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="-54.870056"
+         y="96.302109"
+         id="tspan4732">1</tspan></text>
+    <text
        x="405.12994"
        y="336.30209"
-       id="text4734"><tspan
-         sodipodi:role="line"
-         id="tspan4736"
+       id="text4734"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
          x="405.12994"
-         y="336.30209">3</tspan></text>
+         y="336.30209"
+         id="tspan4736">3</tspan></text>
     <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:#ff0000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0"
-       id="rect2834"
        width="240"
        height="30.00001"
+       ry="1.449414e-05"
        x="65.129944"
        y="306.30209"
-       ry="1.449414e-05" />
+       id="rect2834"
+       style="fill:#ffffff;fill-opacity:1;stroke:#ff0000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
        d="m 380,310 120,0"
+       transform="translate(-94.870058,16.302108)"
        id="path3614"
-       transform="translate(-94.870058,16.302108)" />
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
     <text
-       xml:space="preserve"
-       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
        x="-54.870056"
        y="366.30209"
-       id="text3800"><tspan
-         sodipodi:role="line"
-         id="tspan3802"
+       id="text3800"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
          x="-54.870056"
-         y="366.30209">4</tspan></text>
+         y="366.30209"
+         id="tspan3802">4</tspan></text>
   </g>
 </svg>
