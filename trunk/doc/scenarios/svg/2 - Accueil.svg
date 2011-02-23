@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -13,11 +14,11 @@
    height="600"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.47 r22583"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    sodipodi:docname="2 - Accueil.svg">
   <sodipodi:namedview
-     inkscape:window-height="949"
+     inkscape:window-height="856"
      inkscape:window-width="1280"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -30,11 +31,12 @@
      id="base"
      showgrid="true"
      inkscape:zoom="1.2"
-     inkscape:cx="282.41737"
-     inkscape:cy="293.42784"
-     inkscape:window-x="0"
-     inkscape:window-y="25"
-     inkscape:current-layer="layer1">
+     inkscape:cx="215.7507"
+     inkscape:cy="226.76117"
+     inkscape:window-x="106"
+     inkscape:window-y="0"
+     inkscape:current-layer="layer1"
+     inkscape:window-maximized="0">
     <inkscape:grid
        type="xygrid"
        id="grid2432"
@@ -241,13 +243,13 @@
          id="tspan3868"
          style="font-size:24px">Aide</tspan></text>
     <rect
-       width="216.18987"
+       width="190"
        height="29.811998"
        ry="8.6951666"
-       x="95.14386"
-       y="552.01666"
+       x="85.14386"
+       y="552.20465"
        id="rect3872"
-       style="fill:#000000;fill-opacity:0.11935485000000000;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       style="fill:#000000;fill-opacity:0.11935485;stroke:#000000;stroke-width:1.87494767;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <text
        x="-34.85614"
        y="102.01666"
@@ -355,5 +357,23 @@
        d="M 60,80 L 160,80"
        id="path3755"
        transform="translate(-74.856139,12.016659)" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2867"
+       width="40"
+       height="30"
+       x="285.14386"
+       y="552.01666"
+       ry="10" />
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       x="295.14386"
+       y="572.01666"
+       id="text2869"><tspan
+         sodipodi:role="line"
+         id="tspan2871"
+         x="295.14386"
+         y="572.01666">+</tspan></text>
   </g>
 </svg>
