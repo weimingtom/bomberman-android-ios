@@ -433,18 +433,13 @@
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
 				2 & Label & Affiche le pseudonyme du compte & Chargement de la page & RG4-01 \\
 				  &       & hors ligne en cours d'utilisation & & \\\hline
-				3 & Label & Affiche l'erreur & RG4-03 & RG4-02 \\
-				  &       & rencontré par l'utilisateur & RG4-04 & \\\hline
-				4 & Champs de texte & & Perte du focus & RG4-03 \\
-				 & & & RG4-07 & \\\hline 
-				6 & Champs de texte & & Perte du focus & RG4-04 \\
-				 & & & RG4-07 & \\\hline 
-				7 & Check box & Permet la connexion automatique & Cliqué & RG4-05 \\
-				  &           & lors des prochaines utilisations&        & \\				
-				  &           & du multi-joueurs                &        & \\\hline
-				8 & Bouton & Permet de revenir à la page & Cliqué & RG4-06 \\
+				3 & Label & Affiche l'erreur & RG4-04 & RG4-02\\
+				  &       & rencontrée par l'utilisateur & & \\\hline
+				6 & Champs de texte & Champs de vérification & Perte du focus & RG4-03 \\
+				 & & du mot de passe entré & RG4-07 & \\\hline 
+				7 & Bouton & Permet de revenir à la page & Cliqué & RG4-04 \\
 				  &        & de connexion multi-joueurs \footnotemark[1] & & \\\hline
-				9 & Bouton & Valide les paramètres entrés & Cliqué & RG4-07 \\\hline
+				8 & Bouton & Valide les paramètres entrés & Cliqué & RG4-05 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
@@ -455,35 +450,24 @@
 					Afficher le pseudonyme.\\
 				\end{quote}
 
+
 			\underline{RG4-02 :}
 				\begin{quote}
 					Afficher l'erreur rencontrée.\\
 				\end{quote}
+
 				
 			\underline{RG4-03 :}
 				\begin{quote}
-					Vérifier les caractères entrés.\\
-					Si une erreur est rencontrée alors
+					Si champs de texte (5) différent de champs de texte (6)
 					\begin{quote}
 						RG4-02.
 					\end{quote}
 				\end{quote}
+
+			$\,$				
 				
 			\underline{RG4-04 :}
-				\begin{quote}
-					Vérifier que les caractères entrés soient identiques à ceux entrés dans la zone 5.\\
-					Si ce n'est pas le cas alors
-					\begin{quote}
-						RG4-02.
-					\end{quote}					
-				\end{quote}	
-				
-			\underline{RG4-05 :}
-				\begin{quote}
-					
-				\end{quote}
-				
-			\underline{RG4-06 :}
 				\begin{quote}
 					Afficher la page de connexion multi-joueurs%
 						\footnote[1]{
@@ -493,25 +477,29 @@
 					Supprimer la page de création d'un compte multi-joueurs.\\
 				\end{quote}
 
-			\underline{RG4-07 :}
+			\underline{RG4-05 :}
 				\begin{quote}
 					RG4-03.\\
-					RG4-04.\\
 					Si aucune erreur n'a été détectée alors
 						\begin{quote}
 							Une connexion avec le serveur distant a lieu afin d'ajouter le nouveau compte.\\
-							Si le serveur renvoie une erreur alors \\
+							Si le serveur renvoie une erreur alors
 							\begin{quote}
 								Elle sera affichée sous la forme d'un pop-up.
 							\end{quote}	
 							Sinon
 							\begin{quote}
-								L'utilisateur sera redirigé vers l'accueil multi-joueurs%
+								Charger l'accueil multi-joueurs%
 								\footnote[2]{
 									\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
 									\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
 								}.\\
-								RG4-05.\\
+								Afficher l'accueil multi-joueurs\footnotemark[2].
+								Si la check-box est cochée (7)
+								\begin{quote}
+									Modifier le fichier utilisateur.
+									Recharger la classe utilisateur.
+								\end{quote}
 								Supprimer toutes les pages existantes sauf la page d'acceuil multi-joueurs\footnotemark[2].					
 							\end{quote}
 						\end{quote}
