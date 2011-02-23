@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -13,11 +14,11 @@
    height="600"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.47 r22583"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   sodipodi:docname="4bis- Connexion multijoueurs.svg">
+   sodipodi:docname="5 - Connexion multi-joueurs.svg">
   <sodipodi:namedview
-     inkscape:window-height="949"
+     inkscape:window-height="856"
      inkscape:window-width="1280"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -30,11 +31,12 @@
      id="base"
      showgrid="true"
      inkscape:zoom="1.2"
-     inkscape:cx="255.8263"
+     inkscape:cx="287.49297"
      inkscape:cy="298.2689"
-     inkscape:window-x="0"
-     inkscape:window-y="25"
-     inkscape:current-layer="layer1">
+     inkscape:window-x="83"
+     inkscape:window-y="0"
+     inkscape:current-layer="layer1"
+     inkscape:window-maximized="0">
     <inkscape:grid
        type="xygrid"
        id="grid2431"
@@ -101,12 +103,12 @@
        style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.95566034;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <rect
        width="324.65411"
-       height="307.8009"
-       ry="28.927332"
+       height="357.69568"
+       ry="33.61647"
        x="116.8146"
        y="-5.6954517"
        id="rect6597"
-       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2.06863451;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2.23000407;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <rect
        width="150.0284"
        height="29.892616"
@@ -128,9 +130,9 @@
        height="29.778919"
        ry="14.88946"
        x="280"
-       y="262.00018"
+       y="312.00018"
        id="rect7113"
-       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <text
        x="130"
        y="132.0002"
@@ -160,28 +162,28 @@
        height="29.658474"
        ry="14.829238"
        x="130.00337"
-       y="262.38889"
+       y="312.38889"
        id="rect7125"
-       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <text
        x="150.10498"
-       y="282.05554"
+       y="332.05554"
        id="text7127"
        xml:space="preserve"
        style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
        sodipodi:linespacing="125%"><tspan
          x="150.10498"
-         y="282.05554"
+         y="332.05554"
          id="tspan7129">Annuler</tspan></text>
     <text
        x="300.10498"
-       y="282.05554"
+       y="332.05554"
        id="text7131"
        xml:space="preserve"
        style="font-size:22.31095123px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
        sodipodi:linespacing="125%"><tspan
          x="300.10498"
-         y="282.05554"
+         y="332.05554"
          id="tspan7133">Connexion</tspan></text>
     <rect
        width="150.02682"
@@ -298,12 +300,12 @@
          y="242.0002"
          id="tspan4765">7</tspan></text>
     <text
-       x="40"
+       x="500"
        y="282.00021"
        id="text4767"
        xml:space="preserve"
        style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-         x="40"
+         x="500"
          y="282.00021"
          id="tspan4769">8</tspan></text>
     <path
@@ -316,8 +318,8 @@
        d="M 150,-17.999797 L 60,-17.999797"
        id="path3211" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;marker-start:url(#Arrow2Mstart);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 150,272.00019 L 60,272.00019"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8,8;marker-start:url(#Arrow2Mstart);stroke-dashoffset:0"
+       d="m 150,322.0002 -90,0"
        id="path3213" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
@@ -336,8 +338,8 @@
        d="M 400.04545,182.0002 L 500.04545,182.0002"
        id="path3221" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;marker-start:url(#Arrow2Mstart);stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 410,272.00019 L 500,272.00019"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
+       d="m 410,322.0002 90,0"
        id="path3223" />
     <text
        xml:space="preserve"
@@ -365,13 +367,47 @@
        transform="translate(0,-147.9998)" />
     <text
        xml:space="preserve"
-       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Utopia;-inkscape-font-specification:Utopia"
-       x="500"
-       y="282.00021"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       x="40"
+       y="332.00021"
        id="text3741"><tspan
          sodipodi:role="line"
          id="tspan3743"
+         x="40"
+         y="332.00021">9</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       x="130"
+       y="282.00021"
+       id="text2869"><tspan
+         sodipodi:role="line"
+         id="tspan2871"
+         x="130"
+         y="282.00021"
+         style="font-size:24px">Mémoriser mot de passe</tspan></text>
+    <rect
+       ry="0"
+       y="262.00021"
+       x="410"
+       height="20"
+       width="20"
+       id="rect2873"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
+       d="m 420,420 80,0"
+       id="path3659"
+       transform="translate(0,-147.9998)" />
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       x="500"
+       y="332.00021"
+       id="text3847"><tspan
+         sodipodi:role="line"
+         id="tspan3849"
          x="500"
-         y="282.00021">9</tspan></text>
+         y="332.00021">10</tspan></text>
   </g>
 </svg>

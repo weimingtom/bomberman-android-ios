@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -13,11 +14,11 @@
    height="600"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.47 r22583"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   sodipodi:docname="4 - Création compte multijoueurs.svg">
+   sodipodi:docname="4 - Creation compte multi-joueurs.svg">
   <sodipodi:namedview
-     inkscape:window-height="949"
+     inkscape:window-height="856"
      inkscape:window-width="1280"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -29,12 +30,13 @@
      pagecolor="#ffffff"
      id="base"
      showgrid="true"
-     inkscape:zoom="1.2"
-     inkscape:cx="270.34701"
-     inkscape:cy="295.64003"
-     inkscape:window-x="0"
-     inkscape:window-y="25"
-     inkscape:current-layer="layer1">
+     inkscape:zoom="0.84852814"
+     inkscape:cx="385.84479"
+     inkscape:cy="121.56888"
+     inkscape:window-x="32"
+     inkscape:window-y="0"
+     inkscape:current-layer="layer1"
+     inkscape:window-maximized="0">
     <inkscape:grid
        type="xygrid"
        id="grid3207"
@@ -88,31 +90,31 @@
        style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.95566034;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <rect
        width="319.8877"
-       height="349.9686"
-       ry="41.478687"
+       height="379.92252"
+       ry="45.028862"
        x="120.00764"
        y="33.078003"
        id="rect5176"
-       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.08383346;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <text
        x="330"
-       y="352.7352"
+       y="383.00055"
        id="text2932"
        xml:space="preserve"
        style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
        sodipodi:linespacing="125%"><tspan
          x="330"
-         y="352.7352"
+         y="383.00055"
          id="tspan2934">Valider</tspan></text>
     <text
        x="150.08359"
-       y="352.8548"
+       y="383.12015"
        id="text2936"
        xml:space="preserve"
        style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
        sodipodi:linespacing="125%"><tspan
          x="150.08359"
-         y="352.8548"
+         y="383.12015"
          id="tspan2938">Annuler</tspan></text>
     <rect
        width="179.96443"
@@ -255,19 +257,19 @@
        height="29.734667"
        ry="11.012837"
        x="130.61235"
-       y="-362.7352"
+       y="-393.00055"
        transform="scale(1,-1)"
        id="rect6537"
-       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <rect
        width="120.13267"
        height="31.551233"
        ry="11.68564"
        x="310.47968"
-       y="-363.00052"
+       y="-393.26587"
        transform="scale(1,-1)"
        id="rect6539"
-       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <text
        x="-25.144033"
        y="566.20172"
@@ -297,13 +299,13 @@
          y="303.00052"
          id="tspan4777">7</tspan></text>
     <text
-       x="40"
-       y="353.00052"
+       x="500"
+       y="343.00052"
        id="text4779"
        xml:space="preserve"
        style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-         x="40"
-         y="353.00052"
+         x="500"
+         y="343.00052"
          id="tspan4781">8</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8,8;marker-start:url(#Arrow2Mstart);stroke-dashoffset:0"
@@ -336,12 +338,12 @@
        id="path3219"
        transform="translate(0,-106.99948)" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;marker-start:url(#Arrow2Mstart);stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 410,342.73518 L 500,342.73518"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
+       d="m 410,373.00052 90,0"
        id="path3221" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;marker-start:url(#Arrow2Mstart);stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 150,342.73518 L 60,342.73518"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
+       d="m 150,373.00052 -90,0"
        id="path3223" />
     <text
        xml:space="preserve"
@@ -368,13 +370,47 @@
        transform="translate(0,-106.99948)" />
     <text
        xml:space="preserve"
-       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Utopia;-inkscape-font-specification:Utopia"
-       x="500"
-       y="353.00052"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       x="40"
+       y="383.00052"
        id="text3729"><tspan
          sodipodi:role="line"
          id="tspan3731"
+         x="40"
+         y="383.00052">9</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       x="130"
+       y="343.00052"
+       id="text3185"><tspan
+         sodipodi:role="line"
+         id="tspan3187"
+         x="130"
+         y="343.00052"
+         style="font-size:24px">Mémoriser mot de passe</tspan></text>
+    <rect
+       ry="0"
+       y="323.00052"
+       x="410"
+       height="20"
+       width="20"
+       id="rect3189"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)"
+       d="m 420,440 80,0"
+       id="path3191"
+       transform="translate(0,-106.99948)" />
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+       x="500"
+       y="383.00052"
+       id="text4155"><tspan
+         sodipodi:role="line"
+         id="tspan4157"
          x="500"
-         y="353.00052">9</tspan></text>
+         y="383.00052">10</tspan></text>
   </g>
 </svg>
