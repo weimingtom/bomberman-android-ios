@@ -40,8 +40,8 @@
 
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline 
-				2 & Barre de & Montre l'avancement du & Chargement de & RG0-01\\
-				  & chargement & chargement de l'application & l'application &\\\hline
+				Ensemble   & Vue & Page de chargement & Chargement de & RG0-01\\
+				de la page &     & de l'application   & l'application &       \\\hline
 			\end{tabular}
 		
 		\subsubsection{Description des règles}
@@ -49,35 +49,26 @@
 		
 		\underline{RG0-01 :}
 		\begin{quote}
-			Déclenchée au démarrage de l'application.\\
-			Afficher le spinner montrant le chargement de l'application.\\
-			\underline{Chargement de l'application :}
-				\begin{quote}
-					Vérification d'un compte local existant (stocké sur le téléphone).\\
-					Si aucun compte n'est trouvé alors 
-					\begin{quote}
-						Créer la page de création du profil%
-						\footnote[1]{
-							\hyperlink{Création du profil}{Page de création du profil}
-							\og voir section \ref{profil}, page \pageref{profil}.\fg
-						}.\\
-						Afficher la page de création du profil\footnotemark[1].
-					\end{quote}
-					Sinon
-					\begin{quote}
-						Créer la classe utilisateur.\\
-						Mettre à jour les informations de la classe utilisateur.\\
-						Charger la page d'accueil%
-						\footnote[2]{
-							\hyperlink{Page d'accueil}{Page d'accueil}
-							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
-						}.\\
-						Afficher la page d'accueil\footnotemark[2].
-					\end{quote}
-					Supprimer la page de chargement de l'application.
-				\end{quote}
+			Si un compte hors ligne existe
+			\begin{quote}
+				Créer la classe utilisateur.\\
+				Mettre à jour les informations de la classe utilisateur.\\
+				Afficher la page d'accueil%
+				\footnote[1]{
+					\hyperlink{Page d'accueil}{Page d'accueil}
+					\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
+				}.
+			\end{quote}
+			Sinon
+			\begin{quote}
+				Afficher la page de création du profil%
+				\footnote[2]{
+					\hyperlink{Création du profil}{Page de création du profil}
+					\og voir section \ref{profil}, page \pageref{profil}.\fg
+				}.
+			\end{quote}
+			Supprimer la page de chargement de l'application.
 		\end{quote}
-
 	
 \newpage
 
