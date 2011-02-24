@@ -177,12 +177,11 @@
 		
 		\underline{RG2-01 :}
 			\begin{quote}
-				Charger la page de création d'une partie hors ligne
+				Afficher la page de création d'une partie hors ligne
 					\footnote{
 						\hyperlink{Creer partie solo}{Création d'une partie hors ligne}
 						\og voir section \ref{Creer partie solo}, page \pageref{Creer partie solo}.\fg
 					}.\\
-				Afficher la page de création d'une partie hors ligne\footnotemark[1].\\
 				Supprimer la page d'accueil%
 					\footnote{
 						\hyperlink{Page d'accueil}{Page d'accueil}
@@ -201,23 +200,21 @@
 						Se connecter au serveur distant.\\
 						Si la connexion est validée alors
 						\begin{quote}
-							Charger la page d'accueil multi-joueurs%
+							Afficher la page d'accueil multi-joueurs%
 								\footnote{
 									\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
 									\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
-								}.\\
-							Afficher la page d'accueil multi-joueurs\footnotemark[3].
+								}.
 						\end{quote}
 					\end{quote}	
 				\end{quote}
 				Si la connexion automatique est desactivée ou qu'une erreur est survenue alors 
 				\begin{quote}		
-					Charger la page de connexion multi-joueurs%
+					Afficher la page de connexion multi-joueurs%
 						\footnote{
 							\hyperlink{Connexion multi-joueurs}{Connexion multi-joueurs}
 							\og voir section \ref{Connexion multi-joueurs}, page \pageref{Connexion multi-joueurs}.\fg
 						}.\\
-					Afficher la page de connexion multi-joueurs\footnotemark[4].
 					Si une erreur est survenue
 					\begin{quote}
 						Afficher l'erreur dans la page de connexion multi-joueurs\footnotemark[4].
@@ -230,12 +227,11 @@
 		
 		\underline{RG2-03 :}
 			\begin{quote}
-				Charger la page des options%
+				Afficher la page des options%
 					\footnote{
 						\hyperlink{Options}{Options}
 						\og voir section \ref{Options}, page \pageref{Options}.\fg
 					}.\\
-				Afficher la page des options\footnotemark[5].\\
 				Supprimer la page d'accueil\footnotemark[2].
 			\end{quote}
 
@@ -244,12 +240,11 @@
 
 		\underline{RG2-04 :}
 			\begin{quote}
-				Charger la page des statistiques%
+				Afficher la page des statistiques%
 					\footnote{
 						\hyperlink{Statistiques}{Statistiques}
 						\og voir section \ref{Statistiques}, page \pageref{Statistiques}.\fg
 					}.\\
-				Afficher la page des statistiques\footnotemark[6].\\
 				Supprimer la page d'accueil\footnotemark[2].
 			\end{quote}
 
@@ -257,12 +252,11 @@
 
 		\underline{RG2-05 :}
 			\begin{quote}
-				Charger la page de création de niveaux%
+				Afficher la page de création de niveaux%
 					\footnote{
 						\hyperlink{Creer niveau}{Créer niveau}
 						\og voir section \ref{Creer niveau}, page \pageref{Creer niveau}.\fg
 					}.\\
-				Afficher la page de création de niveaux\footnotemark[7].\\
 				Supprimer la page d'accueil\footnotemark[2].		
 			\end{quote}
 
@@ -270,21 +264,22 @@
 
 		\underline{RG2-06 :}
 			\begin{quote}
-				Charger la page d'aide%
+				Afficher la page d'aide%
 					\footnote{
 						\hyperlink{Aide}{Aide}
 						\og voir section \ref{Aide}, page \pageref{Aide}.\fg
 					}.\\
-				Afficher la page d'aide\footnotemark[8].\\
-				Supprimer la page d'accueil\footnotemark[2].\\		
+				Supprimer la page d'accueil\footnotemark[2].		
 			\end{quote}
-			
+		
+		$\,$	
 			
 		\underline{RG2-07 :}
 			\begin{quote}
 				Récupérer la liste des comptes hors ligne présents sur le téléphone.\\
 			\end{quote}
 
+		$\,$
 
 		\underline{RG2-08 :}
 			\begin{quote}
@@ -295,12 +290,11 @@
 
 		\underline{RG2-09 :}
 			\begin{quote}
-				Charger la page de Création d'un compte hors ligne%
+				Afficher la page de Création d'un compte hors ligne%
 					\footnote{
 						\hyperlink{profil}{Création d'un compte hors ligne}
 						\og voir section \ref{Creation d'un compte hors ligne}, page \pageref{Creation d'un compte hors ligne}.\fg
 					}.\\
-				Afficher la page de Création d'un compte hors ligne\footnotemark[9].\\
 				Supprimer la page d'accueil\footnotemark[2].
 			\end{quote}
 
@@ -368,7 +362,11 @@
 							\hyperlink{Page d'accueil}{Page d'accueil}
 							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
 						}.\\
-					Supprimer la page de création d'une partie solitaire.\\
+					Supprimer la page de création d'une partie hors ligne
+					\footnote[2]{
+						\hyperlink{Creer partie solo}{Création d'une partie hors ligne}
+						\og voir section \ref{Creer partie solo}, page \pageref{Creer partie solo}.\fg
+					}.\\
 				\end{quote}
 
 
@@ -414,41 +412,33 @@
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
 				2 & Label & Affiche le pseudonyme du compte & Chargement de la page & RG4-01 \\
 				  &       & hors ligne en cours d'utilisation & & \\\hline
-				3 & Label & Affiche l'erreur & RG4-04 & RG4-02\\
-				  &       & rencontrée par l'utilisateur & & \\\hline
-				6 & Champs de texte & Champs de vérification & Perte du focus & RG4-03 \\
-				 & & du mot de passe entré & RG4-07 & \\\hline 
-				7 & Bouton & Permet de revenir à la page & Cliqué & RG4-04 \\
+				6 & Champs de texte & Champs de vérification & Perte du focus & RG4-02 \\
+				  & & du mot de passe entré & RG4-07 & \\\hline 
+				9 & Bouton & Permet de revenir à la page & Cliqué & RG4-03 \\
 				  &        & de connexion multi-joueurs \footnotemark[1] & & \\\hline
-				8 & Bouton & Valide les paramètres entrés & Cliqué & RG4-05 \\\hline
+				10 & Bouton & Valide les paramètres entrés & Cliqué & RG4-04 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
 			\underline{RG4-01 :}
 				\begin{quote}
-					Récupérer le pseudonyme du compte hors ligne en cours d'utilisation dans la classe utilisateur.\\
-					Afficher le pseudonyme.\\
+					Récupérer le pseudonyme du compte hors ligne en cours d'utilisation dans la classe utilisateur.
 				\end{quote}
 
+		$\,$
 
 			\underline{RG4-02 :}
 				\begin{quote}
-					Afficher l'erreur rencontrée.\\
-				\end{quote}
-
-				
-			\underline{RG4-03 :}
-				\begin{quote}
-					Si champs de texte (5) différent de champs de texte (6)
+					Si champs de texte (5) différent du champs de texte (6)
 					\begin{quote}
-						RG4-02.
+						Afficher dans le label (3) ``Mots de passes différents''.
 					\end{quote}
 				\end{quote}
 
 			$\,$				
 				
-			\underline{RG4-04 :}
+			\underline{RG4-03 :}
 				\begin{quote}
 					Afficher la page de connexion multi-joueurs%
 						\footnote[1]{
@@ -457,10 +447,12 @@
 						}.\\
 					Supprimer la page de création d'un compte multi-joueurs.\\
 				\end{quote}
+				
+			$\,$
 
-			\underline{RG4-05 :}
+			\underline{RG4-04 :}
 				\begin{quote}
-					RG4-03.\\
+					RG4-02.\\
 					Si aucune erreur n'a été détectée alors
 						\begin{quote}
 							Une connexion avec le serveur distant a lieu afin d'ajouter le nouveau compte.\\
@@ -470,13 +462,12 @@
 							\end{quote}	
 							Sinon
 							\begin{quote}
-								Charger l'accueil multi-joueurs%
+								Afficher l'accueil multi-joueurs%
 								\footnote[2]{
 									\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
 									\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
 								}.\\
-								Afficher l'accueil multi-joueurs\footnotemark[2].
-								Si la check-box est cochée (7)
+								Si la check-box de connexion automatique (7) ou que la check-box de mémorisation du mot de passe (8) est cochée alors 
 								\begin{quote}
 									Modifier le fichier utilisateur.
 									Recharger la classe utilisateur.
