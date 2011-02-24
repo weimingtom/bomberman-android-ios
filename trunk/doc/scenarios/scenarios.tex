@@ -49,9 +49,9 @@
 		
 		\underline{RG0-01 :}
 		\begin{quote}
+			Créer la classe utilisateur.\\
 			Si un compte hors ligne existe
 			\begin{quote}
-				Créer la classe utilisateur.\\
 				Mettre à jour les informations de la classe utilisateur.\\
 				Afficher la page d'accueil%
 				\footnote[1]{
@@ -61,10 +61,10 @@
 			\end{quote}
 			Sinon
 			\begin{quote}
-				Afficher la page de création du profil%
+				Afficher la page de Création d'un compte hors ligne%
 				\footnote[2]{
-					\hyperlink{Création du profil}{Page de création du profil}
-					\og voir section \ref{profil}, page \pageref{profil}.\fg
+					\hyperlink{Création d'un compte hors ligne}{Page de Création d'un compte hors ligne}
+					\og voir section \ref{Creation d'un compte hors ligne},	page \pageref{Creation d'un compte hors ligne}.\fg
 				}.
 			\end{quote}
 			Supprimer la page de chargement de l'application.
@@ -72,9 +72,9 @@
 	
 \newpage
 
-	\subsection{Création du profil}
-		\hypertarget{profil}{}
-		\label{profil}
+	\subsection{Création d'un compte hors ligne}
+		\hypertarget{Creation d'un compte hors ligne}{}
+		\label{Creation d'un compte hors ligne}
 
 		\begin{center}
 			\input{./tex/1_Creation_profil}
@@ -91,10 +91,9 @@
 				
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline 
-				2 & Champs de texte & Définition du pseudonyme & Perte du focus & RG1-01 \\\hline
-				3 & Label & Affiche une des erreurs survenues lors de & RG1-01 & RG1-02 \\
-				  &       & la vérification de la zone de saisie (1) &  & \\\hline
-				4 & Bouton         & Bouton validant le pseudonyme entré & Cliqué & RG1-03 \\\hline
+				2 & Champs de texte & Définition du pseudonyme & Perte du focus & RG1-01 \\
+				  &                 &                          & RG1-02         & \\\hline
+				4 & Bouton          & Bouton validant le pseudonyme entré & Cliqué & RG1-02 \\\hline
 			\end{tabular}
 
 		\subsubsection{Description des règles}
@@ -103,38 +102,33 @@
 			\begin{quote}
 				Si le champs de texte (2) est vide alors
 				\begin{quote}
-					RG1-02 (``Champs de texte vide'').
+					Afficher dans le label d'erreur (3) ``Champs de texte vide''.
 				\end{quote}
 				Sinon si le champs de texte (2) correspond à un pseudo existant alors
 				\begin{quote}
-					RG1-02 (``Pseudonyme déjà utilisé'').
+					Afficher dans le label d'erreur (3) ``Pseudonyme déjà utilisé''.
 				\end{quote}		
 			\end{quote}
 		
 		$\,$	
-		
+
 		\underline{RG1-02 :}
 			\begin{quote}
-				Afficher dans le label de la zone (3) l'erreur rencontrée.
-			\end{quote}
-			
-		$\,$
-
-		\underline{RG1-03 :}
-			\begin{quote}
-				Si RG1-01 est correcte alors
+				Si RG1-01 ne renvoie pas d'erreur alors
 				\begin{quote}
 					Créer un nouveau compte hors ligne ayant pour pseudonyme celui entré.\\
 					Créer un fichier utilisateur.\\
-					Créer la classe utilisateur.\\
 					Mettre à jour la classe utilisateur.\\
-					Créer la page d'accueil%
+					Afficher la page d'accueil%
 						\footnote[1]{
 							\hyperlink{Page d'accueil}{Page d'accueil}
 							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
 						}.\\
-					Afficher la page d'acceuil\footnotemark[1].\\
-					Supprimer la page de création du profil.
+					Supprimer la page de création d'un compte hors ligne%
+						\footnote[2]{
+							\hyperlink{Creation d'un compte hors ligne}{Création d'un compte hors ligne}
+							\og voir section \ref{Creation d'un compte hors ligne}, page \pageref{Creation d'un compte hors ligne}.\fg
+						}.
 				\end{quote}
 			\end{quote}
 	
@@ -172,7 +166,7 @@
 			7 & Bouton & Affiche l'écran d'aide & Cliqué & RG2-06 \\\hline
 			8 & Liste & Permet de sélectionner un compte hors ligne & Cliqué & RG2-07 \\ 
 			  & déroulante & Affiche le compte en cours d'utilisation & Perte du focus & RG2-08\\\hline
-			9 & Bouton & Affiche l'écran de création du profil & Cliqué & RG2-08 \\\hline
+			9 & Bouton & Affiche l'écran de Création d'un compte hors ligne & Cliqué & RG2-08 \\\hline
 			
 		\end{tabular}
 		
@@ -301,12 +295,12 @@
 
 		\underline{RG2-09 :}
 			\begin{quote}
-				Charger la page de création du profil%
+				Charger la page de Création d'un compte hors ligne%
 					\footnote{
-						\hyperlink{profil}{Création du profil}
+						\hyperlink{profil}{Création d'un compte hors ligne}
 						\og voir section \ref{profil}, page \pageref{profil}.\fg
 					}.\\
-				Afficher la page de création du profil\footnotemark[9].\\
+				Afficher la page de Création d'un compte hors ligne\footnotemark[9].\\
 				Supprimer la page d'accueil\footnotemark[2].
 			\end{quote}
 
