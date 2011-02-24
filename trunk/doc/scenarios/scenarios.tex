@@ -107,7 +107,11 @@
 				Sinon si le champs de texte (2) correspond à un pseudo existant alors
 				\begin{quote}
 					Afficher dans le label d'erreur (3) ``Pseudonyme déjà utilisé''.
-				\end{quote}		
+				\end{quote}
+				Sinon si le champs de texte (2) contient un espace alors
+				\begin{quote}
+					Afficher dans le label d'erreur (3) ``Le pseudonyme contient un espace''.
+				\end{quote}
 			\end{quote}
 		
 		$\,$	
@@ -417,6 +421,7 @@
 				9 & Bouton & Permet de revenir à la page & Cliqué & RG4-03 \\
 				  &        & de connexion multi-joueurs \footnotemark[1] & & \\\hline
 				10 & Bouton & Valide les paramètres entrés & Cliqué & RG4-04 \\\hline
+				   & Evènement & Erreur renvoyée par le serveur & Serveur distant & RG4-05 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
@@ -456,25 +461,14 @@
 					Si aucune erreur n'a été détectée alors
 						\begin{quote}
 							Une connexion avec le serveur distant a lieu afin d'ajouter le nouveau compte.\\
-							Si le serveur renvoie une erreur alors
-							\begin{quote}
-								Elle sera affichée sous la forme d'un pop-up.
-							\end{quote}	
-							Sinon
-							\begin{quote}
-								Afficher l'accueil multi-joueurs%
-								\footnote[2]{
-									\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
-									\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
-								}.\\
-								Si la check-box de connexion automatique (7) ou que la check-box de mémorisation du mot de passe (8) est cochée alors 
-								\begin{quote}
-									Modifier le fichier utilisateur.
-									Recharger la classe utilisateur.
-								\end{quote}
-								Supprimer toutes les pages existantes sauf la page d'acceuil multi-joueurs\footnotemark[2].					
-							\end{quote}
 						\end{quote}
+				\end{quote}
+				
+			$\,$
+				
+			\underline{RG4-05 :}
+				\begin{quote}
+					Affichée l'erreur renvoyée par le serveur sous forme d'un pop-up.
 				\end{quote}
 	
 \newpage
@@ -509,7 +503,6 @@
 				3 & Bouton & Permet à l'utilisateur d'être redirigé & Cliqué & RG5-01\\
 				  &        & sur la page de création  & & \\
 				  &        & d'un compte multi-joueurs \footnotemark[1] & & \\\hline
-				4 & Label & Affiche l'erreur & Serveur distant & RG4-02 \\\hline
 				7 & Check box & Permet la connexion automatique & Cliqué & RG4-05 \\
 				  &           & lors des prochaines utilisations&        & \\				
 				  &           & du multi-joueurs                &        & \\\hline
@@ -522,12 +515,11 @@
 
 			\underline{RG5-01 :}
 				\begin{quote}
-					Charger la page de création d'un compte multi-joueurs%
+					Afficher la page de création d'un compte multi-joueurs%
 						\footnote[1]{
 							\hyperlink{Creation compte multi-joueurs}{Creation compte multi-joueurs}
 							\og voir section \ref{Creation compte multi-joueurs}, page \pageref{Creation compte multi-joueurs}.\fg
 						}.\\
-					Afficher la page de création d'un compte multi-joueurs\footnotemark[1].\\
 					Supprimer la page de connexion multi-joueurs%
 						\footnote[2]{
 							\hyperlink{Connexion multi-joueurs}{Connexion multi-joueurs}
@@ -550,23 +542,15 @@
 				
 			\underline{RG5-03 :}
 				\begin{quote}
-					Vérification des paramètres passés.\\
-					Connexion au serveur distant.\\
-					Si le nom du compte et le password sont bons alors
-					\begin{quote}					
-						Charger la page d'accueil multi-joueurs%
-							\footnote[4]{
-								\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
-								\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
-							}.\\
-						Afficher la page d'accueil multi-joueurs \footnotemark[4].\\
-						Supprimer la page de connexion multi-joueurs \footnotemark[2].
-					\end{quote}	
-					Sinon
-					\begin{quote}
-						Afficher l'erreur dans le label d'erreur (4).
-					\end{quote}					
-				\end{quote}	
+					Connexion au serveur distant.			
+				\end{quote}
+				
+			$\,$
+			
+			\underline{RG5-04 :}
+				\begin{quote}
+					Afficher l'erreur renvoyée par le serveur sous forme de pop-up.
+				\end{quote}
 
 \newpage
 
@@ -583,7 +567,7 @@
 		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Champs de texte ``Filtrer''
 		  \item Bouton ``Rafraichir''
-		  \item Cadre contenant les différentes parties en ligne en cours
+		  \item Label contenant les différentes parties en ligne en cours
 		  \item Bouton ``\hyperlink{Accueil}{Retour}''
 		  \item Bouton ``\hyperlink{Creer partie multi-joueurs}{Créer partie}''
 		\end{enumerate}
@@ -592,17 +576,16 @@
 
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
-				2 & Champs de texte & Permet de filtrer les parties & Texte saisi & RG6-01 \\
+				  & Evènement & Autorisation du serveur & Serveur & RG6-01 \\\hline
+				2 & Champs de texte & Permet de filtrer les parties & Texte saisi & RG6-02 \\
 				  &                 & selon le texte tapé par l'utilisateur & & \\\hline
-				3 & Bouton & Rafraichi la liste des parties & Cliqué & RG6-02 \\
+				3 & Bouton & Rafraichi la liste des parties & Cliqué & RG6-03 \\
 				  &        & en cours & & \\\hline
-				4 & Label & Liste des parties en cours & Chargement de la page & RG6-03 \\
-				  &       &                            & RG6-01 & RG6-04 \\
-				  &       &                            & RG6-02 & RG6-03 \\
-				  &       &                            & Cliqué & RG6-05 \\\hline
-				5 & Bouton & Permet à l'utilisateur de & Cliqué & RG6-06 \\
+				4 & Label & Liste des parties en cours & Chargement de la page & RG6-03 \\\
+				  &       &                            & Cliqué & RG6-04 \\\hline
+				5 & Bouton & Permet à l'utilisateur de & Cliqué & RG6-05 \\
 				  &        & revenir à la page d'acceuil & & \\\hline
-				6 & Bouton & Affiche la page de création de & Cliqué & RG6-07 \\
+				6 & Bouton & Affiche la page de création de & Cliqué & RG6-06 \\
 				  &        & création d'une partie multi-joueurs & & \\\hline    
 			\end{tabular}
 
@@ -610,20 +593,25 @@
 
 			\underline{RG6-01 :}
 				\begin{quote}
+					Afficher la page d'accueil multi-joueurs%
+					\footnote[1]{
+						\hyperlink{Accueil multi-joueurs}{Accueil multi-joueurs}
+						\og voir section \ref{Accueil multi-joueurs}, page \pageref{Accueil multi-joueurs}.\fg
+					}.\\
+					Supprimer toutes les autres pages.
+				\end{quote}
+
+			$\,$
+
+			\underline{RG6-02 :}
+				\begin{quote}
 					Si le champs de texte (2) n'est pas vide alors
 					\begin{quote}	
-						Envoyer le contenu à RG6-04
+						Mettre à jour le label des parties (4).
 					\end{quote}					
 				\end{quote}	
 		
 			$\,$
-				
-			\underline{RG6-02 :}
-				\begin{quote}	
-					RG6-03
-				\end{quote}
-
-			$\,$	
 				
 			\underline{RG6-03 :}
 				\begin{quote}
@@ -632,13 +620,6 @@
 					\begin{quote}
 						Afficher la liste.
 					\end{quote}								
-				\end{quote}
-
-			$\,$
-
-			\underline{RG6-04 :}
-				\begin{quote}
-					Filtrer l'affichage du label (4) selon le texte reçu.
 				\end{quote}
 
 			$\,$
