@@ -991,142 +991,50 @@
 
 \newpage
 
-	\subsection{Statistiques}
+	\subsection{Changer de compte multi-joueurs}
 		
-		\hypertarget{Statistiques}{}
-		\label{Statistiques}
+		\hypertarget{Changer de compte multi-joueurs}{}
+		\label{Changer de compte multi-joueurs}
 			
 		\begin{center}
-			\input{./tex/10_Mes_statistiques}
+			\input{./tex/10_Changer_compte_multi}
 		\end{center}
 		
 		\begin{enumerate}
 		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
-		  \item Pseudonyme du compte hors ligne utilisé
-		  \item Text Box ``Statistiques''
-		  \item Bouton ``\hyperlink{Accueil}{Retour}''
+		  \item ?
+		  \item Label d'erreur
+		  \item Champs de texte ``Nom d'utilisateur''
+		  \item Champs de texte ``Mot de passe''
+		  \item Bouton ``Annuler''
+		  \item Bouton ``Valider''
 		\end{enumerate}
 
 		\subsubsection{Description des zones}
 		
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
-				2 & Label & Pseudonyme hors ligne utilisé & Chargement de la page & RG4-01 \\\hline
-				3 & Label & Statistiques du joueur & Chargement de la page & RG10-01 \\\hline
-				4 & Bouton & Permet de revenir à la page d'accueil & Cliqué & RG10-02 \\\hline 
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
 			\underline{RG10-01 :}
 				\begin{quote}
-					Récuperer dans la classe utilisateur la valeur de la connexion automatique.\\
+
 				\end{quote}
-				
-			\underline{RG10-02 :}
-				\begin{quote}
-					Charger la page d'accueil%
-						\footnote[3]{
-							\hyperlink{Page d'accueil}{Page d'accueil}
-							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
-						}.\\
-					Afficher la page d'accueil\footnotemark[3].\\
-					Supprimer la page des statistiques%
-						\footnote[2]{
-							\hyperlink{Statistiques}{Statistiques}
-							\og voir section \ref{Statistiques}, page \pageref{Statistiques}.\fg
-						}.\\		
-				\end{quote}
-	
+
+
 \newpage
-	
-	\subsection{Créer niveau}
+
+	\subsection{Modifier le mot de passe du compte multi-joueurs}
 		
-		\hypertarget{Creer niveau}{}
-		\label{Creer niveau}
+		\hypertarget{Modifier le mot de passe du compte multi-joueurs}{}
+		\label{Modifier le mot de passe du compte multi-joueurs}
 			
 		\begin{center}
-			\input{./tex/11_Creer_niveau}
+			\input{./tex/11_Modifier_mot_de_passe_compte_multi.tex}
 		\end{center}
-
-		\begin{enumerate}
-		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
-		  \item Champs de texte ``Nom du niveau''
-		  \item Liste déroulante ``Largeur''
-		  \item Liste déroulante ``Hauteur''
-		  \item Bouton ``\hyperlink{Charger}{Charger niveau}''
-		  \item Bouton ``\hyperlink{Accueil}{Retour}''
-		  \item Bouton ``\hyperlink{Editeur}{Valider}''
-		\end{enumerate}
-
-		\subsubsection{Description des zones}
 		
-			\begin{tabular}{|c|c|c|c|c|} \hline
-				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
-				5 & Bouton & Affiche une sous activée pour la selection de niveau & Cliqué & RG11-01 \\
-				  &        & Seuls les niveaux non officiels peuvent être chargés &        &         \\\hline
-				6 & Bouton & Permet de revenir à la page d'accueil & Cliqué & RG11-02 \\\hline
-				7 & Bouton & Lance l'éditeur de niveau selon les paramètres choisis & Cliqué & RG11-03 \\\hline 
-			\end{tabular}
-			
-		\subsubsection{Description des règles}
-
-			\underline{RG11-01 :}
-				\begin{quote}
-					Charger la page de selection de niveau%
-						\footnote[1]{
-							\hyperlink{Charger un niveau}{Charger un niveau}
-							\og voir section \ref{Charger}, page \pageref{Charger}.\fg
-						}.\\
-					Afficher la page de selection de niveau\footnotemark[1].
-					Supprimer la page
-				\end{quote}
-				
-			$\,$
-
-			\underline{RG11-02 :}
-				\begin{quote}
-					Charger la page d'accueil%
-						\footnote[2]{
-							\hyperlink{Page d'accueil}{Page d'accueil}
-							\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
-						}.\\
-					Afficher la page d'accueil\footnotemark[2].\\
-					Supprimer la page de création de niveau%
-					\footnote[3]{
-						\hyperlink{Creer niveau}{Créer niveau}
-						\og voir section \ref{Creer niveau}, page \pageref{Creer niveau}.\fg
-					}.
-				\end{quote}
-				
-			$\,$
-			
-			\underline{RG11-03 :}
-				\begin{quote}
-					Charger la page d'edition de carte%
-					\footnote[2]{
-							\hyperlink{Editeur}{Editeur de niveau}
-							\og voir section \ref{Editeur}, page \pageref{Editeur}.\fg
-						}.\\
-					Afficher la page d'editeur de carte\footnotemark[2].\\
-					Supprimer la page de création de niveau%
-					\footnote[3]{
-						\hyperlink{Creer niveau}{Créer niveau}
-						\og voir section \ref{Creer niveau}, page \pageref{Creer niveau}.\fg
-					}.
-				\end{quote}
-				
-\newpage
-	
-	\subsection{Charger un niveau}
-		
-		\hypertarget{Charger niveau}{}
-		\label{Charger niveau}
-			
-		\begin{center}
-
-		\end{center}
-
 		\begin{enumerate}
 		  \item 
 		\end{enumerate}
@@ -1139,46 +1047,37 @@
 			
 		\subsubsection{Description des règles}
 
-			\underline{RG12-01 :}
+			\underline{RG11-01 :}
 				\begin{quote}
-				
+
 				\end{quote}
 				
+				
 \newpage
-	
-	\subsection{Aide}
+
+	\subsection{Modifier le mot de passe du compte multi-joueurs}
 		
-		\hypertarget{Aide}{}
-		\label{Aide}
+		\hypertarget{Modifier le mot de passe du compte multi-joueurs}{}
+		\label{Modifier le mot de passe du compte multi-joueurs}
 			
 		\begin{center}
-			\input{./tex/13_Aide}
+			\input{./tex/11_Modifier_mot_de_passe_compte_multi.tex}
 		\end{center}
-
+		
 		\begin{enumerate}
-		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
-		  \item Bouton ``But du jeu''
-		  \item Bouton ``Instructions''
-		  \item Bouton ``Bonus''
-		  \item Bouton ``A propos''
-		  \item Bouton ``\hyperlink{Accueil}{Retour}''
+		  \item 
 		\end{enumerate}
 
 		\subsubsection{Description des zones}
 		
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
-				2 & Bouton & Ouvre la page ``But du jeu'' & Cliqué & RG13-01 \\\hline
-				3 & Bouton & Ouvre la page ``Instructions'' & Cliqué & RG13-02 \\\hline
-				4 & Bouton & Ouvre la page ``Bonus'' & Cliqué & RG13-03 \\\hline
-				5 & Bouton & Ouvre la page ``A propos'' & Cliqué & RG13-04 \\\hline
-				6 & Bouton & Permet de revenir à la page d'accueil & Cliqué & RG13-05 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
-			\underline{RG13-01 :}
+			\underline{RG11-01 :}
 				\begin{quote}
-				
-				\end{quote}	
+
+				\end{quote}
 \end{document}
