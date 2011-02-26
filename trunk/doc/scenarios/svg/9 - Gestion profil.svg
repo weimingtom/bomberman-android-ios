@@ -2,424 +2,422 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-     xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:cc="http://creativecommons.org/ns#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:svg="http://www.w3.org/2000/svg"
-     xmlns="http://www.w3.org/2000/svg"
-     version="1.0"
-     width="560"
-     height="600"
-     id="svg2">
-    <defs
-         id="defs4">
-        <marker
-             refX="0"
-             refY="0"
-             orient="auto"
-             id="Arrow2Mstart"
-             style="overflow:visible">
-            <path
-                 d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 l 0,0 z"
-                 transform="scale(0.6,0.6)"
-                 id="path5217"
-                 style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round" />
-        </marker>
-    </defs>
-    <metadata
-         id="metadata7">
-        <rdf:RDF>
-            <cc:Work
-                 rdf:about="">
-                <dc:format>image/svg+xml</dc:format>
-                <dc:type
-                     rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-                <dc:title></dc:title>
-            </cc:Work>
-        </rdf:RDF>
-    </metadata>
-    <g
-         transform="translate(0,147.9998)"
-         id="layer1">
-        <rect
-             width="355.04434"
-             height="595.04437"
-             ry="30.646187"
-             x="102.47783"
-             y="-145.522"
-             id="rect2385"
-             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.95566034;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-        <text
-             x="564.85596"
-             y="296.63162"
-             id="text8275"
-             xml:space="preserve"
-             style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="564.85596"
-                 y="296.63162"
-                 id="tspan8277" /></text>
-        <rect
-             width="320.03973"
-             height="130.02934"
-             ry="13.877773"
-             x="119.94481"
-             y="-48.114403"
-             id="rect3252"
-             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.2812984;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-        <rect
-             width="319.86951"
-             height="210.00002"
-             ry="22.412884"
-             x="117.5348"
-             y="122.0002"
-             id="rect3208"
-             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.29226828;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-        <text
-             x="127.44397"
-             y="121.91458"
-             id="text3210"
-             xml:space="preserve"
-             style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="127.44397"
-                 y="121.91458"
-                 id="tspan3212"
-                 style="font-size:28px">Multijoueur</tspan></text>
-        <rect
-             width="147.5779"
-             height="30.326611"
-             ry="15.163305"
-             x="279.97415"
-             y="141.91493"
-             id="rect3214"
-             style="fill:#000000;fill-opacity:0.11935485;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-        <rect
-             width="190.36838"
-             height="30.064823"
-             ry="15.032412"
-             x="239.69853"
-             y="-37.953815"
-             id="rect3224"
-             style="fill:#000000;fill-opacity:0.11935485;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-        <rect
-             width="110.09112"
-             height="29.918203"
-             ry="11.539264"
-             x="130.09694"
-             y="402.15393"
-             id="rect3226"
-             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-        <text
-             x="150"
-             y="422.00021"
-             id="text3228"
-             xml:space="preserve"
-             style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="150"
-                 y="422.00021"
-                 id="tspan3230">Retour</tspan></text>
-        <rect
-             width="119.72763"
-             height="29.9538"
-             ry="11.560771"
-             x="320.41907"
-             y="402.12711"
-             id="rect3236"
-             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-        <text
-             x="340"
-             y="422.00021"
-             id="text3232"
-             xml:space="preserve"
-             style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="340"
-                 y="422.00021"
-                 id="tspan3234">Valider</tspan></text>
-        <text
-             x="170"
-             y="372.00021"
-             id="text3238"
-             xml:space="preserve"
-             style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="170"
-                 y="372.00021"
-                 id="tspan3244">Type</tspan></text>
-        <rect
-             width="147.47018"
-             height="30.327316"
-             ry="15.163658"
-             x="260"
-             y="351.67288"
-             id="rect3242"
-             style="fill:#000000;fill-opacity:0.11935485;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-        <rect
-             width="120.09565"
-             height="30.516834"
-             ry="15.258417"
-             x="310"
-             y="32.000198"
-             id="rect3250"
-             style="fill:#000000;fill-opacity:0.11935485;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-        <text
-             x="129.97415"
-             y="-48.085064"
-             id="text3254"
-             xml:space="preserve"
-             style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="129.97415"
-                 y="-48.085064"
-                 id="tspan3256">Solo</tspan></text>
-        <rect
-             width="149.99998"
-             height="60.000011"
-             ry="20.000002"
-             x="130"
-             y="192.0002"
-             id="rect3262"
-             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-        <text
-             x="40"
-             y="-77.999802"
-             id="text7410"
-             xml:space="preserve"
-             style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="40"
-                 y="-77.999802"
-                 id="tspan7412">1</tspan></text>
-        <text
-             x="499.97415"
-             y="-18.085064"
-             id="text7414"
-             xml:space="preserve"
-             style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="499.97415"
-                 y="-18.085064"
-                 id="tspan7416">2</tspan></text>
-        <text
-             x="37.7131"
-             y="302.34393"
-             id="text7418"
-             xml:space="preserve"
-             style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="37.7131"
-                 y="302.34393"
-                 id="tspan7420" /></text>
-        <text
-             x="499.97415"
-             y="51.914932"
-             id="text7422"
-             xml:space="preserve"
-             style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="499.97415"
-                 y="51.914932"
-                 id="tspan7424">3</tspan></text>
-        <text
-             x="497.44397"
-             y="161.91458"
-             id="text7426"
-             xml:space="preserve"
-             style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="497.44397"
-                 y="161.91458"
-                 id="tspan7428">4</tspan></text>
-        <text
-             x="497.44397"
-             y="221.91458"
-             id="text7430"
-             xml:space="preserve"
-             style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="497.44397"
-                 y="221.91458"
-                 id="tspan7432">5</tspan></text>
-        <text
-             x="500"
-             y="282.00021"
-             id="text7434"
-             xml:space="preserve"
-             style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="500"
-                 y="282.00021"
-                 id="tspan7436">6</tspan></text>
-        <text
-             x="500"
-             y="312.00021"
-             id="text7438"
-             xml:space="preserve"
-             style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="500"
-                 y="312.00021"
-                 id="tspan7440">7</tspan></text>
-        <text
-             x="500"
-             y="372.00021"
-             id="text7442"
-             xml:space="preserve"
-             style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="500"
-                 y="372.00021"
-                 id="tspan7444">8</tspan></text>
-        <rect
-             width="20"
-             height="20"
-             ry="0"
-             x="330"
-             y="262.00021"
-             id="rect3227"
-             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-        <path
-             d="M 150,60 60,60"
-             transform="translate(0,-147.9998)"
-             id="path3229"
-             style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
-        <path
-             d="m 399.97415,-28.085064 100,0"
-             id="path3231"
-             style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
-        <path
-             d="m 399.97415,41.914936 100,0"
-             id="path3233"
-             style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
-        <path
-             d="m 397.44397,151.91459 100,0"
-             id="path3235"
-             style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
-        <rect
-             width="130.03398"
-             height="28.689569"
-             ry="14.344785"
-             x="299.94016"
-             y="203.22537"
-             id="rect3658"
-             style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-        <path
-             d="m 409.97415,211.91459 87.46982,0"
-             id="path3237"
-             style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
-        <path
-             d="m 380,362.0002 120,0"
-             id="path3241"
-             style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
-        <path
-             d="m 420,560 80,0"
-             transform="translate(0,-147.9998)"
-             id="path3243"
-             style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
-        <path
-             d="m 150,560 -90,0"
-             transform="translate(0,-147.9998)"
-             id="path3245"
-             style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
-        <path
-             d="m 340,272.0002 160,0"
-             id="path3247"
-             style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
-        <text
-             x="40"
-             y="422.00021"
-             id="text3251"
-             xml:space="preserve"
-             style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="40"
-                 y="422.00021"
-                 id="tspan3253">9</tspan></text>
-        <rect
-             width="20"
-             height="20"
-             x="410"
-             y="440"
-             transform="translate(0,-147.9998)"
-             id="rect2886"
-             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
-        <path
-             d="m 420,450 80,0"
-             transform="translate(0,-147.9998)"
-             id="path3666"
-             style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
-        <text
-             x="490"
-             y="422.00021"
-             id="text3852"
-             xml:space="preserve"
-             style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
-                 x="490"
-                 y="422.00021"
-                 id="tspan3854">10</tspan></text>
-        <text
-             x="140"
-             y="-17.9998"
-             id="text3059"
-             xml:space="preserve"
-             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
-                 x="140"
-                 y="-17.9998"
-                 id="tspan3061"
-                 style="font-size:22px">Pseudo</tspan></text>
-        <text
-             x="130"
-             y="52.000198"
-             id="text3063"
-             xml:space="preserve"
-             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
-                 x="130"
-                 y="52.000198"
-                 id="tspan3065"
-                 style="font-size:22px">Couleur joueur</tspan></text>
-        <text
-             x="200"
-             y="152.0002"
-             id="text3067"
-             xml:space="preserve"
-             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
-                 x="200"
-                 y="152.0002"
-                 id="tspan3069"
-                 style="font-size:22px;text-align:center;text-anchor:middle">Nom</tspan><tspan
-                 x="200"
-                 y="179.5002"
-                 id="tspan3087"
-                 style="font-size:22px;text-align:center;text-anchor:middle">d'utilisateur</tspan></text>
-        <text
-             x="205.83333"
-             y="213.66687"
-             id="text3071"
-             xml:space="preserve"
-             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
-                 x="205.83333"
-                 y="213.66687"
-                 id="tspan3073"
-                 style="font-size:22px;text-align:center;text-anchor:middle">Changer</tspan><tspan
-                 x="205.83333"
-                 y="241.16687"
-                 id="tspan3089"
-                 style="font-size:22px;text-align:center;text-anchor:middle">de compte</tspan></text>
-        <text
-             x="311.66666"
-             y="225.33353"
-             id="text3075"
-             xml:space="preserve"
-             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
-                 x="311.66666"
-                 y="225.33353"
-                 id="tspan3077"
-                 style="font-size:22px">Modifier</tspan></text>
-        <text
-             x="130"
-             y="282.00021"
-             id="text3079"
-             xml:space="preserve"
-             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
-                 x="130"
-                 y="282.00021"
-                 id="tspan3081"
-                 style="font-size:22px">Connexion auto</tspan></text>
-        <text
-             x="130"
-             y="312.00021"
-             id="text3083"
-             xml:space="preserve"
-             style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
-                 x="130"
-                 y="312.00021"
-                 id="tspan3085"
-                 style="font-size:22px">Mémoriser mot de passe</tspan></text>
-    </g>
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="560"
+   height="600"
+   id="svg2">
+  <defs
+     id="defs4">
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       id="Arrow2Mstart"
+       style="overflow:visible">
+      <path
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 l 0,0 z"
+         transform="scale(0.6,0.6)"
+         id="path5217"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round" />
+    </marker>
+  </defs>
+  <g
+     transform="translate(0,147.9998)"
+     id="layer1">
+    <rect
+       width="355.04434"
+       height="595.04437"
+       ry="30.646187"
+       x="102.47783"
+       y="-145.522"
+       id="rect2385"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.95566034;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       x="564.85596"
+       y="296.63162"
+       id="text8275"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="564.85596"
+         y="296.63162"
+         id="tspan8277" /></text>
+    <rect
+       width="320.03973"
+       height="130.02934"
+       ry="13.877773"
+       x="119.94481"
+       y="-48.114403"
+       id="rect3252"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.2812984;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       width="319.86951"
+       height="210.00002"
+       ry="22.412884"
+       x="117.5348"
+       y="122.0002"
+       id="rect3208"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.29226828;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       x="127.44397"
+       y="121.91458"
+       id="text3210"
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="127.44397"
+         y="121.91458"
+         id="tspan3212"
+         style="font-size:28px">Multijoueur</tspan></text>
+    <rect
+       width="147.5779"
+       height="30.326611"
+       ry="15.163305"
+       x="279.97415"
+       y="141.91493"
+       id="rect3214"
+       style="fill:#000000;fill-opacity:0.11935485;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       width="190.36838"
+       height="30.064823"
+       ry="15.032412"
+       x="239.69853"
+       y="-37.953815"
+       id="rect3224"
+       style="fill:#000000;fill-opacity:0.11935485;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       width="110.09112"
+       height="29.918203"
+       ry="11.539264"
+       x="130.09694"
+       y="402.15393"
+       id="rect3226"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       x="150"
+       y="422.00021"
+       id="text3228"
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="150"
+         y="422.00021"
+         id="tspan3230">Retour</tspan></text>
+    <rect
+       width="119.72763"
+       height="29.9538"
+       ry="11.560771"
+       x="320.41907"
+       y="402.12711"
+       id="rect3236"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       x="340"
+       y="422.00021"
+       id="text3232"
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="340"
+         y="422.00021"
+         id="tspan3234">Valider</tspan></text>
+    <text
+       x="170"
+       y="372.00021"
+       id="text3238"
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="170"
+         y="372.00021"
+         id="tspan3244">Type</tspan></text>
+    <rect
+       width="147.47018"
+       height="30.327316"
+       ry="15.163658"
+       x="260"
+       y="351.67288"
+       id="rect3242"
+       style="fill:#000000;fill-opacity:0.11935485;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       width="120.09565"
+       height="30.516834"
+       ry="15.258417"
+       x="310"
+       y="32.000198"
+       id="rect3250"
+       style="fill:#000000;fill-opacity:0.11935485;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       x="129.97415"
+       y="-48.085064"
+       id="text3254"
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="129.97415"
+         y="-48.085064"
+         id="tspan3256">Solo</tspan></text>
+    <rect
+       width="149.99998"
+       height="60.000011"
+       ry="20.000002"
+       x="130"
+       y="192.0002"
+       id="rect3262"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       x="40"
+       y="-77.999802"
+       id="text7410"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="40"
+         y="-77.999802"
+         id="tspan7412">1</tspan></text>
+    <text
+       x="499.97415"
+       y="-18.085064"
+       id="text7414"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="499.97415"
+         y="-18.085064"
+         id="tspan7416">2</tspan></text>
+    <text
+       x="37.7131"
+       y="302.34393"
+       id="text7418"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="37.7131"
+         y="302.34393"
+         id="tspan7420" /></text>
+    <text
+       x="499.97415"
+       y="51.914932"
+       id="text7422"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="499.97415"
+         y="51.914932"
+         id="tspan7424">3</tspan></text>
+    <text
+       x="497.44397"
+       y="161.91458"
+       id="text7426"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="497.44397"
+         y="161.91458"
+         id="tspan7428">4</tspan></text>
+    <text
+       x="46.213963"
+       y="223.71231"
+       id="text7430"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="46.213963"
+         y="223.71231"
+         id="tspan7432">5</tspan></text>
+    <text
+       x="500"
+       y="220.87743"
+       id="text7434"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="500"
+         y="220.87743"
+         id="tspan7436">6</tspan></text>
+    <text
+       x="500"
+       y="281.43881"
+       id="text7438"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="500"
+         y="281.43881"
+         id="tspan7440">7</tspan></text>
+    <text
+       x="499.10114"
+       y="311.77628"
+       id="text7442"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="499.10114"
+         y="311.77628"
+         id="tspan7444">8</tspan></text>
+    <rect
+       width="20"
+       height="20"
+       ry="0"
+       x="330"
+       y="262.00021"
+       id="rect3227"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="M 150,60 60,60"
+       transform="translate(0,-147.9998)"
+       id="path3229"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
+    <path
+       d="m 399.97415,-28.085064 100,0"
+       id="path3231"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
+    <path
+       d="m 399.97415,41.914936 100,0"
+       id="path3233"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
+    <path
+       d="m 397.44397,151.91459 100,0"
+       id="path3235"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
+    <rect
+       width="130.03398"
+       height="28.689569"
+       ry="14.344785"
+       x="299.94016"
+       y="203.22537"
+       id="rect3658"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="m 409.97415,211.91459 87.46982,0"
+       id="path3237"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
+    <path
+       d="m 380,362.0002 120,0"
+       id="path3241"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
+    <path
+       d="m 420,560 80,0"
+       transform="translate(0,-147.9998)"
+       id="path3243"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
+    <path
+       d="m 150,560 -90,0"
+       transform="translate(0,-147.9998)"
+       id="path3245"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
+    <path
+       d="m 340,272.0002 160,0"
+       id="path3247"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
+    <text
+       x="498.42093"
+       y="371.66379"
+       id="text3251"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="498.42093"
+         y="371.66379"
+         id="tspan3253">9</tspan></text>
+    <rect
+       width="20"
+       height="20"
+       x="410"
+       y="440"
+       transform="translate(0,-147.9998)"
+       id="rect2886"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       d="m 420,450 80,0"
+       transform="translate(0,-147.9998)"
+       id="path3666"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
+    <text
+       x="28.882484"
+       y="421.10135"
+       id="text3852"
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+         x="28.882484"
+         y="421.10135"
+         id="tspan3854">10</tspan></text>
+    <text
+       x="140"
+       y="-17.9998"
+       id="text3059"
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
+         x="140"
+         y="-17.9998"
+         id="tspan3061"
+         style="font-size:22px">Pseudo</tspan></text>
+    <text
+       x="130"
+       y="52.000198"
+       id="text3063"
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
+         x="130"
+         y="52.000198"
+         id="tspan3065"
+         style="font-size:22px">Couleur joueur</tspan></text>
+    <text
+       x="200"
+       y="152.0002"
+       id="text3067"
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
+         x="200"
+         y="152.0002"
+         id="tspan3069"
+         style="font-size:22px;text-align:center;text-anchor:middle">Nom</tspan><tspan
+         x="200"
+         y="179.5002"
+         id="tspan3087"
+         style="font-size:22px;text-align:center;text-anchor:middle">d'utilisateur</tspan></text>
+    <text
+       x="205.83333"
+       y="213.66687"
+       id="text3071"
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
+         x="205.83333"
+         y="213.66687"
+         id="tspan3073"
+         style="font-size:22px;text-align:center;text-anchor:middle">Changer</tspan><tspan
+         x="205.83333"
+         y="241.16687"
+         id="tspan3089"
+         style="font-size:22px;text-align:center;text-anchor:middle">de compte</tspan></text>
+    <text
+       x="311.66666"
+       y="225.33353"
+       id="text3075"
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
+         x="311.66666"
+         y="225.33353"
+         id="tspan3077"
+         style="font-size:22px">Modifier</tspan></text>
+    <text
+       x="130"
+       y="282.00021"
+       id="text3079"
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
+         x="130"
+         y="282.00021"
+         id="tspan3081"
+         style="font-size:22px">Connexion auto</tspan></text>
+    <text
+       x="130"
+       y="312.00021"
+       id="text3083"
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
+         x="130"
+         y="312.00021"
+         id="tspan3085"
+         style="font-size:22px">Mémoriser mot de passe</tspan></text>
+  </g>
+  <path
+     d="m 156.40243,360.90203 -96.178505,0"
+     id="path2889"
+     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart)" />
+  <text
+     x="487.1846"
+     y="569.4386"
+     id="text3853"
+     xml:space="preserve"
+     style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"><tspan
+       x="487.1846"
+       y="569.4386"
+       id="tspan3855">11</tspan></text>
 </svg>
