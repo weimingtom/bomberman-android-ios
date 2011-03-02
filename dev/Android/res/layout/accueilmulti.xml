@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent"
+	android:orientation="vertical">
+	
+	
+	<TextView android:layout_weight="1" android:layout_height="fill_parent"
+		android:layout_width="wrap_content" />
+		
+			
+	<LinearLayout android:id="@+id/linearLayout1"
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<EditText android:layout_height="wrap_content"
+			android:id="@+id/editText1" android:layout_width="250dip" android:layout_marginLeft="5px"></EditText>
+			
+		<ImageButton android:id="@+id/rafraichir"
+			android:layout_width="wrap_content" style="@android:style/Widget.Button.Small"
+			android:background="@drawable/refresh" android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical" android:layout_marginLeft="20px" />
+
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/linearLayout2"
+		android:layout_width="match_parent" android:layout_margin="5px" android:layout_height="240dip">
+
+	</LinearLayout>
+
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_gravity="bottom"
+		android:paddingBottom="5px">
+
+		<Button android:id="@+id/boutonRetour" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_gravity="left"
+			android:text="Retour" android:textSize="10px" android:paddingLeft="13px"
+			android:paddingTop="5px" android:paddingBottom="5px"
+			android:paddingRight="13px" />
+
+
+		<TextView android:layout_weight="1" android:layout_height="fill_parent"
+			android:layout_width="wrap_content" />
+
+		<Button android:id="@+id/boutonCreerPartie" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_gravity="right"
+			android:text="Créer Partie" android:textSize="10px" android:paddingLeft="13px"
+			android:paddingTop="5px" android:paddingBottom="5px"
+			android:paddingRight="13px" />
+	</LinearLayout>
+
+
+</LinearLayout>

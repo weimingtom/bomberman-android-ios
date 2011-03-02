@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:stretchColumns="2">
+
+		<TableRow android:baselineAligned="true"
+			android:layout_marginTop="50px" android:layout_gravity="center_horizontal">
+
+			<TextView android:text="Son" android:id="@+id/textView1"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_marginLeft="10px" android:layout_gravity="center_vertical"/>
+
+			<SeekBar android:id="@+id/seekBar1" android:layout_width="160px"
+				android:layout_margin="5px" android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical" />
+
+			<CheckBox android:text="Muet" android:id="@+id/checkBox1"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_margin="5px" />
+
+		</TableRow>
+
+		<TableRow android:baselineAligned="true"
+			android:layout_marginLeft="20px" android:layout_marginTop="30px"
+			android:layout_gravity="center_horizontal">
+
+			<TextView android:text="Langue" android:id="@+id/textView1"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_margin="5px" android:layout_marginRight="5px" />
+
+
+			<Spinner android:layout_gravity="left" android:id="@+id/langues"
+				android:layout_width="wrap_content" android:layout_height="39px"
+				android:entries="@array/langues" android:layout_marginLeft="10px" />
+
+		</TableRow>
+
+		<TableRow android:layout_height="wrap_content"
+			android:layout_gravity="center" android:baselineAligned="false"
+			android:layout_width="wrap_content" android:layout_marginTop="30px">
+
+			<TextView android:id="@+id/textView1" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_margin="5px"
+				android:layout_marginRight="5px" />
+
+			<Button android:text="Gestion profil" android:id="@+id/gestionProfil"
+				android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+				android:layout_width="wrap_content" />
+
+		</TableRow>
+		
+		
+		<TableRow android:layout_gravity="center" android:baselineAligned="false"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dip">
+			
+			
+			<Button android:text="Retour" android:id="@+id/retour"
+				android:layout_height="wrap_content" android:layout_gravity="left"
+				android:layout_width="wrap_content"/>
+			
+		</TableRow>
+		
+
+	</TableLayout>
+
+
+
+
+
+
+</LinearLayout>

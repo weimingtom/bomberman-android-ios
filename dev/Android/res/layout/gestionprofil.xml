@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent"
+	android:orientation="vertical">
+
+
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_gravity="left" android:layout_marginLeft="20px"
+		android:layout_marginTop="20px">
+
+		<TextView android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:text="Solo" android:id="@+id/textView1"
+			android:textSize="18px" />
+	</LinearLayout>
+
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:layout_gravity="right"
+		android:layout_marginRight="20px" android:layout_marginTop="30px">
+
+		<TextView android:text="Pseudo" android:id="@+id/textView2"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_marginRight="10px" />
+
+		<TextView android:id="@+id/Pseudo" android:text="Pedro"
+			android:layout_width="140px" android:layout_height="wrap_content"
+			android:layout_marginLeft="10px" />
+
+	</LinearLayout>
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:orientation="horizontal" android:layout_width="wrap_content"
+		android:layout_gravity="right" android:layout_marginRight="20px">
+
+		<TextView android:text="Couleur joueur" android:id="@+id/textView4"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical" android:layout_marginRight="5px" />
+
+		<TextView android:layout_weight="1" android:layout_height="fill_parent"
+			android:layout_width="wrap_content" />
+
+
+		<Spinner android:id="@+id/spinner2" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_marginLeft="10px"
+			android:entries="@array/couleursJoueur" />
+	</LinearLayout>
+
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:orientation="horizontal" android:layout_width="wrap_content" android:layout_marginTop="30px" >
+
+		<TextView android:text="Multijoueur" android:id="@+id/textView3"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textSize="18px" android:layout_marginLeft="20px" />
+
+	</LinearLayout>
+
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_height="wrap_content" android:layout_width="wrap_content"
+		android:layout_gravity="right" android:layout_marginRight="20px" android:layout_marginTop="20px" >
+
+		<TextView android:text="Nom utilisateur" android:id="@+id/textView2"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_marginRight="5px" />
+
+		<TextView android:id="@+id/nomUtilisateur" android:text="PedroDu34" android:layout_width="140px"
+			android:layout_height="wrap_content" android:layout_marginLeft="10px" />
+
+	</LinearLayout>
+
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:orientation="horizontal" android:layout_width="wrap_content"
+		android:layout_gravity="center_horizontal" android:layout_marginTop="20px">
+
+		<Button android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:text="Changer de compte"
+			android:id="@+id/changerCompte" />
+
+		<Button android:text="Modifier" android:id="@+id/modifierMdp"
+			android:layout_width="90px" android:layout_height="wrap_content"
+			android:layout_marginLeft="10px" android:layout_gravity="center" />
+	</LinearLayout>
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:orientation="horizontal" android:layout_width="wrap_content"
+		android:layout_gravity="center">
+
+		<CheckBox android:text="Connexion auto" android:id="@+id/checkBox1"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_gravity="center" />
+	</LinearLayout>
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:orientation="horizontal" android:layout_width="wrap_content"
+		android:layout_gravity="center">
+
+		<CheckBox android:text="Mémoriser mot de passe" android:id="@+id/checkBox2"
+			android:layout_height="wrap_content" android:layout_width="wrap_content" />
+	</LinearLayout>
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:orientation="horizontal" android:layout_width="wrap_content"
+		android:layout_gravity="center">
+
+		<TextView android:text="Type" android:id="@+id/textView6"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_marginRight="5px" />
+
+		<Spinner android:id="@+id/type" android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:entries="@array/type"
+			android:layout_marginLeft="10px" />
+	</LinearLayout>
+
+
+	<LinearLayout android:id="@+id/linearLayout3"
+		android:layout_height="wrap_content" android:layout_width="match_parent"
+		android:layout_marginTop="20px">
+
+		<Button android:text="Retour" android:id="@+id/boutonRetour"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+
+		<TextView android:layout_weight="1" android:layout_height="fill_parent"
+			android:layout_width="wrap_content" />
+
+
+		<Button android:layout_gravity="right" android:layout_height="wrap_content"
+			android:id="@+id/boutonValider" android:layout_width="wrap_content"
+			android:text="Valider"></Button>
+	</LinearLayout>
+
+
+</LinearLayout>

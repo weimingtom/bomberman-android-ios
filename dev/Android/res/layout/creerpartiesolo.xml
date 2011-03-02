@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center"
+	android:padding="10px">
+	
+	
+	
+   <Gallery android:id="@+id/galleryz"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:gravity="bottom"
+	/>
+
+
+    
+	
+	<TextView
+	android:id="@+id/nomMap"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="nom de la map"
+	android:layout_gravity="center">
+	</TextView>
+	
+	<TextView 
+	android:layout_weight="1" 
+	android:layout_height="fill_parent"
+	android:layout_width="wrap_content"/>
+ 
+ 
+
+		<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:stretchColumns="2">
+			<TableRow android:baselineAligned="true">
+				<TextView
+				android:layout_gravity="left" 
+				android:padding="4dip"
+				android:text="Type Partie">
+				</TextView>
+				
+				<Spinner
+				 android:layout_gravity="right" 
+				 android:id="@+id/typePartie"
+				 android:layout_height="39px"
+				 android:layout_marginLeft="3px"
+				 android:entries="@array/typePartie">
+				 </Spinner>
+				 
+		 	</TableRow>
+				 
+			<TableRow>
+				<TextView
+				android:layout_gravity="left" 
+				android:padding="4dip"	
+				android:text="Nombre d'ennemis">
+				</TextView>
+				
+				<Spinner
+				android:layout_gravity="right"
+				android:id="@+id/nbEnnemis"
+				android:layout_height="39px"
+				android:layout_marginLeft="3px"
+				android:entries="@array/nbEnnemis">
+				</Spinner>
+		</TableRow>
+		
+		<TableRow>
+	 	
+				<TextView
+				android:layout_gravity="left"
+				android:padding="4dip" 
+				android:text="Difficulté des ennemis">
+				</TextView>
+				
+				<Spinner
+			 	android:id="@+id/difficulte"
+			 	android:layout_gravity="right"
+			 	android:layout_height="39px"
+			 	android:layout_marginLeft="3px"
+			 	android:entries="@array/difficulte" >
+			 	</Spinner>
+			 	
+		</TableRow>
+	</TableLayout>
+		
+	
+	<LinearLayout 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content" 
+		android:layout_gravity="bottom" 
+		android:paddingTop="55px" 
+		android:paddingBottom="5px" >	
+		
+		<Button 
+		android:id="@+id/boutonRetour"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:layout_gravity="left" 
+		android:text="Retour" 
+		android:textSize="10px" 
+		android:paddingLeft="13px" 
+		android:paddingTop="5px" 
+		android:paddingBottom="5px" 
+		android:paddingRight="13px" />
+		
+		
+		<TextView 
+		android:layout_weight="1" 
+		android:layout_height="fill_parent"
+		android:layout_width="wrap_content"/>
+	 
+		<Button 		
+		android:id="@+id/boutonLancer"			
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" 
+		android:layout_gravity="right" 
+		android:text="Lancer" 
+		android:textSize="10px" 
+		android:paddingLeft="13px" 
+		android:paddingTop="5px" 
+		android:paddingBottom="5px" 
+		android:paddingRight="13px"/>
+	</LinearLayout>
+
+
+		
+		 
+ 
+</LinearLayout>
