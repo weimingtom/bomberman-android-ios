@@ -1,5 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, klob!</string>
-    <string name="app_name">BomberKlob</string>
+    <string name="app_name">Bomberman</string>
+    
+    <string-array name="typePartie">
+    	<item>Vulcan</item>
+    	<item>Labyrinth</item>
+    	<item>Shivas</item>
+    	<item>Speedy</item>
+    	<item>Mocka</item>
+    	<item>Tiberium</item>
+    	<item>The Wall</item>
+    	<item>Green Planet</item>
+    </string-array>
+    
+    <string-array name="nbEnnemis">
+    	<item>1</item>
+    	<item>2</item>
+    	<item>3</item>
+    	<item>4</item>
+    </string-array>
+    
+    <string-array name="difficulte">
+    	<item>normale</item>
+    	<item>facile</item>
+    	<item>difficile</item>
+    </string-array>
+    
+    <string-array name="comptes">
+    	<item>Michel</item>
+    	<item>Pedro</item>
+    	<item>Tiguan</item>
+    </string-array>
+
+
+	<string-array name="langues">
+		<item>Français</item>
+		<item>English</item>
+	</string-array>
+	
+	 <string-array name="type">
+    	<item>Gaucher</item>
+    	<item>Droitier</item>
+    </string-array>
+    
+     <string-array name="couleursJoueur">
+    	<item>Vert</item>
+    	<item>Bleue</item>
+    	<item>Rouge</item>
+    	<item>Orange</item>
+    	<item>Noire</item>
+    </string-array>
+    
+    
 </resources>
