@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<TableLayout android:layout_width="wrap_content"
+		android:id="@+id/tableLayout1" android:layout_height="wrap_content">
+		<TableRow android:baselineAligned="true">
+			<TextView android:layout_weight="1" android:layout_height="fill_parent"
+				android:layout_width="wrap_content" />
+
+		</TableRow>
+
+		<TableRow android:layout_width="wrap_content"
+			android:layout_gravity="center_horizontal" android:baselineAligned="true">
+
+			<TextView android:id="@+id/editText1" android:text="Pedro"
+				android:layout_height="wrap_content" android:layout_marginLeft="35px"
+				android:layout_gravity="center_horizontal" android:layout_width="wrap_content">
+			</TextView>
+		</TableRow>
+
+
+		<TableRow android:layout_width="wrap_content"
+			android:layout_gravity="center_horizontal" android:baselineAligned="true">
+
+
+			<TextView android:layout_weight="1" android:layout_height="fill_parent"
+				android:layout_width="wrap_content" />
+
+			<Button android:text="Inscription" android:id="@+id/boutonIncription"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_gravity="right" android:layout_marginRight="20px">
+			</Button>
+
+		</TableRow>
+
+		<TableRow android:baselineAligned="false">
+
+			<TextView android:id="@+id/editText2" android:text="EditText"
+				android:layout_marginLeft="35px" android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal" android:layout_width="wrap_content">
+			</TextView>
+
+			<TextView android:layout_weight="1" android:layout_height="fill_parent"
+				android:layout_width="wrap_content" />
+
+		</TableRow>
+
+		<TableRow android:baselineAligned="true" android:layout_marginTop="20px">
+			<TextView android:text="Nom utilisateur" android:id="@+id/textView1"
+				android:layout_width="wrap_content" android:paddingLeft="20px"
+				android:layout_gravity="center_vertical">
+			</TextView>
+
+			<TextView android:layout_weight="1" android:layout_height="fill_parent"
+				android:layout_width="wrap_content" />
+
+			<EditText android:id="@+id/editText3" android:layout_height="50px"
+				android:layout_width="120px" android:layout_marginRight="20px">
+			</EditText>
+		</TableRow>
+
+		<TableRow android:baselineAligned="true">
+			<TextView android:text="mot de passe" android:id="@+id/textView1"
+				android:layout_width="wrap_content" android:paddingLeft="20px"
+				android:layout_gravity="center_vertical">
+			</TextView>
+
+			<TextView android:layout_weight="1" android:layout_height="fill_parent"
+				android:layout_width="wrap_content" />
+
+			<EditText android:id="@+id/editText4" android:password="true"
+				android:layout_height="50px" android:layout_width="120px"
+				android:layout_marginRight="20px">
+			</EditText>
+
+
+		</TableRow>
+
+
+
+		<TableRow android:baselineAligned="true" android:layout_marginTop="20px">
+
+			<CheckBox android:id="@+id/checkBox1" android:text="Connexion auto"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+				android:layout_marginLeft="10px">
+
+			</CheckBox>
+
+			<CheckBox android:id="@+id/checkBox2" android:text="Mémoriser mot de passe"
+				android:layout_height="wrap_content" android:layout_width="120px"
+				android:layout_gravity="right" android:layout_marginLeft="9px">
+			</CheckBox>
+		</TableRow>
+
+		<TableRow android:baselineAligned="true">
+			<TextView android:layout_weight="1" android:layout_height="fill_parent"
+				android:layout_width="wrap_content" />
+		</TableRow>
+	</TableLayout>
+
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_gravity="bottom"
+		android:paddingBottom="5px" android:layout_marginTop="30px">
+
+		<Button android:id="@+id/boutonAnnuler" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_gravity="left"
+			android:text="Annuler" android:textSize="10px" android:paddingTop="5px"
+			android:paddingBottom="5px" android:layout_marginLeft="15px" />
+
+
+		<TextView android:layout_weight="1" android:layout_height="fill_parent"
+			android:layout_width="wrap_content" />
+
+		<Button android:id="@+id/boutonConnexion" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_gravity="right"
+			android:text="Connexion" android:textSize="10px" android:paddingTop="5px"
+			android:paddingBottom="5px" android:layout_marginRight="15px" />
+	</LinearLayout>
+
+</LinearLayout>
