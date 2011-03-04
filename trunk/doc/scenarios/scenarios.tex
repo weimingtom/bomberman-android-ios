@@ -81,9 +81,9 @@
 
 		\begin{enumerate}
 		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
-		  \item Zone de saisie.
-		  \item Label d'erreur.
-		  \item Bouton ``\hyperlink{Accueil}{Valider}".
+		  \item Zone de saisie
+		  \item Label contenant l’erreur survenue
+		  \item Bouton ``\hyperlink{Accueil}{Valider}"
 		\end{enumerate}
 
 		\subsubsection{Description des zones}
@@ -182,12 +182,12 @@
 		\underline{RG2-01 :}
 			\begin{quote}
 				Afficher la page de création d'une partie hors ligne
-					\footnote{
+					\footnote[1]{
 						\hyperlink{Creer partie solo}{Création d'une partie hors ligne}
 						\og voir section \ref{Creer partie solo}, page \pageref{Creer partie solo}.\fg
 					}.\\
 				Supprimer la page d'accueil%
-					\footnote{
+					\footnote[2]{
 						\hyperlink{Page d'accueil}{Page d'accueil}
 						\og voir section \ref{Accueil}, page \pageref{Accueil}.\fg
 					}.
@@ -203,14 +203,21 @@
 					\begin{quote}
 						Se connecter au serveur distant.
 					\end{quote}	
+					Sinon
+					\begin{quote}
+						Afficher la page de connexion multi-joueurs%
+							\footnote[3]{
+								\hyperlink{Connexion multi-joueurs}{Connexion multi-joueurs}
+								\og voir section \ref{Connexion multi-joueurs}, page \pageref{Connexion multi-joueurs}.\fg
+							}.\\
+						Afficher dans le label d'erreur (3) ``Nom d'utilisateur et/ou mot de passe inexistant(s)''.\\
+						Supprimer la page d'accueil\footnotemark[2].
+					\end{quote}	
 				\end{quote}
-				Si la connexion automatique est desactivée ou qu'une erreur est survenue alors 
+				Sinon
 				\begin{quote}		
-					Afficher la page de connexion multi-joueurs%
-						\footnote{
-							\hyperlink{Connexion multi-joueurs}{Connexion multi-joueurs}
-							\og voir section \ref{Connexion multi-joueurs}, page \pageref{Connexion multi-joueurs}.\fg
-						}.
+					Afficher la page de connexion multi-joueurs\footnotemark[3].\\
+					Supprimer la page d'accueil\footnotemark[2].
 				\end{quote}
 			\end{quote}
 
@@ -219,7 +226,7 @@
 		\underline{RG2-03 :}
 			\begin{quote}
 				Afficher la page des options%
-					\footnote{
+					\footnote[4]{
 						\hyperlink{Options}{Options}
 						\og voir section \ref{Options}, page \pageref{Options}.\fg
 					}.\\
@@ -232,7 +239,7 @@
 		\underline{RG2-04 :}
 			\begin{quote}
 				Afficher la page des statistiques%
-					\footnote{
+					\footnote[5]{
 						\hyperlink{Statistiques}{Statistiques}
 						\og voir section \ref{Statistiques}, page \pageref{Statistiques}.\fg
 					}.\\
@@ -244,7 +251,7 @@
 		\underline{RG2-05 :}
 			\begin{quote}
 				Afficher la page de création de niveaux%
-					\footnote{
+					\footnote[6]{
 						\hyperlink{Creer niveau}{Créer niveau}
 						\og voir section \ref{Creer niveau}, page \pageref{Creer niveau}.\fg
 					}.\\
@@ -256,7 +263,7 @@
 		\underline{RG2-06 :}
 			\begin{quote}
 				Afficher la page d'aide%
-					\footnote{
+					\footnote[7]{
 						\hyperlink{Aide}{Aide}
 						\og voir section \ref{Aide}, page \pageref{Aide}.\fg
 					}.\\
@@ -282,7 +289,7 @@
 		\underline{RG2-09 :}
 			\begin{quote}
 				Afficher la page de Création d'un compte hors ligne%
-					\footnote{
+					\footnote[8]{
 						\hyperlink{profil}{Création d'un compte hors ligne}
 						\og voir section \ref{Creation d'un compte hors ligne}, page \pageref{Creation d'un compte hors ligne}.\fg
 					}.\\
@@ -293,8 +300,8 @@
 				
 		\underline{RG2-10 :}
 			\begin{quote}
-				Affichée l'erreur renvoyée par le serveur sous forme d'un pop-up.\\
-				(Cas ou l'utilisateur a cliqué sur ``Connexion multi-joueurs'' que la connexion automatique soit activée et que le serveur ait rencontré une erreur).
+				Afficher l'erreur renvoyée par le serveur sous forme d'un pop-up.\\
+				(Cas ou l'utilisateur a cliqué sur ``Connexion multi-joueurs'' et que la connexion automatique soit activée et que le serveur ait rencontré une erreur).
 			\end{quote}
 	
 \newpage
@@ -393,9 +400,9 @@
 		\end{center}
 		
 		\begin{enumerate}
-		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone).
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Pseudonyme du compte hors ligne utilisé
-		  \item Cadre contenant l'erreur survenue
+		  \item Label contenant l’erreur survenue
 		  \item Champs de texte ``Nom utilisateur''
 		  \item Champs de texte ``Mot de passe''
 		  \item Champs de texte ``Vérification''
@@ -411,12 +418,16 @@
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
 				2 & Label & Affiche le pseudonyme du compte & Chargement de la page & RG4-01 \\
 				  &       & hors ligne en cours d'utilisation & & \\\hline
-				6 & Champs de texte & Champs de vérification & Perte du focus & RG4-02 \\
+				4 & Champs de texte & Nom d'utilisateur du compte &  Perte du focus & RG4-02 \\
+				  &                 & multi-joueurs               & & \\\hline
+				5 & Champs de texte & Mot de passe du compte & Perte du focus & RG4-03 \\
+				  &                 & multi-joueurs          & & \\\hline
+				6 & Champs de texte & Champs de vérification & Perte du focus & RG4-04 \\
 				  & & du mot de passe entré & RG4-04 & \\\hline 
-				9 & Bouton & Permet de revenir à la page & Cliqué & RG4-03 \\
+				9 & Bouton & Permet de revenir à la page & Cliqué & RG4-05 \\
 				  &        & de connexion multi-joueurs \footnotemark[1] & & \\\hline
-				10 & Bouton & Valide les paramètres entrés & Cliqué & RG4-04 \\\hline
-				   & Evènement & Erreur renvoyée par le serveur & Serveur distant & RG4-05 \\\hline
+				10 & Bouton & Valide les paramètres entrés & Cliqué & RG4-06 \\\hline
+				   & Evènement & Erreur renvoyée par le serveur & Serveur distant & RG4-07 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
@@ -425,20 +436,40 @@
 				\begin{quote}
 					Récupérer le pseudonyme du compte hors ligne en cours d'utilisation dans la classe utilisateur.
 				\end{quote}
-
+				
 			$\,$
 
 			\underline{RG4-02 :}
 				\begin{quote}
+					Si le champs du nom d'utilisateur (5) est vide ou fait moins de N caractères alors
+					\begin{quote}
+						Afficher dans le label d'erreur (3) ``Nom d'utilisateur incorrect''.
+					\end{quote}
+				\end{quote}
+
+			$\,$
+
+			\underline{RG4-03 :}
+				\begin{quote}
+					Si le champs du mot de passe (5) est vide ou fait moins de N caractères alors
+					\begin{quote}
+						Afficher dans le label d'erreur (3) ``Mot de passe incorrect''.
+					\end{quote}
+				\end{quote}
+			
+			$\,$	
+			
+			\underline{RG4-04 :}
+				\begin{quote}
 					Si champs de texte (5) différent du champs de texte (6)
 					\begin{quote}
-						Afficher dans le label (3) ``Mots de passes différents''.
+						Afficher dans le label d'erreur (3) ``Mots de passes différents''.
 					\end{quote}
 				\end{quote}
 
 			$\,$				
 				
-			\underline{RG4-03 :}
+			\underline{RG4-05 :}
 				\begin{quote}
 					Afficher la page de connexion multi-joueurs%
 						\footnote[1]{
@@ -450,33 +481,26 @@
 				
 			$\,$
 
-			\underline{RG4-04 :}
-				\begin{quote}
-					RG4-02.\\
-					RG4-06.\\
-					Si aucune erreur n'a été détectée alors
-						\begin{quote}
-							Connexion avec le serveur distant afin d'ajouter le nouveau compte.
-						\end{quote}
-				\end{quote}
-				
-			$\,$
-				
-			\underline{RG4-05 :}
-				\begin{quote}
-					Affichée l'erreur renvoyée par le serveur sous forme d'un pop-up.
-				\end{quote}
-
-			$\,$
-			
 			\underline{RG4-06 :}
 				\begin{quote}
+					RG4-02.\\
+					RG4-03.\\
+					RG4-04.\\
 					Si la check-box ``Connexion automatique'' ou ``Mémoriser mot de passe'' ont été cochées/décochées alors
 					\begin{quote}
 						Modifier le fichier utilisateur.\\
 						Recharger la classe utilisateur.
 					\end{quote}
-				\end{quote}			
+					Connexion avec le serveur distant afin d'ajouter le nouveau compte.
+				\end{quote}
+
+				
+			$\,$
+			
+			\underline{RG4-07 :}
+				\begin{quote}
+					Afficher l'erreur renvoyée par le serveur sous forme d'un pop-up.
+				\end{quote}
 	
 \newpage
 
@@ -493,7 +517,7 @@
 		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
 		  \item Pseudonyme du compte hors ligne utilisé
 		  \item Bouton ``\hyperlink{Creation compte multi-joueurs}{Inscription}''
-		  \item Cadre contenant l'erreur survenue
+		  \item Label contenant l’erreur survenue
 		  \item Champs de texte ``Nom utilisateur''
 		  \item Champs de texte ``Mot de passe''
 		  \item Check Box ``Connexion auto''
@@ -511,14 +535,16 @@
 				3 & Bouton & Permet à l'utilisateur d'être redirigé & Cliqué & RG5-01\\
 				  &        & sur la page de création  & & \\
 				  &        & d'un compte multi-joueurs \footnotemark[1] & & \\\hline
-				5 & Check-box & Nom utilisateur & Chargement de la page & RG5-02 \\\hline 
-				6 & Check-box & Mot de passe & Chargement de la page & RG5-03 \\\hline 
-				7 & Check-box & Connexion automatique & Chargement de la page & RG5-04 \\\hline 
-				8 & Check-box & Mémoriser mot de passe & Chargement de la page & RG5-05 \\\hline 
-				9 & Bouton & Permet de revenir à la page & Cliqué & RG5-06 \\
+				5 & Champs de texte & Nom utilisateur & Chargement de la page & RG5-02 \\
+				  &                 &                 & Perte du focus & RG5-03\\\hline 
+				6 & Champs de texte & Mot de passe & Chargement de la page & RG5-04 \\
+				  &                 &                 & Perte du focus & RG5-05\\\hline 
+				7 & Check-box & Connexion automatique & Chargement de la page & RG5-06 \\\hline 
+				8 & Check-box & Mémoriser mot de passe & Chargement de la page & RG5-07 \\\hline 
+				9 & Bouton & Permet de revenir à la page & Cliqué & RG5-08 \\
 				  &        & de connexion multi-joueurs \footnotemark[2] & & \\\hline
-				10 & Bouton & Valide les paramètres entrés & Cliqué & RG5-07 \\\hline
-				  & Evènement & Erreur renvoyée par le serveur & Serveur distant & RG4-08 \\\hline
+				10 & Bouton & Valide les paramètres entrés & Cliqué & RG5-09 \\\hline
+				  & Evènement & Erreur renvoyée par le serveur & Serveur distant & RG4-07 \\\hline
 			\end{tabular}
 
 		\subsubsection{Description des règles}
@@ -548,26 +574,46 @@
 			
 			\underline{RG5-03 :}
 				\begin{quote}
-					Recuperer le mot de passe dans la classe utilisateur.
+					Si le champs du nom d'utilisateur (5) est vide ou fait moins de N caractères alors
+					\begin{quote}
+						Afficher dans le label d'erreur (4) ``Nom d'utilisateur incorrect''.
+					\end{quote}
 				\end{quote}
-				
+
 			$\,$
 			
 			\underline{RG5-04 :}
 				\begin{quote}
-					Recuperer la connexion automatique dans la classe utilisateur.
+					Recuperer le mot de passe dans la classe utilisateur.
 				\end{quote}
 				
 			$\,$
 			
 			\underline{RG5-05 :}
 				\begin{quote}
+					Si le champs du mot de passe (6) est vide ou fait moins de N caractères alors
+					\begin{quote}
+						Afficher dans le label d'erreur (4) ``Mot de passe incorrect''.
+					\end{quote}
+				\end{quote}
+
+			$\,$
+			
+			\underline{RG5-06 :}
+				\begin{quote}
+					Recuperer la connexion automatique dans la classe utilisateur.
+				\end{quote}
+				
+			$\,$
+			
+			\underline{RG5-07 :}
+				\begin{quote}
 					Recuperer le mot de passe dans la classe utilisateur.
 				\end{quote}
 
 			$\,$
 
-			\underline{RG5-06 :}
+			\underline{RG5-08 :}
 				\begin{quote}
 					Afficher la page d'accueil%
 						\footnote[3]{
@@ -579,9 +625,10 @@
 
 			$\,$
 
-			\underline{RG5-07 :}
+			\underline{RG5-09 :}
 				\begin{quote}
-					RG4-06.\\
+					RG5-03.\\
+					RG5-05.\\
 					Connexion au serveur distant.			
 				\end{quote}
 
@@ -622,7 +669,7 @@
 				6 & Bouton & Affiche la page de création de & Cliqué & RG6-06 \\
 				  &        & création d'une partie multi-joueurs & & \\\hline
 				  & Evènement & Partie rejointe & Serveur distant & RG6-07 \\\hline
-				  & Evènement & Erreur renvoyée par le serveur & Serveur distant & RG4-05 \\\hline
+				  & Evènement & Erreur renvoyée par le serveur & Serveur distant & RG4-07 \\\hline
 				  
 			\end{tabular}
 
@@ -704,6 +751,8 @@
 
 				
 \newpage
+
+	FIXMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE RG7-01.\\
 
 	\subsection{Créer une partie multi-joueurs}
 	
@@ -912,10 +961,11 @@
 				7 & Check-box & Connexion automatique & Chargement de la page & RG5-04 \\\hline
 				8 & Check-box & Mémoriser mot de passe & Chargement de la page & RG5-05 \\\hline
 				9 & Liste déroulante & Type d'affichage désiré & Chargement de la page & RG9-04 \\\hline
-				10 & Bouton & Valide les options choisies et & Cliqué & RG9-05 \\
-				   &        & renvoie à l'écran des options &  & \\\hline
-				11 & Bouton & Annule les options choisies et & Cliqué & RG9-06 \\
-				   &        & Renvoie à l'écran des options &  &  \\\hline
+				10 & Bouton & Annule les options choisies et & Cliqué & RG9-05 \\
+				   &        & renvoie à la page des options &  &  \\\hline
+				11 & Bouton & Valide les options choisies et & Cliqué & RG9-06 \\
+				   &        & renvoie à la page des options &  & \\\hline
+
 
 			\end{tabular}
 			
@@ -930,15 +980,22 @@
 
 			\underline{RG9-02 :}
 				\begin{quote}
-					FIXME
+					Afficher la page de changement de compte multi-joueurs%
+						\footnote[1]{
+							\hyperlink{Changer de compte multi-joueurs}{Changer de compte multi-joueurs}
+							\og voir section \ref{Changer de compte multi-joueurs}, page \pageref{Changer de compte multi-joueurs}.\fg
+						}.
 				\end{quote}
 
 			$\,$
 
 			\underline{RG9-03 :}
 				\begin{quote}
-					FIXME
-					Lancer une sous activité pour la modification du mot de passe.
+						Afficher la page de modification du mot de passe du compte multi-joueurs%
+						\footnote[2]{
+							\hyperlink{Modifier le mot de passe du compte multi-joueurs}{Modifier le mot de passe du compte multi-joueurs}
+							\og voir section \ref{Modifier le mot de passe du compte multi-joueurs}, page \pageref{Modifier le mot de passe du compte multi-joueurs}.\fg
+						}.
 				\end{quote}
 
 			$\,$
@@ -953,7 +1010,7 @@
 			\underline{RG9-05 :}
 				\begin{quote}
 					Afficher la page des options%
-						\footnote[1]{
+						\footnote[4]{
 							\hyperlink{Options}{Options}
 							\og voir section \ref{Options}, page \pageref{Options}.\fg
 						}.\\
@@ -963,7 +1020,9 @@
 							\og voir section \ref{Gestion du profil}, page \pageref{Gestion du profil}.\fg
 						}.
 				\end{quote}
-				
+
+			$\,$
+							
 			\underline{RG9-06 :}
 				\begin{quote}
 					Si le champs de texte (2) est différent du pseudonyme de la classe utilisateur alors
@@ -983,7 +1042,7 @@
 						Modifier le type dans le fichier utilisateur.
 					\end{quote}	
 					Recharger la classe utilisateur.\\
-					Afficher la page des options\footnotemark[1].\\
+					Afficher la page des options\footnotemark[4].\\
 					Supprimer la page de gestion du profil\footnotemark[2].
 				\end{quote}
 				
@@ -1000,9 +1059,9 @@
 		\end{center}
 		
 		\begin{enumerate}
+		  \item Page de gestion du profil
 		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
-		  \item ?
-		  \item Label d'erreur
+		  \item Label contenant l’erreur survenue
 		  \item Champs de texte ``Nom d'utilisateur''
 		  \item Champs de texte ``Mot de passe''
 		  \item Bouton ``Annuler''
@@ -1013,13 +1072,36 @@
 		
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+				4 & Champs de texte & Nom d'utilisateur du compte &  Perte du focus & RG4-02 \\
+				  &                 & multi-joueurs               & & \\\hline
+				5 & Champs de texte & Mot de passe du compte & Perte du focus & RG4-03 \\
+				  &                 & multi-joueurs          & & \\\hline
+				6 & Bouton & Annule les paramètres entrés et & Cliqué & RG10-01 \\
+				  &        & renvoie à la page de gestion du profil & & \\\hline
+				7 & Bouton & Valide les paramètres entrés et & Cliqué & RG10-02 \\
+				  &        & renvoie à la page de gestion du profil & & \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
 			\underline{RG10-01 :}
 				\begin{quote}
-
+					Supprimer la page de changement de compte multi-joueurs%
+						\footnote[1]{
+							\hyperlink{Changer de compte multi-joueurs}{Changer de compte multi-joueurs}
+							\og voir section \ref{Changer de compte multi-joueurs}, page \pageref{Changer de compte multi-joueurs}.\fg
+						}.
+				\end{quote}
+				
+			$\,$
+				
+			\underline{RG10-01 :}
+				\begin{quote}
+					RG4-02.\\
+					RG4-03.\\
+					Mettre à jour le nom d'utilisateur (4) et le mot de passe (5) dans le fichier utilisateur.\\
+					Recharger la classe utilisateur.\\
+					Supprimer la page de changement de compte multi-joueurs\footnotemark[4].
 				\end{quote}
 
 
@@ -1035,20 +1117,91 @@
 		\end{center}
 		
 		\begin{enumerate}
-		  \item 
+		  \item Page de gestion du profil
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
+		  \item Label contenant l’erreur survenue
+		  \item Champs de texte ``Nom d'utilisateur''
+		  \item Champs de texte ``Ancien mot de passe''
+		  \item Champs de texte ``Nouveau mot de passe''
+		  \item Champs de texte ``Confirmer le mot de passe''
+		  \item Bouton ``Annuler''
+		  \item Bouton ``Valider''
 		\end{enumerate}
 
 		\subsubsection{Description des zones}
 		
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+				4 & Champs de texte & Nom d'utilisateur du compte &  Perte du focus & RG4-02 \\
+				  &                 & multi-joueurs               & & \\\hline
+				5 & Champs de texte & Mot de passe du compte & Perte du focus & RG4-03 \\
+				  &                 & multi-joueurs          & & \\\hline
+				6 & Champs de texte & Nouveau mot de passe &  Perte du focus & RG11-01 \\
+				  &                 & du compte multi-joueurs  & & \\\hline
+				7 & Champs de texte & Vérification du nouveau mot de passe & Perte du focus & RG11-02 \\
+				  &                 & du compte multi-joueurs & & \\\hline
+				8 & Bouton & Annule les paramètres entrés et & Cliqué & RG11-03 \\
+				  &        & renvoie à la page de gestion du profil & & \\\hline
+				9 & Bouton & Valide les paramètres entrés et & Cliqué & RG11-04 \\
+				  &        & renvoie à la page de gestion du profil & & \\\hline
+
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
-
+		
 			\underline{RG11-01 :}
 				\begin{quote}
+					Si le champs du nouveau mot de passe (6) est vide ou fait moins de N caractères alors
+					\begin{quote}
+						Afficher dans le label d'erreur (3) ``Mot de passe incorrect''.
+					\end{quote}
+				\end{quote}
+			
+			$\,$	
+			
+			\underline{RG11-02 :}
+				\begin{quote}
+					Si champs de texte (6) est différent du champs de texte (7)
+					\begin{quote}
+						Afficher dans le label d'erreur (3) ``Mots de passes différents''.
+					\end{quote}
+				\end{quote}
+			$\,$
+			
+			\underline{RG11-03 :}
+				\begin{quote}
+					Supprimer la page de modification du mot de passe du compte multi-joueurs%
+						\footnote[1]{
+							\hyperlink{Modifier le mot de passe du compte multi-joueurs}{Modifier le mot de passe du compte multi-joueurs}
+							\og voir section \ref{Modifier le mot de passe du compte multi-joueurs}, page \pageref{Modifier le mot de passe du compte multi-joueurs}.\fg
+						}.
+				\end{quote}
+				
+			$\,$
+				
+			\underline{RG11-04 :}
+				\begin{quote}
+					RG4-02.\\
+					RG4-03.\\
+					RG11-01.\\
+					RG11-02.\\
+					Si le nom d'utilisateur (4) et l'ancien mot de passe (5) concordent dans la classe utilisateur alors
+					\begin{quote}
+						Se connecter au serveur distant afin de mettre à jour le mot de passe.					
+					\end{quote}
+					Sinon
+					\begin{quote}
+						Afficher dans le label d'erreur (3) ``Nom d'utilisateur et/ou ancien mot de passe incorrect(s)''.
+					\end{quote}
+				\end{quote}
 
+			$\,$					
+					
+			\underline{RG11-05 :}
+				\begin{quote}
+					Mettre à jour le nom d'utilisateur et le mot de passe dans le fichier utilisateur.\\
+					Recharger la classe utilisateur.\\
+					Supprimer la page de modification du mot de passe du compte multi-joueurs\footnotemark[1].
 				\end{quote}
 				
 				
