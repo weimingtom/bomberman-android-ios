@@ -1357,8 +1357,10 @@
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
 				1 & Canvas   & Carte en cours d'édition & Chargement de la page & RG14-01 \\
 				  &          &                          & Focus + Relâchement & RG14-02 \\\hline
-				3 & Gallerie & Gallerie des différents  & Chargement de la page & RG14-03 \\
-				  &          & objets du jeu            & Cliqué                & RG14-04 \\\hline
+				2 & Bouton   & Permet d'acceder au menu & Cliqué & RG14-03 \\
+				  &          & de l'éditeur de carte    &        &         \\\hline
+				3 & Gallerie & Gallerie des différents  & Chargement de la page & RG14-04 \\
+				  &          & objets du jeu            & Cliqué                & RG14-05 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
@@ -1382,12 +1384,23 @@
 			
 			\underline{RG14-03 :}
 				\begin{quote}
-				Récupérer les différents objets du jeu stockés sur le téléphone
+				Afficher la page du menu de l'éditeur de cartes
+				\footnote[1]{
+						\hyperlink{Menu de l'editeur de cartes}{Menu de l'editeur de cartes}
+						\og voir section \ref{Menu de l'editeur de cartes}, page \pageref{Menu de l'editeur de cartes}.\fg
+				}.
 				\end{quote}
 				
 			$\,$
 			
 			\underline{RG14-04 :}
+				\begin{quote}
+				Récupérer les différents objets du jeu stockés sur le téléphone
+				\end{quote}
+				
+			$\,$
+			
+			\underline{RG14-05 :}
 				\begin{quote}
 				Enregistrer l'objet cliqué.\\
 				Le dessiner sous le curseur tant que la pression sur l'écran n'est pas relachée.
@@ -1396,30 +1409,75 @@
 				
 \newpage
 
-	\subsection{Menu de l'editeur de carte}
+	\subsection{Menu de l'editeur de cartes}
 		
-		\hypertarget{Menu_pause_creation_carte}{}
-		\label{Menu_pause_creation_carte}
+		\hypertarget{Menu de l'editeur de cartes}{}
+		\label{Menu de l'editeur de cartes}
 			
 		\begin{center}
 			\input{./tex/15_Menu_pause_creation_carte}
 		\end{center}
 		
 		\begin{enumerate}
-		  \item 
+		  \item Editeur de carte
+		  \item Fond d'écran (présent dans l'archive stocké sur le téléphone)
+		  \item Bouton ``Reprendre''
+		  \item Bouton ``Enregistrer''
+		  \item Bouton ``Tout effacer''
+		  \item Bouton ``Quitter''
 		\end{enumerate}
 
 		\subsubsection{Description des zones}
 		
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+				3 & Bouton & Permet de revenir à l'éditeur de cartes & Cliqué & RG15-01 \\\hline
+				4 & Bouton & Permet d'enregistrer la carte créée & Cliqué & RG15-02 \\\hline
+				5 & Bouton & Permet une remise à zéro de la carte créée & Cliqué & RG15-03 \\\hline
+				6 & Bouton & Permet de revenir à la page d'accueil & Cliqué & RG15-04 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
 			\underline{RG15-01 :}
 				\begin{quote}
+				Supprimer la page du menu de l'éditeur de cartes
+				\footnote[1]{
+						\hyperlink{Menu de l'editeur de cartes}{Menu de l'editeur de cartes}
+						\og voir section \ref{Menu de l'editeur de cartes}, page \pageref{Menu de l'editeur de cartes}.\fg
+				}.
+				\end{quote}
+				
+			$\,$
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG15-02 :}
+				\begin{quote}
+					FIXME : Faire certaines vérifications (spawn pour les joueurs, nom de la carte!!!,  etc \ldots)
+					Si aucune erreur n'est rencontrée alors
+					\begin{quote}	
+						???
+					\end{quote}
+				\end{quote}
+				
+			$\,$
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG15-03 :}
+				\begin{quote}
 
 				\end{quote}
+				
+			$\,$
+			
+		\subsubsection{Description des règles}
+
+			\underline{RG15-04 :}
+				\begin{quote}
+
+				\end{quote}
+		
 				
 \end{document}
