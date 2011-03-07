@@ -1346,22 +1346,52 @@
 		\end{center}
 		
 		\begin{enumerate}
-		  \item 
+		  \item Carte en cours d'édition
+		  \item Bouton ``Menu''
+		  \item Gallerie des différents objets du jeu
 		\end{enumerate}
 
 		\subsubsection{Description des zones}
 		
 			\begin{tabular}{|c|c|c|c|c|} \hline
 				Numéro de zone & Type  & Description & Evènement &	Règle \\\hline
+				1 & Canvas   & Carte en cours d'édition & Chargement de la page & RG14-01 \\
+				  &          &                          & Focus + Relâchement & RG14-02 \\\hline
+				3 & Gallerie & Gallerie des différents  & Chargement de la page & RG14-03 \\
+				  &          & objets du jeu            & Cliqué                & RG14-04 \\\hline
 			\end{tabular}
 			
 		\subsubsection{Description des règles}
 
 			\underline{RG14-01 :}
 				\begin{quote}
-
+				Initialiser le Canvas avec une carte vide
 				\end{quote}
 				
+			$\,$
+			
+			\underline{RG14-02 :}
+				\begin{quote}
+				Si l'objet passé n'est pas nul alors
+					\begin{quote}
+					Le dessiner dans la case correspondante au relachement de la pression sur l'écran.
+					\end{quote}
+				\end{quote}
+				
+			$\,$
+			
+			\underline{RG14-03 :}
+				\begin{quote}
+				Récupérer les différents objets du jeu stockés sur le téléphone
+				\end{quote}
+				
+			$\,$
+			
+			\underline{RG14-04 :}
+				\begin{quote}
+				Enregistrer l'objet cliqué.\\
+				Le dessiner sous le curseur tant que la pression sur l'écran n'est pas relachée.
+				\end{quote}
 				
 				
 \newpage
