@@ -1,135 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:layout_gravity="center"
-	android:padding="10px">
-	
-	
-	
-   <Gallery android:id="@+id/galleryz"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:gravity="bottom"
-	/>
+    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+        
+        <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:gravity="center_vertical|center_horizontal" android:layout_centerInParent="true" android:background="@color/Grey">
+            <Gallery android:gravity="bottom" android:layout_height="wrap_content" android:id="@+id/galleryz" android:layout_width="fill_parent"></Gallery>
+            <TextView android:layout_height="wrap_content" android:id="@+id/nomMap" android:layout_width="wrap_content" android:text="nom de la map"></TextView>
+        
+        	<TableLayout android:id="@+id/tableLayout1" android:layout_height="wrap_content" android:stretchColumns="2" android:layout_width="match_parent" android:gravity="center_vertical|center_horizontal">
+        		<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow1" android:gravity="center_vertical|center_horizontal">
+        			<TextView android:text="Type de la partie" android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+        			<Spinner android:id="@+id/typePartie" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
+        		</TableRow>
+        		<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow2" android:gravity="center_vertical|center_horizontal">
+        			<TextView android:text="Nombre d'ennemis" android:id="@+id/textView3" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+        			<Spinner android:id="@+id/nbEnnemis" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
+        		</TableRow>
+        		<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow2" android:gravity="center_vertical|center_horizontal">
+        			<TextView android:text="Difficulté des ennemis" android:id="@+id/textView4" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+        			<Spinner android:id="@+id/difficulte" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
+        		</TableRow>
 
+            </TableLayout>
+        
+        </LinearLayout>
+        
+        
+        <RelativeLayout android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:id="@+id/relativeLayout2" android:layout_width="match_parent" android:background="@color/Grey">
+            <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Lancer" android:id="@+id/boutonLancer" android:layout_alignParentRight="true"></Button>
+            <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Retour" android:id="@+id/boutonRetour"></Button>
+        </RelativeLayout>    
+        
+    </RelativeLayout>
 
-    
-	
-	<TextView
-	android:id="@+id/nomMap"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"
-	android:text="nom de la map"
-	android:layout_gravity="center">
-	</TextView>
-	
-	<TextView 
-	android:layout_weight="1" 
-	android:layout_height="fill_parent"
-	android:layout_width="wrap_content"/>
- 
- 
-
-		<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:stretchColumns="2">
-			<TableRow android:baselineAligned="true">
-				<TextView
-				android:layout_gravity="left" 
-				android:padding="4dip"
-				android:text="Type Partie">
-				</TextView>
-				
-				<Spinner
-				 android:layout_gravity="right" 
-				 android:id="@+id/typePartie"
-				 android:layout_height="39px"
-				 android:layout_marginLeft="3px"
-				 android:entries="@array/typePartie">
-				 </Spinner>
-				 
-		 	</TableRow>
-				 
-			<TableRow>
-				<TextView
-				android:layout_gravity="left" 
-				android:padding="4dip"	
-				android:text="Nombre d'ennemis">
-				</TextView>
-				
-				<Spinner
-				android:layout_gravity="right"
-				android:id="@+id/nbEnnemis"
-				android:layout_height="39px"
-				android:layout_marginLeft="3px"
-				android:entries="@array/nbEnnemis">
-				</Spinner>
-		</TableRow>
-		
-		<TableRow>
-	 	
-				<TextView
-				android:layout_gravity="left"
-				android:padding="4dip" 
-				android:text="Difficulté des ennemis">
-				</TextView>
-				
-				<Spinner
-			 	android:id="@+id/difficulte"
-			 	android:layout_gravity="right"
-			 	android:layout_height="39px"
-			 	android:layout_marginLeft="3px"
-			 	android:entries="@array/difficulte" >
-			 	</Spinner>
-			 	
-		</TableRow>
-	</TableLayout>
-		
-	
-	<LinearLayout 
-		android:layout_width="fill_parent" 
-		android:layout_height="wrap_content" 
-		android:layout_gravity="bottom" 
-		android:paddingTop="55px" 
-		android:paddingBottom="5px" >	
-		
-		<Button 
-		android:id="@+id/boutonRetour"
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-		android:layout_gravity="left" 
-		android:text="Retour" 
-		android:textSize="10px" 
-		android:paddingLeft="13px" 
-		android:paddingTop="5px" 
-		android:paddingBottom="5px" 
-		android:paddingRight="13px" />
-		
-		
-		<TextView 
-		android:layout_weight="1" 
-		android:layout_height="fill_parent"
-		android:layout_width="wrap_content"/>
-	 
-		<Button 		
-		android:id="@+id/boutonLancer"			
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-		android:layout_gravity="right" 
-		android:text="Lancer" 
-		android:textSize="10px" 
-		android:paddingLeft="13px" 
-		android:paddingTop="5px" 
-		android:paddingBottom="5px" 
-		android:paddingRight="13px"/>
-	</LinearLayout>
-
-
-		
-		 
- 
-</LinearLayout>

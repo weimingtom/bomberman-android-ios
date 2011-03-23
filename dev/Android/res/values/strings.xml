@@ -50,6 +50,7 @@
     	<item>Orange</item>
     	<item>Noire</item>
     </string-array>
+     <color name="Grey">#616161</color>
     
     
 </resources>
