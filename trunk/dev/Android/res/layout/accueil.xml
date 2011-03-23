@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+        
+        <LinearLayout android:layout_width="match_parent"
+			android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center_horizontal" android:layout_centerInParent="true" android:background="@color/Grey">
+			<Button android:layout_width="wrap_content" android:paddingBottom="5px" android:layout_height="wrap_content" android:id="@+id/boutonSolo" android:text="Jouer Solo" android:textSize="10px" android:paddingTop="5px"></Button>
+			<Button android:layout_width="wrap_content" android:paddingBottom="5px" android:layout_height="wrap_content" android:id="@+id/buttonMulti" android:text="Jouer Multi" android:textSize="10px" android:paddingTop="5px"></Button>
+			<Button android:layout_width="wrap_content" android:paddingBottom="5px" android:layout_height="wrap_content" android:id="@+id/buttonOptions" android:text="Options" android:textSize="10px" android:paddingTop="5px"></Button>
+			<Button android:layout_width="wrap_content" android:paddingBottom="5px" android:layout_height="wrap_content" android:id="@+id/buttonStats" android:text="Statistiques" android:textSize="10px" android:paddingTop="5px"></Button>
+			<Button android:layout_width="wrap_content" android:paddingBottom="5px" android:layout_height="wrap_content" android:id="@+id/buttonCreerNiveaux" android:text="Création de niveaux" android:textSize="10px" android:paddingTop="5px"></Button>
+			<Button android:layout_width="wrap_content" android:paddingBottom="5px" android:layout_height="wrap_content" android:id="@+id/buttonAide" android:text="Aide" android:textSize="10px" android:paddingTop="5px"></Button>
+		</LinearLayout>
+        
+        <LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/linearLayout2" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:background="@color/Grey">
+	        <Spinner android:id="@+id/choixCompte" 
+	        	android:layout_gravity="center_horizontal"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+			/>
+	
+			<ImageButton android:id="@+id/ajoutCompte"
+				android:layout_width="wrap_content" style="@android:style/Widget.Button.Small"
+				android:background="@drawable/plus" android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical" android:layout_marginLeft="10px"
+			/>
+        </LinearLayout>
+        
+    </RelativeLayout>
