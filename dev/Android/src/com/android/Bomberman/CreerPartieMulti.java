@@ -34,6 +34,7 @@ public class CreerPartieMulti extends Activity implements View.OnClickListener {
 		R.drawable.m4
 	};
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -64,7 +65,8 @@ public class CreerPartieMulti extends Activity implements View.OnClickListener {
 		gallery.setAdapter(adapter);
 		
 		gallery.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
+            @Override
+			public void onItemClick(AdapterView parent, View v, int position, long id) {
             	ImageView img = new ImageView(getBaseContext());
 				
 				//redimmensionnement auto
@@ -73,32 +75,36 @@ public class CreerPartieMulti extends Activity implements View.OnClickListener {
 				
             	nomMap = gallery.getSelectedItem().toString();
             	map.setText(nomMap);
-//                Toast.makeText(CreerPartieSolo.this, "" + gallery.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+//              Toast.makeText(CreerPartieSolo.this, "" + gallery.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
             }
         });
-
 	}
 	
+	@Override
 	protected void onStop() {
 		Log.i("", "onStop ");
 		super.onStop();
 	}
 	
+	@Override
 	protected void onDestroy(){
 		Log.i("", "onDestroy ");
 		super.onDestroy();
 	}
 	
+	@Override
 	protected void onResume(){
 		Log.i("", "onResume ");
 		super.onResume();
 	}
 	
+	@Override
 	protected void onPause(){
 		Log.i("", "onPause ");
 		super.onPause();
 	}
 
+	@Override
 	public void onClick(View v) {
 		if (v == lancer) {
 			Toast.makeText(CreerPartieMulti.this, "Lancement partie multi",
@@ -125,16 +131,20 @@ public class CreerPartieMulti extends Activity implements View.OnClickListener {
 			array.recycle();
 		}
 		
+		@Override
 		public int getCount() {
 			return m_images.length;
 		}
+		@Override
 		public Object getItem(int position) {
 			return position;
 		}
+		@Override
 		public long getItemId(int position) {
 			return position;
 		}
 		
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 				ImageView img = new ImageView(m_context);
 				img.setImageResource(m_images[position]);

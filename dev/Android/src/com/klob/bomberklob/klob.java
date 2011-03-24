@@ -1,5 +1,7 @@
 package com.klob.bomberklob;
 
+import com.android.Bomberman.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 

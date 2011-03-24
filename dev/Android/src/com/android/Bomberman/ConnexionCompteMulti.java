@@ -14,6 +14,7 @@ public class ConnexionCompteMulti extends Activity implements View.OnClickListen
 	private Button connexion;
 	private Button inscription;
 	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
@@ -33,26 +34,31 @@ public class ConnexionCompteMulti extends Activity implements View.OnClickListen
 		inscription.setOnClickListener(this);
 	}
 	
+	@Override
 	protected void onStop() {
 		Log.i("", "onStop ");
 		super.onStop();
 	}
 	
+	@Override
 	protected void onDestroy(){
 		Log.i("", "onDestroy ");
 		super.onDestroy();
 	}
 	
+	@Override
 	protected void onResume(){
 		Log.i("", "onResume ");
 		super.onResume();
 	}
 	
+	@Override
 	protected void onPause(){
 		Log.i("", "onPause ");
 		super.onPause();
 	}
 	
+	@Override
 	public void onClick(View view) {
 		if(view == connexion){
 //			Toast.makeText(ConnexionCompteMulti.this, "Connexion au compte multi", Toast.LENGTH_SHORT).show();

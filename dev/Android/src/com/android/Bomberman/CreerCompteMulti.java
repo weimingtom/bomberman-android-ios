@@ -12,6 +12,7 @@ public class CreerCompteMulti  extends Activity implements View.OnClickListener{
 	
 	private Button valider;
 	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
@@ -26,27 +27,32 @@ public class CreerCompteMulti  extends Activity implements View.OnClickListener{
 		valider.setOnClickListener(this);
 	}
 	
+	@Override
 	protected void onStop() {
 		Log.i("", "onStop ");
 		super.onStop();
 	}
 	
+	@Override
 	protected void onDestroy(){
 		Log.i("", "onDestroy ");
 		super.onDestroy();
 	}
 	
+	@Override
 	protected void onResume(){
 		Log.i("", "onResume ");
 		super.onResume();
 	}
 	
+	@Override
 	protected void onPause(){
 		Log.i("", "onPause ");
 		super.onPause();
 	}
 	
 	
+	@Override
 	public void onClick(View view) {
 		if(view ==valider){
 //			Intent intent = new Intent(CreerCompteMulti.this, Accueil.class);

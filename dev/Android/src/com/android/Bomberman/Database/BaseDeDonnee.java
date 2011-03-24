@@ -4,13 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -18,8 +12,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.provider.Contacts;
 import android.util.Log;
 
 public class BaseDeDonnee extends SQLiteOpenHelper{
@@ -161,6 +153,7 @@ public class BaseDeDonnee extends SQLiteOpenHelper{
  
 	}
 	
+	@Override
 	public void onOpen(SQLiteDatabase db){
 		Log.i("", "Ouverture bd ");
 	}

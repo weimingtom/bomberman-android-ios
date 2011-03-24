@@ -1,6 +1,8 @@
 package com.android.Bomberman;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,45 +63,48 @@ public class CreerPartieSolo extends Activity implements View.OnClickListener{
 		// Pour la Gallery
 		
 		final Gallery gallery = (Gallery) findViewById(R.id.galleryz);
-		ImageAdapter adapter = new ImageAdapter(this, MAP);
-		gallery.setAdapter(adapter);
+		gallery.setAdapter(new ImageAdapter(this, MAP));
 		
 		gallery.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
+			public void onItemClick(AdapterView parent, View v, int position, long id) {
             	ImageView img = new ImageView(getBaseContext());
 				
-				//redimmensionnement auto
-				
+				// FIXME redimmensionnement auto
 				img.setLayoutParams(new Gallery.LayoutParams(235, 235));
 				
             	nomMap = gallery.getSelectedItem().toString();
             	map.setText(nomMap);
-//                Toast.makeText(CreerPartieSolo.this, "" + gallery.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+//              Toast.makeText(CreerPartieSolo.this, "" + gallery.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
             }
         });
 	}
 	
+	@Override
 	protected void onStop() {
 		Log.i("", "onStop ");
 		super.onStop();
 	}
 	
+	@Override
 	protected void onDestroy(){
-		Log.i("", "onDestroy ");
+		Log.i("", "onDestroy Solo");
 		super.onDestroy();
 	}
 	
+	@Override
 	protected void onResume(){
 		Log.i("", "onResume ");
 		super.onResume();
 	}
 	
+	@Override
 	protected void onPause(){
 		Log.i("", "onPause ");
 		super.onPause();
 	}
  
 	
+	@Override
 	public void onClick(View view) {
 		if(view == lancer){
 //			Intent intent = new Intent(CreerPartieSolo.this, LancerPartieSolo.class);
@@ -115,38 +120,43 @@ public class CreerPartieSolo extends Activity implements View.OnClickListener{
 					" ennemis, ca va être "+difficulte+" !", Toast.LENGTH_SHORT).show();
 		}
 		else if(view == retour){
-			finish();
+			Intent intent = new Intent(CreerPartieSolo.this, Bomberman.class);
+			startActivity(intent);
+			this.onDestroy();
 		}
 	}
 	
 	
 	
 	// Pour la selection de map
-	
 	public static class ImageAdapter extends BaseAdapter {
 		private int[] m_images;
 		private Context m_context;
 		private int m_itemBackground;
 		
 		public ImageAdapter(Context context, int[] images) {
-			m_context = context;
-			m_images=images;
+			this.m_context = context;
+			this.m_images=images;
 			TypedArray array = context.obtainStyledAttributes(R.styleable.Gallery);
-			m_itemBackground = array.getResourceId(
+			this.m_itemBackground = array.getResourceId(
 			R.styleable.Gallery_android_galleryItemBackground, 0);
 			array.recycle();
 		}
 		
+		@Override
 		public int getCount() {
-			return m_images.length;
+			return this.m_images.length;
 		}
+		@Override
 		public Object getItem(int position) {
 			return position;
 		}
+		@Override
 		public long getItemId(int position) {
 			return position;
 		}
 		
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 				ImageView img = new ImageView(m_context);
 				img.setImageResource(m_images[position]);
@@ -158,8 +168,6 @@ public class CreerPartieSolo extends Activity implements View.OnClickListener{
 				return img;
 		}
 	}
-
-
 }
 
 

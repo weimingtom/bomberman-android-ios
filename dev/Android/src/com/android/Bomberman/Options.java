@@ -33,27 +33,32 @@ public class Options extends Activity implements View.OnClickListener{
         retour.setOnClickListener(this);   
     }
     
-    protected void onStop() {
+    @Override
+	protected void onStop() {
 		Log.i("", "onStop ");
 		super.onStop();
 	}
 	
+	@Override
 	protected void onDestroy(){
 		Log.i("", "onDestroy ");
 		super.onDestroy();
 	}
 	
+	@Override
 	protected void onResume(){
 		Log.i("", "onResume ");
 		super.onResume();
 	}
 	
+	@Override
 	protected void onPause(){
 		Log.i("", "onPause ");
 		super.onPause();
 	}
     
-    public void onClick(View v) {
+    @Override
+	public void onClick(View v) {
 		if(v == gestionProfil){
 			Intent intent = new Intent(Options.this, GestionProfil.class);
 			startActivity(intent);

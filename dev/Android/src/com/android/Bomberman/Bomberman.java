@@ -67,9 +67,8 @@ public class Bomberman extends Activity implements View.OnClickListener{
 	 		throw sqle;
 	 
 	 	}
-        
-	 	
-        setContentView(R.layout.menu);
+
+        setContentView(R.layout.accueil);
         
         solo = (Button)findViewById(R.id.boutonSolo);
         solo.setOnClickListener(this);
@@ -102,28 +101,36 @@ public class Bomberman extends Activity implements View.OnClickListener{
 
     }
     
-    protected void onStop() {
+    @Override
+	protected void onStop() {
 		Log.i("", "onStop ");
 		super.onStop();
 	}
 	
+	@Override
 	protected void onDestroy(){
-		Log.i("", "onDestroy ");
+		Log.i("", "onDestroy Accueil");
 		super.onDestroy();
 	}
 	
+	@Override
 	protected void onResume(){
 		Log.i("", "onResume ");
 		super.onResume();
 	}
 	
+	@Override
 	protected void onPause(){
 		Log.i("", "onPause ");
 		super.onPause();
 	}     
 
 
+	@Override
 	public void onClick(View v) {
+		
+		Intent intent = null;
+		
 		if( v == choixCompte){
 			Toast.makeText(Bomberman.this, "New compte", Toast.LENGTH_SHORT).show();
 		}
@@ -133,32 +140,33 @@ public class Bomberman extends Activity implements View.OnClickListener{
 			 * de notre interface. Il suffit donc de créer un nouvel Intent pour démarrer
 			 * la seconde activité.
 			 */
-			Intent intent = new Intent(Bomberman.this, CreerPartieSolo.class);
+			intent = new Intent(Bomberman.this, CreerPartieSolo.class);
 			startActivity(intent);
+			this.onDestroy();
 		}
 		else if(v == multi){
 //			Toast.makeText(Bomberman.this, "Connexion au compte multi", Toast.LENGTH_SHORT).show();
-			Intent intentMulti = new Intent(Bomberman.this, ConnexionCompteMulti.class);
-			startActivity(intentMulti);
+			intent = new Intent(Bomberman.this, ConnexionCompteMulti.class);
+			startActivity(intent);
 		}
 		else if(v == options){
-			Intent intent = new Intent(this, Options.class);
+			intent = new Intent(this, Options.class);
 			startActivity(intent);
 		}
 		else if(v == ajoutCompte){
-			Intent intentMulti = new Intent(Bomberman.this, CreerCompteHorsLigne.class);
-			startActivity(intentMulti);
+			intent = new Intent(Bomberman.this, CreerCompteHorsLigne.class);
+			startActivity(intent);
 		}
 //		else if(v == stats){
-//			Intent intent = new Intent(this, Statistiques.class);
+//			intent = new Intent(this, Statistiques.class);
 //			startActivity(intent);
 //		}
 //		else if(v == creerNiveaux){
-//			Intent intent = new Intent(this, CreationNiveaux.class);
+//			intent = new Intent(this, CreationNiveaux.class);
 //			startActivity(intent);
 //		}
 //		else if(v == aide){
-//			Intent intent = new Intent(this, Aide.class);
+//			intent = new Intent(this, Aide.class);
 //			startActivity(intent);
 //		}
 
