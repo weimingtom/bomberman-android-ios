@@ -1,9 +1,9 @@
 package com.android.Bomberman;
 
 import java.io.IOException;
-import java.util.Calendar;
 
 import com.android.Bomberman.Database.BaseDeDonnee;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.SQLException;
@@ -14,7 +14,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class CreerCompteHorsLigne extends Activity implements View.OnClickListener{
@@ -23,6 +22,7 @@ public class CreerCompteHorsLigne extends Activity implements View.OnClickListen
 	private Button valider;
 
 	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
@@ -39,27 +39,32 @@ public class CreerCompteHorsLigne extends Activity implements View.OnClickListen
 		
 	}
 	
+	@Override
 	protected void onStop() {
 		Log.i("", "onStop ");
 		super.onStop();
 	}
 	
+	@Override
 	protected void onDestroy(){
 		Log.i("", "onDestroy ");
 		super.onDestroy();
 	}
 	
+	@Override
 	protected void onResume(){
 		Log.i("", "onResume ");
 		super.onResume();
 	}
 	
+	@Override
 	protected void onPause(){
 		Log.i("", "onPause ");
 		super.onPause();
 	}
 	
 	
+	@Override
 	public void onClick(View view) {
 		if(view ==valider){
 //			

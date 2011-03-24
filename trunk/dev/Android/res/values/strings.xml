@@ -51,6 +51,7 @@
     	<item>Noire</item>
     </string-array>
      <color name="Grey">#616161</color>
+     <string name="accueilPrompt">Veuillez choisir un compte</string>
     
     
 </resources>

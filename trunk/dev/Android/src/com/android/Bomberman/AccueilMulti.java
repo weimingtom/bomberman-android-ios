@@ -18,7 +18,8 @@ public class AccueilMulti extends Activity implements View.OnClickListener{
 	
 	private ImageButton rafraichir;
 	
-	 public void onCreate(Bundle savedInstanceState) {
+	 @Override
+	public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        
 	        // plein ecran, à remettre dans chaque onCreate
@@ -39,26 +40,31 @@ public class AccueilMulti extends Activity implements View.OnClickListener{
 	        
 	 }
 	 
-	 protected void onStop() {
+	 @Override
+	protected void onStop() {
 			Log.i("", "onStop ");
 			super.onStop();
 		}
 		
+		@Override
 		protected void onDestroy(){
 			Log.i("", "onDestroy ");
 			super.onDestroy();
 		}
 		
+		@Override
 		protected void onResume(){
 			Log.i("", "onResume ");
 			super.onResume();
 		}
 		
+		@Override
 		protected void onPause(){
 			Log.i("", "onPause ");
 			super.onPause();
 		}
 
+		@Override
 		public void onClick(View v) {
 			if(v == rafraichir){
 				Toast.makeText(AccueilMulti.this, "Rafraichissement des parties", Toast.LENGTH_SHORT).show();

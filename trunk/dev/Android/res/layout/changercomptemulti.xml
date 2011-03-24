@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
     
-    	<LinearLayout  android:layout_height="wrap_content" android:layout_gravity="center_horizontal"  android:layout_marginTop="50px" android:orientation="vertical" android:gravity="center_vertical|center_horizontal" android:layout_width="match_parent" android:background="@color/Grey">
+    	<LinearLayout  android:layout_height="wrap_content" android:layout_gravity="center_horizontal"  android:layout_marginTop="50px" android:orientation="vertical" android:gravity="center_vertical|center_horizontal" android:background="@color/Grey" android:layout_width="wrap_content" android:layout_centerInParent="true">
 			
 			<TextView android:id="@+id/editText2" android:text="Erreur"
 					android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
 				</TableRow>
 				<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow2" android:baselineAligned="true" android:layout_marginTop="10px">
 					<TextView android:id="@+id/textView1" android:layout_height="wrap_content" android:text="mot de passe" android:layout_gravity="center_vertical" android:paddingLeft="20px" android:layout_width="wrap_content"></TextView>
-					<EditText android:password="true" android:text="" and android:id="@+id/editText4" android:layout_width="150dip" android:layout_height="40dip"></EditText>
+					<EditText android:password="true" android:id="@+id/editText4" android:layout_width="150dip" android:layout_height="40dip"></EditText>
 				</TableRow>
 			</TableLayout>
 		</LinearLayout>

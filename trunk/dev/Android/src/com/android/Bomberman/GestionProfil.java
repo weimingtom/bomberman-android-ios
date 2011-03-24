@@ -37,27 +37,32 @@ public class GestionProfil extends Activity implements View.OnClickListener{
         annuler.setOnClickListener(this);   
     }
     
-    protected void onStop() {
+    @Override
+	protected void onStop() {
 		Log.i("", "onStop ");
 		super.onStop();
 	}
 	
+	@Override
 	protected void onDestroy(){
 		Log.i("", "onDestroy ");
 		super.onDestroy();
 	}
 	
+	@Override
 	protected void onResume(){
 		Log.i("", "onResume ");
 		super.onResume();
 	}
 	
+	@Override
 	protected void onPause(){
 		Log.i("", "onPause ");
 		super.onPause();
 	}
     
-    public void onClick(View v) {
+    @Override
+	public void onClick(View v) {
 		if(v == changerCompte){
 			Intent intent = new Intent(GestionProfil.this, ChangerCompteMulti.class);
 			startActivity(intent);
