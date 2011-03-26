@@ -15,11 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class CreateAccountOffline extends Activity implements View.OnClickListener{
+public class NewAccountOffline extends Activity implements View.OnClickListener{
 
 	private Model model;
 	
 	private EditText pseudo;
+	private Button cancel;
 	private Button validate;
 
 	
@@ -30,7 +31,7 @@ public class CreateAccountOffline extends Activity implements View.OnClickListen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         
-        setContentView(R.layout.createaccountoffline);
+        setContentView(R.layout.newaccountoffline);
         
         try {
 			this.model = Model.getInstance(this);
@@ -38,56 +39,70 @@ public class CreateAccountOffline extends Activity implements View.OnClickListen
 			e.printStackTrace();
 		}
         
-		this.pseudo = (EditText) findViewById(R.id.CreateAccountOfflineEditText);
-        
-		this.validate = (Button)findViewById(R.id.CreateAccountOfflineButton);
+		this.pseudo = (EditText) findViewById(R.id.NewAccountOfflineEditText);
+		this.cancel   = (Button) findViewById(R.id.NewAccountOfflineButtonCancel);
+		this.validate = (Button) findViewById(R.id.NewAccountOfflineButtonOk);
+		
 		this.validate.setOnClickListener(this);
+		this.cancel.setOnClickListener(this);
 	}
 	
 	@Override
 	protected void onStop() {
-		Log.i("CreateAccountOffline", "onStop");
+		Log.i("NewAccountOffline", "onStop");
 		super.onStop();
 	}
 	
 	@Override
 	protected void onDestroy(){
-		Log.i("CreateAccountOffline", "onDestroy");
+		Log.i("NewAccountOffline", "onDestroy");
 		super.onDestroy();
 	}
 	
 	@Override
 	protected void onResume(){
-		Log.i("CreateAccountOffline", "onResume");
+		Log.i("NewAccountOffline", "onResume");
 		super.onResume();
 	}
 	
 	@Override
 	protected void onPause(){
-		Log.i("CreateAccountOffline", "onPause");
+		Log.i("NewAccountOffline", "onPause");
 		super.onPause();
 	}
 	
 	
 	@Override
 	public void onClick(View view) {
+		
+		Intent intent = null;
 
-		if(validate == view) {
+		if(this.validate == view) {
 			String pseudo = this.pseudo.getText().toString();
 			
 			if ( !pseudo.equals("") ) { // FIXME Rajouter une taille min ?
 				pseudo = pseudo.toLowerCase();
-				this.model.getSystem().getDatabase().newAccount(pseudo);
-				this.model.getSystem().getDatabase().SetLastUser(pseudo);
-				this.model.getSystem().setLastUser();
-				this.model.setUser(pseudo);
-				Intent intent = new Intent(CreateAccountOffline.this, Home.class);
-				startActivity(intent);
-				this.finish();
+				if ( this.model.getSystem().getDatabase().existingAccount(pseudo)) {
+					this.model.getSystem().getDatabase().newAccount(pseudo);
+					this.model.getSystem().getDatabase().SetLastUser(pseudo);
+					this.model.getSystem().setLastUser();
+					this.model.setUser(pseudo);
+					intent = new Intent(NewAccountOffline.this, Home.class);
+					startActivity(intent);
+					this.finish();
+				}
+				else {
+					Toast.makeText(NewAccountOffline.this, "Username already exists", Toast.LENGTH_SHORT).show();
+				}
 			}
 			else {
-				Toast.makeText(CreateAccountOffline.this, "Invalid Username", Toast.LENGTH_SHORT).show();
+				Toast.makeText(NewAccountOffline.this, "Invalid Username", Toast.LENGTH_SHORT).show();
 			}
+		}
+		else if (this.cancel == view) {
+			intent = new Intent(NewAccountOffline.this, Home.class);
+			startActivity(intent);
+			this.finish();			
 		}
 	}
 }

@@ -2,27 +2,19 @@
 <resources>
     <string name="app_name">Bomberman</string>
     
-    <string-array name="typePartie">
-    	<item>Vulcan</item>
-    	<item>Labyrinth</item>
-    	<item>Shivas</item>
-    	<item>Speedy</item>
-    	<item>Mocka</item>
-    	<item>Tiberium</item>
-    	<item>The Wall</item>
-    	<item>Green Planet</item>
+    <string-array name="gameType">
+    	<item>FreeForAll</item>
     </string-array>
     
-    <string-array name="nbEnnemis">
+    <string-array name="enemiesNumber">
     	<item>1</item>
     	<item>2</item>
     	<item>3</item>
-    	<item>4</item>
     </string-array>
     
-    <string-array name="difficulte">
-    	<item>normale</item>
+    <string-array name="difficulty">
     	<item>facile</item>
+    	<item>moyen</item>
     	<item>difficile</item>
     </string-array>
     

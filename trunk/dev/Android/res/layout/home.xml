@@ -2,7 +2,7 @@
     <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
         
         <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center_horizontal" android:layout_centerInParent="true" android:background="@color/Grey" android:layout_width="wrap_content">
-			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/boutonSolo" android:text="Jouer Solo"></Button>
+			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Jouer Solo" android:id="@+id/boutonSolo"></Button>
 			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonMulti" android:text="Jouer Multi"></Button>
 			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonOptions" android:text="Options"></Button>
 			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonStats" android:text="Statistiques"></Button>

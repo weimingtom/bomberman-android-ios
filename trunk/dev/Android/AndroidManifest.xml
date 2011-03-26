@@ -14,6 +14,8 @@
 		</activity>
 		<activity android:name="CreateAccountOffline" android:screenOrientation="portrait"></activity>
 		<activity android:name="Home" android:screenOrientation="portrait"></activity>
+		<activity android:name="NewAccountOffline" android:screenOrientation="portrait"></activity>
+		<activity android:name="SinglePlayerGame" android:screenOrientation="portrait"></activity>
 
 	</application>
 </manifest>
