@@ -52,6 +52,7 @@
     </string-array>
      <color name="Grey">#616161</color>
      <string name="accueilPrompt">Veuillez choisir un compte</string>
+     <color name="Red">#e51d1d</color>
     
     
 </resources>
