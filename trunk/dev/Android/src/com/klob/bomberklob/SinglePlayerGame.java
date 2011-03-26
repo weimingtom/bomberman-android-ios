@@ -1,6 +1,9 @@
 package com.klob.bomberklob;
 
 import java.io.File;
+import java.io.IOException;
+
+import com.klob.bomberklob.model.Model;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,10 +28,13 @@ import android.widget.Toast;
 
 
 public class SinglePlayerGame extends Activity implements View.OnClickListener{
+
+	private Model model;
 	
 	private Button cancel;
 	private Button lancer;
 	private Gallery gallery;
+	private TextView mapName;
 	
 	private Spinner typePartieSP, nbEnnemisSP, difficulteSP;
 	
@@ -40,18 +46,23 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 		R.drawable.m4
 	};
 	
-	private String[] mapName;
+	private String[] mapsName;
 
  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-        // plein ecran, à remettre dans chaque onCreate
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         
         setContentView(R.layout.singleplayergame);
+        
+        try {
+			this.model = Model.getInstance(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         
         cancel = (Button)findViewById(R.id.SinglePlayerGameButtonCancel);
 		cancel.setOnClickListener(this);
@@ -62,20 +73,19 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 		typePartieSP = (Spinner) findViewById(R.id.typePartie);
 		nbEnnemisSP  = (Spinner) findViewById(R.id.nbEnnemis);
 		difficulteSP = (Spinner) findViewById(R.id.difficulte);
-		
-		getMap();
 			
-		final TextView map = (TextView) findViewById(R.id.nomMap);
+		mapName = (TextView) findViewById(R.id.nomMap);
+
+		getMap();
 		
 		// Pour la Gallery
-		
 		gallery = (Gallery) findViewById(R.id.galleryz);
 		gallery.setAdapter(new ImageAdapter(this, this.mapBitmap));
 		
 		gallery.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            	map.setText(mapBitmap[position]);
+            	mapName.setText(mapBitmap[position]);
             }
         });
 	}
@@ -143,12 +153,12 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 			tabMaps = new int[maps.length];
 			
 			for (int i = 0 ; i < tabMaps.length ; i++ ) {
-				this.mapName[i] = TextUtils.split(maps[i].getName(), ".")[0];
+				this.mapsName[i] = TextUtils.split(maps[i].getName(), ".")[0];
 				//FIXME une fois le nom de la map récupérée comment trouver le bitmap associé ...
 			}
 		}
 		else {
-			Toast.makeText(SinglePlayerGame.this, "Maps directory missing", Toast.LENGTH_SHORT).show();
+			Toast.makeText(SinglePlayerGame.this, R.string.SinglePlayerGameErrorLoadingMap, Toast.LENGTH_SHORT).show();
 		}
 		
 		return tabMaps;

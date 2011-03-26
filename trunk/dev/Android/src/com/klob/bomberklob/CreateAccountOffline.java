@@ -78,7 +78,7 @@ public class CreateAccountOffline extends Activity implements View.OnClickListen
 			if ( !pseudo.equals("") ) { // FIXME Rajouter une taille min ?
 				pseudo = pseudo.toLowerCase();
 				this.model.getSystem().getDatabase().newAccount(pseudo);
-				this.model.getSystem().getDatabase().SetLastUser(pseudo);
+				this.model.getSystem().getDatabase().setLastUser(pseudo);
 				this.model.getSystem().setLastUser();
 				this.model.setUser(pseudo);
 				Intent intent = new Intent(CreateAccountOffline.this, Home.class);
