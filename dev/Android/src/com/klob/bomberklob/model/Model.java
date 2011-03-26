@@ -30,6 +30,9 @@ public class Model {
 		
 		private System(Context context) throws IOException {
 			this.database = new Database(context);
+			this.lastUser = this.database.getLastUser();
+			this.language = this.database.getLanguage();
+			this.volume = this.database.getVolume();
 		}	
 		
 		/* Getteurs -------------------------------------------------------- */

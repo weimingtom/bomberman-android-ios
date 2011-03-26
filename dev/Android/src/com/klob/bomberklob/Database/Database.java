@@ -42,6 +42,40 @@ public class Database extends SQLiteOpenHelper{
 		return res;
 	}
 	
+	public String getLanguage() {
+		
+		String res = null;
+		this.base = this.getReadableDatabase();
+		
+		String[] colonnes={"language"};
+		Cursor cursor = base.query("System", colonnes, null, null, null, null, null);
+		if (cursor.moveToFirst()) {
+			res = cursor.getString(0);
+		}
+
+		cursor.close();
+		this.close();
+		
+		return res;
+	}
+	
+	public int getVolume() {
+		
+		int res = 50;
+		this.base = this.getReadableDatabase();
+		
+		String[] colonnes={"volume"};
+		Cursor cursor = base.query("System", colonnes, null, null, null, null, null);
+		if (cursor.moveToFirst()) {
+			res = cursor.getInt(0);
+		}
+
+		cursor.close();
+		this.close();
+		
+		return res;
+	}
+	
 	public User getUser(String pseudonymAccount) {
 		
 		User user = null;
@@ -84,6 +118,30 @@ public class Database extends SQLiteOpenHelper{
 		if (cursor.moveToFirst()) {
 			ContentValues entree = new ContentValues();
 			entree.put("lastUser", cursor.getInt(0));
+			this.base.update("System", entree, null, null);
+		}
+		cursor.close();
+		this.close();
+	}
+	
+	public void setVolume(int volume) {
+		this.base = this.getReadableDatabase();
+		Cursor cursor = this.base.rawQuery("SELECT volume FROM System", null);
+		if (cursor.moveToFirst()) {
+			ContentValues entree = new ContentValues();
+			entree.put("volume", volume);
+			this.base.update("System", entree, null, null);
+		}
+		cursor.close();
+		this.close();
+	}
+	
+	public void setLanguage(String language) {
+		this.base = this.getReadableDatabase();
+		Cursor cursor = this.base.rawQuery("SELECT language FROM System", null);
+		if (cursor.moveToFirst()) {
+			ContentValues entree = new ContentValues();
+			entree.put("language", language);
 			this.base.update("System", entree, null, null);
 		}
 		cursor.close();
