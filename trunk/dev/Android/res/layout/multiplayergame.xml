@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+        <LinearLayout android:layout_width="match_parent" android:orientation="vertical" android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_centerInParent="true" android:gravity="center_vertical|center_horizontal">
+            
+            <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout2" android:gravity="center_vertical">
+                <TextView android:text="" android:layout_width="wrap_content" android:id="@+id/MultiPlayerGameUserName" android:layout_height="wrap_content"></TextView>
+                <Button android:layout_alignParentRight="true" android:text="Nouveau Compte" android:layout_width="wrap_content" android:id="@+id/MultiPlayerGameNewAccount" android:layout_height="40dip"></Button>
+            </RelativeLayout>
+            
+            <TableLayout android:id="@+id/tableLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:gravity="center_vertical|center_horizontal">
+                <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow1" android:gravity="center_vertical|center_horizontal">
+                    <TextView android:layout_gravity="center_vertical" android:text="Nom utilisateur  " android:layout_height="wrap_content" android:id="@+id/textView1" android:layout_width="wrap_content"></TextView>
+                    <EditText android:layout_height="40px" android:layout_width="100px" android:id="@+id/editText3" android:text=""></EditText>
+                </TableRow>
+                <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow2" android:gravity="center_vertical|center_horizontal">
+                    <TextView android:layout_gravity="center_vertical" android:text="mot de passe" android:layout_height="wrap_content" android:id="@+id/textView1" android:layout_width="wrap_content"></TextView>
+                    <EditText android:layout_height="40px" android:layout_width="100px" android:id="@+id/editText4" android:text="" android:password="true" ></EditText>
+                </TableRow>
+            </TableLayout>
+            <CheckBox android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Connexion auto" android:id="@+id/checkBox1"></CheckBox>
+            <CheckBox android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Mémoriser mot de passe" android:id="@+id/checkBox2"></CheckBox>
+            
+        </LinearLayout>
+        
+		<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:id="@+id/relativeLayout3">
+			<Button android:layout_height="wrap_content" android:text="Annuler"   android:id="@+id/boutonAnnuler"  android:layout_width="wrap_content"  android:layout_alignParentLeft="true"></Button>
+			<Button android:layout_height="wrap_content" android:text="Connexion" android:id="@+id/boutonConnexion" android:layout_width="wrap_content" android:layout_alignParentRight="true"></Button>
+		</RelativeLayout>
+    
+    </RelativeLayout>
+

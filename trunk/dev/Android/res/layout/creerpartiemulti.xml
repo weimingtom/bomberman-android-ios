@@ -31,11 +31,7 @@
 				android:layout_width="wrap_content" />
 
 
-	<Gallery android:id="@+id/galleryz" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:gravity="bottom" />
-
-
-
+	 <Gallery android:gravity="bottom" android:layout_height="wrap_content" android:id="@+id/galleryz" android:layout_width="fill_parent"></Gallery>
 
 	<TextView android:id="@+id/nomMap" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:text="nom de la map"
