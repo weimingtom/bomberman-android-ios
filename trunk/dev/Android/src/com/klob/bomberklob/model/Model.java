@@ -15,7 +15,8 @@ public class Model {
 	private User user;
 
 	private Model (Context context) throws IOException {
-		system = new System(context);
+		this.system = new System(context);
+		this.user = this.system.getDatabase().getUser(this.system.getDatabase().getLastUser());
 	}
 	
 	/* Classes privées ----------------------------------------------------- */
@@ -91,9 +92,7 @@ public class Model {
 
 	public static Model getInstance(Context context) throws IOException {
 		if (null == model) {
-			if (null == model) {
-				model = new Model(context);
-			}
+			model = new Model(context);
 		}
 		return model;
 	}
