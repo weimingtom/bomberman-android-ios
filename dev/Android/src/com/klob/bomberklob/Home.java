@@ -74,7 +74,7 @@ public class Home extends Activity implements View.OnClickListener{
 
             @Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            	model.getSystem().getDatabase().SetLastUser(accounts.getSelectedItem().toString());
+            	model.getSystem().getDatabase().setLastUser(accounts.getSelectedItem().toString());
             	model.setUser(accounts.getSelectedItem().toString());
             }
 

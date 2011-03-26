@@ -10,21 +10,21 @@
             <TableLayout android:id="@+id/tableLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:gravity="center_vertical|center_horizontal">
                 <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow1" android:gravity="center_vertical|center_horizontal">
                     <TextView android:layout_gravity="center_vertical" android:text="Nom utilisateur  " android:layout_height="wrap_content" android:id="@+id/textView1" android:layout_width="wrap_content"></TextView>
-                    <EditText android:layout_height="40px" android:layout_width="100px" android:id="@+id/editText3" android:text=""></EditText>
+                    <EditText android:layout_height="40px" android:layout_width="100px" android:text="" android:id="@+id/MultiPlayerGameEditTextName"></EditText>
                 </TableRow>
                 <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow2" android:gravity="center_vertical|center_horizontal">
                     <TextView android:layout_gravity="center_vertical" android:text="mot de passe" android:layout_height="wrap_content" android:id="@+id/textView1" android:layout_width="wrap_content"></TextView>
-                    <EditText android:layout_height="40px" android:layout_width="100px" android:id="@+id/editText4" android:text="" android:password="true" ></EditText>
+                    <EditText android:layout_height="40px" android:layout_width="100px" android:text="" android:password="true" android:id="@+id/MultiPlayerGameEditTextPassword"></EditText>
                 </TableRow>
             </TableLayout>
-            <CheckBox android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Connexion auto" android:id="@+id/checkBox1"></CheckBox>
-            <CheckBox android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Mémoriser mot de passe" android:id="@+id/checkBox2"></CheckBox>
+            <CheckBox android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Connexion auto" android:id="@+id/MultiPlayerGameCheckBoxConnection"></CheckBox>
+            <CheckBox android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Mémoriser mot de passe" android:id="@+id/MultiPlayerGameCheckBoxPassword"></CheckBox>
             
         </LinearLayout>
         
 		<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:id="@+id/relativeLayout3">
-			<Button android:layout_height="wrap_content" android:text="Annuler"   android:id="@+id/boutonAnnuler"  android:layout_width="wrap_content"  android:layout_alignParentLeft="true"></Button>
-			<Button android:layout_height="wrap_content" android:text="Connexion" android:id="@+id/boutonConnexion" android:layout_width="wrap_content" android:layout_alignParentRight="true"></Button>
+			<Button android:layout_height="wrap_content" android:text="Annuler"   android:layout_width="wrap_content"  android:layout_alignParentLeft="true" android:id="@+id/MultiPlayerGameButtonCancel"></Button>
+			<Button android:layout_height="wrap_content" android:text="Connexion" android:layout_width="wrap_content" android:layout_alignParentRight="true" android:id="@+id/MultiPlayerGameButtonConnection"></Button>
 		</RelativeLayout>
     
     </RelativeLayout>

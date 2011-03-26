@@ -84,7 +84,7 @@ public class NewAccountOffline extends Activity implements View.OnClickListener{
 				pseudo = pseudo.toLowerCase();
 				if ( this.model.getSystem().getDatabase().existingAccount(pseudo)) {
 					this.model.getSystem().getDatabase().newAccount(pseudo);
-					this.model.getSystem().getDatabase().SetLastUser(pseudo);
+					this.model.getSystem().getDatabase().setLastUser(pseudo);
 					this.model.getSystem().setLastUser();
 					this.model.setUser(pseudo);
 					intent = new Intent(NewAccountOffline.this, Home.class);
