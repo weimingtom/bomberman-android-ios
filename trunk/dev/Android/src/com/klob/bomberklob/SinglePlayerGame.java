@@ -32,13 +32,15 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 	
 	private Spinner typePartieSP, nbEnnemisSP, difficulteSP;
 	
-	// FIXME à changer
-	private final static int[] MAP = { 
+	// FIXME à changer créer un tableau pour les images et un pour les noms !
+	private int[] mapBitmap = { 
 		R.drawable.m1,
 		R.drawable.m2,
 		R.drawable.m3,
 		R.drawable.m4
 	};
+	
+	private String[] mapName;
 
  
 	@Override
@@ -68,12 +70,12 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 		// Pour la Gallery
 		
 		gallery = (Gallery) findViewById(R.id.galleryz);
-		gallery.setAdapter(new ImageAdapter(this, MAP));
+		gallery.setAdapter(new ImageAdapter(this, this.mapBitmap));
 		
 		gallery.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            	map.setText(gallery.getSelectedItem().toString());
+            	map.setText(mapBitmap[position]);
             }
         });
 	}
@@ -141,8 +143,7 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 			tabMaps = new int[maps.length];
 			
 			for (int i = 0 ; i < tabMaps.length ; i++ ) {
-				String mapString = maps[i].getName() ;
-				mapString = TextUtils.split(mapString, ".")[0];
+				this.mapName[i] = TextUtils.split(maps[i].getName(), ".")[0];
 				//FIXME une fois le nom de la map récupérée comment trouver le bitmap associé ...
 			}
 		}
