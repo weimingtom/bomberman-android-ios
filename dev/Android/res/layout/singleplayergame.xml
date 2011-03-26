@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+        
+        <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:gravity="center_vertical|center_horizontal" android:layout_centerInParent="true" android:background="@color/Grey">
+            <Gallery android:gravity="bottom" android:layout_height="wrap_content" android:id="@+id/galleryz" android:layout_width="fill_parent"></Gallery>
+            <TextView android:layout_height="wrap_content" android:id="@+id/nomMap" android:layout_width="wrap_content" android:text=""></TextView>
+        
+        	<TableLayout android:id="@+id/tableLayout1" android:layout_height="wrap_content" android:stretchColumns="2" android:layout_width="match_parent" android:gravity="center_vertical|center_horizontal">
+        		<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow1" android:gravity="center_vertical|center_horizontal">
+        			<TextView android:text="Type de la partie" android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+        			<Spinner android:entries="@array/gameType" android:id="@+id/typePartie" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
+        		</TableRow>
+        		<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow2" android:gravity="center_vertical|center_horizontal">
+        			<TextView android:text="Nombre d'ennemis" android:id="@+id/textView3" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+        			<Spinner android:entries="@array/enemiesNumber" android:id="@+id/nbEnnemis" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
+        		</TableRow>
+        		<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow2" android:gravity="center_vertical|center_horizontal">
+        			<TextView android:text="Difficulté des ennemis" android:id="@+id/textView4" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+        			<Spinner android:entries="@array/difficulty" android:id="@+id/difficulte" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
+        		</TableRow>
+
+            </TableLayout>
+        
+        </LinearLayout>
+        
+        
+        <RelativeLayout android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:id="@+id/relativeLayout2" android:layout_width="match_parent" android:background="@color/Grey">
+            <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Demarrer" android:layout_alignParentRight="true" android:id="@+id/SinglePlayerGameButtonGo"></Button>
+            <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Retour" android:id="@+id/SinglePlayerGameButtonCancel"></Button>
+        </RelativeLayout>    
+        
+    </RelativeLayout>
+

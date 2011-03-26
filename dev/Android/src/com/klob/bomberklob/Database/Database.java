@@ -129,9 +129,10 @@ public class Database extends SQLiteOpenHelper{
 	public boolean existingAccount(String pseudonymAccount) {
 		this.base = this.getReadableDatabase();
 		int res = base.rawQuery("SELECT pseudo FROM UserAccounts WHERE pseudo ='"+pseudonymAccount+"' ", null).getCount();
+		System.out.println("RES " + res);
 		this.close(); // On ferme la BDD avec la fonction sécurisée prévue pour.
 		
-		return res == 0 ? false : true;
+		return res == 0 ? true : false;
 	}
 	
     @Override
