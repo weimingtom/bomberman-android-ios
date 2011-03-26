@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -25,7 +24,7 @@ public class Home extends Activity implements View.OnClickListener{
 	private Model model;
 	
 	private Button singlePlayer;
-	private Button multi;
+	private Button multiPlayer;
 	private Button options;
 	private Button stats;
 	private Button createLevel;
@@ -53,14 +52,14 @@ public class Home extends Activity implements View.OnClickListener{
 		}
         
 		this.singlePlayer = (Button)findViewById(R.id.boutonSolo);        
-		this.multi = (Button)findViewById(R.id.buttonMulti);
+		this.multiPlayer = (Button)findViewById(R.id.buttonMulti);
 		this.options = (Button)findViewById(R.id.buttonOptions);
 		this.stats = (Button)findViewById(R.id.buttonStats);
 		this.createLevel = (Button)findViewById(R.id.buttonCreerNiveaux);
 		this.help = (Button)findViewById(R.id.buttonAide);
         
 		this.singlePlayer.setOnClickListener(this);
-		this.multi.setOnClickListener(this);
+		this.multiPlayer.setOnClickListener(this);
 		this.options.setOnClickListener(this);
 		this.stats.setOnClickListener(this);       
 		this.createLevel.setOnClickListener(this);
@@ -125,6 +124,9 @@ public class Home extends Activity implements View.OnClickListener{
 		}
 		else if ( this.singlePlayer == v ) {
 			intent = new Intent(Home.this, SinglePlayerGame.class);
+		}
+		else if ( this.multiPlayer == v ) {
+			intent = new Intent(Home.this, MultiPlayerGame.class);
 		}
 		
 		if ( null != intent) {
