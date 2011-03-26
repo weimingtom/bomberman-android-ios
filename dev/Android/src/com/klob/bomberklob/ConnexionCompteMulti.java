@@ -70,7 +70,7 @@ public class ConnexionCompteMulti extends Activity implements View.OnClickListen
 
 		}
 		else if(view == inscription){
-			Intent intent = new Intent(ConnexionCompteMulti.this, CreerCompteMulti.class);
+			Intent intent = new Intent(ConnexionCompteMulti.this, NewAccountOnLine.class);
 			startActivity(intent);
 		}
 		else if(view == annuler){

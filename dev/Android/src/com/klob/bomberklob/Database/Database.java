@@ -59,6 +59,23 @@ public class Database extends SQLiteOpenHelper{
 		return user;
 	}
 	
+	public User getUser(int id) {
+		
+		User user = null;
+		this.base = this.getReadableDatabase();
+		Cursor cursor = this.base.rawQuery("SELECT * FROM UserAccounts WHERE id ='"+id+"' ", null);
+		if (cursor.moveToFirst()) {
+			System.out.println(cursor.getString(1)+" "+cursor.getString(2)+" "+cursor.getString(3)+" "+cursor.getInt(4)+" "+cursor.getInt(5)+" "+cursor.getString(6)+" "+cursor.getString(7)+" "+cursor.getInt(8)+" "+cursor.getInt(9));
+			user = new User(cursor.getString(1), cursor.getString(2), cursor.getString(3), (cursor.getInt(4) == 0 ? false : true), (cursor.getInt(5) == 0 ? false : true), cursor.getString(6), cursor.getString(7), cursor.getInt(8), cursor.getInt(9));
+		}
+		cursor.close();
+		this.close();
+		
+		// FIXME Si user null lever exception ?
+		
+		return user;
+	}
+	
     /* Setteurs ------------------------------------------------------------ */
 	
 	public void setLastUser(String pseudonymAccount) {

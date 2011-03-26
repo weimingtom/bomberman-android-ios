@@ -73,15 +73,7 @@ public class AccueilMulti extends Activity implements View.OnClickListener{
 
 			}
 			else if (v == creerPartie) {
-				/*
-				 * Nous sommes maintenant sûr que la vue ayant été cliquée est le bouton
-				 * de notre interface. Il suffit donc de créer un nouvel Intent pour démarrer
-				 * la seconde activité.
-				 */
-//				Toast.makeText(AccueilMulti.this, "Creation partie multi", Toast.LENGTH_SHORT).show();
 
-				Intent intent = new Intent(AccueilMulti.this, CreerPartieMulti.class);
-				startActivity(intent);
 			}
 			else if(v == retour){
 				finish();

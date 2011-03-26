@@ -85,8 +85,7 @@ public class Home extends Activity implements View.OnClickListener{
         });
         
         this.addAccount = (ImageButton) findViewById(R.id.addAccount);
-        this.addAccount.setOnClickListener(this);         
-
+        this.addAccount.setOnClickListener(this);   
     }
     
     @Override
@@ -133,48 +132,5 @@ public class Home extends Activity implements View.OnClickListener{
 			startActivity(intent);
 			this.finish();
 		}
-
-/*		
-		Intent intent = null;
-		
-		if( v == choixCompte){
-			Toast.makeText(Home.this, "New compte", Toast.LENGTH_SHORT).show();
-		}
-		else if (v == solo) {
-			/*
-			 * Nous sommes maintenant sûr que la vue ayant été cliquée est le bouton
-			 * de notre interface. Il suffit donc de créer un nouvel Intent pour démarrer
-			 * la seconde activité.
-			 
-			intent = new Intent(this, CreerPartieSolo.class);
-			startActivity(intent);
-//			this.onDestroy();
-		}
-		else if(v == multi){
-//			Toast.makeText(Bomberman.this, "Connexion au compte multi", Toast.LENGTH_SHORT).show();
-			intent = new Intent(this, ConnexionCompteMulti.class);
-			startActivity(intent);
-		}
-		else if(v == options){
-			intent = new Intent(this, Options.class);
-			startActivity(intent);
-		}
-		else if(v == ajoutCompte){
-			intent = new Intent(this, CreateAccountOffline.class);
-			startActivity(intent);
-		}
-//		else if(v == stats){
-//			intent = new Intent(this, Statistiques.class);
-//			startActivity(intent);
-//		}
-//		else if(v == creerNiveaux){
-//			intent = new Intent(this, CreationNiveaux.class);
-//			startActivity(intent);
-//		}
-//		else if(v == aide){
-//			intent = new Intent(this, Aide.class);
-//			startActivity(intent);
-//		}*/
-
 	}
 }
