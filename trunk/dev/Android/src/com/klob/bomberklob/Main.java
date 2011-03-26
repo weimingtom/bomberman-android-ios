@@ -32,7 +32,7 @@ public class Main extends Activity {
 
 		Intent intent;
 		
-		if ( this.model.getSystem().getDatabase().getLastUser() == -1 ) {
+		if ( this.model.getSystem().getLastUser() == -1 ) {
 			intent = new Intent(Main.this, CreateAccountOffline.class);
 		}
 		else {

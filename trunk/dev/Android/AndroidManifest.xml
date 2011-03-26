@@ -18,6 +18,8 @@
 		<activity android:name="SinglePlayerGame" android:screenOrientation="portrait"></activity>
 		<activity android:name="MultiPlayerGame" android:screenOrientation="portrait"></activity>
 		<activity android:name="NewAccountOnLine" android:screenOrientation="portrait"></activity>
+		<activity android:name="Options" android:screenOrientation="portrait"></activity>
+		<activity android:name="ProfilManagement" android:screenOrientation="portrait"></activity>
 
 	</application>
 </manifest>

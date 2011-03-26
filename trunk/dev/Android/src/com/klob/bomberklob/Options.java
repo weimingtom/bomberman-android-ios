@@ -1,6 +1,6 @@
 package com.klob.bomberklob;
 
-import com.klob.bomberklob.R;
+import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,65 +9,152 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Spinner;
+
+import com.klob.bomberklob.model.Model;
 
 public class Options extends Activity implements View.OnClickListener{
 	
-	private Button retour;
-	private Button gestionProfil;
+	private Model model;
+	
+	private Button cancel;
+	private Button managementProfile;
+	
+	private SeekBar soundVolume;
+	private CheckBox mute;
+	
+	private Spinner languages;
+	
+	private String[] languagesTab;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        // plein ecran, à remettre dans chaque onCreate
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
                 
         setContentView(R.layout.options);
         
-        gestionProfil = (Button) findViewById(R.id.gestionProfil);
-        gestionProfil.setOnClickListener(this);
+        try {
+			this.model = Model.getInstance(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         
-        retour = (Button) findViewById(R.id.retour);
-        retour.setOnClickListener(this);   
+        this.managementProfile = (Button) findViewById(R.id.OptionsButtonProfil);
+        this.managementProfile.setOnClickListener(this);
+        
+        this.cancel = (Button) findViewById(R.id.OptionsButtonCancel);
+        this.cancel.setOnClickListener(this);   
+        
+        this.soundVolume = (SeekBar) findViewById(R.id.OptionsSeekBarVolume);
+        this.soundVolume.setMax(100);
+        this.soundVolume.setProgress(this.model.getSystem().getVolume());
+        this.soundVolume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar arg0) {}
+			
+			@Override
+			public void onStartTrackingTouch(SeekBar arg0) {}
+			
+			@Override
+			public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
+				model.getSystem().setVolume(arg1);
+				model.getSystem().getDatabase().setVolume(arg1);
+			}
+		});
+        
+        this.languagesTab = getResources().getStringArray(R.array.languages);
+        
+        this.languages = (Spinner) findViewById( R.id.OptionsSpinnerLanguages );
+        ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, this.languagesTab);
+        a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        this.languages.setAdapter(a);
+        this.languages.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+            @Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            	model.getSystem().setLanguage(languages.getSelectedItem().toString());
+            	model.getSystem().getDatabase().setLanguage(languages.getSelectedItem().toString());
+            	// FIXME CHANGER LA LANGUE
+            }
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {}
+        });
+        
+        for (int i = 0 ; i < this.languagesTab.length ; i++ ) {
+        	if (this.languages.getItemAtPosition(i).toString().equals(model.getSystem().getLanguage())) {
+        		this.languages.setSelection(i);
+        		break;
+        	}
+        }
+        
+		this.mute = (CheckBox) findViewById(R.id.OptionsCheckBoxVolume);
+		this.mute.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
+			@Override 
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
+				if (isChecked) {
+					//FIXME On fait quoi ???
+				}
+				else {
+				
+				}
+			}
+		});
     }
     
     @Override
 	protected void onStop() {
-		Log.i("", "onStop ");
+		Log.i("Options", "onStop");
 		super.onStop();
 	}
 	
 	@Override
 	protected void onDestroy(){
-		Log.i("", "onDestroy ");
+		Log.i("Options", "onDestroy");
 		super.onDestroy();
 	}
 	
 	@Override
 	protected void onResume(){
-		Log.i("", "onResume ");
+		Log.i("Options", "onResume");
 		super.onResume();
 	}
 	
 	@Override
 	protected void onPause(){
-		Log.i("", "onPause ");
+		Log.i("Options", "onPause");
 		super.onPause();
 	}
     
     @Override
 	public void onClick(View v) {
-		if(v == gestionProfil){
-			Intent intent = new Intent(Options.this, GestionProfil.class);
-			startActivity(intent);
+    	
+    	Intent intent = null;
+    	
+		if(v == managementProfile){
+			intent = new Intent(Options.this, ProfilManagement.class);
 		}
-		else if( v == retour){
-			finish();
+		else if( v == cancel){
+			intent = new Intent(Options.this, Home.class);
+		}
+		
+		if ( intent != null ) {
+			this.startActivity(intent);
+			this.finish();
 		}
     }
-
 }
