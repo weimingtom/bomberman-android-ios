@@ -38,8 +38,7 @@ public class Home extends Activity implements View.OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        // plein ecran, à remettre dans chaque onCreate
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -85,7 +84,10 @@ public class Home extends Activity implements View.OnClickListener{
         });
         
         this.addAccount = (ImageButton) findViewById(R.id.addAccount);
-        this.addAccount.setOnClickListener(this);   
+        this.addAccount.setOnClickListener(this);  
+        
+        System.out.println("Langue " +this.getResources().getConfiguration().locale);
+        System.out.println("Langue " +this.model.getSystem().getLocalLanguage());
     }
     
     @Override
@@ -117,6 +119,9 @@ public class Home extends Activity implements View.OnClickListener{
 	public void onClick(View v) {
 		
 		Intent intent = null;
+		
+		System.out.println("Langue " +this.getResources().getConfiguration().locale);
+        System.out.println("Langue " +this.model.getSystem().getLocalLanguage());
 		
 		if ( this.addAccount == v ) {
 			intent = new Intent(Home.this, NewAccountOffline.class);

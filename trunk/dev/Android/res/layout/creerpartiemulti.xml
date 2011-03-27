@@ -43,23 +43,6 @@
 
 
 
-        	<TableLayout android:id="@+id/tableLayout1" android:layout_height="wrap_content" android:stretchColumns="2" android:layout_width="match_parent" android:gravity="center_vertical|center_horizontal">
-        		<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow1" android:gravity="center_vertical|center_horizontal">
-        			<TextView android:text="Type de la partie" android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-        			<Spinner android:entries="@array/gameType" android:id="@+id/typePartie" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
-        		</TableRow>
-        		<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow2" android:gravity="center_vertical|center_horizontal">
-        			<TextView android:text="Nombre d'ennemis" android:id="@+id/textView3" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-        			<Spinner android:entries="@array/enemiesNumber" android:id="@+id/nbEnnemis" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
-        		</TableRow>
-        		<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow2" android:gravity="center_vertical|center_horizontal">
-        			<TextView android:text="Difficulté des ennemis" android:id="@+id/textView4" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-        			<Spinner android:entries="@array/difficulty" android:id="@+id/difficulte" android:layout_width="wrap_content" android:layout_height="wrap_content"></Spinner>
-        		</TableRow>
-
-            </TableLayout>
-
-
 	<LinearLayout android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_gravity="bottom"
 		android:paddingTop="55px" android:paddingBottom="5px">

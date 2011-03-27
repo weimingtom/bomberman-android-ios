@@ -2,12 +2,12 @@
     <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
         
         <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center_horizontal" android:layout_centerInParent="true" android:background="@color/Grey" android:layout_width="wrap_content">
-			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Jouer Solo" android:id="@+id/boutonSolo"></Button>
-			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonMulti" android:text="Jouer Multi"></Button>
-			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonOptions" android:text="Options"></Button>
-			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonStats" android:text="Statistiques"></Button>
-			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonCreerNiveaux" android:text="Création de niveaux"></Button>
-			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonAide" android:text="Aide"></Button>
+			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/boutonSolo" android:text="@string/HomeButtonSinglePlayer"></Button>
+			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonMulti" android:text="@string/HomeButtonMultiPlayer"></Button>
+			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonOptions" android:text="@string/HomeButtonOptions"></Button>
+			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonStats" android:text="@string/HomeButtonStatistics"></Button>
+			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonCreerNiveaux" android:text="@string/HomeButtonCreatingLevel"></Button>
+			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonAide" android:text="@string/HomeButtonHelp"></Button>
 		</LinearLayout>
         
         <LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/linearLayout2" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:background="@color/Grey">
