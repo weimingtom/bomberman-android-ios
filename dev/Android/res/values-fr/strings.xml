@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Klob</string>
+
+	<color name="Grey">#616161</color>
+	<string name="accueilPrompt">Veuillez choisir un compte</string>
+	<string name="MultiPlayerConnectionErrorAutoConnection">The username or password is empty</string>
+	<string name="SinglePlayerGameErrorLoadingMap">Maps directory missing</string>
+	<string name="ProfilManagementErrorPseudo">Ce pseudonyme est déjà utilisé</string>
+	
+	<!-- Global -->
+	
+	<string name="ButtonCancel">Retour</string>
+	<string name="ButtonCreate">Créer</string>
+	<string name="ButtonConnection">Connexion</string>
+	<string name="ButtonValidate">Valider</string>
+	
+	<string name="TextUserName">Nom utilisateur  </string>
+	<string name="TextUserPassword">Mot de passe</string>
+	<string name="TextUserPseudo">Pseudo</string>
+	
+	<string name="CheckBoxConnectionAuto">Connexion auto</string>
+	<string name="CheckBoxRememberPassword">Mémoriser mot de passe</string>
+	
+	<!-- Home -->
+	
+	<string name="HomeButtonSinglePlayer">Solo</string>
+	<string name="HomeButtonMultiPlayer">Multijoueurs</string>
+	<string name="HomeButtonOptions">Options</string>
+	<string name="HomeButtonStatistics">Statistiques</string>
+	<string name="HomeButtonCreatingLevel">Création de niveaux</string>
+	<string name="HomeButtonHelp">Aide</string>
+	
+	<!-- SinglePlayer -->
+	
+	<string name="SinglePlayerGameType">Type de la partie</string>
+	<string name="SinglePlayerGameEnemiesNumber">Nombre d\'ennemis</string>
+	<string name="SinglePlayerGameEnemiesDifficulty">Difficulté des ennemis</string>
+	<string-array name="SinglePlayerGameType">
+		<item>FreeForAll</item>
+	</string-array>
+	<string-array name="SinglePlayerEnemiesNumber">
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+	</string-array>
+	<string-array name="SinglePlayerDifficulty">
+		<item>facile</item>
+		<item>moyen</item>
+		<item>difficile</item>
+	</string-array>
+	
+	<!-- Multiplayer -->
+	
+	<string name="MultiplayerButtonNewAccount">Nouveau Compte</string>
+	
+	<!-- NewAccountOnline -->
+	
+	<string name="NewAccountOnlineTextVerification">Vérification</string>
+	
+	<!-- Options -->
+
+	<string name="OptionsVolume">Volume</string>	
+	<string name="OptionsLanguages">Langages</string>	
+	<string-array name="languages">
+		<item>English</item>
+		<item>Français</item>
+	</string-array>
+	<string name="OptionsProfilManager">Gestion du Profil</string>
+	
+	<!-- ProfilManager -->
+	
+	<string name="ProfilManagementColors">Couleurs</string>
+	<string-array name="playerColors">
+		<item>Blanc</item>
+		<item>Bleu</item>
+		<item>Rouge</item>
+		<item>Noir</item>
+	</string-array>
+	<string name="ProfilManagementButtonEdit">Modifier</string>
+	<string name="ProfilManagementButtonOnlineAccount">Changer de compte</string>	
+	<string name="ProfilManagementType">Type</string>
+	<string-array name="type">
+		<item>Droitier</item>
+		<item>Gaucher</item>
+	</string-array>
+
+</resources>

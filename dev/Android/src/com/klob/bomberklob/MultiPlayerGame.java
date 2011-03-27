@@ -9,9 +9,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnKeyListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -72,7 +70,6 @@ public class MultiPlayerGame extends Activity implements View.OnClickListener {
 				else {
 					model.getUser().setRemenberPassword(false);
 				}
-				model.getSystem().getDatabase().updateUser(model.getUser());
 			}
 		});
 		
@@ -101,7 +98,6 @@ public class MultiPlayerGame extends Activity implements View.OnClickListener {
 					model.getUser().setConnectionAuto(false);
 					Toast.makeText(MultiPlayerGame.this, R.string.MultiPlayerConnectionErrorAutoConnection , Toast.LENGTH_SHORT).show();
 				}
-				model.getSystem().getDatabase().updateUser(model.getUser());
 			}
 		});
 	}
@@ -135,6 +131,9 @@ public class MultiPlayerGame extends Activity implements View.OnClickListener {
 	public void onClick(View view) {
 		
 		Intent intent = null;
+		
+		this.model.getUser().setUserName(this.userAccountName.getText().toString());
+		this.model.getSystem().getDatabase().updateUser(this.model.getUser());
 		
 		if(view == this.connection){
 			if ( this.model.getUser().getRemenberPassword() ) {

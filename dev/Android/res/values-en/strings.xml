@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Klob</string>
+
+	<color name="Grey">#616161</color>
+	<string name="accueilPrompt">Veuillez choisir un compte</string>
+	<string name="MultiPlayerConnectionErrorAutoConnection">The username or password is empty</string>
+	<string name="SinglePlayerGameErrorLoadingMap">Maps directory missing</string>
+	<string name="ProfilManagementErrorPseudo">This pseudo is already used</string>
+	
+	<!-- Global -->
+	
+	<string name="ButtonCancel">Back</string>
+	<string name="ButtonCreate">Create</string>
+	<string name="ButtonConnection">Connection</string>
+	<string name="ButtonValidate">Ok</string>
+	
+	<string name="TextUserName">User Name  </string>
+	<string name="TextUserPassword">Password</string>
+	<string name="TextUserPseudo">Pseudo</string>
+	
+	<string name="CheckBoxConnectionAuto">Auto login</string>
+	<string name="CheckBoxRememberPassword">Remember password</string>
+	
+	<!-- Home -->
+	
+	<string name="HomeButtonSinglePlayer">SinglePlayer</string>
+	<string name="HomeButtonMultiPlayer">MultiPlayer</string>
+	<string name="HomeButtonOptions">Options</string>
+	<string name="HomeButtonStatistics">Statistics</string>
+	<string name="HomeButtonCreatingLevel">Creating Level</string>
+	<string name="HomeButtonHelp">Help</string>
+	
+	<!-- SinglePlayer -->
+	
+	<string name="SinglePlayerGameType">Game Type</string>
+	<string name="SinglePlayerGameEnemiesNumber">Number of enemies</string>
+	<string name="SinglePlayerGameEnemiesDifficulty">Difficulty of the enemies</string>
+	<string-array name="SinglePlayerGameType">
+		<item>FreeForAll</item>
+	</string-array>
+	<string-array name="SinglePlayerEnemiesNumber">
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+	</string-array>
+	<string-array name="SinglePlayerDifficulty">
+		<item>easy</item>
+		<item>normal</item>
+		<item>hard</item>
+	</string-array>
+	
+	<!-- Multiplayer -->
+	
+	<string name="MultiplayerButtonNewAccount">New Account</string>
+	
+	<!-- NewAccountOnline -->
+	
+	<string name="NewAccountOnlineTextVerification">Verification</string>
+	
+	<!-- Options -->
+	
+	<string name="OptionsVolume">Volume</string>
+	<string name="OptionsLanguages">Languages</string>
+	<string-array name="languages">
+		<item>English</item>
+		<item>Français</item>
+	</string-array>
+	<string name="OptionsProfilManager">Profil Manager</string>
+	
+	
+	<!-- ProfilManager -->
+	
+	<string name="ProfilManagementColors">Colors</string>
+	<string-array name="playerColors">
+		<item>White</item>
+		<item>Blue</item>
+		<item>Red</item>
+		<item>Dark</item>
+	</string-array>
+	<string name="ProfilManagementButtonEdit">Edit</string>
+	<string name="ProfilManagementButtonOnlineAccount">Change Account</string>
+	<string name="ProfilManagementType">Type</string>
+	<string-array name="type">
+		<item>Right-handed</item>
+		<item>Left-handed</item>
+	</string-array>
+
+</resources>

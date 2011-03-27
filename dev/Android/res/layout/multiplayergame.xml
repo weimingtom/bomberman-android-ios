@@ -4,27 +4,27 @@
             
             <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout2" android:gravity="center_vertical">
                 <TextView android:text="" android:layout_width="wrap_content" android:id="@+id/MultiPlayerGameUserName" android:layout_height="wrap_content"></TextView>
-                <Button android:layout_alignParentRight="true" android:text="Nouveau Compte" android:layout_width="wrap_content" android:id="@+id/MultiPlayerGameNewAccount" android:layout_height="40dip"></Button>
+                <Button android:layout_alignParentRight="true" android:layout_width="wrap_content" android:id="@+id/MultiPlayerGameNewAccount" android:layout_height="40dip" android:text="@string/MultiplayerButtonNewAccount"></Button>
             </RelativeLayout>
             
             <TableLayout android:id="@+id/tableLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:gravity="center_vertical|center_horizontal">
                 <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow1" android:gravity="center_vertical|center_horizontal">
-                    <TextView android:layout_gravity="center_vertical" android:text="Nom utilisateur  " android:layout_height="wrap_content" android:id="@+id/textView1" android:layout_width="wrap_content"></TextView>
-                    <EditText android:layout_height="40px" android:layout_width="100px" android:text="" android:id="@+id/MultiPlayerGameEditTextName"></EditText>
+                    <TextView android:layout_gravity="center_vertical" android:layout_height="wrap_content" android:id="@+id/textView1" android:layout_width="wrap_content" android:text="@string/TextUserName"></TextView>
+                    <EditText android:text="" android:id="@+id/MultiPlayerGameEditTextName" android:layout_height="wrap_content" android:layout_width="100dip"></EditText>
                 </TableRow>
                 <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableRow2" android:gravity="center_vertical|center_horizontal">
-                    <TextView android:layout_gravity="center_vertical" android:text="mot de passe" android:layout_height="wrap_content" android:id="@+id/textView1" android:layout_width="wrap_content"></TextView>
-                    <EditText android:layout_height="40px" android:layout_width="100px" android:text="" android:password="true" android:id="@+id/MultiPlayerGameEditTextPassword"></EditText>
+                    <TextView android:layout_gravity="center_vertical" android:layout_height="wrap_content" android:id="@+id/textView1" android:layout_width="wrap_content" android:text="@string/TextUserPassword"></TextView>
+                    <EditText android:text="" android:password="true" android:id="@+id/MultiPlayerGameEditTextPassword" android:layout_height="wrap_content" android:layout_width="100dip"></EditText>
                 </TableRow>
             </TableLayout>
-            <CheckBox android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Connexion auto" android:id="@+id/MultiPlayerGameCheckBoxConnection"></CheckBox>
-            <CheckBox android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Mémoriser mot de passe" android:id="@+id/MultiPlayerGameCheckBoxPassword"></CheckBox>
+            <CheckBox android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/MultiPlayerGameCheckBoxConnection" android:text="@string/CheckBoxConnectionAuto"></CheckBox>
+            <CheckBox android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/MultiPlayerGameCheckBoxPassword" android:text="@string/CheckBoxRememberPassword"></CheckBox>
             
         </LinearLayout>
         
 		<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:id="@+id/relativeLayout3">
-			<Button android:layout_height="wrap_content" android:text="Annuler"   android:layout_width="wrap_content"  android:layout_alignParentLeft="true" android:id="@+id/MultiPlayerGameButtonCancel"></Button>
-			<Button android:layout_height="wrap_content" android:text="Connexion" android:layout_width="wrap_content" android:layout_alignParentRight="true" android:id="@+id/MultiPlayerGameButtonConnection"></Button>
+			<Button android:layout_height="wrap_content" android:layout_width="wrap_content"  android:layout_alignParentLeft="true" android:id="@+id/MultiPlayerGameButtonCancel" android:text="@string/ButtonCancel"></Button>
+			<Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentRight="true" android:id="@+id/MultiPlayerGameButtonConnection" android:text="@string/ButtonConnection"></Button>
 		</RelativeLayout>
     
     </RelativeLayout>

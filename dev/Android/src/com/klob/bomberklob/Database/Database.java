@@ -168,7 +168,7 @@ public class Database extends SQLiteOpenHelper{
 			");");
 		db.execSQL("CREATE TABLE System (" +
 				"volume UNSIGNED SMALLINT DEFAULT 50," +
-				"language CHAR DEFAULT 'French'," +
+				"language CHAR DEFAULT 'English'," +
 				"lastUser SMALLINT DEFAULT -1," +
 				"FOREIGN KEY(lastUser) REFERENCES AccountPlayer(id)" +
 			");");
@@ -204,25 +204,30 @@ public class Database extends SQLiteOpenHelper{
 	public void updateUser (User user) {
 		this.base = this.getReadableDatabase();
 		
-		Cursor cursor = this.base.rawQuery("SELECT * FROM UserAccounts WHERE pseudo ='"+user.getPseudo()+"' ", null);
-		if (cursor.moveToFirst()) {
-			ContentValues entree = new ContentValues();
-			entree.put("pseudo", user.getPseudo());
-			entree.put("userName", user.getUserName());
-			entree.put("password", user.getPassword());
-			entree.put("connectionAuto", (user.getConnectionAuto() == false ? 0 : 1));
-			entree.put("rememberPassword", (user.getRemenberPassword() == false ? 0 : 1));
-			entree.put("color", user.getColor());
-			entree.put("menuPosition", user.getMenuPosition());
-			entree.put("gameWon", user.getGameWon());
-			entree.put("gameLost", user.getGameLost());
-			this.base.update("UserAccounts", entree, "pseudo ='"+user.getPseudo()+"' ", null);
-		}
-		
-		cursor.close();
+		ContentValues entree = new ContentValues();
+		entree.put("pseudo", user.getPseudo());
+		entree.put("userName", user.getUserName());
+		entree.put("password", user.getPassword());
+		entree.put("connectionAuto", (user.getConnectionAuto() == false ? 0 : 1));
+		entree.put("rememberPassword", (user.getRemenberPassword() == false ? 0 : 1));
+		entree.put("color", user.getColor());
+		entree.put("menuPosition", user.getMenuPosition());
+		entree.put("gameWon", user.getGameWon());
+		entree.put("gameLost", user.getGameLost());
+		this.base.update("UserAccounts", entree, "pseudo ='"+user.getPseudo()+"' ", null);
+
 		this.close();
 	}
 	
+	public void changePseudo(String oldPseudo, String newPseudo) {
+		this.base = this.getReadableDatabase();
+		
+		ContentValues entree = new ContentValues();
+		entree.put("pseudo", newPseudo);
+		this.base.update("UserAccounts", entree, "pseudo ='"+oldPseudo+"' ", null);
+
+		this.close();
+	}
 	
 	public boolean existingAccount(String pseudonymAccount) {
 		this.base = this.getReadableDatabase();

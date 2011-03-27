@@ -54,6 +54,8 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 		this.userPseudo.setText(this.model.getUser().getPseudo());
 
 		this.userAccountName = (EditText) findViewById(R.id.NewAccountOnLineEditTextName);
+		this.userAccountName.setText(this.model.getUser().getUserName());
+		
 		this.userAccountPassword1 = (EditText) findViewById(R.id.NewAccountOnLineEditTextPassword1);
 		this.userAccountPassword2 = (EditText) findViewById(R.id.NewAccountOnLineEditTextPassword2);
 

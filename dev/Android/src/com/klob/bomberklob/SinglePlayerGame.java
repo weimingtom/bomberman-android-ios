@@ -63,6 +63,8 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println(this.model.getSystem().getLanguage());
         
         cancel = (Button)findViewById(R.id.SinglePlayerGameButtonCancel);
 		cancel.setOnClickListener(this);
@@ -114,30 +116,6 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 		super.onPause();
 	}
  
-	
-	@Override
-	public void onClick(View view) {
-		
-		if(view == lancer){
-//			Intent intent = new Intent(CreerPartieSolo.this, LancerPartieSolo.class);
-//			startActivity(intent);
-			
-			String typeP = typePartieSP.getSelectedItem().toString();
-			String ennemis = nbEnnemisSP.getSelectedItem().toString();
-			String difficulte = difficulteSP.getSelectedItem().toString();
-
-
-			Toast.makeText(SinglePlayerGame.this, "Lancement de la partie Solo sur "+
-					this.gallery.getSelectedItem().toString()+" en mode "+typeP+" avec "+ennemis+
-					" ennemis, ca va être "+difficulte+" !", Toast.LENGTH_SHORT).show();
-		}
-		else if(view == cancel){
-			Intent intent = new Intent(SinglePlayerGame.this, Home.class);
-			startActivity(intent);
-			this.finish();
-		}
-	}
-	
 	public int[] getMap() {
 		
 		int[] tabMaps = null;
@@ -202,6 +180,28 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 			img.setLayoutParams(new Gallery.LayoutParams(115, 115));
 			img.setBackgroundResource(m_itemBackground);
 			return img;
+		}
+	}
+	
+	@Override
+	public void onClick(View view) {
+		
+		Intent intent = null;
+		
+		if(view == lancer){
+			String typeP = typePartieSP.getSelectedItem().toString();
+			String ennemis = nbEnnemisSP.getSelectedItem().toString();
+			String difficulte = difficulteSP.getSelectedItem().toString();
+
+
+			Toast.makeText(SinglePlayerGame.this, "Lancement de la partie Solo sur "+
+					this.gallery.getSelectedItem().toString()+" en mode "+typeP+" avec "+ennemis+
+					" ennemis, ca va être "+difficulte+" !", Toast.LENGTH_SHORT).show();
+		}
+		else if(view == cancel){
+			intent = new Intent(SinglePlayerGame.this, Home.class);
+			startActivity(intent);
+			this.finish();
 		}
 	}
 }

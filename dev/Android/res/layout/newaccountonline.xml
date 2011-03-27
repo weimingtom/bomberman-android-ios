@@ -22,44 +22,39 @@
 				android:layout_height="wrap_content" android:id="@+id/tableRow1"
 				android:gravity="center_vertical|center_horizontal">
 				<TextView android:layout_gravity="center_vertical"
-					android:text="Nom utilisateur  " android:layout_height="wrap_content"
-					android:id="@+id/textView1" android:layout_width="wrap_content"></TextView>
-				<EditText android:layout_height="40px"
-					android:layout_width="100px" android:text="" android:id="@+id/NewAccountOnLineEditTextName"></EditText>
+					android:layout_height="wrap_content"
+					android:id="@+id/textView1" android:layout_width="wrap_content" android:text="@string/TextUserName"></TextView>
+				<EditText android:layout_width="100px" android:text="" android:id="@+id/NewAccountOnLineEditTextName" android:layout_height="wrap_content"></EditText>
 			</TableRow>
 			<TableRow android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:id="@+id/tableRow2"
 				android:gravity="center_vertical|center_horizontal">
 				<TextView android:layout_gravity="center_vertical"
-					android:text="mot de passe" android:layout_height="wrap_content"
-					android:id="@+id/textView1" android:layout_width="wrap_content"></TextView>
-				<EditText android:layout_height="40px"
-					android:layout_width="100px" android:text="" android:password="true" android:id="@+id/NewAccountOnLineEditTextPassword1"></EditText>
+					android:layout_height="wrap_content"
+					android:id="@+id/textView1" android:layout_width="wrap_content" android:text="@string/TextUserPassword"></TextView>
+				<EditText android:layout_width="100px" android:text="" android:password="true" android:id="@+id/NewAccountOnLineEditTextPassword1" android:layout_height="wrap_content"></EditText>
 			</TableRow>
 			<TableRow android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:id="@+id/tableRow2"
 				android:gravity="center_vertical|center_horizontal">
 				<TextView android:layout_gravity="center_vertical"
-					android:text="Vérification" android:layout_height="wrap_content"
-					android:id="@+id/textView1" android:layout_width="wrap_content"></TextView>
-				<EditText android:layout_height="40px"
-					android:layout_width="100px" android:text="" android:password="true" android:id="@+id/NewAccountOnLineEditTextPassword2"></EditText>
+					android:layout_height="wrap_content"
+					android:id="@+id/textView1" android:layout_width="wrap_content" android:text="@string/NewAccountOnlineTextVerification"></TextView>
+				<EditText android:layout_width="100px" android:text="" android:password="true" android:id="@+id/NewAccountOnLineEditTextPassword2" android:layout_height="wrap_content"></EditText>
 			</TableRow>
 		</TableLayout>
 		<CheckBox android:layout_height="wrap_content"
-			android:layout_width="wrap_content" android:text="Connexion auto" android:id="@+id/NewAccountOnLineCheckBoxConnection"></CheckBox>
+			android:layout_width="wrap_content" android:id="@+id/NewAccountOnLineCheckBoxConnection" android:text="@string/CheckBoxConnectionAuto"></CheckBox>
 		<CheckBox android:layout_height="wrap_content"
-			android:layout_width="wrap_content" android:text="Mémoriser mot de passe" android:id="@+id/NewAccountOnLineCheckBoxPassword"></CheckBox>
+			android:layout_width="wrap_content" android:id="@+id/NewAccountOnLineCheckBoxPassword" android:text="@string/CheckBoxRememberPassword"></CheckBox>
 
 	</LinearLayout>
 
 	<RelativeLayout android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:layout_alignParentBottom="true"
 		android:id="@+id/relativeLayout3">
-		<Button android:layout_height="wrap_content" android:text="Annuler"
-			android:layout_width="wrap_content" android:layout_alignParentLeft="true" android:id="@+id/NewAccountOnLineButtonCancel"></Button>
-		<Button android:layout_height="wrap_content" android:text="Connexion"
-			android:layout_width="wrap_content" android:layout_alignParentRight="true" android:id="@+id/NewAccountOnLineButtonConnection"></Button>
+		<Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentLeft="true" android:id="@+id/NewAccountOnLineButtonCancel" android:text="@string/ButtonCancel"></Button>
+		<Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentRight="true" android:id="@+id/NewAccountOnLineButtonConnection" android:text="@string/ButtonConnection"></Button>
 	</RelativeLayout>
 
 </RelativeLayout>

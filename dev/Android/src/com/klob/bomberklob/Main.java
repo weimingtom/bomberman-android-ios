@@ -3,7 +3,11 @@ package com.klob.bomberklob;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -29,17 +33,31 @@ public class Main extends Activity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		Intent intent;
 		
-		if ( this.model.getSystem().getLastUser() == -1 ) {
-			intent = new Intent(Main.this, CreateAccountOffline.class);
+		setVolumeControlStream(this.model.getSystem().getVolume()); //FIXME correct ?
+		
+		Intent intent = null;
+		Resources res = this.getResources();
+		Configuration conf = res.getConfiguration();
+		conf.locale = this.model.getSystem().getLocalLanguage();
+		res.updateConfiguration(conf, res.getDisplayMetrics());
+		try {
+			Context context = this.createPackageContext(getPackageName(), Context.CONTEXT_INCLUDE_CODE);
+			
+			if ( this.model.getSystem().getLastUser() == -1 ) {
+				intent = new Intent(context, CreateAccountOffline.class);
+			}
+			else {
+				intent = new Intent(context, Home.class);
+			}
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
 		}
-		else {
-			intent = new Intent(Main.this, Home.class);
+    	
+		if ( intent != null ) {
+			startActivity(intent);
+			this.finish();	
 		}
-		startActivity(intent);
-		this.finish();	
 	}
 	
     @Override

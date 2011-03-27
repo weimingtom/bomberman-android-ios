@@ -1,6 +1,7 @@
 package com.klob.bomberklob.model;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Vector;
 
 import android.content.Context;
@@ -27,8 +28,10 @@ public class Model {
 		private String language;
 		private int lastUser;
 		private Database database;
+		private Context context;
 		
 		private System(Context context) throws IOException {
+			this.context = context;
 			this.database = new Database(context);
 			this.lastUser = this.database.getLastUser();
 			this.language = this.database.getLanguage();
@@ -49,8 +52,12 @@ public class Model {
 			return this.volume;
 		}
 
-		public String getLanguage() {
+		public String getLanguage() {		
 			return this.language;
+		}
+		
+		public Context getContext() {
+			return this.context;
 		}
 		
 		/* Setteurs -------------------------------------------------------- */
@@ -68,6 +75,18 @@ public class Model {
 			// FIXME Exception sur le langage passé en paramètre ?
 			this.language = language;
 		}
+		
+		/* Méthodes publiques ---------------------------------------------- */
+		
+		public Locale getLocalLanguage() {		
+			if (this.language.equals("Français")) {
+				return Locale.FRENCH;
+			}
+			else {
+				return Locale.ENGLISH;
+			}
+		}
+		
 	}
 	
 	/* Getteurs ------------------------------------------------------------ */
