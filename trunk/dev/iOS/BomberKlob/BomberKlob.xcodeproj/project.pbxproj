@@ -1,0 +1,283 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18C839C913410263001D5747 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C839C813410263001D5747 /* UIKit.framework */; };
+		18C839CB13410263001D5747 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C839CA13410263001D5747 /* Foundation.framework */; };
+		18C839CD13410263001D5747 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C839CC13410263001D5747 /* CoreGraphics.framework */; };
+		18C839D313410263001D5747 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18C839D113410263001D5747 /* InfoPlist.strings */; };
+		18C839D613410263001D5747 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C839D513410263001D5747 /* main.m */; };
+		18C839D913410263001D5747 /* BomberKlobAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C839D813410263001D5747 /* BomberKlobAppDelegate.m */; };
+		18C839DC13410263001D5747 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C839DA13410263001D5747 /* MainWindow.xib */; };
+		18C839DF13410263001D5747 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C839DE13410263001D5747 /* RootViewController.m */; };
+		18C839E213410263001D5747 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C839E013410263001D5747 /* RootViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		18C839C413410263001D5747 /* BomberKlob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BomberKlob.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18C839C813410263001D5747 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		18C839CA13410263001D5747 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		18C839CC13410263001D5747 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		18C839D013410263001D5747 /* BomberKlob-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BomberKlob-Info.plist"; sourceTree = "<group>"; };
+		18C839D213410263001D5747 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		18C839D413410263001D5747 /* BomberKlob-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BomberKlob-Prefix.pch"; sourceTree = "<group>"; };
+		18C839D513410263001D5747 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		18C839D713410263001D5747 /* BomberKlobAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BomberKlobAppDelegate.h; sourceTree = "<group>"; };
+		18C839D813410263001D5747 /* BomberKlobAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BomberKlobAppDelegate.m; sourceTree = "<group>"; };
+		18C839DB13410263001D5747 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		18C839DD13410263001D5747 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		18C839DE13410263001D5747 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		18C839E113410263001D5747 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18C839C113410263001D5747 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18C839C913410263001D5747 /* UIKit.framework in Frameworks */,
+				18C839CB13410263001D5747 /* Foundation.framework in Frameworks */,
+				18C839CD13410263001D5747 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18C839B913410263001D5747 = {
+			isa = PBXGroup;
+			children = (
+				18C839CE13410263001D5747 /* BomberKlob */,
+				18C839C713410263001D5747 /* Frameworks */,
+				18C839C513410263001D5747 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		18C839C513410263001D5747 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18C839C413410263001D5747 /* BomberKlob.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18C839C713410263001D5747 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18C839C813410263001D5747 /* UIKit.framework */,
+				18C839CA13410263001D5747 /* Foundation.framework */,
+				18C839CC13410263001D5747 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18C839CE13410263001D5747 /* BomberKlob */ = {
+			isa = PBXGroup;
+			children = (
+				18C839D713410263001D5747 /* BomberKlobAppDelegate.h */,
+				18C839D813410263001D5747 /* BomberKlobAppDelegate.m */,
+				18C839DA13410263001D5747 /* MainWindow.xib */,
+				18C839DD13410263001D5747 /* RootViewController.h */,
+				18C839DE13410263001D5747 /* RootViewController.m */,
+				18C839E013410263001D5747 /* RootViewController.xib */,
+				18C839CF13410263001D5747 /* Supporting Files */,
+			);
+			path = BomberKlob;
+			sourceTree = "<group>";
+		};
+		18C839CF13410263001D5747 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18C839D013410263001D5747 /* BomberKlob-Info.plist */,
+				18C839D113410263001D5747 /* InfoPlist.strings */,
+				18C839D413410263001D5747 /* BomberKlob-Prefix.pch */,
+				18C839D513410263001D5747 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18C839C313410263001D5747 /* BomberKlob */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18C839E513410263001D5747 /* Build configuration list for PBXNativeTarget "BomberKlob" */;
+			buildPhases = (
+				18C839C013410263001D5747 /* Sources */,
+				18C839C113410263001D5747 /* Frameworks */,
+				18C839C213410263001D5747 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BomberKlob;
+			productName = BomberKlob;
+			productReference = 18C839C413410263001D5747 /* BomberKlob.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18C839BB13410263001D5747 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 18C839BE13410263001D5747 /* Build configuration list for PBXProject "BomberKlob" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 18C839B913410263001D5747;
+			productRefGroup = 18C839C513410263001D5747 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18C839C313410263001D5747 /* BomberKlob */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18C839C213410263001D5747 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18C839D313410263001D5747 /* InfoPlist.strings in Resources */,
+				18C839DC13410263001D5747 /* MainWindow.xib in Resources */,
+				18C839E213410263001D5747 /* RootViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18C839C013410263001D5747 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18C839D613410263001D5747 /* main.m in Sources */,
+				18C839D913410263001D5747 /* BomberKlobAppDelegate.m in Sources */,
+				18C839DF13410263001D5747 /* RootViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		18C839D113410263001D5747 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18C839D213410263001D5747 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		18C839DA13410263001D5747 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18C839DB13410263001D5747 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		18C839E013410263001D5747 /* RootViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18C839E113410263001D5747 /* en */,
+			);
+			name = RootViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18C839E313410263001D5747 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		18C839E413410263001D5747 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		18C839E613410263001D5747 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BomberKlob/BomberKlob-Prefix.pch";
+				INFOPLIST_FILE = "BomberKlob/BomberKlob-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		18C839E713410263001D5747 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BomberKlob/BomberKlob-Prefix.pch";
+				INFOPLIST_FILE = "BomberKlob/BomberKlob-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18C839BE13410263001D5747 /* Build configuration list for PBXProject "BomberKlob" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18C839E313410263001D5747 /* Debug */,
+				18C839E413410263001D5747 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18C839E513410263001D5747 /* Build configuration list for PBXNativeTarget "BomberKlob" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18C839E613410263001D5747 /* Debug */,
+				18C839E713410263001D5747 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18C839BB13410263001D5747 /* Project object */;
+}
