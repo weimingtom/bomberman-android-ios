@@ -27,14 +27,13 @@ public class Home extends Activity implements View.OnClickListener{
 	private Button multiPlayer;
 	private Button options;
 	private Button statistics;
-	private Button createLevel;
+	private Button createMap;
 	private Button help;
 	
 	private Spinner accounts;
 	private ImageButton addAccount;
 	
 	
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,14 +53,14 @@ public class Home extends Activity implements View.OnClickListener{
 		this.multiPlayer = (Button)findViewById(R.id.HomeButtonMulti);
 		this.options = (Button)findViewById(R.id.HomeButtonOptions);
 		this.statistics = (Button)findViewById(R.id.HomeButtonStatistics);
-		this.createLevel = (Button)findViewById(R.id.HomeButtonCreatingLevel);
+		this.createMap = (Button)findViewById(R.id.HomeButtonCreatingLevel);
 		this.help = (Button)findViewById(R.id.HomeButtonHelp);
         
 		this.singlePlayer.setOnClickListener(this);
 		this.multiPlayer.setOnClickListener(this);
 		this.options.setOnClickListener(this);
 		this.statistics.setOnClickListener(this);       
-		this.createLevel.setOnClickListener(this);
+		this.createMap.setOnClickListener(this);
 		this.help.setOnClickListener(this);
         
         this.accounts = (Spinner) findViewById( R.id.accounts );
@@ -128,6 +127,9 @@ public class Home extends Activity implements View.OnClickListener{
 		}
 		else if ( this.options == v ) {
 			intent = new Intent(Home.this, Options.class);
+		}
+		else if ( this.createMap == v ) {
+			intent = new Intent(Home.this, CreateMap.class);
 		}
 		else if ( this.statistics == v ) {
 			intent = new Intent(Home.this, Statistics.class);
