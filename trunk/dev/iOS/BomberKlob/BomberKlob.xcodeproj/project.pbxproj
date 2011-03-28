@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18885582134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18885580134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m */; };
+		18885586134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18885588134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib */; };
 		18C839C913410263001D5747 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C839C813410263001D5747 /* UIKit.framework */; };
 		18C839CB13410263001D5747 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C839CA13410263001D5747 /* Foundation.framework */; };
 		18C839CD13410263001D5747 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C839CC13410263001D5747 /* CoreGraphics.framework */; };
@@ -17,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1888557F134106E500DA88B9 /* CreateAccountOfflineMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountOfflineMenuViewController.h; sourceTree = "<group>"; };
+		18885580134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountOfflineMenuViewController.m; sourceTree = "<group>"; };
+		18885587134107BE00DA88B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CreateAccountOfflineMenuViewController.xib; sourceTree = "<group>"; };
 		18C839C413410263001D5747 /* BomberKlob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BomberKlob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C839C813410263001D5747 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		18C839CA13410263001D5747 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -53,6 +58,16 @@
 			name = AppDelegate;
 			sourceTree = "<group>";
 		};
+		188855851341071700DA88B9 /* CreateAccountMenu */ = {
+			isa = PBXGroup;
+			children = (
+				1888557F134106E500DA88B9 /* CreateAccountOfflineMenuViewController.h */,
+				18885580134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m */,
+				18885588134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib */,
+			);
+			name = CreateAccountMenu;
+			sourceTree = "<group>";
+		};
 		18C839B913410263001D5747 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +98,7 @@
 		18C839CE13410263001D5747 /* BomberKlob */ = {
 			isa = PBXGroup;
 			children = (
+				188855851341071700DA88B9 /* CreateAccountMenu */,
 				18819AC8134103CA00CBAF1D /* AppDelegate */,
 				18C839DA13410263001D5747 /* MainWindow.xib */,
 				18C839CF13410263001D5747 /* Supporting Files */,
@@ -150,6 +166,7 @@
 			files = (
 				18C839D313410263001D5747 /* InfoPlist.strings in Resources */,
 				18C839DC13410263001D5747 /* MainWindow.xib in Resources */,
+				18885586134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,12 +179,21 @@
 			files = (
 				18C839D613410263001D5747 /* main.m in Sources */,
 				18C839D913410263001D5747 /* BomberKlobAppDelegate.m in Sources */,
+				18885582134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		18885588134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18885587134107BE00DA88B9 /* en */,
+			);
+			name = CreateAccountOfflineMenuViewController.xib;
+			sourceTree = "<group>";
+		};
 		18C839D113410263001D5747 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
