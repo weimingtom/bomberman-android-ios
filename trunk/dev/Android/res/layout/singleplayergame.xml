@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/background">
         
-        <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:gravity="center_vertical|center_horizontal" android:layout_centerInParent="true" android:background="@color/Grey">
+        <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:gravity="center_vertical|center_horizontal" android:layout_centerInParent="true">
             <Gallery android:gravity="bottom" android:id="@+id/galleryz" android:layout_width="fill_parent" android:layout_height="match_parent"></Gallery>
             <TextView android:layout_height="wrap_content" android:id="@+id/nomMap" android:layout_width="wrap_content" android:text=""></TextView>
         
@@ -24,10 +24,11 @@
         </LinearLayout>
         
         
-        <RelativeLayout android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:id="@+id/relativeLayout2" android:layout_width="match_parent" android:background="@color/Grey">
+        <RelativeLayout android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:id="@+id/relativeLayout2" android:layout_width="match_parent">
             <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentRight="true" android:id="@+id/SinglePlayerGameButtonGo" android:text="@string/ButtonCreate"></Button>
             <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/SinglePlayerGameButtonCancel" android:text="@string/ButtonCancel"></Button>
-        </RelativeLayout>    
+        </RelativeLayout>
+        <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_centerInParent="true" android:src="@drawable/gamename"></ImageView>    
         
     </RelativeLayout>
 
