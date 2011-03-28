@@ -2,7 +2,7 @@
     <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/background">
         <LinearLayout android:layout_width="match_parent" android:orientation="vertical" android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_centerInParent="true" android:gravity="center_vertical|center_horizontal">
             
-            <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout2" android:gravity="center_vertical">
+            <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout2" android:gravity="center_vertical|center_horizontal">
                 <TextView android:text="" android:layout_width="wrap_content" android:id="@+id/MultiPlayerGameUserName" android:layout_height="wrap_content"></TextView>
                 <Button android:layout_alignParentRight="true" android:layout_width="wrap_content" android:id="@+id/MultiPlayerGameNewAccount" android:layout_height="40dip" android:text="@string/MultiplayerButtonNewAccount"></Button>
             </RelativeLayout>

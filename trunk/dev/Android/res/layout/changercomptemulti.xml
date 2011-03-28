@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
     
-    	<LinearLayout  android:layout_height="wrap_content" android:layout_gravity="center_horizontal"  android:layout_marginTop="50px" android:orientation="vertical" android:gravity="center_vertical|center_horizontal" android:background="@color/Grey" android:layout_width="wrap_content" android:layout_centerInParent="true">
+    	<LinearLayout  android:layout_height="wrap_content" android:layout_gravity="center_horizontal"  android:layout_marginTop="50px" android:orientation="vertical" android:gravity="center_vertical|center_horizontal" android:layout_width="wrap_content" android:layout_centerInParent="true">
 			
 			<TextView android:id="@+id/editText2" android:text="Erreur"
 					android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
 		</LinearLayout>
 		
 		
-    	<RelativeLayout android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:id="@+id/relativeLayout2" android:layout_width="match_parent" android:background="@color/Grey">
+    	<RelativeLayout android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:id="@+id/relativeLayout2" android:layout_width="match_parent" >
     	
     		<Button android:id="@+id/boutonAnnuler" 
 				android:layout_width="wrap_content"

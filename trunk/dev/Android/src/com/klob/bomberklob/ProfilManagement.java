@@ -12,9 +12,12 @@ import android.view.View.OnKeyListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.klob.bomberklob.model.Model;
 
@@ -26,6 +29,9 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
 	private Button validate;
 	private Button changeAccount;
 	private Button edit;
+	
+	private CheckBox password;
+	private CheckBox connectionAuto;
 	
 	private EditText pseudo;
 	private TextView userName;
@@ -60,6 +66,43 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
         
         this.userName = (TextView) findViewById(R.id.ProfilManagementUserName);
         this.userName.setText(this.model.getUser().getUserName());
+        
+        this.connectionAuto = (CheckBox) findViewById(R.id.ProfilManagementCheckBoxConnection);
+		this.connectionAuto.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
+			@Override 
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
+				if (isChecked && !model.getUser().getUserName().equals("") && !model.getUser().getPassword().equals("")) {
+					model.getUser().setConnectionAuto(true);
+				}
+				else {
+					connectionAuto.setChecked(false);
+					model.getUser().setConnectionAuto(false);
+					Toast.makeText(ProfilManagement.this, R.string.MultiPlayerConnectionErrorAutoConnection , Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+		
+		this.password = (CheckBox) findViewById(R.id.ProfilManagementCheckBoxPassword);
+		this.password.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
+			@Override 
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
+				if (isChecked) {
+					model.getUser().setRemenberPassword(true);
+				}
+				else {
+					model.getUser().setRemenberPassword(false);
+				}
+			}
+		});
+		
+		this.edit = (Button) findViewById(R.id.ProfilManagementButtonEdit);
+		this.edit.setOnClickListener(this);
+		
+		this.changeAccount = (Button) findViewById(R.id.ProfilManagementButtonChange);
+		this.changeAccount.setOnClickListener(this);
+		
+		this.cancel = (Button) findViewById(R.id.ProfilManagementButtonCancel);
+		this.cancel.setOnClickListener(this);
 
         this.validate = (Button) findViewById(R.id.ProfilManagementButtonValidate);
         this.validate.setOnClickListener(this);
@@ -67,25 +110,25 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
     
     @Override
 	protected void onStop() {
-		Log.i("", "onStop ");
+		Log.i("ProfilManagement", "onStop ");
 		super.onStop();
 	}
 	
 	@Override
 	protected void onDestroy(){
-		Log.i("", "onDestroy ");
+		Log.i("ProfilManagement", "onDestroy ");
 		super.onDestroy();
 	}
 	
 	@Override
 	protected void onResume(){
-		Log.i("", "onResume ");
+		Log.i("ProfilManagement", "onResume ");
 		super.onResume();
 	}
 	
 	@Override
 	protected void onPause(){
-		Log.i("", "onPause ");
+		Log.i("ProfilManagement", "onPause ");
 		super.onPause();
 	}
     
@@ -115,7 +158,7 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
 			intent = new Intent(ProfilManagement.this, ChangerCompteMulti.class);
 		}
 		else if( v == this.edit){
-			intent = new Intent(ProfilManagement.this, ChangerPassMulti.class);
+			intent = new Intent(ProfilManagement.this, ChangePasswordMultiplayer.class);
 		}
 		else if( v == this.cancel){
 			intent = new Intent(ProfilManagement.this, Options.class);

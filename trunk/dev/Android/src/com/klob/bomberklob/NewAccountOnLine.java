@@ -9,9 +9,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -55,9 +57,40 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 
 		this.userAccountName = (EditText) findViewById(R.id.NewAccountOnLineEditTextName);
 		this.userAccountName.setText(this.model.getUser().getUserName());
+		this.userAccountName.setOnKeyListener(new OnKeyListener() {
+        	
+            @Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                	return true;
+                }
+                return false;
+            }
+        });
 		
 		this.userAccountPassword1 = (EditText) findViewById(R.id.NewAccountOnLineEditTextPassword1);
+		this.userAccountPassword1.setOnKeyListener(new OnKeyListener() {
+        	
+            @Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                	return true;
+                }
+                return false;
+            }
+        });
+		
 		this.userAccountPassword2 = (EditText) findViewById(R.id.NewAccountOnLineEditTextPassword2);
+		this.userAccountPassword2.setOnKeyListener(new OnKeyListener() {
+        	
+            @Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                	return true;
+                }
+                return false;
+            }
+        });
 
 		this.validate = (Button)findViewById(R.id.NewAccountOnLineButtonConnection);
 		this.validate.setOnClickListener(this);
@@ -132,9 +165,29 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 	public void onClick(View view) {
 
 		Intent intent = null;
+		
 
-		if( view == this.validate ){
-			//FIXME Connexion avec le serveur et vérifier les mdp
+		if( view == this.validate ) {
+			
+			if ( !this.userAccountName.getText().toString().equals("")  && !this.userAccountPassword1.getText().toString().equals("")) {
+				if ( !this.userAccountPassword1.getText().toString().equals(this.userAccountPassword2.getText().toString()) ) {
+					this.model.getUser().setUserName(this.userAccountName.getText().toString());
+					
+					if (this.model.getUser().getRemenberPassword()) {
+						// FIXME Encoder le mdp
+						this.model.getUser().setPassword(this.userAccountPassword1.getText().toString());
+					}
+					
+					this.model.getSystem().getDatabase().updateUser(this.model.getUser());
+					//FIXME Connexion avec le serveur
+				}
+				else {
+					//FIXME
+				}
+			}
+			else {
+				Toast.makeText(NewAccountOnLine.this, R.string.MultiPlayerConnectionErrorAutoConnection , Toast.LENGTH_SHORT).show();
+			}
 		}
 		else if( view == this.cancel ) {
 			intent = new Intent(NewAccountOnLine.this, MultiPlayerGame.class);

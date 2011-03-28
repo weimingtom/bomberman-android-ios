@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">Klob</string>
-
-	<color name="Grey">#616161</color>
-	<string name="accueilPrompt">Veuillez choisir un compte</string>
-	<string name="MultiPlayerConnectionErrorAutoConnection">The username or password is empty</string>
-	<string name="SinglePlayerGameErrorLoadingMap">Maps directory missing</string>
-	<string name="ProfilManagementErrorPseudo">Ce pseudonyme est déjà utilisé</string>
 	
 	<!-- Global -->
 	
@@ -31,6 +25,8 @@
 	<string name="HomeButtonCreatingLevel">Création de niveaux</string>
 	<string name="HomeButtonHelp">Aide</string>
 	
+	<string name="HommeSpinnerChooseUserText">Veuillez choisir un compte</string>
+	
 	<!-- SinglePlayer -->
 	
 	<string name="SinglePlayerGameType">Type de la partie</string>
@@ -50,9 +46,13 @@
 		<item>difficile</item>
 	</string-array>
 	
+		<string name="SinglePlayerGameErrorLoadingMap">Répertoire des cartes manquant</string>
+	
 	<!-- Multiplayer -->
 	
 	<string name="MultiplayerButtonNewAccount">Nouveau Compte</string>
+	
+	<string name="MultiPlayerConnectionErrorAutoConnection">Le nom d\'utilisateur ou le mot de passe sont vides</string>
 	
 	<!-- NewAccountOnline -->
 	
@@ -84,5 +84,26 @@
 		<item>Droitier</item>
 		<item>Gaucher</item>
 	</string-array>
+	
+	<string name="ProfilManagementErrorPseudo">Ce pseudonyme est déjà utilisé</string>
+	
+	<!-- Change Password Multiplayer -->
+	
+	<string name="ChangePasswordMultiplayerTextUserName">Nom d\'utilisateur</string>
+	<string name="ChangePasswordMultiplayerTextOldPass">Ancien mot de passe</string>
+	<string name="ChangePasswordMultiplayerTextNewPass">Nouveau mot de passe</string>
+	<string name="ChangePasswordMultiplayerTextConfirmPass">Confirmer le mot de passe</string>
+	
+	<!-- Statistics -->
+	
+	<string name="StatisticsGamesWon">Parties Gagnées</string>
+	<string name="StatisticsGamesLost">Partie Perdues</string>
+	
+	<!-- Help -->
+	
+	<string name="HelpGoal">But du jeu</string>
+	<string name="HelpInstructions">Instructions</string>
+	<string name="HelpBonus">Bonus</string>
+	<string name="HelpAbout">A propos</string>
 
 </resources>
