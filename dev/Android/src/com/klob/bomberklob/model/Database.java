@@ -245,8 +245,7 @@ public class Database extends SQLiteOpenHelper{
 
 		this.base = this.getReadableDatabase();
 
-		String[] colonnes={"pseudo"};
-		Cursor cursor = base.query("UserAccounts", colonnes, null, null, null, null, null);
+		Cursor cursor = this.base.rawQuery("SELECT pseudo FROM UserAccounts", null);
 		if (cursor.moveToFirst()) {
 			do {
 				spinnerArray.add(cursor.getString(0));
