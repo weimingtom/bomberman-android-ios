@@ -5,7 +5,6 @@ import java.util.Locale;
 import java.util.Vector;
 
 import android.content.Context;
-import com.klob.bomberklob.Database.Database;
 
 public class Model {
 
