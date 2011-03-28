@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/background">
         
-        <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center_horizontal" android:layout_centerInParent="true" android:background="@color/Grey" android:layout_width="wrap_content">
+        <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center_horizontal" android:layout_centerInParent="true" android:layout_width="wrap_content">
 			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/boutonSolo" android:text="@string/HomeButtonSinglePlayer"></Button>
 			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonMulti" android:text="@string/HomeButtonMultiPlayer"></Button>
 			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonOptions" android:text="@string/HomeButtonOptions"></Button>
@@ -10,7 +10,7 @@
 			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/buttonAide" android:text="@string/HomeButtonHelp"></Button>
 		</LinearLayout>
         
-        <LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/linearLayout2" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:background="@color/Grey">
+        <LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/linearLayout2" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true">
 	        <Spinner android:id="@+id/accounts" 
 	        	android:layout_gravity="center_horizontal"
 				android:layout_weight="1"
@@ -25,5 +25,6 @@
 				android:layout_gravity="center_vertical" android:layout_marginLeft="10px"
 			/>
         </LinearLayout>
+        <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_centerInParent="true" android:src="@drawable/gamename"></ImageView>
         
     </RelativeLayout>
