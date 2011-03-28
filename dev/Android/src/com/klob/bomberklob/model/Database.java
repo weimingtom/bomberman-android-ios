@@ -28,7 +28,13 @@ public class Database extends SQLiteOpenHelper{
 		
 		int res = -1;
 		this.base = this.getReadableDatabase();
-		res = this.base.rawQuery("SELECT lastUser FROM System", null).getInt(0);
+		
+		Cursor cursor = this.base.rawQuery("SELECT lastUser FROM System", null);
+		if (cursor.moveToFirst()) {
+			res = cursor.getInt(0);
+		}
+
+		cursor.close();
 		this.close();
 		
 		return res;
@@ -37,9 +43,14 @@ public class Database extends SQLiteOpenHelper{
 	public String getLanguage() {
 		
 		String res = null;
-		
 		this.base = this.getReadableDatabase();
-		res = this.base.rawQuery("SELECT language FROM System", null).getString(0);
+
+		Cursor cursor = this.base.rawQuery("SELECT language FROM System", null);
+		if (cursor.moveToFirst()) {
+			res = cursor.getString(0);
+		}
+
+		cursor.close();
 		this.close();
 		
 		return res;
@@ -49,7 +60,13 @@ public class Database extends SQLiteOpenHelper{
 		
 		int res = 50;
 		this.base = this.getReadableDatabase();
-		res = this.base.rawQuery("SELECT volume FROM System", null).getInt(0);
+		
+		Cursor cursor = this.base.rawQuery("SELECT volume FROM System", null);
+		if (cursor.moveToFirst()) {
+			res = cursor.getInt(0);
+		}
+
+		cursor.close();	
 		this.close();
 		
 		return res;
