@@ -29,6 +29,8 @@
 		<activity android:screenOrientation="portrait" android:name="Statistics"></activity>
 		<activity android:screenOrientation="portrait" android:name="Help"></activity>
 		<activity android:screenOrientation="portrait" android:name="ChangePasswordMultiplayer"></activity>
+		<activity android:name="CreateMap" android:screenOrientation="portrait"></activity>
+		<activity android:name="MapEditor" android:screenOrientation="landscape"></activity>
 
 	</application>
 </manifest>

@@ -32,7 +32,7 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 	private Model model;
 	
 	private Button cancel;
-	private Button lancer;
+	private Button create;
 	private Gallery gallery;
 	private TextView mapName;
 	
@@ -63,28 +63,28 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println(this.model.getSystem().getLanguage());
         
-        cancel = (Button)findViewById(R.id.SinglePlayerGameButtonCancel);
-		cancel.setOnClickListener(this);
+        this.cancel = (Button)findViewById(R.id.SinglePlayerGameButtonCancel);
+        this.cancel.setOnClickListener(this);
 		
-		lancer = (Button)findViewById(R.id.SinglePlayerGameButtonGo);
-		lancer.setOnClickListener(this);
+        this.create = (Button)findViewById(R.id.SinglePlayerGameButtonGo);
+        this.create.setOnClickListener(this);
 		
-		typePartieSP = (Spinner) findViewById(R.id.typePartie);
-		nbEnnemisSP  = (Spinner) findViewById(R.id.nbEnnemis);
-		difficulteSP = (Spinner) findViewById(R.id.difficulte);
-			
-		mapName = (TextView) findViewById(R.id.nomMap);
+        this.typePartieSP = (Spinner) findViewById(R.id.typePartie);
+        this.nbEnnemisSP  = (Spinner) findViewById(R.id.nbEnnemis);
+        this.difficulteSP = (Spinner) findViewById(R.id.difficulte);
 
 		getMap();
 		
 		// Pour la Gallery
-		gallery = (Gallery) findViewById(R.id.galleryz);
-		gallery.setAdapter(new ImageAdapter(this, this.mapBitmap));
+		this.gallery = (Gallery) findViewById(R.id.galleryz);
+		this.gallery.setAdapter(new ImageAdapter(this, this.mapBitmap));
 		
-		gallery.setOnItemClickListener(new OnItemClickListener() {
+        this.mapName = (TextView) findViewById(R.id.nomMap);
+        // FIXME
+        this.mapName.setText(mapBitmap[0]);
+		
+		this.gallery.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             	mapName.setText(mapBitmap[position]);
@@ -188,7 +188,7 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 		
 		Intent intent = null;
 		
-		if(view == lancer){
+		if(view == create){
 			String typeP = typePartieSP.getSelectedItem().toString();
 			String ennemis = nbEnnemisSP.getSelectedItem().toString();
 			String difficulte = difficulteSP.getSelectedItem().toString();

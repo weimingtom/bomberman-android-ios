@@ -95,6 +95,11 @@
 	<string name="ChangePasswordMultiplayerTextOldPass">Old Password</string>
 	<string name="ChangePasswordMultiplayerTextNewPass">New Password</string>
 	<string name="ChangePasswordMultiplayerTextConfirmPass">Confirm password</string>
+
+	<!-- Create Map -->
+	
+	<string name="CreateMapTextViewName">Map name</string>
+	<string name="CreateMapButtonLoad">Load Map</string>
 	
 	<!-- Statistics -->
 	

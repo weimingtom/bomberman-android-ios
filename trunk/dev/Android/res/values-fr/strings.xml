@@ -93,6 +93,11 @@
 	<string name="ChangePasswordMultiplayerTextOldPass">Ancien mot de passe</string>
 	<string name="ChangePasswordMultiplayerTextNewPass">Nouveau mot de passe</string>
 	<string name="ChangePasswordMultiplayerTextConfirmPass">Confirmer le mot de passe</string>
+
+	<!-- Create Map -->
+	
+	<string name="CreateMapTextViewName">Nom de la carte</string>
+	<string name="CreateMapButtonLoad">Charger une carte</string>
 	
 	<!-- Statistics -->
 	
