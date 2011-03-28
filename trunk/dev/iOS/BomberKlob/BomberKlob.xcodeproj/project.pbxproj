@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		187A72D6134117650020D828 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A72D5134117650020D828 /* Application.m */; };
+		187A72D9134117800020D828 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A72D8134117800020D828 /* User.m */; };
+		187A72E81341312D0020D828 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A72E61341312D0020D828 /* MainMenuViewController.m */; };
+		187A72EA1341315C0020D828 /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187A72EC1341315C0020D828 /* MainMenuViewController.xib */; };
 		18885582134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18885580134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m */; };
 		18885586134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18885588134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib */; };
 		18C839C913410263001D5747 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C839C813410263001D5747 /* UIKit.framework */; };
@@ -19,6 +23,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		187A72D4134117650020D828 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
+		187A72D5134117650020D828 /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
+		187A72D7134117800020D828 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		187A72D8134117800020D828 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		187A72E51341312D0020D828 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		187A72E61341312D0020D828 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
+		187A72EB1341315C0020D828 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenuViewController.xib; sourceTree = "<group>"; };
+		187A72F5134131D00020D828 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file; name = fr; path = fr.lproj/CreateAccountOfflineMenuViewController.xib; sourceTree = "<group>"; };
+		187A72F613413DCA0020D828 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1888557F134106E500DA88B9 /* CreateAccountOfflineMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountOfflineMenuViewController.h; sourceTree = "<group>"; };
 		18885580134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountOfflineMenuViewController.m; sourceTree = "<group>"; };
 		18885587134107BE00DA88B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CreateAccountOfflineMenuViewController.xib; sourceTree = "<group>"; };
@@ -49,6 +62,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		187A72D2134117400020D828 /* ModelMenu */ = {
+			isa = PBXGroup;
+			children = (
+				187A72D4134117650020D828 /* Application.h */,
+				187A72D5134117650020D828 /* Application.m */,
+				187A72D7134117800020D828 /* User.h */,
+				187A72D8134117800020D828 /* User.m */,
+			);
+			name = ModelMenu;
+			sourceTree = "<group>";
+		};
+		187A72E2134131020020D828 /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				187A72E51341312D0020D828 /* MainMenuViewController.h */,
+				187A72E61341312D0020D828 /* MainMenuViewController.m */,
+				187A72EC1341315C0020D828 /* MainMenuViewController.xib */,
+			);
+			name = MainMenu;
+			sourceTree = "<group>";
+		};
 		18819AC8134103CA00CBAF1D /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +132,8 @@
 		18C839CE13410263001D5747 /* BomberKlob */ = {
 			isa = PBXGroup;
 			children = (
+				187A72D2134117400020D828 /* ModelMenu */,
+				187A72E2134131020020D828 /* MainMenu */,
 				188855851341071700DA88B9 /* CreateAccountMenu */,
 				18819AC8134103CA00CBAF1D /* AppDelegate */,
 				18C839DA13410263001D5747 /* MainWindow.xib */,
@@ -148,6 +184,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				fr,
 			);
 			mainGroup = 18C839B913410263001D5747;
 			productRefGroup = 18C839C513410263001D5747 /* Products */;
@@ -167,6 +204,7 @@
 				18C839D313410263001D5747 /* InfoPlist.strings in Resources */,
 				18C839DC13410263001D5747 /* MainWindow.xib in Resources */,
 				18885586134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib in Resources */,
+				187A72EA1341315C0020D828 /* MainMenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,16 +218,28 @@
 				18C839D613410263001D5747 /* main.m in Sources */,
 				18C839D913410263001D5747 /* BomberKlobAppDelegate.m in Sources */,
 				18885582134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m in Sources */,
+				187A72D6134117650020D828 /* Application.m in Sources */,
+				187A72D9134117800020D828 /* User.m in Sources */,
+				187A72E81341312D0020D828 /* MainMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		187A72EC1341315C0020D828 /* MainMenuViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				187A72EB1341315C0020D828 /* en */,
+			);
+			name = MainMenuViewController.xib;
+			sourceTree = "<group>";
+		};
 		18885588134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				18885587134107BE00DA88B9 /* en */,
+				187A72F5134131D00020D828 /* fr */,
 			);
 			name = CreateAccountOfflineMenuViewController.xib;
 			sourceTree = "<group>";
@@ -198,6 +248,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				18C839D213410263001D5747 /* en */,
+				187A72F613413DCA0020D828 /* fr */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
