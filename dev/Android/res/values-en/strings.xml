@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">Klob</string>
-
-	<color name="Grey">#616161</color>
-	<string name="accueilPrompt">Veuillez choisir un compte</string>
-	<string name="MultiPlayerConnectionErrorAutoConnection">The username or password is empty</string>
-	<string name="SinglePlayerGameErrorLoadingMap">Maps directory missing</string>
-	<string name="ProfilManagementErrorPseudo">This pseudo is already used</string>
 	
 	<!-- Global -->
 	
@@ -31,6 +25,8 @@
 	<string name="HomeButtonCreatingLevel">Creating Level</string>
 	<string name="HomeButtonHelp">Help</string>
 	
+	<string name="HommeSpinnerChooseUserText">Please choose an account</string>
+	
 	<!-- SinglePlayer -->
 	
 	<string name="SinglePlayerGameType">Game Type</string>
@@ -49,10 +45,14 @@
 		<item>normal</item>
 		<item>hard</item>
 	</string-array>
+
+	<string name="SinglePlayerGameErrorLoadingMap">Maps directory missing</string>
 	
 	<!-- Multiplayer -->
 	
 	<string name="MultiplayerButtonNewAccount">New Account</string>
+	
+	<string name="MultiPlayerConnectionErrorAutoConnection">The username or password is empty</string>
 	
 	<!-- NewAccountOnline -->
 	
@@ -85,5 +85,27 @@
 		<item>Right-handed</item>
 		<item>Left-handed</item>
 	</string-array>
+	
+	<string name="ProfilManagementErrorPseudo">This pseudo is already used</string>
+	
+	
+	<!-- Change Password Multiplayer -->
+	
+	<string name="ChangePasswordMultiplayerTextUserName">User name</string>
+	<string name="ChangePasswordMultiplayerTextOldPass">Old Password</string>
+	<string name="ChangePasswordMultiplayerTextNewPass">New Password</string>
+	<string name="ChangePasswordMultiplayerTextConfirmPass">Confirm password</string>
+	
+	<!-- Statistics -->
+	
+	<string name="StatisticsGamesWon">Games won</string>
+	<string name="StatisticsGamesLost">Games lost</string>
+	
+	<!-- Help -->
+	
+	<string name="HelpGoal">Goal of the game</string>
+	<string name="HelpInstructions">Instructions</string>
+	<string name="HelpBonus">Bonus</string>
+	<string name="HelpAbout">About</string>
 
 </resources>

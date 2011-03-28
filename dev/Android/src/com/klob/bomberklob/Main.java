@@ -9,6 +9,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
@@ -33,6 +34,10 @@ public class Main extends Activity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+//		DisplayMetrics dm = new DisplayMetrics();
+//		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
+//		System.out.println("HEIGHT " + dm.heightPixels);
 		
 		setVolumeControlStream(this.model.getSystem().getVolume()); //FIXME correct ?
 		

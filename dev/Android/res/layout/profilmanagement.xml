@@ -1,11 +1,11 @@
 
-    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/background">
         <RelativeLayout android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:id="@+id/relativeLayout2" android:layout_width="match_parent">
-            <Button android:layout_alignParentLeft="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ProfilManagementButtonCancel" android:text="@string/ButtonCancel"></Button>
+            <Button android:layout_alignParentLeft="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/ButtonCancel" android:id="@+id/ProfilManagementButtonCancel"></Button>
             <Button android:layout_alignParentRight="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ProfilManagementButtonValidate" android:text="@string/ButtonValidate"></Button>
         </RelativeLayout>
         <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_centerInParent="true" android:orientation="vertical" android:layout_width="match_parent" android:gravity="center_horizontal">
-            <LinearLayout android:layout_height="wrap_content" android:gravity="center_horizontal" android:layout_width="wrap_content" android:orientation="vertical" android:id="@+id/ProfilLayoutSolo" android:background="@color/Grey">
+            <LinearLayout android:layout_height="wrap_content" android:gravity="center_horizontal" android:layout_width="wrap_content" android:orientation="vertical" android:id="@+id/ProfilLayoutSolo" >
                 <TextView android:layout_height="wrap_content" android:id="@+id/textView1" android:layout_width="wrap_content" android:text="@string/HomeButtonSinglePlayer"></TextView>
                 <TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/tableLayout1">
                     <TableRow android:id="@+id/tableRow1" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_width="wrap_content">
@@ -18,22 +18,23 @@
                     </TableRow>
                 </TableLayout>
             </LinearLayout>
-            <LinearLayout android:layout_height="wrap_content" android:orientation="vertical" android:layout_width="wrap_content" android:gravity="center_horizontal" android:id="@+id/ProfilMultiLayout" android:background="@color/Grey">
+            <LinearLayout android:layout_height="wrap_content" android:orientation="vertical" android:layout_width="wrap_content" android:gravity="center_horizontal" android:id="@+id/ProfilMultiLayout">
                 <TextView android:layout_width="wrap_content" android:id="@+id/textView4" android:text="@string/HomeButtonMultiPlayer" android:layout_height="wrap_content"></TextView>
                 <LinearLayout android:id="@+id/linearLayout6" android:layout_height="wrap_content" android:layout_width="wrap_content">
                     <TextView android:layout_height="wrap_content" android:id="@+id/textView5" android:layout_width="wrap_content" android:text="@string/TextUserName"></TextView>
                     <TextView android:layout_width="wrap_content" android:text="" android:id="@+id/ProfilManagementUserName" android:layout_height="wrap_content"></TextView>
                 </LinearLayout>
                 <LinearLayout android:id="@+id/linearLayout5" android:layout_height="wrap_content" android:gravity="center_horizontal" android:layout_width="wrap_content">
-                    <Button android:layout_height="wrap_content" android:id="@+id/button2" android:layout_width="wrap_content" android:text="@string/ProfilManagementButtonEdit"></Button>
-                    <Button android:layout_height="wrap_content" android:id="@+id/button1" android:layout_width="wrap_content" android:text="@string/ProfilManagementButtonOnlineAccount"></Button>
+                    <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/ProfilManagementButtonEdit" android:id="@+id/ProfilManagementButtonEdit"></Button>
+                    <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/ProfilManagementButtonOnlineAccount" android:id="@+id/ProfilManagementButtonChange"></Button>
                 </LinearLayout>
-                <CheckBox android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/NewAccountOnLineCheckBoxConnection" android:text="@string/CheckBoxConnectionAuto"></CheckBox>
-                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/NewAccountOnLineCheckBoxPassword" android:text="@string/CheckBoxRememberPassword"></CheckBox>
+                <CheckBox android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/CheckBoxConnectionAuto" android:id="@+id/ProfilManagementCheckBoxConnection"></CheckBox>
+                <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/CheckBoxRememberPassword" android:id="@+id/ProfilManagementCheckBoxPassword"></CheckBox>
             </LinearLayout>
-            <LinearLayout android:layout_width="wrap_content" android:id="@+id/linearLayout4" android:layout_height="wrap_content" android:gravity="center_vertical" android:background="@color/Grey">
+            <LinearLayout android:layout_width="wrap_content" android:id="@+id/linearLayout4" android:layout_height="wrap_content" android:gravity="center_vertical">
                 <TextView android:id="@+id/textView6" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/ProfilManagementType"></TextView>
                 <Spinner android:id="@+id/spinner1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:entries="@array/type"></Spinner>
             </LinearLayout>
         </LinearLayout>
+        <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_centerInParent="true" android:src="@drawable/gamename"></ImageView>
     </RelativeLayout>

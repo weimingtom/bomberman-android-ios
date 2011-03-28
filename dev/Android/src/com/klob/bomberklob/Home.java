@@ -26,7 +26,7 @@ public class Home extends Activity implements View.OnClickListener{
 	private Button singlePlayer;
 	private Button multiPlayer;
 	private Button options;
-	private Button stats;
+	private Button statistics;
 	private Button createLevel;
 	private Button help;
 	
@@ -49,18 +49,18 @@ public class Home extends Activity implements View.OnClickListener{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        
-		this.singlePlayer = (Button)findViewById(R.id.boutonSolo);        
-		this.multiPlayer = (Button)findViewById(R.id.buttonMulti);
-		this.options = (Button)findViewById(R.id.buttonOptions);
-		this.stats = (Button)findViewById(R.id.buttonStats);
-		this.createLevel = (Button)findViewById(R.id.buttonCreerNiveaux);
-		this.help = (Button)findViewById(R.id.buttonAide);
+		
+		this.singlePlayer = (Button)findViewById(R.id.HomeButtonSolo);        
+		this.multiPlayer = (Button)findViewById(R.id.HomeButtonMulti);
+		this.options = (Button)findViewById(R.id.HomeButtonOptions);
+		this.statistics = (Button)findViewById(R.id.HomeButtonStatistics);
+		this.createLevel = (Button)findViewById(R.id.HomeButtonCreatingLevel);
+		this.help = (Button)findViewById(R.id.HomeButtonHelp);
         
 		this.singlePlayer.setOnClickListener(this);
 		this.multiPlayer.setOnClickListener(this);
 		this.options.setOnClickListener(this);
-		this.stats.setOnClickListener(this);       
+		this.statistics.setOnClickListener(this);       
 		this.createLevel.setOnClickListener(this);
 		this.help.setOnClickListener(this);
         
@@ -85,9 +85,6 @@ public class Home extends Activity implements View.OnClickListener{
         
         this.addAccount = (ImageButton) findViewById(R.id.addAccount);
         this.addAccount.setOnClickListener(this);  
-        
-        System.out.println("Langue " +this.getResources().getConfiguration().locale);
-        System.out.println("Langue " +this.model.getSystem().getLocalLanguage());
     }
     
     @Override
@@ -98,7 +95,7 @@ public class Home extends Activity implements View.OnClickListener{
 	
 	@Override
 	protected void onDestroy(){
-		Log.i("Home", "onDestroy Accueil");
+		Log.i("Home", "onDestroy");
 		super.onDestroy();
 	}
 	
@@ -120,9 +117,6 @@ public class Home extends Activity implements View.OnClickListener{
 		
 		Intent intent = null;
 		
-		System.out.println("Langue " +this.getResources().getConfiguration().locale);
-        System.out.println("Langue " +this.model.getSystem().getLocalLanguage());
-		
 		if ( this.addAccount == v ) {
 			intent = new Intent(Home.this, NewAccountOffline.class);
 		}
@@ -134,6 +128,12 @@ public class Home extends Activity implements View.OnClickListener{
 		}
 		else if ( this.options == v ) {
 			intent = new Intent(Home.this, Options.class);
+		}
+		else if ( this.statistics == v ) {
+			intent = new Intent(Home.this, Statistics.class);
+		}
+		else if ( this.help == v ) {
+			intent = new Intent(Home.this, Help.class);
 		}
 		
 		if ( null != intent) {

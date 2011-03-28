@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
         
-        <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:gravity="center_vertical|center_horizontal" android:layout_centerInParent="true" android:background="@color/Grey">
+        <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:gravity="center_vertical|center_horizontal" android:layout_centerInParent="true">
             <Gallery android:gravity="bottom" android:layout_height="wrap_content" android:id="@+id/galleryz" android:layout_width="fill_parent"></Gallery>
             <TextView android:layout_height="wrap_content" android:id="@+id/nomMap" android:layout_width="wrap_content" android:text="nom de la map"></TextView>
         
@@ -24,7 +24,7 @@
         </LinearLayout>
         
         
-        <RelativeLayout android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:id="@+id/relativeLayout2" android:layout_width="match_parent" android:background="@color/Grey">
+        <RelativeLayout android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:id="@+id/relativeLayout2" android:layout_width="match_parent">
             <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Lancer" android:id="@+id/boutonLancer" android:layout_alignParentRight="true"></Button>
             <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Retour" android:id="@+id/boutonRetour"></Button>
         </RelativeLayout>    

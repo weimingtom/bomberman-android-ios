@@ -1,0 +1,11 @@
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/relativeLayout1" android:background="@drawable/background" android:layout_height="fill_parent" android:layout_width="fill_parent">
+        <Button android:layout_width="wrap_content" android:layout_alignParentBottom="true" android:layout_height="wrap_content" android:text="@string/ButtonCancel" android:id="@+id/HelpButtonCancel"></Button>
+        <LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/linearLayout1" android:layout_centerInParent="true" android:layout_alignParentTop="false" android:orientation="vertical" android:gravity="center_horizontal">
+            <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/HelpGoal" android:id="@+id/HelpButtonGoalOfTheGame"></Button>
+            <Button android:text="@string/HelpInstructions" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/HelpButtonInstructions"></Button>
+            <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/HelpBonus" android:id="@+id/HelpButtonBonus"></Button>
+            <Button android:layout_height="wrap_content" android:id="@+id/HelpButtonAbout" android:layout_width="wrap_content" android:text="@string/HelpAbout"></Button>
+        </LinearLayout>
+        <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_centerInParent="true" android:layout_alignParentTop="true" android:src="@drawable/gamename"></ImageView>
+    </RelativeLayout>

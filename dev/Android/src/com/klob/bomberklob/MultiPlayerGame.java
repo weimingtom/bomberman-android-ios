@@ -9,9 +9,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -79,9 +81,29 @@ public class MultiPlayerGame extends Activity implements View.OnClickListener {
 
 		this.userAccountName = (EditText) findViewById(R.id.MultiPlayerGameEditTextName);
 		this.userAccountName.setText(this.model.getUser().getUserName());
+		this.userAccountName.setOnKeyListener(new OnKeyListener() {
+        	
+            @Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                	return true;
+                }
+                return false;
+            }
+        });
 		
 		this.userAccountPassword = (EditText) findViewById(R.id.MultiPlayerGameEditTextPassword);
 		this.userAccountPassword.setText(this.model.getUser().getPassword());
+		this.userAccountPassword.setOnKeyListener(new OnKeyListener() {
+        	
+            @Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                	return true;
+                }
+                return false;
+            }
+        });
 		
 		this.connectionAuto = (CheckBox) findViewById(R.id.MultiPlayerGameCheckBoxConnection);
 		this.connectionAuto.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
@@ -132,14 +154,24 @@ public class MultiPlayerGame extends Activity implements View.OnClickListener {
 		
 		Intent intent = null;
 		
-		this.model.getUser().setUserName(this.userAccountName.getText().toString());
+		if ( !this.userAccountName.getText().toString().equals("") && !this.model.getUser().getUserName().equals(this.userAccountName.getText().toString()) ) {		
+			this.model.getUser().setUserName(this.userAccountName.getText().toString());
+		}
+		
+		if (this.model.getUser().getRemenberPassword() ) {
+			// FIXME Encoder le mdp
+			this.model.getUser().setPassword(this.userAccountPassword.getText().toString());			
+		}
+
 		this.model.getSystem().getDatabase().updateUser(this.model.getUser());
 		
 		if(view == this.connection){
-			if ( this.model.getUser().getRemenberPassword() ) {
-				
+			if ( !this.model.getUser().getUserName().equals("") && !this.model.getUser().getPassword().equals("")) {
+				//FIXME Appeler le serveur
 			}
-			//FIXME Appeler le serveur
+			else {
+				Toast.makeText(MultiPlayerGame.this, R.string.MultiPlayerConnectionErrorAutoConnection , Toast.LENGTH_SHORT).show();
+			}
 		}
 		else if(view == this.newAccount){
 			intent = new Intent(MultiPlayerGame.this, NewAccountOnLine.class);
