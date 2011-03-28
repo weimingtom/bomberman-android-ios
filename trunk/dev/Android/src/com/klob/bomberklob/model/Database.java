@@ -1,8 +1,7 @@
-package com.klob.bomberklob.Database;
+package com.klob.bomberklob.model;
 
 import java.util.ArrayList;
 
-import com.klob.bomberklob.model.User;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -29,14 +28,7 @@ public class Database extends SQLiteOpenHelper{
 		
 		int res = -1;
 		this.base = this.getReadableDatabase();
-		
-		String[] colonnes={"lastUser"};
-		Cursor cursor = base.query("System", colonnes, null, null, null, null, null);
-		if (cursor.moveToFirst()) {
-			res = cursor.getInt(0);
-		}
-
-		cursor.close();
+		res = this.base.rawQuery("SELECT lastUser FROM System", null).getInt(0);
 		this.close();
 		
 		return res;
@@ -45,15 +37,9 @@ public class Database extends SQLiteOpenHelper{
 	public String getLanguage() {
 		
 		String res = null;
-		this.base = this.getReadableDatabase();
 		
-		String[] colonnes={"language"};
-		Cursor cursor = base.query("System", colonnes, null, null, null, null, null);
-		if (cursor.moveToFirst()) {
-			res = cursor.getString(0);
-		}
-
-		cursor.close();
+		this.base = this.getReadableDatabase();
+		res = this.base.rawQuery("SELECT language FROM System", null).getString(0);
 		this.close();
 		
 		return res;
@@ -63,14 +49,7 @@ public class Database extends SQLiteOpenHelper{
 		
 		int res = 50;
 		this.base = this.getReadableDatabase();
-		
-		String[] colonnes={"volume"};
-		Cursor cursor = base.query("System", colonnes, null, null, null, null, null);
-		if (cursor.moveToFirst()) {
-			res = cursor.getInt(0);
-		}
-
-		cursor.close();
+		res = this.base.rawQuery("SELECT volume FROM System", null).getInt(0);
 		this.close();
 		
 		return res;
@@ -126,25 +105,21 @@ public class Database extends SQLiteOpenHelper{
 	
 	public void setVolume(int volume) {
 		this.base = this.getReadableDatabase();
-		Cursor cursor = this.base.rawQuery("SELECT volume FROM System", null);
-		if (cursor.moveToFirst()) {
-			ContentValues entree = new ContentValues();
-			entree.put("volume", volume);
-			this.base.update("System", entree, null, null);
-		}
-		cursor.close();
+
+		ContentValues entree = new ContentValues();
+		entree.put("volume", volume);
+		this.base.update("System", entree, null, null);
+		
 		this.close();
 	}
 	
 	public void setLanguage(String language) {
 		this.base = this.getReadableDatabase();
-		Cursor cursor = this.base.rawQuery("SELECT language FROM System", null);
-		if (cursor.moveToFirst()) {
-			ContentValues entree = new ContentValues();
-			entree.put("language", language);
-			this.base.update("System", entree, null, null);
-		}
-		cursor.close();
+
+		ContentValues entree = new ContentValues();
+		entree.put("language", language);
+		this.base.update("System", entree, null, null);
+
 		this.close();
 	}
 	 
