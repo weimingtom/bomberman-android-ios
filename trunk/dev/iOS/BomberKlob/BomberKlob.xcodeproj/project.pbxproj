@@ -14,8 +14,6 @@
 		18C839D613410263001D5747 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C839D513410263001D5747 /* main.m */; };
 		18C839D913410263001D5747 /* BomberKlobAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C839D813410263001D5747 /* BomberKlobAppDelegate.m */; };
 		18C839DC13410263001D5747 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C839DA13410263001D5747 /* MainWindow.xib */; };
-		18C839DF13410263001D5747 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C839DE13410263001D5747 /* RootViewController.m */; };
-		18C839E213410263001D5747 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C839E013410263001D5747 /* RootViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,9 +28,6 @@
 		18C839D713410263001D5747 /* BomberKlobAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BomberKlobAppDelegate.h; sourceTree = "<group>"; };
 		18C839D813410263001D5747 /* BomberKlobAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BomberKlobAppDelegate.m; sourceTree = "<group>"; };
 		18C839DB13410263001D5747 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		18C839DD13410263001D5747 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		18C839DE13410263001D5747 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		18C839E113410263001D5747 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +44,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18819AC8134103CA00CBAF1D /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				18C839D713410263001D5747 /* BomberKlobAppDelegate.h */,
+				18C839D813410263001D5747 /* BomberKlobAppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
 		18C839B913410263001D5747 = {
 			isa = PBXGroup;
 			children = (
@@ -79,12 +83,8 @@
 		18C839CE13410263001D5747 /* BomberKlob */ = {
 			isa = PBXGroup;
 			children = (
-				18C839D713410263001D5747 /* BomberKlobAppDelegate.h */,
-				18C839D813410263001D5747 /* BomberKlobAppDelegate.m */,
+				18819AC8134103CA00CBAF1D /* AppDelegate */,
 				18C839DA13410263001D5747 /* MainWindow.xib */,
-				18C839DD13410263001D5747 /* RootViewController.h */,
-				18C839DE13410263001D5747 /* RootViewController.m */,
-				18C839E013410263001D5747 /* RootViewController.xib */,
 				18C839CF13410263001D5747 /* Supporting Files */,
 			);
 			path = BomberKlob;
@@ -150,7 +150,6 @@
 			files = (
 				18C839D313410263001D5747 /* InfoPlist.strings in Resources */,
 				18C839DC13410263001D5747 /* MainWindow.xib in Resources */,
-				18C839E213410263001D5747 /* RootViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,7 +162,6 @@
 			files = (
 				18C839D613410263001D5747 /* main.m in Sources */,
 				18C839D913410263001D5747 /* BomberKlobAppDelegate.m in Sources */,
-				18C839DF13410263001D5747 /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,14 +182,6 @@
 				18C839DB13410263001D5747 /* en */,
 			);
 			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		18C839E013410263001D5747 /* RootViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				18C839E113410263001D5747 /* en */,
-			);
-			name = RootViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -276,6 +266,7 @@
 				18C839E713410263001D5747 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
