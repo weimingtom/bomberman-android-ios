@@ -147,11 +147,7 @@ public class Map {
 	}
 	
 	public void destroyBlock(Point p) {
-		/* TODO lancer l'animation de destruction
-		if (this.blocks[p.x][p.y] instanceof Animated) {
-			this.blocks[p.x][p.y].setCurrentAnimation("destroy");
-		}
-		*/
+		this.blocks[p.x][p.y].destroy();
 	}
 	
 	public void onDraw(Canvas canvas) {
@@ -160,9 +156,6 @@ public class Map {
 				if ( this.grounds[i][j] != null ) {
 					this.grounds[i][j].onDraw(canvas);
 				}
-				// if (this.blocks[i][j] != null && this.blocks[i][j] instanceof Animated && this.blocks[i][j].hasAnimationFinished() && this.blocks[i][j].getCurrentAnimation().equals("destroy") ) {
-				//		this.deleteBlock(new Point(i,j));
-				// }
 				if ( this.blocks[i][j] != null ) {
 					this.blocks[i][j].onDraw(canvas);
 				}
