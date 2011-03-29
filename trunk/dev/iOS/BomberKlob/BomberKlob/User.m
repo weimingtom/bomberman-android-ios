@@ -18,7 +18,15 @@
     self = [super init];
     
     if (self) {
-        pseudo = @"Benjamin";
+        pseudo = @"Klob";
+        userName = nil;
+        password = nil;
+        connectionAuto = NO;
+        rembemberPassword = NO;
+        color = @"red";
+        menuPosition = @"right";
+        gameWon = 0;
+        gameLost = 0;
     }
     
     return self;
@@ -31,6 +39,11 @@
 
 
 - (void)dealloc {
+    [pseudo release];
+    [userName release];
+    [password release];
+    [color release];
+    [menuPosition release];
     [super dealloc];
 }
 
