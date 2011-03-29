@@ -155,7 +155,7 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
 			}
 		}    	
 		else if(v == this.changeAccount){
-			intent = new Intent(ProfilManagement.this, ChangerCompteMulti.class);
+			//intent = new Intent(ProfilManagement.this, ChangerCompteMulti.class);
 		}
 		else if( v == this.edit){
 			intent = new Intent(ProfilManagement.this, ChangePasswordMultiplayer.class);

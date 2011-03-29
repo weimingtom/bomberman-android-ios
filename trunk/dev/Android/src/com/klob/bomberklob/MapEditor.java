@@ -2,6 +2,7 @@ package com.klob.bomberklob;
 
 import java.io.IOException;
 
+import com.klob.bomberklob.engine.EditorView;
 import com.klob.bomberklob.model.Model;
 
 import android.app.Activity;
@@ -10,11 +11,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 
 public class MapEditor extends Activity implements View.OnClickListener {
 
 	private Model model;
+	private EditorView editorView;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
