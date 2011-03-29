@@ -87,7 +87,7 @@
     
     if ([pseudo.text isEqual:@""]) {
         UILabel *errorText = (UILabel *)[errorView.subviews objectAtIndex:0]; 
-        errorText.text = NSLocalizedString(@"Please enter a pseudo", @"Error message when creating an offline account");
+        errorText.text = NSLocalizedString(@"Please enter a pseudo.", @"Error message when creating an offline account");
         
         return NO;
     }
@@ -96,7 +96,7 @@
         
         if ([application pseudoAlreadyExists:pseudo.text]) {
             UILabel *errorText = (UILabel *)[errorView.subviews objectAtIndex:0]; 
-            errorText.text = NSLocalizedString(@"Pseudo already used", @"Error message when creating an offline account");
+            errorText.text = [NSString stringWithFormat: NSLocalizedString(@"'%@' is already used.", @"Error message when creating an offline account" ), pseudo.text];
             
             return NO;
         }
