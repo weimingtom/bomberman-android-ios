@@ -1,4 +1,4 @@
-package com.klob.bomberklob.engine;
+package com.klob.bomberklob.objects;
 
 import android.graphics.Canvas;
 

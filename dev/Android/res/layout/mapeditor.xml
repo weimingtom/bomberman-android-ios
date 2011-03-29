@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="fill_parent" android:layout_width="fill_parent" android:id="@+id/linearLayout1" android:orientation="vertical">
         <RelativeLayout android:id="@+id/relativeLayout1" android:layout_height="wrap_content" android:layout_width="match_parent">
-            <CheckBox android:layout_height="wrap_content" android:id="@+id/checkBox1" android:layout_width="wrap_content" android:layout_alignParentRight="true" android:text="CheckBox"></CheckBox>
-            <Button android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_width="wrap_content" android:id="@+id/button1" android:text="Button"></Button>
+            <CheckBox android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentRight="true" android:text="CheckBox" android:id="@+id/MapEditorCheckBoxGround"></CheckBox>
+            <Button android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_width="wrap_content" android:text="Button" android:id="@+id/MapEditorButtonMenu"></Button>
         </RelativeLayout>
         <RelativeLayout android:id="@+id/relativeLayout2" android:layout_width="match_parent" android:layout_height="match_parent">
             <LinearLayout android:layout_alignParentRight="true" android:layout_width="wrap_content" android:id="@+id/linearLayout2" android:layout_height="match_parent">
                 <Button android:text="Button" android:id="@+id/button2" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
             </LinearLayout>
-            <FrameLayout android:layout_alignParentLeft="true" android:layout_width="wrap_content" android:id="@+id/frameLayout1" android:layout_height="match_parent"></FrameLayout>
+            <FrameLayout android:layout_alignParentLeft="true" android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/MapEditorFrameLayout"></FrameLayout>
         </RelativeLayout>
     </LinearLayout>
