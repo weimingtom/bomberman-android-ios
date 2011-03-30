@@ -10,13 +10,14 @@ public class Model {
 
 	private static Model model;
 
-	private Vector<Map> map = new Vector<Map>();
+	private Vector<Map> map;
 	private System system;
 	private User user;
 
 	private Model (Context context) throws IOException {
 		this.system = new System(context);
 		this.user = this.system.getDatabase().getUser(this.system.getDatabase().getLastUser());
+		this.map = this.system.getDatabase().getMaps();
 	}
 	
 	/* Classes privées ----------------------------------------------------- */

@@ -31,7 +31,6 @@ public class MapEditor extends Activity implements View.OnClickListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
     }
     
     @Override

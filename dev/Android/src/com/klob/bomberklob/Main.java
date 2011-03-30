@@ -9,83 +9,105 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.klob.bomberklob.model.Model;
+import com.klob.bomberklob.resourcesmanager.ResourcesManager;
 
 public class Main extends Activity {
 
 	private Model model;
+	private Thread mainthread;
+	private Handler handler;
+	private Intent intent = null;
 
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
 
-		try {
-			this.model = Model.getInstance(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-//		DisplayMetrics dm = new DisplayMetrics();
-//		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
-//		System.out.println("HEIGHT " + dm.heightPixels);
-		
-		setVolumeControlStream(this.model.getSystem().getVolume()); //FIXME correct ?
-		
-		Intent intent = null;
-		Resources res = this.getResources();
-		Configuration conf = res.getConfiguration();
-		conf.locale = this.model.getSystem().getLocalLanguage();
-		res.updateConfiguration(conf, res.getDisplayMetrics());
-		try {
-			Context context = this.createPackageContext(getPackageName(), Context.CONTEXT_INCLUDE_CODE);
-			
-			if ( this.model.getSystem().getLastUser() == -1 ) {
-				intent = new Intent(context, CreateAccountOffline.class);
+
+		this.handler = new Handler() {
+			public void handleMessage(Message msg) {
+				if ( msg.what == 0 ) {
+					if ( intent != null ) {
+						startActivity(intent);
+						finish();	
+					}
+				}
 			}
-			else {
-				intent = new Intent(context, Home.class);
-			}
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
-		}
-    	
-		if ( intent != null ) {
-			startActivity(intent);
-			this.finish();	
-		}
+		};
+
+		this.mainthread = new Thread() {
+			public void run() {
+				ResourcesManager.getInstance(getApplicationContext());
+				try {
+					model = Model.getInstance(getApplicationContext());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				DisplayMetrics dm = new DisplayMetrics();
+				getWindowManager().getDefaultDisplay().getMetrics(dm);
+				System.out.println("DPI " + dm.toString());
+
+				Log.i("Main", "Volume : " + model.getSystem().getVolume());
+				setVolumeControlStream(model.getSystem().getVolume()); //FIXME correct ?
+
+				Resources res = getResources();
+				Configuration conf = res.getConfiguration();
+				conf.locale = model.getSystem().getLocalLanguage();
+				Log.i("Main", "Language : " + model.getSystem().getLocalLanguage());
+				res.updateConfiguration(conf, res.getDisplayMetrics());
+				try {
+					Context context = createPackageContext(getPackageName(), Context.CONTEXT_INCLUDE_CODE);
+
+					if ( model.getSystem().getLastUser() == -1 ) {
+						intent = new Intent(context, CreateAccountOffline.class);
+					}
+					else {
+						intent = new Intent(context, Home.class);
+					}
+				} catch (NameNotFoundException e) {
+					e.printStackTrace();
+				}
+				
+				handler.sendMessage(handler.obtainMessage(0));
+			};
+		};
+		this.mainthread.start();
 	}
-	
-    @Override
+
+	@Override
 	protected void onStop() {
 		Log.i("Main", "onStop");
 		super.onStop();
 	}
-	
+
 	@Override
 	protected void onDestroy(){
 		Log.i("Main", "onDestroy");
 		super.onDestroy();
 	}
-	
+
 	@Override
 	protected void onResume(){
 		Log.i("Main", "onResume");
 		super.onResume();
 	}
-	
+
 	@Override
 	protected void onPause(){
 		Log.i("Main", "onPause");
 		super.onPause();
 	} 
+
 }

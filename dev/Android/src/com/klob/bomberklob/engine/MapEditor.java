@@ -4,7 +4,22 @@ public class MapEditor {
 	
 	private Map map;
 	
-	public MapEditor (Map map) {
-		this.map =map;
+	/* Constructeur -------------------------------------------------------- */
+	
+	public MapEditor () {
+
 	}
+	
+	/* Getteurs ------------------------------------------------------------ */
+	
+	public Map getMap() {
+		return map;
+	}
+	
+	/* Setteurs ------------------------------------------------------------ */
+	
+	public void setMap(Map map) {
+		this.map = map;
+	}
+	
 }

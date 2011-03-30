@@ -25,7 +25,7 @@ public class EditorView extends SurfaceView implements SurfaceHolder.Callback {
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
-		
+		this.editorController.getMapEditor().getMap().onDraw(canvas);
 	}
 	
 	@Override
