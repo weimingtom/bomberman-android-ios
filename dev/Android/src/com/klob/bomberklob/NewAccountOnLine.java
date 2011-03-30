@@ -8,6 +8,8 @@ import com.klob.bomberklob.model.Model;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -51,46 +53,30 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		InputFilter filter = new InputFilter() {
+		    public CharSequence filter(CharSequence source, int start, int end,Spanned dest, int dstart, int dend) { 
+		        for (int i = start; i < end; i++) { 
+		             if (!Character.isLetterOrDigit(source.charAt(i)) && Character.isSpaceChar(source.charAt(i))) { 
+		                 return "";     
+		             }     
+		        }		       
+		        return null;   
+		    }  
+		};
 
 		this.userPseudo = (TextView) findViewById(R.id.NewAccountOnLineUserName);
 		this.userPseudo.setText(this.model.getUser().getPseudo());
 
 		this.userAccountName = (EditText) findViewById(R.id.NewAccountOnLineEditTextName);
 		this.userAccountName.setText(this.model.getUser().getUserName());
-		this.userAccountName.setOnKeyListener(new OnKeyListener() {
-        	
-            @Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                	return true;
-                }
-                return false;
-            }
-        });
+		this.userAccountName.setFilters(new InputFilter[]{filter});
 		
 		this.userAccountPassword1 = (EditText) findViewById(R.id.NewAccountOnLineEditTextPassword1);
-		this.userAccountPassword1.setOnKeyListener(new OnKeyListener() {
-        	
-            @Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                	return true;
-                }
-                return false;
-            }
-        });
+		this.userAccountPassword1.setFilters(new InputFilter[]{filter});
 		
 		this.userAccountPassword2 = (EditText) findViewById(R.id.NewAccountOnLineEditTextPassword2);
-		this.userAccountPassword2.setOnKeyListener(new OnKeyListener() {
-        	
-            @Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                	return true;
-                }
-                return false;
-            }
-        });
+		this.userAccountPassword2.setFilters(new InputFilter[]{filter});
 
 		this.validate = (Button)findViewById(R.id.NewAccountOnLineButtonConnection);
 		this.validate.setOnClickListener(this);
@@ -169,7 +155,7 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 
 		if( view == this.validate ) {
 			
-			if ( !this.userAccountName.getText().toString().equals("")  && !this.userAccountPassword1.getText().toString().equals("")) {
+			if ( !this.userAccountName.getText().toString().equals("") && !this.userAccountPassword1.getText().toString().equals("")) {
 				if ( !this.userAccountPassword1.getText().toString().equals(this.userAccountPassword2.getText().toString()) ) {
 					this.model.getUser().setUserName(this.userAccountName.getText().toString());
 					
@@ -197,6 +183,5 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 			startActivity(intent);
 			this.finish();
 		}
-
 	}
 }

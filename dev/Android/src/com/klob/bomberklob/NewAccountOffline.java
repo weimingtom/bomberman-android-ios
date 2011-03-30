@@ -7,6 +7,8 @@ import com.klob.bomberklob.model.Model;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -38,11 +40,23 @@ public class NewAccountOffline extends Activity implements View.OnClickListener{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		InputFilter filter = new InputFilter() {
+		    public CharSequence filter(CharSequence source, int start, int end,Spanned dest, int dstart, int dend) { 
+		        for (int i = start; i < end; i++) { 
+		             if (!Character.isLetterOrDigit(source.charAt(i)) && Character.isSpaceChar(source.charAt(i))) { 
+		                 return "";     
+		             }     
+		        }		       
+		        return null;   
+		    }  
+		};
         
 		this.pseudo = (EditText) findViewById(R.id.NewAccountOfflineEditText);
 		this.cancel   = (Button) findViewById(R.id.NewAccountOfflineButtonCancel);
 		this.validate = (Button) findViewById(R.id.NewAccountOfflineButtonOk);
 		
+		this.pseudo.setFilters(new InputFilter[]{filter});
 		this.validate.setOnClickListener(this);
 		this.cancel.setOnClickListener(this);
 	}
