@@ -8,5 +8,7 @@ public abstract class Objects {
 	public void onDraw(Canvas canvas) {
 		
 	}
+	
+	public void destroy() {}
 
 }

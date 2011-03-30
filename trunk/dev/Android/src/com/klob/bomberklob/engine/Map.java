@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import com.klob.bomberklob.objects.Objects;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;

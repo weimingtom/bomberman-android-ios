@@ -1,7 +1,7 @@
 package com.klob.bomberklob.model;
 
 import java.util.ArrayList;
-
+import java.util.Vector;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -23,6 +23,25 @@ public class Database extends SQLiteOpenHelper{
     }
     
     /* Getteurs ------------------------------------------------------------ */
+    
+	public ArrayList<String> getAccounts(){
+		
+		ArrayList<String> spinnerArray = new ArrayList<String>();
+
+		this.base = this.getReadableDatabase();
+
+		Cursor cursor = this.base.rawQuery("SELECT pseudo FROM UserAccounts", null);
+		if (cursor.moveToFirst()) {
+			do {
+				spinnerArray.add(cursor.getString(0));
+			} while (cursor.moveToNext());
+		}
+
+		cursor.close();
+		this.close();
+
+		return spinnerArray;
+	}
     
 	public int getLastUser() {
 		
@@ -72,19 +91,36 @@ public class Database extends SQLiteOpenHelper{
 		return res;
 	}
 	
+	public Vector<Map> getMaps() {
+		
+		Vector<Map> vec = new Vector<Map>();
+		
+		this.base = this.getReadableDatabase();
+		Cursor cursor = this.base.rawQuery("SELECT * FROM Map", null);
+		if (cursor.moveToFirst()) {
+			do {
+				vec.add(new Map(cursor.getString(0), cursor.getString(1), (cursor.getInt(2) == 0 ? false : true)));
+			} while (cursor.moveToNext());
+		}
+		
+		cursor.close();
+		this.close();
+		
+		return vec;
+	}
+	
 	public User getUser(String pseudonymAccount) {
 		
 		User user = null;
 		this.base = this.getReadableDatabase();
 		Cursor cursor = this.base.rawQuery("SELECT * FROM UserAccounts WHERE pseudo ='"+pseudonymAccount+"' ", null);
+		System.out.println("CURSOR "+ cursor);
 		if (cursor.moveToFirst()) {
 			System.out.println(cursor.getString(1)+" "+cursor.getString(2)+" "+cursor.getString(3)+" "+cursor.getInt(4)+" "+cursor.getInt(5)+" "+cursor.getString(6)+" "+cursor.getString(7)+" "+cursor.getInt(8)+" "+cursor.getInt(9));
 			user = new User(cursor.getString(1), cursor.getString(2), cursor.getString(3), (cursor.getInt(4) == 0 ? false : true), (cursor.getInt(5) == 0 ? false : true), cursor.getString(6), cursor.getString(7), cursor.getInt(8), cursor.getInt(9));
 		}
 		cursor.close();
 		this.close();
-		
-		// FIXME Si user null lever exception ?
 		
 		return user;
 	}
@@ -100,8 +136,6 @@ public class Database extends SQLiteOpenHelper{
 		}
 		cursor.close();
 		this.close();
-		
-		// FIXME Si user null lever exception ?
 		
 		return user;
 	}
@@ -166,7 +200,7 @@ public class Database extends SQLiteOpenHelper{
 			");");
 		db.execSQL("CREATE TABLE Map (" +
 				"name CHAR NOT NULL," + 
-				"owner UNSIGNED INTEGER," +
+				"owner CHAR NOT NULL," +
 				"official UNSIGNED INTEGER," +
 				"FOREIGN KEY(owner) REFERENCES AccountPlayer(id)" +
 			")"
@@ -229,6 +263,14 @@ public class Database extends SQLiteOpenHelper{
 		return res == 0 ? true : false;
 	}
 	
+	public boolean existingMap(String mapName) {
+		this.base = this.getReadableDatabase();
+		int res = base.rawQuery("SELECT name FROM Map WHERE name ='"+mapName+"' ", null).getCount();
+		this.close();
+		
+		return res == 0 ? true : false;
+	}
+	
 	
     @Override
 	public synchronized void close() {
@@ -238,23 +280,4 @@ public class Database extends SQLiteOpenHelper{
     	super.close();
 	}
 	
-	
-	public ArrayList<String> accounts(){
-		
-		ArrayList<String> spinnerArray = new ArrayList<String>();
-
-		this.base = this.getReadableDatabase();
-
-		Cursor cursor = this.base.rawQuery("SELECT pseudo FROM UserAccounts", null);
-		if (cursor.moveToFirst()) {
-			do {
-				spinnerArray.add(cursor.getString(0));
-			} while (cursor.moveToNext());
-		}
-
-		cursor.close();
-		this.close();
-
-		return spinnerArray;
-	}
 }

@@ -12,16 +12,52 @@ public class EditorController extends Thread {
     private MapEditor mapEditor;
     private boolean run = false;
     
+    /* Constructeur -------------------------------------------------------- */
+    
     public EditorController(SurfaceHolder surfaceHolder, EditorView editorView) {
         this.surfaceHolder = surfaceHolder;
         this.editorView = editorView;
     }
 
-    public void setRunning(boolean run) {
-        this.run = run;
-    }
+    /* Getteurs ------------------------------------------------------------ */
+    
+    public SurfaceHolder getSurfaceHolder() {
+		return surfaceHolder;
+	}
 
-    @Override
+	public EditorView getEditorView() {
+		return editorView;
+	}
+
+	public MapEditor getMapEditor() {
+		return mapEditor;
+	}
+
+	public boolean isRun() {
+		return run;
+	}
+    
+    /* Setteurs ------------------------------------------------------------ */
+
+	public void setSurfaceHolder(SurfaceHolder surfaceHolder) {
+		this.surfaceHolder = surfaceHolder;
+	}
+
+	public void setEditorView(EditorView editorView) {
+		this.editorView = editorView;
+	}
+
+	public void setMapEditor(MapEditor mapEditor) {
+		this.mapEditor = mapEditor;
+	}
+
+	public void setRun(boolean run) {
+		this.run = run;
+	}
+	
+	/* Methodes publiques -------------------------------------------------- */
+
+	@Override
     public void run() {
         Canvas c;
         while (this.run) {
