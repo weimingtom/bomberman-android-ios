@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import com.klob.bomberklob.R;
+
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
@@ -80,3 +82,4 @@ public class ResourcesManager {
 		Log.i("ResourcesManager","Bitmaps Loaded ");
 	}
 }
+
