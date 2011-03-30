@@ -64,7 +64,7 @@ public class Home extends Activity implements View.OnClickListener{
 		this.help.setOnClickListener(this);
         
         this.accounts = (Spinner) findViewById( R.id.accounts );
-        ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, this.model.getSystem().getDatabase().accounts());
+        ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, this.model.getSystem().getDatabase().getAccounts());
         a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.accounts.setAdapter(a);
         this.accounts.setSelection(this.model.getSystem().getDatabase().getLastUser()-1);
