@@ -46,7 +46,7 @@
 		<item>difficile</item>
 	</string-array>
 	
-		<string name="SinglePlayerGameErrorLoadingMap">Répertoire des cartes manquant</string>
+	<string name="SinglePlayerGameErrorLoadingMap">Aucune carte trouvée !</string>
 	
 	<!-- Multiplayer -->
 	

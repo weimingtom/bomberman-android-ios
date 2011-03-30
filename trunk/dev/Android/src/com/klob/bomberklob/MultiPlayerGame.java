@@ -8,6 +8,8 @@ import com.klob.bomberklob.model.Model;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -78,32 +80,25 @@ public class MultiPlayerGame extends Activity implements View.OnClickListener {
 		if ( this.model.getUser().getRemenberPassword() ) {
 			this.password.setChecked(true);
 		}
+		
+		InputFilter filter = new InputFilter() {
+		    public CharSequence filter(CharSequence source, int start, int end,Spanned dest, int dstart, int dend) { 
+		        for (int i = start; i < end; i++) { 
+		             if (!Character.isLetterOrDigit(source.charAt(i)) && Character.isSpaceChar(source.charAt(i))) { 
+		                 return "";
+		             }     
+		        }		       
+		        return null;   
+		    }  
+		};
 
 		this.userAccountName = (EditText) findViewById(R.id.MultiPlayerGameEditTextName);
 		this.userAccountName.setText(this.model.getUser().getUserName());
-		this.userAccountName.setOnKeyListener(new OnKeyListener() {
-        	
-            @Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                	return true;
-                }
-                return false;
-            }
-        });
+		this.userAccountName.setFilters(new InputFilter[]{filter});
 		
 		this.userAccountPassword = (EditText) findViewById(R.id.MultiPlayerGameEditTextPassword);
 		this.userAccountPassword.setText(this.model.getUser().getPassword());
-		this.userAccountPassword.setOnKeyListener(new OnKeyListener() {
-        	
-            @Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                	return true;
-                }
-                return false;
-            }
-        });
+		this.userAccountPassword.setFilters(new InputFilter[]{filter});
 		
 		this.connectionAuto = (CheckBox) findViewById(R.id.MultiPlayerGameCheckBoxConnection);
 		this.connectionAuto.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
@@ -154,12 +149,15 @@ public class MultiPlayerGame extends Activity implements View.OnClickListener {
 		
 		Intent intent = null;
 		
-		if ( !this.userAccountName.getText().toString().equals("") && !this.model.getUser().getUserName().equals(this.userAccountName.getText().toString()) ) {		
+		if ( !this.userAccountName.getText().toString().equals("") && !this.model.getUser().getUserName().equals(this.userAccountName.getText().toString()) && this.userAccountName.getText().toString().indexOf(" ") == -1) {		
 			this.model.getUser().setUserName(this.userAccountName.getText().toString());
 		}
+		else {
+			this.userAccountName.setText(this.model.getUser().getUserName());
+		}
 		
-		if (this.model.getUser().getRemenberPassword() ) {
-			// FIXME Encoder le mdp
+		if (this.model.getUser().getRemenberPassword() && !this.model.getUser().getPassword().equals("")) {
+			// FIXME Encoder le mdp, espaces dans le mdp ?
 			this.model.getUser().setPassword(this.userAccountPassword.getText().toString());			
 		}
 

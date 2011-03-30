@@ -46,7 +46,7 @@
 		<item>hard</item>
 	</string-array>
 
-	<string name="SinglePlayerGameErrorLoadingMap">Maps directory missing</string>
+	<string name="SinglePlayerGameErrorLoadingMap">No maps found !</string>
 	
 	<!-- Multiplayer -->
 	

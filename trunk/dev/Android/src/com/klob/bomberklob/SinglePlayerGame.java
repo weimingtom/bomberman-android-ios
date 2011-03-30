@@ -1,16 +1,12 @@
 package com.klob.bomberklob;
 
-import java.io.File;
 import java.io.IOException;
-
-import com.klob.bomberklob.model.Model;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,122 +22,99 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.klob.bomberklob.model.Model;
+
 
 public class SinglePlayerGame extends Activity implements View.OnClickListener{
 
 	private Model model;
-	
+
 	private Button cancel;
 	private Button create;
 	private Gallery gallery;
 	private TextView mapName;
-	
-	private Spinner typePartieSP, nbEnnemisSP, difficulteSP;
-	
-	// FIXME à changer créer un tableau pour les images et un pour les noms !
-	private int[] mapBitmap = { 
-		R.drawable.m1,
-		R.drawable.m2,
-		R.drawable.m3,
-		R.drawable.m4
-	};
-	
-	private String[] mapsName;
 
- 
+	private Spinner typePartieSP, nbEnnemisSP, difficulteSP;
+
+	private int[] mapBitmap;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        
-        setContentView(R.layout.singleplayergame);
-        
-        try {
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+		setContentView(R.layout.singleplayergame);
+
+		try {
 			this.model = Model.getInstance(this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        
-        this.cancel = (Button)findViewById(R.id.SinglePlayerGameButtonCancel);
-        this.cancel.setOnClickListener(this);
-		
-        this.create = (Button)findViewById(R.id.SinglePlayerGameButtonGo);
-        this.create.setOnClickListener(this);
-		
-        this.typePartieSP = (Spinner) findViewById(R.id.typePartie);
-        this.nbEnnemisSP  = (Spinner) findViewById(R.id.nbEnnemis);
-        this.difficulteSP = (Spinner) findViewById(R.id.difficulte);
 
-		getMap();
-		
-		// Pour la Gallery
-		this.gallery = (Gallery) findViewById(R.id.galleryz);
-		this.gallery.setAdapter(new ImageAdapter(this, this.mapBitmap));
-		
-        this.mapName = (TextView) findViewById(R.id.nomMap);
-        // FIXME
-        this.mapName.setText(mapBitmap[0]);
-		
-		this.gallery.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            	mapName.setText(mapBitmap[position]);
-            }
-        });
+		this.mapBitmap = new int[this.model.getMap().size()];
+
+		if ( this.mapBitmap.length > 0 ) {
+			
+			for (int i = 0; i < this.mapBitmap.length ; i++) {
+				this.mapBitmap[i] = this.model.getMap().get(i).getId();
+			}
+
+			this.cancel = (Button)findViewById(R.id.SinglePlayerGameButtonCancel);
+			this.cancel.setOnClickListener(this);
+
+			this.create = (Button)findViewById(R.id.SinglePlayerGameButtonGo);
+			this.create.setOnClickListener(this);
+
+			this.typePartieSP = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerType);
+			this.nbEnnemisSP  = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesNumber);
+			this.difficulteSP = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesDifficulty);
+
+			this.gallery = (Gallery) findViewById(R.id.galleryz);
+			this.gallery.setAdapter(new ImageAdapter(this, this.mapBitmap));
+
+			this.mapName = (TextView) findViewById(R.id.SinglePlayerGameMapName);
+
+			this.gallery.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+					mapName.setText(mapBitmap[position]);
+				}
+			});
+		}
+		else {
+			Intent intent = new Intent(SinglePlayerGame.this, Home.class);
+			startActivity(intent);
+			Toast.makeText(SinglePlayerGame.this, R.string.SinglePlayerGameErrorLoadingMap, Toast.LENGTH_SHORT).show();
+			this.finish();			
+		}
 	}
-	
+
 	@Override
 	protected void onStop() {
 		Log.i("SinglePlayerGame", "onStop ");
 		super.onStop();
 	}
-	
+
 	@Override
 	protected void onDestroy(){
-		Log.i("SinglePlayerGame", "onDestroy Solo");
+		Log.i("SinglePlayerGame", "onDestroy");
 		super.onDestroy();
 	}
-	
+
 	@Override
 	protected void onResume(){
 		Log.i("SinglePlayerGame", "onResume ");
 		super.onResume();
 	}
-	
+
 	@Override
 	protected void onPause(){
 		Log.i("SinglePlayerGame", "onPause ");
 		super.onPause();
 	}
- 
-	public int[] getMap() {
-		
-		int[] tabMaps = null;
-		File map = this.getFilesDir();
-		map = new File(map.getAbsolutePath()+"/maps");
-		
-		System.out.println("MAPS :" + map.getPath());
-		
-		File[] maps = map.listFiles();
-		
-		if ( null != maps ) {
-		
-			tabMaps = new int[maps.length];
-			
-			for (int i = 0 ; i < tabMaps.length ; i++ ) {
-				this.mapsName[i] = TextUtils.split(maps[i].getName(), ".")[0];
-				//FIXME une fois le nom de la map récupérée comment trouver le bitmap associé ...
-			}
-		}
-		else {
-			Toast.makeText(SinglePlayerGame.this, R.string.SinglePlayerGameErrorLoadingMap, Toast.LENGTH_SHORT).show();
-		}
-		
-		return tabMaps;
-	}
-	
+
 	// Pour la selection de map
 	public static class ImageAdapter extends BaseAdapter {
 		private int[] m_images;
@@ -182,13 +155,13 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 			return img;
 		}
 	}
-	
+
 	@Override
 	public void onClick(View view) {
-		
+
 		Intent intent = null;
-		
-		if(view == create){
+
+		if( view == create ){
 			String typeP = typePartieSP.getSelectedItem().toString();
 			String ennemis = nbEnnemisSP.getSelectedItem().toString();
 			String difficulte = difficulteSP.getSelectedItem().toString();

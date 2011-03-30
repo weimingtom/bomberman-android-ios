@@ -24,7 +24,7 @@ public class Database extends SQLiteOpenHelper{
     
     /* Getteurs ------------------------------------------------------------ */
     
-	public ArrayList<String> getAccounts(){
+	public ArrayList<String> getAccountsPseudos(){
 		
 		ArrayList<String> spinnerArray = new ArrayList<String>();
 
@@ -99,7 +99,7 @@ public class Database extends SQLiteOpenHelper{
 		Cursor cursor = this.base.rawQuery("SELECT * FROM Map", null);
 		if (cursor.moveToFirst()) {
 			do {
-				vec.add(new Map(cursor.getString(0), cursor.getString(1), (cursor.getInt(2) == 0 ? false : true)));
+				vec.add(new Map(cursor.getString(0), cursor.getString(1), (cursor.getInt(2) == 0 ? false : true), cursor.getInt(3)));
 			} while (cursor.moveToNext());
 		}
 		
@@ -201,7 +201,8 @@ public class Database extends SQLiteOpenHelper{
 		db.execSQL("CREATE TABLE Map (" +
 				"name CHAR NOT NULL," + 
 				"owner CHAR NOT NULL," +
-				"official UNSIGNED INTEGER," +
+				"official UNSIGNED INTEGER NOT NULL," +
+				"id UNSIGNED INTEGER NOT NULL," +
 				"FOREIGN KEY(owner) REFERENCES AccountPlayer(id)" +
 			")"
 		);

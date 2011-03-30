@@ -5,7 +5,7 @@
             <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1" android:gravity="center_vertical">
            	  
 	            <TextView android:layout_height="wrap_content" android:layout_marginRight="5px" android:layout_width="wrap_content" android:text="Pseudo" android:id="@+id/CreateAccountOfflineTextView"></TextView>
-	            <EditText android:text="" android:id="@+id/CreateAccountOfflineEditText" android:layout_height="wrap_content" android:layout_width="150dip"></EditText>
+	            <EditText android:text="" android:id="@+id/CreateAccountOfflineEditText" android:layout_height="wrap_content" android:layout_width="150dip" android:lines="1"></EditText>
 	                   
             </LinearLayout> 
             
