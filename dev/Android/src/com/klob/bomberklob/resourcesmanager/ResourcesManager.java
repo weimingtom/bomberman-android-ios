@@ -58,10 +58,14 @@ public class ResourcesManager {
 							p = Bitmap.createScaledBitmap(p, xpp.getAttributeIntValue(null, "xTile", 0)/*this.tileSize*/, xpp.getAttributeIntValue(null, "yTile", 0)/*this.tileSize*/+(xpp.getAttributeIntValue(null, "yTile", 0)/*(this.tileSize/2)*/), true);
 						}
 						else if ( xpp.getAttributeValue(null, "name").equals("animate")) {
-//							p = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.animate);
-//							p = Bitmap.createScaledBitmap(p, xpp.getAttributeIntValue(null, "xTile", 0)/*this.tileSize*/, xpp.getAttributeIntValue(null, "yTile", 0)*this.tileSize+(xpp.getAttributeIntValue(null, "yTile", 0)*(this.tileSize/2)), true);
+							p = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.animate);
+							p = Bitmap.createScaledBitmap(p, xpp.getAttributeIntValue(null, "xTile", 0)/*this.tileSize*/, xpp.getAttributeIntValue(null, "yTile", 0)/*this.tileSize*/, true);
 						}
 						else if ( xpp.getAttributeValue(null, "name").equals("bombs")) {
+							p = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.bombs);
+							p = Bitmap.createScaledBitmap(p, xpp.getAttributeIntValue(null, "xTile", 0)/*this.tileSize*/, xpp.getAttributeIntValue(null, "yTile", 0)/*this.tileSize*/, true);
+						}
+						else if ( xpp.getAttributeValue(null, "name").equals("explosions")) {
 							p = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.bombs);
 							p = Bitmap.createScaledBitmap(p, xpp.getAttributeIntValue(null, "xTile", 0)/*this.tileSize*/, xpp.getAttributeIntValue(null, "yTile", 0)/*this.tileSize*/, true);
 						}
