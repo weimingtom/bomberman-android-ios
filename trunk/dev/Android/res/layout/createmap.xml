@@ -6,9 +6,13 @@
                 <EditText android:layout_height="wrap_content" android:text="" android:id="@+id/CreateMapButtonEditTextMapName" android:layout_width="140dip"></EditText>
             </LinearLayout>
             <Button android:layout_height="wrap_content" android:id="@+id/CreateMapButtonLoad" android:layout_width="wrap_content" android:text="@string/CreateMapButtonLoad"></Button>
+        	<FrameLayout android:layout_width="match_parent" android:id="@+id/frameLayout1" android:layout_height="wrap_content" android:layout_gravity="center">
+                <com.klob.bomberklob.engine.ObjectsGallery android:layout_width="wrap_content" android:id="@+id/FrameLayoutTest" android:layout_height="wrap_content"></com.klob.bomberklob.engine.ObjectsGallery>
+            </FrameLayout>
         </LinearLayout>
         <RelativeLayout android:layout_height="wrap_content" android:id="@+id/relativeLayout2" android:layout_alignParentBottom="true" android:layout_width="match_parent">
             <Button android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_width="wrap_content" android:text="@string/ButtonCancel" android:id="@+id/CreateMapButtonCancel"></Button>
             <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentRight="true" android:text="@string/ButtonValidate" android:id="@+id/CreateMapButtonValidate"></Button>
         </RelativeLayout>
     </RelativeLayout>
+
