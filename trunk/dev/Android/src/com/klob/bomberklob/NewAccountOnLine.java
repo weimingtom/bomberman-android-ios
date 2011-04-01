@@ -1,28 +1,23 @@
 package com.klob.bomberklob;
 
-import java.io.IOException;
-
-import com.klob.bomberklob.R;
-import com.klob.bomberklob.model.Model;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+
+import com.klob.bomberklob.model.Model;
 
 public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 
@@ -48,14 +43,11 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 
 		setContentView(R.layout.newaccountonline);
 
-		try {
-			this.model = Model.getInstance(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.model = Model.getInstance(this);
 		
 		InputFilter filter = new InputFilter() {
-		    public CharSequence filter(CharSequence source, int start, int end,Spanned dest, int dstart, int dend) { 
+		    @Override
+			public CharSequence filter(CharSequence source, int start, int end,Spanned dest, int dstart, int dend) { 
 		        for (int i = start; i < end; i++) { 
 		             if (!Character.isLetterOrDigit(source.charAt(i)) && Character.isSpaceChar(source.charAt(i))) { 
 		                 return "";     

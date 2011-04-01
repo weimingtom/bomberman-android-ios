@@ -1,7 +1,5 @@
 package com.klob.bomberklob;
 
-import java.io.IOException;
-
 import com.klob.bomberklob.engine.EditorView;
 import com.klob.bomberklob.model.Model;
 
@@ -26,11 +24,7 @@ public class MapEditor extends Activity implements View.OnClickListener {
 
         setContentView(R.layout.mapeditor);
         
-        try {
-			this.model = Model.getInstance(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        this.model = Model.getInstance();
     }
     
     @Override

@@ -1,9 +1,5 @@
 package com.klob.bomberklob;
 
-import java.io.IOException;
-
-import com.klob.bomberklob.model.Model;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +12,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.klob.bomberklob.model.Model;
 
 public class CreateAccountOffline extends Activity implements View.OnClickListener{
 
@@ -33,15 +31,12 @@ public class CreateAccountOffline extends Activity implements View.OnClickListen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         
         setContentView(R.layout.createaccountoffline);
-        
-        try {
-			this.model = Model.getInstance(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+		this.model = Model.getInstance();
 		
 		InputFilter filter = new InputFilter() {
-		    public CharSequence filter(CharSequence source, int start, int end,Spanned dest, int dstart, int dend) { 
+		    @Override
+			public CharSequence filter(CharSequence source, int start, int end,Spanned dest, int dstart, int dend) { 
 		        for (int i = start; i < end; i++) { 
 		             if (!Character.isLetterOrDigit(source.charAt(i)) && Character.isSpaceChar(source.charAt(i))) { 
 		                 return "";     

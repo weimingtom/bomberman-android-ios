@@ -1,7 +1,5 @@
 package com.klob.bomberklob;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -47,11 +45,7 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 
 		setContentView(R.layout.singleplayergame);
 
-		try {
-			this.model = Model.getInstance(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.model = Model.getInstance(this);
 
 		this.mapBitmap = new int[this.model.getMap().size()];
 
@@ -71,11 +65,10 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 			this.nbEnnemisSP  = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesNumber);
 			this.difficulteSP = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesDifficulty);
 
+			this.mapName = (TextView) findViewById(R.id.SinglePlayerGameMapName);
+			
 			this.gallery = (Gallery) findViewById(R.id.galleryz);
 			this.gallery.setAdapter(new ImageAdapter(this, this.mapBitmap));
-
-			this.mapName = (TextView) findViewById(R.id.SinglePlayerGameMapName);
-
 			this.gallery.setOnItemClickListener(new OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -115,7 +108,6 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 		super.onPause();
 	}
 
-	// Pour la selection de map
 	public static class ImageAdapter extends BaseAdapter {
 		private int[] m_images;
 		private Context m_context;

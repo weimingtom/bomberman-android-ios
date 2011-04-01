@@ -1,7 +1,5 @@
 package com.klob.bomberklob;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,12 +33,8 @@ public class ChangePasswordMultiplayer extends Activity implements View.OnClickL
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
                 
         setContentView(R.layout.changepasswordmultiplayer);
-        
-		try {
-			this.model = Model.getInstance(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+		this.model = Model.getInstance();
 		
 	    this.userName = (EditText) findViewById(R.id.ChangePasswordMultiplayerEditTextUserName);
 	    this.userName.setText(this.model.getUser().getUserName());

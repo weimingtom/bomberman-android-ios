@@ -91,6 +91,21 @@ public class Model {
 	
 	/* Getteurs ------------------------------------------------------------ */
 	
+	public static Model getInstance(){
+		return getInstance(null);
+	}
+	
+	public static Model getInstance(Context context){
+		if (null == model) {
+			try {
+				model = new Model(context);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return model;
+	}
+	
 	public System getSystem() {
 		return this.system;
 	}
@@ -98,7 +113,6 @@ public class Model {
 	public User getUser() {
 		return this.user;
 	}
-	
 	
 	public Vector<Map> getMap() {
 		return map;
@@ -109,13 +123,5 @@ public class Model {
 	public void setUser(String pseudonymAccount) {
 		this.user = this.system.getDatabase().getUser(pseudonymAccount);
 	}
-	
-	/* Méthodes publiques -------------------------------------------------- */
 
-	public static Model getInstance(Context context) throws IOException {
-		if (null == model) {
-			model = new Model(context);
-		}
-		return model;
-	}
 }

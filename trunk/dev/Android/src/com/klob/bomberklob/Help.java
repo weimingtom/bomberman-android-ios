@@ -1,9 +1,5 @@
 package com.klob.bomberklob;
 
-import java.io.IOException;
-
-import com.klob.bomberklob.model.Model;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +8,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class Help extends Activity implements View.OnClickListener {
 	

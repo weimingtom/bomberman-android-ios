@@ -1,7 +1,5 @@
 package com.klob.bomberklob;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,10 +12,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.klob.bomberklob.model.Model;
 
@@ -45,11 +43,7 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
                 
         setContentView(R.layout.profilmanagement);
         
-		try {
-			this.model = Model.getInstance(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.model = Model.getInstance(this);
         
         this.pseudo = (EditText) findViewById(R.id.ProfilManagementEditTextPseudo);
         this.pseudo.setText(this.model.getUser().getPseudo());
