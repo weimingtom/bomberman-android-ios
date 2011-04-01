@@ -1,7 +1,5 @@
 package com.klob.bomberklob;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +34,7 @@ public class Main extends Activity {
 
 
 		this.handler = new Handler() {
+			@Override
 			public void handleMessage(Message msg) {
 				if ( msg.what == 0 ) {
 					if ( intent != null ) {
@@ -47,17 +46,14 @@ public class Main extends Activity {
 		};
 
 		this.mainthread = new Thread() {
+			@Override
 			public void run() {
-				ResourcesManager.getInstance(getApplicationContext());
-				try {
-					model = Model.getInstance(getApplicationContext());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
+				
 				DisplayMetrics dm = new DisplayMetrics();
 				getWindowManager().getDefaultDisplay().getMetrics(dm);
 				System.out.println("DPI " + dm.toString());
+				
+				model = Model.getInstance(getApplicationContext());
 
 				Log.i("Main", "Volume : " + model.getSystem().getVolume());
 				setVolumeControlStream(model.getSystem().getVolume()); //FIXME correct ?
@@ -69,6 +65,11 @@ public class Main extends Activity {
 				res.updateConfiguration(conf, res.getDisplayMetrics());
 				try {
 					Context context = createPackageContext(getPackageName(), Context.CONTEXT_INCLUDE_CODE);
+					
+					ResourcesManager rm = ResourcesManager.getInstance(getApplicationContext(),64); //FIXME 64 par la valeur de tileSize
+					rm.bitmapsInitialisation();
+					rm.animatedObjectsInitialisation();
+					rm.inanimatedObjectsInitialisation();
 
 					if ( model.getSystem().getLastUser() == -1 ) {
 						intent = new Intent(context, CreateAccountOffline.class);

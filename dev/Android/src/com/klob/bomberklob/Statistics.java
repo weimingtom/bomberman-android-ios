@@ -1,9 +1,5 @@
 package com.klob.bomberklob;
 
-import java.io.IOException;
-
-import com.klob.bomberklob.model.Model;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.klob.bomberklob.model.Model;
 
 public class Statistics extends Activity implements View.OnClickListener {
 	
@@ -32,11 +30,7 @@ public class Statistics extends Activity implements View.OnClickListener {
 	            
 	    setContentView(R.layout.statistics);
 	    
-		try {
-			this.model = Model.getInstance(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.model = Model.getInstance(this);
 		
 		this.userPseudo = (TextView) findViewById(R.id.StatisticsPseudo);
 		this.userPseudo.setText(this.model.getUser().getPseudo());

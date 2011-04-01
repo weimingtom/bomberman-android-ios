@@ -1,7 +1,5 @@
 package com.klob.bomberklob;
 
-import java.io.IOException;
-
 import com.klob.bomberklob.model.Model;
 
 import android.app.Activity;
@@ -35,14 +33,12 @@ public class NewAccountOffline extends Activity implements View.OnClickListener{
         
         setContentView(R.layout.newaccountoffline);
         
-        try {
-			this.model = Model.getInstance(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        this.model = Model.getInstance(this);
 		
 		InputFilter filter = new InputFilter() {
-		    public CharSequence filter(CharSequence source, int start, int end,Spanned dest, int dstart, int dend) { 
+		    @Override
+			public CharSequence filter(CharSequence source, int start, int end,Spanned dest, int dstart, int dend) {
+		    	
 		        for (int i = start; i < end; i++) { 
 		             if (!Character.isLetterOrDigit(source.charAt(i)) && Character.isSpaceChar(source.charAt(i))) { 
 		                 return "";     

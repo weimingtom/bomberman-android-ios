@@ -1,7 +1,5 @@
 package com.klob.bomberklob;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -50,11 +48,7 @@ public class Options extends Activity implements View.OnClickListener{
 
 		setContentView(R.layout.options);
 
-		try {
-			this.model = Model.getInstance(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.model = Model.getInstance(this);
 
 		this.managementProfile = (Button) findViewById(R.id.OptionsButtonProfil);
 		this.managementProfile.setOnClickListener(this);

@@ -1,7 +1,5 @@
 package com.klob.bomberklob;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.klob.bomberklob.engine.ObjectsGallery;
 import com.klob.bomberklob.model.Model;
 
 
@@ -33,6 +32,8 @@ public class Home extends Activity implements View.OnClickListener{
 	private Spinner accounts;
 	private ImageButton addAccount;
 	
+	private ObjectsGallery og;
+	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,12 +43,8 @@ public class Home extends Activity implements View.OnClickListener{
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.home);
-        
-        try {
-			this.model = Model.getInstance(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+        this.model = Model.getInstance();
 		
 		this.singlePlayer = (Button)findViewById(R.id.HomeButtonSolo);        
 		this.multiPlayer = (Button)findViewById(R.id.HomeButtonMulti);
@@ -84,6 +81,8 @@ public class Home extends Activity implements View.OnClickListener{
         
         this.addAccount = (ImageButton) findViewById(R.id.addAccount);
         this.addAccount.setOnClickListener(this);  
+        
+        this.og = (ObjectsGallery) findViewById(R.id.FrameLayoutTest);
     }
     
     @Override
@@ -108,7 +107,7 @@ public class Home extends Activity implements View.OnClickListener{
 	protected void onPause(){
 		Log.i("Home", "onPause ");
 		super.onPause();
-	}     
+	}
 
 
 	@Override
