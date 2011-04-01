@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.klob.bomberklob.engine.ObjectsGallery;
 import com.klob.bomberklob.model.Model;
 
 public class CreateMap extends Activity implements View.OnClickListener {
@@ -18,6 +19,9 @@ public class CreateMap extends Activity implements View.OnClickListener {
 	private Button load;
 	private Button cancel;
 	private Button validate;
+	
+	
+	private ObjectsGallery og;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,9 @@ public class CreateMap extends Activity implements View.OnClickListener {
 		
 		this.validate = (Button) findViewById(R.id.CreateMapButtonValidate);
 		this.validate.setOnClickListener(this);
+		
+        
+        this.og = (ObjectsGallery) findViewById(R.id.FrameLayoutTest);
     }
     
     @Override
@@ -87,3 +94,4 @@ public class CreateMap extends Activity implements View.OnClickListener {
 	}
 
 }
+

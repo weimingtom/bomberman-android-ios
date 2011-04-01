@@ -3,9 +3,6 @@
         <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_centerInParent="true" android:src="@drawable/gamename"></ImageView>
         
         <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center_horizontal" android:layout_centerInParent="true" android:layout_width="wrap_content">
-            <FrameLayout android:layout_width="match_parent" android:id="@+id/frameLayout1" android:layout_height="wrap_content" android:layout_gravity="center">
-                <com.klob.bomberklob.engine.ObjectsGallery android:layout_width="wrap_content" android:id="@+id/FrameLayoutTest" android:layout_height="wrap_content"></com.klob.bomberklob.engine.ObjectsGallery>
-            </FrameLayout>            
 			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/HomeButtonSinglePlayer" android:id="@+id/HomeButtonSolo"></Button>
 			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/HomeButtonMultiPlayer" android:id="@+id/HomeButtonMulti"></Button>
 			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/HomeButtonOptions" android:id="@+id/HomeButtonOptions"></Button>

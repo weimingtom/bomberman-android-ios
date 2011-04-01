@@ -32,8 +32,6 @@ public class Home extends Activity implements View.OnClickListener{
 	private Spinner accounts;
 	private ImageButton addAccount;
 	
-	private ObjectsGallery og;
-	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,8 +79,6 @@ public class Home extends Activity implements View.OnClickListener{
         
         this.addAccount = (ImageButton) findViewById(R.id.addAccount);
         this.addAccount.setOnClickListener(this);  
-        
-        this.og = (ObjectsGallery) findViewById(R.id.FrameLayoutTest);
     }
     
     @Override
@@ -143,3 +139,4 @@ public class Home extends Activity implements View.OnClickListener{
 		}
 	}
 }
+
