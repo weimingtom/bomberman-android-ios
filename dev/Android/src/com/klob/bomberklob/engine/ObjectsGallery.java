@@ -21,7 +21,6 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	private ResourcesManager rm = ResourcesManager.getInstance();
 
 	private int itemsDisplayed = 3;
-	private int currentItem = 0;
 
 	private Objects selectedItem;
 	
@@ -31,7 +30,10 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	private int level = 0;
 
 	private ArrayList<Objects> grounds = new ArrayList<Objects>();
+	private int currentGroundsItem = 0;
+	
 	private ArrayList<Objects> blocks = new ArrayList<Objects>();
+	private int currentBlocksItem = 0;
 
 	/* Constructeurs ------------------------------------------------------- */
 	
@@ -103,15 +105,18 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+		
+		int i,j;
+		
 		if ( this.level == 0 ) {
-			for (int i = this.currentItem ; i < this.itemsDisplayed && i < this.grounds.size() ; i++ ) {
-				this.grounds.get(i).setPosition(new Point(0,i));
+			for (i = this.currentGroundsItem, j = 0 ; j < this.itemsDisplayed && j < this.grounds.size() ; i++, j++ ) {
+				this.grounds.get(i).setPosition(new Point(0,j));
 				this.grounds.get(i).onDraw(canvas);
 			}
 		}
 		else if ( this.level == 1 ) {
-			for (int i = this.currentItem ; i < this.itemsDisplayed && i < this.blocks.size() ; i++ ) {
-				this.blocks.get(i).setPosition(new Point(0,i));
+			for (i = this.currentBlocksItem, j = 0 ; j < this.itemsDisplayed && j < this.blocks.size() ; i++, j++ ) {
+				this.blocks.get(i).setPosition(new Point(0,j));
 				this.blocks.get(i).onDraw(canvas);
 			}
 		}
@@ -128,11 +133,12 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 			
 			Point point = this.rm.coToTile(this.x, this.y);
 			if ( this.level == 0 ) {
-				this.selectedItem = this.grounds.get(point.y);
+				this.selectedItem = this.grounds.get(point.y+currentGroundsItem);
 			}
 			else if ( this.level == 1 ) {
-				this.selectedItem = this.blocks.get(point.y);
+				this.selectedItem = this.blocks.get(point.y+currentBlocksItem);
 			}
+			System.out.println("Objects selected : " + this.selectedItem.getImageName());
 			break;
 		case MotionEvent.ACTION_MOVE:
 			if ( (int) event.getX() > this.x + (this.rm.getTileSize()/2)) {
@@ -155,8 +161,40 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 					this.level--;
 				}
 			}
+			else if ( (int) event.getY() < this.y - (this.rm.getTileSize()/2)) {
+				
+				this.y = (int) event.getY();
+				if ( this.level == 0 ) {
+					if ( this.currentGroundsItem < (this.grounds.size() - this.itemsDisplayed) ) {
+						System.out.println("ON DESCEND");
+						this.currentGroundsItem++;
+					}
+				}
+				else {
+					if ( this.currentBlocksItem < this.blocks.size() - this.itemsDisplayed ) {
+						System.out.println("ON DESCEND");
+						this.currentBlocksItem++;
+					}
+				}
+			}
+			else if ( (int) event.getY() > this.y + (this.rm.getTileSize()/2)) {
+				this.y = (int) event.getY();
+				if ( this.level == 0 ) {
+					if ( this.currentGroundsItem >= 1 ) {
+						System.out.println("ON MONTE");
+						this.currentGroundsItem--;
+					}
+				}
+				else {
+					if ( this.currentBlocksItem >= 1 ) {
+						System.out.println("ON MONTE");
+						this.currentBlocksItem--;
+					}
+				}
+			}
 		}
 		return true;
 	}
 
 }
+
