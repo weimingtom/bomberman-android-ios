@@ -53,7 +53,7 @@ public class MapEditor {
 	public void loadMap(Context context, String mapName) {
 		
 		if ( !map.loadMap(context, mapName) ) {
-			
+			map = new Map();
 			map.setName(mapName);
 			for (int j = 0 ; j < 15 ; j ++) {
 				for (int k = 0 ; k < 13 ; k++ ) {

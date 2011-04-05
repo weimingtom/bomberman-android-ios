@@ -8,11 +8,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.View.MeasureSpec;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -32,15 +32,13 @@ public class MapEditor extends Activity implements View.OnClickListener {
 	private EditorController editorController;
 
 	private ObjectsGallery objectsGallery;
-	private LinearLayout layout, l1;
-	private RelativeLayout r1;
+	private LinearLayout editorLayout, editorControllerLayout;
+	private RelativeLayout editorRelativeLayoutObjectsGallery;
 	
 	private Bundle bundle;
 
 	private Button menu;
 	private CheckBox checkBox;
-	
-	private Bitmap bm;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,11 +52,11 @@ public class MapEditor extends Activity implements View.OnClickListener {
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);		
 		
-		this.r1 = (RelativeLayout) findViewById(R.id.MapEditorRelativeLayoutGallery);
-		this.r1.setLayoutParams(new LinearLayout.LayoutParams( (int) (50*ResourcesManager.getDpiPx()), (int) (dm.heightPixels-(50*ResourcesManager.getDpiPx())) ) );
+		this.editorRelativeLayoutObjectsGallery = (RelativeLayout) findViewById(R.id.MapEditorRelativeLayoutObjectsGallery);
+		this.editorRelativeLayoutObjectsGallery.setLayoutParams(new LinearLayout.LayoutParams( (int) (50*ResourcesManager.getDpiPx()), (int) (dm.heightPixels-(50*ResourcesManager.getDpiPx())) ) );
 
-		this.l1 = (LinearLayout) findViewById(R.id.MapEditorLinearLayoutEditorController);
-		this.l1.setLayoutParams(new LinearLayout.LayoutParams( (int) (dm.widthPixels-(50*ResourcesManager.getDpiPx())), (int) (dm.heightPixels-(50*ResourcesManager.getDpiPx())) ) );
+		this.editorControllerLayout = (LinearLayout) findViewById(R.id.MapEditorLinearLayoutEditorController);
+		this.editorControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (dm.widthPixels-(50*ResourcesManager.getDpiPx())), (int) (dm.heightPixels-(50*ResourcesManager.getDpiPx())) ) );
 		
 		this.objectsGallery = (ObjectsGallery) findViewById(R.id.MapEditorObjectsGallery);
 
@@ -90,8 +88,8 @@ public class MapEditor extends Activity implements View.OnClickListener {
         }
         
 		
-		this.layout = (LinearLayout) findViewById(R.id.MapEditorLayout);
-		this.layout.setOnClickListener(this);
+		this.editorLayout = (LinearLayout) findViewById(R.id.MapEditorLayout);
+		this.editorLayout.setOnClickListener(this);
 
 	}
 
@@ -123,25 +121,6 @@ public class MapEditor extends Activity implements View.OnClickListener {
 	public void onClick(View arg0) {
 		
 		if ( this.menu == arg0 ) {
-			
-			this.layout.setDrawingCacheEnabled(true);
-			this.layout.post(new Runnable() {
-		        public void run() {
-		        	layout.setDrawingCacheEnabled(true);
-		    	    // this is the important code :)
-		    	    // Without it the view will have a
-		    	    // dimension of 0,0 and the bitmap will
-		    	    // be null
-		        	layout.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-		    	            MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-		    	    //v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
-		        	layout.layout(0, 0, layout.getWidth(), layout.getHeight());
-		        	layout.buildDrawingCache(true);
-		    	    bm = Bitmap.createBitmap(layout.getDrawingCache());
-		    	    layout.setDrawingCacheEnabled(false); //
-		        }
-		    });
-			
 			Intent intent = new Intent(MapEditor.this, MapEditorMenu.class);
 			startActivityForResult(intent, 1000);
 		}
@@ -154,37 +133,35 @@ public class MapEditor extends Activity implements View.OnClickListener {
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		if ( resultCode == 2000) {
-			
+			checkBox.setChecked(false);
+			objectsGallery.setLevel(0);
+			editorController.getEditorView().setLevel(0);
+			objectsGallery.SetSelectedItem(null);
 		}
 		else if ( resultCode == 2001) {
-			// TODO Auto-generated method stub
-		
 			
-			// On crée le répertoire quoi qu'il arrive
+
+		    Bitmap bm = Bitmap.createBitmap(this.editorController.getWidth(), this.editorController.getHeight(), Bitmap.Config.ARGB_8888);
+		    Canvas pictureCanvas = new Canvas(bm);
+		    this.editorController.getMapEditor().getMap().groundsOnDraw(pictureCanvas);
+		    this.editorController.getMapEditor().getMap().onDraw(pictureCanvas);
+
 			File dir = this.getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
-			
-			// On dit où l'on voudra créer notre fichier
 			File f = new File (dir.getAbsolutePath()+"/"+bundle.getString("map")+".png");
 			
-			this.editorController.getMapEditor().getMap().saveMap(getApplicationContext());
-			
 			try {
-				
-				// on crée le nouveau fichier;
 				f.createNewFile();
-				
-				// ouverture d'un flux de sortie vers le fichier "map.getName()+".klob""
 				FileOutputStream fos = new FileOutputStream(f);
-			
 				bm.compress(Bitmap.CompressFormat.PNG, 85, fos);
 				fos.flush();
 				fos.close();
-			
-				Model.getSystem().getDatabase().newMap(bundle.getString("map"), Model.getUser().getPseudo(), 1, dir.getAbsolutePath()+"/"+bundle.getString("map")+".png");
 
 			} catch(IOException ioe) {
 				ioe.printStackTrace();
 			}
+			
+			this.editorController.getMapEditor().getMap().saveMap(getApplicationContext());
+			Model.getSystem().getDatabase().newMap(bundle.getString("map"), Model.getUser().getPseudo(), 1, dir.getAbsolutePath()+"/"+bundle.getString("map")+".png");
 			Intent intent = new Intent(MapEditor.this, Home.class);
 			startActivity(intent);
 			this.finish();
