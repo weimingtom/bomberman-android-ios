@@ -107,7 +107,7 @@ public class Database extends SQLiteOpenHelper{
 		Cursor cursor = this.base.rawQuery("SELECT * FROM Map", null);
 		if (cursor.moveToFirst()) {
 			do {
-				vec.add(new Map(cursor.getString(0), cursor.getString(1), (cursor.getInt(2) == 0 ? false : true), cursor.getString(3)));
+				vec.add(new Map(cursor.getString(0), cursor.getString(1), (cursor.getInt(2) == 0 ? false : true)));
 			} while (cursor.moveToNext());
 		}
 		
@@ -214,7 +214,6 @@ public class Database extends SQLiteOpenHelper{
 				"name CHAR NOT NULL," + 
 				"owner CHAR NOT NULL," +
 				"official UNSIGNED INT NOT NULL," +
-				"bitmapPath TEXT NOT NULL," +
 				"FOREIGN KEY(owner) REFERENCES UserAccounts(id)" +
 			");");
 		db.execSQL("INSERT INTO System (volume, language, lastUser) VALUES (50, 'French', -1);");
@@ -236,7 +235,7 @@ public class Database extends SQLiteOpenHelper{
 		this.close();
 	}
 	
-	public void newMap(String name, String owner, int i, String bitmapPath){
+	public void newMap(String name, String owner, int i){
 		
 		this.base = this.getWritableDatabase();
 		int res = this.base.rawQuery("SELECT * FROM Map WHERE name ='"+name+"' AND owner ='"+owner+"' ", null).getCount();
@@ -246,10 +245,9 @@ public class Database extends SQLiteOpenHelper{
 			entree.put("name", name);
 			entree.put("owner", owner);
 			entree.put("official", i);
-			entree.put("bitmapPath", bitmapPath);
 			this.base.insert("Map", null, entree);
 			
-			Log.i("Database", "New map added : \n+Name : " + name +"\nOwner : " + owner + "\nOfficial : " + i + "\nBitmapPath : " + bitmapPath);	
+			Log.i("Database", "New map added : \n+Name : " + name +"\nOwner : " + owner + "\nOfficial : " + i);	
 		}
 		else {
 			Log.i("Database", "New map : Map already exists");	

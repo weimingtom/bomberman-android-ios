@@ -34,8 +34,8 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 	private TextView mapName;
 
 	private Spinner typePartieSP, nbEnnemisSP, difficulteSP;
-
-	private String[] mapBitmap;
+	
+	private Vector<Map> maps;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +46,12 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 
 		setContentView(R.layout.singleplayergame);
 		
-		Vector<Map> maps = Model.getSystem().getDatabase().getMaps();
+		this.maps = Model.getSystem().getDatabase().getMaps();
 		
-		if ( maps.size() > 0 ) {
+		if ( this.maps.size() > 0 ) {
 			
 			this.setResult(2000);
-			
-			this.mapBitmap = new String[maps.size()];
-			
-			for (int i = 0; i < this.mapBitmap.length ; i++) {
-				this.mapBitmap[i] = maps.get(i).getPath();
-			}
+
 
 			this.cancel = (Button)findViewById(R.id.SinglePlayerGameButtonCancel);
 			this.cancel.setOnClickListener(this);
@@ -69,13 +64,19 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 			this.difficulteSP = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesDifficulty);
 
 			this.mapName = (TextView) findViewById(R.id.SinglePlayerGameMapName);
+			this.mapName.setText(maps.get(0).getName());
+			
+			String[] mapBitmap = new String[this.maps.size()];
+			for (int i = 0; i < mapBitmap.length ; i++) {
+				mapBitmap[i] = this.getDir("maps", i).getAbsolutePath()+"/"+this.maps.get(i).getName()+".png";
+			}
 			
 			this.gallery = (Gallery) findViewById(R.id.galleryz);
 			this.gallery.setAdapter(new ImageAdapter(getApplicationContext(), mapBitmap));
 			this.gallery.setOnItemClickListener(new OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-					mapName.setText(mapBitmap[position]);
+					mapName.setText(maps.get(position).getName());
 				}
 			});
 		}
