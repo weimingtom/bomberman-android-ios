@@ -67,6 +67,7 @@ public class MapEditor extends Activity implements View.OnClickListener {
 		this.editorController.setObjectsGallery(this.objectsGallery);
 		
 		this.checkBox = (CheckBox) findViewById(R.id.MapEditorCheckBox);
+		this.checkBox.setChecked(true);
 		this.checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
 			@Override 
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
@@ -82,11 +83,13 @@ public class MapEditor extends Activity implements View.OnClickListener {
 			}
 		});
 		
+		objectsGallery.setLevel(1);
+		editorController.getEditorView().setLevel(1);
+		
 		this.bundle = getIntent().getExtras();
         if(bundle.getString("map")!= null) {
         	this.editorController.getMapEditor().loadMap(getApplicationContext(), bundle.getString("map"));
         }
-        
 		
 		this.editorLayout = (LinearLayout) findViewById(R.id.MapEditorLayout);
 		this.editorLayout.setOnClickListener(this);
