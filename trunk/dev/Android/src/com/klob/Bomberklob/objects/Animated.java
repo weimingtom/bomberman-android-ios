@@ -74,7 +74,7 @@ public abstract class Animated extends Objects {
 			if(animations.get(currentAnimation).canLoop && currentFrame == animations.get(currentAnimation).sequence.size()-1) {
 				currentFrame=0;
 			}
-			else {
+			else if ( currentFrame < animations.get(currentAnimation).sequence.size()-1 ){
 				currentFrame++;
 				FrameInfo frameinfo= animations.get(currentAnimation).sequence.get(currentFrame);
 				waitDelay = frameinfo.nextFrameDelay;
@@ -103,5 +103,6 @@ public abstract class Animated extends Objects {
 	public void onDraw(Canvas canvas,int size) {
 		int tileSize = ResourcesManager.getTileSize();
         canvas.drawBitmap(ResourcesManager.getBitmaps().get("animate"), new Rect(this.getPoint().x*tileSize, this.getPoint().y*tileSize, (this.getPoint().x*tileSize)+tileSize, (this.getPoint().y*tileSize)+tileSize), new Rect(this.position.x*size, this.position.y*size, (this.position.x*size)+size, (this.position.y*size)+size), null);
+        update();
 	}
 }

@@ -142,6 +142,7 @@ public class Player extends Animated {
 	public void onDraw(Canvas canvas, int size) {
 		int tileSize = ResourcesManager.getTileSize();
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("player"), new Rect(this.getPoint().x*tileSize, this.getPoint().y*tileSize, (this.getPoint().x*tileSize)+tileSize, (this.getPoint().y*tileSize)+tileSize+(tileSize/2)), new Rect(this.position.x, this.position.y-(size/2), this.position.x+size, this.position.y+size), null);
+        update();
 	}
 
 	// FIXME Bonus immortel ?
