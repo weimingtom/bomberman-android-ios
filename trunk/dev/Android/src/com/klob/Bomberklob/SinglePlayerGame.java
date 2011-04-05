@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import com.klob.Bomberklob.model.Map;
 import com.klob.Bomberklob.model.Model;
+import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -144,7 +145,7 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 
 			//redimmensionnement auto FIXME Correct pour tous les écrans ?
 			img.setScaleType(ImageView.ScaleType.FIT_XY);
-			img.setLayoutParams(new Gallery.LayoutParams(115, 115));
+			img.setLayoutParams(new Gallery.LayoutParams( (int) ((ResourcesManager.getSize()*15)/1.75) , (int) ((ResourcesManager.getSize()*13)/1.75) ) );
 			img.setBackgroundResource(m_itemBackground);
 			return img;
 		}

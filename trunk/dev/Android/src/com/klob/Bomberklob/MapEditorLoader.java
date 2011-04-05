@@ -42,7 +42,7 @@ public class MapEditorLoader extends Activity {
 				map = new HashMap<String, String>();
 				map.put("mapName", maps.get(i).getName());
 				map.put("mapOwner", maps.get(i).getOwner());
-				map.put("mapBitmap", String.valueOf(R.drawable.icon));
+				map.put("mapBitmap", this.getDir("maps", i).getAbsolutePath()+"/"+maps.get(i).getName()+".png");
 				listItem.add(map);
 			}
 
@@ -50,7 +50,7 @@ public class MapEditorLoader extends Activity {
 			map = new HashMap<String, String>();
 			map.put("mapName", this.getBaseContext().getString(R.string.ButtonCancel));
 			map.put("mapOwner", "");
-			map.put("mapBitmap", String.valueOf(R.drawable.refresh));
+			map.put("mapBitmap", String.valueOf(R.drawable.space));
 			listItem.add(map);
 
 			SimpleAdapter mSchedule = new SimpleAdapter (this.getBaseContext(), listItem, R.layout.mapeditorloaderitems, new String[] {"mapName", "mapOwner", "mapBitmap"}, new int[] {R.id.mapName, R.id.mapOwner, R.id.mapBitmap});
