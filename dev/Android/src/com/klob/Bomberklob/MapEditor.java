@@ -51,12 +51,12 @@ public class MapEditor extends Activity implements View.OnClickListener {
 		
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);		
-		
+
 		this.editorRelativeLayoutObjectsGallery = (RelativeLayout) findViewById(R.id.MapEditorRelativeLayoutObjectsGallery);
-		this.editorRelativeLayoutObjectsGallery.setLayoutParams(new LinearLayout.LayoutParams( (int) (50*ResourcesManager.getDpiPx()), (int) (dm.heightPixels-(50*ResourcesManager.getDpiPx())) ) );
+		this.editorRelativeLayoutObjectsGallery.setLayoutParams(new LinearLayout.LayoutParams( (int) (50*ResourcesManager.getDpiPx()), (int) (ResourcesManager.getWidth()-(50*ResourcesManager.getDpiPx())) ) );
 
 		this.editorControllerLayout = (LinearLayout) findViewById(R.id.MapEditorLinearLayoutEditorController);
-		this.editorControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (dm.widthPixels-(50*ResourcesManager.getDpiPx())), (int) (dm.heightPixels-(50*ResourcesManager.getDpiPx())) ) );
+		this.editorControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getHeight()-(50*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getWidth()-(50*ResourcesManager.getDpiPx())) ) );
 		
 		this.objectsGallery = (ObjectsGallery) findViewById(R.id.MapEditorObjectsGallery);
 

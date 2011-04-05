@@ -30,6 +30,8 @@ public class ResourcesManager {
 	private static int tileSize;
 	private static float dpiPx;
 	private static int size;
+	private static int height;
+	private static int width;
 	private static HashMap<String, Bitmap>	bitmaps = new HashMap<String, Bitmap>();
 	private static HashMap<String, Objects> objects = new HashMap<String, Objects>();
 
@@ -39,8 +41,8 @@ public class ResourcesManager {
 		ResourcesManager.context = context;
 		ResourcesManager.dpiPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, context.getResources().getDisplayMetrics());
 
-		int height = context.getResources().getDisplayMetrics().heightPixels;
-		int width = context.getResources().getDisplayMetrics().widthPixels;
+		height = context.getResources().getDisplayMetrics().heightPixels;
+		width = context.getResources().getDisplayMetrics().widthPixels;
 		
 		if ( ((height-(50*dpiPx))/15) < ((width-(50*dpiPx))/14) ) {
 			size = (int) ((height-(50*dpiPx))/15);
@@ -102,8 +104,16 @@ public class ResourcesManager {
 		return size;
 	}
 	
-	/* Setters ------------------------------------------------------------- */
+	public static int getHeight() {
+		return height;
+	}
+
+	public static int getWidth() {
+		return width;
+	}
 	
+	/* Setters ------------------------------------------------------------- */
+
 	public static void setDpiPx(float dpiPx) {
 		ResourcesManager.dpiPx =  dpiPx;
 	}
