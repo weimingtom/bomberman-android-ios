@@ -29,8 +29,8 @@ public class Map implements Serializable {
 	private Objects[][] blocks;
 	
 	public Map() {
-		this.grounds = new Objects[15][13];
-		this.blocks  = new Objects[15][13];
+		this.grounds = new Objects[17][15];
+		this.blocks  = new Objects[17][15];
 	}
 	
 	/* Getteurs ------------------------------------------------------------ */

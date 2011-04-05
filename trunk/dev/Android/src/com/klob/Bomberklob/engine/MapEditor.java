@@ -55,8 +55,20 @@ public class MapEditor {
 		if ( !map.loadMap(context, mapName) ) {
 			map = new Map();
 			map.setName(mapName);
-			for (int j = 0 ; j < 15 ; j ++) {
-				for (int k = 0 ; k < 13 ; k++ ) {
+			for (int j = 0 ; j < map.getGrounds().length ; j++) {
+				Objects o = ResourcesManager.getObject("bloc");
+				map.addBlock(o, new Point(j,0));
+				o = ResourcesManager.getObject("bloc");
+				map.addBlock(o, new Point(j,14));
+			}
+			for (int j = 1 ; j < map.getGrounds()[0].length-1 ; j++) {
+				Objects o = ResourcesManager.getObject("bloc");
+				map.addBlock(o, new Point(0,j));
+				o = ResourcesManager.getObject("bloc");
+				map.addBlock(o, new Point(16,j));
+			}
+			for (int j = 1 ; j < map.getGrounds().length-1 ; j++) {
+				for (int k = 1 ; k < map.getGrounds()[0].length-1 ; k++ ) {
 					Objects o = ResourcesManager.getObject("grass");
 					map.addGround(o, new Point(j,k));
 				}

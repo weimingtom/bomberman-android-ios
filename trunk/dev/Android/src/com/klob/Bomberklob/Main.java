@@ -60,6 +60,7 @@ public class Main extends Activity {
 					ResourcesManager.setInstance(getApplicationContext());
 					ResourcesManager.animatedObjectsInitialisation();
 					ResourcesManager.inanimatedObjectsInitialisation();
+					//ResourcesManager.playersInitialisation();
 					
 					if ( Model.getSystem().getLastUser() == -1 ) {
 						intent = new Intent(context, CreateAccountOffline.class);
