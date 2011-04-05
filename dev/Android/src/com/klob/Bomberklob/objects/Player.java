@@ -30,8 +30,8 @@ public class Player extends Animated {
 	
 	/* Getters ------------------------------------------------------------- */
 	
-	public Player(int tileSize, int size, String imageName, String color, int lifeNumber, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber) {
-		super(tileSize, size, imageName, false, 1, false);
+	public Player(String imageName, String color, int lifeNumber, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber) {
+		super(imageName, false, 1, false);
 		this.color = color;
 		this.lifeNumber = lifeNumber;
 		this.powerExplosion = powerExplosion;
@@ -139,8 +139,9 @@ public class Player extends Animated {
 	/* Méthodes publiques -------------------------------------------------- */
 
 	@Override
-	public void onDraw(Canvas canvas) {
-		canvas.drawBitmap(ResourcesManager.getBitmaps().get("player"), new Rect(this.getPoint().x*this.tileSize, this.getPoint().y*this.tileSize, (this.getPoint().x*this.tileSize)+this.tileSize, (this.getPoint().y*this.tileSize)+this.tileSize), new Rect(this.position.x, this.position.y-(this.size/2), this.position.x+this.size, this.position.y+this.size), null);
+	public void onDraw(Canvas canvas, int size) {
+		int tileSize = ResourcesManager.getTileSize();
+		canvas.drawBitmap(ResourcesManager.getBitmaps().get("player"), new Rect(this.getPoint().x*tileSize, this.getPoint().y*tileSize, (this.getPoint().x*tileSize)+tileSize, (this.getPoint().y*tileSize)+tileSize), new Rect(this.position.x, this.position.y-(size/2), this.position.x+size, this.position.y+size), null);
 	}
 
 	// FIXME Bonus immortel ?

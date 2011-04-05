@@ -11,8 +11,8 @@ public class Bombs extends Animated {
 	protected int time;
 	//FIXME protected ??? type
 
-	public Bombs(int tileSize, int size, String imageName, boolean hit, int level, boolean fireWall, int power, int time) {
-		super(tileSize, size, imageName, hit, level, fireWall);
+	public Bombs(String imageName, boolean hit, int level, boolean fireWall, int power, int time) {
+		super(imageName, hit, level, fireWall);
 		this.power = power;
 		this.time = time;
 	}

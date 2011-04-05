@@ -10,8 +10,8 @@ public class Undestructible extends AnimatedObjects {
 	
 	/* Constructeurs ------------------------------------------------------- */
 
-	public Undestructible(int tileSize, int size, String imageName, boolean hit, int level, boolean fireWall) {
-		super(tileSize, size, imageName, hit, level, fireWall);
+	public Undestructible(String imageName, boolean hit, int level, boolean fireWall) {
+		super(imageName, hit, level, fireWall);
 	}
 	
 	public Undestructible(Undestructible undestructible) {
