@@ -12,8 +12,8 @@ public class Destructible extends AnimatedObjects {
 	
 	/* Constructeurs ------------------------------------------------------- */
 	
-	public Destructible(int tileSize, int size, String imageName, boolean hit, int level, boolean fireWall, int life) {
-		super(tileSize, size, imageName, hit, level, fireWall);
+	public Destructible(String imageName, boolean hit, int level, boolean fireWall, int life) {
+		super(imageName, hit, level, fireWall);
 		this.life = life;
 	}
 	

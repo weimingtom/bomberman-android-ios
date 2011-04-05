@@ -188,10 +188,10 @@ public class ResourcesManager {
 				if(eventType == XmlPullParser.START_TAG) {
 
 					if(xpp.getName().toLowerCase().equals("destructible")) {
-						animatedObjects = new Destructible(tileSize, size, xpp.getAttributeValue(null, "name"), (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "level", 0), (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true), (xpp.getAttributeIntValue(null, "life", 0)));
+						animatedObjects = new Destructible(xpp.getAttributeValue(null, "name"), (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "level", 0), (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true), (xpp.getAttributeIntValue(null, "life", 0)));
 					}
 					else if(xpp.getName().toLowerCase().equals("undestructible")) {
-						animatedObjects = new Undestructible(tileSize, size, xpp.getAttributeValue(null, "name"), (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "level", 0), (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true)); 
+						animatedObjects = new Undestructible(xpp.getAttributeValue(null, "name"), (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "level", 0), (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true)); 
 					}
 					else if(xpp.getName().toLowerCase().equals("animation")) {			
 						animationname=xpp.getAttributeValue(null, "name");	            	 
@@ -245,7 +245,7 @@ public class ResourcesManager {
 				if(eventType == XmlPullParser.START_TAG) {
 					
 					if(xpp.getName().toLowerCase().equals("png")) {
-						inanimate = new Inanimate(tileSize, size, xpp.getAttributeValue(null, "name"), (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "level", 0), (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true), new Point(xpp.getAttributeIntValue(null, "x", 0),xpp.getAttributeIntValue(null, "y", 0)));
+						inanimate = new Inanimate(xpp.getAttributeValue(null, "name"), (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "level", 0), (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true), new Point(xpp.getAttributeIntValue(null, "x", 0),xpp.getAttributeIntValue(null, "y", 0)));
 						objects.put(inanimate.getImageName(), inanimate);
 						Log.i("ResourcesManager","Added InanimatedObject : " + inanimate.getImageName());
 						inanimate = null;

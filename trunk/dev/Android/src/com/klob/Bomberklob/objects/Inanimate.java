@@ -17,8 +17,8 @@ public class Inanimate extends Objects {
 	
 	/* Constructeur -------------------------------------------------------- */
 	
-	public Inanimate (int tileSize, int size, String imageName, boolean hit, int level, boolean fireWall, Point tilePosition) {
-		super(tileSize, size, imageName, hit, level, fireWall);
+	public Inanimate (String imageName, boolean hit, int level, boolean fireWall, Point tilePosition) {
+		super(imageName, hit, level, fireWall);
 		this.tilePosition = tilePosition;
 	}
 	
@@ -45,8 +45,9 @@ public class Inanimate extends Objects {
 	public void update() {}
 
 	@Override
-	public void onDraw(Canvas canvas) {
-		canvas.drawBitmap(ResourcesManager.getBitmaps().get("inanimate"), new Rect(this.tilePosition.x*this.tileSize, this.tilePosition.y*this.tileSize, (this.tilePosition.x*this.tileSize)+this.tileSize, (this.tilePosition.y*this.tileSize)+this.tileSize), new Rect(this.position.x*this.size, this.position.y*this.size, (this.position.x*this.size)+this.size, (this.position.y*this.size)+this.size), null);
+	public void onDraw(Canvas canvas, int size) {
+		int tileSize = ResourcesManager.getTileSize();
+		canvas.drawBitmap(ResourcesManager.getBitmaps().get("inanimate"), new Rect(this.tilePosition.x*tileSize, this.tilePosition.y*tileSize, (this.tilePosition.x*tileSize)+tileSize, (this.tilePosition.y*tileSize)+tileSize), new Rect(this.position.x*size, this.position.y*size, (this.position.x*size)+size, (this.position.y*size)+size), null);
 	}
 	
 	/* Méthodes publiques -------------------------------------------------- */

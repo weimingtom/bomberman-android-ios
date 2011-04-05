@@ -18,27 +18,21 @@ public abstract class Objects implements Serializable {
 	protected int level;
 	protected boolean fireWall;
 	protected Point position;
-	protected int tileSize;
-	protected int size;
 	
 	/* Contructeur --------------------------------------------------------- */
 	
-	public Objects(int tileSize, int size, String imageName, boolean hit, int level, boolean fireWall) {
-		this.tileSize = tileSize;
+	public Objects(String imageName, boolean hit, int level, boolean fireWall) {
 		this.imageName = imageName;
 		this.hit = hit;
 		this.level = level;
 		this.fireWall = fireWall;
-		this.size = size;
 	}
 	
 	public Objects(Objects objects) {
-		this.tileSize = objects.tileSize;
 		this.imageName = objects.imageName;
 		this.hit = objects.hit;
 		this.level = objects.level;
 		this.fireWall = objects.fireWall;
-		this.size = objects.size;
 	}
 	
 	/* Getters ------------------------------------------------------------- */
@@ -63,14 +57,6 @@ public abstract class Objects implements Serializable {
 		return imageName;
 	}
 	
-	public int getSize() {
-		return size;
-	}
-	
-	public int getTileSize() {
-		return this.tileSize;
-	}
-	
 	/* Setteurs ------------------------------------------------------------ */
 
 
@@ -82,10 +68,6 @@ public abstract class Objects implements Serializable {
 		this.position = position;
 	}
 	
-	public void setSize(int size) {
-		this.size = size;
-	}
-	
 	/* Méthodes abstraites publiques --------------------------------------- */
 
 	public abstract void update();
@@ -94,7 +76,7 @@ public abstract class Objects implements Serializable {
 	
 	public abstract boolean hasAnimationFinished();
 	
-	public abstract void onDraw(Canvas canvas);
+	public abstract void onDraw(Canvas canvas, int size);
 	
 	public abstract boolean isDestructible();
 

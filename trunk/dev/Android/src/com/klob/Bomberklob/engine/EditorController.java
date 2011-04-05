@@ -65,7 +65,6 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 
 			if ( this.objectGallery.getSelectedItem() != null ) {
 				Objects o = ResourcesManager.getObject(this.objectGallery.getSelectedItem());
-				o.setSize(objectsSize);
 				this.mapEditor.addObject(o, point);			
 			}
 

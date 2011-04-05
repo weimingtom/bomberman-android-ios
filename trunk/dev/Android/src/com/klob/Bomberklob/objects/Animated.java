@@ -22,8 +22,8 @@ public abstract class Animated extends Objects {
 	
 	/* Constructeur -------------------------------------------------------- */
 	
-	public Animated (int tileSize, int size, String imageName, boolean hit, int level, boolean fireWall) {
-		super(tileSize, size, imageName, hit, level, fireWall);
+	public Animated (String imageName, boolean hit, int level, boolean fireWall) {
+		super(imageName, hit, level, fireWall);
 	}
 	
 	public Animated (Animated animated) {
@@ -100,7 +100,8 @@ public abstract class Animated extends Objects {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas) {
-        canvas.drawBitmap(ResourcesManager.getBitmaps().get("animate"), new Rect(this.getPoint().x*this.tileSize, this.getPoint().y*this.tileSize, (this.getPoint().x*this.tileSize)+this.tileSize, (this.getPoint().y*this.tileSize)+this.tileSize), new Rect(this.position.x*this.size, this.position.y*this.size, (this.position.x*this.size)+this.size, (this.position.y*this.size)+this.size), null);
+	public void onDraw(Canvas canvas,int size) {
+		int tileSize = ResourcesManager.getTileSize();
+        canvas.drawBitmap(ResourcesManager.getBitmaps().get("animate"), new Rect(this.getPoint().x*tileSize, this.getPoint().y*tileSize, (this.getPoint().x*tileSize)+tileSize, (this.getPoint().y*tileSize)+tileSize), new Rect(this.position.x*size, this.position.y*size, (this.position.x*size)+size, (this.position.y*size)+size), null);
 	}
 }

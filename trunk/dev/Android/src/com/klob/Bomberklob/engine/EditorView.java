@@ -1,5 +1,7 @@
 package com.klob.Bomberklob.engine;
 
+import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
+
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
@@ -66,10 +68,10 @@ public class EditorView extends Thread {
                 c = this.surfaceHolder.lockCanvas(null);
                 synchronized (this.surfaceHolder) {
                 	if ( level == 0 ) {
-                		this.editorView.getMapEditor().getMap().groundsOnDraw(c);
+                		this.editorView.getMapEditor().getMap().groundsOnDraw(c, ResourcesManager.getSize());
                 	}
                 	else {
-                		this.editorView.getMapEditor().getMap().onDraw(c);
+                		this.editorView.getMapEditor().getMap().onDraw(c, ResourcesManager.getSize());
                 	}
                 }
             } finally {

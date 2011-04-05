@@ -85,11 +85,9 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		for(Entry<String, Objects> entry : ResourcesManager.getObjects().entrySet()) {
 			Objects valeur = ResourcesManager.getObject(entry.getKey());
 			if ( valeur.getLevel() == 0 ) {
-				valeur.setSize(objectsSize);
 				this.grounds.add(valeur);
 			}
 			else {
-				valeur.setSize(objectsSize);
 				this.blocks.add(valeur);
 			}
 		}
@@ -133,13 +131,13 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		if ( this.level == 0 ) {
 			for (i = this.currentGroundsItem, j = 0 ; j < this.itemsDisplayed && j < this.grounds.size() ; i++, j++ ) {
 				this.grounds.get(i).setPosition(new Point(0,j));
-				this.grounds.get(i).onDraw(canvas);
+				this.grounds.get(i).onDraw(canvas, objectsSize);
 			}
 		}
 		else if ( this.level == 1 ) {
 			for (i = this.currentBlocksItem, j = 0 ; j < this.itemsDisplayed && j < this.blocks.size() ; i++, j++ ) {
 				this.blocks.get(i).setPosition(new Point(0,j));
-				this.blocks.get(i).onDraw(canvas);
+				this.blocks.get(i).onDraw(canvas, objectsSize);
 			}
 		}
 	}
