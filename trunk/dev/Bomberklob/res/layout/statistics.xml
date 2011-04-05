@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/relativeLayout1" android:background="@drawable/background" android:layout_height="fill_parent" android:layout_width="fill_parent">
+        <LinearLayout android:id="@+id/linearLayout1" android:layout_centerInParent="true" android:gravity="center_horizontal" android:layout_height="wrap_content" android:orientation="vertical" android:layout_width="fill_parent">
+            <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/StatisticsPseudo"></TextView>
+           	<TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:stretchColumns="*" >
+				<TableRow>
+					<TextView android:text="@string/StatisticsGamesWon"/>
+					<TextView android:text="" android:id="@+id/StatisticsGamesWon"/>
+				</TableRow>
+                <TableRow>
+					<TextView android:text="@string/StatisticsGamesLost"/>
+					<TextView android:text="" android:id="@+id/StatisticsGamesLost"/>
+				</TableRow>
+            </TableLayout>
+        </LinearLayout>
+        <Button android:layout_width="wrap_content" android:layout_alignParentBottom="true" android:layout_height="wrap_content" android:text="@string/ButtonCancel" android:id="@+id/StatisticsButtonCancel"></Button>
+        <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_centerInParent="true" android:src="@drawable/gamename"></ImageView>
+    </RelativeLayout>

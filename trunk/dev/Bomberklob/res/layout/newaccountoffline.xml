@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/background">
+        <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_centerInParent="true" android:orientation="vertical" android:gravity="center_horizontal" android:layout_width="wrap_content">
+            <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1" android:gravity="center_vertical">
+           	  
+	            <TextView android:layout_height="wrap_content" android:layout_marginRight="5px" android:layout_width="wrap_content" android:text="Pseudo" android:id="@+id/NewAccountOfflineTextView"></TextView>
+	            <EditText android:layout_width="140px" android:text="" android:id="@+id/NewAccountOfflineEditText" android:layout_height="wrap_content" android:lines="1" android:singleLine="true"></EditText>
+	                   
+            </LinearLayout>
+            <LinearLayout android:id="@+id/linearLayout3" android:layout_height="wrap_content" android:layout_width="fill_parent">
+                <Button android:layout_weight="1" android:layout_height="wrap_content" android:text="Cancel" android:layout_width="wrap_content" android:id="@+id/NewAccountOfflineButtonCancel"></Button>
+                <Button android:layout_weight="1" android:layout_height="wrap_content" android:text="   Ok   " android:layout_width="wrap_content" android:id="@+id/NewAccountOfflineButtonOk"></Button>
+            </LinearLayout>
+        
+        </LinearLayout>
+        <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_centerInParent="true" android:src="@drawable/gamename"></ImageView>
+    </RelativeLayout>
+
