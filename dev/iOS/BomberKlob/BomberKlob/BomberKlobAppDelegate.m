@@ -7,8 +7,10 @@
 
 #import "BomberKlobAppDelegate.h"
 #import "CreateAccountOfflineMenuViewController.h"
+#import "MainMenuViewController.h"
 #import "Application.h"
 #import "User.h"
+#import "System.h"
 
 
 @implementation BomberKlobAppDelegate
@@ -19,18 +21,19 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+      
     app = [[Application alloc] init];
+    NSLog(@"%@", app.user);
     
     UINavigationController *navigationControllerTmp = [[UINavigationController alloc] init];
     UIViewController *viewController;
     
-    //    if (![app existPlayer]) {
-    //        viewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
-    //    }    
-    //    else {
-    viewController = [[CreateAccountOfflineMenuViewController alloc] initWithNibName:@"CreateAccountOfflineMenuViewController" bundle:nil];
-    //    }
+    if ([app existPlayer]) {
+        viewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
+    }    
+    else {
+        viewController = [[CreateAccountOfflineMenuViewController alloc] initWithNibName:@"CreateAccountOfflineMenuViewController" bundle:nil];
+    }
     
     [navigationControllerTmp pushViewController:viewController animated:YES];    
     self.navigationController = navigationControllerTmp;
@@ -39,8 +42,8 @@
     [self.window makeKeyAndVisible];
     
     [navigationControllerTmp release];
-    [viewController release];
-    
+    [viewController release];    
+        
     return YES;
 }
 
@@ -81,6 +84,8 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+    
+    
 }
 
 
@@ -93,5 +98,6 @@
 
 
 #pragma - My methods
+
 
 @end

@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class User, System;
+@class DataBase, User, System;
+
 
 @interface Application : NSObject {
+    
+    DataBase *dataBase;
     
     User *user;
     NSArray *pseudos;
@@ -26,10 +29,9 @@
 - (id)init;
 - (void)dealloc;
 
-- (void)loadLastUser;
+- (void)loadSystem;
 - (void)loadPseudos;
 - (void)loadMaps;
-- (void)loadSystem;
 
 - (BOOL)existPlayer;
 - (BOOL)pseudoAlreadyExists:(NSString *)pseudo;

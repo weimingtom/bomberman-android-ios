@@ -11,7 +11,7 @@
 
 
 @interface BomberKlobAppDelegate : NSObject <UIApplicationDelegate> {
-
+    
     Application *app;
 }
 

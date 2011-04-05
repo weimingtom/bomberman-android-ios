@@ -7,6 +7,8 @@
 //
 
 #import "System.h"
+#import "User.h"
+#import "DataBase.h"
 
 
 @implementation System
@@ -15,13 +17,16 @@
 @synthesize language;
 @synthesize lastUser;
 
-- (id)initWithVolume:(NSInteger)aVolume language:(NSString *)aLanguage lastUser:(NSInteger)alastUser {
+
+- (id)initWithVolume:(NSUInteger)aVolume language:(NSString *)aLanguage lastUser:(User *)anUser {
     self = [super init]; 
     
     if (self) {
+        dataBase = [DataBase instance];
+        
         volume = aVolume;
-        language = aLanguage;
-        lastUser = alastUser;
+        self.language = aLanguage;
+        self.lastUser = anUser;
     }
     
     return self;
@@ -30,12 +35,24 @@
 
 - (void)dealloc {
     [language release];
+    [lastUser release];
     [super dealloc];
 }
 
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"Volume: %d\nLanguage: %@\nLast user: %d", volume, language, lastUser];
+}
+
+
+// TODO: A compléter...
+- (void)saveInDataBase {
+    
+}
+
+
+- (void)updateLastUser {    
+    [dataBase update:@"System" set:[NSString stringWithFormat:@"lastUser = %d", lastUser.identifier] where:nil];
 }
 
 @end

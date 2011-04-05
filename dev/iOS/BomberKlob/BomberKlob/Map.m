@@ -7,17 +7,19 @@
 //
 
 #import "Map.h"
+#import "User.h"
 
 
 @implementation Map
 
-- (id)initWithName:(NSString *)aName owner:(NSInteger)anOwner officiel:(BOOL)anOfficiel {
+@synthesize name;
+@synthesize owner;
+@synthesize official;
+
+- (id)init {
     self = [super init]; 
     
     if (self) {
-        name = aName;
-        owner = anOwner;
-        officiel = anOfficiel;
     }
     
     return self;
@@ -26,12 +28,19 @@
 
 - (void)dealloc {
     [name release];
+    [owner release];
     [super dealloc];
 }
 
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Name: %@\nId owner: %d\nOfficiel: %d", name, owner, officiel];
+    return [NSString stringWithFormat:@"Name: %@\nId owner: %d\nOfficiel: %d", name, owner, official];
+}
+
+
+// TODO: A completer...
+- (void)saveInDataBase {
+    
 }
 
 @end

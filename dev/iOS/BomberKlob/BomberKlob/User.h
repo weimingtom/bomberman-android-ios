@@ -8,24 +8,41 @@
 
 #import <Foundation/Foundation.h>
 
+@class DataBase;
+
 
 @interface User : NSObject {
     
+    DataBase *dataBase;
+    
+    NSUInteger identifier;
     NSString *pseudo;
     NSString *userName;
     NSString *password;
     BOOL connectionAuto;
-    BOOL rembemberPassword;
-    NSString *color;
-    NSString *menuPosition;
-    NSInteger gameWon;
-    NSInteger gameLost;
+    BOOL rememberPassword;
+    NSUInteger color;
+    NSUInteger menuPosition;
+    NSUInteger gameWon;
+    NSUInteger gameLost;
 }
 
+// TODO: A changer...
+@property (readonly) NSUInteger identifier;
 @property (nonatomic, retain) NSString *pseudo;
+@property (nonatomic, retain) NSString *userName;
+@property (nonatomic, retain) NSString *password;
+@property (nonatomic) BOOL connectionAuto;
+@property (nonatomic) BOOL rememberPassword;
+@property (nonatomic) NSUInteger color;
+@property (nonatomic) NSUInteger menuPosition;
+@property (nonatomic) NSUInteger gameWon;
+@property (nonatomic) NSUInteger gameLost;
 
-- (id)init;
-- (id)initWithId:(NSInteger)identifier;
+- (id)initWithPseudo:(NSString *)aPseudo;
+- (id)initWithId:(NSUInteger)aId;
 - (void)dealloc;
+
+- (void)saveInDataBase;
 
 @end

@@ -10,6 +10,7 @@
 #import "User.h"
 #import "System.h"
 #import "Map.h"
+#import "DataBase.h"
 
 
 @implementation Application
@@ -23,10 +24,11 @@
     self = [super init]; 
     
     if (self) {
-        [self loadLastUser];
+        dataBase = [DataBase instance];
+        
+        [self loadSystem];
         [self loadPseudos];
         [self loadMaps];
-        [self loadSystem];
     }
     
     return self;
@@ -37,7 +39,7 @@
     [user release];
     [pseudos release];
     [maps release];
-    [system release];    
+    [system release]; 
     [super dealloc];
 }
 
@@ -47,57 +49,54 @@
 }
 
 
-- (void)loadLastUser {
-    
-    if (system.lastUser > 0) {
-        self.user = [[User alloc] initWithId:system.lastUser]; 
-    }
-    else {
-        self.user = nil;
-    }
-}
-
-
 - (void)loadPseudos {
-    self.pseudos = [NSArray arrayWithObjects:@"Joueur1", @"Joueur2", @"Joueur3", nil];
-}
+    NSMutableArray *playersPseudos = [[NSMutableArray alloc] init];
+    
+    sqlite3_stmt *statement = [dataBase select:@"pseudo" from:@"AccountPlayer" where:nil];
 
-
-- (void)loadMaps {
-    Map *map1 = [[Map alloc] initWithName:@"Map1" owner:0 officiel:YES];
-    Map *map2 = [[Map alloc] initWithName:@"Map2" owner:0 officiel:YES];
-    Map *map3 = [[Map alloc] initWithName:@"Map3" owner:0 officiel:YES];
-    Map *map4 = [[Map alloc] initWithName:@"Map4" owner:0 officiel:YES];
-    Map *map5 = [[Map alloc] initWithName:@"Map5" owner:0 officiel:YES];
-    Map *map6 = [[Map alloc] initWithName:@"Map6" owner:2 officiel:NO];
-    Map *map7 = [[Map alloc] initWithName:@"Map7" owner:1 officiel:NO];
-    Map *map8 = [[Map alloc] initWithName:@"Map8" owner:3 officiel:NO];
-    Map *map9 = [[Map alloc] initWithName:@"Map9" owner:1 officiel:NO];
-    Map *map10 = [[Map alloc] initWithName:@"Map10" owner:1 officiel:NO];
+    while (sqlite3_step(statement) == SQLITE_ROW) {
+        [playersPseudos addObject:[NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 0)]]; 
+    }
     
+    sqlite3_finalize(statement);
     
-    self.maps = [NSArray arrayWithObjects:map1, map2, map3, map4, map5, map6, map7, map8, map9, map10, nil];
+    if ([playersPseudos count] > 0) {
+        self.pseudos = playersPseudos;
+    }
     
-    [map1 release];
-    [map2 release];
-    [map3 release];
-    [map4 release];
-    [map5 release];
-    [map6 release];
-    [map7 release];
-    [map8 release];
-    [map9 release];
-    [map10 release];
+    [playersPseudos release];
 }
 
 
 - (void)loadSystem {
-    self.system = [[System alloc] initWithVolume:100 language:@"en" lastUser:0];
+    NSUInteger volume;
+    NSString *language;
+    
+    sqlite3_stmt *statement = [dataBase select:@"*" from:@"System" where:nil];
+
+    while (sqlite3_step(statement) == SQLITE_ROW) {
+        volume = sqlite3_column_int(statement, 0); 
+        language = [NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 1)];
+        
+        if (sqlite3_column_int(statement, 2) > 0) {
+            user = [[User alloc] initWithId:((NSInteger) sqlite3_column_int(statement, 2))];
+        }
+    }
+  
+    system = [[System alloc] initWithVolume:volume language:language lastUser:user];
+    sqlite3_finalize(statement);
 }
 
 
+// TODO: A compléter...
+- (void)loadMaps {
+    
+}
+
+
+// TODO: A vérifier...
 - (BOOL)existPlayer {
-    return ([pseudos count] > 0);
+    return (user != nil);
 }
 
 
@@ -111,5 +110,12 @@
     return !(i == [pseudos count]);
 }
  
+
+- (void)setUser:(User *)value {
+    [value retain];
+    [user release];
+    user = value;
+    system.lastUser = value;
+}
 
 @end
