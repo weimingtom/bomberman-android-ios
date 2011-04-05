@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<bitmaps>
-	<png name="inanimate" xTile="6" yTile="1"/> 
-    <png name="player" xTile="24" yTile="1"/> 
-	<png name="bombs" xTile="3" yTile="1"/> 
-	<png name="animate" xTile="6" yTile="1"/> 
-	<png name="explosions" xTile="3" yTile="4"/> 
-</bitmaps>

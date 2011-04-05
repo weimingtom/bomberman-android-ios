@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<inanimates>
-	<png name="grass" 	x="0" y="0" hit="0" level="0" fireWall="0" />
-	<png name="bloc"  	x="1" y="0" hit="1" level="1" fireWall="1" />
-	<png name="snow"  	x="2" y="0" hit="0" level="0" fireWall="0" />
-	<png name="ground"  x="3" y="0" hit="0" level="0" fireWall="0" />
-	<png name="wbloc"  	x="4" y="0" hit="1" level="1" fireWall="1" />
-	<png name="other" 	x="5" y="0" hit="0" level="0" fireWall="0" />
-</inanimates>
