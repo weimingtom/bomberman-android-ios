@@ -8,17 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+@class User;
+
 
 @interface Map : NSObject {
     
     NSString *name;
-    NSInteger owner;
-    BOOL officiel;
+    User *owner;
+    BOOL official;
 }
 
-- (id)initWithName:(NSString *)aName 
-             owner:(NSInteger)anOwner 
-          officiel:(BOOL)anOfficiel;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) User *owner;
+@property (nonatomic) BOOL official;
+
+- (id)init;
 - (void)dealloc;
+
+- (void)saveInDataBase;
 
 @end

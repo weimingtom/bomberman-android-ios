@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		184A63A31347AF34000F5C50 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 184A63A21347AF34000F5C50 /* libsqlite3.dylib */; };
+		185EEC971348A98D007A1C67 /* DataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EEC961348A98D007A1C67 /* DataBase.m */; };
+		186E7CD21345313F004B873F /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 186E7CCF1345313F004B873F /* Map.m */; };
+		186E7CD31345313F004B873F /* System.m in Sources */ = {isa = PBXBuildFile; fileRef = 186E7CD11345313F004B873F /* System.m */; };
 		187A72D6134117650020D828 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A72D5134117650020D828 /* Application.m */; };
 		187A72D9134117800020D828 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A72D8134117800020D828 /* User.m */; };
 		187A72E81341312D0020D828 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A72E61341312D0020D828 /* MainMenuViewController.m */; };
@@ -23,6 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		184A63A21347AF34000F5C50 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		185EEC951348A98D007A1C67 /* DataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBase.h; sourceTree = "<group>"; };
+		185EEC961348A98D007A1C67 /* DataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBase.m; sourceTree = "<group>"; };
+		186E7CCE1345313F004B873F /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		186E7CCF1345313F004B873F /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
+		186E7CD01345313F004B873F /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
+		186E7CD11345313F004B873F /* System.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = System.m; sourceTree = "<group>"; };
 		187A72D4134117650020D828 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		187A72D5134117650020D828 /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
 		187A72D7134117800020D828 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -30,8 +41,8 @@
 		187A72E51341312D0020D828 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		187A72E61341312D0020D828 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		187A72EB1341315C0020D828 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenuViewController.xib; sourceTree = "<group>"; };
-		187A72F5134131D00020D828 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file; name = fr; path = fr.lproj/CreateAccountOfflineMenuViewController.xib; sourceTree = "<group>"; };
-		187A72F613413DCA0020D828 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		187A72F5134131D00020D828 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/CreateAccountOfflineMenuViewController.xib; sourceTree = "<group>"; };
+		187A72F613413DCA0020D828 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1888557F134106E500DA88B9 /* CreateAccountOfflineMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountOfflineMenuViewController.h; sourceTree = "<group>"; };
 		18885580134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountOfflineMenuViewController.m; sourceTree = "<group>"; };
 		18885587134107BE00DA88B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CreateAccountOfflineMenuViewController.xib; sourceTree = "<group>"; };
@@ -53,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				184A63A31347AF34000F5C50 /* libsqlite3.dylib in Frameworks */,
 				18C839C913410263001D5747 /* UIKit.framework in Frameworks */,
 				18C839CB13410263001D5747 /* Foundation.framework in Frameworks */,
 				18C839CD13410263001D5747 /* CoreGraphics.framework in Frameworks */,
@@ -65,10 +77,16 @@
 		187A72D2134117400020D828 /* ModelMenu */ = {
 			isa = PBXGroup;
 			children = (
+				185EEC951348A98D007A1C67 /* DataBase.h */,
+				185EEC961348A98D007A1C67 /* DataBase.m */,
 				187A72D4134117650020D828 /* Application.h */,
 				187A72D5134117650020D828 /* Application.m */,
+				186E7CD01345313F004B873F /* System.h */,
+				186E7CD11345313F004B873F /* System.m */,
 				187A72D7134117800020D828 /* User.h */,
 				187A72D8134117800020D828 /* User.m */,
+				186E7CCE1345313F004B873F /* Map.h */,
+				186E7CCF1345313F004B873F /* Map.m */,
 			);
 			name = ModelMenu;
 			sourceTree = "<group>";
@@ -107,6 +125,7 @@
 			children = (
 				18C839CE13410263001D5747 /* BomberKlob */,
 				18C839C713410263001D5747 /* Frameworks */,
+				184A63A21347AF34000F5C50 /* libsqlite3.dylib */,
 				18C839C513410263001D5747 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -221,6 +240,9 @@
 				187A72D6134117650020D828 /* Application.m in Sources */,
 				187A72D9134117800020D828 /* User.m in Sources */,
 				187A72E81341312D0020D828 /* MainMenuViewController.m in Sources */,
+				186E7CD21345313F004B873F /* Map.m in Sources */,
+				186E7CD31345313F004B873F /* System.m in Sources */,
+				185EEC971348A98D007A1C67 /* DataBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

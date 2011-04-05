@@ -7,24 +7,33 @@
 //
 
 #import "User.h"
+#import "DataBase.h"
 
 
 @implementation User
 
+@synthesize identifier;
 @synthesize pseudo;
+@synthesize userName;
+@synthesize password;
+@synthesize connectionAuto;
+@synthesize rememberPassword;
+@synthesize color;
+@synthesize menuPosition;
+@synthesize gameWon;
+@synthesize gameLost;
 
 
-- (id)init {
+- (id)initWithPseudo:(NSString *)aPseudo {
     self = [super init];
     
     if (self) {
-        pseudo = @"Klob";
-        userName = nil;
-        password = nil;
-        connectionAuto = NO;
-        rembemberPassword = NO;
-        color = @"red";
-        menuPosition = @"right";
+        dataBase = [DataBase instance];
+        
+        identifier = 0;
+        self.pseudo = aPseudo;
+        color = 0;
+        menuPosition = 1;
         gameWon = 0;
         gameLost = 0;
     }
@@ -33,8 +42,30 @@
 }
 
 
-- (id)initWithId:(NSInteger)identifier {
-    return nil;
+- (id)initWithId:(NSUInteger)aId {
+    self = [super init];
+    
+    if (self) {
+        dataBase = [DataBase instance];
+        sqlite3_stmt *statement = [dataBase select:@"*" from:@"AccountPlayer" where:[NSString stringWithFormat:@"id = %d", aId]];
+        identifier = aId;
+
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            pseudo = [NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 1)];
+            userName = [NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 2)]; 
+            password = [NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 3)];
+            connectionAuto = (BOOL) sqlite3_column_int(statement, 4);
+            rememberPassword = (BOOL) sqlite3_column_int(statement, 5);
+            color = (NSUInteger) sqlite3_column_int(statement, 6);
+            menuPosition = (NSUInteger) sqlite3_column_int(statement, 7);
+            gameWon = (NSUInteger) sqlite3_column_int(statement, 8);
+            gameLost = (NSUInteger) sqlite3_column_int(statement, 9);
+        }
+        
+        sqlite3_finalize(statement);
+    }
+    
+    return self;
 }
 
 
@@ -42,9 +73,34 @@
     [pseudo release];
     [userName release];
     [password release];
-    [color release];
-    [menuPosition release];
     [super dealloc];
+}
+
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"User:\n Id: %d\n Pseudo: %@\n User name: %@\n Password: %@\n Connection auto: %d\n Remember password: %d\n Color: %d\n Menu position: %d\n Game won: %d\n Game lost: %d\n", identifier, pseudo, userName, password, connectionAuto, rememberPassword, color, menuPosition, gameWon, gameLost];
+}
+
+
+- (void)saveInDataBase {
+    NSString *values;
+    
+    if (!userName) {
+        values = [NSString stringWithFormat: @"(NULL, '%@', '', '', 0, 0, %d, %d, %d, %d)", pseudo, color, menuPosition, gameWon, gameLost];
+    }
+    else {
+        values = [NSString stringWithFormat: @"(NULL, '%@', '%@', '%@', %d, %d, %d, %d, %d, %d)", pseudo, userName, password, connectionAuto, rememberPassword, color, menuPosition, gameWon, gameLost];
+    }
+    
+    [dataBase insertInto:@"AccountPlayer" values:values];
+    
+    sqlite3_stmt *statement = [dataBase select:@"id" from:@"AccountPlayer" where:[NSString stringWithFormat:@"pseudo = '%@'", pseudo]];
+    
+    while (sqlite3_step(statement) == SQLITE_ROW) {
+        identifier = (NSUInteger) sqlite3_column_int(statement, 0); 
+    }
+    
+    sqlite3_finalize(statement);
 }
 
 @end

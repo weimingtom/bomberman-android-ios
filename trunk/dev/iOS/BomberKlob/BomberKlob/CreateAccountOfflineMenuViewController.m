@@ -10,6 +10,7 @@
 #import "MainMenuViewController.h"
 #import "Application.h"
 #import "User.h"
+#import "System.h"
 
 
 @implementation CreateAccountOfflineMenuViewController
@@ -63,8 +64,6 @@
     [self setPseudo:nil];
     [self setDone:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 
@@ -85,23 +84,42 @@
 
 - (BOOL)vericationPseudo {
     
+    // if the player doesn't provide his pseudo
     if ([pseudo.text isEqual:@""]) {
         UILabel *errorText = (UILabel *)[errorView.subviews objectAtIndex:0]; 
         errorText.text = NSLocalizedString(@"Please enter a pseudo.", @"Error message when creating an offline account");
         
         return NO;
     }
+    // else if he provide his pseudo
     else {
+        NSMutableArray *pseudos;
         Application *application = ((BomberKlobAppDelegate *)[UIApplication sharedApplication].delegate).app;
         
+        // if the player's name is already used
         if ([application pseudoAlreadyExists:pseudo.text]) {
             UILabel *errorText = (UILabel *)[errorView.subviews objectAtIndex:0]; 
             errorText.text = [NSString stringWithFormat: NSLocalizedString(@"'%@' is already used.", @"Error message when creating an offline account" ), pseudo.text];
             
             return NO;
         }
-        
-        return YES;
+        // else the player has provide a good pseudo
+        else {
+            User *newUser = [[User alloc] initWithPseudo:pseudo.text];
+            [newUser saveInDataBase];
+            
+            pseudos = [[NSMutableArray alloc] initWithArray:application.pseudos];
+            [pseudos addObject:newUser.pseudo];
+            
+            application.pseudos = pseudos;
+            application.user = newUser;
+            
+            [application.system updateLastUser];
+            
+            [newUser release];
+            
+            return YES;
+         }
     }
 }
 
@@ -110,6 +128,10 @@
     
     if ([self vericationPseudo]) {
         errorView.hidden = YES;
+        
+        Application *application = ((BomberKlobAppDelegate *)[UIApplication sharedApplication].delegate).app;
+        
+        application.user = [[User alloc] initWithPseudo:pseudo.text];
         
         MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
         [self.navigationController pushViewController:mainMenuViewController animated:YES];
