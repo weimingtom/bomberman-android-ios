@@ -11,7 +11,7 @@ public class EditorView extends Thread {
     private EditorController editorView;
     private boolean run = false;
     
-    private int level = 0;
+    private int level = 1;
     
     /* Constructeur -------------------------------------------------------- */
 
@@ -62,8 +62,7 @@ public class EditorView extends Thread {
     public void run() {
         Canvas c;
         while (this.run) {
-            c = null;
-            
+            c = null;            
             try {
                 c = this.surfaceHolder.lockCanvas(null);
                 synchronized (this.surfaceHolder) {

@@ -13,6 +13,7 @@ import com.klob.Bomberklob.objects.Destructible;
 import com.klob.Bomberklob.objects.FrameInfo;
 import com.klob.Bomberklob.objects.Inanimate;
 import com.klob.Bomberklob.objects.Objects;
+import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.Undestructible;
 
 import android.content.Context;
@@ -87,6 +88,9 @@ public class ResourcesManager {
 		}
 		else if ( o instanceof Undestructible) {
 			o = new Undestructible((Undestructible) o);
+		}
+		else if ( o instanceof Player) {
+			o = new Player((Player) o);
 		}
 		
 		return o;
@@ -181,7 +185,7 @@ public class ResourcesManager {
 		try {
 			int eventType = xpp.getEventType();
 			String animationname="";
-			AnimationSequence animationsequence = new AnimationSequence();
+			AnimationSequence animationsequence = new AnimationSequence();;
 
 			while (eventType != XmlPullParser.END_DOCUMENT){
 
@@ -259,6 +263,64 @@ public class ResourcesManager {
 			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+ e.toString());
 		}
 		Log.i("ResourcesManager","--------- Inanimated objects loaded  ---------");
+	}
+	
+	public static void playersInitialisation() {
+
+		XmlResourceParser xpp = context.getResources().getXml(R.xml.players);
+		
+		Log.i("ResourcesManager","--------------- Loading player ---------------");
+		Player player = new Player("player", "lol", 1, 1, 1, 1, 1, 1);
+
+		try {
+			int eventType = xpp.getEventType();
+			String animationname="";
+			AnimationSequence animationsequence = new AnimationSequence();;
+			
+			while (eventType != XmlPullParser.END_DOCUMENT){
+
+				if(eventType == XmlPullParser.START_TAG) {
+					
+					if(xpp.getName().toLowerCase().equals("animation")) {	
+						Log.i("ResourcesManager","Player animation : " + xpp.getAttributeValue(null, "name"));
+						animationname=xpp.getAttributeValue(null, "name");	            	 
+						animationsequence = new AnimationSequence();
+						animationsequence.name=animationname;
+						animationsequence.sequence=new ArrayList<FrameInfo>();
+						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);	
+					}
+					else if(xpp.getName().toLowerCase().equals("png")) {
+						FrameInfo frameinfo = new FrameInfo();
+						Point point = new Point();
+						point.x = xpp.getAttributeIntValue(null, "x", 0);
+						point.y = xpp.getAttributeIntValue(null, "y", 0);
+						frameinfo.point = point;
+						frameinfo.nextFrameDelay = xpp.getAttributeIntValue(null,"delayNextFrame", 0);
+						System.out.println("CACA " + point.x + " " + point.y + " " + frameinfo.point.x + " " + frameinfo.point.y + " " + frameinfo.nextFrameDelay);
+						animationsequence.sequence.add(frameinfo);
+					}
+				}else if(eventType == XmlPullParser.END_TAG) {
+					if(xpp.getName().toLowerCase().equals("animation")) {
+						player.getAnimations().put(animationname, animationsequence);
+						System.out.println("Animation : " + player.getAnimations().get(animationname));
+					}
+					else if (xpp.getName().toLowerCase().equals("animations")) {
+						if ( player != null ) {
+							objects.put(player.getImageName(), player);
+							Log.i("ResourcesManager","Added AnimatedObject : " + player.getImageName());
+							player = null;
+						}
+					}
+				} else if(eventType == XmlPullParser.TEXT) {
+					System.out.println("Text "+xpp.getText());
+				}
+				eventType = xpp.next();
+			}
+		}
+		catch (Exception e) {
+			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+e.toString());
+		}
+		System.out.println("--------------- Player Loaded ----------------");
 	}
 
 	/**
