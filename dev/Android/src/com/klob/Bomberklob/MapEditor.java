@@ -139,7 +139,6 @@ public class MapEditor extends Activity implements View.OnClickListener {
 			objectsGallery.SetSelectedItem(null);
 		}
 		else if ( resultCode == 2001) {
-			
 
 		    Bitmap bm = Bitmap.createBitmap(this.editorController.getWidth(), this.editorController.getHeight(), Bitmap.Config.ARGB_8888);
 		    Canvas pictureCanvas = new Canvas(bm);
@@ -161,7 +160,7 @@ public class MapEditor extends Activity implements View.OnClickListener {
 			}
 			
 			this.editorController.getMapEditor().getMap().saveMap(getApplicationContext());
-			Model.getSystem().getDatabase().newMap(bundle.getString("map"), Model.getUser().getPseudo(), 1, dir.getAbsolutePath()+"/"+bundle.getString("map")+".png");
+			Model.getSystem().getDatabase().newMap(bundle.getString("map"), Model.getUser().getPseudo(), 1);
 			Intent intent = new Intent(MapEditor.this, Home.class);
 			startActivity(intent);
 			this.finish();

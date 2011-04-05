@@ -5,15 +5,13 @@ public class Map {
 	private String name;
 	private String owner;
 	private boolean official;
-	private String bitmapPath;
 	
 	/* Constructeur -------------------------------------------------------- */
 	
-	public Map(String name, String owner, boolean official, String bitmapPath) {
+	public Map(String name, String owner, boolean official) {
 		this.name = name;
 		this.owner = owner;
 		this.official = official;
-		this.bitmapPath = bitmapPath;
 	}
 	
 	/* Getteurs ------------------------------------------------------------ */
@@ -30,10 +28,6 @@ public class Map {
 		return this.official;
 	}
 	
-	public String getPath() {
-		return this.bitmapPath;
-	}
-	
 	/* Setteurs ------------------------------------------------------------ */
 	
 	public void setName(String name) {
@@ -46,10 +40,6 @@ public class Map {
 
 	public void setOfficial(boolean official) {
 		this.official = official;
-	}
-	
-	public void setBitmapPath(String bitmapPath) {
-		this.bitmapPath = bitmapPath;
 	}
 	
 }
