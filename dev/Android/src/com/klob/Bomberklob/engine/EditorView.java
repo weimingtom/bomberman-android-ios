@@ -12,8 +12,8 @@ public class EditorView extends Thread {
     private int level = 0;
     
     /* Constructeur -------------------------------------------------------- */
-    
-    public EditorView(SurfaceHolder surfaceHolder, EditorController editorView) {
+
+	public EditorView(SurfaceHolder surfaceHolder, EditorController editorView) {
         this.surfaceHolder = surfaceHolder;
         this.editorView = editorView;
     }
@@ -61,6 +61,7 @@ public class EditorView extends Thread {
         Canvas c;
         while (this.run) {
             c = null;
+            
             try {
                 c = this.surfaceHolder.lockCanvas(null);
                 synchronized (this.surfaceHolder) {
