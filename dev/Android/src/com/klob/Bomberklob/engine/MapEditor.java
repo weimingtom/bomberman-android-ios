@@ -39,8 +39,7 @@ public class MapEditor {
 				this.map.addGround(objects, point);
 			}
 		}
-		else {
-			
+		else {			
 			if ( map.getBlocks()[point.x][point.y] != null && objects.getImageName().equals(map.getBlocks()[point.x][point.y].getImageName())) {
 				map.getBlocks()[point.x][point.y] = null;
 			}
