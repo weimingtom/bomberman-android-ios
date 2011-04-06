@@ -18,6 +18,9 @@
 @property (nonatomic, retain) IBOutlet UIButton *pseudo;
 @property (nonatomic, retain) IBOutlet UIButton *newProfil;
 
+- (void)goToCreateAccountOfflineMenu;
+- (void)goToChangePlayerMenu;
+
 - (IBAction)singlePlayerAction:(id)sender;
 - (IBAction)multiplayerAction:(id)sender;
 - (IBAction)optionsAction:(id)sender;

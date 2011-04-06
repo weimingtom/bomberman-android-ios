@@ -9,6 +9,8 @@
 #import "MainMenuViewController.h"
 #import "BomberKlobAppDelegate.h"
 #import "Application.h"
+#import "CreateAccountOfflineMenuViewController.h"
+#import "ChangePlayerMenuViewController.h"
 #import "User.h"
 
 
@@ -47,6 +49,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // TODO: Fixer pourquoi si on release visibleViewController ca plante...
+    NSArray *visibleViewController = [[NSArray alloc] initWithObjects:self, nil];
+    self.navigationController.viewControllers = visibleViewController;
+//    [visibleViewController release];
+    
+    NSLog(@"%@", self.navigationController.viewControllers);
+    
     self.title = NSLocalizedString(@"Main menu", @"Title of 'Main menu' page");
     
     Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
@@ -57,8 +66,6 @@
     
     newProfil.frame = CGRectMake((pseudo.frame.origin.x + pseudo.frame.size.width + 5), newProfil.frame.origin.y, newProfil.frame.size.width, newProfil.frame.size.height);
     NSLog(@"%f", (pseudo.frame.origin.x + pseudo.frame.size.width));
-    
-    self.navigationItem.hidesBackButton = YES;
 }
 
 
@@ -78,6 +85,19 @@
 
 
 #pragma mark - My methods
+
+- (void)goToCreateAccountOfflineMenu {
+    CreateAccountOfflineMenuViewController *createAccountOfflineMenuViewController = [[CreateAccountOfflineMenuViewController alloc] initWithNibName:@"CreateAccountOfflineMenuViewController" bundle:nil];
+    [self.navigationController pushViewController:createAccountOfflineMenuViewController animated:YES];
+    [createAccountOfflineMenuViewController release];
+}
+
+
+- (void)goToChangePlayerMenu {
+    ChangePlayerMenuViewController * changePlayerMenuViewController = [[ChangePlayerMenuViewController alloc] initWithNibName:@"ChangePlayerMenuViewController" bundle:nil];
+    [self.navigationController pushViewController:changePlayerMenuViewController animated:YES];
+    [changePlayerMenuViewController release];
+}
 
 
 #pragma mark Action
@@ -107,9 +127,11 @@
 }
 
 - (IBAction)pseudoAction:(id)sender {
+    [self goToChangePlayerMenu];
 }
 
 - (IBAction)newProfilAction:(id)sender {
+    [self goToCreateAccountOfflineMenu];
 }
 
 @end
