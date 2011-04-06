@@ -7,6 +7,10 @@
 		android:id="@+id/MapEditorRelativeLayoutMenu" android:background="@color/White" android:gravity="center_vertical" android:layout_height="wrap_content">
 		<Button android:layout_width="wrap_content" android:text="@string/ButtonMenu"
 			android:layout_height="wrap_content" android:id="@+id/MapEditorButtonMenu"></Button>
+		<FrameLayout android:id="@+id/frameLayout1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_centerInParent="true">
+				<com.klob.Bomberklob.engine.ObjectsGallery android:layout_width="wrap_content" android:id="@+id/MapEditorPlayersGallery" android:layout_height="wrap_content"></com.klob.Bomberklob.engine.ObjectsGallery>
+			</FrameLayout>
+			
 		<CheckBox android:layout_width="wrap_content" android:text="@string/MapEditorCheckBox"
 			android:layout_alignParentRight="true" android:layout_height="wrap_content"
 			android:id="@+id/MapEditorCheckBox"></CheckBox>

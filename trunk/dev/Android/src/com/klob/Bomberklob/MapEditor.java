@@ -32,7 +32,7 @@ public class MapEditor extends Activity implements View.OnClickListener {
 
 	private EditorController editorController;
 
-	private ObjectsGallery objectsGallery;
+	private ObjectsGallery objectsGallery, objectsGallery2;
 	private LinearLayout editorControllerLayout;
 	private RelativeLayout editorRelativeLayoutObjectsGallery, editorRelativeLayoutMenu;
 	
@@ -67,6 +67,11 @@ public class MapEditor extends Activity implements View.OnClickListener {
 		this.objectsGallery = (ObjectsGallery) findViewById(R.id.MapEditorObjectsGallery);
 		this.objectsGallery.setLevel(1);
 		this.objectsGallery.loadObjects(ResourcesManager.getObjects());
+		
+		this.objectsGallery2 = (ObjectsGallery) findViewById(R.id.MapEditorPlayersGallery);
+		this.objectsGallery2.setLevel(0);
+		this.objectsGallery2.setVertical(false);
+		this.objectsGallery2.loadObjects(ResourcesManager.getObjects());
 		
 		this.editorController = (EditorController) findViewById(R.id.MapEditorFrameLayout);
 		this.editorController.setObjectsGallery(this.objectsGallery);
