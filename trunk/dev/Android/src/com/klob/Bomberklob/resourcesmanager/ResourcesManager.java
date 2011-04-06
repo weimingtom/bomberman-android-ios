@@ -11,6 +11,7 @@ import com.klob.Bomberklob.objects.AnimatedObjects;
 import com.klob.Bomberklob.objects.AnimationSequence;
 import com.klob.Bomberklob.objects.Destructible;
 import com.klob.Bomberklob.objects.FrameInfo;
+import com.klob.Bomberklob.objects.HashMapObjects;
 import com.klob.Bomberklob.objects.Inanimate;
 import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.Player;
@@ -34,7 +35,7 @@ public class ResourcesManager {
 	private static int height;
 	private static int width;
 	private static HashMap<String, Bitmap>	bitmaps = new HashMap<String, Bitmap>();
-	private static HashMap<String, Objects> objects = new HashMap<String, Objects>();
+	private static HashMapObjects objects = new HashMapObjects();
 
 	/* Constructeur -------------------------------------------------------- */
 
@@ -68,32 +69,12 @@ public class ResourcesManager {
 		return bitmaps;
 	}
 
-	public static HashMap<String, Objects> getObjects() {
+	public static HashMapObjects getObjects() {
 		return objects;
 	}
 	
 	public static float getDpiPx() {
 		return dpiPx;
-	}
-	
-	public static Objects getObject(String objectName) {
-		
-		Objects o = objects.get(objectName);
-		
-		if ( o instanceof Inanimate ) {
-			o = new Inanimate((Inanimate) o);
-		}
-		else if ( o instanceof Destructible ) {
-			o = new Destructible((Destructible) o);
-		}
-		else if ( o instanceof Undestructible) {
-			o = new Undestructible((Undestructible) o);
-		}
-		else if ( o instanceof Player) {
-			o = new Player((Player) o);
-		}
-		
-		return o;
 	}
 
 	public Context getContext() {

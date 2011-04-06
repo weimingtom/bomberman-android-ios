@@ -33,13 +33,15 @@ public class MapEditor extends Activity implements View.OnClickListener {
 	private EditorController editorController;
 
 	private ObjectsGallery objectsGallery;
-	private LinearLayout editorLayout, editorControllerLayout;
-	private RelativeLayout editorRelativeLayoutObjectsGallery;
+	private LinearLayout editorControllerLayout;
+	private RelativeLayout editorRelativeLayoutObjectsGallery, editorRelativeLayoutMenu;
 	
 	private Bundle bundle;
 
 	private Button menu;
 	private CheckBox checkBox;
+	
+	private int menuSize = 50;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,21 +53,27 @@ public class MapEditor extends Activity implements View.OnClickListener {
 		setContentView(R.layout.mapeditor);
 		
 		DisplayMetrics dm = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(dm);		
+		getWindowManager().getDefaultDisplay().getMetrics(dm);	
+		
+		this.editorRelativeLayoutMenu = (RelativeLayout) findViewById(R.id.MapEditorRelativeLayoutMenu);
+		this.editorRelativeLayoutMenu.setLayoutParams(new LinearLayout.LayoutParams( ResourcesManager.getHeight(), (int) (menuSize*ResourcesManager.getDpiPx())) );
 
 		this.editorRelativeLayoutObjectsGallery = (RelativeLayout) findViewById(R.id.MapEditorRelativeLayoutObjectsGallery);
-		this.editorRelativeLayoutObjectsGallery.setLayoutParams(new LinearLayout.LayoutParams( (int) (50*ResourcesManager.getDpiPx()), (int) (ResourcesManager.getWidth()-(50*ResourcesManager.getDpiPx())) ) );
+		this.editorRelativeLayoutObjectsGallery.setLayoutParams(new LinearLayout.LayoutParams( (int) (menuSize*ResourcesManager.getDpiPx()), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
 
 		this.editorControllerLayout = (LinearLayout) findViewById(R.id.MapEditorLinearLayoutEditorController);
-		this.editorControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getHeight()-(50*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getWidth()-(50*ResourcesManager.getDpiPx())) ) );
+		this.editorControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
 		
 		this.objectsGallery = (ObjectsGallery) findViewById(R.id.MapEditorObjectsGallery);
-
-		this.menu = (Button) findViewById(R.id.MapEditorButtonMenu);
-		this.menu.setOnClickListener(this);
+		this.objectsGallery.setLevel(1);
+		this.objectsGallery.loadObjects(ResourcesManager.getObjects());
 		
 		this.editorController = (EditorController) findViewById(R.id.MapEditorFrameLayout);
 		this.editorController.setObjectsGallery(this.objectsGallery);
+		this.editorController.getEditorView().setLevel(1);
+		
+		this.menu = (Button) findViewById(R.id.MapEditorButtonMenu);
+		this.menu.setOnClickListener(this);
 		
 		this.checkBox = (CheckBox) findViewById(R.id.MapEditorCheckBox);
 		this.checkBox.setChecked(true);
@@ -85,17 +93,10 @@ public class MapEditor extends Activity implements View.OnClickListener {
 			}
 		});
 		
-		objectsGallery.setLevel(1);
-		editorController.getEditorView().setLevel(1);
-		
 		this.bundle = getIntent().getExtras();
         if(bundle.getString("map")!= null) {
         	this.editorController.getMapEditor().loadMap(getApplicationContext(), bundle.getString("map"));
         }
-		
-		this.editorLayout = (LinearLayout) findViewById(R.id.MapEditorLayout);
-		this.editorLayout.setOnClickListener(this);
-
 	}
 
 	@Override
@@ -123,15 +124,12 @@ public class MapEditor extends Activity implements View.OnClickListener {
 	}  
 
 	@Override
-	public void onClick(View arg0) {
-		
+	public void onClick(View arg0) {	
 		if ( this.menu == arg0 ) {
 			Intent intent = new Intent(MapEditor.this, MapEditorMenu.class);
 			startActivityForResult(intent, 1000);
 		}
-		
-	}
-	
+	}	
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
