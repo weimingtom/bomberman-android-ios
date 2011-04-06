@@ -26,6 +26,14 @@
 		18C839D613410263001D5747 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C839D513410263001D5747 /* main.m */; };
 		18C839D913410263001D5747 /* BomberKlobAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C839D813410263001D5747 /* BomberKlobAppDelegate.m */; };
 		18C839DC13410263001D5747 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C839DA13410263001D5747 /* MainWindow.xib */; };
+		9943388E134C6E9B00970231 /* Animated.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943387F134C6E9B00970231 /* Animated.m */; };
+		9943388F134C6E9B00970231 /* AnimationSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433881134C6E9B00970231 /* AnimationSequence.m */; };
+		99433890134C6E9B00970231 /* Bomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433883134C6E9B00970231 /* Bomb.m */; };
+		99433891134C6E9B00970231 /* Destructible.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433885134C6E9B00970231 /* Destructible.m */; };
+		99433892134C6E9B00970231 /* FrameInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433887134C6E9B00970231 /* FrameInfo.m */; };
+		99433893134C6E9B00970231 /* Inanimated.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433889134C6E9B00970231 /* Inanimated.m */; };
+		99433894134C6E9B00970231 /* Object.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943388B134C6E9B00970231 /* Object.m */; };
+		99433895134C6E9B00970231 /* Undestructible.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943388D134C6E9B00970231 /* Undestructible.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,11 +45,11 @@
 		185EEC961348A98D007A1C67 /* DataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBase.m; sourceTree = "<group>"; };
 		186E7CCE1345313F004B873F /* DBMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMap.h; sourceTree = "<group>"; };
 		186E7CCF1345313F004B873F /* DBMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMap.m; sourceTree = "<group>"; };
-		186E7CD01345313F004B873F /* DBSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; path = DBSystem.h; sourceTree = "<group>"; };
+		186E7CD01345313F004B873F /* DBSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBSystem.h; sourceTree = "<group>"; };
 		186E7CD11345313F004B873F /* DBSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSystem.m; sourceTree = "<group>"; };
 		187A72D4134117650020D828 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		187A72D5134117650020D828 /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
-		187A72D7134117800020D828 /* DBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; path = DBUser.h; sourceTree = "<group>"; };
+		187A72D7134117800020D828 /* DBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBUser.h; sourceTree = "<group>"; };
 		187A72D8134117800020D828 /* DBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBUser.m; sourceTree = "<group>"; };
 		187A72E51341312D0020D828 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		187A72E61341312D0020D828 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
@@ -62,6 +70,22 @@
 		18C839D713410263001D5747 /* BomberKlobAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BomberKlobAppDelegate.h; sourceTree = "<group>"; };
 		18C839D813410263001D5747 /* BomberKlobAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BomberKlobAppDelegate.m; sourceTree = "<group>"; };
 		18C839DB13410263001D5747 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		9943387E134C6E9B00970231 /* Animated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animated.h; sourceTree = "<group>"; };
+		9943387F134C6E9B00970231 /* Animated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animated.m; sourceTree = "<group>"; };
+		99433880134C6E9B00970231 /* AnimationSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationSequence.h; sourceTree = "<group>"; };
+		99433881134C6E9B00970231 /* AnimationSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationSequence.m; sourceTree = "<group>"; };
+		99433882134C6E9B00970231 /* Bomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bomb.h; sourceTree = "<group>"; };
+		99433883134C6E9B00970231 /* Bomb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bomb.m; sourceTree = "<group>"; };
+		99433884134C6E9B00970231 /* Destructible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Destructible.h; sourceTree = "<group>"; };
+		99433885134C6E9B00970231 /* Destructible.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Destructible.m; sourceTree = "<group>"; };
+		99433886134C6E9B00970231 /* FrameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameInfo.h; sourceTree = "<group>"; };
+		99433887134C6E9B00970231 /* FrameInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameInfo.m; sourceTree = "<group>"; };
+		99433888134C6E9B00970231 /* Inanimated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inanimated.h; sourceTree = "<group>"; };
+		99433889134C6E9B00970231 /* Inanimated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Inanimated.m; sourceTree = "<group>"; };
+		9943388A134C6E9B00970231 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
+		9943388B134C6E9B00970231 /* Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Object.m; sourceTree = "<group>"; };
+		9943388C134C6E9B00970231 /* Undestructible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Undestructible.h; sourceTree = "<group>"; };
+		9943388D134C6E9B00970231 /* Undestructible.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Undestructible.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +192,8 @@
 		18C839CE13410263001D5747 /* BomberKlob */ = {
 			isa = PBXGroup;
 			children = (
+				9943387D134C6E4B00970231 /* Object */,
+				9943387B134C6E1B00970231 /* Body */,
 				187A72D2134117400020D828 /* ModelMenu */,
 				188855851341071700DA88B9 /* CreateAccountMenu */,
 				187A72E2134131020020D828 /* MainMenu */,
@@ -187,6 +213,36 @@
 				18C839D513410263001D5747 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9943387B134C6E1B00970231 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Body;
+			sourceTree = "<group>";
+		};
+		9943387D134C6E4B00970231 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				9943387E134C6E9B00970231 /* Animated.h */,
+				9943387F134C6E9B00970231 /* Animated.m */,
+				99433880134C6E9B00970231 /* AnimationSequence.h */,
+				99433881134C6E9B00970231 /* AnimationSequence.m */,
+				99433882134C6E9B00970231 /* Bomb.h */,
+				99433883134C6E9B00970231 /* Bomb.m */,
+				99433884134C6E9B00970231 /* Destructible.h */,
+				99433885134C6E9B00970231 /* Destructible.m */,
+				99433886134C6E9B00970231 /* FrameInfo.h */,
+				99433887134C6E9B00970231 /* FrameInfo.m */,
+				99433888134C6E9B00970231 /* Inanimated.h */,
+				99433889134C6E9B00970231 /* Inanimated.m */,
+				9943388A134C6E9B00970231 /* Object.h */,
+				9943388B134C6E9B00970231 /* Object.m */,
+				9943388C134C6E9B00970231 /* Undestructible.h */,
+				9943388D134C6E9B00970231 /* Undestructible.m */,
+			);
+			name = Object;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +318,14 @@
 				186E7CD31345313F004B873F /* DBSystem.m in Sources */,
 				185EEC971348A98D007A1C67 /* DataBase.m in Sources */,
 				1846A7BF134B6F4D00D35626 /* ChangePlayerMenuViewController.m in Sources */,
+				9943388E134C6E9B00970231 /* Animated.m in Sources */,
+				9943388F134C6E9B00970231 /* AnimationSequence.m in Sources */,
+				99433890134C6E9B00970231 /* Bomb.m in Sources */,
+				99433891134C6E9B00970231 /* Destructible.m in Sources */,
+				99433892134C6E9B00970231 /* FrameInfo.m in Sources */,
+				99433893134C6E9B00970231 /* Inanimated.m in Sources */,
+				99433894134C6E9B00970231 /* Object.m in Sources */,
+				99433895134C6E9B00970231 /* Undestructible.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
