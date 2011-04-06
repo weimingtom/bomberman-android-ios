@@ -10,7 +10,7 @@
 #import "BomberKlobAppDelegate.h"
 #import "MainMenuViewController.h"
 #import "Application.h"
-#import "User.h"
+#import "DBUser.h"
 
 
 @implementation ChangePlayerMenuViewController
@@ -115,6 +115,8 @@
 
     cell.textLabel.text = [application.pseudos objectAtIndex:indexPath.row]; // 3
     
+    NSLog(@"%d", application.user.identifier);
+    
     if ((indexPath.row + 1) == application.user.identifier) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
@@ -166,7 +168,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Application *application = ((BomberKlobAppDelegate *)[UIApplication sharedApplication].delegate).app;
     
-    User *newUser = [[User alloc] initWithId:(indexPath.row + 1)];
+    DBUser *newUser = [[DBUser alloc] initWithId:(indexPath.row + 1)];
     application.user = newUser;
     [newUser release];
     

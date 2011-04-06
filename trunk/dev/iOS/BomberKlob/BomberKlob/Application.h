@@ -8,23 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
-@class DataBase, User, System;
+@class DataBase, DBUser, DBSystem;
 
 
 @interface Application : NSObject {
     
     DataBase *dataBase;
     
-    User *user;
+    DBUser *user;
     NSArray *pseudos;
     NSArray *maps;
-    System *system;
+    DBSystem *system;
 }
 
-@property (nonatomic, retain) User *user;
+@property (nonatomic, retain) DBUser *user;
 @property (nonatomic, retain) NSArray *pseudos;
 @property (nonatomic, retain) NSArray *maps;
-@property (nonatomic, retain) System *system;
+@property (nonatomic, retain) DBSystem *system;
 
 - (id)init;
 - (void)dealloc;

@@ -9,7 +9,7 @@
 #import "BomberKlobAppDelegate.h"
 #import "MainMenuViewController.h"
 #import "Application.h"
-#import "User.h"
+#import "DBUser.h"
 #import "System.h"
 
 
@@ -105,7 +105,7 @@
         }
         // else the player has provide a good pseudo
         else {
-            User *newUser = [[User alloc] initWithPseudo:pseudo.text];
+            DBUser *newUser = [[DBUser alloc] initWithPseudo:pseudo.text];
             [newUser saveInDataBase];
             
             pseudos = [[NSMutableArray alloc] initWithArray:application.pseudos];
@@ -131,7 +131,7 @@
         
         Application *application = ((BomberKlobAppDelegate *)[UIApplication sharedApplication].delegate).app;
         
-        application.user = [[User alloc] initWithPseudo:pseudo.text];
+        application.user = [[DBUser alloc] initWithPseudo:pseudo.text];
         
         MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
         [self.navigationController pushViewController:mainMenuViewController animated:YES];

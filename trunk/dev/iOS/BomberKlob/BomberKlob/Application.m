@@ -7,8 +7,8 @@
 //
 
 #import "Application.h"
-#import "User.h"
-#import "System.h"
+#import "DBUser.h"
+#import "DBSystem.h"
 #import "Map.h"
 #import "DataBase.h"
 
@@ -79,11 +79,11 @@
         language = [NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 1)];
         
         if (sqlite3_column_int(statement, 2) > 0) {
-            user = [[User alloc] initWithId:((NSInteger) sqlite3_column_int(statement, 2))];
+            user = [[DBUser alloc] initWithId:((NSInteger) sqlite3_column_int(statement, 2))];
         }
     }
   
-    system = [[System alloc] initWithVolume:volume language:language lastUser:user];
+    system = [[DBSystem alloc] initWithVolume:volume language:language lastUser:user];
     sqlite3_finalize(statement);
 }
 
@@ -111,7 +111,7 @@
 }
  
 
-- (void)setUser:(User *)value {
+- (void)setUser:(DBUser *)value {
     [value retain];
     [user release];
     user = value;

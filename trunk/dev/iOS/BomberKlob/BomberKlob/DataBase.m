@@ -114,7 +114,6 @@ static DataBase *_dataBase = nil;
 
 
 - (void)update:(NSString *)table set:(NSString *)values where:(NSString *)condition {
-    NSLog(@"TEstesttststse");
     char *err; 
     NSString *sql;
     
@@ -124,8 +123,6 @@ static DataBase *_dataBase = nil;
     else {
         sql = [NSString stringWithFormat: @"UPDATE %@ SET %@;", table, values];
     }
-    
-    NSLog(@"=-=-=-=-=-=-=-=>%@", sql);
     
     if (sqlite3_exec(dataBase, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK) {
         sqlite3_close(dataBase); 

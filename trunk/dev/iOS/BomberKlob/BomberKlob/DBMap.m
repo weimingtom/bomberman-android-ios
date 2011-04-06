@@ -6,11 +6,11 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "Map.h"
+#import "DBMap.h"
 #import "User.h"
 
 
-@implementation Map
+@implementation DBMap
 
 @synthesize name;
 @synthesize owner;
