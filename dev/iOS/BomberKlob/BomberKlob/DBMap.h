@@ -11,7 +11,7 @@
 @class User;
 
 
-@interface Map : NSObject {
+@interface DBMap : NSObject {
     
     NSString *name;
     User *owner;

@@ -6,11 +6,11 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "User.h"
+#import "DBUser.h"
 #import "DataBase.h"
 
 
-@implementation User
+@implementation DBUser
 
 @synthesize identifier;
 @synthesize pseudo;

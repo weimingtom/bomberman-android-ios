@@ -11,7 +11,7 @@
 @class DataBase;
 
 
-@interface User : NSObject {
+@interface DBUser : NSObject {
     
     DataBase *dataBase;
     

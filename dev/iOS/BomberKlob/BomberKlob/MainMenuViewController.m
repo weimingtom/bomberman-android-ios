@@ -54,8 +54,6 @@
     self.navigationController.viewControllers = visibleViewController;
 //    [visibleViewController release];
     
-    NSLog(@"%@", self.navigationController.viewControllers);
-    
     self.title = NSLocalizedString(@"Main menu", @"Title of 'Main menu' page");
     
     Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
@@ -65,7 +63,6 @@
     
     
     newProfil.frame = CGRectMake((pseudo.frame.origin.x + pseudo.frame.size.width + 5), newProfil.frame.origin.y, newProfil.frame.size.width, newProfil.frame.size.height);
-    NSLog(@"%f", (pseudo.frame.origin.x + pseudo.frame.size.width));
 }
 
 

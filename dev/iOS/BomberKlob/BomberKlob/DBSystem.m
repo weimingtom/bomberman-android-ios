@@ -6,19 +6,19 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "System.h"
-#import "User.h"
+#import "DBSystem.h"
+#import "DBUser.h"
 #import "DataBase.h"
 
 
-@implementation System
+@implementation DBSystem
 
 @synthesize volume;
 @synthesize language;
 @synthesize lastUser;
 
 
-- (id)initWithVolume:(NSUInteger)aVolume language:(NSString *)aLanguage lastUser:(User *)anUser {
+- (id)initWithVolume:(NSUInteger)aVolume language:(NSString *)aLanguage lastUser:(DBUser *)anUser {
     self = [super init]; 
     
     if (self) {

@@ -8,23 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
-@class DataBase, User;
+@class DataBase, DBUser;
 
 
-@interface System : NSObject {
+@interface DBSystem : NSObject {
     
     DataBase *dataBase;
     
     NSUInteger volume;
     NSString *language;
-    User *lastUser;
+    DBUser *lastUser;
 }
 
 @property (nonatomic) NSUInteger volume;
 @property (nonatomic, retain) NSString *language;
-@property (nonatomic, retain) User *lastUser;
+@property (nonatomic, retain) DBUser *lastUser;
 
-- (id)initWithVolume:(NSUInteger)aVolume language:(NSString *)aLanguage lastUser:(User *)anUser;
+- (id)initWithVolume:(NSUInteger)aVolume language:(NSString *)aLanguage lastUser:(DBUser *)anUser;
 - (void)dealloc;
 
 - (void)saveInDataBase;
