@@ -64,10 +64,8 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 			Point point = new Point((int) event.getX()/objectsSize, (int) event.getY()/objectsSize);
 
 			if ( this.objectGallery.getSelectedItem() != null && point.x > 0 && point.x < 16 && point.y > 0 && point.y < 14) {
-				Objects o = ResourcesManager.getObject(this.objectGallery.getSelectedItem());
-				this.mapEditor.addObject(o, point);			
+				this.mapEditor.addObject(ResourcesManager.getObjects().get(this.objectGallery.getSelectedItem()), point);			
 			}
-
 
 			break;
 		}
@@ -87,7 +85,7 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 		this.editorView.setRun(true);
 		this.editorView.start();
 		this.objectsSize = ResourcesManager.getSize();
-		this.setLayoutParams(new FrameLayout.LayoutParams(17*this.objectsSize, 15*this.objectsSize));
+		this.setLayoutParams(new FrameLayout.LayoutParams(this.mapEditor.getMap().getBlocks().length*this.objectsSize, this.mapEditor.getMap().getBlocks()[0].length*this.objectsSize));
 	}
 
 

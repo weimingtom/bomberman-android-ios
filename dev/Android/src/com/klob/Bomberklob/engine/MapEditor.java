@@ -2,6 +2,7 @@ package com.klob.Bomberklob.engine;
 
 import android.content.Context;
 
+import com.klob.Bomberklob.objects.HashMapObjects;
 import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
@@ -54,22 +55,20 @@ public class MapEditor {
 		if ( !map.loadMap(context, mapName) ) {
 			map = new Map();
 			map.setName(mapName);
+			
+			HashMapObjects hmo = ResourcesManager.getObjects();
+			
 			for (int j = 0 ; j < map.getGrounds().length ; j++) {
-				Objects o = ResourcesManager.getObject("bloc");
-				map.addBlock(o, new Point(j,0));
-				o = ResourcesManager.getObject("bloc");
-				map.addBlock(o, new Point(j,14));
+				map.addBlock(hmo.get("bloc"), new Point(j,0));
+				map.addBlock(hmo.get("bloc"), new Point(j,14));
 			}
 			for (int j = 1 ; j < map.getGrounds()[0].length-1 ; j++) {
-				Objects o = ResourcesManager.getObject("bloc");
-				map.addBlock(o, new Point(0,j));
-				o = ResourcesManager.getObject("bloc");
-				map.addBlock(o, new Point(16,j));
+				map.addBlock(hmo.get("bloc"), new Point(0,j));
+				map.addBlock(hmo.get("bloc"), new Point(16,j));
 			}
 			for (int j = 1 ; j < map.getGrounds().length-1 ; j++) {
 				for (int k = 1 ; k < map.getGrounds()[0].length-1 ; k++ ) {
-					Objects o = ResourcesManager.getObject("grass");
-					map.addGround(o, new Point(j,k));
+					map.addGround(hmo.get("grass"), new Point(j,k));
 				}
 			}
 		}

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:orientation="vertical"
-	android:layout_height="fill_parent" android:id="@+id/MapEditorLayout" android:drawingCacheQuality="high" android:animationCache="true" android:background="@color/White">
+	android:layout_height="fill_parent" android:drawingCacheQuality="high" android:animationCache="true" android:background="@color/White" android:id="@+id/MapEditorLinearLayoutGlobal">
 
 	<RelativeLayout android:layout_width="fill_parent"
-		android:id="@+id/MapEditorRelativeLayoutMenu" android:background="@color/White" android:layout_height="50dip" android:gravity="center_vertical">
+		android:id="@+id/MapEditorRelativeLayoutMenu" android:background="@color/White" android:gravity="center_vertical" android:layout_height="wrap_content">
 		<Button android:layout_width="wrap_content" android:text="@string/ButtonMenu"
 			android:layout_height="wrap_content" android:id="@+id/MapEditorButtonMenu"></Button>
 		<CheckBox android:layout_width="wrap_content" android:text="@string/MapEditorCheckBox"
