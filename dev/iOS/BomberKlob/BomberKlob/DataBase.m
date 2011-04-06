@@ -83,7 +83,7 @@ static DataBase *_dataBase = nil;
     sql = [NSMutableString stringWithString:@"CREATE TABLE IF NOT EXISTS AccountPlayer(id INTEGER PRIMARY KEY AUTOINCREMENT, pseudo VARCHAR(25) NOT NULL UNIQUE, userName VARCHAR(25), password VARCHAR(20), connectionAuto BOOLEAN, rememberPassword BOOLEAN, color UNSIGNED TINYINT DEFAULT 0, menuPosition UNSIGNED TINYINT DEFAULT 1, gameWon UNSIGNED INTEGER DEFAULT 0, gameLost UNSIGNED INTEGER DEFAULT 0);"];
     
     // Definition of System table.
-    [sql appendString:@"CREATE TABLE IF NOT EXISTS System(volume UNSIGNED SMALLINT DEFAULT 100, language VARCHAR(5) DEFAULT 'en', lastUser INTEGER, FOREIGN KEY(lastUser) REFERENCES AccountPlayer(id));"];
+    [sql appendString:@"CREATE TABLE IF NOT EXISTS System(volume UNSIGNED SMALLINT DEFAULT 100, mute BOOLEAN DEFAULT 0, language VARCHAR(5) DEFAULT 'en', lastUser INTEGER, FOREIGN KEY(lastUser) REFERENCES AccountPlayer(id));"];
     
     // Definition of Map table.
     [sql appendString:@"CREATE TABLE IF NOT EXISTS Map(name VARCHAR(50) NOT NULL UNIQUE, owner UNSIGNED INTEGER, official BOOLEAN, FOREIGN KEY(owner) REFERENCES AccountPlayer(id));"];
@@ -97,7 +97,14 @@ static DataBase *_dataBase = nil;
     
     // if it's the first time that the application is launched, we need to add values in System table.
     if (sqlite3_step(statement) == SQLITE_DONE) {
-        [self insertInto:@"System" values:@"(100, 'en', NULL)"]; // TODO: Changer le 'en' en fonction de la langue par défaut du téléphone
+        NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+        
+        if (language == @"fr" || language == @"en") {
+            [self insertInto:@"System" values:[NSString stringWithFormat:@"(100, 0, '%@', NULL)", language]];
+        }
+        else {
+            [self insertInto:@"System" values:@"(100, 0, 'en', NULL)"];
+        }
     }
 }
 
@@ -123,7 +130,7 @@ static DataBase *_dataBase = nil;
     else {
         sql = [NSString stringWithFormat: @"UPDATE %@ SET %@;", table, values];
     }
-    
+    NSLog(@"%@", sql);
     if (sqlite3_exec(dataBase, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK) {
         sqlite3_close(dataBase); 
         NSAssert(0, @"Error updating table.");

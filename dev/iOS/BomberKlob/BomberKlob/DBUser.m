@@ -52,8 +52,16 @@
 
         while (sqlite3_step(statement) == SQLITE_ROW) {
             pseudo = [NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 1)];
-            userName = [NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 2)]; 
-            password = [NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 3)];
+            
+            if ([[NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 2)] isEqual:@""]) {
+                userName = nil; 
+                password = nil;
+            }
+            else {
+                userName = [NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 2)]; 
+                password = [NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 3)];
+            }
+            
             connectionAuto = (BOOL) sqlite3_column_int(statement, 4);
             rememberPassword = (BOOL) sqlite3_column_int(statement, 5);
             color = (NSUInteger) sqlite3_column_int(statement, 6);

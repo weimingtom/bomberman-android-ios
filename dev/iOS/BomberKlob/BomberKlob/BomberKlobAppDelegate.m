@@ -9,8 +9,8 @@
 #import "CreateAccountOfflineMenuViewController.h"
 #import "MainMenuViewController.h"
 #import "Application.h"
-#import "User.h"
-#import "System.h"
+#import "DBUser.h"
+#import "DBSystem.h"
 
 
 @implementation BomberKlobAppDelegate

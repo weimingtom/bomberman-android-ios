@@ -9,7 +9,7 @@
 #import "Application.h"
 #import "DBUser.h"
 #import "DBSystem.h"
-#import "Map.h"
+#import "DBMap.h"
 #import "DataBase.h"
 
 
@@ -70,20 +70,23 @@
 
 - (void)loadSystem {
     NSUInteger volume;
+    BOOL mute;
     NSString *language;
     
     sqlite3_stmt *statement = [dataBase select:@"*" from:@"System" where:nil];
 
     while (sqlite3_step(statement) == SQLITE_ROW) {
         volume = sqlite3_column_int(statement, 0); 
-        language = [NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 1)];
+        mute = (BOOL) sqlite3_column_int(statement, 1);
+        language = [NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 2)];
         
-        if (sqlite3_column_int(statement, 2) > 0) {
-            user = [[DBUser alloc] initWithId:((NSInteger) sqlite3_column_int(statement, 2))];
+        
+        if (sqlite3_column_int(statement, 3) > 0) {
+            user = [[DBUser alloc] initWithId:((NSInteger) sqlite3_column_int(statement, 3))];
         }
     }
   
-    system = [[DBSystem alloc] initWithVolume:volume language:language lastUser:user];
+    system = [[DBSystem alloc] initWithVolume:volume mute:mute language:language lastUser:user];
     sqlite3_finalize(statement);
 }
 

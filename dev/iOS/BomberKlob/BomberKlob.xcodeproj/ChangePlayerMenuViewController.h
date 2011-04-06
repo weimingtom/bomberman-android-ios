@@ -11,10 +11,7 @@
 
 @interface ChangePlayerMenuViewController : UITableViewController {
     
-    UILabel *pseudo;
 }
-
-@property (nonatomic, retain) IBOutlet UILabel *pseudo;
 
 - (void)goToMainMenu;
 
