@@ -1,7 +1,6 @@
 package com.klob.Bomberklob.engine;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map.Entry;
 
 import android.content.Context;
@@ -165,13 +164,23 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 		if ( this.level == 0 ) {
 			for (i = this.currentGroundsItem, j = 0 ; j < this.itemsDisplayed && j < this.grounds.size() ; i++, j++ ) {
-				this.grounds.get(i).setPosition(new Point(0,j));
+				if ( vertical ) {
+					this.grounds.get(i).setPosition(new Point(0,j));
+				}
+				else {
+					this.grounds.get(i).setPosition(new Point(j,0));
+				}
 				this.grounds.get(i).onDraw(canvas, objectsSize);
 			}
 		}
 		else if ( this.level == 1 ) {
 			for (i = this.currentBlocksItem, j = 0 ; j < this.itemsDisplayed && j < this.blocks.size() ; i++, j++ ) {
-				this.blocks.get(i).setPosition(new Point(0,j));
+				if ( vertical ) {
+					this.blocks.get(i).setPosition(new Point(0,j));
+				}
+				else {
+					this.blocks.get(i).setPosition(new Point(j,0));
+				}
 				this.blocks.get(i).onDraw(canvas, objectsSize);
 			}
 		}
@@ -209,14 +218,14 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 					if ( this.level == 0 ) {
 						if ( this.currentGroundsItem >= 1 ) {
 							this.currentGroundsItem--;
-							point = new Point(point.x-1, point.y);
+							point = new Point(point.x+1, point.y);
 							setRectangles(point);
 						}
 					}
 					else {
 						if ( this.currentBlocksItem >= 1 ) {
 							this.currentBlocksItem--;
-							point = new Point(point.x-1, point.y);
+							point = new Point(point.x+1, point.y);
 							setRectangles(point);
 						}
 					}
@@ -228,14 +237,14 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 					if ( this.level == 0 ) {
 						if ( this.currentGroundsItem < (this.grounds.size() - this.itemsDisplayed) ) {
 							this.currentGroundsItem++;
-							point = new Point(point.x+1, point.y);
+							point = new Point(point.x-1, point.y);
 							setRectangles(point);
 						}
 					}
 					else {
 						if ( this.currentBlocksItem < (this.blocks.size() - this.itemsDisplayed) ) {
 							this.currentBlocksItem++;
-							point = new Point(point.x+1, point.y);
+							point = new Point(point.x-1, point.y);
 							setRectangles(point);
 						}
 					}

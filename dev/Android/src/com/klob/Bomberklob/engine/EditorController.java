@@ -1,6 +1,5 @@
 package com.klob.Bomberklob.engine;
 
-import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 import android.content.Context;
