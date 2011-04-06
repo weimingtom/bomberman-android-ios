@@ -11,7 +11,8 @@
 #import "Application.h"
 #import "CreateAccountOfflineMenuViewController.h"
 #import "ChangePlayerMenuViewController.h"
-#import "User.h"
+#import "OptionsMenuViewController.h"
+#import "DBUser.h"
 
 
 @implementation MainMenuViewController
@@ -61,7 +62,6 @@
     [pseudo setTitle:application.user.pseudo forState:UIControlStateNormal];
     [pseudo sizeToFit];
     
-    
     newProfil.frame = CGRectMake((pseudo.frame.origin.x + pseudo.frame.size.width + 5), newProfil.frame.origin.y, newProfil.frame.size.width, newProfil.frame.size.height);
 }
 
@@ -91,9 +91,16 @@
 
 
 - (void)goToChangePlayerMenu {
-    ChangePlayerMenuViewController * changePlayerMenuViewController = [[ChangePlayerMenuViewController alloc] initWithNibName:@"ChangePlayerMenuViewController" bundle:nil];
+    ChangePlayerMenuViewController *changePlayerMenuViewController = [[ChangePlayerMenuViewController alloc] initWithNibName:@"ChangePlayerMenuViewController" bundle:nil];
     [self.navigationController pushViewController:changePlayerMenuViewController animated:YES];
     [changePlayerMenuViewController release];
+}
+
+
+- (void)goToOptionsMenu {
+    OptionsMenuViewController *optionsMenuViewController = [[OptionsMenuViewController alloc] initWithNibName:@"OptionsMenuViewController" bundle:nil];
+    [self.navigationController pushViewController:optionsMenuViewController animated:YES];
+    [optionsMenuViewController release];
 }
 
 
@@ -111,6 +118,7 @@
 
 - (IBAction)optionsAction:(id)sender {
     NSLog(@"Options");
+    [self goToOptionsMenu];
 }
 
 

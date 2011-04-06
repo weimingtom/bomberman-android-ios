@@ -14,19 +14,24 @@
 @implementation DBSystem
 
 @synthesize volume;
+@synthesize mute;
 @synthesize language;
 @synthesize lastUser;
 
 
-- (id)initWithVolume:(NSUInteger)aVolume language:(NSString *)aLanguage lastUser:(DBUser *)anUser {
+- (id)initWithVolume:(NSUInteger)aVolume mute:(BOOL)aMute language:(NSString *)aLanguage lastUser:(DBUser *)anUser {
     self = [super init]; 
     
     if (self) {
         dataBase = [DataBase instance];
         
+        [aLanguage retain];
+        [anUser retain];
+        
         volume = aVolume;
-        self.language = aLanguage;
-        self.lastUser = anUser;
+        mute = aMute;
+        language = aLanguage;
+        lastUser = anUser;
     }
     
     return self;
@@ -41,7 +46,7 @@
 
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Volume: %d\nLanguage: %@\nLast user: %d", volume, language, lastUser];
+    return [NSString stringWithFormat:@"Volume: %d\nMute: %d\nLanguage: %@\nLast user: %@", volume, mute, language, lastUser];
 }
 
 
@@ -51,8 +56,51 @@
 }
 
 
+- (void)updateVolume {    
+    [dataBase update:@"System" set:[NSString stringWithFormat:@"volume = %d", volume] where:nil];
+}
+
+
+- (void)updateMute {
+    [dataBase update:@"System" set:[NSString stringWithFormat:@"mute = %d", mute] where:nil];
+}
+
+
+- (void)updateLanguage {
+    [dataBase update:@"System" set:[NSString stringWithFormat:@"language = '%@'", language] where:nil];
+}
+
+
 - (void)updateLastUser {    
     [dataBase update:@"System" set:[NSString stringWithFormat:@"lastUser = %d", lastUser.identifier] where:nil];
+}
+
+
+- (void)setVolume:(NSUInteger)value {
+    volume = value;
+    [self updateVolume];
+}
+
+
+- (void)setMute:(BOOL)value {
+    mute = value;
+    [self updateMute];
+}
+
+
+- (void)setLanguage:(NSString *)value {
+    [value retain];
+    [language release];
+    language = value;
+    [self updateLanguage];
+}
+
+
+- (void)setLastUser:(DBUser *)value {
+    [value retain];
+    [lastUser release];
+    lastUser = value;
+    [self updateLastUser];
 }
 
 @end

@@ -15,7 +15,6 @@
 
 @implementation ChangePlayerMenuViewController
 
-@synthesize pseudo;
 
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
@@ -28,7 +27,6 @@
 
 
 - (void)dealloc {
-    [pseudo release];
     [super dealloc];
 }
 
@@ -57,7 +55,6 @@
 
 
 - (void)viewDidUnload {
-    [self setPseudo:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -115,13 +112,10 @@
 
     cell.textLabel.text = [application.pseudos objectAtIndex:indexPath.row]; // 3
     
-    NSLog(@"%d", application.user.identifier);
     
     if ((indexPath.row + 1) == application.user.identifier) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
-    // Configure the cell...
-//    pseudo.text = [application.pseudos objectAtIndex:indexPath.row];
     
     return cell;
 }

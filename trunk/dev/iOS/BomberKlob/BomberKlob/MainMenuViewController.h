@@ -20,6 +20,7 @@
 
 - (void)goToCreateAccountOfflineMenu;
 - (void)goToChangePlayerMenu;
+- (void)goToOptionsMenu;
 
 - (IBAction)singlePlayerAction:(id)sender;
 - (IBAction)multiplayerAction:(id)sender;

@@ -10,7 +10,7 @@
 #import "MainMenuViewController.h"
 #import "Application.h"
 #import "DBUser.h"
-#import "System.h"
+#import "DBSystem.h"
 
 
 @implementation CreateAccountOfflineMenuViewController
@@ -114,8 +114,6 @@
             application.pseudos = pseudos;
             application.user = newUser;
             
-            [application.system updateLastUser];
-            
             [newUser release];
             
             return YES;
@@ -128,10 +126,6 @@
     
     if ([self vericationPseudo]) {
         errorView.hidden = YES;
-        
-        Application *application = ((BomberKlobAppDelegate *)[UIApplication sharedApplication].delegate).app;
-        
-        application.user = [[DBUser alloc] initWithPseudo:pseudo.text];
         
         MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
         [self.navigationController pushViewController:mainMenuViewController animated:YES];

@@ -7,7 +7,7 @@
 //
 
 #import "DBMap.h"
-#import "User.h"
+#import "DBUser.h"
 
 
 @implementation DBMap

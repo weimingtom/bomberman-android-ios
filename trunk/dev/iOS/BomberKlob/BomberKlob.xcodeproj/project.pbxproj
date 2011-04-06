@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1846A7BF134B6F4D00D35626 /* ChangePlayerMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846A7BD134B6F4D00D35626 /* ChangePlayerMenuViewController.m */; };
-		1846A7C0134B6F4D00D35626 /* ChangePlayerMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1846A7BE134B6F4D00D35626 /* ChangePlayerMenuViewController.xib */; };
+		1846A7E7134C631900D35626 /* OptionsMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846A7E5134C631900D35626 /* OptionsMenuViewController.m */; };
+		1846A7E9134C635400D35626 /* ChangePlayerMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1846A7EB134C635400D35626 /* ChangePlayerMenuViewController.xib */; };
+		1846A7EC134C636800D35626 /* OptionsMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1846A7EE134C636800D35626 /* OptionsMenuViewController.xib */; };
+		1846A7F3134C6C4E00D35626 /* AccountManagementMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846A7F1134C6C4E00D35626 /* AccountManagementMenuViewController.m */; };
+		1846A7F5134C6C7700D35626 /* AccountManagementMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1846A7F7134C6C7700D35626 /* AccountManagementMenuViewController.xib */; };
 		184A63A31347AF34000F5C50 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 184A63A21347AF34000F5C50 /* libsqlite3.dylib */; };
 		185EEC971348A98D007A1C67 /* DataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EEC961348A98D007A1C67 /* DataBase.m */; };
 		186E7CD21345313F004B873F /* DBMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 186E7CCF1345313F004B873F /* DBMap.m */; };
@@ -57,7 +61,13 @@
 /* Begin PBXFileReference section */
 		1846A7BC134B6F4D00D35626 /* ChangePlayerMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePlayerMenuViewController.h; path = BomberKlob.xcodeproj/ChangePlayerMenuViewController.h; sourceTree = "<group>"; };
 		1846A7BD134B6F4D00D35626 /* ChangePlayerMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePlayerMenuViewController.m; path = BomberKlob.xcodeproj/ChangePlayerMenuViewController.m; sourceTree = "<group>"; };
-		1846A7BE134B6F4D00D35626 /* ChangePlayerMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChangePlayerMenuViewController.xib; path = BomberKlob.xcodeproj/ChangePlayerMenuViewController.xib; sourceTree = "<group>"; };
+		1846A7E4134C631900D35626 /* OptionsMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsMenuViewController.h; sourceTree = "<group>"; };
+		1846A7E5134C631900D35626 /* OptionsMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsMenuViewController.m; sourceTree = "<group>"; };
+		1846A7EA134C635400D35626 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ChangePlayerMenuViewController.xib; sourceTree = "<group>"; };
+		1846A7ED134C636800D35626 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/OptionsMenuViewController.xib; sourceTree = "<group>"; };
+		1846A7F0134C6C4E00D35626 /* AccountManagementMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManagementMenuViewController.h; sourceTree = "<group>"; };
+		1846A7F1134C6C4E00D35626 /* AccountManagementMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManagementMenuViewController.m; sourceTree = "<group>"; };
+		1846A7F6134C6C7700D35626 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AccountManagementMenuViewController.xib; sourceTree = "<group>"; };
 		184A63A21347AF34000F5C50 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		185EEC951348A98D007A1C67 /* DataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBase.h; sourceTree = "<group>"; };
 		185EEC961348A98D007A1C67 /* DataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBase.m; sourceTree = "<group>"; };
@@ -162,10 +172,30 @@
 			children = (
 				1846A7BC134B6F4D00D35626 /* ChangePlayerMenuViewController.h */,
 				1846A7BD134B6F4D00D35626 /* ChangePlayerMenuViewController.m */,
-				1846A7BE134B6F4D00D35626 /* ChangePlayerMenuViewController.xib */,
+				1846A7EB134C635400D35626 /* ChangePlayerMenuViewController.xib */,
 			);
 			name = ChangePlayerMenu;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		1846A7E3134C62F600D35626 /* OptionsMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				1846A7E4134C631900D35626 /* OptionsMenuViewController.h */,
+				1846A7E5134C631900D35626 /* OptionsMenuViewController.m */,
+				1846A7EE134C636800D35626 /* OptionsMenuViewController.xib */,
+			);
+			name = OptionsMenuView;
+			sourceTree = "<group>";
+		};
+		1846A7EF134C6C3600D35626 /* AccountManagementMenu */ = {
+			isa = PBXGroup;
+			children = (
+				1846A7F0134C6C4E00D35626 /* AccountManagementMenuViewController.h */,
+				1846A7F1134C6C4E00D35626 /* AccountManagementMenuViewController.m */,
+				1846A7F7134C6C7700D35626 /* AccountManagementMenuViewController.xib */,
+			);
+			name = AccountManagementMenu;
 			sourceTree = "<group>";
 		};
 		187A72D2134117400020D828 /* ModelMenu */ = {
@@ -252,6 +282,8 @@
 				188855851341071700DA88B9 /* CreateAccountMenu */,
 				187A72E2134131020020D828 /* MainMenu */,
 				1846A7C2134B6F5700D35626 /* ChangePlayerMenu */,
+				1846A7E3134C62F600D35626 /* OptionsMenuView */,
+				1846A7EF134C6C3600D35626 /* AccountManagementMenu */,
 				18819AC8134103CA00CBAF1D /* AppDelegate */,
 				18C839CF13410263001D5747 /* Supporting Files */,
 			);
@@ -387,7 +419,9 @@
 				18C839DC13410263001D5747 /* MainWindow.xib in Resources */,
 				18885586134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib in Resources */,
 				187A72EA1341315C0020D828 /* MainMenuViewController.xib in Resources */,
-				1846A7C0134B6F4D00D35626 /* ChangePlayerMenuViewController.xib in Resources */,
+				1846A7E9134C635400D35626 /* ChangePlayerMenuViewController.xib in Resources */,
+				1846A7EC134C636800D35626 /* OptionsMenuViewController.xib in Resources */,
+				1846A7F5134C6C7700D35626 /* AccountManagementMenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,38 +442,39 @@
 				186E7CD31345313F004B873F /* DBSystem.m in Sources */,
 				185EEC971348A98D007A1C67 /* DataBase.m in Sources */,
 				1846A7BF134B6F4D00D35626 /* ChangePlayerMenuViewController.m in Sources */,
-				9943395A134C876200970231 /* Animated.m in Sources */,
-				9943395B134C876200970231 /* AnimationSequence.m in Sources */,
-				9943395C134C876200970231 /* Bomb.m in Sources */,
-				9943395D134C876200970231 /* BotPlayer.m in Sources */,
-				9943395E134C876200970231 /* DeathMatch.m in Sources */,
-				9943395F134C876200970231 /* Destructible.m in Sources */,
-				99433960134C876200970231 /* EditorViewController.m in Sources */,
-				99433961134C876200970231 /* Engine.m in Sources */,
-				99433962134C876200970231 /* FrameInfo.m in Sources */,
-				99433963134C876200970231 /* Game.m in Sources */,
-				99433964134C876200970231 /* GameControllerMultiplayer.m in Sources */,
-				99433965134C876200970231 /* GameControllerSingle.m in Sources */,
-				99433966134C876200970231 /* GameType.m in Sources */,
-				99433967134C876200970231 /* GameView.m in Sources */,
-				99433968134C876200970231 /* GameViewController.m in Sources */,
-				99433969134C876200970231 /* HumanPlayer.m in Sources */,
-				9943396A134C876200970231 /* Inanimated.m in Sources */,
-				9943396B134C876200970231 /* Map.m in Sources */,
-				9943396C134C876200970231 /* MapEditor.m in Sources */,
-				9943396D134C876200970231 /* Multiplayer.m in Sources */,
-				9943396E134C876200970231 /* Object.m in Sources */,
-				9943396F134C876200970231 /* Player.m in Sources */,
-				99433970134C876200970231 /* Position.m in Sources */,
-				99433971134C876200970231 /* RessourceManager.m in Sources */,
-				99433972134C876200970231 /* Single.m in Sources */,
-				99433973134C876200970231 /* Undestructible.m in Sources */,
+				1846A7E7134C631900D35626 /* OptionsMenuViewController.m in Sources */,
+				1846A7F3134C6C4E00D35626 /* AccountManagementMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		1846A7EB134C635400D35626 /* ChangePlayerMenuViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1846A7EA134C635400D35626 /* en */,
+			);
+			name = ChangePlayerMenuViewController.xib;
+			path = BomberKlob.xcodeproj;
+			sourceTree = "<group>";
+		};
+		1846A7EE134C636800D35626 /* OptionsMenuViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1846A7ED134C636800D35626 /* en */,
+			);
+			name = OptionsMenuViewController.xib;
+			sourceTree = "<group>";
+		};
+		1846A7F7134C6C7700D35626 /* AccountManagementMenuViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1846A7F6134C6C7700D35626 /* en */,
+			);
+			name = AccountManagementMenuViewController.xib;
+			sourceTree = "<group>";
+		};
 		187A72EC1341315C0020D828 /* MainMenuViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
