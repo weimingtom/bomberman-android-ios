@@ -23,7 +23,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
       
     app = [[Application alloc] init];
-    NSLog(@"%@", app.user);
     
     UINavigationController *navigationControllerTmp = [[UINavigationController alloc] init];
     UIViewController *viewController;

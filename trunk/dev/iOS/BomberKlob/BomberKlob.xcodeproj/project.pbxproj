@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1846A7BF134B6F4D00D35626 /* ChangePlayerMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846A7BD134B6F4D00D35626 /* ChangePlayerMenuViewController.m */; };
+		1846A7C0134B6F4D00D35626 /* ChangePlayerMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1846A7BE134B6F4D00D35626 /* ChangePlayerMenuViewController.xib */; };
 		184A63A31347AF34000F5C50 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 184A63A21347AF34000F5C50 /* libsqlite3.dylib */; };
 		185EEC971348A98D007A1C67 /* DataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EEC961348A98D007A1C67 /* DataBase.m */; };
 		186E7CD21345313F004B873F /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 186E7CCF1345313F004B873F /* Map.m */; };
@@ -27,6 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1846A7BC134B6F4D00D35626 /* ChangePlayerMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePlayerMenuViewController.h; path = BomberKlob.xcodeproj/ChangePlayerMenuViewController.h; sourceTree = "<group>"; };
+		1846A7BD134B6F4D00D35626 /* ChangePlayerMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePlayerMenuViewController.m; path = BomberKlob.xcodeproj/ChangePlayerMenuViewController.m; sourceTree = "<group>"; };
+		1846A7BE134B6F4D00D35626 /* ChangePlayerMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChangePlayerMenuViewController.xib; path = BomberKlob.xcodeproj/ChangePlayerMenuViewController.xib; sourceTree = "<group>"; };
 		184A63A21347AF34000F5C50 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		185EEC951348A98D007A1C67 /* DataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBase.h; sourceTree = "<group>"; };
 		185EEC961348A98D007A1C67 /* DataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBase.m; sourceTree = "<group>"; };
@@ -74,6 +79,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1846A7C2134B6F5700D35626 /* ChangePlayerMenu */ = {
+			isa = PBXGroup;
+			children = (
+				1846A7BC134B6F4D00D35626 /* ChangePlayerMenuViewController.h */,
+				1846A7BD134B6F4D00D35626 /* ChangePlayerMenuViewController.m */,
+				1846A7BE134B6F4D00D35626 /* ChangePlayerMenuViewController.xib */,
+			);
+			name = ChangePlayerMenu;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		187A72D2134117400020D828 /* ModelMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +122,7 @@
 			children = (
 				18C839D713410263001D5747 /* BomberKlobAppDelegate.h */,
 				18C839D813410263001D5747 /* BomberKlobAppDelegate.m */,
+				18C839DA13410263001D5747 /* MainWindow.xib */,
 			);
 			name = AppDelegate;
 			sourceTree = "<group>";
@@ -152,10 +169,10 @@
 			isa = PBXGroup;
 			children = (
 				187A72D2134117400020D828 /* ModelMenu */,
-				187A72E2134131020020D828 /* MainMenu */,
 				188855851341071700DA88B9 /* CreateAccountMenu */,
+				187A72E2134131020020D828 /* MainMenu */,
+				1846A7C2134B6F5700D35626 /* ChangePlayerMenu */,
 				18819AC8134103CA00CBAF1D /* AppDelegate */,
-				18C839DA13410263001D5747 /* MainWindow.xib */,
 				18C839CF13410263001D5747 /* Supporting Files */,
 			);
 			path = BomberKlob;
@@ -224,6 +241,7 @@
 				18C839DC13410263001D5747 /* MainWindow.xib in Resources */,
 				18885586134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib in Resources */,
 				187A72EA1341315C0020D828 /* MainMenuViewController.xib in Resources */,
+				1846A7C0134B6F4D00D35626 /* ChangePlayerMenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +261,7 @@
 				186E7CD21345313F004B873F /* Map.m in Sources */,
 				186E7CD31345313F004B873F /* System.m in Sources */,
 				185EEC971348A98D007A1C67 /* DataBase.m in Sources */,
+				1846A7BF134B6F4D00D35626 /* ChangePlayerMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
