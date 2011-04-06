@@ -5,6 +5,9 @@ import java.util.Map.Entry;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -34,6 +37,10 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	
 	private ArrayList<Objects> blocks = new ArrayList<Objects>();
 	private int currentBlocksItem = 0;
+	
+	private Rect[] rects = new Rect[4];
+	private Paint paint = new Paint();
+	Point point = new Point(-1,-1);
 
 	/* Constructeurs ------------------------------------------------------- */
 	
@@ -42,6 +49,8 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		this.thread = new ObjectsGalleryThread(getHolder(), this);
 		getHolder().addCallback(this);
 		loadObjects();
+		setRectangles(point);
+		paint.setColor(Color.RED);
 	}
 
 	public ObjectsGallery(Context context, AttributeSet attrs, int defStyle) {
@@ -49,6 +58,8 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		this.thread = new ObjectsGalleryThread(getHolder(), this);
 		getHolder().addCallback(this);
 		loadObjects();
+		setRectangles(point);
+		paint.setColor(Color.RED);
 	}
 	
 	/* Getters ------------------------------------------------------------- */
@@ -71,12 +82,19 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	
 	/* Setters ------------------------------------------------------------- */
 	
-	public void SetSelectedItem(String selectedItem) {
+	public void setSelectedItem(String selectedItem) {
 		this.selectedItem = selectedItem;
 	}
 	
 	public void setLevel(int level) {
 		this.level = level;
+	}
+	
+	public void setRectangles(Point point) {
+		rects[0] = new Rect(point.x*objectsSize, point.y*objectsSize, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize/10);
+		rects[1] = new Rect(point.x*objectsSize, point.y*objectsSize, point.x*objectsSize+objectsSize/10, point.y*objectsSize+objectsSize);
+		rects[2] = new Rect(point.x*objectsSize+objectsSize-objectsSize/10, point.y*objectsSize, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize);
+		rects[3] = new Rect(point.x*objectsSize, point.y*objectsSize+objectsSize-objectsSize/10, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize);
 	}
 	
 	/* Méthodes publiques -------------------------------------------------- */
@@ -140,6 +158,10 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 				this.blocks.get(i).onDraw(canvas, objectsSize);
 			}
 		}
+		
+		for (i = 0 ; i < rects.length ; i++ ) {
+			canvas.drawRect(rects[i], paint);
+		}
 	}
 
 
@@ -151,7 +173,8 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 			this.x = (int) event.getX();
 			this.y = (int) event.getY();
 			
-			Point point = new Point(this.x/objectsSize, this.y/objectsSize);
+			point = new Point(this.x/objectsSize, this.y/objectsSize);
+			setRectangles(point);
 			if ( this.level == 0 ) {
 				this.selectedItem = this.grounds.get(point.y+currentGroundsItem).getImageName();
 			}
@@ -188,11 +211,13 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 				if ( this.level == 0 ) {
 					if ( this.currentGroundsItem < (this.grounds.size() - this.itemsDisplayed) ) {
 						this.currentGroundsItem++;
+						setRectangles(new Point(point.x, point.y-1));
 					}
 				}
 				else {
 					if ( this.currentBlocksItem < this.blocks.size() - this.itemsDisplayed ) {
 						this.currentBlocksItem++;
+						setRectangles(new Point(point.x, point.y-1));
 					}
 				}
 			}
@@ -201,11 +226,13 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 				if ( this.level == 0 ) {
 					if ( this.currentGroundsItem >= 1 ) {
 						this.currentGroundsItem--;
+						setRectangles(new Point(point.x, point.y+1));
 					}
 				}
 				else {
 					if ( this.currentBlocksItem >= 1 ) {
 						this.currentBlocksItem--;
+						setRectangles(new Point(point.x, point.y+1));
 					}
 				}
 			}

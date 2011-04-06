@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 
 import com.klob.Bomberklob.engine.EditorController;
 import com.klob.Bomberklob.engine.ObjectsGallery;
+import com.klob.Bomberklob.engine.Point;
 import com.klob.Bomberklob.model.Model;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
@@ -79,7 +80,8 @@ public class MapEditor extends Activity implements View.OnClickListener {
 					objectsGallery.setLevel(0);
 					editorController.getEditorView().setLevel(0);
 				}
-				objectsGallery.SetSelectedItem(null);
+				objectsGallery.setSelectedItem(null);
+				objectsGallery.setRectangles(new Point(-1,-1));
 			}
 		});
 		
@@ -139,7 +141,8 @@ public class MapEditor extends Activity implements View.OnClickListener {
 			checkBox.setChecked(false);
 			objectsGallery.setLevel(0);
 			editorController.getEditorView().setLevel(0);
-			objectsGallery.SetSelectedItem(null);
+			objectsGallery.setSelectedItem(null);
+			objectsGallery.setRectangles(new Point(-1,-1));
 		}
 		else if ( resultCode == 2001) {
 

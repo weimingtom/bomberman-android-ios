@@ -1,6 +1,7 @@
 package com.klob.Bomberklob.engine;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.view.SurfaceHolder;
 
 public class ObjectsGalleryThread extends Thread {
