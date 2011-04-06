@@ -147,7 +147,7 @@ public class ResourcesManager {
 							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.inanimate);
 						}
 						else if ( xpp.getAttributeValue(null, "name").equals("player")) {
-							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.player);
+							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.whiteplayer);
 						}
 						else if ( xpp.getAttributeValue(null, "name").equals("animate")) {
 							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.animate);
