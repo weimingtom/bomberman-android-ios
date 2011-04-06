@@ -1,14 +1,17 @@
 //
-//  GameType.m
+//  Single.h
 //  BombermanIOS
 //
 //  Created by Kilian Coubo on 29/03/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "GameType.h"
+#import <Foundation/Foundation.h>
+#import "Game.h"
 
+@interface Single : Game {
 
-@implementation GameType
+}
+- (void) pauseGame;
 
 @end

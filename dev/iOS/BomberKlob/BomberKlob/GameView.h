@@ -1,5 +1,5 @@
 //
-//  GameControllerSingle.h
+//  View.h
 //  BombermanIOS
 //
 //  Created by Kilian Coubo on 04/04/11.
@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Engine.h"
-#import "GameViewController.h"
 
-@interface GameControllerSingle : GameViewController {
-    Engine * engine;
+
+@interface GameView : UIView {
+    NSInteger tileSize;
+	
 }
 
+
+- (id) initWithFrame:(CGRect)frame;
 @end
