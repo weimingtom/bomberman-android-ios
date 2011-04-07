@@ -119,6 +119,7 @@
 	<!-- Map Editor -->
 	
 	<string name="MapEditorCheckBox">Level</string>
+	<string name="SaveMapPlayerError">The number of players on the map is less than 4</string>
 	
 		<!-- Map Editor Menu -->
 	

@@ -19,7 +19,6 @@ public class Player extends Animated {
 	private static final long serialVersionUID = 1L;
 	protected Vector<Bombs> bombsPlanted = new Vector<Bombs>();
 	//FIXME private ???[] bombsTypes;
-	protected String color;
 	protected int lifeNumber;
 	protected int powerExplosion;
 	protected int timeExplosion;
@@ -30,9 +29,8 @@ public class Player extends Animated {
 	
 	/* Getters ------------------------------------------------------------- */
 	
-	public Player(String imageName, String color, int lifeNumber, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber) {
+	public Player(String imageName, int lifeNumber, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber) {
 		super(imageName, false, 1, false);
-		this.color = color;
 		this.lifeNumber = lifeNumber;
 		this.powerExplosion = powerExplosion;
 		this.timeExplosion = timeExplosion;
@@ -43,7 +41,6 @@ public class Player extends Animated {
 	
 	public Player(Player player) {
 		super(player);
-		this.color = player.color;
 		this.lifeNumber = player.lifeNumber;
 		this.powerExplosion = player.powerExplosion;
 		this.timeExplosion = player.timeExplosion;
@@ -108,10 +105,6 @@ public class Player extends Animated {
 		return this.bombsPlanted;
 	}
 
-	public String getColor() {
-		return this.color;
-	}
-
 	public int getLifeNumber() {
 		return this.lifeNumber;
 	}
@@ -141,7 +134,7 @@ public class Player extends Animated {
 	@Override
 	public void onDraw(Canvas canvas, int size) {
 		int tileSize = ResourcesManager.getTileSize();
-		canvas.drawBitmap(ResourcesManager.getBitmaps().get("player"), new Rect(this.getPoint().x*tileSize, this.getPoint().y*tileSize, (this.getPoint().x*tileSize)+tileSize, (this.getPoint().y*tileSize)+tileSize+(tileSize/2)), new Rect(this.position.x, this.position.y-(size/2), this.position.x+size, this.position.y+size), null);
+		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), new Rect((this.getPoint().x*tileSize), (this.getPoint().y*(tileSize+(tileSize/2))), ((this.getPoint().x*tileSize)+tileSize), ( (this.getPoint().y*(tileSize+(tileSize/2)))+(tileSize+(tileSize/2)) )), new Rect(this.position.x, this.position.y-(size/2), this.position.x+size, this.position.y+size), null);
         update();
 	}
 

@@ -13,6 +13,7 @@ import com.klob.Bomberklob.objects.Destructible;
 import com.klob.Bomberklob.objects.FrameInfo;
 import com.klob.Bomberklob.objects.HashMapObjects;
 import com.klob.Bomberklob.objects.Inanimate;
+import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.Undestructible;
 
@@ -35,6 +36,7 @@ public class ResourcesManager {
 	private static int width;
 	private static HashMap<String, Bitmap>	bitmaps = new HashMap<String, Bitmap>();
 	private static HashMapObjects objects = new HashMapObjects();
+	private static HashMapObjects players = new HashMapObjects();
 
 	/* Constructeur -------------------------------------------------------- */
 
@@ -72,6 +74,10 @@ public class ResourcesManager {
 		return objects;
 	}
 	
+	public static HashMapObjects getPlayers() {
+		return players;
+	}
+	
 	public static float getDpiPx() {
 		return dpiPx;
 	}
@@ -94,6 +100,19 @@ public class ResourcesManager {
 
 	public static int getWidth() {
 		return width;
+	}
+	
+	public static Objects getObject(String s) {
+		
+		Objects o = null; 
+		
+		if ( (o = objects.get(s)) == null ) {
+			if ( (o = players.get(s)) == null ) {
+				//FIXME BOMBES
+			}
+		}
+		
+		return o;
 	}
 	
 	/* Setters ------------------------------------------------------------- */
@@ -126,8 +145,8 @@ public class ResourcesManager {
 						if ( xpp.getAttributeValue(null, "name").equals("inanimate")) {
 							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.inanimate);
 						}
-						else if ( xpp.getAttributeValue(null, "name").equals("player")) {
-							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.whiteplayer);
+						else if ( xpp.getAttributeValue(null, "name").equals("players")) {
+							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.players);
 						}
 						else if ( xpp.getAttributeValue(null, "name").equals("animate")) {
 							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.animate);
@@ -250,7 +269,7 @@ public class ResourcesManager {
 		XmlResourceParser xpp = context.getResources().getXml(R.xml.players);
 		
 		Log.i("ResourcesManager","--------------- Loading player ---------------");
-		Player player = new Player("player", "lol", 1, 1, 1, 1, 1, 1);
+		Player player = null;
 
 		try {
 			int eventType = xpp.getEventType();
@@ -261,8 +280,10 @@ public class ResourcesManager {
 
 				if(eventType == XmlPullParser.START_TAG) {
 					
-					if(xpp.getName().toLowerCase().equals("animation")) {	
-						Log.i("ResourcesManager","Player animation : " + xpp.getAttributeValue(null, "name"));
+					if(xpp.getName().toLowerCase().equals("player")) {
+						player = new Player(xpp.getAttributeValue(null, "name"), 1, 1, 3, 3, 0, 1);
+					}					
+					else if(xpp.getName().toLowerCase().equals("animation")) {	
 						animationname=xpp.getAttributeValue(null, "name");	            	 
 						animationsequence = new AnimationSequence();
 						animationsequence.name=animationname;
@@ -276,17 +297,15 @@ public class ResourcesManager {
 						point.y = xpp.getAttributeIntValue(null, "y", 0);
 						frameinfo.point = point;
 						frameinfo.nextFrameDelay = xpp.getAttributeIntValue(null,"delayNextFrame", 0);
-						System.out.println("CACA " + point.x + " " + point.y + " " + frameinfo.point.x + " " + frameinfo.point.y + " " + frameinfo.nextFrameDelay);
 						animationsequence.sequence.add(frameinfo);
 					}
 				}else if(eventType == XmlPullParser.END_TAG) {
 					if(xpp.getName().toLowerCase().equals("animation")) {
 						player.getAnimations().put(animationname, animationsequence);
-						System.out.println("Animation : " + player.getAnimations().get(animationname));
 					}
-					else if (xpp.getName().toLowerCase().equals("animations")) {
+					else if (xpp.getName().toLowerCase().equals("player")) {
 						if ( player != null ) {
-							objects.put(player.getImageName(), player);
+							players.put(player.getImageName(), player);
 							Log.i("ResourcesManager","Added AnimatedObject : " + player.getImageName());
 							player = null;
 						}

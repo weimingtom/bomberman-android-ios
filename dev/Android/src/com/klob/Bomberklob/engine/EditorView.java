@@ -1,7 +1,5 @@
 package com.klob.Bomberklob.engine;
 
-import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
-
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
@@ -11,7 +9,7 @@ public class EditorView extends Thread {
     private EditorController editorView;
     private boolean run = false;
     
-    private int level = 1;
+    private boolean level = true;
     
     /* Constructeur -------------------------------------------------------- */
 
@@ -30,7 +28,7 @@ public class EditorView extends Thread {
 		return editorView;
 	}
 	
-	public int getLevel() {
+	public boolean getLevel() {
 		return this.level;
 	}
 
@@ -52,7 +50,7 @@ public class EditorView extends Thread {
 		this.run = run;
 	}
 	
-	public void setLevel(int level) {
+	public void setLevel(boolean level) {
 		this.level = level;
 	}
 	
@@ -66,12 +64,7 @@ public class EditorView extends Thread {
             try {
                 c = this.surfaceHolder.lockCanvas(null);
                 synchronized (this.surfaceHolder) {
-                	if ( level == 0 ) {
-                		this.editorView.getMapEditor().getMap().groundsOnDraw(c, ResourcesManager.getSize());
-                	}
-                	else {
-                		this.editorView.getMapEditor().getMap().onDraw(c, ResourcesManager.getSize());
-                	}
+               		this.editorView.getMapEditor().onDraw(c, level);
                 }
             } finally {
                 if (c != null) {

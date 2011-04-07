@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.io.StreamCorruptedException;
 
 import com.klob.Bomberklob.objects.Objects;
+import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -25,10 +26,12 @@ public class Map implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String name;
+	private Point[] players;
 	private Objects[][] grounds;
 	private Objects[][] blocks;
 	
 	public Map() {
+		this.players = new Point[4];
 		this.grounds = new Objects[17][15];
 		this.blocks  = new Objects[17][15];
 	}
@@ -47,6 +50,11 @@ public class Map implements Serializable {
 		return this.blocks;
 	}
 	
+	public Point[] getPlayers() {
+		return players;
+	}
+
+	
 	/* Setteurs ------------------------------------------------------------ */
 	
 	public void setName(String name) {
@@ -60,11 +68,21 @@ public class Map implements Serializable {
 	public void setBlocks(Objects[][] blocks) {
 		this.blocks = blocks;
 	}
+
+	public void setPlayers(Point[] players) {
+		this.players = players;
+	}
 	
 	/* Méthodes publiques -------------------------------------------------- */
 
 	public boolean saveMap(Context context) {
 
+		for (int i = 0 ; i < this.players.length ; i ++ ) {
+			if ( this.players[i] == null ) {
+				return false;
+			}
+		}
+		
 		File dir = context.getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
 		File f = new File (dir.getAbsolutePath()+"/"+this.name+".klob");
 		
@@ -129,13 +147,26 @@ public class Map implements Serializable {
 	}
 	
 	public void addGround(Objects o, Point p) {
-		o.setPosition(p);
+		o.setPosition(new Point(p.x*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
 		this.grounds[p.x][p.y] = o;
 	}
 	
 	public void addBlock(Objects o, Point p) {
-		o.setPosition(p);
+		deletePlayer(p);
+		o.setPosition(new Point(p.x*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
 		this.blocks[p.x][p.y] = o;
+	}
+	
+	public void addPlayer(Point p) {
+		if ( this.blocks[p.x][p.y] != null ) {
+			this.blocks[p.x][p.y] = null;
+		}
+		for (int i = 0 ; i < this.players.length ; i++) {
+			if ( this.players[i] == null ) {
+				this.players[i] = p;
+				break;
+			}
+		}
 	}
 	
 	public void deleteGround(Point p) {
@@ -144,6 +175,16 @@ public class Map implements Serializable {
 	
 	public void deleteBlock(Point p) {
 		this.blocks[p.x][p.y] = null;
+	}
+	
+	public int deletePlayer(Point p) {
+		for (int i = 0 ; i < this.players.length ; i++ ) {
+			if (this.players[i] != null && this.players[i].x == p.x && this.players[i].y == p.y ) {
+				this.players[i] = null;
+				return i;
+			}
+		}
+		return -1;
 	}
 	
 	public void destroyBlock(Point p) {
@@ -164,7 +205,7 @@ public class Map implements Serializable {
 			}
 		}
 	}
-	
+
 	public void groundsOnDraw(Canvas canvas, int size) {
 		for (int i = 0; i < this.grounds.length ; i++) {
 			for (int j = 0; j < this.grounds[0].length ; j++) {

@@ -47,7 +47,7 @@ public class Inanimate extends Objects {
 	@Override
 	public void onDraw(Canvas canvas, int size) {
 		int tileSize = ResourcesManager.getTileSize();
-		canvas.drawBitmap(ResourcesManager.getBitmaps().get("inanimate"), new Rect(this.tilePosition.x*tileSize, this.tilePosition.y*tileSize, (this.tilePosition.x*tileSize)+tileSize, (this.tilePosition.y*tileSize)+tileSize), new Rect(this.position.x*size, this.position.y*size, (this.position.x*size)+size, (this.position.y*size)+size), null);
+		canvas.drawBitmap(ResourcesManager.getBitmaps().get("inanimate"), new Rect(this.tilePosition.x*tileSize, this.tilePosition.y*tileSize, (this.tilePosition.x*tileSize)+tileSize, (this.tilePosition.y*tileSize)+tileSize), new Rect(this.position.x, this.position.y, (this.position.x)+size, (this.position.y)+size), null);
 	}
 	
 	/* Méthodes publiques -------------------------------------------------- */
