@@ -107,7 +107,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	/* Méthodes publiques -------------------------------------------------- */
 
 	public void loadObjects(HashMapObjects hmo) {
-		
+
 		setRectangles(point);
 		paint.setColor(Color.RED);
 		
@@ -161,14 +161,19 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	protected void onDraw(Canvas canvas) {
 
 		int i,j;
+		
+		Paint p = new Paint();
+		p.setColor(Color.WHITE);
+		
+		canvas.drawRect(new Rect(0, 0, canvas.getWidth(), canvas.getHeight()), p);
 
 		if ( this.level == 0 ) {
 			for (i = this.currentGroundsItem, j = 0 ; j < this.itemsDisplayed && j < this.grounds.size() ; i++, j++ ) {
 				if ( vertical ) {
-					this.grounds.get(i).setPosition(new Point(0,j));
+					this.grounds.get(i).setPosition(new Point(0,j*objectsSize));
 				}
 				else {
-					this.grounds.get(i).setPosition(new Point(j,0));
+					this.grounds.get(i).setPosition(new Point(j*objectsSize,0));
 				}
 				this.grounds.get(i).onDraw(canvas, objectsSize);
 			}
@@ -176,10 +181,10 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		else if ( this.level == 1 ) {
 			for (i = this.currentBlocksItem, j = 0 ; j < this.itemsDisplayed && j < this.blocks.size() ; i++, j++ ) {
 				if ( vertical ) {
-					this.blocks.get(i).setPosition(new Point(0,j));
+					this.blocks.get(i).setPosition(new Point(0,j*objectsSize));
 				}
 				else {
-					this.blocks.get(i).setPosition(new Point(j,0));
+					this.blocks.get(i).setPosition(new Point(j*objectsSize,0));
 				}
 				this.blocks.get(i).onDraw(canvas, objectsSize);
 			}
@@ -201,11 +206,22 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 			point = new Point(this.x/objectsSize, this.y/objectsSize);
 			setRectangles(point);
+			
 			if ( this.level == 0 ) {
-				this.selectedItem = this.grounds.get(point.y+currentGroundsItem).getImageName();
+				if (!vertical) {
+					this.selectedItem = this.grounds.get(point.x+currentGroundsItem).getImageName();
+				}
+				else {
+					this.selectedItem = this.grounds.get(point.y+currentGroundsItem).getImageName();
+				}				
 			}
 			else if ( this.level == 1 ) {
-				this.selectedItem = this.blocks.get(point.y+currentBlocksItem).getImageName();
+				if (!vertical) {
+					this.selectedItem = this.blocks.get(point.x+currentBlocksItem).getImageName();
+				}
+				else {
+					this.selectedItem = this.blocks.get(point.y+currentBlocksItem).getImageName();
+				}
 			}
 			System.out.println("Objects selected : " + this.selectedItem);
 			break;
@@ -294,6 +310,5 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		}
 		return true;
 	}
-
 }
 

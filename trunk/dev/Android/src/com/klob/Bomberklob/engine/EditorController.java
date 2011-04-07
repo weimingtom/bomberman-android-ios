@@ -4,7 +4,6 @@ import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
@@ -13,7 +12,6 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 
 	private EditorView editorView;
 
-	private ObjectsGallery objectGallery;
 	private int objectsSize;
 
 	private MapEditor mapEditor;
@@ -48,27 +46,14 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 		this.mapEditor = mapEditor;
 	}
 
-	public void setObjectsGallery(ObjectsGallery objectGallery) {
-		this.objectGallery = objectGallery;
-	}
-
 	/* Méthodes publiques -------------------------------------------------- */
+	
+	public void addObjects(String o, int x, int y) {
+		Point point = new Point((int) x/objectsSize, (int) y/objectsSize);
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event){
-
-		switch (event.getAction()) {
-		case MotionEvent.ACTION_DOWN:
-
-			Point point = new Point((int) event.getX()/objectsSize, (int) event.getY()/objectsSize);
-
-			if ( this.objectGallery.getSelectedItem() != null && point.x > 0 && point.x < 16 && point.y > 0 && point.y < 14) {
-				this.mapEditor.addObject(ResourcesManager.getObjects().get(this.objectGallery.getSelectedItem()), point);			
-			}
-
-			break;
+		if ( o != null && point.x > 0 && point.x < this.mapEditor.getMap().getBlocks().length-1 && point.y > 0 && point.y < this.mapEditor.getMap().getBlocks()[0].length-1) {
+			this.mapEditor.addObject(ResourcesManager.getObject(o), point);			
 		}
-		return false;		
 	}
 
 	@Override

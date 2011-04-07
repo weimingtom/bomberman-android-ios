@@ -102,7 +102,7 @@ public abstract class Animated extends Objects {
 	@Override
 	public void onDraw(Canvas canvas,int size) {
 		int tileSize = ResourcesManager.getTileSize();
-        canvas.drawBitmap(ResourcesManager.getBitmaps().get("animate"), new Rect(this.getPoint().x*tileSize, this.getPoint().y*tileSize, (this.getPoint().x*tileSize)+tileSize, (this.getPoint().y*tileSize)+tileSize), new Rect(this.position.x*size, this.position.y*size, (this.position.x*size)+size, (this.position.y*size)+size), null);
+        canvas.drawBitmap(ResourcesManager.getBitmaps().get("animate"), new Rect(this.getPoint().x*tileSize, this.getPoint().y*tileSize, (this.getPoint().x*tileSize)+tileSize, (this.getPoint().y*tileSize)+tileSize), new Rect(this.position.x, this.position.y, (this.position.x)+size, (this.position.y)+size), null);
         update();
 	}
 }

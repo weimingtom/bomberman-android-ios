@@ -13,11 +13,14 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.MotionEvent;
+import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -57,25 +60,57 @@ public class MapEditor extends Activity implements View.OnClickListener {
 		
 		this.editorRelativeLayoutMenu = (RelativeLayout) findViewById(R.id.MapEditorRelativeLayoutMenu);
 		this.editorRelativeLayoutMenu.setLayoutParams(new LinearLayout.LayoutParams( ResourcesManager.getHeight(), (int) (menuSize*ResourcesManager.getDpiPx())) );
-
+		
 		this.editorRelativeLayoutObjectsGallery = (RelativeLayout) findViewById(R.id.MapEditorRelativeLayoutObjectsGallery);
 		this.editorRelativeLayoutObjectsGallery.setLayoutParams(new LinearLayout.LayoutParams( (int) (menuSize*ResourcesManager.getDpiPx()), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
-
+		
 		this.editorControllerLayout = (LinearLayout) findViewById(R.id.MapEditorLinearLayoutEditorController);
 		this.editorControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
 		
 		this.objectsGallery = (ObjectsGallery) findViewById(R.id.MapEditorObjectsGallery);
 		this.objectsGallery.setLevel(1);
 		this.objectsGallery.loadObjects(ResourcesManager.getObjects());
+		this.objectsGallery.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {	
+				objectsGallery2.setSelectedItem(null);
+				objectsGallery2.setRectangles(new Point(-1,-1));
+				return false;
+			}
+		});
 		
 		this.objectsGallery2 = (ObjectsGallery) findViewById(R.id.MapEditorPlayersGallery);
-		this.objectsGallery2.setLevel(0);
+		this.objectsGallery2.setLevel(1);
+		this.objectsGallery2.setItemsDisplayed(4);
 		this.objectsGallery2.setVertical(false);
-		this.objectsGallery2.loadObjects(ResourcesManager.getObjects());
+		this.objectsGallery2.loadObjects(ResourcesManager.getPlayers());
+		this.objectsGallery2.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+				objectsGallery.setSelectedItem(null);
+				objectsGallery.setRectangles(new Point(-1,-1));
+				return false;
+			}
+		});
 		
 		this.editorController = (EditorController) findViewById(R.id.MapEditorFrameLayout);
-		this.editorController.setObjectsGallery(this.objectsGallery);
-		this.editorController.getEditorView().setLevel(1);
+		this.editorController.getEditorView().setLevel(true);
+		this.editorController.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+				
+				String object = objectsGallery.getSelectedItem();
+				
+				if ( object == null ) {
+					object = objectsGallery2.getSelectedItem();
+				}
+				editorController.addObjects(object, (int) arg1.getX(), (int) arg1.getY());
+				return false;
+			}
+		});
 		
 		this.menu = (Button) findViewById(R.id.MapEditorButtonMenu);
 		this.menu.setOnClickListener(this);
@@ -87,12 +122,13 @@ public class MapEditor extends Activity implements View.OnClickListener {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
 				if (isChecked) {
 					objectsGallery.setLevel(1);
-					editorController.getEditorView().setLevel(1);
+					editorController.getEditorView().setLevel(true);
 				}
 				else {
 					objectsGallery.setLevel(0);
-					editorController.getEditorView().setLevel(0);
+					editorController.getEditorView().setLevel(false);
 				}
+				objectsGallery2.setSelectedItem(null);
 				objectsGallery.setSelectedItem(null);
 				objectsGallery.setRectangles(new Point(-1,-1));
 			}
@@ -127,9 +163,10 @@ public class MapEditor extends Activity implements View.OnClickListener {
 		Log.i("MapEditor", "onPause");
 		super.onPause();
 	}  
+	
 
 	@Override
-	public void onClick(View arg0) {	
+	public void onClick(View arg0) {
 		if ( this.menu == arg0 ) {
 			Intent intent = new Intent(MapEditor.this, MapEditorMenu.class);
 			startActivityForResult(intent, 1000);
@@ -143,36 +180,41 @@ public class MapEditor extends Activity implements View.OnClickListener {
 		if ( resultCode == 2000) {
 			checkBox.setChecked(false);
 			objectsGallery.setLevel(0);
-			editorController.getEditorView().setLevel(0);
+			editorController.getEditorView().setLevel(false);
 			objectsGallery.setSelectedItem(null);
 			objectsGallery.setRectangles(new Point(-1,-1));
 		}
 		else if ( resultCode == 2001) {
 
 		    Bitmap bm = Bitmap.createBitmap(this.editorController.getWidth(), this.editorController.getHeight(), Bitmap.Config.ARGB_8888);
-		    Canvas pictureCanvas = new Canvas(bm);
-		    this.editorController.getMapEditor().getMap().groundsOnDraw(pictureCanvas, ResourcesManager.getSize());
-		    this.editorController.getMapEditor().getMap().onDraw(pictureCanvas, ResourcesManager.getSize());
-
-			File dir = this.getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
-			File f = new File (dir.getAbsolutePath()+"/"+bundle.getString("map")+".png");
-			
-			try {
-				f.createNewFile();
-				FileOutputStream fos = new FileOutputStream(f);
-				bm.compress(Bitmap.CompressFormat.PNG, 85, fos);
-				fos.flush();
-				fos.close();
-
-			} catch(IOException ioe) {
-				ioe.printStackTrace();
-			}
-			
-			this.editorController.getMapEditor().getMap().saveMap(getApplicationContext());
-			Model.getSystem().getDatabase().newMap(bundle.getString("map"), Model.getUser().getPseudo(), 1);
-			Intent intent = new Intent(MapEditor.this, Home.class);
-			startActivity(intent);
-			this.finish();
+		    
+		    if ( this.editorController.getMapEditor().getMap().saveMap(getApplicationContext()) ) {
+			    Canvas pictureCanvas = new Canvas(bm);
+			    this.editorController.getMapEditor().getMap().groundsOnDraw(pictureCanvas, ResourcesManager.getSize());
+			    this.editorController.getMapEditor().getMap().onDraw(pictureCanvas, ResourcesManager.getSize());
+	
+				File dir = this.getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
+				File f = new File (dir.getAbsolutePath()+"/"+bundle.getString("map")+".png");
+				
+				try {
+					f.createNewFile();
+					FileOutputStream fos = new FileOutputStream(f);
+					bm.compress(Bitmap.CompressFormat.PNG, 85, fos);
+					fos.flush();
+					fos.close();
+	
+				} catch(IOException ioe) {
+					ioe.printStackTrace();
+				}
+				
+				Model.getSystem().getDatabase().newMap(bundle.getString("map"), Model.getUser().getPseudo(), 1);
+				Intent intent = new Intent(MapEditor.this, Home.class);
+				startActivity(intent);
+				this.finish();
+		    }
+		    else {
+		    	Toast.makeText(MapEditor.this, R.string.SaveMapPlayerError, Toast.LENGTH_SHORT).show();
+		    }
 		}
 		else if ( resultCode == 2002) {
 			this.editorController.getMapEditor().loadMap(getApplicationContext(), bundle.getString("map"));
