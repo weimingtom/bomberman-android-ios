@@ -86,7 +86,7 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 		this.objectsGallery2.setVertical(false);
 		this.objectsGallery2.loadObjects(ResourcesManager.getPlayers());
 		this.objectsGallery2.setObjectsSize(30);
-		this.objectsGallery2.setVerticalPadding(10);
+		this.objectsGallery2.setVerticalPadding(15);
 		this.objectsGallery2.setOnTouchListener(new OnTouchListener() {
 			
 			@Override

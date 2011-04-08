@@ -54,6 +54,7 @@ public class MapEditor {
 					for (i = 0 ; i < 4 ; i++ ) {
 						if ( objects.getImageName().equals(this.players[i].getImageName()) ) {
 							this.players[i].setPosition(new Point(point.x*ResourcesManager.getSize() , point.y*ResourcesManager.getSize()));
+							map.getBlocks()[point.x][point.y] = null;
 							break;
 						}
 					}
@@ -75,6 +76,14 @@ public class MapEditor {
 				}
 				else {
 					this.map.addBlock(objects, point);
+					for (int i = 0 ; i < 4 ; i++ ) {
+						if ( players[i].getPosition() != null ) {
+							if ( (point.x*ResourcesManager.getSize()) == players[i].getPosition().x && (point.y*ResourcesManager.getSize()) == players[i].getPosition().y) {
+								players[i].setPosition(null);
+								break;
+							}
+						}
+					}
 				}
 			}
 		}
