@@ -39,13 +39,13 @@ public class MapEditorLoader extends Activity {
 			HashMap<String, String> map;
 
 			for (int i = 0 ; i < maps.size() ; i++) {
-				if ( !maps.get(i).isOfficial() ) {
+				//if ( !maps.get(i).isOfficial() ) {
 					map = new HashMap<String, String>();
 					map.put("mapName", maps.get(i).getName());
 					map.put("mapOwner", maps.get(i).getOwner());
 					map.put("mapBitmap", this.getDir("maps", i).getAbsolutePath()+"/"+maps.get(i).getName()+".png");
 					listItem.add(map);
-				}
+				//}
 			}
 
 			

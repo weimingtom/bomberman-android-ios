@@ -153,21 +153,21 @@ public class Map implements Serializable {
 	}
 	
 	public void addBlock(Objects o, Point p) {
-		deletePlayer(p);
 		o.setPosition(new Point(p.x*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
 		this.blocks[p.x][p.y] = o;
 	}
 	
-	public void addPlayer(Point p) {
+	public int addPlayer(Point p) {
 		if ( this.blocks[p.x][p.y] != null ) {
 			this.blocks[p.x][p.y] = null;
 		}
 		for (int i = 0 ; i < this.players.length ; i++) {
 			if ( this.players[i] == null ) {
 				this.players[i] = p;
-				break;
+				return i;
 			}
 		}
+		return -1;
 	}
 	
 	public void deleteGround(Point p) {

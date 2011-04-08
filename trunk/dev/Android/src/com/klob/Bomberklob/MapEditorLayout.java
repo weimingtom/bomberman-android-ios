@@ -193,7 +193,7 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 		    if ( this.editorController.getMapEditor().getMap().saveMap(getApplicationContext()) ) {
 			    Canvas pictureCanvas = new Canvas(bm);
 			    this.editorController.getMapEditor().getMap().groundsOnDraw(pictureCanvas, ResourcesManager.getSize());
-			    this.editorController.getMapEditor().getMap().onDraw(pictureCanvas, ResourcesManager.getSize());
+			    this.editorController.getMapEditor().onDraw(pictureCanvas, true);
 	
 				File dir = this.getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
 				File f = new File (dir.getAbsolutePath()+"/"+bundle.getString("map")+".png");

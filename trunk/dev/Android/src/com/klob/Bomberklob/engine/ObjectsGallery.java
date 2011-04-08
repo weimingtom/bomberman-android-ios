@@ -226,7 +226,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 			this.x = (int) event.getX();
 			this.y = (int) event.getY();
 
-			point = new Point((this.x-verticalPadding)/objectsSize, (this.y-verticalPadding)/objectsSize);
+			point = new Point(this.x/objectsSize, (this.y-verticalPadding)/objectsSize);
 			setRectangles(point);
 			
 			if ( this.level == 0 ) {
