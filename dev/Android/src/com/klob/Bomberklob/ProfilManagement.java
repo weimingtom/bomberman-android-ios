@@ -79,7 +79,7 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
 		this.objectsGallery = (ObjectsGallery) findViewById(R.id.ProfilManagementPlayersGallery);
 		this.objectsGallery.setLevel(1);
 		this.objectsGallery.setItemsDisplayed(4);
-		this.objectsGallery.setVerticalPadding(15);
+		this.objectsGallery.setVerticalPadding(22);
 		this.objectsGallery.setVertical(false);
 		this.objectsGallery.loadObjects(ResourcesManager.getPlayers());
 		
