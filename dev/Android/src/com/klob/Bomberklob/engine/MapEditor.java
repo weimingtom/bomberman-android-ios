@@ -47,27 +47,25 @@ public class MapEditor {
 			}
 		}
 		else {
-			if ( objects instanceof Player ) {
-				int i = 0;
-				if ( (i = this.map.deletePlayer(point)) == -1 ) {
-					this.map.addPlayer(point);
-					for (i = 0 ; i < 4 ; i++ ) {
-						if ( objects.getImageName().equals(this.players[i].getImageName()) ) {
-							this.players[i].setPosition(new Point(point.x*ResourcesManager.getSize() , point.y*ResourcesManager.getSize()));
-							map.getBlocks()[point.x][point.y] = null;
-							break;
-						}
-					}
+			int j = 0,i = 0;
+				
+			for (i = 0 ; i < 4 ; i++) {
+				if ( this.players[i].getImageName().equals(objects.getImageName())) {
+					break;
+				}
+			}				
+				
+			if ( i < 4 ) {
+				if ( (j = this.map.deletePlayer(point)) != -1 ) {
+					this.players[j].setPosition(null);
 				}
 				else {
-					for (i = 0 ; i < 4 ; i++ ) {
-						if ( players[i].getPosition() != null ) {
-							if ( (point.x*ResourcesManager.getSize()) == players[i].getPosition().x && (point.y*ResourcesManager.getSize()) == players[i].getPosition().y) {
-								players[i].setPosition(null);
-								break;
-							}
-						}
-					}
+					map.getBlocks()[point.x][point.y] = null;
+				}
+				
+				if ( j != i ) {
+					this.players[i].setPosition(new Point(point.x*ResourcesManager.getSize() , point.y*ResourcesManager.getSize()));
+					this.map.getPlayers()[i] = point;
 				}
 			}
 			else {
@@ -75,15 +73,10 @@ public class MapEditor {
 					map.getBlocks()[point.x][point.y] = null;
 				}
 				else {
-					this.map.addBlock(objects, point);
-					for (int i = 0 ; i < 4 ; i++ ) {
-						if ( players[i].getPosition() != null ) {
-							if ( (point.x*ResourcesManager.getSize()) == players[i].getPosition().x && (point.y*ResourcesManager.getSize()) == players[i].getPosition().y) {
-								players[i].setPosition(null);
-								break;
-							}
-						}
+					if ( (j = this.map.deletePlayer(point)) != -1 ) {
+						this.players[j].setPosition(null);
 					}
+					this.map.addBlock(objects, point);
 				}
 			}
 		}
