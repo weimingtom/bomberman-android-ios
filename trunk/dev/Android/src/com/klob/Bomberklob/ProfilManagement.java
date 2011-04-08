@@ -17,7 +17,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.klob.Bomberklob.engine.ObjectsGallery;
 import com.klob.Bomberklob.model.Model;
+import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 public class ProfilManagement extends Activity implements View.OnClickListener{
 
@@ -31,6 +33,8 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
 	
 	private EditText pseudo;
 	private TextView userName;
+	
+	private ObjectsGallery objectsGallery;
 	
     /** Called when the activity is first created. */
     @Override
@@ -71,6 +75,13 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
 				}
 			}
 		});
+		
+		this.objectsGallery = (ObjectsGallery) findViewById(R.id.ProfilManagementPlayersGallery);
+		this.objectsGallery.setLevel(1);
+		this.objectsGallery.setItemsDisplayed(4);
+		this.objectsGallery.setVerticalPadding(15);
+		this.objectsGallery.setVertical(false);
+		this.objectsGallery.loadObjects(ResourcesManager.getPlayers());
 		
 		this.password = (CheckBox) findViewById(R.id.ProfilManagementCheckBoxPassword);
 		this.password.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
@@ -127,6 +138,15 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
 		
 		Intent intent = null;
 		
+		String s = this.objectsGallery.getSelectedItem();
+		
+		if ( s == null ) {
+			Model.getUser().setColor("white");
+		}
+		else {
+			Model.getUser().setColor(s);
+		}
+		
 		if( v == this.validate ){
 			
 			boolean error = false;
@@ -153,6 +173,8 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
 		else if( v == this.cancel){
 			intent = new Intent(ProfilManagement.this, Options.class);
 		}
+		
+		Model.getSystem().getDatabase().updateUser(Model.getUser());
 		
 		if (intent != null) {
 			startActivity(intent);

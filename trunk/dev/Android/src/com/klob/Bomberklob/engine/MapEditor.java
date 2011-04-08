@@ -107,7 +107,12 @@ public class MapEditor {
 		for(Entry<String, Objects> entry : ResourcesManager.getPlayers().entrySet()) {
 			if ( i < 4 ) {
 				Objects valeur = ResourcesManager.getPlayers().get(entry.getKey());
-				valeur.setPosition(map.getPlayers()[i]);
+				if ( this.map.getPlayers()[i] != null ) {
+					valeur.setPosition(new Point(this.map.getPlayers()[i].x*ResourcesManager.getSize() , this.map.getPlayers()[i].y*ResourcesManager.getSize()));
+				}
+				else {
+					valeur.setPosition(null);	
+				}
 				this.players[i] = valeur;
 			}
 			i++;

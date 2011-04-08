@@ -5,14 +5,11 @@
 		android:layout_height="wrap_content" android:layout_width="wrap_content"
 		android:layout_alignParentTop="true" android:layout_centerInParent="true"
 		android:src="@drawable/gamename"></ImageView>
-	<ScrollView android:id="@+id/scrollView1"
-		android:layout_centerInParent="true" android:layout_height="fill_parent" android:layout_width="fill_parent">
-		<LinearLayout android:id="@+id/linearLayout2"
+
+<LinearLayout android:id="@+id/linearLayout2"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"
 			android:orientation="vertical" android:gravity="center_horizontal">
-			<LinearLayout android:layout_height="wrap_content"
-				android:gravity="center_horizontal" android:layout_width="wrap_content"
-				android:orientation="vertical" android:id="@+id/ProfilLayoutSolo">
+			<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@+id/ProfilLayoutSolo" android:layout_height="wrap_content" android:layout_width="wrap_content">
 				<TextView android:layout_height="wrap_content" android:id="@+id/textView1"
 					android:layout_width="wrap_content" android:text="@string/HomeButtonSinglePlayer"></TextView>
 				<TableLayout android:layout_width="wrap_content"
@@ -27,17 +24,14 @@
 							android:layout_width="wrap_content" android:text=""
 							android:id="@+id/ProfilManagementEditTextPseudo" android:lines="1"></EditText>
 					</TableRow>
-					<TableRow android:layout_gravity="center_vertical"
-						android:id="@+id/tableRow2" android:layout_height="wrap_content"
-						android:layout_width="wrap_content" android:gravity="center_vertical">
-						<TextView android:layout_height="wrap_content"
-							android:id="@+id/textView3" android:layout_width="wrap_content"
-							android:text="@string/ProfilManagementColors"></TextView>
-						<Spinner android:id="@+id/spinner2" android:layout_width="wrap_content"
-							android:layout_height="wrap_content" android:entries="@array/playerColors"></Spinner>
-					</TableRow>
 				</TableLayout>
+				<RelativeLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/relativeLayout1"></RelativeLayout>
+				<FrameLayout android:id="@+id/ProfilManagementFrameLayoutObjectsGallery" android:layout_gravity="center_horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content">
+					<com.klob.Bomberklob.engine.ObjectsGallery android:layout_width="wrap_content" android:layout_gravity="center_horizontal" android:id="@+id/ProfilManagementPlayersGallery" android:layout_height="wrap_content"></com.klob.Bomberklob.engine.ObjectsGallery>
+				</FrameLayout>
+
 			</LinearLayout>
+			
 			<LinearLayout android:layout_height="wrap_content"
 				android:orientation="vertical" android:layout_width="wrap_content"
 				android:gravity="center_horizontal" android:id="@+id/ProfilMultiLayout">
@@ -86,7 +80,6 @@
 					android:id="@+id/ProfilManagementButtonValidate" android:text="@string/ButtonValidate"></Button>
 			</LinearLayout>
 		</LinearLayout>
-	</ScrollView>
     
     </LinearLayout>
 

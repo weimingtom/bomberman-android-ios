@@ -31,6 +31,8 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 	private int objectsSize = (int) (45*ResourcesManager.getDpiPx());
 
+	private int verticalPadding = 0;
+
 	private int level = 0;
 
 	private ArrayList<Objects> grounds = new ArrayList<Objects>();
@@ -76,6 +78,10 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	public int getItemsDisplayed() {
 		return this.itemsDisplayed;
 	}
+	
+	public int getVerticalPadding() {
+		return verticalPadding;
+	}
 
 	/* Setters ------------------------------------------------------------- */
 
@@ -96,12 +102,21 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 			this.itemsDisplayed = items;
 		}
 	}
+	
+	public void setVerticalPadding(int padding) {
+		this.verticalPadding = padding;
+	}
+	
+	public void setObjectsSize(int objectsSize) {
+		this.objectsSize = (int) (objectsSize*ResourcesManager.getDpiPx());
+	}
+
 
 	public void setRectangles(Point point) {
-		rects[0] = new Rect(point.x*objectsSize, point.y*objectsSize, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize/10);
-		rects[1] = new Rect(point.x*objectsSize, point.y*objectsSize, point.x*objectsSize+objectsSize/10, point.y*objectsSize+objectsSize);
-		rects[2] = new Rect(point.x*objectsSize+objectsSize-objectsSize/10, point.y*objectsSize, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize);
-		rects[3] = new Rect(point.x*objectsSize, point.y*objectsSize+objectsSize-objectsSize/10, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize);
+		rects[0] = new Rect(point.x*objectsSize, point.y*objectsSize, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize/15); //HAUT
+		rects[1] = new Rect(point.x*objectsSize, point.y*objectsSize, point.x*objectsSize+objectsSize/15, point.y*objectsSize+objectsSize+verticalPadding); // GAUCHE
+		rects[2] = new Rect(point.x*objectsSize+objectsSize-objectsSize/15, point.y*objectsSize, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize+verticalPadding); // DROITE
+		rects[3] = new Rect(point.x*objectsSize, point.y*objectsSize+objectsSize-objectsSize/15+verticalPadding, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize+verticalPadding); //BAS
 	}
 
 	/* Méthodes publiques -------------------------------------------------- */
@@ -136,10 +151,10 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		this.thread.start();
 
 		if ( vertical ) {
-			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize, objectsSize*itemsDisplayed));
+			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize+verticalPadding, objectsSize*itemsDisplayed));
 		}
 		else {
-			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize*itemsDisplayed, objectsSize));
+			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize*itemsDisplayed, objectsSize+verticalPadding));
 		}		
 	}
 
@@ -170,10 +185,10 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		if ( this.level == 0 ) {
 			for (i = this.currentGroundsItem, j = 0 ; j < this.itemsDisplayed && j < this.grounds.size() ; i++, j++ ) {
 				if ( vertical ) {
-					this.grounds.get(i).setPosition(new Point(0,j*objectsSize));
+					this.grounds.get(i).setPosition(new Point(0+verticalPadding,j*objectsSize));
 				}
 				else {
-					this.grounds.get(i).setPosition(new Point(j*objectsSize,0));
+					this.grounds.get(i).setPosition(new Point(j*objectsSize,0+verticalPadding));
 				}
 				this.grounds.get(i).onDraw(canvas, objectsSize);
 			}
@@ -181,10 +196,10 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		else if ( this.level == 1 ) {
 			for (i = this.currentBlocksItem, j = 0 ; j < this.itemsDisplayed && j < this.blocks.size() ; i++, j++ ) {
 				if ( vertical ) {
-					this.blocks.get(i).setPosition(new Point(0,j*objectsSize));
+					this.blocks.get(i).setPosition(new Point(0+verticalPadding,j*objectsSize));
 				}
 				else {
-					this.blocks.get(i).setPosition(new Point(j*objectsSize,0));
+					this.blocks.get(i).setPosition(new Point(j*objectsSize,0+verticalPadding));
 				}
 				this.blocks.get(i).onDraw(canvas, objectsSize);
 			}
@@ -204,7 +219,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 			this.x = (int) event.getX();
 			this.y = (int) event.getY();
 
-			point = new Point(this.x/objectsSize, this.y/objectsSize);
+			point = new Point((this.x-verticalPadding)/objectsSize, (this.y-verticalPadding)/objectsSize);
 			setRectangles(point);
 			
 			if ( this.level == 0 ) {

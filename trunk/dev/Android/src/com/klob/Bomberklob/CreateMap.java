@@ -78,7 +78,7 @@ public class CreateMap extends Activity implements View.OnClickListener {
 			String name = this.mapName.getText().toString();
 			
 			if ( !name.equals("") && !Model.getSystem().getDatabase().existingMap(name) ) {
-				intent = new Intent(CreateMap.this, MapEditor.class);
+				intent = new Intent(CreateMap.this, MapEditorLayout.class);
 				intent.putExtra("map", name);
 			}
 			else {
@@ -105,7 +105,7 @@ public class CreateMap extends Activity implements View.OnClickListener {
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if ( resultCode == 2000 ) {
-			Intent intent = new Intent(CreateMap.this, MapEditor.class);
+			Intent intent = new Intent(CreateMap.this, MapEditorLayout.class);
 			intent.putExtra("map", data.getStringExtra("map"));
 			startActivity(intent);
 			this.finish();

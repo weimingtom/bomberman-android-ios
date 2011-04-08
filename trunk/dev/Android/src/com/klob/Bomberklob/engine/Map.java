@@ -140,6 +140,7 @@ public class Map implements Serializable {
 			if(map != null) {
 			this.grounds = map.getGrounds();
 			this.blocks = map.getBlocks();
+			this.players = map.getPlayers();
 			this.name = map.getName();
 			return true;
 		}
