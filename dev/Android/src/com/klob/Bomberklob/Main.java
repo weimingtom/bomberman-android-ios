@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -64,6 +65,11 @@ public class Main extends Activity {
 					
 					if ( Model.getSystem().getLastUser() == -1 ) {
 						intent = new Intent(context, CreateAccountOffline.class);
+						
+						AssetManager am = getAssets();
+						for (int i = 0 ; i < 1 ; i++ ) {
+							System.out.println("FILe : " + am.getLocales());
+						}
 					}
 					else {
 						intent = new Intent(context, Home.class);

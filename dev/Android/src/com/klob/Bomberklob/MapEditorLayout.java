@@ -31,7 +31,7 @@ import com.klob.Bomberklob.engine.Point;
 import com.klob.Bomberklob.model.Model;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
-public class MapEditor extends Activity implements View.OnClickListener {
+public class MapEditorLayout extends Activity implements View.OnClickListener {
 
 	private EditorController editorController;
 
@@ -85,6 +85,8 @@ public class MapEditor extends Activity implements View.OnClickListener {
 		this.objectsGallery2.setItemsDisplayed(4);
 		this.objectsGallery2.setVertical(false);
 		this.objectsGallery2.loadObjects(ResourcesManager.getPlayers());
+		this.objectsGallery2.setObjectsSize(30);
+		this.objectsGallery2.setVerticalPadding(10);
 		this.objectsGallery2.setOnTouchListener(new OnTouchListener() {
 			
 			@Override
@@ -168,7 +170,7 @@ public class MapEditor extends Activity implements View.OnClickListener {
 	@Override
 	public void onClick(View arg0) {
 		if ( this.menu == arg0 ) {
-			Intent intent = new Intent(MapEditor.this, MapEditorMenu.class);
+			Intent intent = new Intent(MapEditorLayout.this, MapEditorMenu.class);
 			startActivityForResult(intent, 1000);
 		}
 	}	
@@ -199,7 +201,7 @@ public class MapEditor extends Activity implements View.OnClickListener {
 				try {
 					f.createNewFile();
 					FileOutputStream fos = new FileOutputStream(f);
-					bm.compress(Bitmap.CompressFormat.PNG, 85, fos);
+					bm.compress(Bitmap.CompressFormat.PNG, 100, fos);
 					fos.flush();
 					fos.close();
 	
@@ -208,19 +210,19 @@ public class MapEditor extends Activity implements View.OnClickListener {
 				}
 				
 				Model.getSystem().getDatabase().newMap(bundle.getString("map"), Model.getUser().getPseudo(), 1);
-				Intent intent = new Intent(MapEditor.this, Home.class);
+				Intent intent = new Intent(MapEditorLayout.this, Home.class);
 				startActivity(intent);
 				this.finish();
 		    }
 		    else {
-		    	Toast.makeText(MapEditor.this, R.string.SaveMapPlayerError, Toast.LENGTH_SHORT).show();
+		    	Toast.makeText(MapEditorLayout.this, R.string.SaveMapPlayerError, Toast.LENGTH_SHORT).show();
 		    }
 		}
 		else if ( resultCode == 2002) {
 			this.editorController.getMapEditor().loadMap(getApplicationContext(), bundle.getString("map"));
 		}
 		else if ( resultCode == 2003) {
-			Intent intent = new Intent(MapEditor.this, Home.class);
+			Intent intent = new Intent(MapEditorLayout.this, Home.class);
 			startActivity(intent);
 			this.finish();
 		}
