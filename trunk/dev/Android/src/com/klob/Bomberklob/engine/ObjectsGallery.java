@@ -104,7 +104,14 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	}
 	
 	public void setVerticalPadding(int padding) {
-		this.verticalPadding = padding;
+		this.verticalPadding = (int) (padding*ResourcesManager.getDpiPx());
+		
+		if ( vertical ) {
+			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize+verticalPadding, objectsSize*itemsDisplayed));
+		}
+		else {
+			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize*itemsDisplayed, objectsSize+verticalPadding));
+		}	
 	}
 	
 	public void setObjectsSize(int objectsSize) {
