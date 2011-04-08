@@ -217,6 +217,7 @@ public class Database extends SQLiteOpenHelper{
 				"FOREIGN KEY(owner) REFERENCES UserAccounts(id)" +
 			");");
 		db.execSQL("INSERT INTO System (volume, language, lastUser) VALUES (50, 'French', -1);");
+		db.execSQL("INSERT INTO Map (name, owner, official) VALUES ('Default', 'KLOB', 1);");
 	}
 
 	@Override

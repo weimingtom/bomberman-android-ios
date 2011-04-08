@@ -53,7 +53,6 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 			
 			this.setResult(2000);
 
-
 			this.cancel = (Button)findViewById(R.id.SinglePlayerGameButtonCancel);
 			this.cancel.setOnClickListener(this);
 
