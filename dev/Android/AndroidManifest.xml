@@ -30,7 +30,7 @@
 		<activity android:screenOrientation="portrait" android:name="Help"></activity>
 		<activity android:screenOrientation="portrait" android:name="ChangePasswordMultiplayer"></activity>
 		<activity android:name="CreateMap" android:screenOrientation="portrait"></activity>
-		<activity android:name="MapEditor" android:screenOrientation="landscape"></activity>
+		<activity android:name="MapEditorLayout" android:screenOrientation="landscape"></activity>
 		<activity android:screenOrientation="landscape" android:name="MapEditorMenu"></activity>
 		<activity android:screenOrientation="portrait" android:name="MapEditorLoader"></activity>
 
