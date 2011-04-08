@@ -78,7 +78,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	public int getItemsDisplayed() {
 		return this.itemsDisplayed;
 	}
-	
+
 	public int getVerticalPadding() {
 		return verticalPadding;
 	}
@@ -96,16 +96,16 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	public void setVertical(boolean bool) {
 		this.vertical = bool;
 	}
-	
+
 	public void setItemsDisplayed(int items) {
 		if ( items > 0 ) {
 			this.itemsDisplayed = items;
 		}
 	}
-	
+
 	public void setVerticalPadding(int padding) {
 		this.verticalPadding = (int) (padding*ResourcesManager.getDpiPx());
-		
+
 		if ( vertical ) {
 			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize+verticalPadding, objectsSize*itemsDisplayed));
 		}
@@ -113,7 +113,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize*itemsDisplayed, objectsSize+verticalPadding));
 		}	
 	}
-	
+
 	public void setObjectsSize(int objectsSize) {
 		this.objectsSize = (int) (objectsSize*ResourcesManager.getDpiPx());
 	}
@@ -132,7 +132,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 		setRectangles(point);
 		paint.setColor(Color.RED);
-		
+
 		for(Entry<String, Objects> entry : hmo.entrySet()) {
 			Objects valeur = hmo.get(entry.getKey());
 			if ( valeur.getLevel() == 0 ) {
@@ -183,10 +183,10 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	protected void onDraw(Canvas canvas) {
 
 		int i,j;
-		
+
 		Paint p = new Paint();
 		p.setColor(Color.WHITE);
-		
+
 		canvas.drawRect(new Rect(0, 0, canvas.getWidth(), canvas.getHeight()), p);
 
 		if ( this.level == 0 ) {
@@ -222,115 +222,121 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	public boolean onTouchEvent(MotionEvent event){
 
 		switch (event.getAction()) {
-		case MotionEvent.ACTION_DOWN:
-			this.x = (int) event.getX();
-			this.y = (int) event.getY();
-
-			point = new Point(this.x/objectsSize, (this.y-verticalPadding)/objectsSize);
-			setRectangles(point);
-			
-			if ( this.level == 0 ) {
+			case MotionEvent.ACTION_DOWN:
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
+	
+				point = new Point(this.x/objectsSize, (this.y-verticalPadding)/objectsSize);
+				setRectangles(point);
+	
+				if ( this.level == 0 ) {
+					if (!vertical) {
+						this.selectedItem = this.grounds.get(point.x+currentGroundsItem).getImageName();
+					}
+					else {
+						this.selectedItem = this.grounds.get(point.y+currentGroundsItem).getImageName();
+					}				
+				}
+				else if ( this.level == 1 ) {
+					if (!vertical) {
+						this.selectedItem = this.blocks.get(point.x+currentBlocksItem).getImageName();
+					}
+					else {
+						this.selectedItem = this.blocks.get(point.y+currentBlocksItem).getImageName();
+					}
+				}
+				System.out.println("Objects selected : " + this.selectedItem);
+				this.thread.update();
+				break;
+			case MotionEvent.ACTION_MOVE:
 				if (!vertical) {
-					this.selectedItem = this.grounds.get(point.x+currentGroundsItem).getImageName();
-				}
-				else {
-					this.selectedItem = this.grounds.get(point.y+currentGroundsItem).getImageName();
-				}				
-			}
-			else if ( this.level == 1 ) {
-				if (!vertical) {
-					this.selectedItem = this.blocks.get(point.x+currentBlocksItem).getImageName();
-				}
-				else {
-					this.selectedItem = this.blocks.get(point.y+currentBlocksItem).getImageName();
-				}
-			}
-			System.out.println("Objects selected : " + this.selectedItem);
-			break;
-		case MotionEvent.ACTION_MOVE:
-			if (!vertical) {
-				if ( (int) event.getX() > this.x + (ResourcesManager.getTileSize()/2)) {
-
-					this.x = (int) event.getX();
-
-					if ( this.level == 0 ) {
-						if ( this.currentGroundsItem >= 1 ) {
-							this.currentGroundsItem--;
-							point = new Point(point.x+1, point.y);
-							setRectangles(point);
+					if ( (int) event.getX() > this.x + (ResourcesManager.getTileSize()/2)) {
+	
+						this.x = (int) event.getX();
+	
+						if ( this.level == 0 ) {
+							if ( this.currentGroundsItem >= 1 ) {
+								this.currentGroundsItem--;
+								point = new Point(point.x+1, point.y);
+								setRectangles(point);
+							}
+						}
+						else {
+							if ( this.currentBlocksItem >= 1 ) {
+								this.currentBlocksItem--;
+								point = new Point(point.x+1, point.y);
+								setRectangles(point);
+							}
 						}
 					}
-					else {
-						if ( this.currentBlocksItem >= 1 ) {
-							this.currentBlocksItem--;
-							point = new Point(point.x+1, point.y);
-							setRectangles(point);
+					else if ( (int) event.getX() < this.x - (ResourcesManager.getTileSize()/2)) {
+	
+						this.x = (int) event.getX();
+	
+						if ( this.level == 0 ) {
+							if ( this.currentGroundsItem < (this.grounds.size() - this.itemsDisplayed) ) {
+								this.currentGroundsItem++;
+								point = new Point(point.x-1, point.y);
+								setRectangles(point);
+							}
 						}
-					}
-				}
-				else if ( (int) event.getX() < this.x - (ResourcesManager.getTileSize()/2)) {
-
-					this.x = (int) event.getX();
-
-					if ( this.level == 0 ) {
-						if ( this.currentGroundsItem < (this.grounds.size() - this.itemsDisplayed) ) {
-							this.currentGroundsItem++;
-							point = new Point(point.x-1, point.y);
-							setRectangles(point);
-						}
-					}
-					else {
-						if ( this.currentBlocksItem < (this.blocks.size() - this.itemsDisplayed) ) {
-							this.currentBlocksItem++;
-							point = new Point(point.x-1, point.y);
-							setRectangles(point);
+						else {
+							if ( this.currentBlocksItem < (this.blocks.size() - this.itemsDisplayed) ) {
+								this.currentBlocksItem++;
+								point = new Point(point.x-1, point.y);
+								setRectangles(point);
+							}
 						}
 					}
 				}
-			}
-			else {			
-				if ( (int) event.getY() < this.y - (ResourcesManager.getTileSize()/2)) {
-
-					this.y = (int) event.getY();
-
-					if ( this.level == 0 ) {
-						if ( this.currentGroundsItem < (this.grounds.size() - this.itemsDisplayed) ) {
-							this.currentGroundsItem++;
-							point = new Point(point.x, point.y-1);
-							setRectangles(point);
+				else {			
+					if ( (int) event.getY() < this.y - (ResourcesManager.getTileSize()/2)) {
+	
+						this.y = (int) event.getY();
+	
+						if ( this.level == 0 ) {
+							if ( this.currentGroundsItem < (this.grounds.size() - this.itemsDisplayed) ) {
+								this.currentGroundsItem++;
+								point = new Point(point.x, point.y-1);
+								setRectangles(point);
+							}
+						}
+						else {
+							if ( this.currentBlocksItem < (this.blocks.size() - this.itemsDisplayed) ) {
+								this.currentBlocksItem++;
+								point = new Point(point.x, point.y-1);
+								setRectangles(point);
+							}
 						}
 					}
-					else {
-						if ( this.currentBlocksItem < (this.blocks.size() - this.itemsDisplayed) ) {
-							this.currentBlocksItem++;
-							point = new Point(point.x, point.y-1);
-							setRectangles(point);
+					else if ( (int) event.getY() > this.y + (ResourcesManager.getTileSize()/2)) {
+	
+						this.y = (int) event.getY();
+	
+						if ( this.level == 0 ) {
+							if ( this.currentGroundsItem >= 1 ) {
+								this.currentGroundsItem--;
+								point = new Point(point.x, point.y+1);
+								setRectangles(point);
+							}
+						}
+						else {
+							if ( this.currentBlocksItem >= 1 ) {
+								this.currentBlocksItem--;
+								point = new Point(point.x, point.y+1);
+								setRectangles(point);
+							}
 						}
 					}
 				}
-				else if ( (int) event.getY() > this.y + (ResourcesManager.getTileSize()/2)) {
-
-					this.y = (int) event.getY();
-
-					if ( this.level == 0 ) {
-						if ( this.currentGroundsItem >= 1 ) {
-							this.currentGroundsItem--;
-							point = new Point(point.x, point.y+1);
-							setRectangles(point);
-						}
-					}
-					else {
-						if ( this.currentBlocksItem >= 1 ) {
-							this.currentBlocksItem--;
-							point = new Point(point.x, point.y+1);
-							setRectangles(point);
-						}
-					}
-				}
-
-			}
+				break;
 		}
+		this.thread.update();
 		return true;
+	}
+	
+	public void update() {
+		this.thread.update();
 	}
 }
 

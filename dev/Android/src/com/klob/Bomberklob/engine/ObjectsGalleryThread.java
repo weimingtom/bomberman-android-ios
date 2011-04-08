@@ -7,7 +7,7 @@ public class ObjectsGalleryThread extends Thread {
 	
 	private SurfaceHolder surfaceHolder;
     private ObjectsGallery panel;
-    private boolean run = false;
+    private boolean run = false, sleep = true;
 
     public ObjectsGalleryThread(SurfaceHolder surfaceHolder, ObjectsGallery panel) {
         this.surfaceHolder = surfaceHolder;
@@ -21,10 +21,14 @@ public class ObjectsGalleryThread extends Thread {
 	public void setRun(boolean run) {
 		this.run = run;
 	}
+	
+	public void update() {
+		this.sleep = false;
+	}
 
     @Override
     public void run() {
-        Canvas c;
+    	Canvas c;
         while (this.run) {
             c = null;
             try {
@@ -36,6 +40,15 @@ public class ObjectsGalleryThread extends Thread {
                 if (c != null) {
                     this.surfaceHolder.unlockCanvasAndPost(c);
                 }
+            }
+            sleep = true;
+            while (sleep) {
+            	try {
+            		sleep(250);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         }
     }
