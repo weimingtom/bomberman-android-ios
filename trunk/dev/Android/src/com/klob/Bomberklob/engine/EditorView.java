@@ -9,7 +9,7 @@ public class EditorView extends Thread {
     private EditorController editorView;
     private boolean run = false;
     
-    private boolean level = true;
+    private boolean level = true, sleep = true;
     
     /* Constructeur -------------------------------------------------------- */
 
@@ -35,6 +35,10 @@ public class EditorView extends Thread {
 	public boolean isRun() {
 		return run;
 	}
+	
+	public void update() {
+		this.sleep = false;
+	}
     
     /* Setteurs ------------------------------------------------------------ */
 
@@ -53,7 +57,7 @@ public class EditorView extends Thread {
 	public void setLevel(boolean level) {
 		this.level = level;
 	}
-	
+
 	/* Methodes publiques -------------------------------------------------- */
 
 	@Override
@@ -70,6 +74,15 @@ public class EditorView extends Thread {
                 if (c != null) {
                     this.surfaceHolder.unlockCanvasAndPost(c);
                 }
+            }
+            sleep = true;
+            while (sleep) {
+            	try {
+            		sleep(250);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         }
     }

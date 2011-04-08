@@ -86,4 +86,8 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 			}
 		}
 	}
+	
+	public void update() {
+		this.editorView.update();
+	}
 }

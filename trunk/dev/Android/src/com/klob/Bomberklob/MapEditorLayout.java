@@ -67,6 +67,31 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 		this.editorControllerLayout = (LinearLayout) findViewById(R.id.MapEditorLinearLayoutEditorController);
 		this.editorControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
 		
+		this.editorController = (EditorController) findViewById(R.id.MapEditorFrameLayout);
+		this.editorController.getEditorView().setLevel(true);
+		this.editorController.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+				
+
+				
+				String object = objectsGallery.getSelectedItem();
+				
+				if ( object == null ) {
+					object = objectsGallery2.getSelectedItem();
+				}
+				editorController.addObjects(object, (int) arg1.getX(), (int) arg1.getY());
+				editorController.update();
+				return false;
+			}
+		});
+		this.bundle = getIntent().getExtras();
+        if(bundle.getString("map")!= null) {
+        	this.editorController.getMapEditor().loadMap(getApplicationContext(), bundle.getString("map"));
+        	this.editorController.update();
+        }
+		
 		this.objectsGallery = (ObjectsGallery) findViewById(R.id.MapEditorObjectsGallery);
 		this.objectsGallery.setLevel(1);
 		this.objectsGallery.loadObjects(ResourcesManager.getObjects());
@@ -76,6 +101,7 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 			public boolean onTouch(View arg0, MotionEvent arg1) {	
 				objectsGallery2.setSelectedItem(null);
 				objectsGallery2.setRectangles(new Point(-1,-1));
+				objectsGallery2.update();
 				return false;
 			}
 		});
@@ -93,23 +119,7 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 			public boolean onTouch(View arg0, MotionEvent arg1) {
 				objectsGallery.setSelectedItem(null);
 				objectsGallery.setRectangles(new Point(-1,-1));
-				return false;
-			}
-		});
-		
-		this.editorController = (EditorController) findViewById(R.id.MapEditorFrameLayout);
-		this.editorController.getEditorView().setLevel(true);
-		this.editorController.setOnTouchListener(new OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View arg0, MotionEvent arg1) {
-				
-				String object = objectsGallery.getSelectedItem();
-				
-				if ( object == null ) {
-					object = objectsGallery2.getSelectedItem();
-				}
-				editorController.addObjects(object, (int) arg1.getX(), (int) arg1.getY());
+				objectsGallery.update();
 				return false;
 			}
 		});
@@ -125,21 +135,21 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 				if (isChecked) {
 					objectsGallery.setLevel(1);
 					editorController.getEditorView().setLevel(true);
+					editorController.update();
 				}
 				else {
 					objectsGallery.setLevel(0);
 					editorController.getEditorView().setLevel(false);
+					editorController.update();
 				}
 				objectsGallery2.setSelectedItem(null);
 				objectsGallery.setSelectedItem(null);
-				objectsGallery.setRectangles(new Point(-1,-1));
+				objectsGallery.setRectangles(new Point(-10,-10));
+				objectsGallery2.setRectangles(new Point(-10,-10));
+				objectsGallery2.update();
+				objectsGallery.update();
 			}
 		});
-		
-		this.bundle = getIntent().getExtras();
-        if(bundle.getString("map")!= null) {
-        	this.editorController.getMapEditor().loadMap(getApplicationContext(), bundle.getString("map"));
-        }
 	}
 
 	@Override
