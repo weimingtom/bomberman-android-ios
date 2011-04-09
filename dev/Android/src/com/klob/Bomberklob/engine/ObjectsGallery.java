@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -91,16 +92,19 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 	public void setLevel(int level) {
 		this.level = level;
+		this.thread.update();
 	}
 
 	public void setVertical(boolean bool) {
 		this.vertical = bool;
+		this.thread.update();
 	}
 
 	public void setItemsDisplayed(int items) {
 		if ( items > 0 ) {
 			this.itemsDisplayed = items;
 		}
+		this.thread.update();
 	}
 
 	public void setVerticalPadding(int padding) {
@@ -111,11 +115,13 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		}
 		else {
 			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize*itemsDisplayed, objectsSize+verticalPadding));
-		}	
+		}
+		this.thread.update();
 	}
 
 	public void setObjectsSize(int objectsSize) {
 		this.objectsSize = (int) (objectsSize*ResourcesManager.getDpiPx());
+		this.thread.update();
 	}
 
 
@@ -124,6 +130,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		rects[1] = new Rect(point.x*objectsSize, point.y*objectsSize, point.x*objectsSize+objectsSize/15, point.y*objectsSize+objectsSize+verticalPadding); // GAUCHE
 		rects[2] = new Rect(point.x*objectsSize+objectsSize-objectsSize/15, point.y*objectsSize, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize+verticalPadding); // DROITE
 		rects[3] = new Rect(point.x*objectsSize, point.y*objectsSize+objectsSize-objectsSize/15+verticalPadding, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize+verticalPadding); //BAS
+		this.thread.update();
 	}
 
 	/* Méthodes publiques -------------------------------------------------- */
@@ -142,6 +149,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 				this.blocks.add(valeur);
 			}
 		}
+		this.thread.update();
 	}
 
 	@Override
@@ -162,13 +170,15 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		}
 		else {
 			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize*itemsDisplayed, objectsSize+verticalPadding));
-		}		
+		}	
+		Log.i("ObjectsGallery", "Thread started");
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0) {
 		boolean retry = true;
 		this.thread.setRun(false);
+		this.thread.update();
 		while (retry) {
 			try {
 				this.thread.join();
@@ -177,6 +187,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 			}
 		}
+		Log.i("ObjectsGallery", "Thread done");
 	}
 
 	@Override
@@ -186,7 +197,6 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 		Paint p = new Paint();
 		p.setColor(Color.WHITE);
-
 		canvas.drawRect(new Rect(0, 0, canvas.getWidth(), canvas.getHeight()), p);
 
 		if ( this.level == 0 ) {
