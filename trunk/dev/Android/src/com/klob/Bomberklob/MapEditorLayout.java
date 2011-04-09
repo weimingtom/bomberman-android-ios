@@ -73,16 +73,12 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 			
 			@Override
 			public boolean onTouch(View arg0, MotionEvent arg1) {
-				
-
-				
 				String object = objectsGallery.getSelectedItem();
 				
 				if ( object == null ) {
 					object = objectsGallery2.getSelectedItem();
 				}
 				editorController.addObjects(object, (int) arg1.getX(), (int) arg1.getY());
-				editorController.update();
 				return false;
 			}
 		});
@@ -101,7 +97,6 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 			public boolean onTouch(View arg0, MotionEvent arg1) {	
 				objectsGallery2.setSelectedItem(null);
 				objectsGallery2.setRectangles(new Point(-1,-1));
-				objectsGallery2.update();
 				return false;
 			}
 		});
@@ -119,7 +114,6 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 			public boolean onTouch(View arg0, MotionEvent arg1) {
 				objectsGallery.setSelectedItem(null);
 				objectsGallery.setRectangles(new Point(-1,-1));
-				objectsGallery.update();
 				return false;
 			}
 		});
@@ -135,19 +129,16 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 				if (isChecked) {
 					objectsGallery.setLevel(1);
 					editorController.getEditorView().setLevel(true);
-					editorController.update();
 				}
 				else {
 					objectsGallery.setLevel(0);
 					editorController.getEditorView().setLevel(false);
-					editorController.update();
 				}
 				objectsGallery2.setSelectedItem(null);
 				objectsGallery.setSelectedItem(null);
 				objectsGallery.setRectangles(new Point(-10,-10));
 				objectsGallery2.setRectangles(new Point(-10,-10));
-				objectsGallery2.update();
-				objectsGallery.update();
+				editorController.update();
 			}
 		});
 	}
@@ -168,6 +159,19 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 	protected void onResume(){
 		Log.i("MapEditor", "onResume");
 		super.onResume();
+		
+		checkBox.setChecked(true);
+		
+		objectsGallery.setLevel(1);
+		objectsGallery.setSelectedItem(null);
+		objectsGallery.setRectangles(new Point(-1,-1));
+		
+		objectsGallery2.setLevel(1);
+		objectsGallery2.setSelectedItem(null);
+		objectsGallery2.setRectangles(new Point(-1,-1));
+		
+		editorController.getEditorView().setLevel(true);
+		editorController.update();
 	}
 
 	@Override
@@ -190,11 +194,7 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		if ( resultCode == 2000) {
-			checkBox.setChecked(false);
-			objectsGallery.setLevel(0);
-			editorController.getEditorView().setLevel(false);
-			objectsGallery.setSelectedItem(null);
-			objectsGallery.setRectangles(new Point(-1,-1));
+
 		}
 		else if ( resultCode == 2001) {
 

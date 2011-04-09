@@ -4,6 +4,7 @@ import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
@@ -44,6 +45,7 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 
 	public void setMapEditor(MapEditor mapEditor) {
 		this.mapEditor = mapEditor;
+		this.editorView.update();
 	}
 
 	/* Méthodes publiques -------------------------------------------------- */
@@ -54,11 +56,12 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 		if ( o != null && point.x > 0 && point.x < this.mapEditor.getMap().getBlocks().length-1 && point.y > 0 && point.y < this.mapEditor.getMap().getBlocks()[0].length-1) {
 			this.mapEditor.addObject(ResourcesManager.getObject(o), point);			
 		}
+		this.editorView.update();
 	}
 
 	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
-
+		this.editorView.update();
 	}
 
 	@Override
@@ -70,6 +73,8 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 		this.editorView.start();
 		this.objectsSize = ResourcesManager.getSize();
 		this.setLayoutParams(new FrameLayout.LayoutParams(this.mapEditor.getMap().getBlocks().length*this.objectsSize, this.mapEditor.getMap().getBlocks()[0].length*this.objectsSize));
+		this.editorView.update();
+		Log.i("EditorController", "Thread started");
 	}
 
 
@@ -77,6 +82,7 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 	public void surfaceDestroyed(SurfaceHolder arg0) {
 		boolean retry = true;
 		this.editorView.setRun(false);
+		this.editorView.update();
 		while (retry) {
 			try {
 				this.editorView.join();
@@ -85,6 +91,7 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 
 			}
 		}
+		Log.i("EditorController", "Thread done");
 	}
 	
 	public void update() {
