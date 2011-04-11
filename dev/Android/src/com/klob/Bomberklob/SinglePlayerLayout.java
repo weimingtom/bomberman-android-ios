@@ -14,6 +14,8 @@ import android.widget.RelativeLayout;
 
 import com.klob.Bomberklob.engine.ObjectsGallery;
 import com.klob.Bomberklob.engine.Point;
+import com.klob.Bomberklob.objects.Bomb;
+import com.klob.Bomberklob.objects.BotPlayer;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 public class SinglePlayerLayout extends Activity implements View.OnClickListener {
@@ -56,7 +58,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 //        }
 		
 		this.bombsGallery = (ObjectsGallery) findViewById(R.id.SinglePlayerBombsGallery);
-//		this.bombsGallery.(ResourcesManager.getBombs());
+		this.bombsGallery.addObjects(new Bomb("normal", false, 1, true, 1, 1, ResourcesManager.getBombsAnimations().get("normal"), "idle"));
 		this.bombsGallery.setSelectedItem("normal");
 		this.bombsGallery.setRectangles(new Point(0,0));
 		

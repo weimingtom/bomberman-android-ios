@@ -16,14 +16,18 @@ public abstract class Animated extends Objects {
 	private static final long serialVersionUID = 1L;
 	
 	protected Hashtable<String, AnimationSequence> animations = new Hashtable<String, AnimationSequence>();
-	protected String currentAnimation="idle";
-	protected int currentFrame=0;
-	protected int waitDelay=0;
+	protected String currentAnimation;
+	protected int currentFrame;
+	protected int waitDelay;
 	
 	/* Constructeur -------------------------------------------------------- */
 	
-	public Animated (String imageName, boolean hit, int level, boolean fireWall) {
+	public Animated (String imageName, boolean hit, int level, boolean fireWall, Hashtable<String, AnimationSequence> animations, String currentAnimation) {
 		super(imageName, hit, level, fireWall);
+		this.animations = animations;
+		this.currentAnimation = currentAnimation;
+		this.currentFrame = 0;
+		this.waitDelay = animations.get(currentAnimation).sequence.get(currentFrame).nextFrameDelay;
 	}
 	
 	public Animated (Animated animated) {

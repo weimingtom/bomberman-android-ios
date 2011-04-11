@@ -31,8 +31,8 @@ public abstract class Player extends Animated {
 	
 	/* Constructeurs ------------------------------------------------------- */
 	
-	public Player(String imageName, Hashtable<String, AnimationSequence> animations, int lifeNumber, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber) {
-		super(imageName, false, 1, false);
+	public Player(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation, int lifeNumber, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber) {
+		super(imageName, false, 1, false, animations, currentAnimation);
 		this.animations = animations;
 		this.lifeNumber = lifeNumber;
 		this.powerExplosion = powerExplosion;

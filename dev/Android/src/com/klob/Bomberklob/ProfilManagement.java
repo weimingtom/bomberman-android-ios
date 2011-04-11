@@ -60,10 +60,10 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
         });
         
 		this.objectsGallery = (ObjectsGallery) findViewById(R.id.ProfilManagementPlayersGallery);
-		this.objectsGallery.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), 1, 1, 1, 1, 1, 1));
-		this.objectsGallery.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), 1, 1, 1, 1, 1, 1));
-		this.objectsGallery.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), 1, 1, 1, 1, 1, 1));
-		this.objectsGallery.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), 1, 1, 1, 1, 1, 1));
+		this.objectsGallery.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), "idle",1, 1, 1, 1, 1, 1));
+		this.objectsGallery.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), "idle",1, 1, 1, 1, 1, 1));
+		this.objectsGallery.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), "idle",1, 1, 1, 1, 1, 1));
+		this.objectsGallery.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), "idle",1, 1, 1, 1, 1, 1));
 		this.objectsGallery.setLevel(1);
 		this.objectsGallery.setItemsDisplayed(4);
 		this.objectsGallery.setVerticalPadding(22);

@@ -1,5 +1,7 @@
 package com.klob.Bomberklob.objects;
 
+import java.util.Hashtable;
+
 
 public class Undestructible extends AnimatedObjects {
 
@@ -10,8 +12,8 @@ public class Undestructible extends AnimatedObjects {
 	
 	/* Constructeurs ------------------------------------------------------- */
 
-	public Undestructible(String imageName, boolean hit, int level, boolean fireWall) {
-		super(imageName, hit, level, fireWall);
+	public Undestructible(String imageName, boolean hit, int level, boolean fireWall, Hashtable<String, AnimationSequence> animations, String currentAnimation) {
+		super(imageName, hit, level, fireWall, animations, currentAnimation);
 	}
 	
 	public Undestructible(Undestructible undestructible) {

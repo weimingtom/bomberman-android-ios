@@ -28,12 +28,12 @@ public class Single extends Game {
 		}
 		
 		if ( colors.size() >= this.players.length ) {		
-			this.players[0] = new HumanPlayer(Model.getUser().getColor(), ResourcesManager.getPlayersAnimations().get(Model.getUser().getColor()), gameType.lifeNumber, gameType.powerExplosion, gameType.timeExplosion, gameType.speed, gameType.shield, gameType.bombNumber);
+			this.players[0] = new HumanPlayer(Model.getUser().getColor(), ResourcesManager.getPlayersAnimations().get(Model.getUser().getColor()), "idle",gameType.lifeNumber, gameType.powerExplosion, gameType.timeExplosion, gameType.speed, gameType.shield, gameType.bombNumber);
 			colors.remove(this.players[0].getImageName());
 			
 			for (int i = 1 ; i < this.players.length ; i++ ) {
 				int j = (int)(Math.random() * (colors.size()));
-				this.players[i] = new BotPlayer(colors.get(j), ResourcesManager.getPlayersAnimations().get(colors.get(j)), gameType.lifeNumber, gameType.powerExplosion, gameType.timeExplosion, gameType.speed, gameType.shield, gameType.bombNumber, this.difficulty);
+				this.players[i] = new BotPlayer(colors.get(j), ResourcesManager.getPlayersAnimations().get(colors.get(j)), "idle",gameType.lifeNumber, gameType.powerExplosion, gameType.timeExplosion, gameType.speed, gameType.shield, gameType.bombNumber, this.difficulty);
 				this.players[i].setPosition(this.map.getPlayers()[i]);
 				colors.remove(j);
 			}
