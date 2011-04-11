@@ -16,10 +16,13 @@
 @synthesize owner;
 @synthesize official;
 
-- (id)init {
+- (id)initWithName:(NSString *)aName owner:(NSUInteger)idOwner official:(BOOL)anOfficial {
     self = [super init]; 
     
     if (self) {
+        self.name = aName;
+        self.owner = [[DBUser alloc] initWithId:idOwner];
+        official = anOfficial;
     }
     
     return self;
@@ -34,7 +37,7 @@
 
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Name: %@\nId owner: %d\nOfficiel: %d", name, owner, official];
+    return [NSString stringWithFormat:@"Name: %@\nId owner: %@\nOfficiel: %d", name, owner, official];
 }
 
 

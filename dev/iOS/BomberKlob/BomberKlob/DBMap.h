@@ -22,7 +22,7 @@
 @property (nonatomic, retain) User *owner;
 @property (nonatomic) BOOL official;
 
-- (id)init;
+- (id)initWithName:(NSString *)aName owner:(NSUInteger)anOwner official:(BOOL)anOfficial;
 - (void)dealloc;
 
 - (void)saveInDataBase;

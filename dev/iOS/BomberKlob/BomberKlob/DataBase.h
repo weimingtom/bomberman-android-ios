@@ -21,6 +21,9 @@
 - (void)openDataBase;
 - (void)loadDataBase;
 
+- (void)initSystemTable;
+- (void)initMapTable;
+
 - (void)insertInto:(NSString *)table values:(NSString *)values;
 - (void)update:(NSString *)table set:(NSString *)values where:(NSString *)condition;
 - (sqlite3_stmt *)select:(NSString *)attributes from:(NSString *)table where:(NSString *)condition;

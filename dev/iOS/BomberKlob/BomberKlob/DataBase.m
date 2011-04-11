@@ -97,15 +97,30 @@ static DataBase *_dataBase = nil;
     
     // if it's the first time that the application is launched, we need to add values in System table.
     if (sqlite3_step(statement) == SQLITE_DONE) {
-        NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
-        
-        if (language == @"fr" || language == @"en") {
-            [self insertInto:@"System" values:[NSString stringWithFormat:@"(100, 0, '%@', NULL)", language]];
-        }
-        else {
-            [self insertInto:@"System" values:@"(100, 0, 'en', NULL)"];
-        }
+        [self initSystemTable];
+        [self initMapTable];        
     }
+}
+
+
+- (void)initSystemTable {
+    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    
+    if (language == @"fr" || language == @"en") {
+        [self insertInto:@"System" values:[NSString stringWithFormat:@"(100, 0, '%@', NULL)", language]];
+    }
+    else {
+        [self insertInto:@"System" values:@"(100, 0, 'en', NULL)"];
+    }
+}
+
+
+// TODO: Change vith the true official map
+- (void)initMapTable {
+    [self insertInto:@"Map" values:@"('Small', NULL, 1)"];
+    [self insertInto:@"Map" values:@"('Normal', NULL, 1)"];
+    [self insertInto:@"Map" values:@"('Power', NULL, 1)"];
+    [self insertInto:@"Map" values:@"('My map', 1, 0)"];
 }
 
 
