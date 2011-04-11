@@ -33,7 +33,7 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 	private Gallery gallery;
 	private TextView mapName;
 
-	private Spinner typePartieSP, nbEnnemisSP, difficulteSP;
+	private Spinner gameType, enemiesNumber, enemiesDifficulty;
 
 	private Vector<Map> maps;
 
@@ -54,9 +54,9 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 		this.create = (Button)findViewById(R.id.SinglePlayerGameButtonGo);
 		this.create.setOnClickListener(this);
 
-		this.typePartieSP = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerType);
-		this.nbEnnemisSP  = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesNumber);
-		this.difficulteSP = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesDifficulty);
+		this.gameType = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerType);
+		this.enemiesNumber  = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesNumber);
+		this.enemiesDifficulty = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesDifficulty);
 
 		this.mapName = (TextView) findViewById(R.id.SinglePlayerGameMapName);
 		this.mapName.setText(maps.get(0).getName());
@@ -132,8 +132,6 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ImageView img = new ImageView(m_context);
 			img.setImageBitmap(BitmapFactory.decodeFile(m_images[position]));
-
-			//redimmensionnement auto FIXME Correct pour tous les écrans ?
 			img.setScaleType(ImageView.ScaleType.FIT_XY);
 			img.setLayoutParams(new Gallery.LayoutParams( (int) ((ResourcesManager.getSize()*15)/1.75) , (int) ((ResourcesManager.getSize()*13)/1.75) ) );
 			img.setBackgroundResource(m_itemBackground);
@@ -147,12 +145,12 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 		Intent intent = null;
 
 		if( view == create ){
-			String typeP = typePartieSP.getSelectedItem().toString();
-			String ennemis = nbEnnemisSP.getSelectedItem().toString();
-			String difficulte = difficulteSP.getSelectedItem().toString();
-
-
 			intent = new Intent(SinglePlayerGame.this, SinglePlayerLayout.class);
+			intent.putExtra("map", this.mapName.getText().toString());
+			intent.putExtra("enemies", Integer.parseInt(enemiesNumber.getSelectedItem().toString()));
+			intent.putExtra("gametype", gameType.getSelectedItem().toString());
+			intent.putExtra("random", false);
+			intent.putExtra("difficulty", enemiesDifficulty.getSelectedItemPosition());
 			startActivity(intent);
 			this.finish();
 		}

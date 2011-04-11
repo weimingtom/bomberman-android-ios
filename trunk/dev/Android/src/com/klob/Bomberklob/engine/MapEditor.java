@@ -14,21 +14,16 @@ public class MapEditor {
 
 	/* Constructeur -------------------------------------------------------- */
 
-	public MapEditor () {
-		this.map = new Map();
+	public MapEditor (String mapName) {
 		this.players = new Player[4];
+		this.map = new Map();
+		loadMap(mapName);
 	}
 
 	/* Getteurs ------------------------------------------------------------ */
 
 	public Map getMap() {
 		return map;
-	}
-
-	/* Setteurs ------------------------------------------------------------ */
-
-	public void setMap(Map map) {
-		this.map = map;
 	}
 
 	/* Méthodes publiques -------------------------------------------------- */

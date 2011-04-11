@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
@@ -42,6 +43,7 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 	private ObjectsGallery objectsGallery, objectsGallery2;
 	private LinearLayout editorControllerLayout;
 	private RelativeLayout editorRelativeLayoutObjectsGallery, editorRelativeLayoutMenu;
+	private FrameLayout mapEditorFrameLayoutEditorController, mapEditorFrameLayoutObjectsGallery, mapEditorFrameLayoutPlayersGallery;
 	
 	private Bundle bundle;
 
@@ -71,31 +73,33 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 		this.editorControllerLayout = (LinearLayout) findViewById(R.id.MapEditorLinearLayoutEditorController);
 		this.editorControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
 		
-		this.editorController = (EditorController) findViewById(R.id.MapEditorFrameLayout);
-		this.editorController.setOnTouchListener(new OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View arg0, MotionEvent arg1) {
-				Objects object = ResourcesManager.getObjects().get(objectsGallery.getSelectedItem());
-				
-				if ( object == null ) {
-					Hashtable<String, AnimationSequence> animations = ResourcesManager.getPlayersAnimations().get(objectsGallery2.getSelectedItem());
-					if ( animations != null ) {
-						object = new HumanPlayer(objectsGallery2.getSelectedItem(), animations, "idle", 1, 1, 1, 1, 1, 1);
-					}
-				}
-				
-				if ( object != null ) {
-					editorController.addObjects(object.copy(), (int) arg1.getX(), (int) arg1.getY());
-				}
-				return false;
-			}
-		});
+		
 		this.bundle = getIntent().getExtras();
         if(bundle.getString("map")!= null) {
-        	this.editorController.getMapEditor().loadMap(bundle.getString("map"));
+    		this.editorController = new EditorController(getApplicationContext(), bundle.getString("map"));
+     		this.editorController.setOnTouchListener(new OnTouchListener() {
+    			
+    			@Override
+    			public boolean onTouch(View arg0, MotionEvent arg1) {
+    				Objects object = ResourcesManager.getObjects().get(objectsGallery.getSelectedItem());
+    				
+    				if ( object == null ) {
+    					Hashtable<String, AnimationSequence> animations = ResourcesManager.getPlayersAnimations().get(objectsGallery2.getSelectedItem());
+    					if ( animations != null ) {
+    						object = new HumanPlayer(objectsGallery2.getSelectedItem(), animations, "idle", 1, 1, 1, 1, 1, 1);
+    					}
+    				}
+    				
+    				if ( object != null ) {
+    					editorController.addObjects(object.copy(), (int) arg1.getX(), (int) arg1.getY());
+    				}
+    				return false;
+    			}
+    		});
         	this.editorController.update();
-        }
+        }        
+		this.mapEditorFrameLayoutEditorController =(FrameLayout) findViewById(R.id.MapEditorFrameLayoutEditorController);
+		this.mapEditorFrameLayoutEditorController.addView(this.editorController);
 		
 		this.menu = (Button) findViewById(R.id.MapEditorButtonMenu);
 		this.menu.setOnClickListener(this);
@@ -126,7 +130,7 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 			}
 		});
 		
-		this.objectsGallery = (ObjectsGallery) findViewById(R.id.MapEditorObjectsGallery);
+		this.objectsGallery = new ObjectsGallery(getApplicationContext());
 		this.objectsGallery.loadObjects(ResourcesManager.getObjects());
 		this.objectsGallery.setItemsDisplayed(3);
 		this.objectsGallery.setOnTouchListener(new OnTouchListener() {
@@ -141,17 +145,14 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 		});
 		this.objectsGallery.update();
 		
-		this.objectsGallery2 = (ObjectsGallery) findViewById(R.id.MapEditorPlayersGallery);
-		this.objectsGallery2.setItemsDisplayed(4);
-		this.objectsGallery2.setVertical(false);
+		this.mapEditorFrameLayoutObjectsGallery = (FrameLayout) findViewById(R.id.MapEditorFrameLayoutObjectsGallery);
+		this.mapEditorFrameLayoutObjectsGallery.addView(this.objectsGallery);
 		
+		this.objectsGallery2 = new ObjectsGallery(getApplicationContext(), 4, null, 30, 15, 1, false);
 		this.objectsGallery2.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), "idle",1, 1, 1, 1, 1, 1));
 		this.objectsGallery2.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), "idle",1, 1, 1, 1, 1, 1));
 		this.objectsGallery2.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), "idle",1, 1, 1, 1, 1, 1));
 		this.objectsGallery2.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), "idle",1, 1, 1, 1, 1, 1));
-		
-		this.objectsGallery2.setObjectsSize(30);
-		this.objectsGallery2.setVerticalPadding(15);
 		this.objectsGallery2.setOnTouchListener(new OnTouchListener() {
 			
 			@Override
@@ -163,6 +164,9 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 			}
 		});
 		this.objectsGallery2.update();
+		
+		this.mapEditorFrameLayoutPlayersGallery = (FrameLayout) findViewById(R.id.MapEditorFrameLayoutPlayersGallery);
+		this.mapEditorFrameLayoutPlayersGallery.addView(this.objectsGallery2);
 	}
 
 	@Override

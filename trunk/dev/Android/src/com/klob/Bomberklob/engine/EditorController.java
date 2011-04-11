@@ -4,7 +4,6 @@ import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -20,18 +19,15 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 	
 	/* Constructeurs  ------------------------------------------------------ */
 
-	public EditorController(Context context, AttributeSet attrs) {		
-		super(context, attrs);
-		this.mapEditor = new MapEditor();
-		this.editorView = new EditorView(getHolder(), this);
-		getHolder().addCallback(this);
-	}
+	public EditorController(Context context, String mapName) {		
+		super(context);
 
-	public EditorController(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		this.mapEditor = new MapEditor();
-		this.editorView = new EditorView(getHolder(), this);
+		this.editorView = new EditorView(getHolder(), this);		
 		getHolder().addCallback(this);
+		
+		this.mapEditor = new MapEditor(mapName);
+		this.objectsSize = ResourcesManager.getSize();
+		this.setLayoutParams(new FrameLayout.LayoutParams(this.mapEditor.getMap().getBlocks().length*this.objectsSize, this.mapEditor.getMap().getBlocks()[0].length*this.objectsSize));
 	}
 
 	/* Getters ------------------------------------------------------------- */
@@ -42,13 +38,6 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 
 	public MapEditor getMapEditor() {
 		return mapEditor;
-	}
-
-	/* Setters ------------------------------------------------------------- */
-
-	public void setMapEditor(MapEditor mapEditor) {
-		this.mapEditor = mapEditor;
-		this.editorView.update();
 	}
 
 	/* Méthodes publiques -------------------------------------------------- */
@@ -74,8 +63,6 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 		}
 		this.editorView.setRun(true);
 		this.editorView.start();
-		this.objectsSize = ResourcesManager.getSize();
-		this.setLayoutParams(new FrameLayout.LayoutParams(this.mapEditor.getMap().getBlocks().length*this.objectsSize, this.mapEditor.getMap().getBlocks()[0].length*this.objectsSize));
 		Log.i("EditorController", "Thread started");
 	}
 

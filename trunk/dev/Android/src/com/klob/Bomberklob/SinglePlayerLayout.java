@@ -9,20 +9,24 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.klob.Bomberklob.engine.GameControllerSingle;
 import com.klob.Bomberklob.engine.ObjectsGallery;
 import com.klob.Bomberklob.engine.Point;
 import com.klob.Bomberklob.objects.Bomb;
-import com.klob.Bomberklob.objects.BotPlayer;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 public class SinglePlayerLayout extends Activity implements View.OnClickListener {
+	
+	private GameControllerSingle gameControllerSingle;
 
 	private ObjectsGallery bombsGallery;
 	private LinearLayout singlePlayerControllerLayout;
 	private RelativeLayout singlePlayerRelativeLayoutObjectsGallery, singlePlayerRelativeLayoutMenu;
+	private FrameLayout singlePlayerFrameLayoutGame, singlePlayerFrameLayoutBombsGallery;
 	
 	private Bundle bundle;
 
@@ -50,17 +54,25 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		
 		this.singlePlayerControllerLayout = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutEditorController);
 		this.singlePlayerControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
-
-		this.bundle = getIntent().getExtras();
-//        if(bundle.getString("map")!= null) {
-//        	this.editorController.getMapEditor().loadMap(getApplicationContext(), bundle.getString("map"));
-//        	this.editorController.update();
-//        }
 		
-		this.bombsGallery = (ObjectsGallery) findViewById(R.id.SinglePlayerBombsGallery);
+		this.bundle = getIntent().getExtras();
+        if( bundle.getString("map") != null) { //FIXME tout vérifier ?
+        	this.gameControllerSingle = new GameControllerSingle(getApplicationContext(), bundle.getString("map"), bundle.getInt("enemies"), bundle.getString("gametype"), bundle.getBoolean("random"), bundle.getInt("difficulty"));
+        }
+        
+        this.singlePlayerFrameLayoutGame = (FrameLayout) findViewById(R.id.SinglePlayerFrameLayoutGame);
+        this.singlePlayerFrameLayoutGame.addView(this.gameControllerSingle);
+		
+		this.bombsGallery = new ObjectsGallery(getApplicationContext());
+		this.bombsGallery.setItemsDisplayed(1);
+		this.bombsGallery.setLevel(1);
 		this.bombsGallery.addObjects(new Bomb("normal", false, 1, true, 1, 1, ResourcesManager.getBombsAnimations().get("normal"), "idle"));
 		this.bombsGallery.setSelectedItem("normal");
 		this.bombsGallery.setRectangles(new Point(0,0));
+		this.bombsGallery.update();
+		
+		this.singlePlayerFrameLayoutBombsGallery = (FrameLayout) findViewById(R.id.SinglePlayerFrameLayoutBombsGallery);
+		this.singlePlayerFrameLayoutBombsGallery.addView(this.bombsGallery);
 		
 		this.menu = (Button) findViewById(R.id.SinglePlayerButtonMenu);
 		this.menu.setOnClickListener(this);
@@ -82,7 +94,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	protected void onResume(){
 		Log.i("SinglePlayerLayout", "onResume");
 		super.onResume();
-		bombsGallery.setLevel(1);
+
 	}
 
 	@Override

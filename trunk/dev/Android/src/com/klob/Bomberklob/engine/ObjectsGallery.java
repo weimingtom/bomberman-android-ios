@@ -9,7 +9,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -23,7 +22,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 	private ObjectsGalleryThread thread;
 
-	private int itemsDisplayed = 3;
+	private int itemsDisplayed;
 
 	private String selectedItem;
 
@@ -32,9 +31,9 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 	private int objectsSize = (int) (45*ResourcesManager.getDpiPx());
 
-	private int verticalPadding = 0;
+	private int verticalPadding;
 
-	private int level = 0;
+	private int level;
 
 	private ArrayList<Objects> grounds = new ArrayList<Objects>();
 	private int currentGroundsItem = 0;
@@ -49,14 +48,24 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	private boolean vertical = true;
 
 	/* Constructeurs ------------------------------------------------------- */
-
-	public ObjectsGallery(Context context, AttributeSet attrs) {
-		super(context, attrs);
+	
+	public ObjectsGallery(Context context) {
+		super(context);
+		this.itemsDisplayed = 3;
+		this.verticalPadding = 0;
+		this.selectedItem = null;
+		this.level = 0;
 		this.initialisation();
 	}
-
-	public ObjectsGallery(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
+	
+	public ObjectsGallery(Context context, int itemsDisplayed,	String selectedItem, int objectsSize, int verticalPadding,	int level, boolean vertical) {
+		super(context);
+		this.itemsDisplayed = itemsDisplayed;
+		this.selectedItem = selectedItem;
+		this.objectsSize = (int) (objectsSize*ResourcesManager.getDpiPx());
+		this.verticalPadding = (int) (verticalPadding*ResourcesManager.getDpiPx());
+		this.level = level;
+		this.vertical = vertical;
 		this.initialisation();
 	}
 

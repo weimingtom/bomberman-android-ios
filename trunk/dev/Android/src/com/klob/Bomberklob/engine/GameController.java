@@ -4,7 +4,6 @@ import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -17,14 +16,8 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 	
 	/* Constructeurs  ------------------------------------------------------ */
 
-	public GameController(Context context, AttributeSet attrs) {		
-		super(context, attrs);
-		this.gameView = new GameView(getHolder(), this);
-		getHolder().addCallback(this);
-	}
-
-	public GameController(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
+	public GameController(Context context) {		
+		super(context);
 		this.gameView = new GameView(getHolder(), this);
 		getHolder().addCallback(this);
 	}

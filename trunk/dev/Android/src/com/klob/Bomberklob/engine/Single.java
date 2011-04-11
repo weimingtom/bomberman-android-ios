@@ -17,6 +17,7 @@ public class Single extends Game {
 	public Single(String mapName, int enemies, String gametype, boolean random, int difficulty) {
 		super(mapName, enemies, gametype, random);
 		this.difficulty = difficulty;
+		initGame();
 	}
 	
 	@Override
@@ -28,13 +29,15 @@ public class Single extends Game {
 		}
 		
 		if ( colors.size() >= this.players.length ) {		
+			System.out.println("COLOR : " + Model.getUser().getColor());
 			this.players[0] = new HumanPlayer(Model.getUser().getColor(), ResourcesManager.getPlayersAnimations().get(Model.getUser().getColor()), "idle",gameType.lifeNumber, gameType.powerExplosion, gameType.timeExplosion, gameType.speed, gameType.shield, gameType.bombNumber);
+			this.players[0].setPosition(new Point(this.map.getPlayers()[0].x*ResourcesManager.getSize(), this.map.getPlayers()[0].y*ResourcesManager.getSize()));
 			colors.remove(this.players[0].getImageName());
 			
 			for (int i = 1 ; i < this.players.length ; i++ ) {
 				int j = (int)(Math.random() * (colors.size()));
 				this.players[i] = new BotPlayer(colors.get(j), ResourcesManager.getPlayersAnimations().get(colors.get(j)), "idle",gameType.lifeNumber, gameType.powerExplosion, gameType.timeExplosion, gameType.speed, gameType.shield, gameType.bombNumber, this.difficulty);
-				this.players[i].setPosition(this.map.getPlayers()[i]);
+				this.players[i].setPosition(new Point(this.map.getPlayers()[i].x*ResourcesManager.getSize(), this.map.getPlayers()[i].y*ResourcesManager.getSize()));
 				colors.remove(j);
 			}
 		}

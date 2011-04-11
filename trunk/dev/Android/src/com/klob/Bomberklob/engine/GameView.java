@@ -63,6 +63,11 @@ public class GameView extends Thread {
                     this.surfaceHolder.unlockCanvasAndPost(c);
                 }
             }
+       		try {
+				sleep(250);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
         }
     }
 }
