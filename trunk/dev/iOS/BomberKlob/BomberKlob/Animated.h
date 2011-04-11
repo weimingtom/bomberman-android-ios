@@ -16,4 +16,11 @@
 	NSUInteger waitDelay;
 }
 
+@property (nonatomic, retain) NSDictionary * animations ;
+@property (nonatomic, retain) NSString * currentAnimation;
+@property (nonatomic) NSUInteger currentFrame;
+@property (nonatomic) NSUInteger waitDelay;
+
+- (id) init;
+
 @end

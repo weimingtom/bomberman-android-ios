@@ -13,4 +13,6 @@
 	Game * gameType;
 }
 
+- (id) initWithGame:(Game *) gameValue;
+
 @end

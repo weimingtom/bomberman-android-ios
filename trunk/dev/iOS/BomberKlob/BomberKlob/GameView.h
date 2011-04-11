@@ -7,13 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class RessourceManager, Map;
 
 @interface GameView : UIView {
-    NSInteger tileSize;
+	NSDictionary * bitmapsInanimates;
+	RessourceManager* ressource;
+	Map * map;
+	NSMutableArray * players;
 	
 }
 
+@property (nonatomic,copy) NSDictionary * bitmapsInanimates;
+@property (nonatomic, retain) RessourceManager* ressource;
+@property (nonatomic, retain) Map* map;
+@property (nonatomic, retain) NSMutableArray * players;
 
+- (id) initWithMap: (Map * )value;
 - (id) initWithFrame:(CGRect)frame;
+
+
+-(id) getPng:(NSString *)path;
 @end

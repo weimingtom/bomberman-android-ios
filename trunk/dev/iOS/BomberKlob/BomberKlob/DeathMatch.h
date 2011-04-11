@@ -10,7 +10,10 @@
 #import "GameType.h"
 
 @interface DeathMatch : GameType {
+	NSTimer * timer;
 	NSInteger time;
 }
+
+- (id) initWithGame:(Game *)gameValue;
 
 @end

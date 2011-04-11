@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "Position.h"
+#import "Animated.h"
 
 
-@interface Player : NSObject {
-	Position * position;
+@interface Player : Animated {
 	NSMutableArray * bombsPlanted;
 	NSMutableArray * bombsTypes;
 	NSMutableString * color;
@@ -23,7 +23,7 @@
 	NSInteger bombNumber;
 
 }
-
+- (id) init;
 - (void) live;
 - (void) relive;
 - (void) die;

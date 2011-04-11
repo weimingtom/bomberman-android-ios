@@ -7,6 +7,7 @@
 //
 
 #import "SinglePlayerMenuViewController.h"
+#import "GameViewControllerSingle.h"
 
 
 @implementation SinglePlayerMenuViewController
@@ -59,4 +60,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)playAction:(id)sender {
+	GameViewControllerSingle * gameViewController = [[GameViewControllerSingle alloc] init];
+	[self.navigationController pushViewController:gameViewController animated:YES];
+	[gameViewController release];
+}
 @end

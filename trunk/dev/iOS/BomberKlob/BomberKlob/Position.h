@@ -10,13 +10,17 @@
 
 
 @interface Position : NSObject {
-	NSInteger x;
-	NSInteger y;
+	NSUInteger x;
+	NSUInteger y;
 }
 
-- (void) setX:(NSInteger) value;
-- (void) setY:(NSInteger) value;
-- (NSInteger) x;
-- (NSInteger) y;
+@property (nonatomic) NSUInteger x;
+@property (nonatomic) NSUInteger y;
+
+- (id) init;
+
+- (id) initWithXAndY:(NSUInteger)xValue:(NSUInteger) yValue;
+
+- (NSString *)description;
 
 @end

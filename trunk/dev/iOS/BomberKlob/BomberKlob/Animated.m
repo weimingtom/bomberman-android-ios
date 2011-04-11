@@ -12,4 +12,15 @@
 
 @implementation Animated
 
+
+@synthesize waitDelay, animations, currentAnimation, currentFrame;
+
+- (id) init{
+	self = [super init];
+	if (self){
+		currentAnimation = @"midle";
+	}
+	return self;
+}
+
 @end

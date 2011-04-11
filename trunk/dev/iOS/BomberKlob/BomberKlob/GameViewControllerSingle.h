@@ -1,5 +1,5 @@
 //
-//  GameController.h
+//  GameControllerSingle.h
 //  BombermanIOS
 //
 //  Created by Kilian Coubo on 04/04/11.
@@ -7,26 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GameView.h"
-@class Position;
+#import "GameViewController.h"
 
-@interface GameViewController : UIViewController {
-    GameView * gameView;
-	Position * currentPosition;
-	Position * lastPosition;
+@class Engine;
 
+@interface GameViewControllerSingle : GameViewController {
+    Engine * engine;
 }
 
-@property (nonatomic, retain) GameView * gameView;
-
 - (id) init;
-- (void)load;
-- (void)remove;
-- (void) managementMovement;
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
+
+- (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
+
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 
 @end

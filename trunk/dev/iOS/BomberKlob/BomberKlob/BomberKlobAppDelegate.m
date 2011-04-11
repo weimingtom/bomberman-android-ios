@@ -11,7 +11,10 @@
 #import "Application.h"
 #import "DBUser.h"
 #import "DBSystem.h"
-
+#import "RessourceManager.h"
+#import "XmlParser.h"
+#import "GameViewController.h"
+#import "RessourceManager.h"
 
 @implementation BomberKlobAppDelegate
 
@@ -21,7 +24,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-      
+		
     app = [[Application alloc] init];
     
     UINavigationController *navigationControllerTmp = [[UINavigationController alloc] init];
@@ -38,6 +41,9 @@
     self.navigationController = navigationControllerTmp;
     
     self.window.rootViewController = self.navigationController;
+	
+
+	
     [self.window makeKeyAndVisible];
     
     [navigationControllerTmp release];

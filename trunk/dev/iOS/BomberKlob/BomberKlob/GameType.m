@@ -11,4 +11,12 @@
 
 @implementation GameType
 
+- (id) initWithGame:(Game *) gameValue{
+	self = [super init];
+	if (self){
+		gameType = gameValue;
+	}
+	return self;
+}
+
 @end

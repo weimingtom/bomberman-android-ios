@@ -11,9 +11,10 @@
 #import "Application.h"
 #import "CreateAccountOfflineMenuViewController.h"
 #import "ChangePlayerMenuViewController.h"
-#import "SinglePlayerMenuViewController.h"
-#import "OptionsMenuViewController.h"
 #import "DBUser.h"
+#import "GameViewControllerSingle.h"
+#import "OptionsMenuViewController.h"
+#import "SinglePlayerMenuViewController.h"
 
 
 @implementation MainMenuViewController
@@ -116,6 +117,7 @@
     SinglePlayerMenuViewController *singlePlayerMenuViewController = [[SinglePlayerMenuViewController alloc] initWithNibName:@"SinglePlayerMenuViewController" bundle:nil];
     [self.navigationController pushViewController:singlePlayerMenuViewController animated:YES];
     [singlePlayerMenuViewController release];
+
 }
 
 

@@ -11,6 +11,18 @@
 
 @implementation Game
 
+@synthesize players, map;
+
+- (id) init{
+	self = [super init];
+	if (self){
+		players = [[NSMutableArray alloc] init];
+		[players addObject:[[Player alloc] init]];
+		map = [[Map alloc] init];
+	}
+	return self;
+}
+
 - (void) initGame{
 	
 }

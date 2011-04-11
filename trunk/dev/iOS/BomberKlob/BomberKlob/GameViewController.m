@@ -7,6 +7,7 @@
 //
 
 #import "GameViewController.h"
+#import "Position.h"
 
 
 @implementation GameViewController
@@ -19,9 +20,10 @@
 	self = [super init];
 	
 	if (self) {
-		self.gameView = [[GameView alloc ]initWithFrame:CGRectMake(0, 0, 320, 460)];
-		[self load];
+		currentPosition = [[Position alloc] initWithXAndY:(NSUInteger)0:(NSUInteger) 0];
+		lastPosition = [[Position alloc] initWithXAndY:(NSUInteger)0:(NSUInteger) 0];
 	}
+	
 	return self;
 }
 
@@ -40,6 +42,8 @@
 // Dealloc
 - (void)dealloc {
 	
+	[gameView release];
+	
 	[super dealloc];
 	
 }
@@ -47,5 +51,7 @@
 - (void) managementMovement{
 	
 }
+
+
 
 @end
