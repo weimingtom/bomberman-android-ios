@@ -75,7 +75,7 @@ public class Map implements Serializable {
 	
 	/* Méthodes publiques -------------------------------------------------- */
 
-	public boolean saveMap(Context context) {
+	public boolean saveMap() {
 
 		for (int i = 0 ; i < this.players.length ; i ++ ) {
 			if ( this.players[i] == null ) {
@@ -83,7 +83,7 @@ public class Map implements Serializable {
 			}
 		}
 		
-		File dir = context.getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
+		File dir = ResourcesManager.getContext().getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
 		File f = new File (dir.getAbsolutePath()+"/"+this.name+".klob");
 		
 		try {
@@ -107,9 +107,9 @@ public class Map implements Serializable {
 		return true;
 	}
 
-	public boolean loadMap(Context context, String s) {
+	public boolean loadMap(String s) {
 		
-		File dir = context.getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
+		File dir = ResourcesManager.getContext().getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
 		File f = new File (dir.getAbsolutePath()+"/"+s+".klob");
 		Log.i("Map", "File loaded : " + f.getAbsolutePath());
 		Map map = null;

@@ -25,4 +25,9 @@ public class Undestructible extends AnimatedObjects {
 		return false;
 	}
 
+	@Override
+	public Undestructible copy() {
+		return new Undestructible(this);
+	}
+
 }

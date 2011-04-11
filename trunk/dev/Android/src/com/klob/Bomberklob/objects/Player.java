@@ -1,5 +1,6 @@
 package com.klob.Bomberklob.objects;
 
+import java.util.Hashtable;
 import java.util.Vector;
 
 import android.graphics.Canvas;
@@ -11,13 +12,14 @@ import com.klob.Bomberklob.objects.exceptions.ShieldException;
 import com.klob.Bomberklob.objects.exceptions.TimeBombException;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
-public class Player extends Animated {
+public abstract class Player extends Animated {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected Vector<Bombs> bombsPlanted = new Vector<Bombs>();
+	
+	protected Vector<Bomb> bombsPlanted = new Vector<Bomb>();
 	//FIXME private ???[] bombsTypes;
 	protected int lifeNumber;
 	protected int powerExplosion;
@@ -27,10 +29,11 @@ public class Player extends Animated {
 	protected int bombNumber;
 	
 	
-	/* Getters ------------------------------------------------------------- */
+	/* Constructeurs ------------------------------------------------------- */
 	
-	public Player(String imageName, int lifeNumber, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber) {
+	public Player(String imageName, Hashtable<String, AnimationSequence> animations, int lifeNumber, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber) {
 		super(imageName, false, 1, false);
+		this.animations = animations;
 		this.lifeNumber = lifeNumber;
 		this.powerExplosion = powerExplosion;
 		this.timeExplosion = timeExplosion;
@@ -41,6 +44,7 @@ public class Player extends Animated {
 	
 	public Player(Player player) {
 		super(player);
+		this.animations = player.animations;
 		this.lifeNumber = player.lifeNumber;
 		this.powerExplosion = player.powerExplosion;
 		this.timeExplosion = player.timeExplosion;
@@ -101,7 +105,7 @@ public class Player extends Animated {
 	
 	/* Getters ------------------------------------------------------------- */
 	
-	public Vector<Bombs> getBombsPlanted() {
+	public Vector<Bomb> getBombsPlanted() {
 		return this.bombsPlanted;
 	}
 

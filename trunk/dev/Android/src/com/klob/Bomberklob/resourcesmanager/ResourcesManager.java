@@ -2,6 +2,7 @@ package com.klob.Bomberklob.resourcesmanager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -9,12 +10,11 @@ import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.engine.Point;
 import com.klob.Bomberklob.objects.AnimatedObjects;
 import com.klob.Bomberklob.objects.AnimationSequence;
+import com.klob.Bomberklob.objects.Bomb;
 import com.klob.Bomberklob.objects.Destructible;
 import com.klob.Bomberklob.objects.FrameInfo;
-import com.klob.Bomberklob.objects.HashMapObjects;
 import com.klob.Bomberklob.objects.Inanimate;
 import com.klob.Bomberklob.objects.Objects;
-import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.Undestructible;
 
 import android.content.Context;
@@ -35,8 +35,9 @@ public class ResourcesManager {
 	private static int height;
 	private static int width;
 	private static HashMap<String, Bitmap>	bitmaps = new HashMap<String, Bitmap>();
-	private static HashMapObjects objects = new HashMapObjects();
-	private static HashMapObjects players = new HashMapObjects();
+	private static HashMap<String, Objects> objects = new HashMap<String, Objects>();
+	private static HashMap<String, Hashtable<String, AnimationSequence>> playersAnimation = new HashMap<String, Hashtable<String, AnimationSequence>>();
+	private static HashMap<String, Bomb> bombs = new HashMap<String, Bomb>();
 
 	/* Constructeur -------------------------------------------------------- */
 
@@ -53,7 +54,6 @@ public class ResourcesManager {
 		else {
 			size = (int) ((width-(50*dpiPx))/14);
 		}
-
 		bitmapsInitialisation();
 	}
 
@@ -70,19 +70,23 @@ public class ResourcesManager {
 		return bitmaps;
 	}
 
-	public static HashMapObjects getObjects() {
+	public static HashMap<String, Objects> getObjects() {
 		return objects;
 	}
 	
-	public static HashMapObjects getPlayers() {
-		return players;
+	public static HashMap<String, Hashtable<String, AnimationSequence>> getPlayersAnimations() {
+		return playersAnimation;
+	}
+	
+	public static HashMap<String, Bomb> getBombs() {
+		return bombs;
 	}
 	
 	public static float getDpiPx() {
 		return dpiPx;
 	}
 
-	public Context getContext() {
+	public static Context getContext() {
 		return context;
 	}
 
@@ -100,19 +104,6 @@ public class ResourcesManager {
 
 	public static int getWidth() {
 		return width;
-	}
-	
-	public static Objects getObject(String s) {
-		
-		Objects o = null; 
-		
-		if ( (o = objects.get(s)) == null ) {
-			if ( (o = players.get(s)) == null ) {
-				//FIXME BOMBES
-			}
-		}
-		
-		return o;
 	}
 	
 	/* Setters ------------------------------------------------------------- */
@@ -184,7 +175,7 @@ public class ResourcesManager {
 		try {
 			int eventType = xpp.getEventType();
 			String animationname="";
-			AnimationSequence animationsequence = new AnimationSequence();;
+			AnimationSequence animationsequence = new AnimationSequence();
 
 			while (eventType != XmlPullParser.END_DOCUMENT){
 
@@ -269,7 +260,8 @@ public class ResourcesManager {
 		XmlResourceParser xpp = context.getResources().getXml(R.xml.players);
 		
 		Log.i("ResourcesManager","--------------- Loading player ---------------");
-		Player player = null;
+		Hashtable<String, AnimationSequence> playerAnimation = null;
+		String name = null;
 
 		try {
 			int eventType = xpp.getEventType();
@@ -281,7 +273,8 @@ public class ResourcesManager {
 				if(eventType == XmlPullParser.START_TAG) {
 					
 					if(xpp.getName().toLowerCase().equals("player")) {
-						player = new Player(xpp.getAttributeValue(null, "name"), 1, 1, 3, 3, 0, 1);
+						playerAnimation = new Hashtable<String, AnimationSequence>();
+						name = xpp.getAttributeValue(null, "name");
 					}					
 					else if(xpp.getName().toLowerCase().equals("animation")) {	
 						animationname=xpp.getAttributeValue(null, "name");	            	 
@@ -301,13 +294,14 @@ public class ResourcesManager {
 					}
 				}else if(eventType == XmlPullParser.END_TAG) {
 					if(xpp.getName().toLowerCase().equals("animation")) {
-						player.getAnimations().put(animationname, animationsequence);
+						playerAnimation.put(animationname, animationsequence);
 					}
 					else if (xpp.getName().toLowerCase().equals("player")) {
-						if ( player != null ) {
-							players.put(player.getImageName(), player);
-							Log.i("ResourcesManager","Added AnimatedObject : " + player.getImageName());
-							player = null;
+						if ( playerAnimation != null ) {
+							playersAnimation.put(name, playerAnimation);
+							Log.i("ResourcesManager","Added Animation : " + name);
+							playerAnimation = null;
+							name = null;
 						}
 					}
 				} else if(eventType == XmlPullParser.TEXT) {
@@ -321,40 +315,62 @@ public class ResourcesManager {
 		}
 		System.out.println("--------------- Player Loaded ----------------");
 	}
+	
+	public static void bombsInitialisation() {
 
-	/**
-	 * Calculates the tile of the coordinate
-	 * 
-	 * @param x x coordinate
-	 * @param y y coordinate
-	 * @return the tile position
-	 */
-	public static Point coToTile(int x, int y) {
+		XmlResourceParser xpp = context.getResources().getXml(R.xml.bombs);
 
-		if ( x < 0 || y < 0) {
-			return null;
+		Log.i("ResourcesManager","---------------- Loading bombs ---------------");
+		Bomb bomb = null;
+
+		try {
+			int eventType = xpp.getEventType();
+			String animationname="";
+			AnimationSequence animationsequence = new AnimationSequence();;
+
+			while (eventType != XmlPullParser.END_DOCUMENT){
+
+				if(eventType == XmlPullParser.START_TAG) {
+
+					if(xpp.getName().toLowerCase().equals("bomb")) {
+						bomb = new Bomb(xpp.getAttributeValue(null, "name"), (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "level", 0), (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true), (xpp.getAttributeIntValue(null, "power", 0)), (xpp.getAttributeIntValue(null, "time", 0)));
+					}
+					else if(xpp.getName().toLowerCase().equals("animation")) {			
+						animationname=xpp.getAttributeValue(null, "name");	            	 
+						animationsequence = new AnimationSequence();
+						animationsequence.name=animationname;
+						animationsequence.sequence=new ArrayList<FrameInfo>();
+						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);	
+					}
+					else if(xpp.getName().toLowerCase().equals("png")) {
+						FrameInfo frameinfo = new FrameInfo();
+						Point point = new Point();
+						point.x = xpp.getAttributeIntValue(null, "x", 0);
+						point.y = xpp.getAttributeIntValue(null, "y", 0);
+						frameinfo.point = point;
+						frameinfo.nextFrameDelay = xpp.getAttributeIntValue(null,"delayNextFrame", 0);
+						animationsequence.sequence.add(frameinfo);
+					}
+				}
+				else if(eventType == XmlPullParser.END_TAG) {
+					
+					if(xpp.getName().toLowerCase().equals("animation")) {
+						bomb.getAnimations().put(animationname, animationsequence);
+					}
+					else if ((xpp.getName().toLowerCase().equals("bomb"))) {
+						if ( bomb != null ) {
+							bombs.put(bomb.getImageName(), bomb);
+							Log.i("ResourcesManager","Added bombs : " + bomb.getImageName());
+							bomb = null;
+						}
+					}
+				}
+				eventType = xpp.next();
+			}
 		}
-		else {
-			return new Point(x/ResourcesManager.tileSize, y/ResourcesManager.tileSize);
+		catch (Exception e) {
+			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+e.toString());
 		}
+		Log.i("ResourcesManager","---------------- Bombs loaded  ---------------");
 	}
-
-	/**
-	 * Calculates the coordinate of the tile
-	 * 
-	 * @param x x coordinate 
-	 * @param y y coordinate
-	 * @return coordinate of the tile
-	 */
-	public Point tileToCo(int x, int y) {
-
-		if ( x < 0 || y < 0) {
-			return null;
-		}
-		else {
-			return new Point(x*ResourcesManager.tileSize, y*ResourcesManager.tileSize);
-		}
-	}
-
 }
-

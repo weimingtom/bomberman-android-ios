@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:orientation="vertical"
+	android:layout_height="fill_parent" android:drawingCacheQuality="high" android:animationCache="true" android:background="@color/White" android:id="@+id/SinglePlayerLinearLayoutGlobal">
+
+	<RelativeLayout android:layout_width="fill_parent"
+		android:id="@+id/SinglePlayerRelativeLayoutMenu" android:background="@color/White" android:gravity="center_vertical" android:layout_height="wrap_content">
+		<Button android:layout_width="wrap_content" android:text="@string/ButtonMenu"
+			android:layout_height="wrap_content" android:id="@+id/SinglePlayerButtonMenu"></Button>
+
+			
+	</RelativeLayout>
+	<LinearLayout android:layout_width="fill_parent" android:id="@+id/linearLayout1" android:layout_height="fill_parent" android:orientation="horizontal">
+		<LinearLayout android:layout_height="fill_parent" android:layout_width="wrap_content" android:gravity="center" android:id="@+id/SinglePlayerLinearLayoutEditorController" android:background="@color/Grey">
+
+		</LinearLayout>
+		<RelativeLayout android:background="@color/White" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/SinglePlayerRelativeLayoutObjectsGallery">
+			
+			<FrameLayout android:id="@+id/SinglePlayerFrameLayoutBombsGallery" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_centerInParent="true">
+				<com.klob.Bomberklob.engine.ObjectsGallery android:layout_width="wrap_content" android:id="@+id/SinglePlayerBombsGallery" android:layout_height="wrap_content"></com.klob.Bomberklob.engine.ObjectsGallery>
+			</FrameLayout>
+			
+			<Button android:layout_alignParentBottom="true" android:layout_height="wrap_content" android:id="@+id/button1" android:text="BOOM" android:layout_width="wrap_content"></Button>
+
+		</RelativeLayout>
+	</LinearLayout>
+
+</LinearLayout>

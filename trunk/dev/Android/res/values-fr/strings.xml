@@ -49,6 +49,13 @@
 	
 	<string name="SinglePlayerGameErrorLoadingMap">Aucune carte trouvée !</string>
 	
+	<!-- SinglePlayerLayout -->
+	
+	<string name="SinglePlayerMenuResume">Reprendre</string>
+	<string name="SinglePlayerMenuOptions">Options</string>
+	<string name="SinglePlayerMenuQuit">Quitter</string>
+	<string name="SinglePlayerMenuRestart">Redemarrer</string>
+	
 	<!-- Multiplayer -->
 	
 	<string name="MultiplayerButtonNewAccount">Nouveau Compte</string>

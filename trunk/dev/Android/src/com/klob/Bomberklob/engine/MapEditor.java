@@ -1,11 +1,8 @@
 package com.klob.Bomberklob.engine;
 
-import java.util.Map.Entry;
-
-import android.content.Context;
 import android.graphics.Canvas;
 
-import com.klob.Bomberklob.objects.HashMapObjects;
+import com.klob.Bomberklob.objects.HumanPlayer;
 import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
@@ -82,42 +79,41 @@ public class MapEditor {
 		}
 	}	
 
-	public void loadMap(Context context, String mapName) {
+	public void loadMap(String mapName) {
 
-		if ( !map.loadMap(context, mapName) ) {
+		if ( !map.loadMap(mapName) ) {
 			map = new Map();
 			map.setName(mapName);
 
-			HashMapObjects hmo = ResourcesManager.getObjects();
+			Objects o = ResourcesManager.getObjects().get("bloc").copy();
 
 			for (int j = 0 ; j < map.getGrounds()[0].length ; j++) {
-				map.addBlock(hmo.get("bloc"), new Point(0,j));
-				map.addBlock(hmo.get("bloc"), new Point(16,j));
+				map.addBlock(o.copy(), new Point(0,j));
+				map.addBlock(o.copy(), new Point(16,j));
 			}
 			for (int j = 1 ; j < map.getGrounds().length-1 ; j++) {
-				map.addBlock(hmo.get("bloc"), new Point(j,0));
-				map.addBlock(hmo.get("bloc"), new Point(j,14));
+				map.addBlock(o.copy(), new Point(j,0));
+				map.addBlock(o.copy(), new Point(j,14));
 			}
+			
+			o = ResourcesManager.getObjects().get("grass").copy();
+
 			for (int j = 1 ; j < map.getGrounds().length-1 ; j++) {
 				for (int k = 1 ; k < map.getGrounds()[0].length-1 ; k++ ) {
-					map.addGround(hmo.get("grass"), new Point(j,k));
+					map.addGround(o.copy(), new Point(j,k));
 				}
 			}
 		}
+		
+		this.players[0] = new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), 1, 1, 1, 1, 1, 1);
+		this.players[1] = new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), 1, 1, 1, 1, 1, 1);
+		this.players[2] = new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), 1, 1, 1, 1, 1, 1);
+		this.players[3] = new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), 1, 1, 1, 1, 1, 1);
 
-		int i = 0;
-		for(Entry<String, Objects> entry : ResourcesManager.getPlayers().entrySet()) {
-			if ( i < 4 ) {
-				Objects valeur = ResourcesManager.getPlayers().get(entry.getKey());
-				if ( this.map.getPlayers()[i] != null ) {
-					valeur.setPosition(new Point(this.map.getPlayers()[i].x*ResourcesManager.getSize() , this.map.getPlayers()[i].y*ResourcesManager.getSize()));
-				}
-				else {
-					valeur.setPosition(null);	
-				}
-				this.players[i] = valeur;
+		for (int i = 0 ; i < 4 ; i++ ) {
+			if ( this.map.getPlayers()[i] != null ) {
+				this.players[i].setPosition(new Point(this.map.getPlayers()[i].x*ResourcesManager.getSize() , this.map.getPlayers()[i].y*ResourcesManager.getSize()));
 			}
-			i++;
 		}
 	}
 

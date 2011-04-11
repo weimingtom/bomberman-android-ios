@@ -62,13 +62,14 @@ public class Main extends Activity {
 					ResourcesManager.animatedObjectsInitialisation();
 					ResourcesManager.inanimatedObjectsInitialisation();
 					ResourcesManager.playersInitialisation();
+					ResourcesManager.bombsInitialisation();
 					
 					if ( Model.getSystem().getLastUser() == -1 ) {
 						intent = new Intent(context, CreateAccountOffline.class);
 						
 						AssetManager am = getAssets();
 						for (int i = 0 ; i < 1 ; i++ ) {
-							System.out.println("FILe : " + am.getLocales());
+							System.out.println("File : " + am.getLocales());
 						}
 					}
 					else {

@@ -1,21 +1,21 @@
 package com.klob.Bomberklob.engine;
 
+import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
+
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-public class EditorView extends Thread {
-
+public class GameView extends Thread {
+	
 	private SurfaceHolder surfaceHolder;
-    private EditorController editorController;
+    private GameController gameController;
     private boolean run = false;
-    
-    private boolean level = true, sleep = true;
     
     /* Constructeur -------------------------------------------------------- */
 
-	public EditorView(SurfaceHolder surfaceHolder, EditorController editorView) {
+	public GameView(SurfaceHolder surfaceHolder, GameController gameController) {
         this.surfaceHolder = surfaceHolder;
-        this.editorController = editorView;
+        this.gameController = gameController;
     }
 
     /* Getteurs ------------------------------------------------------------ */
@@ -24,38 +24,26 @@ public class EditorView extends Thread {
 		return surfaceHolder;
 	}
 
-	public EditorController getEditorController() {
-		return editorController;
-	}
-	
-	public boolean getLevel() {
-		return this.level;
+	public GameController getGameController() {
+		return gameController;
 	}
 
 	public boolean isRun() {
 		return run;
 	}
-	
-	public void update() {
-		this.sleep = false;
-	}
-    
-    /* Setteurs ------------------------------------------------------------ */
+
+	 /* Setteurs ------------------------------------------------------------ */
 
 	public void setSurfaceHolder(SurfaceHolder surfaceHolder) {
 		this.surfaceHolder = surfaceHolder;
 	}
 
-	public void setEditorController(EditorController editorController) {
-		this.editorController = editorController;
+	public void setGameController(GameController gameController) {
+		this.gameController = gameController;
 	}
 
 	public void setRun(boolean run) {
 		this.run = run;
-	}
-	
-	public void setLevel(boolean level) {
-		this.level = level;
 	}
 
 	/* Methodes publiques -------------------------------------------------- */
@@ -68,20 +56,12 @@ public class EditorView extends Thread {
             try {
                 c = this.surfaceHolder.lockCanvas(null);
                 synchronized (this.surfaceHolder) {
-               		this.editorController.getMapEditor().onDraw(c, level);
+               		this.gameController.onDraw(c, ResourcesManager.getSize());
                 }
             } finally {
                 if (c != null) {
                     this.surfaceHolder.unlockCanvasAndPost(c);
                 }
-            }
-            sleep = true;
-            while (sleep) {
-            	try {
-            		sleep(250);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
             }
         }
     }

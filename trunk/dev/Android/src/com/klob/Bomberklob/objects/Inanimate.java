@@ -56,4 +56,9 @@ public class Inanimate extends Objects {
 	public boolean isDestructible() {
 		return false;
 	}
+
+	@Override
+	public Inanimate copy() {
+		return new Inanimate(this);
+	}
 }

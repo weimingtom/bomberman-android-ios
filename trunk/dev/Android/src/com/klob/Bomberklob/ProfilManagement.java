@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.klob.Bomberklob.engine.ObjectsGallery;
 import com.klob.Bomberklob.model.Model;
+import com.klob.Bomberklob.objects.HumanPlayer;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 public class ProfilManagement extends Activity implements View.OnClickListener{
@@ -81,7 +82,11 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
 		this.objectsGallery.setItemsDisplayed(4);
 		this.objectsGallery.setVerticalPadding(22);
 		this.objectsGallery.setVertical(false);
-		this.objectsGallery.loadObjects(ResourcesManager.getPlayers());
+		
+		this.objectsGallery.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), 1, 1, 1, 1, 1, 1));
+		this.objectsGallery.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), 1, 1, 1, 1, 1, 1));
+		this.objectsGallery.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), 1, 1, 1, 1, 1, 1));
+		this.objectsGallery.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), 1, 1, 1, 1, 1, 1));
 		
 		this.password = (CheckBox) findViewById(R.id.ProfilManagementCheckBoxPassword);
 		this.password.setOnCheckedChangeListener(new OnCheckedChangeListener() { 

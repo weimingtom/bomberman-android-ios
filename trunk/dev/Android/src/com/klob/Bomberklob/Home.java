@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 public class Home extends Activity implements View.OnClickListener{
 
@@ -126,27 +125,13 @@ public class Home extends Activity implements View.OnClickListener{
 		else if ( this.help == v ) {
 			intent = new Intent(Home.this, Help.class);
 		}
+		else  if ( this.singlePlayer == v ) {
+			intent = new Intent(Home.this, SinglePlayerGame.class);
+		}
 
 		if ( null != intent) {
 			startActivity(intent);
 			this.finish();
-		}
-
-		if ( this.singlePlayer == v ) {
-			intent = new Intent(Home.this, SinglePlayerGame.class);
-			startActivityForResult(intent, 1000);
-		}
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-
-		if ( resultCode == 2000) {
-			this.finish();
-		}
-		else if ( resultCode == 2001) {
-			Toast.makeText(Home.this, R.string.SinglePlayerGameErrorLoadingMap, Toast.LENGTH_SHORT).show();
 		}
 	}
 }

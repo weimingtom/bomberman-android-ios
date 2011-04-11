@@ -1,6 +1,7 @@
 package com.klob.Bomberklob.engine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map.Entry;
 
 import android.content.Context;
@@ -15,7 +16,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
 
-import com.klob.Bomberklob.objects.HashMapObjects;
 import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
@@ -53,12 +53,14 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	public ObjectsGallery(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.thread = new ObjectsGalleryThread(getHolder(), this);
+		this.paint.setColor(Color.RED);
 		getHolder().addCallback(this);
 	}
 
 	public ObjectsGallery(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		this.thread = new ObjectsGalleryThread(getHolder(), this);
+		this.paint.setColor(Color.RED);
 		getHolder().addCallback(this);
 	}
 
@@ -101,9 +103,17 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	}
 
 	public void setItemsDisplayed(int items) {
-		if ( items > 0 ) {
+		if ( items >= 0 ) {
 			this.itemsDisplayed = items;
 		}
+		
+		if ( vertical ) {
+			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize+verticalPadding, objectsSize*itemsDisplayed));
+		}
+		else {
+			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize*itemsDisplayed, objectsSize+verticalPadding));
+		}
+		
 		this.thread.update();
 	}
 
@@ -135,21 +145,45 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 	/* Méthodes publiques -------------------------------------------------- */
 
-	public void loadObjects(HashMapObjects hmo) {
+	public void loadObjects(HashMap<String, Objects> objects) {
 
+		int i = 0;
 		setRectangles(point);
-		paint.setColor(Color.RED);
 
-		for(Entry<String, Objects> entry : hmo.entrySet()) {
-			Objects valeur = hmo.get(entry.getKey());
+		for(Entry<String, Objects> entry : objects.entrySet()) {
+			Objects valeur = objects.get(entry.getKey());
 			if ( valeur.getLevel() == 0 ) {
-				this.grounds.add(valeur);
+				this.grounds.add(valeur.copy());
 			}
 			else {
-				this.blocks.add(valeur);
+				this.blocks.add(valeur.copy());
 			}
+			i++;
 		}
+		
+		if ( i < itemsDisplayed ) {
+			setItemsDisplayed(i);
+		}
+		
 		this.thread.update();
+	}
+	
+	public void addObjects(Objects object) {
+		if ( object.getLevel() == 0 ) {
+			this.grounds.add(object);
+		}
+		else {
+			this.blocks.add(object);
+		}
+	}
+	
+	public void removeObjects(Objects object) {
+		if ( object.getLevel() == 0 ) {
+			this.grounds.remove(object);
+		}
+		else {
+			this.blocks.remove(object);
+		}
 	}
 
 	@Override
@@ -195,9 +229,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 		int i,j;
 
-		Paint p = new Paint();
-		p.setColor(Color.WHITE);
-		canvas.drawRect(new Rect(0, 0, canvas.getWidth(), canvas.getHeight()), p);
+		canvas.drawColor(Color.WHITE);
 
 		if ( this.level == 0 ) {
 			for (i = this.currentGroundsItem, j = 0 ; j < this.itemsDisplayed && j < this.grounds.size() ; i++, j++ ) {
@@ -255,7 +287,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 						this.selectedItem = this.blocks.get(point.y+currentBlocksItem).getImageName();
 					}
 				}
-				System.out.println("Objects selected : " + this.selectedItem);
+				System.out.println("Object selected : " + this.selectedItem);
 				this.thread.update();
 				break;
 			case MotionEvent.ACTION_MOVE:

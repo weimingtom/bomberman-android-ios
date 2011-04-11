@@ -33,6 +33,8 @@
 		<activity android:name="MapEditorLayout" android:screenOrientation="landscape"></activity>
 		<activity android:screenOrientation="landscape" android:name="MapEditorMenu"></activity>
 		<activity android:screenOrientation="portrait" android:name="MapEditorLoader"></activity>
+		<activity android:name="SinglePlayerLayout" android:screenOrientation="landscape"></activity>
+		<activity android:name="SinglePlayerMenu" android:screenOrientation="landscape"></activity>
 
 	</application>
 </manifest>

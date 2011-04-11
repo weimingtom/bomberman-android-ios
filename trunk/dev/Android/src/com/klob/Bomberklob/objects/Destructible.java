@@ -41,4 +41,9 @@ public class Destructible extends AnimatedObjects {
 		return true;
 	}
 
+	@Override
+	public Destructible copy() {
+		return new Destructible(this);
+	}
+
 }
