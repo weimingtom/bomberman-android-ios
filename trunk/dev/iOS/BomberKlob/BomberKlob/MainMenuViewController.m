@@ -11,6 +11,7 @@
 #import "Application.h"
 #import "CreateAccountOfflineMenuViewController.h"
 #import "ChangePlayerMenuViewController.h"
+#import "SinglePlayerMenuViewController.h"
 #import "OptionsMenuViewController.h"
 #import "DBUser.h"
 
@@ -108,35 +109,60 @@
 
 - (IBAction)singlePlayerAction:(id)sender {
     NSLog(@"Single player");
+    
+    Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+    [application playSoundButton];
+    
+    SinglePlayerMenuViewController *singlePlayerMenuViewController = [[SinglePlayerMenuViewController alloc] initWithNibName:@"SinglePlayerMenuViewController" bundle:nil];
+    [self.navigationController pushViewController:singlePlayerMenuViewController animated:YES];
+    [singlePlayerMenuViewController release];
 }
 
 
 - (IBAction)multiplayerAction:(id)sender {
     NSLog(@"Multiplayer");
+    
+    Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+    [application playSoundButton];
 }
 
 
 - (IBAction)optionsAction:(id)sender {
     NSLog(@"Options");
     [self goToOptionsMenu];
+    
+    Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+    [application playSoundButton];
 }
 
 
 - (IBAction)createMapAction:(id)sender {
     NSLog(@"Create map");
+    
+    Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+    [application playSoundButton];
 }
 
 
 - (IBAction)helpAction:(id)sender {
     NSLog(@"Help");
+    
+    Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+    [application playSoundButton];
 }
 
 - (IBAction)pseudoAction:(id)sender {
     [self goToChangePlayerMenu];
+    
+    Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+    [application playSoundButton];
 }
 
 - (IBAction)newProfilAction:(id)sender {
     [self goToCreateAccountOfflineMenu];
+    
+    Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+    [application playSoundButton];
 }
 
 @end

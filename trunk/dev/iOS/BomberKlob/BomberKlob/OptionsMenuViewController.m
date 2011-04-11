@@ -236,13 +236,10 @@
 #pragma mark - My methods
 
 - (void)muteActived {
-
-	if (mute.on) {
+	if (mute.on) 
 		soundSlider.enabled = NO;
-	}
-	else {
+	else 
 		soundSlider.enabled = YES;
-	}
 }
 
 
@@ -259,11 +256,13 @@
     Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
     [self muteActived];
     application.system.mute = mute.on;
+    [application modifyMute:mute.on];
 }
 
 
 - (IBAction)soundModificationAction:(id)sender {    
     Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+    [application modifyVolume:(NSUInteger) soundSlider.value];
     application.system.volume = (NSUInteger) soundSlider.value;
 }
 

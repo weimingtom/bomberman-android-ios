@@ -19,6 +19,9 @@
 @synthesize pseudos;
 @synthesize maps;
 @synthesize system;
+@synthesize playerMenu;
+@synthesize playerButton;
+
 
 - (id)init {
     self = [super init]; 
@@ -29,6 +32,10 @@
         [self loadSystem];
         [self loadPseudos];
         [self loadMaps];
+        
+        [self loadAudio];        
+        
+        [self playSoundMenu];
     }
     
     return self;
@@ -40,6 +47,8 @@
     [pseudos release];
     [maps release];
     [system release]; 
+    [playerMenu release];
+    [playerButton release];
     [super dealloc];
 }
 
@@ -91,9 +100,52 @@
 }
 
 
-// TODO: A compléter...
 - (void)loadMaps {
+    NSMutableArray *mapsTmp = [[NSMutableArray alloc] init];
+    DBMap *map;
     
+    sqlite3_stmt *statement = [dataBase select:@"*" from:@"Map" where:nil];
+    
+    while (sqlite3_step(statement) == SQLITE_ROW) {
+        map = [[DBMap alloc] initWithName:[NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 0)] owner:sqlite3_column_int(statement, 1) official:sqlite3_column_int(statement, 1)];
+        [mapsTmp addObject:map];
+        [map release];
+    }
+    
+    sqlite3_finalize(statement);
+    [mapsTmp addObject:[[DBMap alloc] initWithName:@"Random" owner:-1 official:-1]];
+    
+    if ([mapsTmp count] > 0) {
+        self.maps = mapsTmp;
+    }
+    
+    [mapsTmp release];
+}
+
+
+- (void)loadAudio {
+	// Check for the file.
+	NSError *error;
+    float volume = system.volume;
+	NSString *pathMenuSound = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"m4a"];
+    NSString *pathButtonSound = [[NSBundle mainBundle] pathForResource:@"button" ofType:@"wav"];    
+    
+	if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSound]) {
+        // Initialize the player
+        self.playerMenu = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:pathMenuSound] error:&error];
+        self.playerButton = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:pathButtonSound] error:&error];
+        
+        if (!playerMenu || !playerButton) 
+            NSLog(@"Error: %@", [error localizedDescription]);
+        
+        // Prepare the player and set the loops to, basically, unlimited
+        [self.playerMenu prepareToPlay];
+        [self.playerMenu setNumberOfLoops:-1];
+        self.playerMenu.volume = (volume / 100);
+        
+        [self.playerButton prepareToPlay];
+        self.playerButton.volume = (volume / 100);
+    }
 }
 
 
@@ -112,6 +164,18 @@
     
     return !(i == [pseudos count]);
 }
+
+
+- (void)playSoundMenu {
+    if (system.volume > 0 && !system.mute)
+        [self.playerMenu play];
+}
+
+
+- (void)playSoundButton {
+    if (system.volume > 0 && !system.mute)
+        [self.playerButton play];
+}
  
 
 - (void)setUser:(DBUser *)value {
@@ -119,6 +183,31 @@
     [user release];
     user = value;
     system.lastUser = value;
+}
+
+
+- (void)modifyVolume:(NSInteger)newVolume {
+    NSInteger oldVolume = system.volume;
+    
+    if (newVolume != oldVolume) {
+        self.playerMenu.volume = (newVolume / 100.0);
+        self.playerButton.volume = (newVolume / 100.0);
+    }
+    
+    if (newVolume == 0) 
+        [playerMenu pause];
+    
+    if (oldVolume == 0)
+        [playerMenu play];
+}
+
+
+- (void)modifyMute:(BOOL)newMute {
+    
+    if (newMute)
+        [playerMenu pause];
+    else if (system.volume > 0) 
+        [playerMenu play];
 }
 
 @end
