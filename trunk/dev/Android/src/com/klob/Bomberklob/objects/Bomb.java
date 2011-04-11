@@ -1,5 +1,7 @@
 package com.klob.Bomberklob.objects;
 
+import java.util.Hashtable;
+
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
@@ -16,8 +18,8 @@ public class Bomb extends Animated {
 	protected int time;
 	//FIXME protected ??? type
 
-	public Bomb(String imageName, boolean hit, int level, boolean fireWall, int power, int time) {
-		super(imageName, hit, level, fireWall);
+	public Bomb(String imageName, boolean hit, int level, boolean fireWall, int power, int time, Hashtable<String, AnimationSequence> animations, String currentAnimation) {
+		super(imageName, hit, level, fireWall, animations, currentAnimation);
 		this.power = power;
 		this.time = time;
 	}

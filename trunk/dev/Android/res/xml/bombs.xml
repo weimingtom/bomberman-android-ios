@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <bombs>
-	<bomb name="normal" hit="1" level="1" fireWall="0" power="3" time="10">
-	    <animation name="idle" canLoop="true" > 
-			<png x="0" y="0" delayNextFrame="5" />
+	<bomb name="normal">
+	    <animation name="idle" canLoop="false" > 
+			<png x="0" y="0" delayNextFrame="0" />
 		</animation>
 	    <animation name="animate" canLoop="true" > 
 			<png x="1" y="0" delayNextFrame="5" /> 

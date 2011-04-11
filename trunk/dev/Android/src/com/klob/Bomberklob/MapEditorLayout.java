@@ -81,7 +81,7 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 				if ( object == null ) {
 					Hashtable<String, AnimationSequence> animations = ResourcesManager.getPlayersAnimations().get(objectsGallery2.getSelectedItem());
 					if ( animations != null ) {
-						object = new HumanPlayer(objectsGallery2.getSelectedItem(), animations, 1, 1, 1, 1, 1, 1);
+						object = new HumanPlayer(objectsGallery2.getSelectedItem(), animations, "idle", 1, 1, 1, 1, 1, 1);
 					}
 				}
 				
@@ -145,10 +145,10 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 		this.objectsGallery2.setItemsDisplayed(4);
 		this.objectsGallery2.setVertical(false);
 		
-		this.objectsGallery2.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), 1, 1, 1, 1, 1, 1));
-		this.objectsGallery2.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), 1, 1, 1, 1, 1, 1));
-		this.objectsGallery2.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), 1, 1, 1, 1, 1, 1));
-		this.objectsGallery2.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), 1, 1, 1, 1, 1, 1));
+		this.objectsGallery2.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), "idle",1, 1, 1, 1, 1, 1));
+		this.objectsGallery2.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), "idle",1, 1, 1, 1, 1, 1));
+		this.objectsGallery2.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), "idle",1, 1, 1, 1, 1, 1));
+		this.objectsGallery2.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), "idle",1, 1, 1, 1, 1, 1));
 		
 		this.objectsGallery2.setObjectsSize(30);
 		this.objectsGallery2.setVerticalPadding(15);

@@ -32,8 +32,8 @@ public class Map implements Serializable {
 	
 	public Map() {
 		this.players = new Point[4];
-		this.grounds = new Objects[17][15];
-		this.blocks  = new Objects[17][15];
+		this.grounds = new Objects[21][15];
+		this.blocks  = new Objects[21][15];
 	}
 	
 	/* Getteurs ------------------------------------------------------------ */

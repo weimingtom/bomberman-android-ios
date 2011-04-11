@@ -35,13 +35,7 @@ public class MapEditor {
 
 	public void addObject (Objects objects, Point point) {
 		if ( objects.getLevel() == 0 ) {
-			if ( map.getBlocks()[point.x][point.y] != null && map.getBlocks()[point.x][point.y].isDestructible() ) {
-				this.map.addGround(objects, point);
-			}
-			else {
-				map.getBlocks()[point.x][point.y] = null;
-				this.map.addGround(objects, point);
-			}
+			this.map.addGround(objects, point);
 		}
 		else {
 			int j = 0,i = 0;
@@ -89,11 +83,11 @@ public class MapEditor {
 
 			for (int j = 0 ; j < map.getGrounds()[0].length ; j++) {
 				map.addBlock(o.copy(), new Point(0,j));
-				map.addBlock(o.copy(), new Point(16,j));
+				map.addBlock(o.copy(), new Point(map.getGrounds().length-1,j));
 			}
 			for (int j = 1 ; j < map.getGrounds().length-1 ; j++) {
 				map.addBlock(o.copy(), new Point(j,0));
-				map.addBlock(o.copy(), new Point(j,14));
+				map.addBlock(o.copy(), new Point(j,map.getGrounds()[0].length-1));
 			}
 			
 			o = ResourcesManager.getObjects().get("grass").copy();
@@ -105,10 +99,10 @@ public class MapEditor {
 			}
 		}
 		
-		this.players[0] = new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), 1, 1, 1, 1, 1, 1);
-		this.players[1] = new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), 1, 1, 1, 1, 1, 1);
-		this.players[2] = new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), 1, 1, 1, 1, 1, 1);
-		this.players[3] = new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), 1, 1, 1, 1, 1, 1);
+		this.players[0] = new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), "idle",1, 1, 1, 1, 1, 1);
+		this.players[1] = new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), "idle",1, 1, 1, 1, 1, 1);
+		this.players[2] = new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), "idle",1, 1, 1, 1, 1, 1);
+		this.players[3] = new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), "idle",1, 1, 1, 1, 1, 1);
 
 		for (int i = 0 ; i < 4 ; i++ ) {
 			if ( this.map.getPlayers()[i] != null ) {
@@ -121,11 +115,11 @@ public class MapEditor {
 		if ( !level ) {
 			for (int j = 0 ; j < map.getGrounds()[0].length ; j++) {
 				map.getBlocks()[0][j].onDraw(canvas,  ResourcesManager.getSize());
-				map.getBlocks()[16][j].onDraw(canvas,  ResourcesManager.getSize());				
+				map.getBlocks()[map.getGrounds().length-1][j].onDraw(canvas,  ResourcesManager.getSize());				
 			}
 			for (int j = 1 ; j < map.getGrounds().length-1 ; j++) {
 				map.getBlocks()[j][0].onDraw(canvas,  ResourcesManager.getSize());
-				map.getBlocks()[j][14].onDraw(canvas,  ResourcesManager.getSize());
+				map.getBlocks()[j][map.getGrounds()[0].length-1].onDraw(canvas,  ResourcesManager.getSize());
 			}
 			
 			this.map.groundsOnDraw(canvas, ResourcesManager.getSize());

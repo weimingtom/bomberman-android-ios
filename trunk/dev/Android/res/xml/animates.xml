@@ -1,15 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animates>
 	<destructible name="wall" hit="1" level="1" fireWall="1" life="1">
-		<animation name="idle" canLoop="true" >
+		<animation name="idle" canLoop="true">
 			<png x="0" y="0" delayNextFrame="0" />
 		</animation>
-		<animation name="destroy" canLoop="false" >
+		<animation name="destroy" canLoop="false">
 			<png x="1" y="0" delayNextFrame="0" />
 			<png x="2" y="0" delayNextFrame="0" />
 			<png x="3" y="0" delayNextFrame="0" />
 			<png x="4" y="0" delayNextFrame="0" />
 			<png x="5" y="0" delayNextFrame="0" />
+		</animation>
+	</destructible>
+	<destructible name="herb" hit="1" level="1" fireWall="1" life="1">
+		<animation name="idle" canLoop="true">
+			<png x="0" y="1" delayNextFrame="0" />
+		</animation>
+		<animation name="destroy" canLoop="false">
+			<png x="1" y="1" delayNextFrame="0" />
+			<png x="2" y="1" delayNextFrame="0" />
+			<png x="3" y="1" delayNextFrame="0" />
+			<png x="4" y="1" delayNextFrame="0" />
+			<png x="5" y="1" delayNextFrame="0" />
+		</animation>
+	</destructible>
+	<destructible name="pebble" hit="1" level="1" fireWall="1" life="1">
+		<animation name="idle" canLoop="true">
+			<png x="0" y="2" delayNextFrame="0" />
+		</animation>
+		<animation name="destroy" canLoop="false">
+			<png x="1" y="2" delayNextFrame="0" />
+			<png x="2" y="2" delayNextFrame="0" />
+			<png x="3" y="2" delayNextFrame="0" />
+			<png x="4" y="2" delayNextFrame="0" />
+			<png x="5" y="2" delayNextFrame="0" />
+		</animation>
+	</destructible>
+	<destructible name="brick" hit="1" level="1" fireWall="1" life="1">
+		<animation name="idle" canLoop="true">
+			<png x="0" y="3" delayNextFrame="0" />
+		</animation>
+		<animation name="destroy" canLoop="false">
+			<png x="1" y="3" delayNextFrame="0" />
+			<png x="2" y="3" delayNextFrame="0" />
+			<png x="3" y="3" delayNextFrame="0" />
+			<png x="4" y="3" delayNextFrame="0" />
+			<png x="5" y="3" delayNextFrame="0" />
+		</animation>
+	</destructible>
+	<destructible name="box" hit="1" level="1" fireWall="1" life="1">
+		<animation name="idle" canLoop="true">
+			<png x="0" y="4" delayNextFrame="0" />
+		</animation>
+		<animation name="destroy" canLoop="false">
+			<png x="1" y="4" delayNextFrame="0" />
+			<png x="2" y="4" delayNextFrame="0" />
+			<png x="3" y="4" delayNextFrame="0" />
+			<png x="4" y="4" delayNextFrame="0" />
+			<png x="5" y="4" delayNextFrame="0" />
+		</animation>
+	</destructible>
+		<destructible name="column" hit="1" level="1" fireWall="1" life="1">
+		<animation name="idle" canLoop="true">
+			<png x="0" y="5" delayNextFrame="0" />
+		</animation>
+		<animation name="destroy" canLoop="false">
+			<png x="1" y="5" delayNextFrame="0" />
+			<png x="2" y="5" delayNextFrame="0" />
+			<png x="3" y="5" delayNextFrame="0" />
+			<png x="4" y="5" delayNextFrame="0" />
+			<png x="5" y="5" delayNextFrame="0" />
 		</animation>
 	</destructible>
 </animates>

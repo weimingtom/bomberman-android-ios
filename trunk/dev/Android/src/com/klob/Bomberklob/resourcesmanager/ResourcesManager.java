@@ -6,23 +6,21 @@ import java.util.Hashtable;
 
 import org.xmlpull.v1.XmlPullParser;
 
-import com.klob.Bomberklob.R;
-import com.klob.Bomberklob.engine.Point;
-import com.klob.Bomberklob.objects.AnimatedObjects;
-import com.klob.Bomberklob.objects.AnimationSequence;
-import com.klob.Bomberklob.objects.Bomb;
-import com.klob.Bomberklob.objects.Destructible;
-import com.klob.Bomberklob.objects.FrameInfo;
-import com.klob.Bomberklob.objects.Inanimate;
-import com.klob.Bomberklob.objects.Objects;
-import com.klob.Bomberklob.objects.Undestructible;
-
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.util.TypedValue;
+
+import com.klob.Bomberklob.R;
+import com.klob.Bomberklob.engine.Point;
+import com.klob.Bomberklob.objects.AnimationSequence;
+import com.klob.Bomberklob.objects.Destructible;
+import com.klob.Bomberklob.objects.FrameInfo;
+import com.klob.Bomberklob.objects.Inanimate;
+import com.klob.Bomberklob.objects.Objects;
+import com.klob.Bomberklob.objects.Undestructible;
 
 public class ResourcesManager {
 
@@ -37,7 +35,7 @@ public class ResourcesManager {
 	private static HashMap<String, Bitmap>	bitmaps = new HashMap<String, Bitmap>();
 	private static HashMap<String, Objects> objects = new HashMap<String, Objects>();
 	private static HashMap<String, Hashtable<String, AnimationSequence>> playersAnimation = new HashMap<String, Hashtable<String, AnimationSequence>>();
-	private static HashMap<String, Bomb> bombs = new HashMap<String, Bomb>();
+	private static HashMap<String, Hashtable<String, AnimationSequence>> bombsAnimation = new HashMap<String, Hashtable<String, AnimationSequence>>();
 
 	/* Constructeur -------------------------------------------------------- */
 
@@ -48,11 +46,11 @@ public class ResourcesManager {
 		height = context.getResources().getDisplayMetrics().heightPixels;
 		width = context.getResources().getDisplayMetrics().widthPixels;
 		
-		if ( ((height-(50*dpiPx))/15) < ((width-(50*dpiPx))/14) ) {
-			size = (int) ((height-(50*dpiPx))/15);
+		if ( ((height-(50*dpiPx))/21) < ((width-(50*dpiPx))/15) ) {
+			size = (int) ((height-(50*dpiPx))/21);
 		}
 		else {
-			size = (int) ((width-(50*dpiPx))/14);
+			size = (int) ((width-(50*dpiPx))/15);
 		}
 		bitmapsInitialisation();
 	}
@@ -78,8 +76,8 @@ public class ResourcesManager {
 		return playersAnimation;
 	}
 	
-	public static HashMap<String, Bomb> getBombs() {
-		return bombs;
+	public static HashMap<String, Hashtable<String, AnimationSequence>> getBombsAnimations() {
+		return bombsAnimation;
 	}
 	
 	public static float getDpiPx() {
@@ -170,7 +168,10 @@ public class ResourcesManager {
 		XmlResourceParser xpp = context.getResources().getXml(R.xml.animates);
 
 		Log.i("ResourcesManager","---------- Loading animated objects ----------");
-		AnimatedObjects animatedObjects = null;
+		Hashtable<String, AnimationSequence> objectAnimation = null;
+		String imageName = null;
+		int level = 0, life = 0;
+		boolean hit = false, fireWall = false;
 
 		try {
 			int eventType = xpp.getEventType();
@@ -180,12 +181,16 @@ public class ResourcesManager {
 			while (eventType != XmlPullParser.END_DOCUMENT){
 
 				if(eventType == XmlPullParser.START_TAG) {
-
-					if(xpp.getName().toLowerCase().equals("destructible")) {
-						animatedObjects = new Destructible(xpp.getAttributeValue(null, "name"), (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "level", 0), (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true), (xpp.getAttributeIntValue(null, "life", 0)));
-					}
-					else if(xpp.getName().toLowerCase().equals("undestructible")) {
-						animatedObjects = new Undestructible(xpp.getAttributeValue(null, "name"), (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "level", 0), (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true)); 
+					
+					if (xpp.getName().toLowerCase().equals("destructible") || xpp.getName().toLowerCase().equals("undestructible") ) {
+						objectAnimation = new Hashtable<String, AnimationSequence>();
+						imageName = xpp.getAttributeValue(null, "name");
+						hit = (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true);
+						level = xpp.getAttributeIntValue(null, "level", 0);
+						fireWall = (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true);
+						if ( xpp.getName().toLowerCase().equals("destructible") ) {
+							life = (xpp.getAttributeIntValue(null, "life", 0));
+						}
 					}
 					else if(xpp.getName().toLowerCase().equals("animation")) {			
 						animationname=xpp.getAttributeValue(null, "name");	            	 
@@ -205,15 +210,17 @@ public class ResourcesManager {
 					}
 				}
 				else if(eventType == XmlPullParser.END_TAG) {
+										
 					if(xpp.getName().toLowerCase().equals("animation")) {
-						animatedObjects.getAnimations().put(animationname, animationsequence);
+						objectAnimation.put(animationname, animationsequence);
 					}
-					else if ((xpp.getName().toLowerCase().equals("destructible")) || (xpp.getName().toLowerCase().equals("undestructible"))) {
-						if ( animatedObjects != null ) {
-							objects.put(animatedObjects.getImageName(), animatedObjects);
-							Log.i("ResourcesManager","Added AnimatedObject : " + animatedObjects.getImageName());
-							animatedObjects = null;
-						}
+					else if(xpp.getName().toLowerCase().equals("destructible")) {
+						objects.put(imageName, new Destructible(imageName, hit, level, fireWall, life, objectAnimation, "idle"));
+						Log.i("ResourcesManager","Added Destructible : " + imageName);
+					}
+					else if(xpp.getName().toLowerCase().equals("undestructible")) {
+						objects.put(imageName, new Undestructible(imageName, hit, level, fireWall, objectAnimation, "idle"));
+						Log.i("ResourcesManager","Added Undestructible : " + imageName);
 					}
 				}
 				eventType = xpp.next();
@@ -317,25 +324,27 @@ public class ResourcesManager {
 	}
 	
 	public static void bombsInitialisation() {
-
+		
 		XmlResourceParser xpp = context.getResources().getXml(R.xml.bombs);
 
 		Log.i("ResourcesManager","---------------- Loading bombs ---------------");
-		Bomb bomb = null;
+		Hashtable<String, AnimationSequence> bombAnimation = null;
+		String name = null;
 
 		try {
 			int eventType = xpp.getEventType();
 			String animationname="";
 			AnimationSequence animationsequence = new AnimationSequence();;
-
+			
 			while (eventType != XmlPullParser.END_DOCUMENT){
 
 				if(eventType == XmlPullParser.START_TAG) {
-
+					
 					if(xpp.getName().toLowerCase().equals("bomb")) {
-						bomb = new Bomb(xpp.getAttributeValue(null, "name"), (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "level", 0), (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true), (xpp.getAttributeIntValue(null, "power", 0)), (xpp.getAttributeIntValue(null, "time", 0)));
-					}
-					else if(xpp.getName().toLowerCase().equals("animation")) {			
+						bombAnimation = new Hashtable<String, AnimationSequence>();
+						name = xpp.getAttributeValue(null, "name");
+					}					
+					else if(xpp.getName().toLowerCase().equals("animation")) {	
 						animationname=xpp.getAttributeValue(null, "name");	            	 
 						animationsequence = new AnimationSequence();
 						animationsequence.name=animationname;
@@ -351,19 +360,20 @@ public class ResourcesManager {
 						frameinfo.nextFrameDelay = xpp.getAttributeIntValue(null,"delayNextFrame", 0);
 						animationsequence.sequence.add(frameinfo);
 					}
-				}
-				else if(eventType == XmlPullParser.END_TAG) {
-					
+				}else if(eventType == XmlPullParser.END_TAG) {
 					if(xpp.getName().toLowerCase().equals("animation")) {
-						bomb.getAnimations().put(animationname, animationsequence);
+						bombAnimation.put(animationname, animationsequence);
 					}
-					else if ((xpp.getName().toLowerCase().equals("bomb"))) {
-						if ( bomb != null ) {
-							bombs.put(bomb.getImageName(), bomb);
-							Log.i("ResourcesManager","Added bombs : " + bomb.getImageName());
-							bomb = null;
+					else if (xpp.getName().toLowerCase().equals("bomb")) {
+						if ( bombAnimation != null ) {
+							bombsAnimation.put(name, bombAnimation);
+							Log.i("ResourcesManager","Added Bomb : " + name);
+							bombAnimation = null;
+							name = null;
 						}
 					}
+				} else if(eventType == XmlPullParser.TEXT) {
+					System.out.println("Text "+xpp.getText());
 				}
 				eventType = xpp.next();
 			}

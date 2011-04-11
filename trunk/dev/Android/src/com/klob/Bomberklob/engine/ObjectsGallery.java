@@ -52,20 +52,12 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 	public ObjectsGallery(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		Log.i("ObjectsGallery", "Constructor");
-		this.thread = new ObjectsGalleryThread(getHolder(), this);
-		this.paint.setColor(Color.RED);
-		setRectangles(point);
-		getHolder().addCallback(this);
+		this.initialisation();
 	}
 
 	public ObjectsGallery(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		Log.i("ObjectsGallery", "Constructor");
-		this.thread = new ObjectsGalleryThread(getHolder(), this);
-		this.paint.setColor(Color.RED);
-		setRectangles(point);
-		getHolder().addCallback(this);
+		this.initialisation();
 	}
 
 	/* Getters ------------------------------------------------------------- */
@@ -98,53 +90,27 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 	public void setLevel(int level) {
 		this.level = level;
-		Log.i("ObjectsGallery", "Level : " + this.level);
 	}
 
 	public void setVertical(boolean bool) {
 		this.vertical = bool;
-		
-		if ( vertical ) {
-			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize+verticalPadding, objectsSize*itemsDisplayed));
-		}
-		else {
-			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize*itemsDisplayed, objectsSize+verticalPadding));
-		}
-		
-		Log.i("ObjectsGallery", "Vertical : " + this.vertical);
+		this.resize();
 	}
 
 	public void setItemsDisplayed(int items) {
 		if ( items >= 0 ) {
 			this.itemsDisplayed = items;
 		}
-		
-		if ( vertical ) {
-			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize+verticalPadding, objectsSize*itemsDisplayed));
-		}
-		else {
-			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize*itemsDisplayed, objectsSize+verticalPadding));
-		}
-		
-		Log.i("ObjectsGallery", "Items Displayed : " + this.itemsDisplayed);
+		this.resize();
 	}
 
 	public void setVerticalPadding(int padding) {
 		this.verticalPadding = (int) (padding*ResourcesManager.getDpiPx());
-
-		if ( vertical ) {
-			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize+verticalPadding, objectsSize*itemsDisplayed));
-		}
-		else {
-			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize*itemsDisplayed, objectsSize+verticalPadding));
-		}
-		
-		Log.i("ObjectsGallery", "Vertical Padding : " + this.verticalPadding);
+		this.resize();
 	}
 
 	public void setObjectsSize(int objectsSize) {
 		this.objectsSize = (int) (objectsSize*ResourcesManager.getDpiPx());
-		Log.i("ObjectsGallery", "Objects Size : " + this.objectsSize);
 	}
 
 
@@ -153,10 +119,26 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		rects[1] = new Rect(point.x*objectsSize, point.y*objectsSize, point.x*objectsSize+objectsSize/15, point.y*objectsSize+objectsSize+verticalPadding); // GAUCHE
 		rects[2] = new Rect(point.x*objectsSize+objectsSize-objectsSize/15, point.y*objectsSize, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize+verticalPadding); // DROITE
 		rects[3] = new Rect(point.x*objectsSize, point.y*objectsSize+objectsSize-objectsSize/15+verticalPadding, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize+verticalPadding); //BAS
-		Log.i("ObjectsGallery", "Rectangles Update");
 	}
 
 	/* Méthodes publiques -------------------------------------------------- */
+	
+	private void initialisation() {
+		this.thread = new ObjectsGalleryThread(getHolder(), this);
+		this.getHolder().addCallback(this);
+		this.paint.setColor(Color.RED);
+		this.setRectangles(point);
+		resize();
+	}
+	
+	private void resize() {
+		if ( vertical ) {
+			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize+verticalPadding, objectsSize*itemsDisplayed));
+		}
+		else {
+			this.setLayoutParams(new FrameLayout.LayoutParams(objectsSize*itemsDisplayed, objectsSize+verticalPadding));
+		}
+	}
 
 	public void loadObjects(HashMap<String, Objects> objects) {
 
