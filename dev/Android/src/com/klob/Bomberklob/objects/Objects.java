@@ -26,6 +26,7 @@ public abstract class Objects implements Serializable {
 		this.hit = hit;
 		this.level = level;
 		this.fireWall = fireWall;
+		this.position = null;
 	}
 	
 	public Objects(Objects objects) {
@@ -33,6 +34,7 @@ public abstract class Objects implements Serializable {
 		this.hit = objects.hit;
 		this.level = objects.level;
 		this.fireWall = objects.fireWall;
+		this.position = objects.position;
 	}
 	
 	/* Getters ------------------------------------------------------------- */
@@ -72,6 +74,8 @@ public abstract class Objects implements Serializable {
 
 	public abstract void update();
 	
+	public abstract Objects copy();
+	
 	public abstract void destroy();
 	
 	public abstract boolean hasAnimationFinished();
@@ -79,5 +83,9 @@ public abstract class Objects implements Serializable {
 	public abstract void onDraw(Canvas canvas, int size);
 	
 	public abstract boolean isDestructible();
+	
+	public String toString() {
+		return imageName;
+	}
 
 }

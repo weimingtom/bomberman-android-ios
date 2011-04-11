@@ -25,7 +25,6 @@ import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SinglePlayerGame extends Activity implements View.OnClickListener{
 
@@ -35,7 +34,7 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 	private TextView mapName;
 
 	private Spinner typePartieSP, nbEnnemisSP, difficulteSP;
-	
+
 	private Vector<Map> maps;
 
 	@Override
@@ -46,44 +45,36 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.singleplayergame);
-		
+
 		this.maps = Model.getSystem().getDatabase().getMaps();
-		
-		if ( this.maps.size() > 0 ) {
-			
-			this.setResult(2000);
 
-			this.cancel = (Button)findViewById(R.id.SinglePlayerGameButtonCancel);
-			this.cancel.setOnClickListener(this);
+		this.cancel = (Button)findViewById(R.id.SinglePlayerGameButtonCancel);
+		this.cancel.setOnClickListener(this);
 
-			this.create = (Button)findViewById(R.id.SinglePlayerGameButtonGo);
-			this.create.setOnClickListener(this);
+		this.create = (Button)findViewById(R.id.SinglePlayerGameButtonGo);
+		this.create.setOnClickListener(this);
 
-			this.typePartieSP = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerType);
-			this.nbEnnemisSP  = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesNumber);
-			this.difficulteSP = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesDifficulty);
+		this.typePartieSP = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerType);
+		this.nbEnnemisSP  = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesNumber);
+		this.difficulteSP = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesDifficulty);
 
-			this.mapName = (TextView) findViewById(R.id.SinglePlayerGameMapName);
-			this.mapName.setText(maps.get(0).getName());
-			
-			String[] mapBitmap = new String[this.maps.size()];
-			for (int i = 0; i < mapBitmap.length ; i++) {
-				mapBitmap[i] = this.getDir("maps", i).getAbsolutePath()+"/"+this.maps.get(i).getName()+".png";
+		this.mapName = (TextView) findViewById(R.id.SinglePlayerGameMapName);
+		this.mapName.setText(maps.get(0).getName());
+
+		String[] mapBitmap = new String[this.maps.size()];
+		for (int i = 0; i < mapBitmap.length ; i++) {
+			mapBitmap[i] = this.getDir("maps", i).getAbsolutePath()+"/"+this.maps.get(i).getName()+".png";
+		}
+
+		this.gallery = (Gallery) findViewById(R.id.galleryz);
+		this.gallery.setAdapter(new ImageAdapter(getApplicationContext(), mapBitmap));
+		this.gallery.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+				mapName.setText(maps.get(position).getName());
 			}
-			
-			this.gallery = (Gallery) findViewById(R.id.galleryz);
-			this.gallery.setAdapter(new ImageAdapter(getApplicationContext(), mapBitmap));
-			this.gallery.setOnItemClickListener(new OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-					mapName.setText(maps.get(position).getName());
-				}
-			});
-		}
-		else {
-			this.setResult(2001);
-			this.finish();			
-		}
+		});
+
 	}
 
 	@Override
@@ -161,9 +152,9 @@ public class SinglePlayerGame extends Activity implements View.OnClickListener{
 			String difficulte = difficulteSP.getSelectedItem().toString();
 
 
-			Toast.makeText(SinglePlayerGame.this, "Lancement de la partie Solo sur "+
-					this.gallery.getSelectedItem().toString()+" en mode "+typeP+" avec "+ennemis+
-					" ennemis, ca va être "+difficulte+" !", Toast.LENGTH_SHORT).show();
+			intent = new Intent(SinglePlayerGame.this, SinglePlayerLayout.class);
+			startActivity(intent);
+			this.finish();
 		}
 		else if(view == cancel){
 			intent = new Intent(SinglePlayerGame.this, Home.class);

@@ -49,6 +49,13 @@
 
 	<string name="SinglePlayerGameErrorLoadingMap">No maps found !</string>
 	
+	<!-- SinglePlayerLayout -->
+	
+	<string name="SinglePlayerMenuResume">Resume</string>
+	<string name="SinglePlayerMenuOptions">Options</string>
+	<string name="SinglePlayerMenuQuit">Leave</string>
+	<string name="SinglePlayerMenuRestart">Restart</string>
+	
 	<!-- Multiplayer -->
 	
 	<string name="MultiplayerButtonNewAccount">New Account</string>

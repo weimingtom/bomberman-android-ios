@@ -3,6 +3,8 @@ package com.klob.Bomberklob;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Hashtable;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,6 +31,9 @@ import com.klob.Bomberklob.engine.EditorController;
 import com.klob.Bomberklob.engine.ObjectsGallery;
 import com.klob.Bomberklob.engine.Point;
 import com.klob.Bomberklob.model.Model;
+import com.klob.Bomberklob.objects.AnimationSequence;
+import com.klob.Bomberklob.objects.HumanPlayer;
+import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 public class MapEditorLayout extends Activity implements View.OnClickListener {
@@ -68,28 +73,33 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 		this.editorControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
 		
 		this.editorController = (EditorController) findViewById(R.id.MapEditorFrameLayout);
-		this.editorController.getEditorView().setLevel(true);
 		this.editorController.setOnTouchListener(new OnTouchListener() {
 			
 			@Override
 			public boolean onTouch(View arg0, MotionEvent arg1) {
-				String object = objectsGallery.getSelectedItem();
+				Objects object = ResourcesManager.getObjects().get(objectsGallery.getSelectedItem());
 				
 				if ( object == null ) {
-					object = objectsGallery2.getSelectedItem();
+					Hashtable<String, AnimationSequence> animations = ResourcesManager.getPlayersAnimations().get(objectsGallery2.getSelectedItem());
+					if ( animations != null ) {
+						object = new HumanPlayer(objectsGallery2.getSelectedItem(), animations, 1, 1, 1, 1, 1, 1);
+					}
 				}
-				editorController.addObjects(object, (int) arg1.getX(), (int) arg1.getY());
+				
+				if ( object != null ) {
+					System.out.println("Object : " + object.toString());
+					editorController.addObjects(object.copy(), (int) arg1.getX(), (int) arg1.getY());
+				}
 				return false;
 			}
 		});
 		this.bundle = getIntent().getExtras();
         if(bundle.getString("map")!= null) {
-        	this.editorController.getMapEditor().loadMap(getApplicationContext(), bundle.getString("map"));
+        	this.editorController.getMapEditor().loadMap(bundle.getString("map"));
         	this.editorController.update();
         }
 		
 		this.objectsGallery = (ObjectsGallery) findViewById(R.id.MapEditorObjectsGallery);
-		this.objectsGallery.setLevel(1);
 		this.objectsGallery.loadObjects(ResourcesManager.getObjects());
 		this.objectsGallery.setOnTouchListener(new OnTouchListener() {
 			
@@ -102,10 +112,14 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 		});
 		
 		this.objectsGallery2 = (ObjectsGallery) findViewById(R.id.MapEditorPlayersGallery);
-		this.objectsGallery2.setLevel(1);
 		this.objectsGallery2.setItemsDisplayed(4);
 		this.objectsGallery2.setVertical(false);
-		this.objectsGallery2.loadObjects(ResourcesManager.getPlayers());
+		
+		this.objectsGallery2.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), 1, 1, 1, 1, 1, 1));
+		this.objectsGallery2.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), 1, 1, 1, 1, 1, 1));
+		this.objectsGallery2.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), 1, 1, 1, 1, 1, 1));
+		this.objectsGallery2.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), 1, 1, 1, 1, 1, 1));
+		
 		this.objectsGallery2.setObjectsSize(30);
 		this.objectsGallery2.setVerticalPadding(15);
 		this.objectsGallery2.setOnTouchListener(new OnTouchListener() {
@@ -200,7 +214,7 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 
 		    Bitmap bm = Bitmap.createBitmap(this.editorController.getWidth(), this.editorController.getHeight(), Bitmap.Config.ARGB_8888);
 		    
-		    if ( this.editorController.getMapEditor().getMap().saveMap(getApplicationContext()) ) {
+		    if ( this.editorController.getMapEditor().getMap().saveMap() ) {
 			    Canvas pictureCanvas = new Canvas(bm);
 			    this.editorController.getMapEditor().getMap().groundsOnDraw(pictureCanvas, ResourcesManager.getSize());
 			    this.editorController.getMapEditor().onDraw(pictureCanvas, true);
@@ -229,7 +243,7 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 		    }
 		}
 		else if ( resultCode == 2002) {
-			this.editorController.getMapEditor().loadMap(getApplicationContext(), bundle.getString("map"));
+			this.editorController.getMapEditor().loadMap(bundle.getString("map"));
 		}
 		else if ( resultCode == 2003) {
 			Intent intent = new Intent(MapEditorLayout.this, Home.class);

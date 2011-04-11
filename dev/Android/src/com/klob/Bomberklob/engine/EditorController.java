@@ -1,5 +1,6 @@
 package com.klob.Bomberklob.engine;
 
+import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 import android.content.Context;
@@ -16,6 +17,8 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 	private int objectsSize;
 
 	private MapEditor mapEditor;
+	
+	/* Constructeurs  ------------------------------------------------------ */
 
 	public EditorController(Context context, AttributeSet attrs) {		
 		super(context, attrs);
@@ -50,11 +53,11 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 
 	/* Méthodes publiques -------------------------------------------------- */
 	
-	public void addObjects(String o, int x, int y) {
-		Point point = new Point((int) x/objectsSize, (int) y/objectsSize);
+	public void addObjects(Objects object, int x, int y) {
+		Point point = new Point(x/objectsSize, y/objectsSize);
 
-		if ( o != null && point.x > 0 && point.x < this.mapEditor.getMap().getBlocks().length-1 && point.y > 0 && point.y < this.mapEditor.getMap().getBlocks()[0].length-1) {
-			this.mapEditor.addObject(ResourcesManager.getObject(o), point);			
+		if ( object != null && point.x > 0 && point.x < this.mapEditor.getMap().getBlocks().length-1 && point.y > 0 && point.y < this.mapEditor.getMap().getBlocks()[0].length-1) {
+			this.mapEditor.addObject(object, point);			
 		}
 		this.editorView.update();
 	}

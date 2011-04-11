@@ -15,7 +15,7 @@ public abstract class Animated extends Objects {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	protected Hashtable<String, AnimationSequence > animations = new Hashtable<String, AnimationSequence>();
+	protected Hashtable<String, AnimationSequence> animations = new Hashtable<String, AnimationSequence>();
 	protected String currentAnimation="idle";
 	protected int currentFrame=0;
 	protected int waitDelay=0;
@@ -61,6 +61,10 @@ public abstract class Animated extends Objects {
 	public void setCurrentAnimation(String s) {
 		this.currentAnimation = s;
 		this.currentFrame = 0;
+	}
+	
+	public void setAnimations(Hashtable<String, AnimationSequence> animations) {
+		this.animations = animations;
 	}
 
 	
