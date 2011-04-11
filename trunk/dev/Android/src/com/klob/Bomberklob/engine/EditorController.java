@@ -76,7 +76,6 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 		this.editorView.start();
 		this.objectsSize = ResourcesManager.getSize();
 		this.setLayoutParams(new FrameLayout.LayoutParams(this.mapEditor.getMap().getBlocks().length*this.objectsSize, this.mapEditor.getMap().getBlocks()[0].length*this.objectsSize));
-		this.editorView.update();
 		Log.i("EditorController", "Thread started");
 	}
 

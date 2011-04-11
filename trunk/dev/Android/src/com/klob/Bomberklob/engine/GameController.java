@@ -1,5 +1,7 @@
 package com.klob.Bomberklob.engine;
 
+import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
@@ -9,7 +11,9 @@ import android.view.SurfaceView;
 
 public abstract class GameController extends SurfaceView implements SurfaceHolder.Callback {
 	
-	private GameView gameView;
+	protected GameView gameView;
+	
+	protected int objectsSize;
 	
 	/* Constructeurs  ------------------------------------------------------ */
 
@@ -51,6 +55,7 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 		}
 		this.gameView.setRun(true);
 		this.gameView.start();
+		this.objectsSize = ResourcesManager.getSize();
 		Log.i("GameController", "Thread started");
 	}
 
