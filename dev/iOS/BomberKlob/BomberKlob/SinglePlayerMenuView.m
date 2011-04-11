@@ -11,7 +11,7 @@
 #import "Application.h"
 #import "DBMap.h"
 
-
+// TODO: Finir l'implementation
 @implementation SinglePlayerMenuView
 
 @synthesize map1;
@@ -84,6 +84,8 @@
     
     map7.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", ((DBMap *) [application.maps objectAtIndex:nextMap]).name]];
     nextMap = [self nextMap:nextMap];
+    
+    mapName.text = [NSString stringWithFormat:@"%@", ((DBMap *) [application.maps objectAtIndex:selectedMap]).name];
 }
 
 
