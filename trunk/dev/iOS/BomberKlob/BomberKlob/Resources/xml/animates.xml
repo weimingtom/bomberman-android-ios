@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animates>
+	<destructible name="wall" hit="1" level="1" fireWall="1" life="1">
+		<animation name="idle" canLoop="true" >
+			<png x="0" y="0" delayNextFrame="0" />
+		</animation>
+		<animation name="destroy" canLoop="false" >
+			<png x="1" y="0" delayNextFrame="2" />
+			<png x="2" y="0" delayNextFrame="2" />
+			<png x="3" y="0" delayNextFrame="2" />
+			<png x="4" y="0" delayNextFrame="2" />
+			<png x="5" y="0" delayNextFrame="2" />
+		</animation>
+	</destructible>
+</animates>
