@@ -11,4 +11,12 @@
 
 @implementation DeathMatch
 
+- (id) initWithGame:(Game *)gameValue{
+	self = [super initWithGame:gameValue];
+	if (self){
+		time = 60;
+	}
+	return self;
+}
+
 @end

@@ -8,12 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-
+@class RessourceManager;
 @interface Map : NSObject {
+	RessourceManager * ressource;
 	NSString *name;
-	NSUInteger ** grounds;
-	NSUInteger ** blocks;
+	NSMutableArray * grounds;
+	NSMutableArray * blocks;
+	NSMutableDictionary * bitmapsInanimates;
 }
+
+@property (nonatomic, retain) NSMutableArray * grounds;
+@property (nonatomic, retain) NSMutableArray * blocks;
+
+- (id) init;
+- (id) initWithPath;
+
 - (void) save;
 - (void) load:(NSString*)path;
 - (void) addGround:(NSInteger) ground;

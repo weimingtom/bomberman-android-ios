@@ -8,10 +8,23 @@
 
 #import "Object.h"
 #import "Position.h"
+#import "RessourceManager.h"
 
 
 @implementation Object
 
+@synthesize imageName,hit, level, fireWall, position;
+
+- (id) init{
+	self = [super init];
+	
+	if (self) {
+		ressource = [RessourceManager sharedRessource];
+		position = [[Position alloc] init];
+	}
+	
+	return self;
+}
 
 - (void) resize{
 	
@@ -30,5 +43,11 @@
 	
 	
 }
+
+- (NSString *)description{
+	NSString * desc = [NSString stringWithFormat:@"ImageName : %@ hit : %d, Level : %d, FireWall : %d, X :  %d  Y : %d",imageName, hit, level, fireWall, position.x, position.y];
+	return desc;
+
+	}
 
 @end

@@ -12,6 +12,8 @@
 @interface Engine : NSObject {
     Game * game;
 }
+@property (nonatomic, retain) Game * game;
+
 - (void) moveTop;
 - (void) moveDown;
 - (void) moveLeft;

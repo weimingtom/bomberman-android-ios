@@ -32,9 +32,7 @@
         [self loadSystem];
         [self loadPseudos];
         [self loadMaps];
-        
         [self loadAudio];        
-        
         [self playSoundMenu];
     }
     

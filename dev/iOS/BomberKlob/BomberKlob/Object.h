@@ -9,14 +9,24 @@
 #import <Foundation/Foundation.h>
 
 @class Position;
+@class RessourceManager;
 
 @interface Object : NSObject {
+	RessourceManager * ressource;
     NSString * imageName;
 	BOOL hit;
-	NSInteger level;
+	NSUInteger level;
 	BOOL fireWall;
 	Position * position;
 }
+
+@property (nonatomic, retain) NSString * imageName;
+@property (nonatomic) BOOL hit;
+@property (nonatomic) NSUInteger level;
+@property (nonatomic) BOOL fireWall;
+@property (nonatomic, retain) Position * position;
+
+- (id) init;
 
 - (void) resize;
 

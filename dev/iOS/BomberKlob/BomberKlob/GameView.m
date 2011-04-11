@@ -7,19 +7,22 @@
 //
 
 #import "GameView.h"
+#import "RessourceManager.h"
+#import "Map.h"
+#import "Player.h"
 
 
 @implementation GameView
+@synthesize  bitmapsInanimates, ressource, map, players;
 
-- (id) init{
+- (id) initWithMap:(Map *) value{
 	NSLog(@"INIT GameView");
+	map = value;
 	
-	self = [super initWithFrame:CGRectMake(0, 0, 280, 20)];
+	self = [self initWithFrame:CGRectMake(0, 0,320 , 480)];
 	
 	if (self){
-		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 280, 20)];
-		label.text = @"hello, world"; label.textAlignment = UITextAlignmentCenter;
-		[self addSubview:label];
+		
 	}
 	
 	return self;
@@ -31,12 +34,39 @@
 	self = [super initWithFrame:frame];
 	
 	if (self){
-		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 280, 20)]; 
-		label.text = @"hello, world"; label.textAlignment = UITextAlignmentCenter;
-		[self addSubview:label];
+		ressource = [RessourceManager sharedRessource];
+		bitmapsInanimates = ressource.bitmapsInanimates;
+		[self setNeedsDisplay];
+
+		NSLog(@"ressource actived");
 	}
 	
 	return self;
+}
+
+- (void)drawRect:(CGRect)rect{
+	
+	CGContextRef context = UIGraphicsGetCurrentContext();	
+	
+	
+	CGImageRef image ;
+	
+	[map draw:context];
+	
+	for (Player * player in players) {
+		[player draw:context];
+	}
+	
+}
+
+
+-(CGImageRef) getPng:(NSString *) path{
+	
+	UIImage* image = [UIImage imageNamed:path];
+	CGImageRef imageRef = image.CGImage;
+	
+    return imageRef;
+	
 }
 
 @end

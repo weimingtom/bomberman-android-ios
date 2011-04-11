@@ -15,5 +15,6 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *play;
+- (IBAction)playAction:(id)sender;
 
 @end

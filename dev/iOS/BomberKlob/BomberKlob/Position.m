@@ -11,24 +11,26 @@
 
 @implementation Position
 
-- (void) setX:(NSInteger) value{
-	x = value;
+@synthesize x, y;
+
+- (id) init{
+	self = [super init];
+	
+	return self;
 }
 
-
-- (void) setY:(NSInteger) value{
-	y = value;
+- (id) initWithXAndY:(NSUInteger)xValue:(NSUInteger) yValue{
+	self = [super init];
+	if (self){
+		x = xValue;
+		y = yValue;
+	}
+	return self;
 }
 
-
-- (NSInteger) x{
-	return x;
-}
-
-
-- (NSInteger) y{
-	return y;
-}
-
+- (NSString *)description{
+	NSString * desc = [NSString stringWithFormat:@"X : %d \nY : %d",x,y];
+	return desc;
+	}
 
 @end

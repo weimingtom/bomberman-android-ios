@@ -16,7 +16,10 @@
 	Map * map;
 
 }
+@property (nonatomic, retain) NSMutableArray * players;
+@property (nonatomic, retain) Map * map;
 
+- (id) init;
 - (void) initGame;
 - (void) startGame;
 - (void) endGame;

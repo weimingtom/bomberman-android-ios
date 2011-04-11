@@ -10,10 +10,28 @@
 
 
 @interface RessourceManager : NSObject {
-    
+	NSUInteger tileHeight;
+	NSUInteger tileWidth;
+	NSMutableDictionary * bitmapsInanimates;
+	NSMutableDictionary * bitmapsPlayer;
 }
 
-- (void) loadBitmap:(NSInteger) tileSize;
+@property (nonatomic, copy) NSMutableDictionary * bitmapsInanimates;
+@property (nonatomic, copy) NSMutableDictionary * bitmapsPlayer;
+@property (nonatomic) NSUInteger tileHeight;
+@property (nonatomic) NSUInteger tileWidth;
+
++(RessourceManager*)sharedRessource;
+
++ (id) alloc;
+
+- (id) init;
+
+- (void) loadProperty;
+
+- (void) loadBitmapInanimates;
+
+- (void) loadBitmapPlayer;
 
 - (void) update;
 

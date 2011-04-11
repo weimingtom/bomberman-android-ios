@@ -12,6 +12,7 @@
 @interface Single : Game {
 
 }
+
 - (void) pauseGame;
 
 @end
