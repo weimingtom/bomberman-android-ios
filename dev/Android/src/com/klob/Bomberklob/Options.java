@@ -80,11 +80,8 @@ public class Options extends Activity implements View.OnClickListener{
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				System.out.println("CACA");
 				Model.getSystem().setLanguage(languages.getSelectedItem().toString());
-				System.out.println("CACA");
 				Model.getSystem().getDatabase().setLanguage(languages.getSelectedItem().toString());
-				System.out.println("CACA");
 			}
 
 			@Override

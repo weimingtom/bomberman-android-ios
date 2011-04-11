@@ -3,7 +3,6 @@ package com.klob.Bomberklob;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Hashtable;
 
 import android.app.Activity;
@@ -87,7 +86,6 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 				}
 				
 				if ( object != null ) {
-					System.out.println("Object : " + object.toString());
 					editorController.addObjects(object.copy(), (int) arg1.getX(), (int) arg1.getY());
 				}
 				return false;
@@ -99,17 +97,49 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
         	this.editorController.update();
         }
 		
+		this.menu = (Button) findViewById(R.id.MapEditorButtonMenu);
+		this.menu.setOnClickListener(this);
+		
+		this.checkBox = (CheckBox) findViewById(R.id.MapEditorCheckBox);
+		this.checkBox.setChecked(true);
+		this.checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
+			@Override 
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
+				if (isChecked) {
+					objectsGallery.setLevel(1);
+					editorController.getEditorView().setLevel(true);
+				}
+				else {
+					objectsGallery.setLevel(0);
+					editorController.getEditorView().setLevel(false);
+				}
+				
+				objectsGallery.setSelectedItem(null);
+				objectsGallery.setRectangles(new Point(-10,-10));
+				objectsGallery.update();
+				
+				objectsGallery2.setSelectedItem(null);
+				objectsGallery2.setRectangles(new Point(-10,-10));
+				objectsGallery2.update();
+				
+				editorController.update();
+			}
+		});
+		
 		this.objectsGallery = (ObjectsGallery) findViewById(R.id.MapEditorObjectsGallery);
 		this.objectsGallery.loadObjects(ResourcesManager.getObjects());
+		this.objectsGallery.setItemsDisplayed(3);
 		this.objectsGallery.setOnTouchListener(new OnTouchListener() {
 			
 			@Override
 			public boolean onTouch(View arg0, MotionEvent arg1) {	
 				objectsGallery2.setSelectedItem(null);
 				objectsGallery2.setRectangles(new Point(-1,-1));
+				objectsGallery2.update();
 				return false;
 			}
 		});
+		this.objectsGallery.update();
 		
 		this.objectsGallery2 = (ObjectsGallery) findViewById(R.id.MapEditorPlayersGallery);
 		this.objectsGallery2.setItemsDisplayed(4);
@@ -128,33 +158,11 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 			public boolean onTouch(View arg0, MotionEvent arg1) {
 				objectsGallery.setSelectedItem(null);
 				objectsGallery.setRectangles(new Point(-1,-1));
+				objectsGallery.update();
 				return false;
 			}
 		});
-		
-		this.menu = (Button) findViewById(R.id.MapEditorButtonMenu);
-		this.menu.setOnClickListener(this);
-		
-		this.checkBox = (CheckBox) findViewById(R.id.MapEditorCheckBox);
-		this.checkBox.setChecked(true);
-		this.checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-			@Override 
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
-				if (isChecked) {
-					objectsGallery.setLevel(1);
-					editorController.getEditorView().setLevel(true);
-				}
-				else {
-					objectsGallery.setLevel(0);
-					editorController.getEditorView().setLevel(false);
-				}
-				objectsGallery2.setSelectedItem(null);
-				objectsGallery.setSelectedItem(null);
-				objectsGallery.setRectangles(new Point(-10,-10));
-				objectsGallery2.setRectangles(new Point(-10,-10));
-				editorController.update();
-			}
-		});
+		this.objectsGallery2.update();
 	}
 
 	@Override
@@ -176,16 +184,18 @@ public class MapEditorLayout extends Activity implements View.OnClickListener {
 		
 		checkBox.setChecked(true);
 		
+		editorController.getEditorView().setLevel(true);
+		editorController.update();
+		
 		objectsGallery.setLevel(1);
 		objectsGallery.setSelectedItem(null);
 		objectsGallery.setRectangles(new Point(-1,-1));
+		objectsGallery.update();
 		
 		objectsGallery2.setLevel(1);
 		objectsGallery2.setSelectedItem(null);
 		objectsGallery2.setRectangles(new Point(-1,-1));
-		
-		editorController.getEditorView().setLevel(true);
-		editorController.update();
+		objectsGallery2.update();
 	}
 
 	@Override

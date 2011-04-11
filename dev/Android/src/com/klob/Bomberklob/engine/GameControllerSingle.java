@@ -1,17 +1,15 @@
 package com.klob.Bomberklob.engine;
 
-import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
+import android.widget.FrameLayout;
 
 public class GameControllerSingle extends GameController {
 	
 	private Engine engine;
-	
-	private int objectsSize;
+
 	
 	/* Constructeurs  ------------------------------------------------------ */
 	
@@ -45,8 +43,7 @@ public class GameControllerSingle extends GameController {
 	@Override
 	public void surfaceCreated(SurfaceHolder arg0) {
 		super.surfaceCreated(arg0);
-		this.objectsSize = ResourcesManager.getSize();
-		//this.setLayoutParams(new FrameLayout.LayoutParams(this.engine.getSingle().getMap().getBlocks().length*this.objectsSize, this.engine.getSingle().getMap().getBlocks()[0].length*this.objectsSize));
+		this.setLayoutParams(new FrameLayout.LayoutParams(this.engine.getSingle().getMap().getBlocks().length*this.objectsSize, this.engine.getSingle().getMap().getBlocks()[0].length*this.objectsSize));
 	}
 
 	@Override

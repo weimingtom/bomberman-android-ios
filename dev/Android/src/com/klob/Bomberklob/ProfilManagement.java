@@ -59,6 +59,17 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
             }
         });
         
+		this.objectsGallery = (ObjectsGallery) findViewById(R.id.ProfilManagementPlayersGallery);
+		this.objectsGallery.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), 1, 1, 1, 1, 1, 1));
+		this.objectsGallery.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), 1, 1, 1, 1, 1, 1));
+		this.objectsGallery.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), 1, 1, 1, 1, 1, 1));
+		this.objectsGallery.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), 1, 1, 1, 1, 1, 1));
+		this.objectsGallery.setLevel(1);
+		this.objectsGallery.setItemsDisplayed(4);
+		this.objectsGallery.setVerticalPadding(22);
+		this.objectsGallery.setVertical(false);
+		this.objectsGallery.update();
+        
         this.userName = (TextView) findViewById(R.id.ProfilManagementUserName);
         this.userName.setText(Model.getUser().getUserName());
         
@@ -77,16 +88,6 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
 			}
 		});
 		
-		this.objectsGallery = (ObjectsGallery) findViewById(R.id.ProfilManagementPlayersGallery);
-		this.objectsGallery.setLevel(1);
-		this.objectsGallery.setItemsDisplayed(4);
-		this.objectsGallery.setVerticalPadding(22);
-		this.objectsGallery.setVertical(false);
-		
-		this.objectsGallery.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), 1, 1, 1, 1, 1, 1));
-		this.objectsGallery.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), 1, 1, 1, 1, 1, 1));
-		this.objectsGallery.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), 1, 1, 1, 1, 1, 1));
-		this.objectsGallery.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), 1, 1, 1, 1, 1, 1));
 		
 		this.password = (CheckBox) findViewById(R.id.ProfilManagementCheckBoxPassword);
 		this.password.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
