@@ -2,7 +2,6 @@ package com.klob.Bomberklob.engine;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.widget.FrameLayout;
 
@@ -13,12 +12,9 @@ public class GameControllerSingle extends GameController {
 	
 	/* Constructeurs  ------------------------------------------------------ */
 	
-	public GameControllerSingle(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
-
-	public GameControllerSingle(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
+	public GameControllerSingle(Context context, String mapName, int enemies, String gametype, boolean random, int difficulty) {
+		super(context);
+		this.engine = new Engine(mapName, enemies, gametype, random, difficulty);
 	}
 	
 	/* Getteurs ------------------------------------------------------------ */
@@ -27,17 +23,11 @@ public class GameControllerSingle extends GameController {
 		return engine;
 	}
 	
-	/* Setteurs ------------------------------------------------------------ */
-
-	public void setEngine(Engine engine) {
-		this.engine = engine;
-	}
-	
 	/* Méthodes publiques -------------------------------------------------- */
 	
 	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
-		
+		super.surfaceChanged(arg0, arg1, arg2, arg3);
 	}
 
 	@Override
@@ -48,7 +38,7 @@ public class GameControllerSingle extends GameController {
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0) {
-
+		super.surfaceDestroyed(arg0);
 	}
 
 	@Override

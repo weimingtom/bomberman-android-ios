@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <bombs>
 	<bomb name="normal">
-	    <animation name="idle" canLoop="false" > 
+	    <animation name="idle" canLoop="true" > 
 			<png x="0" y="0" delayNextFrame="0" />
 		</animation>
 	    <animation name="animate" canLoop="true" > 

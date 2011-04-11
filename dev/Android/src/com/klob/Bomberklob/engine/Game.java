@@ -15,6 +15,7 @@ public abstract class Game {
 	/* Constructeurs  ------------------------------------------------------ */
 	
 	public Game(String mapName, int enemies, String gametype, boolean random) {
+		this.map = new Map();
 		if ( this.map.loadMap(mapName) ) {
 			this.players = new Player[enemies+1];
 			this.random = random;
@@ -46,30 +47,17 @@ public abstract class Game {
 		return random;
 	}
 	
-	/* Setters ------------------------------------------------------------- */
-	
-	public void setMap(Map map) {
-		this.map = map;
-	}
-
-	public void setPlayers(Player[] players) {
-		this.players = players;
-	}
-
-	public void setGameType(GameType gameType) {
-		this.gameType = gameType;
-	}
-
-	public void setRandom(boolean random) {
-		this.random = random;
-	}
-	
 	/* Méthodes publiques -------------------------------------------------- */
 	
 	public abstract void initGame();
 
 	public void onDraw(Canvas canvas, int size) {
 		this.map.onDraw(canvas, size);
+		for (int i = 0 ; i < this.players.length ; i++ ) {
+			if ( this.players[i].getPosition() != null ) {
+				this.players[i].onDraw(canvas, size);
+			}
+		}
 	}
 
 }

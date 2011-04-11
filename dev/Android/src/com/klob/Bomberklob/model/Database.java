@@ -197,7 +197,7 @@ public class Database extends SQLiteOpenHelper{
 				"password CHAR DEFAULT ''," + 
 				"connectionAuto UNSIGNED TINYINT DEFAULT 0," + 
 				"rememberPassword UNSIGNED TINYINT DEFAULT 0," +
-				"color CHAR DEFAULT 'WHITE'," +
+				"color CHAR DEFAULT 'white'," +
 				"menuPosition CHAR DEFAULT 'Right'," +
 				"gameWon UNSIGNED INT DEFAULT 0," +
 				"gameLost UNSIGNED INT DEFAULT 0" +

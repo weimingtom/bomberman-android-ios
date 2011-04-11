@@ -6,6 +6,12 @@ public class Engine {
 	
 	private Single single;
 	
+	/* Constructeur -------------------------------------------------------- */
+	
+	public Engine(String mapName, int enemies, String gametype, boolean random, int difficulty) {
+		this.single = new Single(mapName, enemies, gametype, random, difficulty);
+	}
+	
 	/* Getters ------------------------------------------------------------- */
 
 	public Single getSingle() {

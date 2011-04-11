@@ -1,29 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:orientation="vertical"
-	android:layout_height="fill_parent" android:drawingCacheQuality="high" android:animationCache="true" android:background="@color/White" android:id="@+id/MapEditorLinearLayoutGlobal">
+	android:layout_height="fill_parent" android:drawingCacheQuality="high"
+	android:animationCache="true" android:background="@color/White"
+	android:id="@+id/MapEditorLinearLayoutGlobal">
 
 	<RelativeLayout android:layout_width="fill_parent"
-		android:id="@+id/MapEditorRelativeLayoutMenu" android:background="@color/White" android:gravity="center_vertical" android:layout_height="wrap_content">
+		android:id="@+id/MapEditorRelativeLayoutMenu" android:background="@color/White"
+		android:gravity="center_vertical" android:layout_height="wrap_content">
 		<Button android:layout_width="wrap_content" android:text="@string/ButtonMenu"
 			android:layout_height="wrap_content" android:id="@+id/MapEditorButtonMenu"></Button>
-		<FrameLayout android:id="@+id/MapEditorFrameLayoutPlayersGallery" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_centerInParent="true">
-				<com.klob.Bomberklob.engine.ObjectsGallery android:layout_width="wrap_content" android:id="@+id/MapEditorPlayersGallery" android:layout_height="wrap_content"></com.klob.Bomberklob.engine.ObjectsGallery>
-			</FrameLayout>
-			
+		<FrameLayout android:id="@+id/MapEditorFrameLayoutPlayersGallery"
+			android:layout_height="wrap_content" android:layout_width="wrap_content"
+			android:layout_centerInParent="true">
+		</FrameLayout>
 		<CheckBox android:layout_width="wrap_content" android:text="@string/MapEditorCheckBox"
 			android:layout_alignParentRight="true" android:layout_height="wrap_content"
 			android:id="@+id/MapEditorCheckBox"></CheckBox>
 	</RelativeLayout>
-	<LinearLayout android:layout_width="fill_parent" android:id="@+id/linearLayout1" android:layout_height="fill_parent" android:orientation="horizontal">
-		<LinearLayout android:layout_height="fill_parent" android:layout_width="wrap_content" android:gravity="center" android:id="@+id/MapEditorLinearLayoutEditorController" android:background="@color/Grey">
-			<FrameLayout android:layout_width="wrap_content" android:id="@+id/MapEditorFrameLayoutEditorController" android:layout_height="wrap_content">
-				<com.klob.Bomberklob.engine.EditorController android:layout_width="wrap_content" android:id="@+id/MapEditorFrameLayout" android:layout_height="wrap_content" android:drawingCacheQuality="high"></com.klob.Bomberklob.engine.EditorController>
+	<LinearLayout android:layout_width="fill_parent"
+		android:id="@+id/linearLayout1" android:layout_height="fill_parent"
+		android:orientation="horizontal">
+		<LinearLayout android:layout_height="fill_parent"
+			android:layout_width="wrap_content" android:gravity="center"
+			android:id="@+id/MapEditorLinearLayoutEditorController"
+			android:background="@color/Grey">
+			<FrameLayout android:layout_width="wrap_content"
+				android:id="@+id/MapEditorFrameLayoutEditorController"
+				android:layout_height="wrap_content">
 			</FrameLayout>
 		</LinearLayout>
-		<RelativeLayout android:background="@color/White" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/MapEditorRelativeLayoutObjectsGallery">
-			<FrameLayout android:id="@+id/MapEditorFrameLayoutObjectsGallery" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_centerInParent="true">
-				<com.klob.Bomberklob.engine.ObjectsGallery android:layout_width="wrap_content" android:id="@+id/MapEditorObjectsGallery" android:layout_height="wrap_content"></com.klob.Bomberklob.engine.ObjectsGallery>
+		<RelativeLayout android:background="@color/White"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:id="@+id/MapEditorRelativeLayoutObjectsGallery">
+			<FrameLayout android:id="@+id/MapEditorFrameLayoutObjectsGallery"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+				android:layout_centerInParent="true">
 			</FrameLayout>
 		</RelativeLayout>
 	</LinearLayout>
