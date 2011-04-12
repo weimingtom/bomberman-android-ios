@@ -14,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.Gallery;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,16 +61,15 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
             }
         });
         
-		this.objectsGallery = (ObjectsGallery) findViewById(R.id.ProfilManagementPlayersGallery);
+		this.objectsGallery = new ObjectsGallery(getApplicationContext(), 4, null, 45, 22, 1, false);
 		this.objectsGallery.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), "idle",1, 1, 1, 1, 1, 1));
 		this.objectsGallery.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), "idle",1, 1, 1, 1, 1, 1));
 		this.objectsGallery.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), "idle",1, 1, 1, 1, 1, 1));
 		this.objectsGallery.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), "idle",1, 1, 1, 1, 1, 1));
-		this.objectsGallery.setLevel(1);
-		this.objectsGallery.setItemsDisplayed(4);
-		this.objectsGallery.setVerticalPadding(22);
-		this.objectsGallery.setVertical(false);
 		this.objectsGallery.update();
+		
+        FrameLayout f = (FrameLayout) findViewById(R.id.ProfilManagementFrameLayoutObjectsGallery);
+        f.addView(this.objectsGallery);
         
         this.userName = (TextView) findViewById(R.id.ProfilManagementUserName);
         this.userName.setText(Model.getUser().getUserName());

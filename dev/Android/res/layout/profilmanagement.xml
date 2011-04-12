@@ -27,7 +27,7 @@
 				</TableLayout>
 				<RelativeLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/relativeLayout1"></RelativeLayout>
 				<FrameLayout android:id="@+id/ProfilManagementFrameLayoutObjectsGallery" android:layout_gravity="center_horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content">
-					<com.klob.Bomberklob.engine.ObjectsGallery android:layout_width="wrap_content" android:layout_gravity="center_horizontal" android:id="@+id/ProfilManagementPlayersGallery" android:layout_height="wrap_content"></com.klob.Bomberklob.engine.ObjectsGallery>
+					
 				</FrameLayout>
 
 			</LinearLayout>
