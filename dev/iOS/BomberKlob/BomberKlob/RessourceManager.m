@@ -57,8 +57,9 @@ static RessourceManager * ressource = nil;
 
 
 - (void) loadProperty{
-	tileHeight = [[UIScreen mainScreen] bounds].size.height * 0.065;
-	tileWidth = [[UIScreen mainScreen] bounds].size.width * 0.065;
+	//tileHeight = [[UIScreen mainScreen] bounds].size.height / 21;
+	tileWidth = [[UIScreen mainScreen] bounds].size.width / 15;
+	 tileHeight = tileWidth;
 }
 
 - (void) loadBitmapInanimates{

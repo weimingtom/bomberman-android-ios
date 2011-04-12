@@ -30,6 +30,7 @@
 	if (png == nil){
 		png = [[NSMutableDictionary alloc] init];
 		animations = [[NSMutableDictionary alloc] init];
+		currentColorPlayer = [[NSMutableString alloc] init];
 	}
 	else {
 		[png removeAllObjects];
@@ -60,8 +61,8 @@
 			CGImageRef image = imageRef.CGImage;
 			CGImageRef imageTemp;
 			
-			NSUInteger heightOfOneCase = CGImageGetHeight(image);
-			NSUInteger widthOfOneCase = CGImageGetWidth(image)/6;
+			NSUInteger heightOfOneCase = imageRef.size.height/3;
+			NSUInteger widthOfOneCase = imageRef.size.width/6;
 			
 			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y, heightOfOneCase, widthOfOneCase))];
 
@@ -84,23 +85,31 @@
 	}
 	else if (type == @"player"){
 		
-		UIImage* imageRef = [UIImage imageNamed:@"player.png"];
+		UIImage* imageRef = [UIImage imageNamed:@"players.png"];
 		CGImageRef image = imageRef.CGImage;
-		CGImageRef imageTemp;
 		
-		NSUInteger heightOfOneCase = CGImageGetHeight(image);
-		NSUInteger widthOfOneCase = CGImageGetWidth(image)/24; // 24 = nombre d'image differentes dans la grande image
+		NSUInteger heightOfOneCase = imageRef.size.height/4;
+		NSUInteger widthOfOneCase = imageRef.size.width/24; // 24 = nombre d'image differentes dans la grande image
 
-		
-		if([elementName isEqualToString:@"animation"]){
+		if([elementName isEqualToString:@"player"]){
+			currentColorPlayer = [attributeDict valueForKey:@"name"];
+			NSLog(@"Color Player : %@", [attributeDict valueForKey:@"name"]);
+			
+			[animations setObject:[[NSMutableDictionary alloc] init] forKey:currentColorPlayer];
+			
+		}
+		else if([elementName isEqualToString:@"animation"]){
 			currentAnimation = [attributeDict valueForKey:@"name"];
 			currentCanLoop = [attributeDict valueForKey:@"canLoop"];
 			
-			[animations setObject:[[AnimationSequence alloc] initWithNameAndLoop:currentAnimation:currentCanLoop ] forKey:currentAnimation];
+			[[animations objectForKey:currentColorPlayer ] setObject:[[AnimationSequence alloc] initWithNameAndLoop:currentAnimation:currentCanLoop ] forKey:currentAnimation];
+
+			
+			//[animations setObject:[[AnimationSequence alloc] initWithNameAndLoop:currentAnimation:currentCanLoop ] forKey:currentAnimation];
 
 		}
 		
-		if ([elementName isEqualToString:@"png"]) {
+		else if ([elementName isEqualToString:@"png"]) {
 			
 			Player * currentObject = [[Player alloc] init];
 
@@ -112,8 +121,8 @@
 			currentObject.level = 0;
 			currentObject.fireWall = 0;
 			
-			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y,widthOfOneCase , heightOfOneCase))];
-			[[animations objectForKey:currentAnimation] addImageSequence:imageRef];
+			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
+			[[[animations objectForKey:currentColorPlayer ] objectForKey:currentAnimation] addImageSequence:imageRef];
 			
 			
 			

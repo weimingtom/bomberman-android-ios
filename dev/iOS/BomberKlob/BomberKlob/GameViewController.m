@@ -15,8 +15,6 @@
 @synthesize gameView;
 
 - (id) init {
-	
-	NSLog(@"INIT GameController");
 	self = [super init];
 	
 	if (self) {

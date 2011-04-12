@@ -15,16 +15,11 @@
 @implementation GameView
 @synthesize  bitmapsInanimates, ressource, map, players;
 
-- (id) initWithMap:(Map *) value{
-	NSLog(@"INIT GameView");
-	
-	
-	self = [self initWithFrame:CGRectMake(0, 0,320 , 480)];
+- (id) initWithMap:(Map *) value{	
+	self = [self initWithFrame:CGRectMake(0, 0,[[UIScreen mainScreen] bounds].size.height , [[UIScreen mainScreen] bounds].size.width)];
 	
 	if (self){
 		map = value;
-		/*CGAffineTransform transform = CGAffineTransformMakeRotation(3.14159);
-		self.transform = transform;*/
 	
 	}
 	
@@ -32,17 +27,13 @@
 }
 
 
-- (id) initWithFrame:(CGRect)frame{
-	NSLog(@"INITWITHFRAME GameView");
-	
+- (id) initWithFrame:(CGRect)frame{	
 	self = [super initWithFrame:frame];
 	
 	if (self){
 		ressource = [RessourceManager sharedRessource];
 		bitmapsInanimates = ressource.bitmapsInanimates;
-//		[self setNeedsDisplay];
-
-		NSLog(@"ressource actived");
+		[self setNeedsDisplay];
 	}
 	
 	return self;
@@ -50,8 +41,7 @@
 
 - (void)drawRect:(CGRect)rect{
 	
-	CGContextRef context = UIGraphicsGetCurrentContext();	
-	
+	CGContextRef context = UIGraphicsGetCurrentContext();		
 	
 	CGImageRef image ;
 	

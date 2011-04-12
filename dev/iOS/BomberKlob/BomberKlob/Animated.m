@@ -18,7 +18,7 @@
 - (id) init{
 	self = [super init];
 	if (self){
-		currentAnimation = @"midle";
+		currentAnimation = @"idle";
 	}
 	return self;
 }
