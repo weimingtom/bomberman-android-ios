@@ -72,4 +72,9 @@ public class GameControllerSingle extends GameController {
 		super.onTouchEvent(event);
 		return true;
 	}
+
+	@Override
+	public void update() {
+		this.engine.update();
+	}
 }
