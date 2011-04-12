@@ -24,6 +24,7 @@
 
 }
 - (id) init;
+- (id) initWithColor:(NSString *)colorValue position:(Position *) positionValue;
 - (void) live;
 - (void) relive;
 - (void) die;

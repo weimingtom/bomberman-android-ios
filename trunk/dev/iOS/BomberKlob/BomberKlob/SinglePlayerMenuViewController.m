@@ -57,12 +57,13 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
 - (IBAction)playAction:(id)sender {
 	GameViewControllerSingle * gameViewController = [[GameViewControllerSingle alloc] init];
 	[self.navigationController pushViewController:gameViewController animated:YES];
+	self.navigationController.navigationBarHidden = YES; 
 	[gameViewController release];
 }
 @end

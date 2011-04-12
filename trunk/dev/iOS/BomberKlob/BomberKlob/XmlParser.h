@@ -19,6 +19,7 @@
 	NSMutableDictionary * animations;
 	NSMutableString * currentAnimation;
 	NSMutableString * currentCanLoop;
+	NSMutableString * currentColorPlayer;
 
 }
 
