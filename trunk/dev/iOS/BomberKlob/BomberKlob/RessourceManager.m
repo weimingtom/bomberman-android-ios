@@ -16,7 +16,7 @@
 
 @implementation RessourceManager
 
-@synthesize bitmapsInanimates, bitmapsPlayer,tileWidth, tileHeight;
+@synthesize bitmapsInanimates, bitmapsPlayer, tileWidth, tileHeight;
 
 static RessourceManager * ressource = nil;
 
@@ -67,10 +67,13 @@ static RessourceManager * ressource = nil;
 
 	
 	NSError * erreur = nil;
-	NSString * contenu = [NSString stringWithContentsOfFile:@"/Users/choucomog/bomberman-android-ios/dev/iOS/BomberKlob/BomberKlob/Resources/xml/inanimates.xml"
-												   encoding:NSUTF8StringEncoding
-													  error:&erreur]; // On donne l'adresse de "erreur"
-	
+//	NSString * contenu = [NSString stringWithContentsOfFile:@"/Users/choucomog/Desktop/bomberman-android-ios/dev/iOS/BomberKlob/BomberKlob/Resources/xml/inanimates.xml"
+//												   encoding:NSUTF8StringEncoding
+//													  error:&erreur]; // On donne l'adresse de "erreur"
+    // TODO: A modifier...
+    NSString *xmlFilePath =[[NSBundle mainBundle] pathForResource:@"inanimates" ofType:@"xml"];
+    NSString * contenu = [NSString stringWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:&erreur]; // On donne l'adresse de "erreur"
+	NSLog(@"Contenu: %@\n", contenu);
 	
 	NSXMLParser * parseur = [[NSXMLParser alloc] initWithData:[contenu dataUsingEncoding:NSUTF8StringEncoding]];
 	XmlParser * parserDelegate = [[XmlParser alloc] initXMLParser:@"inanimates"];	
