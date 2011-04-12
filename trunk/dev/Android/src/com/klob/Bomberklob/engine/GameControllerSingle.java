@@ -19,22 +19,6 @@ public class GameControllerSingle extends GameController {
 	public GameControllerSingle(Context context, String mapName, int enemies, String gametype, boolean random, int difficulty) {
 		super(context);
 		this.engine = new Engine(mapName, enemies, gametype, random, difficulty);
-		this.onTouchEventBoolean = true;
-		this.onTouchEventThread = new Thread() {
-			@Override
-			public void run() {
-				while (onTouchEventBoolean) {
-					engine.move(animation);
-					try {
-						sleep(50);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				Log.i("GameControllerSingle","Thread done");
-			};
-		};
-		this.onTouchEventThread.start();
 	}
 	
 	/* Getteurs ------------------------------------------------------------ */
@@ -54,6 +38,22 @@ public class GameControllerSingle extends GameController {
 	public void surfaceCreated(SurfaceHolder arg0) {
 		super.surfaceCreated(arg0);
 		this.setLayoutParams(new FrameLayout.LayoutParams(this.engine.getSingle().getMap().getBlocks().length*this.objectsSize, this.engine.getSingle().getMap().getBlocks()[0].length*this.objectsSize));
+		this.onTouchEventBoolean = true;
+		this.onTouchEventThread = new Thread() {
+			@Override
+			public void run() {
+				while (onTouchEventBoolean) {
+					engine.move(animation);
+					try {
+						sleep(50);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				Log.i("GameControllerSingle","Thread done");
+			};
+		};
+		this.onTouchEventThread.start();
 	}
 
 	@Override
