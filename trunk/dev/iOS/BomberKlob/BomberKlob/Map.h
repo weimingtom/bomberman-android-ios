@@ -18,6 +18,7 @@
     
 	RessourceManager *ressource;
 	NSString *name;
+    
 	NSMutableArray *grounds;
 	NSMutableArray *blocks;
 	NSMutableDictionary *bitmapsInanimates;
