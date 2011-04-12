@@ -101,6 +101,18 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 			else if ( (int) event.getY() > this.y && ((int) event.getX() <  (this.x+yy)) && ((int) event.getX() > (this.x-yy)) ) {
 				animation = PlayerAnimations.DOWN;
 			}
+			else if ( (int) event.getY() > this.y && ((int) event.getX() >  (this.x+yy)) && ((int) event.getY() > (this.y+xx)) ) {
+				animation = PlayerAnimations.DOWN_RIGHT;
+			}
+			else if ( (int) event.getY() > this.y && ((int) event.getX() <  (this.x-yy)) && ((int) event.getY() > (this.y+xx)) ) {
+				animation = PlayerAnimations.DOWN_LEFT;
+			}
+			else if ( (int) event.getY() < this.y && ((int) event.getX() >  (this.x+yy)) && ((int) event.getY() < (this.y-xx)) ) {
+				animation = PlayerAnimations.UP_RIGHT;
+			}
+			else if ( (int) event.getY() < this.y && ((int) event.getX() <  (this.x-yy)) && ((int) event.getY() < (this.y-xx)) ) {
+				animation = PlayerAnimations.UP_LEFT;
+			}
 			break;
 		case MotionEvent.ACTION_UP:
 			if ( animation == PlayerAnimations.RIGHT) {
@@ -114,6 +126,18 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 			}
 			else if ( animation == PlayerAnimations.DOWN) {
 				animation = PlayerAnimations.STOP_DOWN;
+			}
+			else if ( animation == PlayerAnimations.DOWN_RIGHT) {
+				animation = PlayerAnimations.STOP_DOWN_RIGHT;
+			}
+			else if ( animation == PlayerAnimations.DOWN_LEFT) {
+				animation = PlayerAnimations.STOP_DOWN_LEFT;
+			}
+			else if ( animation == PlayerAnimations.UP_RIGHT) {
+				animation = PlayerAnimations.STOP_UP_RIGHT;
+			}
+			else if ( animation == PlayerAnimations.UP_LEFT) {
+				animation = PlayerAnimations.STOP_UP_LEFT;
 			}
 			break;
 		}
