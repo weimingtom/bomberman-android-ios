@@ -76,7 +76,6 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 	public abstract void onDraw(Canvas canvas, int size);
 
 
-	//FIXME Diagonales
 	@Override
 	public boolean onTouchEvent(MotionEvent event){
 		
