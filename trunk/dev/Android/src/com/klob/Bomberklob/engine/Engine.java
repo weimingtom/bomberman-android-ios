@@ -53,13 +53,18 @@ public class Engine {
 		else if ( playerAnimation == PlayerAnimations.UP_RIGHT) {
 
 		}
-		else {
+		
+		if ( !this.single.getPlayers()[0].getCurrentAnimation().equals(playerAnimation.getLabel()) ) {
 			this.single.getPlayers()[0].setCurrentAnimation(playerAnimation.getLabel());
 		}
 	}
 	
 	public void onDraw(Canvas canvas, int size) {
 		this.single.onDraw(canvas,size);
+	}
+	
+	public void update() {
+		this.single.update();
 	}
 
 }

@@ -283,7 +283,8 @@ public class ResourcesManager {
 						playerAnimation = new Hashtable<String, AnimationSequence>();
 						name = xpp.getAttributeValue(null, "name");
 					}					
-					else if(xpp.getName().toLowerCase().equals("animation")) {	
+					else if(xpp.getName().toLowerCase().equals("animation")) {
+						System.out.println("<animation name="+xpp.getAttributeValue(null, "name")+" canLoop="+xpp.getAttributeBooleanValue(null,"canLoop", false)+">");
 						animationname=xpp.getAttributeValue(null, "name");	            	 
 						animationsequence = new AnimationSequence();
 						animationsequence.name=animationname;
@@ -291,6 +292,7 @@ public class ResourcesManager {
 						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);	
 					}
 					else if(xpp.getName().toLowerCase().equals("png")) {
+						System.out.println("<png x="+xpp.getAttributeIntValue(null, "x", 0)+" y="+xpp.getAttributeIntValue(null, "y", 0)+" delayNextFrame="+xpp.getAttributeIntValue(null,"delayNextFrame", 0)+" />");
 						FrameInfo frameinfo = new FrameInfo();
 						Point point = new Point();
 						point.x = xpp.getAttributeIntValue(null, "x", 0);

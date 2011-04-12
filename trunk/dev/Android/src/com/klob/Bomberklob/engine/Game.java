@@ -59,5 +59,12 @@ public abstract class Game {
 			}
 		}
 	}
+	
+	public void update() {
+
+
+				this.players[0].update();
+
+	}
 
 }

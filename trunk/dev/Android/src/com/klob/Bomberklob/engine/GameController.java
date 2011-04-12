@@ -74,6 +74,8 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 	}
 
 	public abstract void onDraw(Canvas canvas, int size);
+	
+	public abstract void update();
 
 
 	@Override

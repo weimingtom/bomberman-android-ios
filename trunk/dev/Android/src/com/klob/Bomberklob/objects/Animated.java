@@ -65,6 +65,8 @@ public abstract class Animated extends Objects {
 	public void setCurrentAnimation(String s) {
 		this.currentAnimation = s;
 		this.currentFrame = 0;
+		this.waitDelay = animations.get(currentAnimation).sequence.get(currentFrame).nextFrameDelay;
+		
 	}
 	
 	public void setAnimations(Hashtable<String, AnimationSequence> animations) {
@@ -78,14 +80,14 @@ public abstract class Animated extends Objects {
 	public void update() {
 		
 		if(waitDelay==0) {
-
-			if(animations.get(currentAnimation).canLoop && currentFrame == animations.get(currentAnimation).sequence.size()-1) {
-				currentFrame=0;
-			}
-			else if ( currentFrame < animations.get(currentAnimation).sequence.size()-1 ){
-				currentFrame++;
-				FrameInfo frameinfo= animations.get(currentAnimation).sequence.get(currentFrame);
-				waitDelay = frameinfo.nextFrameDelay;
+			if(animations.get(currentAnimation).canLoop) {
+				if ( currentFrame == animations.get(currentAnimation).sequence.size()-1) {
+					this.currentFrame=0;
+				}
+				else {
+					this.currentFrame++;
+				}
+				this.waitDelay = animations.get(currentAnimation).sequence.get(currentFrame).nextFrameDelay;
 			}
 		}
 		else {
@@ -111,6 +113,5 @@ public abstract class Animated extends Objects {
 	public void onDraw(Canvas canvas,int size) {
 		int tileSize = ResourcesManager.getTileSize();
         canvas.drawBitmap(ResourcesManager.getBitmaps().get("animate"), new Rect(this.getPoint().x*tileSize, this.getPoint().y*tileSize, (this.getPoint().x*tileSize)+tileSize, (this.getPoint().y*tileSize)+tileSize), new Rect(this.position.x, this.position.y, (this.position.x)+size, (this.position.y)+size), null);
-        update();
 	}
 }

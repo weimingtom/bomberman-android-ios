@@ -57,13 +57,14 @@ public class GameView extends Thread {
                 c = this.surfaceHolder.lockCanvas(null);
                 synchronized (this.surfaceHolder) {
                		this.gameController.onDraw(c, ResourcesManager.getSize());
+                	this.gameController.update();
                 }
             } finally {
                 if (c != null) {
                     this.surfaceHolder.unlockCanvasAndPost(c);
                 }
             }
-       		try {
+            try {
 				sleep(50);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

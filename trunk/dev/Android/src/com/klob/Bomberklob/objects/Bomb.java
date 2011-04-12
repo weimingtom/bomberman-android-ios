@@ -49,7 +49,6 @@ public class Bomb extends Animated {
 	public void onDraw(Canvas canvas,int size) {
 		int tileSize = ResourcesManager.getTileSize();
         canvas.drawBitmap(ResourcesManager.getBitmaps().get("bombs"), new Rect(this.getPoint().x*tileSize, this.getPoint().y*tileSize, (this.getPoint().x*tileSize)+tileSize, (this.getPoint().y*tileSize)+tileSize), new Rect(this.position.x, this.position.y, (this.position.x)+size, (this.position.y)+size), null);
-        update();
 	}
 
 	@Override
