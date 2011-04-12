@@ -16,6 +16,7 @@
 	self = [super init];
 	
 	if (self){
+		//[[UIDevice currentDevice] setOrientation:UIInterfaceOrientationLandscapeRight];
 		engine = [[Engine alloc] initWithGame:[[Game alloc] init]];
 		self.gameView = [[GameView alloc] initWithMap: engine.game.map];	
 		gameView.players = engine.game.players;
@@ -25,9 +26,60 @@
 	return self;
 }
 
+-(void) startTimer
+{
+	movementThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerThread) object:nil]autorelease]; //Create a new thread
+	[movementThread start]; //start the thread
+}
+
+//the thread starts by sending this message
+-(void) startTimerThread {
+
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
+	[[NSTimer scheduledTimerWithTimeInterval: 1/3 target: self selector: @selector(timerTick:) userInfo:nil repeats: YES] retain];	
+	[runLoop run];
+	[pool release];
+}
+
+- (void)timerTick:(NSTimer *)timer {
+	NSLog(@"Direction : %@",currentDirection);
+	
+	if (run) {
+		if (currentDirection == @"right") {
+			engine.moveRight;
+		}
+		if (currentDirection == @"left") {
+			engine.moveLeft;
+		}
+		if (currentDirection == @"down") {
+			engine.moveDown;
+		}
+		if (currentDirection == @"top") {
+			engine.moveTop;
+		}
+		if (currentDirection == @"rightTop") {
+			engine.moveRightTop;
+		}
+		if (currentDirection == @"leftTop") {
+			engine.moveLeftTop;
+		}
+		if (currentDirection == @"rightDown") {
+			engine.moveRightDown;
+		}
+		if (currentDirection == @"rightTop") {
+			engine.moveRightTop;
+		}
+		[self.gameView setNeedsDisplay];
+	}
+	else {
+		NSLog(@"Arret du thread");
+		//[NSThread exit];
+	}
+}
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-	NSLog(@"TOUCHES : %@", [touches anyObject] );
 	UITouch * touch = [touches anyObject];
 	CGPoint pt = [touch locationInView:self.view];
 	lastPosition.x = currentPosition.x;
@@ -35,35 +87,105 @@
 	currentPosition.x = pt.x;
 	currentPosition.y = pt.y;
 	[self.gameView setNeedsDisplay];
+	[self startTimer];
 	
 }
+
+
+
+
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+	NSUInteger marge = 10;
+	run = YES;
 	CGPoint pt = [[touches anyObject] locationInView:self.view];
 
 	lastPosition.x = currentPosition.x;
 	lastPosition.y = currentPosition.y;
 	currentPosition.x = pt.x;
 	currentPosition.y = pt.y;
-	if (lastPosition.x > currentPosition.x) {
-		engine.moveLeft;
+	
+	if (lastPosition.x > currentPosition.x && lastPosition.y > currentPosition.y-marge && lastPosition.y < currentPosition.y+marge) {
+		currentDirection = @"left";
 	}
-	if (lastPosition.x < currentPosition.x) {
-		engine.moveRight;
+	else if (lastPosition.x < currentPosition.x  && lastPosition.y > currentPosition.y-marge && lastPosition.y < currentPosition.y+marge) {
+		currentDirection = @"right";
 	}
-	if (lastPosition.y > currentPosition.y) {
-		engine.moveTop;
+	else if (lastPosition.y > currentPosition.y && lastPosition.x < currentPosition.x+marge  && lastPosition.x > currentPosition.x-marge) {
+		currentDirection = @"top";
 	}
-	if (lastPosition.y < currentPosition.y) {
-		engine.moveDown;
+	else if (lastPosition.y < currentPosition.y && lastPosition.x < currentPosition.x+marge  && lastPosition.x > currentPosition.x-marge) {
+		currentDirection = @"down";
 	}
+	
+	else if (lastPosition.x > currentPosition.x && lastPosition.y > currentPosition.y) {
+		currentDirection = @"leftTop";
+	}
+	else if (lastPosition.x > currentPosition.x && lastPosition.y < currentPosition.y) {
+		currentDirection = @"leftDown";
+	}
+	else if (lastPosition.x < currentPosition.x && lastPosition.y < currentPosition.y) {
+		currentDirection = @"rightDown";
+	}
+	else if (lastPosition.x < currentPosition.x && lastPosition.y > currentPosition.y) {
+		currentDirection = @"rightTop";
+	}
+	
+	/*if (lastPosition.x > currentPosition.x) {
+	 if (lastPosition.x > currentPosition.x && lastPosition.y > currentPosition.y) {
+	 engine.moveLeftTop;
+	 }
+	 else if (lastPosition.x > currentPosition.x && lastPosition.y < currentPosition.y) {
+	 engine.moveLeftDown;
+	 }
+	 else
+	 engine.moveLeft;
+	 }
+	 
+	 if (lastPosition.x < currentPosition.x) {
+	 if (lastPosition.x < currentPosition.x && lastPosition.y < currentPosition.y) {
+	 engine.moveRightDown;
+	 }
+	 else if (lastPosition.x < currentPosition.x && lastPosition.y > currentPosition.y) {
+	 engine.moveRightTop;
+	 }
+	 else
+	 engine.moveRight;
+	 }
+	 if (lastPosition.y > currentPosition.y) {
+	 if (lastPosition.x > currentPosition.x && lastPosition.y > currentPosition.y) {
+	 engine.moveLeftTop;
+	 }
+	 else if (lastPosition.x < currentPosition.x && lastPosition.y > currentPosition.y) {
+	 engine.moveRightTop;
+	 }
+	 else
+	 engine.moveTop;
+	 }
+	 
+	 if (lastPosition.y < currentPosition.y) {
+	 if (lastPosition.x > currentPosition.x && lastPosition.y < currentPosition.y) {
+	 engine.moveLeftDown;
+	 }
+	 else if (lastPosition.x < currentPosition.x && lastPosition.y < currentPosition.y) {
+	 engine.moveRightDown;
+	 }
+	 else
+	 engine.moveDown;
+	 }*/
+
+	
 	[self.gameView setNeedsDisplay];
 
 
 }
 - (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+	NSLog(@"cancel");
 
+	run = NO;
 }
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+	NSLog(@"ended");
+	run = NO;
 
 }
 

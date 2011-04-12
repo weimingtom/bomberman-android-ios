@@ -13,6 +13,10 @@
 
 @interface GameViewControllerSingle : GameViewController {
     Engine * engine;
+	NSTimer * refreshTimer;
+	NSThread* movementThread;
+	NSString * currentDirection;
+	BOOL run ;
 }
 
 - (id) init;

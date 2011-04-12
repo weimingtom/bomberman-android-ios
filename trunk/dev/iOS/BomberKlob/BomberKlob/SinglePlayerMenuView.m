@@ -109,9 +109,7 @@
 }
 
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    NSLog(@"Begin");
-    
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {    
     UITouch *touch = [touches anyObject];
     
     CGPoint touchPoint = [touch locationInView:self];
@@ -120,7 +118,6 @@
 
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {	
-    NSLog(@"Ended");
     UITouch *touch = [touches anyObject];	
     CGPoint touchPoint = [touch locationInView:self];
     UIImageView *middleMap = [maps objectAtIndex:3];

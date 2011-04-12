@@ -87,41 +87,48 @@
 
 
 - (void) draw:(CGContextRef)context{
-	CGImageRef image;
+	UIImage * image;
 	
 	for (int i=0; i < 15; i++) {
 		for (int j= 0; j < 15; j++){
 			
 			if ([[[grounds objectAtIndex:i] objectAtIndex:j] intValue] == 0){
 				image = [bitmapsInanimates valueForKey:@"wbloc"];
-				CGContextDrawImage(context, CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight ), image);
+				[image drawInRect:CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight )];
+				//CGContextDrawImage(context, CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight ), image);
 			}
 			
 			
 			if ([[[grounds objectAtIndex:i] objectAtIndex:j] intValue] == 1){
 				image = [bitmapsInanimates valueForKey:@"grass"];
-				CGContextDrawImage(context, CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight ), image);
+				[image drawInRect:CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight )];
+				//CGContextDrawImage(context, CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight ), image);
 			}
 			
 			
 			if ([[[grounds objectAtIndex:i] objectAtIndex:j] intValue] == 2){
 				image = [bitmapsInanimates valueForKey:@"ground"];
-				CGContextDrawImage(context, CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight ), image);
+				[image drawInRect:CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight )];
+				//CGContextDrawImage(context, CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight ), image);
 			}
 			
 			if ([[[grounds objectAtIndex:i] objectAtIndex:j] intValue] == 3){
 				image = [bitmapsInanimates valueForKey:@"snow"];
-				CGContextDrawImage(context, CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight ), image);
+				[image drawInRect:CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight )];
+				//CGContextDrawImage(context, CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight ), image);
 			}
 			
 			if ([[[grounds objectAtIndex:i] objectAtIndex:j] intValue] == 4){
 				image = [bitmapsInanimates valueForKey:@"bloc"];
-				CGContextDrawImage(context, CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight ), image);
+				[image drawInRect:CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight )];
+
+				//CGContextDrawImage(context, CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight ), image);
 			}
 			
 			if ([[[grounds objectAtIndex:i] objectAtIndex:j] intValue] == 5){
 				image = [bitmapsInanimates valueForKey:@"other"];
-				CGContextDrawImage(context, CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight ), image);
+				[image drawInRect:CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight )];
+				//CGContextDrawImage(context, CGRectMake(ressource.tileWidth*i, ressource.tileHeight*j, ressource.tileWidth , ressource.tileHeight ), image);
 			}
 			
 		}

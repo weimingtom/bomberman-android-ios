@@ -17,16 +17,20 @@
 
 - (id) initWithMap:(Map *) value{
 	NSLog(@"INIT GameView");
-	map = value;
+	
 	
 	self = [self initWithFrame:CGRectMake(0, 0,320 , 480)];
 	
 	if (self){
-		
+		map = value;
+		/*CGAffineTransform transform = CGAffineTransformMakeRotation(3.14159);
+		self.transform = transform;*/
+	
 	}
 	
 	return self;
 }
+
 
 - (id) initWithFrame:(CGRect)frame{
 	NSLog(@"INITWITHFRAME GameView");

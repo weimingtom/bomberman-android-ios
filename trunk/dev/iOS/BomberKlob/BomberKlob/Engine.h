@@ -19,4 +19,9 @@
 - (void) moveLeft;
 - (void) moveRight;
 
+- (void) moveLeftTop;
+- (void) moveLeftDown;
+- (void) moveRightDown;
+- (void) moveRightTop;
+
 @end

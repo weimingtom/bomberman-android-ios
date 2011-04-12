@@ -67,7 +67,7 @@ static RessourceManager * ressource = nil;
 
 	
 	NSError * erreur = nil;
-	NSString * contenu = [NSString stringWithContentsOfFile:@"/Users/choucomog/Desktop/bomberman-android-ios/dev/iOS/BomberKlob/BomberKlob/Resources/xml/inanimates.xml"
+	NSString * contenu = [NSString stringWithContentsOfFile:@"/Users/choucomog/bomberman-android-ios/dev/iOS/BomberKlob/BomberKlob/Resources/xml/inanimates.xml"
 												   encoding:NSUTF8StringEncoding
 													  error:&erreur]; // On donne l'adresse de "erreur"
 	
@@ -99,7 +99,7 @@ static RessourceManager * ressource = nil;
 	
 	
 	NSError * erreur = nil;
-	NSString * contenu = [NSString stringWithContentsOfFile:@"/Users/choucomog/Desktop/bomberman-android-ios/dev/iOS/BomberKlob/BomberKlob/Resources/xml/players.xml"
+	NSString * contenu = [NSString stringWithContentsOfFile:@"/Users/choucomog/bomberman-android-ios/dev/iOS/BomberKlob/BomberKlob/Resources/xml/players.xml"
 												   encoding:NSUTF8StringEncoding
 													  error:&erreur]; // On donne l'adresse de "erreur"
 	
