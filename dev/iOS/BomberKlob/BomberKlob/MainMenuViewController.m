@@ -15,6 +15,7 @@
 #import "GameViewControllerSingle.h"
 #import "OptionsMenuViewController.h"
 #import "SinglePlayerMenuViewController.h"
+#import "EditorGameViewController.h"
 
 
 @implementation MainMenuViewController
@@ -78,8 +79,7 @@
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
 
@@ -143,6 +143,10 @@
     
     Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
     [application playSoundButton];
+    
+    EditorGameViewController *editorGameViewController = [[EditorGameViewController alloc] initWithNibName:@"EditorGameViewController" bundle:nil];
+    [self.navigationController pushViewController:editorGameViewController animated:YES];
+    [editorGameViewController release];
 }
 
 

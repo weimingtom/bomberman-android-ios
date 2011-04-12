@@ -40,7 +40,7 @@
 	if (self){
 		ressource = [RessourceManager sharedRessource];
 		bitmapsInanimates = ressource.bitmapsInanimates;
-		[self setNeedsDisplay];
+//		[self setNeedsDisplay];
 
 		NSLog(@"ressource actived");
 	}

@@ -8,13 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+#define WIDTH 21
+#define HEIGHT 15
+
 @class RessourceManager;
+
+
 @interface Map : NSObject {
-	RessourceManager * ressource;
+    
+	RessourceManager *ressource;
 	NSString *name;
-	NSMutableArray * grounds;
-	NSMutableArray * blocks;
-	NSMutableDictionary * bitmapsInanimates;
+	NSMutableArray *grounds;
+	NSMutableArray *blocks;
+	NSMutableDictionary *bitmapsInanimates;
 }
 
 @property (nonatomic, retain) NSMutableArray * grounds;
