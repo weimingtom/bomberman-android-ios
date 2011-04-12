@@ -56,16 +56,16 @@
 						
 			// Le traitement est fini pour cet élément. 
 			
-			
 			UIImage* imageRef = [UIImage imageNamed:@"inanimate.png"];
 			CGImageRef image = imageRef.CGImage;
 			CGImageRef imageTemp;
 			
 			NSUInteger heightOfOneCase = CGImageGetHeight(image);
 			NSUInteger widthOfOneCase = CGImageGetWidth(image)/6;
+			
+			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y, heightOfOneCase, widthOfOneCase))];
 
-			imageTemp = CGImageCreateWithImageInRect(image, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y, heightOfOneCase, widthOfOneCase));
-			[png setObject:imageTemp forKey:currentObject.imageName];
+			[png setObject:imageRef forKey:currentObject.imageName];
 			[currentObject release];
 
 			
@@ -112,9 +112,8 @@
 			currentObject.level = 0;
 			currentObject.fireWall = 0;
 			
-			
-			imageTemp = CGImageCreateWithImageInRect(image, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y, widthOfOneCase,heightOfOneCase ));
-			[[animations objectForKey:currentAnimation] addImageSequence:imageTemp];
+			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y,widthOfOneCase , heightOfOneCase))];
+			[[animations objectForKey:currentAnimation] addImageSequence:imageRef];
 			
 			
 			

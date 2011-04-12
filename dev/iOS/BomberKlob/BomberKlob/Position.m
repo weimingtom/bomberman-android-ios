@@ -29,7 +29,7 @@
 }
 
 - (NSString *)description{
-	NSString * desc = [NSString stringWithFormat:@"X : %d \nY : %d",x,y];
+	NSString * desc = [NSString stringWithFormat:@"X : %d \n Y : %d",x,y];
 	return desc;
 	}
 

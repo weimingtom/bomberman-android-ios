@@ -21,6 +21,8 @@
 	return self;
 }
 
+
+
 - (void) moveTop{
 	((Player *)[game.players objectAtIndex:0]).moveTop;
 }
@@ -35,6 +37,23 @@
 
 - (void) moveRight{
     ((Player *)[game.players objectAtIndex:0]).moveRight;
+}
+
+- (void) moveLeftTop{
+	((Player *)[game.players objectAtIndex:0]).moveLeftTop;
+}
+
+- (void) moveLeftDown{
+	((Player *)[game.players objectAtIndex:0]).moveLeftDown;
+}
+
+- (void) moveRightDown{
+	((Player *)[game.players objectAtIndex:0]).moveRightDown;
+}
+
+- (void) moveRightTop{
+	((Player *)[game.players objectAtIndex:0]).moveRightTop;
+
 }
 
 @end

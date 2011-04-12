@@ -53,12 +53,11 @@
 	}
 	else if (currentFrame < 3) {
 		currentFrame++;
-		position.y++;
+		position.y--;
 	}
 	else {
 		currentFrame = 0;
-	//	currentFrame++;
-		position.y++;
+		position.y--;
 
 	}
 	
@@ -73,12 +72,11 @@
 	}
 	else if (currentFrame < 3) {
 		currentFrame++;
-		position.y--;
+		position.y++;
 	}
 	else {
 		currentFrame = 0;
-		//currentFrame++;
-		position.y--;
+		position.y++;
 
 	}
 }
@@ -96,7 +94,6 @@
 	}
 	else {
 		currentFrame = 0;
-		//currentFrame++;
 		position.x--;
 	}
 }
@@ -115,8 +112,75 @@
 	}
 	else {
 		currentFrame = 0;
-		//currentFrame++;
 		position.x++;
+	}
+}
+
+- (void) moveLeftTop{
+	if (currentAnimation != @"upLeft") {
+		currentAnimation = @"upLeft";
+		currentFrame = 0;
+	}
+	else if (currentFrame < 3) {
+		currentFrame++;
+		position.x--;
+		position.y--;
+	}
+	else {
+		currentFrame = 0;
+		position.x--;
+		position.y--;
+	}
+}
+
+- (void) moveLeftDown{
+	if (currentAnimation != @"downLeft") {
+		currentAnimation = @"downLeft";
+		currentFrame = 0;
+	}
+	else if (currentFrame < 3) {
+		currentFrame++;
+		position.x--;
+		position.y++;
+	}
+	else {
+		currentFrame = 0;
+		position.x--;
+		position.y++;
+	}
+}
+
+- (void) moveRightDown{
+	if (currentAnimation != @"downRight") {
+		currentAnimation = @"downRight";
+		currentFrame = 0;
+	}
+	else if (currentFrame < 3) {
+		currentFrame++;
+		position.x++;
+		position.y++;
+	}
+	else {
+		currentFrame = 0;
+		position.x++;
+		position.y++;
+	}
+}
+
+- (void) moveRightTop{
+	if (currentAnimation != @"upRight") {
+		currentAnimation = @"upRight";
+		currentFrame = 0;
+	}
+	else if (currentFrame < 3) {
+		currentFrame++;
+		position.x++;
+		position.y--;
+	}
+	else {
+		currentFrame = 0;
+		position.x++;
+		position.y--;
 	}
 }
 
@@ -132,16 +196,10 @@
 
 
 - (void) draw:(CGContextRef)context{
-
-	CGImageRef image = [((AnimationSequence *)[animations valueForKey:currentAnimation]).sequences objectAtIndex:currentFrame];
-	CGAffineTransform transform = CGAffineTransformIdentity;
-	transform = CGAffineTransformMakeTranslation(0.0, ressource.tileHeight);
-	transform = CGAffineTransformScale(transform, 1.0, -1.0);
-	CGContextConcatCTM(context, transform);
+	//NSLog(@"Position : %@", position);
 	
-	NSLog(@"Position du personnage : X : %d, Y : %d  Current Animation : %@ , currentFrame : %d, image : %@ ",position.x, position.y, currentAnimation, currentFrame, image);
-	
-	CGContextDrawImage(context, CGRectMake(position.x, position.y, ressource.tileWidth , ressource.tileHeight ), image);
+	UIImage * image = [((AnimationSequence *)[animations valueForKey:currentAnimation]).sequences objectAtIndex:currentFrame];
+	[image drawInRect:CGRectMake(position.x, position.y, ressource.tileWidth , ressource.tileHeight)];
 }
 
 
