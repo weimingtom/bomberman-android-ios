@@ -9,17 +9,17 @@
 #import <Foundation/Foundation.h>
 
 
-@interface Position : NSObject {
-	NSUInteger x;
-	NSUInteger y;
+@interface Position : NSObject <NSCoding> {
+	NSInteger x;
+	NSInteger y;
 }
 
-@property (nonatomic) NSUInteger x;
-@property (nonatomic) NSUInteger y;
+@property (nonatomic) NSInteger x;
+@property (nonatomic) NSInteger y;
 
 - (id) init;
 
-- (id) initWithXAndY:(NSUInteger)xValue:(NSUInteger) yValue;
+- (id) initWithXAndY:(NSInteger)xValue:(NSInteger) yValue;
 
 - (NSString *)description;
 

@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class EditorGameZoneViewController;
+
 
 @interface EditorGameViewController : UIViewController {
     
+    EditorGameZoneViewController *editorGameZoneViewController;
 }
 
 @end

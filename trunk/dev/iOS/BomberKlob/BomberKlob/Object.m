@@ -13,14 +13,27 @@
 
 @implementation Object
 
-@synthesize imageName,hit, level, fireWall, position;
+@synthesize imageName, hit, level, fireWall, position;
 
-- (id) init{
+- (id)init {
 	self = [super init];
 	
 	if (self) {
 		ressource = [RessourceManager sharedRessource];
-		position = [[Position alloc] init];
+        position = [[Position alloc] init];
+	}
+	
+	return self;
+}
+
+
+- (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition {
+	self = [super init];
+	
+	if (self) {
+        self.imageName = anImageName;
+        self.position = aPosition;
+		ressource = [RessourceManager sharedRessource];
 	}
 	
 	return self;
@@ -47,7 +60,34 @@
 - (NSString *)description{
 	NSString * desc = [NSString stringWithFormat:@"ImageName : %@ hit : %d, Level : %d, FireWall : %d, X :  %d  Y : %d",imageName, hit, level, fireWall, position.x, position.y];
 	return desc;
+}
 
-	}
+
+- (void)draw:(CGContextRef)context {
+    UIImage *image = [ressource.bitmapsInanimates valueForKey:imageName];
+    [image drawInRect:CGRectMake(ressource.tileWidth * position.x, ressource.tileHeight * position.y, ressource.tileWidth, ressource.tileHeight)];
+}
+
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    
+    if (self) {
+        ressource = [RessourceManager sharedRessource];
+        
+        self.imageName = [aDecoder decodeObjectForKey:@"imageName"];
+        self.hit = [aDecoder decodeBoolForKey:@"hit"];
+        self.position = [aDecoder decodeObjectForKey:@"position"];
+    }
+    
+    return self;
+}
+
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:imageName forKey:@"imageName"];
+    [aCoder encodeBool:hit forKey:@"hit"];
+    [aCoder encodeObject:position forKey:@"position"];
+}
 
 @end

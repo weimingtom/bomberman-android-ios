@@ -66,6 +66,7 @@
     [pseudo sizeToFit];
     
     newProfil.frame = CGRectMake((pseudo.frame.origin.x + pseudo.frame.size.width + 5), newProfil.frame.origin.y, newProfil.frame.size.width, newProfil.frame.size.height);
+//    [UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationPortrait;
 }
 
 
@@ -144,7 +145,7 @@
     Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
     [application playSoundButton];
     
-    EditorGameViewController *editorGameViewController = [[EditorGameViewController alloc] initWithNibName:@"EditorGameViewController" bundle:nil];
+    EditorGameViewController *editorGameViewController = [[EditorGameViewController alloc] init];
     [self.navigationController pushViewController:editorGameViewController animated:YES];
     [editorGameViewController release];
 }

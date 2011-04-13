@@ -48,9 +48,11 @@
 			// On ajoute l’objet métier à la liste de tous les objets 
 			// lus par le parseur 
 			// Lecture des attributs de l’élément
-			currentObject.imageName = [attributeDict valueForKey:@"name"]; 
-			currentObject.position.x = [[attributeDict valueForKey:@"x"] intValue];
-			currentObject.position.y = [[attributeDict valueForKey:@"y"] intValue];
+			currentObject.imageName = [attributeDict valueForKey:@"name"];
+
+            currentObject.position = [[Position alloc] initWithXAndY:[[attributeDict valueForKey:@"x"] integerValue] :[[attributeDict valueForKey:@"y"] integerValue]];
+//			currentObject.position.x = [[attributeDict valueForKey:@"x"] integerValue];
+//			currentObject.position.y = [[attributeDict valueForKey:@"y"] integerValue];
 			currentObject.hit = [[attributeDict valueForKey:@"hit"] intValue];
 			currentObject.level = [[attributeDict valueForKey:@"level"] intValue];
 			currentObject.fireWall = [[attributeDict valueForKey:@"fireWall"] intValue];
@@ -64,7 +66,7 @@
 			NSUInteger heightOfOneCase = imageRef.size.height/3;
 			NSUInteger widthOfOneCase = imageRef.size.width/6;
 			
-			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y, heightOfOneCase, widthOfOneCase))];
+			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y*heightOfOneCase, heightOfOneCase, widthOfOneCase))];
 
 			[png setObject:imageRef forKey:currentObject.imageName];
 			[currentObject release];
@@ -93,7 +95,6 @@
 
 		if([elementName isEqualToString:@"player"]){
 			currentColorPlayer = [attributeDict valueForKey:@"name"];
-			NSLog(@"Color Player : %@", [attributeDict valueForKey:@"name"]);
 			
 			[animations setObject:[[NSMutableDictionary alloc] init] forKey:currentColorPlayer];
 			

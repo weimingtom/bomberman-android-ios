@@ -7,8 +7,29 @@
 //
 
 #import "MapEditor.h"
+#import "Map.h"
 
 
 @implementation MapEditor
+
+@synthesize map;
+
+
+- (id)init {
+    self = [super init];
+    
+    if (self) {
+        map = [[Map alloc] init];
+    }
+    
+    return self;
+}
+
+
+- (void)dealloc {
+    [map release];
+    [super dealloc];
+}
+
 
 @end

@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class Map;
 
 @interface EditorGameZoneView : UIView {
-    
+    Map *map;
 }
+
+- (void)test;
 
 @end

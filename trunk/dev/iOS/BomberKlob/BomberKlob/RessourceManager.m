@@ -47,10 +47,12 @@ static RessourceManager * ressource = nil;
 
 -(id)init {
 	self = [super init];
+    
 	if (self != nil) {
 		[self loadProperty];
 		[self loadBitmapInanimates];
-		[self loadBitmapPlayer];	}
+		[self loadBitmapPlayer];	
+    }
 	
 	return self;
 }
@@ -74,7 +76,6 @@ static RessourceManager * ressource = nil;
     // TODO: A modifier...
     NSString *xmlFilePath =[[NSBundle mainBundle] pathForResource:@"inanimates" ofType:@"xml"];
     NSString * contenu = [NSString stringWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:&erreur]; // On donne l'adresse de "erreur"
-	NSLog(@"Contenu: %@\n", contenu);
 	
 	NSXMLParser * parseur = [[NSXMLParser alloc] initWithData:[contenu dataUsingEncoding:NSUTF8StringEncoding]];
 	XmlParser * parserDelegate = [[XmlParser alloc] initXMLParser:@"inanimates"];	
@@ -93,8 +94,6 @@ static RessourceManager * ressource = nil;
 	CGImageRef imageTemp;
 	
 	bitmapsInanimates = parserDelegate.png;
-	
-	NSLog(@"Fin du parsage");	
 }
 
 - (void) loadBitmapPlayer{
@@ -103,10 +102,11 @@ static RessourceManager * ressource = nil;
 	
 	
 	NSError * erreur = nil;
-	NSString * contenu = [NSString stringWithContentsOfFile:@"/Users/choucomog/bomberman-android-ios/dev/iOS/BomberKlob/BomberKlob/Resources/xml/players.xml"
-												   encoding:NSUTF8StringEncoding
-													  error:&erreur]; // On donne l'adresse de "erreur"
-	
+//	NSString * contenu = [NSString stringWithContentsOfFile:@"/Users/choucomog/bomberman-android-ios/dev/iOS/BomberKlob/BomberKlob/Resources/xml/players.xml"
+//												   encoding:NSUTF8StringEncoding
+//													  error:&erreur]; // On donne l'adresse de "erreur"
+    NSString *xmlFilePath =[[NSBundle mainBundle] pathForResource:@"players" ofType:@"xml"];
+    NSString * contenu = [NSString stringWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:&erreur]; // On donne l'adresse de "erreur"
 	
 	NSXMLParser * parseur = [[NSXMLParser alloc] initWithData:[contenu dataUsingEncoding:NSUTF8StringEncoding]];
 	XmlParser * parserDelegate = [[XmlParser alloc] initXMLParser:@"player"];	
@@ -121,8 +121,6 @@ static RessourceManager * ressource = nil;
 	[parseError release];
 	
 	bitmapsPlayer = parserDelegate.animations;
-	
-	NSLog(@"Fin du parsage");	
 }
 
 - (void) update{

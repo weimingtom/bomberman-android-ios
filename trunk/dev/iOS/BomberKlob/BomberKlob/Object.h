@@ -11,13 +11,14 @@
 @class Position;
 @class RessourceManager;
 
-@interface Object : NSObject {
-	RessourceManager * ressource;
-    NSString * imageName;
+@interface Object : NSObject <NSCoding> {
+    
+	RessourceManager *ressource;
+    NSString *imageName;
 	BOOL hit;
 	NSUInteger level;
 	BOOL fireWall;
-	Position * position;
+	Position *position;
 }
 
 @property (nonatomic, retain) NSString * imageName;
@@ -26,14 +27,13 @@
 @property (nonatomic) BOOL fireWall;
 @property (nonatomic, retain) Position * position;
 
-- (id) init;
+- (id)init;
+- (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition;
+- (void)resize;
+- (void)update;
+- (void)hasAnimationFinished;
+- (void)destroy;
 
-- (void) resize;
-
-- (void) update;
-
-- (void) hasAnimationFinished;
-
-- (void) destroy;
+- (void)draw:(CGContextRef)context;
 
 @end

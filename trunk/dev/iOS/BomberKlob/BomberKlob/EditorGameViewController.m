@@ -9,13 +9,26 @@
 #import "EditorGameViewController.h"
 #import "BomberKlobAppDelegate.h"
 #import "Application.h"
+#import "EditorGameZoneViewController.h"
 
 
 @implementation EditorGameViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+
+- (id)init {
+    self = [super init];
+    
+    if (self) {
+        editorGameZoneViewController = [[EditorGameZoneViewController alloc] init];        
+    }
+    
+    return self;
+}
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
     if (self) {
         // Custom initialization
     }
