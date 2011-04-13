@@ -11,6 +11,7 @@
 
 @interface Engine : NSObject {
     Game * game;
+	RessourceManager * resource;
 }
 @property (nonatomic, retain) Game * game;
 

@@ -16,7 +16,7 @@
 
 @implementation RessourceManager
 
-@synthesize bitmapsInanimates, bitmapsPlayer, tileWidth, tileHeight;
+@synthesize bitmapsInanimates, bitmapsPlayer, tileSize, screenWidth, screenHeight;
 
 static RessourceManager * ressource = nil;
 
@@ -59,9 +59,9 @@ static RessourceManager * ressource = nil;
 
 
 - (void) loadProperty{
-	//tileHeight = [[UIScreen mainScreen] bounds].size.height / 21;
-	tileWidth = [[UIScreen mainScreen] bounds].size.width / 15;
-	 tileHeight = tileWidth;
+	tileSize = [[UIScreen mainScreen] bounds].size.width / 15;
+	screenHeight = [[UIScreen mainScreen] bounds].size.height-([[UIScreen mainScreen] bounds].size.height-(21*tileSize) );
+	screenWidth = [[UIScreen mainScreen] bounds].size.width ;
 }
 
 - (void) loadBitmapInanimates{
