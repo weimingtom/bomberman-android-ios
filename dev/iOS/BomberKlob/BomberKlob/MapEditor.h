@@ -7,10 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Map.h"
+
+@class Map;
+
 
 @interface MapEditor : NSObject {
+    
     Map *map;
 }
+
+@property (nonatomic, retain) Map *map;
+
+- (id)init;
+- (void)dealloc;
 
 @end

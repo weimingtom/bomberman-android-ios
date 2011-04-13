@@ -16,7 +16,7 @@
 	NSMutableDictionary * bitmapsPlayer;
 }
 
-@property (nonatomic, copy) NSMutableDictionary * bitmapsInanimates;
+@property (nonatomic, retain) NSMutableDictionary * bitmapsInanimates;
 @property (nonatomic, copy) NSMutableDictionary * bitmapsPlayer;
 @property (nonatomic) NSUInteger tileHeight;
 @property (nonatomic) NSUInteger tileWidth;

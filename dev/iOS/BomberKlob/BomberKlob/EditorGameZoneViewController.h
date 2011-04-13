@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class MapEditor;
+
 
 @interface EditorGameZoneViewController : UIViewController {
     
+    MapEditor *mapEditor;
 }
 
 @end

@@ -23,6 +23,7 @@
 		[players addObject:[[Player alloc] initWithColor:@"white" position:[[Position alloc] initWithXAndY:200 :200]]];
 
 		map = [[Map alloc] init];
+//        map = [[Map alloc] initWithPath];
 	}
 	return self;
 }

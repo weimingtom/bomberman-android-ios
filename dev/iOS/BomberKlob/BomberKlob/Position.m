@@ -13,13 +13,18 @@
 
 @synthesize x, y;
 
-- (id) init{
+- (id) init {
 	self = [super init];
 	
+    if (self) {
+        
+    }
+    
 	return self;
 }
 
-- (id) initWithXAndY:(NSUInteger)xValue:(NSUInteger) yValue{
+
+- (id) initWithXAndY:(NSInteger)xValue:(NSInteger) yValue {
 	self = [super init];
 	if (self){
 		x = xValue;
@@ -28,9 +33,28 @@
 	return self;
 }
 
-- (NSString *)description{
+
+- (NSString *)description {
 	NSString * desc = [NSString stringWithFormat:@"X : %d \n Y : %d",x,y];
 	return desc;
-	}
+}
+
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    
+    if (self) {
+        self.x = [aDecoder decodeIntegerForKey:@"x"];
+        self.y = [aDecoder decodeIntegerForKey:@"y"];
+    }
+    
+    return self;
+}
+
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeInteger:x forKey:@"x"];
+    [aCoder encodeInteger:y forKey:@"y"];
+}
 
 @end
