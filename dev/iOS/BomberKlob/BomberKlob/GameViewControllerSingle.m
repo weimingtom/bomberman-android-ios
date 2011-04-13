@@ -16,7 +16,6 @@
 	self = [super init];
 	
 	if (self){
-		//[[UIDevice currentDevice] setOrientation:UIInterfaceOrientationLandscapeRight];
 		engine = [[Engine alloc] initWithGame:[[Game alloc] init]];
 		self.gameView = [[GameView alloc] initWithMap: engine.game.map];	
 		gameView.players = engine.game.players;
@@ -43,8 +42,6 @@
 }
 
 - (void)timerTick:(NSTimer *)timer {
-	
-
 	if (run) {
 		if (currentDirection == @"right") {
 			engine.moveRight;
@@ -71,6 +68,7 @@
 			engine.moveLeftDown;
 		}
 		[self.gameView setNeedsDisplay];
+		//[self.gameView threadUpdate];
 	}
 	else {
 		NSLog(@"Arret du thread");

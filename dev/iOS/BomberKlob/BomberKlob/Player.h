@@ -23,6 +23,9 @@
 	NSInteger bombNumber;
 
 }
+
+@property (nonatomic) NSInteger speed;
+
 - (id) init;
 - (id) initWithColor:(NSString *)colorValue position:(Position *) positionValue;
 - (void) live;

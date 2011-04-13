@@ -20,7 +20,7 @@
 	
 	if (self){
 		map = value;
-	
+		cpt = 0;
 	}
 	
 	return self;
@@ -33,25 +33,36 @@
 	if (self){
 		ressource = [RessourceManager sharedRessource];
 		bitmapsInanimates = ressource.bitmapsInanimates;
+		cpt = 0;
 		[self setNeedsDisplay];
 	}
 	
 	return self;
 }
 
+- (void) threadUpdate{
+	NSThread * updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(updateView) object:nil];
+	[updateThread start];
+}
+
+- (void) updateView{
+	[self setNeedsDisplay];
+	//[NSThread exit];
+}
+
 - (void)drawRect:(CGRect)rect{
 	
-	CGContextRef context = UIGraphicsGetCurrentContext();		
-	
-	CGImageRef image ;
-	
+	CGContextRef context = UIGraphicsGetCurrentContext();
 	[map draw:context];
-	
+		
 	for (Player * player in players) {
 		[player draw:context];
-	}
+	}	
 	
+
+	//[NSThread exit];
 }
+
 
 
 -(CGImageRef) getPng:(NSString *) path{

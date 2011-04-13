@@ -12,6 +12,7 @@
 
 
 @implementation Player
+@synthesize speed;
 
 - (id) init{
 	self = [super init];
@@ -223,12 +224,17 @@
 	
 }
 
+- (void) threadDraw:(CGContextRef) context{
+	NSThread * movementThread = [[[NSThread alloc] initWithTarget:self selector:@selector(draw:) object:context]autorelease];[movementThread start]; 
+}
+
 
 - (void) draw:(CGContextRef)context{
 	//NSLog(@"Position : %@", position);
+		UIImage * image = [((AnimationSequence *)[animations valueForKey:currentAnimation]).sequences objectAtIndex:currentFrame];
+		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize*2)];
 	
-	UIImage * image = [((AnimationSequence *)[animations valueForKey:currentAnimation]).sequences objectAtIndex:currentFrame];
-	[image drawInRect:CGRectMake(position.x, position.y, ressource.tileWidth , ressource.tileHeight*2)];
+
 }
 
 

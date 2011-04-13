@@ -19,7 +19,6 @@
 @synthesize grounds;
 @synthesize blocks;
 
-
 - (id) init {
     self = [super init];
     
@@ -155,6 +154,43 @@
 	
 }
 
+- (void) threadDraw:(CGContextRef)context{
+	NSThread * movementThread = [[[NSThread alloc] initWithTarget:self selector:@selector(draw:) object:context]autorelease];[movementThread start]; 
+}
+
+- (void) draw:(CGContextRef) context: (CGFloat)x: (CGFloat)y{
+	//if (floor(x) != ceil(x)) {
+	//	if ((floor(y) != ceil(y)) {
+			
+			
+			[((Object *) [[grounds objectAtIndex:floor(x)] objectAtIndex:floor(y)]) draw:context];
+            
+            if (![[[blocks objectAtIndex:floor(x)] objectAtIndex:floor(y)] isEqual:@"empty"])
+                [((Object *) [[blocks objectAtIndex:floor(x)] objectAtIndex:floor(y)]) draw:context];
+			
+			
+			[((Object *) [[grounds objectAtIndex:floor(x)] objectAtIndex:ceil(y)]) draw:context];
+            
+            if (![[[blocks objectAtIndex:floor(x)] objectAtIndex:ceil(y)] isEqual:@"empty"])
+                [((Object *) [[blocks objectAtIndex:floor(x)] objectAtIndex:ceil(y)]) draw:context];
+	
+	
+	
+			
+			[((Object *) [[grounds objectAtIndex:ceil(x)] objectAtIndex:floor(y)]) draw:context];
+            
+            if (![[[blocks objectAtIndex:ceil(x)] objectAtIndex:floor(y)] isEqual:@"empty"])
+                [((Object *) [[blocks objectAtIndex:ceil(x)] objectAtIndex:floor(y)]) draw:context];
+	
+	
+			
+			[((Object *) [[grounds objectAtIndex:ceil(x)] objectAtIndex:ceil(y)]) draw:context];
+            
+            if (![[[blocks objectAtIndex:ceil(x)] objectAtIndex:ceil(y)] isEqual:@"empty"])
+                [((Object *) [[blocks objectAtIndex:ceil(x)] objectAtIndex:ceil(y)]) draw:context];
+	//	}
+	//}
+}
 
 - (void)draw:(CGContextRef)context {
     for (int i = 0; i < width; i++) {
@@ -163,8 +199,13 @@
             
             if (![[[blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"])
                 [((Object *) [[blocks objectAtIndex:i] objectAtIndex:j]) draw:context];
+			
+			CGContextFillRect(context, CGRectMake(i*[RessourceManager sharedRessource].tileSize, 0,2 , 15*[RessourceManager sharedRessource].tileSize));
+			CGContextFillRect(context, CGRectMake(0, j*[RessourceManager sharedRessource].tileSize,21*[RessourceManager sharedRessource].tileSize , 2));
         }
     }
+
+
 }
 
 
@@ -182,7 +223,6 @@
     return self;
 }
 
-
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:name forKey:@"name"];
     [aCoder encodeInteger:width forKey:@"width"];
@@ -190,4 +230,5 @@
     [aCoder encodeObject:grounds forKey:@"grounds"];
     [aCoder encodeObject:blocks forKey:@"blocks"];
 }
+
 @end

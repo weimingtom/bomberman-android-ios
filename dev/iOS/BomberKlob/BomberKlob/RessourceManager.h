@@ -10,16 +10,20 @@
 
 
 @interface RessourceManager : NSObject {
-	NSUInteger tileHeight;
-	NSUInteger tileWidth;
+	NSInteger tileSize;
+	NSInteger screenHeight;
+	NSInteger screenWidth;
+
 	NSMutableDictionary * bitmapsInanimates;
 	NSMutableDictionary * bitmapsPlayer;
 }
 
 @property (nonatomic, retain) NSMutableDictionary * bitmapsInanimates;
 @property (nonatomic, copy) NSMutableDictionary * bitmapsPlayer;
-@property (nonatomic) NSUInteger tileHeight;
-@property (nonatomic) NSUInteger tileWidth;
+@property (nonatomic) NSInteger tileSize;
+@property (nonatomic) NSInteger screenHeight;
+@property (nonatomic) NSInteger screenWidth;
+
 
 +(RessourceManager*)sharedRessource;
 

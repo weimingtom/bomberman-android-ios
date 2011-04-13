@@ -14,6 +14,7 @@
 	RessourceManager* ressource;
 	Map * map;
 	NSMutableArray * players;
+	int cpt;
 	
 }
 

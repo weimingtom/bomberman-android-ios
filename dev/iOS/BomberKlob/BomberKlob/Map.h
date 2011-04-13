@@ -40,5 +40,5 @@
 - (void) deleteBlock: (NSInteger)block;
 - (void) destroyBlock: (NSInteger)block;
 - (void) draw:(CGContextRef)context;
-
+- (void) draw:(CGContextRef) context: (CGFloat)x: (CGFloat)y;
 @end
