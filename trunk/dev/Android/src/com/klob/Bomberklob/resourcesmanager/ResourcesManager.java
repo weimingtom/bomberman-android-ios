@@ -385,4 +385,38 @@ public class ResourcesManager {
 		}
 		Log.i("ResourcesManager","---------------- Bombs loaded  ---------------");
 	}
+	
+	/**
+	 * Calculates the tile of the coordinate
+	 * 
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @return the tile position
+	 */
+	public static Point coToTile(int x, int y) {
+		
+		if ( x < 0 || y < 0) {
+			return null;
+		}
+		else {
+			return new Point(x/size, y/size);
+		}
+	}
+	
+	/**
+	 * Calculates the coordinate of the tile
+	 * 
+	 * @param x x coordinate 
+	 * @param y y coordinate
+	 * @return coordinate of the tile
+	 */
+	public static Point tileToCo(int x, int y) {
+		
+		if ( x < 0 || y < 0) {
+			return null;
+		}
+		else {
+			return new Point(x*size, y*size);
+		}
+	}
 }
