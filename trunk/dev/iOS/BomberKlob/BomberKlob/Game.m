@@ -20,28 +20,26 @@
 	if (self) {
 //        map = [[Map alloc] init];
         Position *position;
+        Player *player;
         NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
         map = [[Map alloc] initWithNameMap:@"Default"];
         
         players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
 
-        position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:0]).x * tileSize) y:(((Position *) [map.players objectAtIndex:0]).y * tileSize)];
-        [players addObject:[[Player alloc] initWithColor:@"black" position:position]];
+        // TODO: Changer le tableau des couleurs en fonction de la couleur de joueur
+        NSArray *colorsPlayers = [[NSArray alloc] initWithObjects:@"white", @"blue", @"red", @"black", nil];
         
-        position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:1]).x * tileSize) y:(((Position *) [map.players objectAtIndex:1]).y * tileSize)];
-        [players addObject:[[Player alloc] initWithColor:@"red" position:position]];
-    
-        if ([map.players count] > 2) {
-            position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:2]).x * tileSize) y:(((Position *) [map.players objectAtIndex:2]).y * tileSize)];
-            [players addObject:[[Player alloc] initWithColor:@"white" position:position]];
+        for (int i = 0; i < [map.players count]; i++) {
+            position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:i]).x * tileSize) y:(((Position *) [map.players objectAtIndex:i]).y * tileSize)];
+            player = [[Player alloc] initWithColor:[colorsPlayers objectAtIndex:i] position:position];
             
-            if ([map.players count] == 4) {
-                position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:3]).x * tileSize) y:(((Position *) [map.players objectAtIndex:3]).y * tileSize)];
-                [players addObject:[[Player alloc] initWithColor:@"blue" position:position]];
-            }
+            [players addObject:player];
+            
+            [position release];
+            [player release];
         }
         
-        [position release];
+        [colorsPlayers release];
 	}
     
 	return self;

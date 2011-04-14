@@ -10,6 +10,7 @@
 #import "RessourceManager.h"
 #import "Object.h"
 #import "Position.h"
+#import "Player.h"
 
 @implementation Map
 
@@ -29,7 +30,7 @@
         width = WIDTH;
         height = HEIGHT;
         
-        name = @"Test";
+        name = @"Default";
         
         grounds = [[NSMutableArray alloc] initWithCapacity:height];
         blocks = [[NSMutableArray alloc] initWithCapacity:height];
@@ -51,16 +52,16 @@
             }
         }
         
-        position = [[Position alloc] initWithX:1 y:1];
+        position = [[Position alloc] initWithX:1 y:0];
         [players addObject:position];
         [position release];
-        position = [[Position alloc] initWithX:19 y:1];
+        position = [[Position alloc] initWithX:19 y:0];
         [players addObject:position];
         [position release];
-        position = [[Position alloc] initWithX:1 y:12];
+        position = [[Position alloc] initWithX:1 y:11];
         [players addObject:position];
         [position release];
-        position = [[Position alloc] initWithX:19 y:12];
+        position = [[Position alloc] initWithX:19 y:11];
         [players addObject:position];
         [position release];
         
@@ -102,10 +103,8 @@
     [map encodeObject:self forKey:@"map"];
     [map finishEncoding];
     result = [data writeToFile:mapPath atomically:YES];
+    [self makePreviewWithView];
     
-    [map release];
-    [data release];
-    [mapPath release];
     [map release];
 }
 
@@ -131,9 +130,23 @@
     self.players = myMap.players;
     
     [myMap release];
-    [data release];
-    [unarchiver release];
-    [mapPath release];
+}
+
+
+- (void)makePreviewWithView {
+    CGSize size = [[UIScreen mainScreen] bounds].size;
+    
+    UIGraphicsBeginImageContext(CGSizeMake(size.height, size.width));
+    
+    [self draw:UIGraphicsGetCurrentContext()];
+    [self drawPlayers:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    NSData *img;
+    img = UIImagePNGRepresentation(image);
+    [img writeToFile:[NSString stringWithFormat:@"%@/Maps/%@.png",[[NSBundle mainBundle] bundlePath], name] atomically:YES];
+    
+    UIGraphicsEndImageContext();
 }
 
 
@@ -203,18 +216,43 @@
 
 
 - (void)draw:(CGContextRef)context {
+    NSLog(@"Dessine...");
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             [((Object *) [[grounds objectAtIndex:i] objectAtIndex:j]) draw:context];
             
             if (![[[blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"])
                 [((Object *) [[blocks objectAtIndex:i] objectAtIndex:j]) draw:context];
-			
-//			CGContextFillRect(context, CGRectMake(i*[RessourceManager sharedRessource].tileSize, 0,2 , 15*[RessourceManager sharedRessource].tileSize));
-//			CGContextFillRect(context, CGRectMake(0, j*[RessourceManager sharedRessource].tileSize,21*[RessourceManager sharedRessource].tileSize , 2));
         }
     }
+}
 
+
+- (void) drawPlayers:(CGContextRef)context {
+    Position *position;
+    Player *player;
+    NSArray *colorsPlayers = [[NSArray alloc] initWithObjects:@"white", @"blue", @"red", @"black", nil];
+    NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
+    
+    for (int i = 0; i < [players count]; i++) {
+        position = [[Position alloc] initWithX:(((Position *) [players objectAtIndex:i]).x * tileSize) y:(((Position *) [players objectAtIndex:i]).y * tileSize)];
+        player = [[Player alloc] initWithColor:[colorsPlayers objectAtIndex:i] position:position];
+        
+        [player draw:context];
+        
+        [position release];
+        [player release];
+    }
+}
+
+
+- (void)drawCase:(CGContextRef)context {
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            CGContextFillRect(context, CGRectMake(i*[RessourceManager sharedRessource].tileSize, 0,2 , 15*[RessourceManager sharedRessource].tileSize));
+            CGContextFillRect(context, CGRectMake(0, j*[RessourceManager sharedRessource].tileSize,21*[RessourceManager sharedRessource].tileSize , 2));
+        }
+    }
 
 }
 
