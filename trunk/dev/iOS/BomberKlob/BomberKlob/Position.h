@@ -19,7 +19,7 @@
 
 - (id) init;
 
-- (id) initWithXAndY:(NSInteger)xValue:(NSInteger) yValue;
+- (id) initWithX:(NSInteger)aX y:(NSInteger)aY;
 
 - (NSString *)description;
 

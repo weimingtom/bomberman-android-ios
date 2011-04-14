@@ -18,8 +18,8 @@
 	self = [super init];
 	
 	if (self) {
-		currentPosition = [[Position alloc] initWithXAndY:(NSUInteger)0:(NSUInteger) 0];
-		lastPosition = [[Position alloc] initWithXAndY:(NSUInteger)0:(NSUInteger) 0];
+		currentPosition = [[Position alloc] initWithX:0 y:0];
+		lastPosition = [[Position alloc] initWithX:0 y:0];
 	}
 	
 	return self;

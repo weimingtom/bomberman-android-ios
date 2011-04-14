@@ -21,6 +21,7 @@
     NSInteger height;
 	NSMutableArray *grounds;
 	NSMutableArray *blocks;
+    NSMutableArray *players;
 }
 
 @property (nonatomic, retain) NSString *name;
@@ -28,17 +29,21 @@
 @property (nonatomic) NSInteger height;
 @property (nonatomic, retain) NSMutableArray * grounds;
 @property (nonatomic, retain) NSMutableArray * blocks;
+@property (nonatomic, retain) NSMutableArray *players;
 
-- (id) init;
-- (id) initWithPath;
+- (id)init;
+- (id)initWithNameMap:(NSString *)nameMap;
+- (void)dealloc;
 
-- (void) save;
-- (void) load:(NSString*)mapName;
-- (void) addGround:(NSInteger) ground;
-- (void) addBlock:(NSInteger) block;
-- (void) deleteGround: (NSInteger) ground;
-- (void) deleteBlock: (NSInteger)block;
-- (void) destroyBlock: (NSInteger)block;
+- (void)save;
+- (void)load:(NSString*)mapName;
+
+- (void)addGround:(NSInteger)ground;
+- (void)addBlock:(NSInteger)block;
+- (void)deleteGround:(NSInteger)ground;
+- (void)deleteBlock:(NSInteger)block;
+- (void)destroyBlock:(NSInteger)block;
+
 - (void) draw:(CGContextRef)context;
-- (void) draw:(CGContextRef) context: (CGFloat)x: (CGFloat)y;
+- (void) draw:(CGContextRef)context:(CGFloat)x: (CGFloat)y;
 @end

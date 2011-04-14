@@ -20,6 +20,8 @@
 @property (nonatomic, retain) Map * map;
 
 - (id) init;
+- (void)dealloc;
+
 - (void) initGame;
 - (void) startGame;
 - (void) endGame;
