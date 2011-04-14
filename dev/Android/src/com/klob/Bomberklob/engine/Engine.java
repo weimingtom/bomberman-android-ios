@@ -169,57 +169,85 @@ public class Engine {
 		this.y = 0;
 
 		for (int i = 0 ; i < player.getSpeed() ; i++ ) {
-			if ( (player.getPosition().y+this.size) < ((this.single.map.getBlocks()[0].length-1)*this.size) ) {
+			if ( player.getPosition().y < (this.size*(this.single.map.getBlocks().length-1)) ) {
 
 				this.nextTile = ResourcesManager.coToTile(player.getPosition().x, player.getPosition().y+this.size);
 				this.currentTile = ResourcesManager.coToTile(player.getPosition().x, player.getPosition().y);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
 					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null ) {
-						if ( this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
-							if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-								if ( (this.nextTile.x+1)*this.size < player.getPosition().x+(this.size/2) ) {
-									this.x++;
+						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
+							if ( ( (this.currentTile.x*this.size) <= player.getPosition().x) && ((player.getPosition().x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
+								System.out.println("DESCEND");
+								y++;
+							}
+							else if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
+								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
+									System.out.println("MILIEU");
+									y++;
 								}
 								else {
-									break;
+									if ( player.getPosition().x < ((this.currentTile.x*this.size)+(this.size/2)) ) {
+										System.out.println("DROITE|BLOCK OK|GROUND KO|DECALE GAUCHE");
+										x--;
+									}
+									else {
+										break;
+									}
 								}
 							}
-							else if ( !this.single.map.getGrounds()[this.nextTile.x-1][this.nextTile.y].isHit() ) {
-								if ( (this.nextTile.x-1)*this.size+(this.size/2) > player.getPosition().x ) {
-									this.x--;
+							else {
+								if ( player.getPosition().x <= ((this.currentTile.x*this.size)+(this.size/2)) ) {
+									System.out.println("DROITE|BLOCK KO|DECALE GAUCHE");
+									x--;
 								}
 								else {
 									break;
 								}
 							}
 						}
-						else if ( (player.getPosition().x >= this.nextTile.x*this.size) && ((player.getPosition().x+this.size) <= ((this.nextTile.x*this.size)+this.size))) {
-							this.y++;
+						else {
+							if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
+								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
+									if ( player.getPosition().x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
+										System.out.println("GAUCHE|BLOCK OK|GROUND KO|DECALE DROITE");
+										x++;
+									}
+									else {
+										break;
+									}
+								}
+								else {
+									break;
+								}
+							}
+							else {
+								break;
+							}
 						}
 					}
 					else {
-						if ( this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
+						if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-								if ( (this.nextTile.x+1)*this.size < player.getPosition().x+(this.size/2) ) {
-									this.x++;
+								if ( player.getPosition().x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
+									System.out.println("GAUCHE|BLOCK KO|DECALE DROITE");
+									x++;
 								}
 								else {
 									break;
 								}
 							}
-							else if ( !this.single.map.getGrounds()[this.nextTile.x-1][this.nextTile.y].isHit() ) {
-								if ( (this.nextTile.x-1)*this.size+(this.size/2) > player.getPosition().x ) {
-									this.x--;
-								}
-								else {
-									break;
-								}
+							else {
+								break;
 							}
+						}
+						else {
+							break;
 						}
 					}
 				}
 				else {
+					System.out.println("MEME CASE");
 					this.y++;
 				}
 			}
@@ -234,65 +262,87 @@ public class Engine {
 		
 		this.x = 0;
 		this.y = 0;
-		
+
 		for (int i = 0 ; i < player.getSpeed() ; i++ ) {
-			if ( (player.getPosition().x+this.size) < ((this.single.map.getBlocks().length-1)*this.size) ) {
-				
+			if ( player.getPosition().x < (this.size*(this.single.map.getBlocks()[0].length-1)) ) {
+
 				this.nextTile = ResourcesManager.coToTile(player.getPosition().x+this.size, player.getPosition().y);
 				this.currentTile = ResourcesManager.coToTile(player.getPosition().x, player.getPosition().y);
-				
-				System.out.println("CURRENT : " + this.currentTile.x + " " + this.currentTile.y);
-				System.out.println("NEXT    : " + this.nextTile.x    + " " + this.nextTile.y   );
-				
+
 				if ( this.nextTile.x != this.currentTile.x ) {
-					System.out.println("CHANGE TILE");
 					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null ) {
-						System.out.println("BLOCK OK");
-						if ( this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
-							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-								if ( (this.nextTile.y+1)*this.size < player.getPosition().y+(this.size/2) ) {
-									this.y++;
+						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
+							if ( ( (this.currentTile.y*this.size) <= player.getPosition().y) && ((player.getPosition().y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
+								System.out.println("DROITE");
+								x++;
+							}
+							else if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
+								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
+									System.out.println("MILIEU");
+									x++;
 								}
 								else {
-									break;
+									if ( player.getPosition().y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
+										System.out.println("BAS|BLOCK OK|GROUND KO|DECALE HAUT");
+										y--;
+									}
+									else {
+										break;
+									}
 								}
 							}
-							else if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y-1].isHit() ) {
-								if ( (this.nextTile.y-1)*this.size+(this.size/2) > player.getPosition().y ) {
-									this.y--;
+							else {
+								if ( player.getPosition().y <= ((this.currentTile.y*this.size)+(this.size/2)) ) {
+									System.out.println("BAS|BLOCK KO|DECALE HAUT");
+									y--;
 								}
 								else {
 									break;
 								}
 							}
 						}
-						else if ( (player.getPosition().y >= this.nextTile.y*this.size) && ((player.getPosition().y+this.size) <= ((this.nextTile.y*this.size)+this.size))) {
-							this.x++;
+						else {
+							if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
+								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
+									if ( player.getPosition().y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
+										System.out.println("HAUT|BLOCK OK|GROUND KO|DECALE BAS");
+										y++;
+									}
+									else {
+										break;
+									}
+								}
+								else {
+									break;
+								}
+							}
+							else {
+								break;
+							}
 						}
 					}
 					else {
-						System.out.println("BLOCK KO");
-						if ( this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
+						if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-								if ( (this.nextTile.y+1)*this.size < player.getPosition().y+(this.size/2) ) {
-									this.y++;
+								if ( player.getPosition().y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
+									System.out.println("HAUT|BLOCK KO|DECALE BAS");
+									y++;
 								}
 								else {
 									break;
 								}
 							}
-							else if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y-1].isHit() ) {
-								if ( (this.nextTile.y-1)*this.size+(this.size/2) > player.getPosition().y ) {
-									this.y--;
-								}
-								else {
-									break;
-								}
+							else {
+								break;
 							}
+						}
+						else {
+							break;
 						}
 					}
 				}
 				else {
+					System.out.println("MEME CASE");
 					this.x++;
 				}
 			}
@@ -300,72 +350,94 @@ public class Engine {
 				break;
 			}
 		}		
-		player.setPosition(new Point(player.getPosition().x+x, player.getPosition().y+y));		
+		player.setPosition(new Point(player.getPosition().x+x, player.getPosition().y+y));
 	}
 	
 	private void moveLeft(Player player) {
 		
 		this.x = 0;
 		this.y = 0;
-		
+
 		for (int i = 0 ; i < player.getSpeed() ; i++ ) {
 			if ( player.getPosition().x > this.size ) {
-				
+
 				this.nextTile = ResourcesManager.coToTile(player.getPosition().x-1, player.getPosition().y);
 				this.currentTile = ResourcesManager.coToTile(player.getPosition().x, player.getPosition().y);
-				
-				System.out.println("CURRENT : " + this.currentTile.x + " " + this.currentTile.y);
-				System.out.println("NEXT    : " + this.nextTile.x    + " " + this.nextTile.y   );
-				
+
 				if ( this.nextTile.x != this.currentTile.x ) {
-					System.out.println("CHANGE TILE");
 					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null ) {
-						System.out.println("BLOCK OK");
-						if ( this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
-							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-								if ( (this.nextTile.y+1)*this.size < player.getPosition().y+(this.size/2) ) {
-									this.y++;
+						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
+							if ( ( (this.currentTile.y*this.size) <= player.getPosition().y) && ((player.getPosition().y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
+								System.out.println("GAUCHE");
+								x--;
+							}
+							else if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
+								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
+									System.out.println("MILIEU");
+									x--;
 								}
 								else {
-									break;
+									if ( player.getPosition().y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
+										System.out.println("BAS|BLOCK OK|GROUND KO|DECALE HAUT");
+										y--;
+									}
+									else {
+										break;
+									}
 								}
 							}
-							else if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y-1].isHit() ) {
-								if ( (this.nextTile.y-1)*this.size+(this.size/2) > player.getPosition().y ) {
-									this.y--;
+							else {
+								if ( player.getPosition().y <= ((this.currentTile.y*this.size)+(this.size/2)) ) {
+									System.out.println("BAS|BLOCK KO|DECALE HAUT");
+									y--;
 								}
 								else {
 									break;
 								}
 							}
 						}
-						else if ( (player.getPosition().y >= this.nextTile.y*this.size) && ((player.getPosition().y+this.size) <= ((this.nextTile.y*this.size)+this.size))) {
-							this.x--;
+						else {
+							if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
+								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
+									if ( player.getPosition().y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
+										System.out.println("HAUT|BLOCK OK|GROUND KO|DECALE BAS");
+										y++;
+									}
+									else {
+										break;
+									}
+								}
+								else {
+									break;
+								}
+							}
+							else {
+								break;
+							}
 						}
 					}
 					else {
-						System.out.println("BLOCK KO");
-						if ( this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
+						if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-								if ( (this.nextTile.y+1)*this.size < player.getPosition().y+(this.size/2) ) {
-									this.y++;
+								if ( player.getPosition().y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
+									System.out.println("HAUT|BLOCK KO|DECALE BAS");
+									y++;
 								}
 								else {
 									break;
 								}
 							}
-							else if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y-1].isHit() ) {
-								if ( (this.nextTile.y-1)*this.size+(this.size/2) > player.getPosition().y ) {
-									this.y--;
-								}
-								else {
-									break;
-								}
+							else {
+								break;
 							}
+						}
+						else {
+							break;
 						}
 					}
 				}
 				else {
+					System.out.println("MEME CASE");
 					this.x--;
 				}
 			}
@@ -373,7 +445,7 @@ public class Engine {
 				break;
 			}
 		}		
-		player.setPosition(new Point(player.getPosition().x+x, player.getPosition().y+y));		
+		player.setPosition(new Point(player.getPosition().x+x, player.getPosition().y+y));			
 	}
 
 	public void onDraw(Canvas canvas, int size) {
