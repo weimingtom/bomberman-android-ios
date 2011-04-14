@@ -24,11 +24,11 @@
 }
 
 
-- (id) initWithXAndY:(NSInteger)xValue:(NSInteger) yValue {
+- (id) initWithX:(NSInteger)aX y:(NSInteger)aY {
 	self = [super init];
 	if (self){
-		x = xValue;
-		y = yValue;
+		x = aX;
+		y = aY;
 	}
 	return self;
 }

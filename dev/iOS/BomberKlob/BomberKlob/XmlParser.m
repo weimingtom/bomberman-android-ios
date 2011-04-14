@@ -50,7 +50,7 @@
 			// Lecture des attributs de l’élément
 			currentObject.imageName = [attributeDict valueForKey:@"name"];
 
-            currentObject.position = [[Position alloc] initWithXAndY:[[attributeDict valueForKey:@"x"] integerValue] :[[attributeDict valueForKey:@"y"] integerValue]];
+            currentObject.position = [[Position alloc] initWithX:[[attributeDict valueForKey:@"x"] integerValue] y:[[attributeDict valueForKey:@"y"] integerValue]];
 //			currentObject.position.x = [[attributeDict valueForKey:@"x"] integerValue];
 //			currentObject.position.y = [[attributeDict valueForKey:@"y"] integerValue];
 			currentObject.hit = [[attributeDict valueForKey:@"hit"] intValue];

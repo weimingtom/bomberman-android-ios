@@ -18,101 +18,107 @@
 @synthesize height;
 @synthesize grounds;
 @synthesize blocks;
+@synthesize players;
 
-- (id) init {
+
+- (id)init {
     self = [super init];
     
     if (self) {
+        Position *position;
         width = WIDTH;
         height = HEIGHT;
         
-        name = @"InitMap";
+        name = @"Test";
         
         grounds = [[NSMutableArray alloc] initWithCapacity:height];
         blocks = [[NSMutableArray alloc] initWithCapacity:height];
+        players = [[NSMutableArray alloc] init];
         
         for (int i = 0; i < width; i++){
             [grounds addObject:[[NSMutableArray alloc] initWithCapacity:width]];
             [blocks addObject:[[NSMutableArray alloc] initWithCapacity:width]];
             
             for (int j = 0; j < height; j++) {
-                [[grounds objectAtIndex:i] addObject: [[Object alloc] initWithImageName:@"grass2" position:[[Position alloc] initWithXAndY:i :j]]];
+                [[grounds objectAtIndex:i] addObject: [[Object alloc] initWithImageName:@"grass2" position:[[Position alloc] initWithX:i y:j]]];
                 
-                if (i == 4 && j != 5 && j != 10) {
-                    [[blocks objectAtIndex:i] addObject: [[Object alloc] initWithImageName:@"stone2" position:[[Position alloc] initWithXAndY:i :j]]];
+                if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
+                    [[blocks objectAtIndex:i] addObject: [[Object alloc] initWithImageName:@"bloc" position:[[Position alloc] initWithX:i y:j]]];
                 }
                 else {
                     [[blocks objectAtIndex:i] addObject:@"empty"];
                 }
             }
         }
+        
+        position = [[Position alloc] initWithX:1 y:1];
+        [players addObject:position];
+        [position release];
+        position = [[Position alloc] initWithX:19 y:1];
+        [players addObject:position];
+        [position release];
+        position = [[Position alloc] initWithX:1 y:12];
+        [players addObject:position];
+        [position release];
+        position = [[Position alloc] initWithX:19 y:12];
+        [players addObject:position];
+        [position release];
+        
+        [self save];
     }
-    
-    [self save];
     
     return self;
 }
 
 
-- (id)initWithPath {
+- (id)initWithNameMap:(NSString *)nameMap {
     self = [super init];
     
-    if (self) {
-        NSLog(@"Loading map...");
-        [self load:@""];
+    if (self) {       
+        [self load:nameMap];
     }
     
     return self;
 }
 
 
-- (void) save{
-//	NSString *path = [NSString stringWithFormat:@"%@.klob", name];
-//    NSLog(@"Path: %@", path);
-//    NSMutableDictionary *rootObject = [NSMutableDictionary dictionary];
-//    
-//    [rootObject setValue:self forKey:@"map"];
-//    [NSKeyedArchiver archiveRootObject:rootObject toFile:path];
-//    
-//    NSData* artistData = [NSKeyedArchiver archivedDataWithRootObject:artistCollection];
-//    [artistData writeToFile: @"/Users/benjamintardieu/Desktop/test.klob" atomically:YES];
-    
-    
-
-    NSMutableData *data;
-//    NSString *archivePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"Map.archive"];
-    NSString *archivePath = @"/Users/benjamintardieu/Desktop/Map.archive";
-    NSKeyedArchiver *archiver;
-    BOOL result;
-    
-    data = [NSMutableData data];
-    archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    // Customize archiver here
-    [archiver encodeObject:self forKey:@"map"];
-    [archiver finishEncoding];
-    result = [data writeToFile:archivePath atomically:YES];
-    [archiver release];
-    
-    
+- (void)dealloc {
+    [name release];
+    [grounds release];
+    [blocks release];
+    [players release];
+    [super dealloc];
 }
 
 
-- (void) load:(NSString*)mapName {
-//    NSString *path = [NSString stringWithFormat:@"%@.klob", mapName];
-//    NSDictionary *rootObject;
-//    
-//    rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];    
-//    self = [rootObject valueForKey:@"map"];
+- (void)save {
+    NSMutableData *data = [NSMutableData data];
+
+    NSString *mapPath = [NSString stringWithFormat:@"%@/Maps/%@.klob", [[NSBundle mainBundle] bundlePath], name];
+    NSKeyedArchiver *map;
+    BOOL result;
     
+    map = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [map encodeObject:self forKey:@"map"];
+    [map finishEncoding];
+    result = [data writeToFile:mapPath atomically:YES];
+    
+    [map release];
+    [data release];
+    [mapPath release];
+    [map release];
+}
+
+
+- (void)load:(NSString*)mapName {
     Map *myMap;
     NSData *data;
     NSKeyedUnarchiver *unarchiver;
-//    NSString *archivePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"Map.archive"];
-    NSString *archivePath = @"/Users/benjamintardieu/Desktop/Map.archive";
+    NSString *mapPath = [NSString stringWithFormat:@"%@/Maps/%@.klob", [[NSBundle mainBundle] bundlePath], mapName];
     
-    data = [NSData dataWithContentsOfFile:archivePath];
+    data = [NSData dataWithContentsOfFile:mapPath];
     unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-    // Customize unarchiver here
+
     myMap = [unarchiver decodeObjectForKey:@"map"];
     [unarchiver finishDecoding];
     [unarchiver release];
@@ -122,43 +128,46 @@
     self.height = myMap.height;
     self.grounds = myMap.grounds;
     self.blocks = myMap.blocks;
-//    NSLog(@"myMap: %@", myMap.name);
-//    NSLog(@"%d", myMap.width);
-//    NSLog(@"%d", myMap.height);
-//    NSLog(@"%@", myMap.grounds);
-//    NSLog(@"%@", myMap.blocks);
+    self.players = myMap.players;
+    
+    [myMap release];
+    [data release];
+    [unarchiver release];
+    [mapPath release];
 }
 
 
-- (void) addGround:(NSInteger) ground {
+- (void)addGround:(NSInteger)ground {
 	
 }
 
 
-- (void) addBlock:(NSInteger) block {
+- (void)addBlock:(NSInteger)block {
 	
 }
 
 
-- (void) deleteGround: (NSInteger) ground {
+- (void)deleteGround:(NSInteger)ground {
 	
 }
 
 
-- (void) deleteBlock: (NSInteger)block {
+- (void)deleteBlock:(NSInteger)block {
 	
 }
 
 
-- (void) destroyBlock: (NSInteger)block {
+- (void)destroyBlock:(NSInteger)block {
 	
 }
 
-- (void) threadDraw:(CGContextRef)context{
-	NSThread * movementThread = [[[NSThread alloc] initWithTarget:self selector:@selector(draw:) object:context]autorelease];[movementThread start]; 
+
+- (void)threadDraw:(CGContextRef)context {
+//	NSThread * movementThread = [[[NSThread alloc] initWithTarget:self selector:@selector(draw:) object:context]autorelease];[movementThread start]; 
 }
 
-- (void) draw:(CGContextRef) context: (CGFloat)x: (CGFloat)y{
+
+- (void)draw:(CGContextRef)context:(CGFloat)x:(CGFloat)y{
 	//if (floor(x) != ceil(x)) {
 	//	if ((floor(y) != ceil(y)) {
 			
@@ -192,6 +201,7 @@
 	//}
 }
 
+
 - (void)draw:(CGContextRef)context {
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
@@ -200,14 +210,16 @@
             if (![[[blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"])
                 [((Object *) [[blocks objectAtIndex:i] objectAtIndex:j]) draw:context];
 			
-			CGContextFillRect(context, CGRectMake(i*[RessourceManager sharedRessource].tileSize, 0,2 , 15*[RessourceManager sharedRessource].tileSize));
-			CGContextFillRect(context, CGRectMake(0, j*[RessourceManager sharedRessource].tileSize,21*[RessourceManager sharedRessource].tileSize , 2));
+//			CGContextFillRect(context, CGRectMake(i*[RessourceManager sharedRessource].tileSize, 0,2 , 15*[RessourceManager sharedRessource].tileSize));
+//			CGContextFillRect(context, CGRectMake(0, j*[RessourceManager sharedRessource].tileSize,21*[RessourceManager sharedRessource].tileSize , 2));
         }
     }
 
 
 }
 
+
+#pragma mark - NSCoding
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
@@ -218,10 +230,12 @@
         self.height = [aDecoder decodeIntegerForKey:@"height"];
         self.grounds = [aDecoder decodeObjectForKey:@"grounds"];
         self.blocks = [aDecoder decodeObjectForKey:@"blocks"];
+        self.players = [aDecoder decodeObjectForKey:@"players"];
     }
     
     return self;
 }
+
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:name forKey:@"name"];
@@ -229,6 +243,9 @@
     [aCoder encodeInteger:height forKey:@"height"];
     [aCoder encodeObject:grounds forKey:@"grounds"];
     [aCoder encodeObject:blocks forKey:@"blocks"];
+    [aCoder encodeObject:players forKey:@"players"];
 }
+
+#pragma mark -
 
 @end
