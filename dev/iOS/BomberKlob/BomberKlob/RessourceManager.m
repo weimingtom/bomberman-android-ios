@@ -59,7 +59,7 @@ static RessourceManager * ressource = nil;
 
 
 - (void) loadProperty{
-	tileSize = [[UIScreen mainScreen] bounds].size.width / 15;
+	tileSize = [[UIScreen mainScreen] bounds].size.width / 14;
 	screenHeight = [[UIScreen mainScreen] bounds].size.height-([[UIScreen mainScreen] bounds].size.height-(21*tileSize) );
 	screenWidth = [[UIScreen mainScreen] bounds].size.width ;
 }

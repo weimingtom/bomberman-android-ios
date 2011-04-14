@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define WIDTH  21
-#define HEIGHT 15
+#define HEIGHT 14
 
 @class RessourceManager;
 
@@ -44,6 +44,13 @@
 - (void)deleteBlock:(NSInteger)block;
 - (void)destroyBlock:(NSInteger)block;
 
-- (void) draw:(CGContextRef)context;
-- (void) draw:(CGContextRef)context:(CGFloat)x: (CGFloat)y;
+- (void)draw:(CGContextRef)context;
+- (void)drawPlayers:(CGContextRef)context;
+- (void)drawCase:(CGContextRef)context;
+- (void)draw:(CGContextRef)context:(CGFloat)x: (CGFloat)y;
+
+
+- (void)makePreviewWithView;
+
+
 @end

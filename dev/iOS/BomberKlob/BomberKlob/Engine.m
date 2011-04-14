@@ -43,8 +43,6 @@
 	int xmax = ceil((player.position.x+xValue + resource.tileSize-player.speed) / resource.tileSize);
 	int ymax = ceil(((player.position.y+yValue + (resource.tileSize*2)-player.speed) / resource.tileSize));
 	
-	NSLog(@"TILE : %d  Xmin : %d  Xmax : %d  Ymin: %d  Ymax : %d",320/resource.tileSize,xmin,xmax,ymin,ymax);
-	
 	for (int i=xmin; i <= xmax; i++) {
 		for (int j =ymin; j <= ymax; j++) {
 			if ((xmin >= 0 && ymin >=0) && (xmax < 21 && ymax < 15)) {
