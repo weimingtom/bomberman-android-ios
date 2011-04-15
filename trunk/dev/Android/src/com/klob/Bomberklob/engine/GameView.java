@@ -65,7 +65,7 @@ public class GameView extends Thread {
                 }
             }
             try {
-				sleep(50);
+				sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

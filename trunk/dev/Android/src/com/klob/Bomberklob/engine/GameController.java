@@ -92,27 +92,43 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 			
 			if ( (int) event.getX() > this.x && ((int) event.getY() <  (this.y+xx)) && ((int) event.getY() > (this.y-xx)) ) {
 				animation = PlayerAnimations.RIGHT;
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
 			}
 			else if ( (int) event.getX() < this.x && ((int) event.getY() <  (this.y+xx)) && ((int) event.getY() > (this.y-xx)) ) {
 				animation = PlayerAnimations.LEFT;
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
 			}
 			else if ( (int) event.getY() < this.y && ((int) event.getX() <  (this.x+yy)) && ((int) event.getX() > (this.x-yy)) ) {
 				animation = PlayerAnimations.UP;
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
 			}
 			else if ( (int) event.getY() > this.y && ((int) event.getX() <  (this.x+yy)) && ((int) event.getX() > (this.x-yy)) ) {
 				animation = PlayerAnimations.DOWN;
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
 			}
 			else if ( (int) event.getY() > this.y && ((int) event.getX() >  (this.x+yy)) && ((int) event.getY() > (this.y+xx)) ) {
 				animation = PlayerAnimations.DOWN_RIGHT;
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
 			}
 			else if ( (int) event.getY() > this.y && ((int) event.getX() <  (this.x-yy)) && ((int) event.getY() > (this.y+xx)) ) {
 				animation = PlayerAnimations.DOWN_LEFT;
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
 			}
 			else if ( (int) event.getY() < this.y && ((int) event.getX() >  (this.x+yy)) && ((int) event.getY() < (this.y-xx)) ) {
 				animation = PlayerAnimations.UP_RIGHT;
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
 			}
 			else if ( (int) event.getY() < this.y && ((int) event.getX() <  (this.x-yy)) && ((int) event.getY() < (this.y-xx)) ) {
 				animation = PlayerAnimations.UP_LEFT;
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
 			}
 			break;
 		case MotionEvent.ACTION_UP:
