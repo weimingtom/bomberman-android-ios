@@ -72,7 +72,7 @@ public class Engine {
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < (this.size/3) ; i++ ) {
+		for (int i = 0 ; i < 1 ; i++ ) {
 			if ( this.y > this.size ) {
 
 				this.nextTile = ResourcesManager.coToTile(this.x, this.y-1);
@@ -161,7 +161,7 @@ public class Engine {
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < (this.size/3) ; i++ ) {
+		for (int i = 0 ; i < 1 ; i++ ) {
 			if ( this.y < (this.size*(this.single.map.getBlocks()[0].length-1)) ) {
 
 				this.nextTile = ResourcesManager.coToTile(this.x, this.y+this.size);
@@ -249,7 +249,7 @@ public class Engine {
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < (this.size/3) ; i++ ) {
+		for (int i = 0 ; i < 1 ; i++ ) {
 			if ( this.x < (this.size*(this.single.map.getBlocks().length-1)) ) {
 
 				this.nextTile = ResourcesManager.coToTile(this.x+this.size, this.y);
@@ -337,7 +337,7 @@ public class Engine {
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < (this.size/3) ; i++ ) {
+		for (int i = 0 ; i < 1 ; i++ ) {
 			if ( this.x > this.size ) {
 
 				this.nextTile = ResourcesManager.coToTile(this.x-1, this.y);
