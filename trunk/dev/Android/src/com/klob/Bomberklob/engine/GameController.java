@@ -74,59 +74,56 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 	}
 
 	public abstract void onDraw(Canvas canvas, int size);
-	
+
 	public abstract void update();
 
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event){
-		
+
 		switch (event.getAction()) {		
 		case MotionEvent.ACTION_DOWN:
 			this.x = (int) event.getX();
 			this.y = (int) event.getY();
 			break;
 		case MotionEvent.ACTION_MOVE:
-			int xx = Math.abs(((int) event.getX()-this.x)/4);
-			int yy = Math.abs(((int) event.getY()-this.y)/4);
-			
-			if ( (int) event.getX() > this.x && ((int) event.getY() <  (this.y+xx)) && ((int) event.getY() > (this.y-xx)) ) {
-				animation = PlayerAnimations.RIGHT;
-				this.x = (int) event.getX();
-				this.y = (int) event.getY();
-			}
-			else if ( (int) event.getX() < this.x && ((int) event.getY() <  (this.y+xx)) && ((int) event.getY() > (this.y-xx)) ) {
-				animation = PlayerAnimations.LEFT;
-				this.x = (int) event.getX();
-				this.y = (int) event.getY();
-			}
-			else if ( (int) event.getY() < this.y && ((int) event.getX() <  (this.x+yy)) && ((int) event.getX() > (this.x-yy)) ) {
-				animation = PlayerAnimations.UP;
-				this.x = (int) event.getX();
-				this.y = (int) event.getY();
-			}
-			else if ( (int) event.getY() > this.y && ((int) event.getX() <  (this.x+yy)) && ((int) event.getX() > (this.x-yy)) ) {
-				animation = PlayerAnimations.DOWN;
-				this.x = (int) event.getX();
-				this.y = (int) event.getY();
-			}
-			else if ( (int) event.getY() > this.y && ((int) event.getX() >  (this.x+yy)) && ((int) event.getY() > (this.y+xx)) ) {
+			if ( (int) event.getX() > this.x+(this.objectsSize*2) && (int) event.getY() > this.y+(this.objectsSize*2) ) {
 				animation = PlayerAnimations.DOWN_RIGHT;
 				this.x = (int) event.getX();
 				this.y = (int) event.getY();
 			}
-			else if ( (int) event.getY() > this.y && ((int) event.getX() <  (this.x-yy)) && ((int) event.getY() > (this.y+xx)) ) {
-				animation = PlayerAnimations.DOWN_LEFT;
-				this.x = (int) event.getX();
-				this.y = (int) event.getY();
-			}
-			else if ( (int) event.getY() < this.y && ((int) event.getX() >  (this.x+yy)) && ((int) event.getY() < (this.y-xx)) ) {
+			else if ( (int) event.getX() > this.x+(this.objectsSize*2) && (int) event.getY() < this.y-(this.objectsSize*2) ) {
 				animation = PlayerAnimations.UP_RIGHT;
 				this.x = (int) event.getX();
 				this.y = (int) event.getY();
 			}
-			else if ( (int) event.getY() < this.y && ((int) event.getX() <  (this.x-yy)) && ((int) event.getY() < (this.y-xx)) ) {
+			else if ( (int) event.getX() < this.x-(this.objectsSize*2) && (int) event.getY() < this.y-(this.objectsSize*2) ) {
 				animation = PlayerAnimations.UP_LEFT;
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
+			}
+			else if ( (int) event.getX() < this.x-(this.objectsSize*2) && (int) event.getY() > this.y+(this.objectsSize*2) ) {
+				animation = PlayerAnimations.DOWN_LEFT;
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
+			}
+			else if ( (int) event.getY() > this.y+(this.objectsSize*2) ) {
+				animation = PlayerAnimations.DOWN;
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
+			}
+			else if ( (int) event.getX() < this.x-(this.objectsSize*2) ) {
+				animation = PlayerAnimations.LEFT;
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
+			}
+			else if ( (int) event.getX() > this.x+(this.objectsSize*2) ) {
+				animation = PlayerAnimations.RIGHT;
+				this.x = (int) event.getX();
+				this.y = (int) event.getY();
+			}
+			else if ( (int) event.getY() < this.y-(this.objectsSize*2) ) {
+				animation = PlayerAnimations.UP;
 				this.x = (int) event.getX();
 				this.y = (int) event.getY();
 			}

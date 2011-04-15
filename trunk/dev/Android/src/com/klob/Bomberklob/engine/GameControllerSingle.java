@@ -45,7 +45,7 @@ public class GameControllerSingle extends GameController {
 				while (onTouchEventBoolean) {
 					engine.move(animation);
 					try {
-						sleep(150);
+						sleep(50);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
