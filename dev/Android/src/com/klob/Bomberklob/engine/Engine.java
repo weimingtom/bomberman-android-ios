@@ -50,16 +50,16 @@ public class Engine {
 			moveRight(this.single.getPlayers()[0]);
 		}
 		else if ( playerAnimation == PlayerAnimations.DOWN_LEFT) {
-
+			downLeft(this.single.getPlayers()[0]);
 		}
 		else if ( playerAnimation == PlayerAnimations.DOWN_RIGHT) {
-
+			downRight(this.single.getPlayers()[0]);
 		}
 		else if ( playerAnimation == PlayerAnimations.UP_LEFT) {
-
+			upLeft(this.single.getPlayers()[0]);
 		}
 		else if ( playerAnimation == PlayerAnimations.UP_RIGHT) {
-
+			upRight(this.single.getPlayers()[0]);
 		}
 
 		if ( !this.single.getPlayers()[0].getCurrentAnimation().equals(playerAnimation.getLabel()) ) {
@@ -69,31 +69,28 @@ public class Engine {
 
 	private void moveUp(Player player) {
 
-		this.x = 0;
-		this.y = 0;
+		this.x = player.getPosition().x;
+		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < player.getSpeed() ; i++ ) {
-			if ( player.getPosition().y > this.size ) {
+		for (int i = 0 ; i < (this.size/3) ; i++ ) {
+			if ( this.y > this.size ) {
 
-				this.nextTile = ResourcesManager.coToTile(player.getPosition().x, player.getPosition().y-1);
-				this.currentTile = ResourcesManager.coToTile(player.getPosition().x, player.getPosition().y);
+				this.nextTile = ResourcesManager.coToTile(this.x, this.y-1);
+				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
 					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null ) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
-							if ( ( (this.currentTile.x*this.size) <= player.getPosition().x) && ((player.getPosition().x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
-								System.out.println("MONTE");
-								y--;
+							if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
+								this.y--;
 							}
 							else if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-									System.out.println("MILIEU");
-									y--;
+									this.y--;
 								}
 								else {
-									if ( player.getPosition().x < ((this.currentTile.x*this.size)+(this.size/2)) ) {
-										System.out.println("DROITE|BLOCK OK|GROUND KO|DECALE GAUCHE");
-										x--;
+									if ( this.x < ((this.currentTile.x*this.size)+(this.size/2)) ) {
+										this.x--;
 									}
 									else {
 										break;
@@ -101,9 +98,8 @@ public class Engine {
 								}
 							}
 							else {
-								if ( player.getPosition().x <= ((this.currentTile.x*this.size)+(this.size/2)) ) {
-									System.out.println("DROITE|BLOCK KO|DECALE GAUCHE");
-									x--;
+								if ( this.x <= ((this.currentTile.x*this.size)+(this.size/2)) ) {
+									this.x--;
 								}
 								else {
 									break;
@@ -113,9 +109,8 @@ public class Engine {
 						else {
 							if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-									if ( player.getPosition().x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
-										System.out.println("GAUCHE|BLOCK OK|GROUND KO|DECALE DROITE");
-										x++;
+									if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
+										this.x++;
 									}
 									else {
 										break;
@@ -133,9 +128,8 @@ public class Engine {
 					else {
 						if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-								if ( player.getPosition().x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
-									System.out.println("GAUCHE|BLOCK KO|DECALE DROITE");
-									x++;
+								if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
+									this.x++;
 								}
 								else {
 									break;
@@ -151,45 +145,41 @@ public class Engine {
 					}
 				}
 				else {
-					System.out.println("MEME CASE");
 					this.y--;
 				}
 			}
 			else {
 				break;
 			}
-		}		
-		player.setPosition(new Point(player.getPosition().x+x, player.getPosition().y+y));		
+		}
+		player.setPosition(new Point(this.x, this.y));		
 	}
 
 
 	private void moveDown(Player player) {
 
-		this.x = 0;
-		this.y = 0;
+		this.x = player.getPosition().x;
+		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < player.getSpeed() ; i++ ) {
-			if ( player.getPosition().y < (this.size*(this.single.map.getBlocks().length-1)) ) {
+		for (int i = 0 ; i < (this.size/3) ; i++ ) {
+			if ( this.y < (this.size*(this.single.map.getBlocks()[0].length-1)) ) {
 
-				this.nextTile = ResourcesManager.coToTile(player.getPosition().x, player.getPosition().y+this.size);
-				this.currentTile = ResourcesManager.coToTile(player.getPosition().x, player.getPosition().y);
+				this.nextTile = ResourcesManager.coToTile(this.x, this.y+this.size);
+				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
 					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null ) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
-							if ( ( (this.currentTile.x*this.size) <= player.getPosition().x) && ((player.getPosition().x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
-								System.out.println("DESCEND");
-								y++;
+							if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
+								this.y++;
 							}
 							else if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-									System.out.println("MILIEU");
-									y++;
+									this.y++;
 								}
 								else {
-									if ( player.getPosition().x < ((this.currentTile.x*this.size)+(this.size/2)) ) {
-										System.out.println("DROITE|BLOCK OK|GROUND KO|DECALE GAUCHE");
-										x--;
+									if ( this.x < ((this.currentTile.x*this.size)+(this.size/2)) ) {
+										this.x--;
 									}
 									else {
 										break;
@@ -197,9 +187,8 @@ public class Engine {
 								}
 							}
 							else {
-								if ( player.getPosition().x <= ((this.currentTile.x*this.size)+(this.size/2)) ) {
-									System.out.println("DROITE|BLOCK KO|DECALE GAUCHE");
-									x--;
+								if ( this.x <= ((this.currentTile.x*this.size)+(this.size/2)) ) {
+									this.x--;
 								}
 								else {
 									break;
@@ -209,9 +198,8 @@ public class Engine {
 						else {
 							if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-									if ( player.getPosition().x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
-										System.out.println("GAUCHE|BLOCK OK|GROUND KO|DECALE DROITE");
-										x++;
+									if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
+										this.x++;
 									}
 									else {
 										break;
@@ -229,9 +217,8 @@ public class Engine {
 					else {
 						if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-								if ( player.getPosition().x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
-									System.out.println("GAUCHE|BLOCK KO|DECALE DROITE");
-									x++;
+								if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
+									this.x++;
 								}
 								else {
 									break;
@@ -247,7 +234,6 @@ public class Engine {
 					}
 				}
 				else {
-					System.out.println("MEME CASE");
 					this.y++;
 				}
 			}
@@ -255,36 +241,33 @@ public class Engine {
 				break;
 			}
 		}		
-		player.setPosition(new Point(player.getPosition().x+x, player.getPosition().y+y));		
+		player.setPosition(new Point(this.x, this.y));		
 	}
 	
 	private void moveRight(Player player) {
 		
-		this.x = 0;
-		this.y = 0;
+		this.x = player.getPosition().x;
+		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < player.getSpeed() ; i++ ) {
-			if ( player.getPosition().x < (this.size*(this.single.map.getBlocks()[0].length-1)) ) {
+		for (int i = 0 ; i < (this.size/3) ; i++ ) {
+			if ( this.x < (this.size*(this.single.map.getBlocks().length-1)) ) {
 
-				this.nextTile = ResourcesManager.coToTile(player.getPosition().x+this.size, player.getPosition().y);
-				this.currentTile = ResourcesManager.coToTile(player.getPosition().x, player.getPosition().y);
+				this.nextTile = ResourcesManager.coToTile(this.x+this.size, this.y);
+				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
 
 				if ( this.nextTile.x != this.currentTile.x ) {
 					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null ) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
-							if ( ( (this.currentTile.y*this.size) <= player.getPosition().y) && ((player.getPosition().y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
-								System.out.println("DROITE");
-								x++;
+							if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
+								this.x++;
 							}
 							else if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-									System.out.println("MILIEU");
-									x++;
+									this.x++;
 								}
 								else {
-									if ( player.getPosition().y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
-										System.out.println("BAS|BLOCK OK|GROUND KO|DECALE HAUT");
-										y--;
+									if ( this.y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
+										this.y--;
 									}
 									else {
 										break;
@@ -292,9 +275,8 @@ public class Engine {
 								}
 							}
 							else {
-								if ( player.getPosition().y <= ((this.currentTile.y*this.size)+(this.size/2)) ) {
-									System.out.println("BAS|BLOCK KO|DECALE HAUT");
-									y--;
+								if ( this.y <= ((this.currentTile.y*this.size)+(this.size/2)) ) {
+									this.y--;
 								}
 								else {
 									break;
@@ -304,9 +286,8 @@ public class Engine {
 						else {
 							if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-									if ( player.getPosition().y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
-										System.out.println("HAUT|BLOCK OK|GROUND KO|DECALE BAS");
-										y++;
+									if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
+										this.y++;
 									}
 									else {
 										break;
@@ -324,9 +305,8 @@ public class Engine {
 					else {
 						if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-								if ( player.getPosition().y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
-									System.out.println("HAUT|BLOCK KO|DECALE BAS");
-									y++;
+								if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
+									this.y++;
 								}
 								else {
 									break;
@@ -342,7 +322,6 @@ public class Engine {
 					}
 				}
 				else {
-					System.out.println("MEME CASE");
 					this.x++;
 				}
 			}
@@ -350,36 +329,33 @@ public class Engine {
 				break;
 			}
 		}		
-		player.setPosition(new Point(player.getPosition().x+x, player.getPosition().y+y));
+		player.setPosition(new Point(this.x, this.y));
 	}
 	
 	private void moveLeft(Player player) {
 		
-		this.x = 0;
-		this.y = 0;
+		this.x = player.getPosition().x;
+		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < player.getSpeed() ; i++ ) {
-			if ( player.getPosition().x > this.size ) {
+		for (int i = 0 ; i < (this.size/3) ; i++ ) {
+			if ( this.x > this.size ) {
 
-				this.nextTile = ResourcesManager.coToTile(player.getPosition().x-1, player.getPosition().y);
-				this.currentTile = ResourcesManager.coToTile(player.getPosition().x, player.getPosition().y);
+				this.nextTile = ResourcesManager.coToTile(this.x-1, this.y);
+				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
 
 				if ( this.nextTile.x != this.currentTile.x ) {
 					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null ) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
-							if ( ( (this.currentTile.y*this.size) <= player.getPosition().y) && ((player.getPosition().y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
-								System.out.println("GAUCHE");
-								x--;
+							if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
+								this.x--;
 							}
 							else if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-									System.out.println("MILIEU");
-									x--;
+									this.x--;
 								}
 								else {
-									if ( player.getPosition().y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
-										System.out.println("BAS|BLOCK OK|GROUND KO|DECALE HAUT");
-										y--;
+									if ( this.y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
+										this.y--;
 									}
 									else {
 										break;
@@ -387,9 +363,8 @@ public class Engine {
 								}
 							}
 							else {
-								if ( player.getPosition().y <= ((this.currentTile.y*this.size)+(this.size/2)) ) {
-									System.out.println("BAS|BLOCK KO|DECALE HAUT");
-									y--;
+								if ( this.y <= ((this.currentTile.y*this.size)+(this.size/2)) ) {
+									this.y--;
 								}
 								else {
 									break;
@@ -399,9 +374,8 @@ public class Engine {
 						else {
 							if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-									if ( player.getPosition().y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
-										System.out.println("HAUT|BLOCK OK|GROUND KO|DECALE BAS");
-										y++;
+									if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
+										this.y++;
 									}
 									else {
 										break;
@@ -419,9 +393,8 @@ public class Engine {
 					else {
 						if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-								if ( player.getPosition().y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
-									System.out.println("HAUT|BLOCK KO|DECALE BAS");
-									y++;
+								if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
+									this.y++;
 								}
 								else {
 									break;
@@ -437,7 +410,6 @@ public class Engine {
 					}
 				}
 				else {
-					System.out.println("MEME CASE");
 					this.x--;
 				}
 			}
@@ -445,7 +417,27 @@ public class Engine {
 				break;
 			}
 		}		
-		player.setPosition(new Point(player.getPosition().x+x, player.getPosition().y+y));			
+		player.setPosition(new Point(this.x, this.y));			
+	}
+	
+	private void upRight(Player player) {		
+		moveRight(player);
+		moveUp(player);
+	}
+	
+	private void upLeft(Player player) {		
+		moveLeft(player);
+		moveUp(player);
+	}
+	
+	private void downLeft(Player player) {		
+		moveLeft(player);
+		moveDown(player);
+	}
+	
+	private void downRight(Player player) {		
+		moveRight(player);
+		moveDown(player);
 	}
 
 	public void onDraw(Canvas canvas, int size) {
