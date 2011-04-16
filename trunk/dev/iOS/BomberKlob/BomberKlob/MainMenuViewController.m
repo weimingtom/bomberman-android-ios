@@ -56,7 +56,7 @@
     // TODO: Fixer pourquoi si on release visibleViewController ca plante...
     NSArray *visibleViewController = [[NSArray alloc] initWithObjects:self, nil];
     self.navigationController.viewControllers = visibleViewController;
-//    [visibleViewController release];
+    //    [visibleViewController release];
     
     self.title = NSLocalizedString(@"Main menu", @"Title of 'Main menu' page");
     
@@ -66,7 +66,7 @@
     [pseudo sizeToFit];
     
     newProfil.frame = CGRectMake((pseudo.frame.origin.x + pseudo.frame.size.width + 5), newProfil.frame.origin.y, newProfil.frame.size.width, newProfil.frame.size.height);
-//    [UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationPortrait;
+    //    [UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationPortrait;
 }
 
 
@@ -118,7 +118,6 @@
     SinglePlayerMenuViewController *singlePlayerMenuViewController = [[SinglePlayerMenuViewController alloc] initWithNibName:@"SinglePlayerMenuViewController" bundle:nil];
     [self.navigationController pushViewController:singlePlayerMenuViewController animated:YES];
     [singlePlayerMenuViewController release];
-
 }
 
 
@@ -146,6 +145,7 @@
     [application playSoundButton];
     
     EditorGameViewController *editorGameViewController = [[EditorGameViewController alloc] init];
+    self.navigationController.navigationBarHidden = YES;
     [self.navigationController pushViewController:editorGameViewController animated:YES];
     [editorGameViewController release];
 }

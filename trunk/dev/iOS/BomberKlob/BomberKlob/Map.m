@@ -11,6 +11,8 @@
 #import "Object.h"
 #import "Position.h"
 #import "Player.h"
+#import "Inanimated.h"
+#import "Undestructible.h"
 
 @implementation Map
 
@@ -26,46 +28,46 @@
     self = [super init];
     
     if (self) {
-        Position *position;
-        width = WIDTH;
-        height = HEIGHT;
-        
-        name = @"Default";
-        
-        grounds = [[NSMutableArray alloc] initWithCapacity:height];
-        blocks = [[NSMutableArray alloc] initWithCapacity:height];
-        players = [[NSMutableArray alloc] init];
-        
-        for (int i = 0; i < width; i++){
-            [grounds addObject:[[NSMutableArray alloc] initWithCapacity:width]];
-            [blocks addObject:[[NSMutableArray alloc] initWithCapacity:width]];
-            
-            for (int j = 0; j < height; j++) {
-                [[grounds objectAtIndex:i] addObject: [[Object alloc] initWithImageName:@"tiling" position:[[Position alloc] initWithX:i y:j]]];
-                
-                if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
-                    [[blocks objectAtIndex:i] addObject: [[Object alloc] initWithImageName:@"bloc" position:[[Position alloc] initWithX:i y:j]]];
-                }
-                else {
-                    [[blocks objectAtIndex:i] addObject:@"empty"];
-                }
-            }
-        }
-        
-        position = [[Position alloc] initWithX:1 y:0];
-        [players addObject:position];
-        [position release];
-        position = [[Position alloc] initWithX:19 y:0];
-        [players addObject:position];
-        [position release];
-        position = [[Position alloc] initWithX:1 y:11];
-        [players addObject:position];
-        [position release];
-        position = [[Position alloc] initWithX:19 y:11];
-        [players addObject:position];
-        [position release];
-        
-        [self save];
+//        Position *position;
+//        width = WIDTH;
+//        height = HEIGHT;
+//        
+//        name = @"Test";
+//        
+//        grounds = [[NSMutableArray alloc] initWithCapacity:height];
+//        blocks = [[NSMutableArray alloc] initWithCapacity:height];
+//        players = [[NSMutableArray alloc] init];
+//        
+//        for (int i = 0; i < width; i++){
+//            [grounds addObject:[[NSMutableArray alloc] initWithCapacity:width]];
+//            [blocks addObject:[[NSMutableArray alloc] initWithCapacity:width]];
+//            
+//            for (int j = 0; j < height; j++) {
+//                [[grounds objectAtIndex:i] addObject: [[Inanimated alloc] initWithImageName:@"snow" position:[[Position alloc] initWithX:i y:j]]];
+//                
+//                if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
+//                    [[blocks objectAtIndex:i] addObject: [[Undestructible alloc] initWithImageName:@"bloc" position:[[Position alloc] initWithX:i y:j]]];
+//                }
+//                else {
+//                    [[blocks objectAtIndex:i] addObject:@"empty"];
+//                }
+//            }
+//        }
+//        
+//        position = [[Position alloc] initWithX:5 y:2];
+//        [players addObject:position];
+//        [position release];
+//        position = [[Position alloc] initWithX:15 y:2];
+//        [players addObject:position];
+//        [position release];
+//        position = [[Position alloc] initWithX:15 y:9];
+//        [players addObject:position];
+//        [position release];
+//        position = [[Position alloc] initWithX:5 y:9];
+//        [players addObject:position];
+//        [position release];
+//        
+//        [self save];
     }
     
     return self;
@@ -94,7 +96,7 @@
 
 - (void)save {
     NSMutableData *data = [NSMutableData data];
-
+    
     NSString *mapPath = [NSString stringWithFormat:@"%@/Maps/%@.klob", [[NSBundle mainBundle] bundlePath], name];
     NSKeyedArchiver *map;
     BOOL result;
@@ -117,7 +119,7 @@
     
     data = [NSData dataWithContentsOfFile:mapPath];
     unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-
+    
     myMap = [unarchiver decodeObjectForKey:@"map"];
     [unarchiver finishDecoding];
     [unarchiver release];
@@ -185,33 +187,33 @@
 - (void)draw:(CGContextRef)context:(CGFloat)x:(CGFloat)y{
 	//if (floor(x) != ceil(x)) {
 	//	if ((floor(y) != ceil(y)) {
-			
-			
-			[((Object *) [[grounds objectAtIndex:floor(x)] objectAtIndex:floor(y)]) draw:context];
-            
-            if (![[[blocks objectAtIndex:floor(x)] objectAtIndex:floor(y)] isEqual:@"empty"])
-                [((Object *) [[blocks objectAtIndex:floor(x)] objectAtIndex:floor(y)]) draw:context];
-			
-			
-			[((Object *) [[grounds objectAtIndex:floor(x)] objectAtIndex:ceil(y)]) draw:context];
-            
-            if (![[[blocks objectAtIndex:floor(x)] objectAtIndex:ceil(y)] isEqual:@"empty"])
-                [((Object *) [[blocks objectAtIndex:floor(x)] objectAtIndex:ceil(y)]) draw:context];
+    
+    
+    [((Object *) [[grounds objectAtIndex:floor(x)] objectAtIndex:floor(y)]) draw:context];
+    
+    if (![[[blocks objectAtIndex:floor(x)] objectAtIndex:floor(y)] isEqual:@"empty"])
+        [((Object *) [[blocks objectAtIndex:floor(x)] objectAtIndex:floor(y)]) draw:context];
+    
+    
+    [((Object *) [[grounds objectAtIndex:floor(x)] objectAtIndex:ceil(y)]) draw:context];
+    
+    if (![[[blocks objectAtIndex:floor(x)] objectAtIndex:ceil(y)] isEqual:@"empty"])
+        [((Object *) [[blocks objectAtIndex:floor(x)] objectAtIndex:ceil(y)]) draw:context];
 	
 	
 	
-			
-			[((Object *) [[grounds objectAtIndex:ceil(x)] objectAtIndex:floor(y)]) draw:context];
-            
-            if (![[[blocks objectAtIndex:ceil(x)] objectAtIndex:floor(y)] isEqual:@"empty"])
-                [((Object *) [[blocks objectAtIndex:ceil(x)] objectAtIndex:floor(y)]) draw:context];
+    
+    [((Object *) [[grounds objectAtIndex:ceil(x)] objectAtIndex:floor(y)]) draw:context];
+    
+    if (![[[blocks objectAtIndex:ceil(x)] objectAtIndex:floor(y)] isEqual:@"empty"])
+        [((Object *) [[blocks objectAtIndex:ceil(x)] objectAtIndex:floor(y)]) draw:context];
 	
 	
-			
-			[((Object *) [[grounds objectAtIndex:ceil(x)] objectAtIndex:ceil(y)]) draw:context];
-            
-            if (![[[blocks objectAtIndex:ceil(x)] objectAtIndex:ceil(y)] isEqual:@"empty"])
-                [((Object *) [[blocks objectAtIndex:ceil(x)] objectAtIndex:ceil(y)]) draw:context];
+    
+    [((Object *) [[grounds objectAtIndex:ceil(x)] objectAtIndex:ceil(y)]) draw:context];
+    
+    if (![[[blocks objectAtIndex:ceil(x)] objectAtIndex:ceil(y)] isEqual:@"empty"])
+        [((Object *) [[blocks objectAtIndex:ceil(x)] objectAtIndex:ceil(y)]) draw:context];
 	//	}
 	//}
 }
@@ -224,9 +226,6 @@
             
             if (![[[blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"])
                 [((Object *) [[blocks objectAtIndex:i] objectAtIndex:j]) draw:context];
-			
-			//CGContextFillRect(context, CGRectMake(i*[RessourceManager sharedRessource].tileSize, 0,2 , 15*[RessourceManager sharedRessource].tileSize));
-			//CGContextFillRect(context, CGRectMake(0, j*[RessourceManager sharedRessource].tileSize,21*[RessourceManager sharedRessource].tileSize , 2));
         }
     }
 }
@@ -257,7 +256,7 @@
             CGContextFillRect(context, CGRectMake(0, j*[RessourceManager sharedRessource].tileSize,21*[RessourceManager sharedRessource].tileSize , 2));
         }
     }
-
+    
 }
 
 
@@ -289,7 +288,5 @@
 }
 
 #pragma mark -
-
-
 
 @end

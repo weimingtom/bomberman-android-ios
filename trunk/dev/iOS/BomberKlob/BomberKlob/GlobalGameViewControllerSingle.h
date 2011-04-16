@@ -24,7 +24,7 @@
 @property (nonatomic,retain) GameInformationViewController * informationViewController;
 @property (nonatomic,retain) GameActionViewController * actionViewController;
 
-- (id) init;
+- (id) initWithMapName:(NSString *)mapName;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;

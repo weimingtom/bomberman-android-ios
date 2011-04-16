@@ -13,6 +13,7 @@
 
 @implementation SinglePlayerMenuViewController
 @synthesize play;
+@synthesize mapName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -25,6 +26,7 @@
 
 - (void)dealloc {
     [play release];
+    [mapName release];
     [super dealloc];
 }
 
@@ -50,6 +52,7 @@
 
 - (void)viewDidUnload {
     [self setPlay:nil];
+    [self setMapName:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -63,10 +66,12 @@
 
 - (IBAction)playAction:(id)sender {
 	
-	GlobalGameViewControllerSingle * globalGameViewControllerSingle = [[GlobalGameViewControllerSingle alloc] init];
+	GlobalGameViewControllerSingle * globalGameViewControllerSingle = [[GlobalGameViewControllerSingle alloc] initWithMapName:mapName.text];
 	[self.navigationController pushViewController:globalGameViewControllerSingle animated:YES];
 
 	
+//	GameViewControllerSingle * gameViewController = [[GameViewControllerSingle alloc] initWithMapName:mapName.text];
+//	[self.navigationController pushViewController:gameViewController animated:YES];
 	self.navigationController.navigationBarHidden = YES; 
 	[globalGameViewControllerSingle release];
 }

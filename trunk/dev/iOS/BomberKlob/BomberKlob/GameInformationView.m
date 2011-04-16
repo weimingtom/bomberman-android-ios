@@ -10,6 +10,8 @@
 #import "RessourceManager.h"
 #import "AnimationSequence.h"
 #import "Engine.h"
+#import "Player.h"
+#import "Game.h"
 
 
 @implementation GameInformationView

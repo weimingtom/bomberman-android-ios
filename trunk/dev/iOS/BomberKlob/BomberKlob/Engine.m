@@ -9,9 +9,12 @@
 #import "Engine.h"
 #import "Player.h"
 #import "RessourceManager.h"
+#import "Game.h"
+#import "Map.h"
 
 
 @implementation Engine
+
 @synthesize game;
 
 - (id) initWithGame:(Game *) gameValue{
@@ -24,7 +27,7 @@
 }
 
 - (BOOL) isInCollision: (Player *) player: (NSInteger) xValue: (NSInteger) yValue{
-
+    
 	if (player.position.x+xValue < 0) {
 		return true;
 	}
@@ -51,12 +54,12 @@
 			}
 			else
 				return true;
-
+            
 		}
 	}
-
+    
 	return false;
-
+    
 }
 
 
@@ -67,9 +70,9 @@
 	}
 	
 	//NSLog(@"hello  : %f - %f",floor(player.position.y/15.0),ceil(player.position.y/15.0));
-
+    
 	/*if (player.position.y+resource.tileHeight*2 >= floor(player.position.y/15) && player.position.y+resource.tileHeight*2 >= round(player.position.y/15)) {
-	}*/
+     }*/
 }
 
 - (void) moveDown{
@@ -119,7 +122,7 @@
 	if (![self isInCollision:player :player.speed :-player.speed]){
 		player.moveRightTop;
 	}
-
+    
 }
 
 @end

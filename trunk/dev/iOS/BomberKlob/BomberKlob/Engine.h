@@ -7,13 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Game.h"
+
+@class Game, RessourceManager;
 
 @interface Engine : NSObject {
     Game * game;
 	RessourceManager * resource;
 }
 @property (nonatomic, retain) Game * game;
+
+- (id) initWithGame:(Game *) gameValue;
 
 - (void) moveTop;
 - (void) moveDown;

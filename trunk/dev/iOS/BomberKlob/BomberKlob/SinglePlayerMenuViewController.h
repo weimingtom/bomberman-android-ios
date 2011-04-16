@@ -12,9 +12,12 @@
 @interface SinglePlayerMenuViewController : UIViewController {
     
     UIBarButtonItem *play;
+    UILabel *mapName;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *play;
+@property (nonatomic, retain) IBOutlet UILabel *mapName;
+
 - (IBAction)playAction:(id)sender;
 
 @end
