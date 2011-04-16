@@ -60,7 +60,7 @@
     NSMutableArray *playersPseudos = [[NSMutableArray alloc] init];
     
     sqlite3_stmt *statement = [dataBase select:@"pseudo" from:@"AccountPlayer" where:nil];
-
+    
     while (sqlite3_step(statement) == SQLITE_ROW) {
         [playersPseudos addObject:[NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 0)]]; 
     }
@@ -81,7 +81,7 @@
     NSString *language;
     
     sqlite3_stmt *statement = [dataBase select:@"*" from:@"System" where:nil];
-
+    
     while (sqlite3_step(statement) == SQLITE_ROW) {
         volume = sqlite3_column_int(statement, 0); 
         mute = (BOOL) sqlite3_column_int(statement, 1);
@@ -92,7 +92,7 @@
             user = [[DBUser alloc] initWithId:((NSInteger) sqlite3_column_int(statement, 3))];
         }
     }
-  
+    
     system = [[DBSystem alloc] initWithVolume:volume mute:mute language:language lastUser:user];
     sqlite3_finalize(statement);
 }
@@ -111,11 +111,9 @@
     }
     
     sqlite3_finalize(statement);
-    [mapsTmp addObject:[[DBMap alloc] initWithName:@"Random" owner:-1 official:-1]];
     
-    if ([mapsTmp count] > 0) {
+    if ([mapsTmp count] > 0)
         self.maps = mapsTmp;
-    }
     
     [mapsTmp release];
 }
@@ -174,7 +172,7 @@
     if (system.volume > 0 && !system.mute)
         [self.playerButton play];
 }
- 
+
 
 - (void)setUser:(DBUser *)value {
     [value retain];

@@ -7,19 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Player.h"
-#import "Map.h"
+
+@class Map, Player;
 
 
 @interface Game : NSObject {
 	NSMutableArray * players;
 	Map * map;
-
+    
 }
 @property (nonatomic, retain) NSMutableArray * players;
 @property (nonatomic, retain) Map * map;
 
-- (id) init;
+- (id) initWithMapName:(NSString *)mapName;
 - (void)dealloc;
 
 - (void) initGame;

@@ -94,7 +94,7 @@
 	else if (currentFrame < 3) {
 		currentFrame++;
 		position.y+=speed;
-		NSLog(@"moveDown + position %@ and speed : %d",position, speed);
+//		NSLog(@"moveDown + position %@ and speed : %d",position, speed);
 	}
 	else {
 		currentFrame = 0;

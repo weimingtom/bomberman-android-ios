@@ -8,7 +8,9 @@
 
 #import "GameViewControllerSingle.h"
 #import "Engine.h"
-#import "RessourceManager.h"
+#import "Game.h"
+#import "Map.h"
+#import "Position.h"
 
 
 @implementation GameViewControllerSingle
@@ -23,6 +25,8 @@
 		dimension = dimensionValue;
 		self.gameView = [[GameView alloc] initWithMap: engine.game.map frame:dimension];	
 
+//		engine = [[Engine alloc] initWithGame:[[Game alloc] initWithMapName:mapName]];
+//		self.gameView = [[GameView alloc] initWithMap: engine.game.map];	
 		gameView.players = engine.game.players;
 		[self.view addSubview:gameView];
 		[gameView release];
@@ -38,7 +42,7 @@
 
 //the thread starts by sending this message
 -(void) startTimerThread {
-
+    
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 	[[NSTimer scheduledTimerWithTimeInterval: 0.03125 target: self selector: @selector(timerTick:) userInfo:nil repeats: YES] retain];	
@@ -49,7 +53,7 @@
 }
 
 - (void)timerTick:(NSTimer *)timer {
-	NSLog(@"timer : %@",timer );
+//	NSLog(@"timer : %@",timer );
 	if (run) {
 		if (currentDirection == @"right") {
 			engine.moveRight;
@@ -86,7 +90,7 @@
 
 
 - (void)touchesBegan:(CGPoint) pt{
-	NSLog(@" SINGLE pt.X : %f , pt.Y : %f",pt.x,pt.y);
+//	NSLog(@" SINGLE pt.X : %f , pt.Y : %f",pt.x,pt.y);
 	lastPosition.x = currentPosition.x;
 	lastPosition.y = currentPosition.y;
 	currentPosition.x = pt.x;
@@ -103,7 +107,8 @@
 - (void)touchesMoved: (CGPoint) pt {
 	NSUInteger marge = 20;
 	run = YES;
-
+//	CGPoint pt = [[touches anyObject] locationInView:self.view];
+    
 	lastPosition.x = currentPosition.x;
 	lastPosition.y = currentPosition.y;
 	currentPosition.x = pt.x;
@@ -134,14 +139,18 @@
 	else if (lastPosition.y < currentPosition.y && lastPosition.x < currentPosition.x+marge  && lastPosition.x > currentPosition.x-marge) {
 		currentDirection = @"down";
 	}
-
+    
+	
+	[self.gameView setNeedsDisplay];
+    
+    
 }
 - (void) touchesCancelled:(CGPoint) pt{
 	run = NO;
 }
 - (void) touchesEnded:(CGPoint) pt{
 	run = NO;
-
+    
 }
 
 @end

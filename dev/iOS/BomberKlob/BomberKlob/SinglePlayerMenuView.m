@@ -36,12 +36,12 @@
 
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 - (void)dealloc {
     [map1 release];
@@ -65,24 +65,24 @@
     
     
     previousMap = [self previousMap:previousMap];
-    map3.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", ((DBMap *) [application.maps objectAtIndex:previousMap]).name]];
+    map3.image = [UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@.png", ((DBMap *) [application.maps objectAtIndex:previousMap]).name]];
     previousMap = [self previousMap:previousMap];
     
-    map2.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", ((DBMap *) [application.maps objectAtIndex:previousMap]).name]];
+    map2.image = [UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@.png", ((DBMap *) [application.maps objectAtIndex:previousMap]).name]];
     previousMap = [self previousMap:previousMap];
     
-    map1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", ((DBMap *) [application.maps objectAtIndex:previousMap]).name]];
+    map1.image = [UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@.png", ((DBMap *) [application.maps objectAtIndex:previousMap]).name]];
     
-    map4.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", ((DBMap *) [application.maps objectAtIndex:nextMap]).name]];
+    map4.image = [UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@.png", ((DBMap *) [application.maps objectAtIndex:nextMap]).name]];
     nextMap = [self nextMap:nextMap];
     
-    map5.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", ((DBMap *) [application.maps objectAtIndex:nextMap]).name]];
+    map5.image = [UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@.png", ((DBMap *) [application.maps objectAtIndex:nextMap]).name]];
     nextMap = [self nextMap:nextMap];
     
-    map6.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", ((DBMap *) [application.maps objectAtIndex:nextMap]).name]];
+    map6.image = [UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@.png", ((DBMap *) [application.maps objectAtIndex:nextMap]).name]];
     nextMap = [self nextMap:nextMap];
     
-    map7.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", ((DBMap *) [application.maps objectAtIndex:nextMap]).name]];
+    map7.image = [UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@.png", ((DBMap *) [application.maps objectAtIndex:nextMap]).name]];
     nextMap = [self nextMap:nextMap];
     
     mapName.text = [NSString stringWithFormat:@"%@", ((DBMap *) [application.maps objectAtIndex:selectedMap]).name];
@@ -125,9 +125,9 @@
     [UIView beginAnimations:@"Move" context:nil];
     [UIView setAnimationDuration:0.3];
     [UIView setAnimationBeginsFromCurrentState:YES];
-    NSLog(@"%f", touchPoint.x - startLocation);
+
     if([touches count] == 1) {
-//        [self moveMaps:(touchPoint.x - startLocation)];
+        //        [self moveMaps:(touchPoint.x - startLocation)];
         [self changeMap:(touchPoint.x - startLocation)];
         [self moveMaps:(160.0 - middleMap.center.x)]; // TODO: Changer les nombres par des constantes
         [self replace];
@@ -177,10 +177,10 @@
         selectedMap = [self previousMap:selectedMap];
         
         nextMap = selectedMap - 3;        
-        if (nextMap < 0)
+        while (nextMap < 0)
             nextMap = [application.maps count] + nextMap;
         
-        ((UIImageView *) [maps objectAtIndex:0]).image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", ((DBMap *) [application.maps objectAtIndex:nextMap]).name]];
+        ((UIImageView *) [maps objectAtIndex:0]).image = [UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@.png", ((DBMap *) [application.maps objectAtIndex:nextMap]).name]];
         
         //small - normal - power - my map - aléatoire
     }
@@ -208,25 +208,26 @@
         
         selectedMap = [self nextMap:selectedMap];
         
-        nextMap = selectedMap + 3;        
-        if (nextMap > (((NSInteger) [application.maps count]) - 1))
+        nextMap = selectedMap + 3;
+        
+        while (nextMap > (((NSInteger) [application.maps count]) - 1))
             nextMap = nextMap - [application.maps count];
         
-        ((UIImageView *) [maps lastObject]).image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", ((DBMap *) [application.maps objectAtIndex:nextMap]).name]];
+        ((UIImageView *) [maps lastObject]).image = [UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@.png", ((DBMap *) [application.maps objectAtIndex:nextMap]).name]];
     }
-
+    
     mapName.text = [NSString stringWithFormat:@"%@", ((DBMap *) [application.maps objectAtIndex:selectedMap]).name];
 }
 
 
 - (void)replace {
-    ((UIImageView *) [maps objectAtIndex:0]).frame = CGRectMake(-77.0, 15.0, 84.0, 70.0);
-    ((UIImageView *) [maps objectAtIndex:1]).frame = CGRectMake(-27.0, 10.0, 94.0, 80.0);
-    ((UIImageView *) [maps objectAtIndex:2]).frame = CGRectMake(33.0, 5.0, 104.0, 90.0);
-    ((UIImageView *) [maps objectAtIndex:3]).frame = CGRectMake(103.0, 0.0, 114.0, 100.0);
-    ((UIImageView *) [maps objectAtIndex:4]).frame = CGRectMake(183.0, 5.0, 104.0, 90.0);
-    ((UIImageView *) [maps objectAtIndex:5]).frame = CGRectMake(253.0, 10.0, 94.0, 80.0);
-    ((UIImageView *) [maps objectAtIndex:6]).frame = CGRectMake(313.0, 15.0, 84.0, 70.0);
+    ((UIImageView *) [maps objectAtIndex:0]).frame = CGRectMake(-82.0, 26.0, 95.0, 64.0);
+    ((UIImageView *) [maps objectAtIndex:1]).frame = CGRectMake(-17.0, 19.0, 115.0, 78.0);
+    ((UIImageView *) [maps objectAtIndex:2]).frame = CGRectMake(60.0, 10.0, 140.0, 95.0);
+    ((UIImageView *) [maps objectAtIndex:3]).frame = CGRectMake(155.0, 0.0, 170.0, 115.0);
+    ((UIImageView *) [maps objectAtIndex:4]).frame = CGRectMake(280.0, 10.0, 140.0, 95.0);
+    ((UIImageView *) [maps objectAtIndex:5]).frame = CGRectMake(383.0, 19.0, 115.0, 78.0);
+    ((UIImageView *) [maps objectAtIndex:6]).frame = CGRectMake(467.0, 26.0, 95.0, 64.0);
 }
 
 @end

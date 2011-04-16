@@ -8,25 +8,26 @@
 
 #import "Game.h"
 #import "RessourceManager.h"
+#import "Player.h"
+#import "Map.h"
 
 
 @implementation Game
 
 @synthesize players, map;
 
-- (id) init {
+- (id) initWithMapName:(NSString *)mapName {
 	self = [super init];
     
 	if (self) {
-        map = [[Map alloc] init];
-//		map = [[Map alloc] initWithNameMap:@"Default"];
-
-		Player *player;
+//        map = [[Map alloc] init];
         Position *position;
+        Player *player;
         NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
+        map = [[Map alloc] initWithNameMap:mapName];
         
         players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
-
+        
         // TODO: Changer le tableau des couleurs en fonction de la couleur de joueur
         NSArray *colorsPlayers = [[NSArray alloc] initWithObjects:@"white", @"blue", @"red", @"black", nil];
         
@@ -39,6 +40,8 @@
             [position release];
             [player release];
         }
+        
+        [colorsPlayers release];
 	}
     
 	return self;

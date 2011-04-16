@@ -115,12 +115,28 @@ static DataBase *_dataBase = nil;
 }
 
 
-// TODO: Change vith the true official map
+// TODO: Change with the true official map
 - (void)initMapTable {
-    [self insertInto:@"Map" values:@"('Small', NULL, 1)"];
-    [self insertInto:@"Map" values:@"('Normal', NULL, 1)"];
-    [self insertInto:@"Map" values:@"('Power', NULL, 1)"];
-    [self insertInto:@"Map" values:@"('My map', 1, 0)"];
+    NSString *extension = @".klob";
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *mapPath = [NSString stringWithFormat:@"%@/Maps/", [[NSBundle mainBundle] bundlePath]];
+    NSArray *files = [fileManager contentsOfDirectoryAtPath:mapPath error:NULL];
+    NSMutableArray *nameMap = [[NSMutableArray alloc] init];
+    NSString *fileName;
+    
+    for (int i = 0; i < [files count]; i++) {
+        fileName = (NSString *) [files objectAtIndex:i];
+        
+        if ([fileName hasSuffix:extension]) {
+            if ([files containsObject:[NSString stringWithFormat:@"%@.png", [fileName substringToIndex:([fileName length] - [extension length])]]]) {
+                [nameMap addObject:[fileName substringToIndex:([fileName length] - [extension length])]];
+            }
+        }
+    }
+    
+    for (int i = 0; i < [nameMap count]; i++) {
+        [self insertInto:@"Map" values:[NSString stringWithFormat:@"('%@', NULL, 1)", [nameMap objectAtIndex:i]]];
+    }
 }
 
 
@@ -145,7 +161,7 @@ static DataBase *_dataBase = nil;
     else {
         sql = [NSString stringWithFormat: @"UPDATE %@ SET %@;", table, values];
     }
-    NSLog(@"%@", sql);
+
     if (sqlite3_exec(dataBase, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK) {
         sqlite3_close(dataBase); 
         NSAssert(0, @"Error updating table.");
@@ -163,7 +179,7 @@ static DataBase *_dataBase = nil;
     else {
         query = [NSString stringWithFormat:@"SELECT %@ FROM %@;", attributes, table];
     }
-
+    
     return (sqlite3_prepare_v2(dataBase, [query UTF8String], -1, &statement, nil) == SQLITE_OK)? statement : nil;
 }
 

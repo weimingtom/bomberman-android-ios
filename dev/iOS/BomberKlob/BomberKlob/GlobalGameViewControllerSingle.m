@@ -12,17 +12,19 @@
 #import "GameViewControllerSingle.h"
 #import "Engine.h"
 #import "RessourceManager.h"
+#import "Game.h"
+#import "Map.h"
 
 
 @implementation GlobalGameViewControllerSingle
 
 @synthesize gameViewController,actionViewController,informationViewController;
 
-- (id) init{
+- (id) initWithMapName:(NSString *)mapName {
 	self = [super init];
 	
 	if (self){
-		engine = [[Engine alloc] initWithGame:[[Game alloc] init]];
+		engine = [[Engine alloc] initWithGame:[[Game alloc] initWithMapName:mapName]];
 		resource = [RessourceManager sharedRessource];
 		CGRect dimension ;
 		dimension = CGRectMake(0, resource.screenWidth-(engine.game.map.height*resource.tileSize),resource.tileSize*engine.game.map.width,resource.tileSize*engine.game.map.height);
@@ -52,7 +54,7 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
 	CGPoint pt = [[touches anyObject] locationInView:self.view];
-	NSLog(@" Global pt.X : %f , pt.Y : %f",pt.x,pt.y);
+//	NSLog(@" Global pt.X : %f , pt.Y : %f",pt.x,pt.y);
 	CGRect dimension = gameViewController.dimension;
 	
 	if (pt.x < dimension.size.width && pt.x > 0 && pt.y < dimension.size.height+dimension.origin.y && pt.y > dimension.origin.y){
