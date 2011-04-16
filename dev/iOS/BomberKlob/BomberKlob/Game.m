@@ -18,11 +18,12 @@
 	self = [super init];
     
 	if (self) {
-//        map = [[Map alloc] init];
+        map = [[Map alloc] init];
+//		map = [[Map alloc] initWithNameMap:@"Default"];
+
+		Player *player;
         Position *position;
-        Player *player;
         NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
-        map = [[Map alloc] initWithNameMap:@"Default"];
         
         players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
 
@@ -38,8 +39,6 @@
             [position release];
             [player release];
         }
-        
-        [colorsPlayers release];
 	}
     
 	return self;

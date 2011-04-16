@@ -8,16 +8,21 @@
 
 #import "GameViewControllerSingle.h"
 #import "Engine.h"
+#import "RessourceManager.h"
 
 
 @implementation GameViewControllerSingle
+@synthesize dimension;
 
 - (id) init{
 	self = [super init];
 	
 	if (self){
+		RessourceManager * resource = [RessourceManager sharedRessource];
 		engine = [[Engine alloc] initWithGame:[[Game alloc] init]];
-		self.gameView = [[GameView alloc] initWithMap: engine.game.map];	
+				dimension = CGRectMake(0, resource.screenWidth*0.12,resource.tileSize*engine.game.map.width,resource.tileSize*engine.game.map.height);
+		self.gameView = [[GameView alloc] initWithMap: engine.game.map frame:dimension];	
+
 		gameView.players = engine.game.players;
 		[self.view addSubview:gameView];
 		[gameView release];
@@ -36,12 +41,15 @@
 
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
-	[[NSTimer scheduledTimerWithTimeInterval: 1/2 target: self selector: @selector(timerTick:) userInfo:nil repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval: 0.0625 target: self selector: @selector(timerTick:) userInfo:nil repeats: YES] retain];	
+	
 	[runLoop run];
 	[pool release];
+	
 }
 
 - (void)timerTick:(NSTimer *)timer {
+	NSLog(@"timer : %@",timer );
 	if (run) {
 		if (currentDirection == @"right") {
 			engine.moveRight;
@@ -67,7 +75,7 @@
 		else if (currentDirection == @"leftDown") {
 			engine.moveLeftDown;
 		}
-		[self.gameView setNeedsDisplay];
+		//[self.gameView setNeedsDisplay];
 		//[self.gameView threadUpdate];
 	}
 	else {
@@ -77,14 +85,12 @@
 }
 
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-	UITouch * touch = [touches anyObject];
-	CGPoint pt = [touch locationInView:self.view];
+- (void)touchesBegan:(CGPoint) pt{
+	NSLog(@" SINGLE pt.X : %f , pt.Y : %f",pt.x,pt.y);
 	lastPosition.x = currentPosition.x;
 	lastPosition.y = currentPosition.y;
 	currentPosition.x = pt.x;
 	currentPosition.y = pt.y;
-	[self.gameView setNeedsDisplay];
 	[self startTimer];
 	run = true;
 	currentDirection = @"";
@@ -94,10 +100,9 @@
 
 
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-	NSUInteger marge = 15;
+- (void)touchesMoved: (CGPoint) pt {
+	NSUInteger marge = 20;
 	run = YES;
-	CGPoint pt = [[touches anyObject] locationInView:self.view];
 
 	lastPosition.x = currentPosition.x;
 	lastPosition.y = currentPosition.y;
@@ -130,15 +135,11 @@
 		currentDirection = @"down";
 	}
 
-	
-	[self.gameView setNeedsDisplay];
-
-
 }
-- (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+- (void) touchesCancelled:(CGPoint) pt{
 	run = NO;
 }
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+- (void) touchesEnded:(CGPoint) pt{
 	run = NO;
 
 }

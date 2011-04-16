@@ -14,7 +14,6 @@
 	RessourceManager* ressource;
 	Map * map;
 	NSMutableArray * players;
-	int cpt;
 	
 }
 
@@ -25,6 +24,9 @@
 
 - (id) initWithMap: (Map * )value;
 - (id) initWithFrame:(CGRect)frame;
+- (void)drawAll: (CGContextRef) context;
+- (void) startTimer;
+- (void) startTimerThread;
 
 
 -(id) getPng:(NSString *)path;

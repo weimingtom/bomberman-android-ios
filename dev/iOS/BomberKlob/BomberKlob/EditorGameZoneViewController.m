@@ -32,7 +32,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if (self) {
-        NSLog(@"fregdrsgdgddgdrgdgrt");
 //        mapEditor = [[MapEditor alloc] init];
 //        [(EditorGameZoneView *)r self.view test];
     }

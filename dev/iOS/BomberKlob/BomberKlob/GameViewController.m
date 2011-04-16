@@ -26,8 +26,7 @@
 }
 
 - (void)load{
-	[self.view addSubview:gameView];
-	[gameView release];
+
 }
 
 

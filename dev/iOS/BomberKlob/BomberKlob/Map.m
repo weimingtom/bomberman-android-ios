@@ -41,7 +41,7 @@
             [blocks addObject:[[NSMutableArray alloc] initWithCapacity:width]];
             
             for (int j = 0; j < height; j++) {
-                [[grounds objectAtIndex:i] addObject: [[Object alloc] initWithImageName:@"grass2" position:[[Position alloc] initWithX:i y:j]]];
+                [[grounds objectAtIndex:i] addObject: [[Object alloc] initWithImageName:@"tiling" position:[[Position alloc] initWithX:i y:j]]];
                 
                 if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
                     [[blocks objectAtIndex:i] addObject: [[Object alloc] initWithImageName:@"bloc" position:[[Position alloc] initWithX:i y:j]]];
@@ -175,8 +175,10 @@
 }
 
 
-- (void)threadDraw:(CGContextRef)context {
-//	NSThread * movementThread = [[[NSThread alloc] initWithTarget:self selector:@selector(draw:) object:context]autorelease];[movementThread start]; 
+- (void) threadDraw:(CGContextRef) context{
+	[self performSelectorOnMainThread:@selector(draw:) withObject:context waitUntilDone:YES];
+	NSThread * threadDraw = [[[NSThread alloc] initWithTarget:self selector:@selector(draw:) object:context]autorelease];
+	[threadDraw start];
 }
 
 
@@ -216,13 +218,15 @@
 
 
 - (void)draw:(CGContextRef)context {
-    NSLog(@"Dessine...");
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             [((Object *) [[grounds objectAtIndex:i] objectAtIndex:j]) draw:context];
             
             if (![[[blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"])
                 [((Object *) [[blocks objectAtIndex:i] objectAtIndex:j]) draw:context];
+			
+			//CGContextFillRect(context, CGRectMake(i*[RessourceManager sharedRessource].tileSize, 0,2 , 15*[RessourceManager sharedRessource].tileSize));
+			//CGContextFillRect(context, CGRectMake(0, j*[RessourceManager sharedRessource].tileSize,21*[RessourceManager sharedRessource].tileSize , 2));
         }
     }
 }
@@ -285,5 +289,7 @@
 }
 
 #pragma mark -
+
+
 
 @end

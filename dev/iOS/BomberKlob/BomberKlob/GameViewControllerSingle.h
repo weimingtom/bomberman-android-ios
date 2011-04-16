@@ -17,7 +17,10 @@
 	NSThread* movementThread;
 	NSString * currentDirection;
 	BOOL run ;
+	CGRect dimension;
 }
+@property (nonatomic) CGRect dimension;
+
 
 - (id) init;
 

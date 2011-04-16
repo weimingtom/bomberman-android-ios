@@ -42,13 +42,12 @@
 	
 	int xmax = ceil((player.position.x+xValue + resource.tileSize-player.speed) / resource.tileSize);
 	int ymax = ceil(((player.position.y+yValue + (resource.tileSize*2)-player.speed) / resource.tileSize));
-	
+		
 	for (int i=xmin; i <= xmax; i++) {
 		for (int j =ymin; j <= ymax; j++) {
-			if ((xmin >= 0 && ymin >=0) && (xmax < 21 && ymax < 15)) {
-				if (![[[game.map.blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"]){
+			if ((xmin >= 0 && ymin >=0) && (xmax < game.map.width && ymax < game.map.height)) {
+				if (![[[game.map.blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"])
 					return true;
-				}
 			}
 			else
 				return true;
