@@ -10,7 +10,8 @@
 #import "GameInformationViewController.h"
 #import "GameActionViewController.h"
 #import "GameViewControllerSingle.h"
-
+#import "Engine.h"
+#import "RessourceManager.h"
 
 
 @implementation GlobalGameViewControllerSingle
@@ -21,9 +22,20 @@
 	self = [super init];
 	
 	if (self){
-		self.gameViewController = [[GameViewControllerSingle alloc] init];
-		self.informationViewController = [[GameInformationViewController alloc] init];
-		self.actionViewController = [[GameActionViewController alloc] init];
+		engine = [[Engine alloc] initWithGame:[[Game alloc] init]];
+		resource = [RessourceManager sharedRessource];
+		CGRect dimension ;
+		dimension = CGRectMake(0, resource.screenWidth-(engine.game.map.height*resource.tileSize),resource.tileSize*engine.game.map.width,resource.tileSize*engine.game.map.height);
+		self.gameViewController = [[GameViewControllerSingle alloc] initWithFrame:dimension Engine:engine];
+		
+		dimension = CGRectMake(0, 0,resource.screenHeight,resource.screenWidth-(engine.game.map.height*resource.tileSize));
+		self.informationViewController = [[GameInformationViewController alloc] initWithFrame:dimension Engine:engine];
+
+		
+		dimension = CGRectMake(engine.game.map.width*resource.tileSize, resource.screenWidth-(engine.game.map.height*resource.tileSize),resource.screenHeight-(engine.game.map.width*resource.tileSize),engine.game.map.height*resource.tileSize)
+		;
+		self.actionViewController = [[GameActionViewController alloc] initWithFrame:dimension Engine:engine];
+
 		
 		[self.view addSubview:gameViewController.gameView];
 		[self.view addSubview:informationViewController.informationView];

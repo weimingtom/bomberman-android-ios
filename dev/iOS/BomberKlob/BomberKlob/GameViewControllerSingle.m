@@ -14,13 +14,13 @@
 @implementation GameViewControllerSingle
 @synthesize dimension;
 
-- (id) init{
+- (id) initWithFrame:(CGRect)dimensionValue Engine:(Engine *)engineValue{
 	self = [super init];
 	
 	if (self){
 		RessourceManager * resource = [RessourceManager sharedRessource];
-		engine = [[Engine alloc] initWithGame:[[Game alloc] init]];
-				dimension = CGRectMake(0, resource.screenWidth*0.12,resource.tileSize*engine.game.map.width,resource.tileSize*engine.game.map.height);
+		engine = engineValue;
+		dimension = dimensionValue;
 		self.gameView = [[GameView alloc] initWithMap: engine.game.map frame:dimension];	
 
 		gameView.players = engine.game.players;
@@ -41,7 +41,7 @@
 
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
-	[[NSTimer scheduledTimerWithTimeInterval: 0.0625 target: self selector: @selector(timerTick:) userInfo:nil repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval: 0.03125 target: self selector: @selector(timerTick:) userInfo:nil repeats: YES] retain];	
 	
 	[runLoop run];
 	[pool release];

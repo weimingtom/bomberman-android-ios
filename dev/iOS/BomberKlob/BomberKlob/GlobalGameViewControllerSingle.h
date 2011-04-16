@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class GameActionViewController, GameInformationViewController, GameViewControllerSingle;
+@class GameActionViewController, GameInformationViewController, GameViewControllerSingle, Engine, RessourceManager;
 
 
 @interface GlobalGameViewControllerSingle : UIViewController {
+	Engine * engine;
+	RessourceManager * resource;
+	
     GameActionViewController * actionViewController;
 	GameInformationViewController * informationViewController;
 	GameViewControllerSingle * gameViewController;

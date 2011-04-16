@@ -14,13 +14,13 @@
 
 @synthesize informationView, dimension;
 
-- (id) init{
+- (id) initWithFrame:(CGRect)dimensionValue Engine:(Engine*) engineValue{
 	self = [super init];
 	
 	if (self){
 		RessourceManager * resource = [RessourceManager sharedRessource];
-		dimension = CGRectMake(0, 0,resource.screenHeight , resource.screenWidth*0.12);
-		self.informationView = [[GameInformationView alloc] initWithFrame:dimension];	
+		dimension = dimensionValue;
+		self.informationView = [[GameInformationView alloc] initWithFrame:dimension Engine:engineValue];	
 		[self.view addSubview:informationView];
 		[informationView release];
 	}

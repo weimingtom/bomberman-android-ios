@@ -12,7 +12,7 @@
 
 
 @implementation Player
-@synthesize speed;
+@synthesize speed, lifeNumber;
 
 - (id) init{
 	self = [super init];
@@ -22,7 +22,7 @@
 		powerExplosion = 1;
 		timeExplosion = 3;
 		shield = 1;
-		speed = 3;
+		speed = 2;
 		bombNumber = 1;
 		ressource = [RessourceManager sharedRessource];
 		animations = [ressource.bitmapsPlayer objectForKey:color];
@@ -40,7 +40,7 @@
 		powerExplosion = 1;
 		timeExplosion = 3;
 		shield = 1;
-		speed = 3;
+		speed = 2;
 		bombNumber = 1;
 		ressource = [RessourceManager sharedRessource];
 		animations = [ressource.bitmapsPlayer objectForKey:color];
@@ -222,10 +222,6 @@
 
 - (void) hurt{
 	
-}
-
-- (void) threadDraw:(CGContextRef) context{
-	NSThread * movementThread = [[[NSThread alloc] initWithTarget:self selector:@selector(draw:) object:context]autorelease];[movementThread start]; 
 }
 
 

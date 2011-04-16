@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+@class Engine;
 
 
 @interface GameActionView : UIView {
-    
+    Engine * engine;
 }
 
 - (id) initWithFrame:(CGRect)frame;
+- (void) initComponents;
 
 @end

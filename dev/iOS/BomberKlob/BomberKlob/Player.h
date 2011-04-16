@@ -25,6 +25,7 @@
 }
 
 @property (nonatomic) NSInteger speed;
+@property (nonatomic) NSInteger lifeNumber;
 
 - (id) init;
 - (id) initWithColor:(NSString *)colorValue position:(Position *) positionValue;
