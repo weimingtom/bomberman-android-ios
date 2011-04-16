@@ -15,12 +15,13 @@
 @implementation GameView
 @synthesize  bitmapsInanimates, ressource, map, players;
 
-- (id) initWithMap:(Map *) value{	
-	self = [self initWithFrame:CGRectMake(0, 0,[[UIScreen mainScreen] bounds].size.height , [[UIScreen mainScreen] bounds].size.width)];
+- (id) initWithMap:(Map *) value frame:(CGRect) dimension{	
+	ressource = [RessourceManager sharedRessource];
+	self = [self initWithFrame:dimension];
 	
 	if (self){
 		map = value;
-		cpt = 0;
+		[self startTimer];
 	}
 	
 	return self;
@@ -33,35 +34,27 @@
 	if (self){
 		ressource = [RessourceManager sharedRessource];
 		bitmapsInanimates = ressource.bitmapsInanimates;
-		cpt = 0;
-		[self setNeedsDisplay];
 	}
 	
 	return self;
 }
 
-- (void) threadUpdate{
-	NSThread * updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(updateView) object:nil];
-	[updateThread start];
-}
-
-- (void) updateView{
-	[self setNeedsDisplay];
-	//[NSThread exit];
-}
-
 - (void)drawRect:(CGRect)rect{
+	[super drawRect:rect];
+	NSLog(@"DrawRect : %@",rect);
 	
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	[map draw:context];
-		
+
+	[self drawAll:context];	
+}
+
+- (void)drawAll: (CGContextRef) context{
+	[map draw:context];	
 	for (Player * player in players) {
 		[player draw:context];
-	}	
-	
-
-	//[NSThread exit];
+	}
 }
+
 
 
 
@@ -72,6 +65,25 @@
 	
     return imageRef;
 	
+	
+}
+
+-(void) startTimer
+{
+	NSThread * updateThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerThread) object:nil]autorelease]; //Create a new thread
+	[updateThread start]; //start the thread
+}
+
+//the thread starts by sending this message
+-(void) startTimerThread {
+	
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	CGRect dimension = [self bounds];
+	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
+
+	[[NSTimer scheduledTimerWithTimeInterval: 0.0625 target: self selector: @selector(setNeedsDisplay) userInfo:self repeats: YES] retain];	
+	[runLoop run];
+	[pool release];
 }
 
 @end

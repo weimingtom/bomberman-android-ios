@@ -36,7 +36,6 @@
 
 
 - (void)test {
-    NSLog(@"Testesfessfsefs");
     [map init];
 }
 

@@ -45,6 +45,10 @@
 		9924053213533ABF00011965 /* menu.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 18543B141350A44F0038CC61 /* menu.m4a */; };
 		9924053313533ABF00011965 /* button.wav in Resources */ = {isa = PBXBuildFile; fileRef = 18543B161350BB890038CC61 /* button.wav */; };
 		9924053413533ABF00011965 /* back.wav in Resources */ = {isa = PBXBuildFile; fileRef = 18543B181350BB930038CC61 /* back.wav */; };
+		992AFC701356415D00D7726C /* GameActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 992AFC6F1356415D00D7726C /* GameActionView.m */; };
+		992AFC741356417100D7726C /* GameActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992AFC731356417100D7726C /* GameActionViewController.m */; };
+		992AFC771356419E00D7726C /* GameInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 992AFC761356419E00D7726C /* GameInformationView.m */; };
+		992AFC7A135641B800D7726C /* GameInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992AFC79135641B700D7726C /* GameInformationViewController.m */; };
 		9943395A134C876200970231 /* Animated.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433927134C876200970231 /* Animated.m */; };
 		9943395B134C876200970231 /* AnimationSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433929134C876200970231 /* AnimationSequence.m */; };
 		9943395C134C876200970231 /* Bomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943392B134C876200970231 /* Bomb.m */; };
@@ -83,6 +87,7 @@
 		994339A1134C889500970231 /* inanimates.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9943398C134C889500970231 /* inanimates.xml */; };
 		994339A2134C889500970231 /* players.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9943398D134C889500970231 /* players.xml */; };
 		994339A5134C953000970231 /* XmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 994339A4134C952E00970231 /* XmlParser.m */; };
+		994497C61356EE0B00B6BF6C /* GlobalGameViewControllerSingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 994497C51356EE0A00B6BF6C /* GlobalGameViewControllerSingle.m */; };
 		99ABA0D7135334970052E45F /* OptionsMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846A7E5134C631900D35626 /* OptionsMenuViewController.m */; };
 		99ABA0D8135334CE0052E45F /* SinglePlayerMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18412F1D13519CE6002C49D7 /* SinglePlayerMenuViewController.m */; };
 		99ABA0D9135334D80052E45F /* SelectMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18412F1A13519834002C49D7 /* SelectMapViewController.m */; };
@@ -163,6 +168,14 @@
 		992405231353379700011965 /* DBMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMap.m; sourceTree = "<group>"; };
 		99240525135337D700011965 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		99240526135337D700011965 /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
+		992AFC6E1356415D00D7726C /* GameActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameActionView.h; sourceTree = "<group>"; };
+		992AFC6F1356415D00D7726C /* GameActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameActionView.m; sourceTree = "<group>"; };
+		992AFC721356417100D7726C /* GameActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameActionViewController.h; sourceTree = "<group>"; };
+		992AFC731356417100D7726C /* GameActionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameActionViewController.m; sourceTree = "<group>"; };
+		992AFC751356419E00D7726C /* GameInformationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInformationView.h; sourceTree = "<group>"; };
+		992AFC761356419E00D7726C /* GameInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInformationView.m; sourceTree = "<group>"; };
+		992AFC78135641B700D7726C /* GameInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInformationViewController.h; sourceTree = "<group>"; };
+		992AFC79135641B700D7726C /* GameInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInformationViewController.m; sourceTree = "<group>"; };
 		99433926134C876200970231 /* Animated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animated.h; sourceTree = "<group>"; };
 		99433927134C876200970231 /* Animated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animated.m; sourceTree = "<group>"; };
 		99433928134C876200970231 /* AnimationSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationSequence.h; sourceTree = "<group>"; };
@@ -228,6 +241,8 @@
 		9943398D134C889500970231 /* players.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = players.xml; sourceTree = "<group>"; };
 		994339A3134C952D00970231 /* XmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlParser.h; sourceTree = "<group>"; };
 		994339A4134C952E00970231 /* XmlParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlParser.m; sourceTree = "<group>"; };
+		994497C41356EE0A00B6BF6C /* GlobalGameViewControllerSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalGameViewControllerSingle.h; sourceTree = "<group>"; };
+		994497C51356EE0A00B6BF6C /* GlobalGameViewControllerSingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalGameViewControllerSingle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -506,6 +521,16 @@
 				99433957134C876200970231 /* Single.m */,
 				994339A3134C952D00970231 /* XmlParser.h */,
 				994339A4134C952E00970231 /* XmlParser.m */,
+				992AFC6E1356415D00D7726C /* GameActionView.h */,
+				992AFC6F1356415D00D7726C /* GameActionView.m */,
+				992AFC721356417100D7726C /* GameActionViewController.h */,
+				992AFC731356417100D7726C /* GameActionViewController.m */,
+				992AFC751356419E00D7726C /* GameInformationView.h */,
+				992AFC761356419E00D7726C /* GameInformationView.m */,
+				992AFC78135641B700D7726C /* GameInformationViewController.h */,
+				992AFC79135641B700D7726C /* GameInformationViewController.m */,
+				994497C41356EE0A00B6BF6C /* GlobalGameViewControllerSingle.h */,
+				994497C51356EE0A00B6BF6C /* GlobalGameViewControllerSingle.m */,
 			);
 			name = Body;
 			sourceTree = "<group>";
@@ -682,6 +707,11 @@
 				99225AEF135477B0008B95AA /* EditorGameViewController.m in Sources */,
 				99225AF1135477B0008B95AA /* EditorGameZoneView.m in Sources */,
 				99225AF2135477B0008B95AA /* EditorGameZoneViewController.m in Sources */,
+				992AFC701356415D00D7726C /* GameActionView.m in Sources */,
+				992AFC741356417100D7726C /* GameActionViewController.m in Sources */,
+				992AFC771356419E00D7726C /* GameInformationView.m in Sources */,
+				992AFC7A135641B800D7726C /* GameInformationViewController.m in Sources */,
+				994497C61356EE0B00B6BF6C /* GlobalGameViewControllerSingle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

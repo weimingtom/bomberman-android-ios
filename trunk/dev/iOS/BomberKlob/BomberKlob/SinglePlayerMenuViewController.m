@@ -8,6 +8,7 @@
 
 #import "SinglePlayerMenuViewController.h"
 #import "GameViewControllerSingle.h"
+#import "GlobalGameViewControllerSingle.h"
 
 
 @implementation SinglePlayerMenuViewController
@@ -61,9 +62,12 @@
 }
 
 - (IBAction)playAction:(id)sender {
-	GameViewControllerSingle * gameViewController = [[GameViewControllerSingle alloc] init];
-	[self.navigationController pushViewController:gameViewController animated:YES];
+	
+	GlobalGameViewControllerSingle * globalGameViewControllerSingle = [[GlobalGameViewControllerSingle alloc] init];
+	[self.navigationController pushViewController:globalGameViewControllerSingle animated:YES];
+
+	
 	self.navigationController.navigationBarHidden = YES; 
-	[gameViewController release];
+	[globalGameViewControllerSingle release];
 }
 @end
