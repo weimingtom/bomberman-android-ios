@@ -40,9 +40,6 @@
 }
 
 - (void)drawRect:(CGRect)rect{
-	[super drawRect:rect];
-	NSLog(@"DrawRect : %@",rect);
-	
 	CGContextRef context = UIGraphicsGetCurrentContext();
 
 	[self drawAll:context];	
@@ -81,7 +78,7 @@
 	CGRect dimension = [self bounds];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 
-	[[NSTimer scheduledTimerWithTimeInterval: 0.0625 target: self selector: @selector(setNeedsDisplay) userInfo:self repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval: 0.03125 target: self selector: @selector(setNeedsDisplay) userInfo:self repeats: YES] retain];	
 	[runLoop run];
 	[pool release];
 }

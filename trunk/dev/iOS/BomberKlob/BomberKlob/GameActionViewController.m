@@ -9,22 +9,25 @@
 #import "GameActionViewController.h"
 #import "GameActionView.h"
 #import "RessourceManager.h"
+#import "Engine.h"
 
 
 @implementation GameActionViewController
 @synthesize actionView, dimension;
 
-- (id) init{
+- (id) initWithFrame:(CGRect)dimensionValue Engine:(Engine*)engineValue{
 	self = [super init];
 	
 	if (self){
 		RessourceManager * resource = [RessourceManager sharedRessource];
-		dimension = CGRectMake(resource.screenHeight*0.90, resource.screenWidth*0.12, resource.screenHeight, resource.screenWidth*0.88);
-		self.actionView = [[GameActionView alloc] initWithFrame:dimension];	
+		dimension = dimensionValue;
+		self.actionView = [[GameActionView alloc] initWithFrame:dimension Engine:engineValue];	
 		[self.view addSubview:actionView];
 		[actionView release];
 	}
 	return self;
 }
+
+
 
 @end

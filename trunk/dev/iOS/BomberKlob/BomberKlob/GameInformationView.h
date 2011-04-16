@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@class RessourceManager, Engine;
 
 
 @interface GameInformationView : UIView {
-    
+    RessourceManager * resource;
+	Engine * engine;
 }
 
 - (id) initWithFrame:(CGRect)frame;
