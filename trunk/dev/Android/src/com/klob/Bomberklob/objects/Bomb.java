@@ -55,6 +55,11 @@ public class Bomb extends Animated {
 	public Bomb copy() {
 		return new Bomb(this);
 	}
+	
+	@Override
+	public void destroy() {
+		time = 0;		
+	}
 
 	@Override
 	public boolean hasAnimationFinished() {

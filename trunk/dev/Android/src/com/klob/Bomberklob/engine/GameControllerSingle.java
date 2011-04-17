@@ -82,6 +82,6 @@ public class GameControllerSingle extends GameController {
 
 	@Override
 	public void pushBomb() {
-		this.engine.pushBomb();		
+		this.engine.pushBomb(this.engine.getSingle().getPlayers()[0]);		
 	}
 }

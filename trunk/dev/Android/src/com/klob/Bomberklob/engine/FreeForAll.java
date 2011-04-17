@@ -8,7 +8,7 @@ public class FreeForAll extends GameType {
 		timeExplosion = 30;
 		shield = 0;
 		speed = 1;
-		bombNumber = 1;
+		bombNumber = 3;
 		damages = 0;
 	}
 

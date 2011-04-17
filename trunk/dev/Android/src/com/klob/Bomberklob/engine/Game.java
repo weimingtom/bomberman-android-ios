@@ -55,13 +55,6 @@ public abstract class Game {
 		this.map.onDraw(canvas, size);
 		for (int i = 0 ; i < this.players.length ; i++ ) {
 			if ( this.players[i].getPosition() != null ) {
-				for(int j = 0; j < this.players[j].getBombsPlanted().size() ; j++ ) {
-					this.players[j].getBombsPlanted().get(j).onDraw(canvas, size);
-				}
-			}
-		}
-		for (int i = 0 ; i < this.players.length ; i++ ) {
-			if ( this.players[i].getPosition() != null ) {
 				this.players[i].onDraw(canvas, size);
 			}
 		}

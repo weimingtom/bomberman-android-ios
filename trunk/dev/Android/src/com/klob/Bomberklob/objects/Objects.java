@@ -88,7 +88,6 @@ public abstract class Objects implements Serializable {
 	public abstract boolean isDestructible();
 	
 	public String toString() {
-		return imageName;
+		return "Name : " +imageName+ "| Position (" + position.x + "," + position.y + ")";
 	}
-
 }

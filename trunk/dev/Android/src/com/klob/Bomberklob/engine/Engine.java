@@ -201,7 +201,7 @@ public class Engine {
 			if ( this.y < (this.size*(this.single.map.getBlocks()[0].length-1)) ) {
 
 				this.nextTile = ResourcesManager.coToTile(this.x, this.y+this.size);
-				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
+				this.currentTile = ResourcesManager.coToTile(this.x, this.y+this.size-1);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
 					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null ) {
@@ -289,7 +289,7 @@ public class Engine {
 			if ( this.x < (this.size*(this.single.map.getBlocks().length-1)) ) {
 
 				this.nextTile = ResourcesManager.coToTile(this.x+this.size, this.y);
-				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
+				this.currentTile = ResourcesManager.coToTile(this.x+this.size-1, this.y);
 
 				if ( this.nextTile.x != this.currentTile.x ) {
 					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null ) {
@@ -476,8 +476,8 @@ public class Engine {
 		moveDown(player);
 	}
 
-	public void pushBomb() {
-		this.single.getPlayers()[0].plantingBomb();
+	public void pushBomb(Player player) {
+		this.single.pushBomb(player);
 	}
 
 
