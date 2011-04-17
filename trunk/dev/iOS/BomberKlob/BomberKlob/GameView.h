@@ -22,7 +22,7 @@
 @property (nonatomic, retain) Map* map;
 @property (nonatomic, retain) NSMutableArray * players;
 
-- (id) initWithMap: (Map * )value;
+- (id) initWithMap:(Map *) value frame:(CGRect) dimension;
 - (id) initWithFrame:(CGRect)frame;
 - (void)drawAll: (CGContextRef) context;
 - (void) startTimer;

@@ -15,7 +15,7 @@
 #import "GameViewControllerSingle.h"
 #import "OptionsMenuViewController.h"
 #import "SinglePlayerMenuViewController.h"
-#import "EditorGameViewController.h"
+#import "EditorViewController.h"
 
 
 @implementation MainMenuViewController
@@ -144,10 +144,10 @@
     Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
     [application playSoundButton];
     
-    EditorGameViewController *editorGameViewController = [[EditorGameViewController alloc] init];
+    EditorViewController *editorViewController = [[EditorViewController alloc] init];
     self.navigationController.navigationBarHidden = YES;
-    [self.navigationController pushViewController:editorGameViewController animated:YES];
-    [editorGameViewController release];
+    [self.navigationController pushViewController:editorViewController animated:NO];
+    [editorViewController release];
 }
 
 

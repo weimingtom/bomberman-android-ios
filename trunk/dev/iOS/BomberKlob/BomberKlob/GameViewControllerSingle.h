@@ -21,7 +21,7 @@
 }
 @property (nonatomic) CGRect dimension;
 
-- (id) initWithMapName:(NSString *)mapName;
+- (id) initWithFrame:(CGRect)dimensionValue Engine:(Engine *)engineValue;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 

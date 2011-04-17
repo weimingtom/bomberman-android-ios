@@ -13,6 +13,7 @@
 #import "Player.h"
 #import "Inanimated.h"
 #import "Undestructible.h"
+#import "Animated.h"
 
 @implementation Map
 
@@ -29,30 +30,30 @@
     
     if (self) {
 //        Position *position;
-//        width = WIDTH;
-//        height = HEIGHT;
-//        
-//        name = @"Test";
-//        
-//        grounds = [[NSMutableArray alloc] initWithCapacity:height];
-//        blocks = [[NSMutableArray alloc] initWithCapacity:height];
-//        players = [[NSMutableArray alloc] init];
-//        
-//        for (int i = 0; i < width; i++){
-//            [grounds addObject:[[NSMutableArray alloc] initWithCapacity:width]];
-//            [blocks addObject:[[NSMutableArray alloc] initWithCapacity:width]];
-//            
-//            for (int j = 0; j < height; j++) {
-//                [[grounds objectAtIndex:i] addObject: [[Inanimated alloc] initWithImageName:@"snow" position:[[Position alloc] initWithX:i y:j]]];
-//                
-//                if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
-//                    [[blocks objectAtIndex:i] addObject: [[Undestructible alloc] initWithImageName:@"bloc" position:[[Position alloc] initWithX:i y:j]]];
-//                }
-//                else {
-//                    [[blocks objectAtIndex:i] addObject:@"empty"];
-//                }
-//            }
-//        }
+        width = WIDTH;
+        height = HEIGHT;
+        
+        name = @"Default";
+        
+        grounds = [[NSMutableArray alloc] initWithCapacity:height];
+        blocks = [[NSMutableArray alloc] initWithCapacity:height];
+        players = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < width; i++){
+            [grounds addObject:[[NSMutableArray alloc] initWithCapacity:width]];
+            [blocks addObject:[[NSMutableArray alloc] initWithCapacity:width]];
+            
+            for (int j = 0; j < height; j++) {
+                [[grounds objectAtIndex:i] addObject: [[Inanimated alloc] initWithImageName:@"grass2" position:[[Position alloc] initWithX:i y:j]]];
+                
+                if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
+                    [[blocks objectAtIndex:i] addObject: [[Undestructible alloc] initWithImageName:@"bloc" position:[[Position alloc] initWithX:i y:j]]];
+                }
+                else {
+                    [[blocks objectAtIndex:i] addObject:@"empty"];
+                }
+            }
+        }
 //        
 //        position = [[Position alloc] initWithX:5 y:2];
 //        [players addObject:position];
@@ -152,27 +153,22 @@
 }
 
 
-- (void)addGround:(NSInteger)ground {
+- (void)addGround:(Object *)ground position:(Position *)position {
 	
 }
 
 
-- (void)addBlock:(NSInteger)block {
-	
+- (void)addBlock:(Object *)block position:(Position *)position {
+    [[blocks objectAtIndex:position.x] replaceObjectAtIndex:position.y withObject:block];
 }
 
 
-- (void)deleteGround:(NSInteger)ground {
-	
+- (void)deleteBlockAtPosition:(Position *)position {
+	[[blocks objectAtIndex:position.x] replaceObjectAtIndex:position.y withObject:@"empty"];
 }
 
 
-- (void)deleteBlock:(NSInteger)block {
-	
-}
-
-
-- (void)destroyBlock:(NSInteger)block {
+- (void)destroyBlock:(Animated *)block position:(Position *)position {
 	
 }
 
@@ -223,9 +219,10 @@
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             [((Object *) [[grounds objectAtIndex:i] objectAtIndex:j]) draw:context];
-            
-            if (![[[blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"])
+
+            if (![[[blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"]) {
                 [((Object *) [[blocks objectAtIndex:i] objectAtIndex:j]) draw:context];
+            }
         }
     }
 }

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class GameInformationView;
+@class GameInformationView, Engine;
 
 @interface GameInformationViewController : UIViewController {
     GameInformationView * informationView;
@@ -17,5 +17,8 @@
 
 @property (nonatomic,retain) GameInformationView * informationView;
 @property (nonatomic) CGRect dimension;
+
+
+- (id) initWithFrame:(CGRect)dimensionValue Engine:(Engine *) engineValue;
 
 @end

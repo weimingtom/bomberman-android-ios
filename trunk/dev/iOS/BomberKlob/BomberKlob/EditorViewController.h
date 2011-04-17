@@ -7,14 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MapEditor.h"
-#import "GameView.h"
 
-@interface EditorViewController : NSObject {
-    MapEditor * mapEditor;
-    GameView * view;
+@class MapEditor, EditorMapZone, EditorInformation, EditorAction, Position, Object;
+
+
+@interface EditorViewController : UIViewController {
+    
+    MapEditor *mapEditor;
+    
+    EditorMapZone *editorMapZone;
+    EditorInformation *editorInformation;
+    EditorAction *editorAction;
 }
 
-- (id) init;
+@property (nonatomic, retain) MapEditor *mapEditor;
+
+- (id)init;
+- (void)dealloc;
+
+- (void)clickOnPosition:(Position *)position;
 
 @end

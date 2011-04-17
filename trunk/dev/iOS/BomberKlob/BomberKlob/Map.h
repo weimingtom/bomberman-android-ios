@@ -11,7 +11,7 @@
 #define WIDTH  21
 #define HEIGHT 14
 
-@class RessourceManager;
+@class RessourceManager, Position, Object, Animated;
 
 
 @interface Map : NSObject <NSCoding> {
@@ -38,11 +38,10 @@
 - (void)save;
 - (void)load:(NSString*)mapName;
 
-- (void)addGround:(NSInteger)ground;
-- (void)addBlock:(NSInteger)block;
-- (void)deleteGround:(NSInteger)ground;
-- (void)deleteBlock:(NSInteger)block;
-- (void)destroyBlock:(NSInteger)block;
+- (void)addGround:(Object *)ground position:(Position *)position;
+- (void)addBlock:(Object *)block position:(Position *)position;
+- (void)deleteBlockAtPosition:(Position *)position;
+- (void)destroyBlock:(Animated *)block position:(Position *)position;
 
 - (void)draw:(CGContextRef)context;
 - (void)drawPlayers:(CGContextRef)context;
