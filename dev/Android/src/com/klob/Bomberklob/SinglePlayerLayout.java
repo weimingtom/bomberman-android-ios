@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -30,7 +31,8 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	
 	private Bundle bundle;
 
-	private Button menu, bomb;
+	private Button menu;
+	private ImageButton bomb;
 	
 	private int menuSize = 50;
 
@@ -77,7 +79,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.menu = (Button) findViewById(R.id.SinglePlayerButtonMenu);
 		this.menu.setOnClickListener(this);
 		
-		this.bomb = (Button) findViewById(R.id.SinglePlayerButtonBomb);
+		this.bomb = (ImageButton) findViewById(R.id.SinglePlayerButtonBomb);
 		this.bomb.setOnClickListener(this);
 	}
 

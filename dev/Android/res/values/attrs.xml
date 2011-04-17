@@ -3,6 +3,6 @@
     <declare-styleable name="Gallery">
         <attr name="android:galleryItemBackground" />
     </declare-styleable>
-    <color name="White">#FFFFFF</color>
+    <color name="White">#884422</color>
     <color name="Grey">#808080</color>
 </resources>

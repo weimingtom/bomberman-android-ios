@@ -28,17 +28,16 @@
 
 		</LinearLayout>
 		<RelativeLayout android:background="@color/White"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:id="@+id/SinglePlayerRelativeLayoutObjectsGallery">
+			android:id="@+id/SinglePlayerRelativeLayoutObjectsGallery" android:layout_width="fill_parent" android:layout_height="wrap_content">
 
 			<FrameLayout android:id="@+id/SinglePlayerFrameLayoutBombsGallery"
 				android:layout_height="wrap_content" android:layout_width="wrap_content"
 				android:layout_centerInParent="true">
 			</FrameLayout>
+			<ImageButton
+				android:layout_alignParentBottom="true" android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:id="@+id/SinglePlayerButtonBomb" android:background="@drawable/bomb_button" android:layout_centerInParent="true"></ImageButton>
 
-			<Button android:layout_alignParentBottom="true"
-				android:layout_height="wrap_content" android:id="@+id/SinglePlayerButtonBomb"
-				android:text="BOOM" android:layout_width="wrap_content"></Button>
 
 		</RelativeLayout>
 	</LinearLayout>
