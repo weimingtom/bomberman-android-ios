@@ -10,6 +10,7 @@ import com.klob.Bomberklob.objects.AnimationSequence;
 import com.klob.Bomberklob.objects.Bomb;
 import com.klob.Bomberklob.objects.BotPlayer;
 import com.klob.Bomberklob.objects.HumanPlayer;
+import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 public class Single extends Game {
@@ -51,5 +52,15 @@ public class Single extends Game {
 				
 			}
 		}
+	}
+	
+	public void pushBomb(Player player) {
+		
+		Bomb b = player.plantingBomb();		
+		if ( b != null ) {
+			Point p = ResourcesManager.coToTile(b.getPosition().x, b.getPosition().y);
+			this.map.getBlocks()[p.x][p.y] = b;
+		}
+
 	}
 }
