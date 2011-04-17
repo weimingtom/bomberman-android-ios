@@ -1,10 +1,14 @@
 package com.klob.Bomberklob.engine;
 
+import java.util.Vector;
+
+import com.klob.Bomberklob.objects.Bomb;
 import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.resourcesmanager.ResourcesManager;
 
 import android.graphics.Canvas;
+import android.util.Log;
 
 public class Engine {
 
@@ -12,6 +16,11 @@ public class Engine {
 
 	private Point nextTile = null, currentTile = null;
 	private int size,x, y;
+
+
+	private boolean bombBoolean = true;
+	private Thread bombThread;	
+
 
 	/* Constructeur -------------------------------------------------------- */
 
@@ -21,6 +30,7 @@ public class Engine {
 		this.x = 0;
 		this.y = 0;
 	}
+
 
 	/* Getters ------------------------------------------------------------- */
 
@@ -32,6 +42,33 @@ public class Engine {
 
 	public void setSingle(Single single) {
 		this.single = single;
+	}
+
+	public void setBombThreadRunning(boolean bombBoolean2) {
+		this.bombBoolean = bombBoolean2;
+		if ( this.bombBoolean && (this.bombThread == null || this.bombThread.getState() == Thread.State.TERMINATED)) {
+			this.bombThread = new Thread() {
+				@Override
+				public void run() {
+					Log.i("Bombs Thread","Thread started");
+					while (bombBoolean) {
+						try {
+							sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						for (int i = 0 ; i < single.getPlayers().length ; i++ ) {
+							Vector<Bomb> bombs = single.getPlayers()[i].getBombsPlanted();
+							for (int j = 0 ; j < bombs.size() ; j++ ) {
+								bombs.get(j).updateTime();
+							}
+						}
+					}
+					Log.i("Bombs Thread","Thread done");
+				};
+			};
+			this.bombThread.start();
+		}
 	}
 
 	/* Méthodes publiques -------------------------------------------------- */
@@ -72,7 +109,7 @@ public class Engine {
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < 1 ; i++ ) {
+		for (int i = 0 ; i < (ResourcesManager.getSize()/4) ; i++ ) {
 			if ( this.y > this.size ) {
 
 				this.nextTile = ResourcesManager.coToTile(this.x, this.y-1);
@@ -155,13 +192,12 @@ public class Engine {
 		player.setPosition(new Point(this.x, this.y));		
 	}
 
-
 	private void moveDown(Player player) {
 
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < 1 ; i++ ) {
+		for (int i = 0 ; i < (ResourcesManager.getSize()/4) ; i++ ) {
 			if ( this.y < (this.size*(this.single.map.getBlocks()[0].length-1)) ) {
 
 				this.nextTile = ResourcesManager.coToTile(this.x, this.y+this.size);
@@ -243,13 +279,13 @@ public class Engine {
 		}		
 		player.setPosition(new Point(this.x, this.y));		
 	}
-	
+
 	private void moveRight(Player player) {
-		
+
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < 1 ; i++ ) {
+		for (int i = 0 ; i < (ResourcesManager.getSize()/4) ; i++ ) {
 			if ( this.x < (this.size*(this.single.map.getBlocks().length-1)) ) {
 
 				this.nextTile = ResourcesManager.coToTile(this.x+this.size, this.y);
@@ -331,13 +367,13 @@ public class Engine {
 		}		
 		player.setPosition(new Point(this.x, this.y));
 	}
-	
+
 	private void moveLeft(Player player) {
-		
+
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < 1 ; i++ ) {
+		for (int i = 0 ; i < (ResourcesManager.getSize()/4) ; i++ ) {
 			if ( this.x > this.size ) {
 
 				this.nextTile = ResourcesManager.coToTile(this.x-1, this.y);
@@ -419,26 +455,31 @@ public class Engine {
 		}		
 		player.setPosition(new Point(this.x, this.y));			
 	}
-	
+
 	private void upRight(Player player) {		
 		moveRight(player);
 		moveUp(player);
 	}
-	
+
 	private void upLeft(Player player) {		
 		moveLeft(player);
 		moveUp(player);
 	}
-	
+
 	private void downLeft(Player player) {		
 		moveLeft(player);
 		moveDown(player);
 	}
-	
+
 	private void downRight(Player player) {		
 		moveRight(player);
 		moveDown(player);
 	}
+
+	public void pushBomb() {
+		this.single.getPlayers()[0].plantingBomb();
+	}
+
 
 	public void onDraw(Canvas canvas, int size) {
 		this.single.onDraw(canvas,size);
@@ -446,6 +487,115 @@ public class Engine {
 
 	public void update() {
 		this.single.update();
-	}
 
+		Player[] players = this.single.getPlayers();
+		Vector<Bomb> bombs;
+		Map map = this.single.getMap();
+
+		for (int i = 0 ; i < players.length ; i++ ) {
+			if ( players[i].getPosition() != null ) {
+				players[i].update();
+				bombs = players[i].getBombsPlanted();
+				for(int j = 0; j < bombs.size() ; j++ ) {
+					if ( bombs.get(j).hasAnimationFinished() ) {
+						Point p = ResourcesManager.coToTile(bombs.get(j).getPosition().x, bombs.get(j).getPosition().y);
+						map.addBlock(ResourcesManager.getObjects().get("firecenter").copy(), p);
+						
+						/* UP */
+						for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
+							if ( map.getBlocks()[p.x][p.y-k] == null) {
+								if ( map.getGrounds()[p.x][p.y-k].isFireWall() ) {
+									break;
+								}
+								else {
+									if ( k < bombs.get(j).getPower()-1 ) {
+										map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y-k));
+									}
+									else {
+										map.addBlock(ResourcesManager.getObjects().get("fireup").copy(), new Point(p.x ,p.y-k));
+									}
+								}
+							}
+							else {
+								if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
+									map.getBlocks()[p.x][p.y-k].destroy();
+								}
+								break;
+							}
+						}
+						
+						/* DOWN */
+						for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
+							if ( map.getBlocks()[p.x][p.y+k] == null) {
+								if ( map.getGrounds()[p.x][p.y+k].isFireWall() ) {
+									break;
+								}
+								else {
+									if ( k < bombs.get(j).getPower()-1 ) {
+										map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y+k));
+									}
+									else {
+										map.addBlock(ResourcesManager.getObjects().get("firedown").copy(), new Point(p.x ,p.y+k));
+									}
+								}
+							}
+							else {
+								if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
+									map.getBlocks()[p.x][p.y+k].destroy();
+								}
+								break;
+							}
+						}
+						
+						/* LEFT */
+						for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
+							if ( map.getBlocks()[p.x-k][p.y] == null) {
+								if ( map.getGrounds()[p.x-k][p.y].isFireWall() ) {
+									break;
+								}
+								else {
+									if ( k < bombs.get(j).getPower()-1 ) {
+										map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x-k ,p.y));
+									}
+									else {
+										map.addBlock(ResourcesManager.getObjects().get("fireleft").copy(), new Point(p.x-k ,p.y));
+									}
+								}
+							}
+							else {
+								if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
+									map.getBlocks()[p.x-k][p.y].destroy();
+								}
+								break;
+							}
+						}
+						
+						/* RIGHT */
+						for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
+							if ( map.getBlocks()[p.x+k][p.y] == null) {
+								if ( map.getGrounds()[p.x+k][p.y].isFireWall() ) {
+									break;
+								}
+								else {
+									if ( k < bombs.get(j).getPower()-1 ) {
+										map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x+k ,p.y));
+									}
+									else {
+										map.addBlock(ResourcesManager.getObjects().get("fireright").copy(), new Point(p.x+k ,p.y));
+									}
+								}
+							}
+							else {
+								if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
+									map.getBlocks()[p.x+k][p.y].destroy();
+								}
+								break;
+							}
+						}
+						bombs.remove(j);
+					}
+				}
+			}
+		}
+	}
 }

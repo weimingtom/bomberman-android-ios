@@ -30,7 +30,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	
 	private Bundle bundle;
 
-	private Button menu;
+	private Button menu, bomb;
 	
 	private int menuSize = 50;
 
@@ -66,7 +66,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.bombsGallery = new ObjectsGallery(getApplicationContext());
 		this.bombsGallery.setItemsDisplayed(1);
 		this.bombsGallery.setLevel(1);
-		this.bombsGallery.addObjects(new Bomb("normal", false, 1, true, 1, 1, ResourcesManager.getBombsAnimations().get("normal"), "idle"));
+		this.bombsGallery.addObjects(new Bomb("normal", false, 1, true, 1, 1, 0, ResourcesManager.getBombsAnimations().get("normal"), "idle"));
 		this.bombsGallery.setSelectedItem("normal");
 		this.bombsGallery.setRectangles(new Point(0,0));
 		this.bombsGallery.update();
@@ -76,6 +76,9 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		
 		this.menu = (Button) findViewById(R.id.SinglePlayerButtonMenu);
 		this.menu.setOnClickListener(this);
+		
+		this.bomb = (Button) findViewById(R.id.SinglePlayerButtonBomb);
+		this.bomb.setOnClickListener(this);
 	}
 
 	@Override
@@ -109,6 +112,9 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		if ( this.menu == arg0 ) {
 			Intent intent = new Intent(SinglePlayerLayout.this, SinglePlayerMenu.class);
 			startActivityForResult(intent, 1000);
+		}
+		else if ( this.bomb == arg0 ) {
+			this.gameControllerSingle.pushBomb();
 		}
 	}	
 	

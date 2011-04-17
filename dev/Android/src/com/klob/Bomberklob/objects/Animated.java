@@ -22,8 +22,8 @@ public abstract class Animated extends Objects {
 	
 	/* Constructeur -------------------------------------------------------- */
 	
-	public Animated (String imageName, boolean hit, int level, boolean fireWall, Hashtable<String, AnimationSequence> animations, String currentAnimation) {
-		super(imageName, hit, level, fireWall);
+	public Animated (String imageName, boolean hit, int level, boolean fireWall, int damages, Hashtable<String, AnimationSequence> animations, String currentAnimation) {
+		super(imageName, hit, level, fireWall, damages);
 		this.animations = animations;
 		this.currentAnimation = currentAnimation;
 		this.currentFrame = 0;
@@ -89,6 +89,11 @@ public abstract class Animated extends Objects {
 				}
 				this.waitDelay = animations.get(currentAnimation).sequence.get(currentFrame).nextFrameDelay;
 			}
+			else {
+				if ( currentFrame < animations.get(currentAnimation).sequence.size()-1 ) {
+					this.currentFrame++;
+				}
+			}
 		}
 		else {
 			waitDelay--;
@@ -103,7 +108,7 @@ public abstract class Animated extends Objects {
 	@Override
 	public boolean hasAnimationFinished() {
 		AnimationSequence as = animations.get(currentAnimation);
-		if(currentFrame == as.sequence.size() -1 && !as.canLoop ) {
+		if(currentFrame == as.sequence.size() -1 && currentAnimation.equals("destroy") ) {
 			return true;
 		}
 		return false;

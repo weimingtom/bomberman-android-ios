@@ -6,6 +6,7 @@ import java.util.Vector;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+import com.klob.Bomberklob.engine.Point;
 import com.klob.Bomberklob.objects.exceptions.BombPowerException;
 import com.klob.Bomberklob.objects.exceptions.PlayersSpeedException;
 import com.klob.Bomberklob.objects.exceptions.ShieldException;
@@ -31,8 +32,8 @@ public abstract class Player extends Animated {
 	
 	/* Constructeurs ------------------------------------------------------- */
 	
-	public Player(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation, int lifeNumber, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber) {
-		super(imageName, false, 1, false, animations, currentAnimation);
+	public Player(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation, int lifeNumber, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber, int damages) {
+		super(imageName, false, 1, false, damages, animations, currentAnimation);
 		this.animations = animations;
 		this.lifeNumber = lifeNumber;
 		this.powerExplosion = powerExplosion;
@@ -135,20 +136,20 @@ public abstract class Player extends Animated {
 	
 	/* Méthodes publiques -------------------------------------------------- */
 	
-	public void moveUp() {
-		this.position.y -= (ResourcesManager.getSize()*this.speed);
+	public void plantingBomb() {
+		if ( bombNumber > bombsPlanted.size() ) {
+			Bomb b = new Bomb("normal", true, 1, false, 0, powerExplosion, timeExplosion, ResourcesManager.getBombsAnimations().get("normal"), "destroy");
+			Point p = ResourcesManager.coToTile(position.x+(ResourcesManager.getSize()/2), position.y+(ResourcesManager.getSize()/2));
+			b.setPosition(ResourcesManager.tileToCo(p.x, p.y));
+			bombsPlanted.add(b);
+		}
 	}
 	
-	public void moveDown() {
-		this.position.y += (ResourcesManager.getSize()*this.speed);
-	}
-	
-	public void moveRight() {
-		this.position.x += (ResourcesManager.getSize()*this.speed);
-	}
-	
-	public void moveLeft() {
-		this.position.x -= (ResourcesManager.getSize()*this.speed);
+	public void update() {
+		super.update();
+		for(int i = 0; i < bombsPlanted.size() ; i++ ) {
+			bombsPlanted.get(i).update();
+		}
 	}
 
 	@Override

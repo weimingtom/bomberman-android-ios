@@ -18,10 +18,10 @@ public class Bomb extends Animated {
 	protected int time;
 	//FIXME protected ??? type
 
-	public Bomb(String imageName, boolean hit, int level, boolean fireWall, int power, int time, Hashtable<String, AnimationSequence> animations, String currentAnimation) {
-		super(imageName, hit, level, fireWall, animations, currentAnimation);
+	public Bomb(String imageName, boolean hit, int level, boolean fireWall, int damages, int power, int time2, Hashtable<String, AnimationSequence> animations, String currentAnimation) {
+		super(imageName, hit, level, fireWall, damages, animations, currentAnimation);
 		this.power = power;
-		this.time = time;
+		this.time = time2;
 	}
 	
 	public Bomb(Bomb bombs) {
@@ -56,4 +56,14 @@ public class Bomb extends Animated {
 		return new Bomb(this);
 	}
 
+	@Override
+	public boolean hasAnimationFinished() {
+		return (time == 0);
+	}
+	
+	public void updateTime() {
+		if ( time > 0 ) {
+			time--;
+		}
+	}
 }

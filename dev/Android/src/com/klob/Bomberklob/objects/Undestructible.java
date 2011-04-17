@@ -12,8 +12,8 @@ public class Undestructible extends AnimatedObjects {
 	
 	/* Constructeurs ------------------------------------------------------- */
 
-	public Undestructible(String imageName, boolean hit, int level, boolean fireWall, Hashtable<String, AnimationSequence> animations, String currentAnimation) {
-		super(imageName, hit, level, fireWall, animations, currentAnimation);
+	public Undestructible(String imageName, boolean hit, int level, boolean fireWall, int damages, Hashtable<String, AnimationSequence> animations, String currentAnimation) {
+		super(imageName, hit, level, fireWall, damages, animations, currentAnimation);
 	}
 	
 	public Undestructible(Undestructible undestructible) {
