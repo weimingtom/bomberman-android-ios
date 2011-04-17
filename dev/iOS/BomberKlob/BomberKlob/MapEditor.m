@@ -8,6 +8,7 @@
 
 #import "MapEditor.h"
 #import "Map.h"
+#import "Position.h"
 
 
 @implementation MapEditor
@@ -21,7 +22,7 @@
     if (self) {
         map = [[Map alloc] init];
     }
-    
+
     return self;
 }
 
@@ -31,5 +32,19 @@
     [super dealloc];
 }
 
+
+- (void)addBlock:(Object *)block position:(Position *)position {
+    [map addBlock:block position:position];
+}
+
+
+- (void)deleteGround:(Object *)ground position:(Position *)position {
+    
+}
+
+
+- (void)deleteBlockAtPosition:(Position *)position {
+    [map deleteBlockAtPosition:position];
+}
 
 @end

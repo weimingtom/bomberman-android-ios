@@ -11,6 +11,7 @@
 #import "Game.h"
 #import "Map.h"
 #import "Position.h"
+#import "RessourceManager.h"
 
 
 @implementation GameViewControllerSingle

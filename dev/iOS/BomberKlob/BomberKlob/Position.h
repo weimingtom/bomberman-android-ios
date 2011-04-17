@@ -17,10 +17,10 @@
 @property (nonatomic) NSInteger x;
 @property (nonatomic) NSInteger y;
 
-- (id) init;
+- (id)init;
+- (id)initWithX:(NSInteger)aX y:(NSInteger)aY;
 
-- (id) initWithX:(NSInteger)aX y:(NSInteger)aY;
-
+- (BOOL)isEqual:(id)object;
 - (NSString *)description;
 
 @end

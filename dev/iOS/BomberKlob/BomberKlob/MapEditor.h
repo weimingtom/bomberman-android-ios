@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Map;
+@class Map, Position, Object;
 
 
 @interface MapEditor : NSObject {
@@ -20,5 +20,8 @@
 
 - (id)init;
 - (void)dealloc;
+
+- (void)addBlock:(Object *)block position:(Position *)position;
+- (void)deleteBlockAtPosition:(Position *)position;
 
 @end

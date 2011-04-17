@@ -23,6 +23,12 @@
 		1890E74C1359F197002F78B9 /* GameInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 992AFC761356419E00D7726C /* GameInformationView.m */; };
 		1890E74D1359F1CF002F78B9 /* GameActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992AFC731356417100D7726C /* GameActionViewController.m */; };
 		1890E74E1359F1DB002F78B9 /* GameActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 992AFC6F1356415D00D7726C /* GameActionView.m */; };
+		1890E7541359FE02002F78B9 /* EditorInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E7531359FE02002F78B9 /* EditorInformation.m */; };
+		1890E7571359FE1A002F78B9 /* EditorAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E7561359FE1A002F78B9 /* EditorAction.m */; };
+		1890E75A1359FF20002F78B9 /* EditorMapZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E7591359FF20002F78B9 /* EditorMapZone.m */; };
+		1890E75D135A02CC002F78B9 /* EditorMapZoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E75C135A02CB002F78B9 /* EditorMapZoneView.m */; };
+		1890E760135A02EF002F78B9 /* EditorInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E75F135A02EF002F78B9 /* EditorInformationView.m */; };
+		1890E763135A0303002F78B9 /* EditorActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E762135A0303002F78B9 /* EditorActionView.m */; };
 		18ADE84F13534575001AF150 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18ADE84E13534575001AF150 /* icon.png */; };
 		18C839C913410263001D5747 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C839C813410263001D5747 /* UIKit.framework */; };
 		18C839CB13410263001D5747 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C839CA13410263001D5747 /* Foundation.framework */; };
@@ -33,10 +39,6 @@
 		18C839DC13410263001D5747 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C839DA13410263001D5747 /* MainWindow.xib */; };
 		99225ADB135471C7008B95AA /* players.png in Resources */ = {isa = PBXBuildFile; fileRef = 99225ADA135471C7008B95AA /* players.png */; };
 		99225ADD135471EC008B95AA /* space.png in Resources */ = {isa = PBXBuildFile; fileRef = 99225ADC135471EC008B95AA /* space.png */; };
-		99225AEF135477B0008B95AA /* EditorGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99225AE9135477B0008B95AA /* EditorGameViewController.m */; };
-		99225AF0135477B0008B95AA /* EditorGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99225AEA135477B0008B95AA /* EditorGameViewController.xib */; };
-		99225AF1135477B0008B95AA /* EditorGameZoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99225AEC135477B0008B95AA /* EditorGameZoneView.m */; };
-		99225AF2135477B0008B95AA /* EditorGameZoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99225AEE135477B0008B95AA /* EditorGameZoneViewController.m */; };
 		99240527135337D700011965 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 99240526135337D700011965 /* Application.m */; };
 		992405281353382700011965 /* DBMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 992405231353379700011965 /* DBMap.m */; };
 		992405291353394F00011965 /* OptionsMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1846A7EE134C636800D35626 /* OptionsMenuViewController.xib */; };
@@ -127,6 +129,18 @@
 		1888557F134106E500DA88B9 /* CreateAccountOfflineMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountOfflineMenuViewController.h; sourceTree = "<group>"; };
 		18885580134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountOfflineMenuViewController.m; sourceTree = "<group>"; };
 		18885587134107BE00DA88B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CreateAccountOfflineMenuViewController.xib; sourceTree = "<group>"; };
+		1890E7521359FE02002F78B9 /* EditorInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorInformation.h; sourceTree = "<group>"; };
+		1890E7531359FE02002F78B9 /* EditorInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorInformation.m; sourceTree = "<group>"; };
+		1890E7551359FE1A002F78B9 /* EditorAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorAction.h; sourceTree = "<group>"; };
+		1890E7561359FE1A002F78B9 /* EditorAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorAction.m; sourceTree = "<group>"; };
+		1890E7581359FF20002F78B9 /* EditorMapZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorMapZone.h; sourceTree = "<group>"; };
+		1890E7591359FF20002F78B9 /* EditorMapZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorMapZone.m; sourceTree = "<group>"; };
+		1890E75B135A02CB002F78B9 /* EditorMapZoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorMapZoneView.h; sourceTree = "<group>"; };
+		1890E75C135A02CB002F78B9 /* EditorMapZoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorMapZoneView.m; sourceTree = "<group>"; };
+		1890E75E135A02EF002F78B9 /* EditorInformationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorInformationView.h; sourceTree = "<group>"; };
+		1890E75F135A02EF002F78B9 /* EditorInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorInformationView.m; sourceTree = "<group>"; };
+		1890E761135A0303002F78B9 /* EditorActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorActionView.h; sourceTree = "<group>"; };
+		1890E762135A0303002F78B9 /* EditorActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorActionView.m; sourceTree = "<group>"; };
 		18ADE84E13534575001AF150 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		18C839C413410263001D5747 /* BomberKlob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BomberKlob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C839C813410263001D5747 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -141,13 +155,6 @@
 		18C839DB13410263001D5747 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		99225ADA135471C7008B95AA /* players.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = players.png; sourceTree = "<group>"; };
 		99225ADC135471EC008B95AA /* space.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = space.png; sourceTree = "<group>"; };
-		99225AE8135477B0008B95AA /* EditorGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorGameViewController.h; sourceTree = "<group>"; };
-		99225AE9135477B0008B95AA /* EditorGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorGameViewController.m; sourceTree = "<group>"; };
-		99225AEA135477B0008B95AA /* EditorGameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorGameViewController.xib; sourceTree = "<group>"; };
-		99225AEB135477B0008B95AA /* EditorGameZoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorGameZoneView.h; sourceTree = "<group>"; };
-		99225AEC135477B0008B95AA /* EditorGameZoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorGameZoneView.m; sourceTree = "<group>"; };
-		99225AED135477B0008B95AA /* EditorGameZoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorGameZoneViewController.h; sourceTree = "<group>"; };
-		99225AEE135477B0008B95AA /* EditorGameZoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorGameZoneViewController.m; sourceTree = "<group>"; };
 		992405221353379700011965 /* DBMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMap.h; sourceTree = "<group>"; };
 		992405231353379700011965 /* DBMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMap.m; sourceTree = "<group>"; };
 		99240525135337D700011965 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
@@ -371,7 +378,6 @@
 		18C839CE13410263001D5747 /* BomberKlob */ = {
 			isa = PBXGroup;
 			children = (
-				99225AE613547785008B95AA /* EditorGame */,
 				99433976134C889500970231 /* Resources */,
 				99433975134C87AE00970231 /* Body */,
 				99433974134C877000970231 /* Object */,
@@ -380,6 +386,7 @@
 				187A72E2134131020020D828 /* MainMenu */,
 				18543B251350C7610038CC61 /* SinglePlayerMenu */,
 				1846A7E3134C62F600D35626 /* OptionsMenu */,
+				99225AE613547785008B95AA /* EditorGame */,
 				1846A7EF134C6C3600D35626 /* AccountManagementMenu */,
 				1846A7C2134B6F5700D35626 /* ChangePlayerMenu */,
 				18819AC8134103CA00CBAF1D /* AppDelegate */,
@@ -404,13 +411,20 @@
 		99225AE613547785008B95AA /* EditorGame */ = {
 			isa = PBXGroup;
 			children = (
-				99225AE8135477B0008B95AA /* EditorGameViewController.h */,
-				99225AE9135477B0008B95AA /* EditorGameViewController.m */,
-				99225AEA135477B0008B95AA /* EditorGameViewController.xib */,
-				99225AEB135477B0008B95AA /* EditorGameZoneView.h */,
-				99225AEC135477B0008B95AA /* EditorGameZoneView.m */,
-				99225AED135477B0008B95AA /* EditorGameZoneViewController.h */,
-				99225AEE135477B0008B95AA /* EditorGameZoneViewController.m */,
+				99433932134C876200970231 /* EditorViewController.h */,
+				99433933134C876200970231 /* EditorViewController.m */,
+				1890E7581359FF20002F78B9 /* EditorMapZone.h */,
+				1890E7591359FF20002F78B9 /* EditorMapZone.m */,
+				1890E75B135A02CB002F78B9 /* EditorMapZoneView.h */,
+				1890E75C135A02CB002F78B9 /* EditorMapZoneView.m */,
+				1890E7521359FE02002F78B9 /* EditorInformation.h */,
+				1890E7531359FE02002F78B9 /* EditorInformation.m */,
+				1890E75E135A02EF002F78B9 /* EditorInformationView.h */,
+				1890E75F135A02EF002F78B9 /* EditorInformationView.m */,
+				1890E7551359FE1A002F78B9 /* EditorAction.h */,
+				1890E7561359FE1A002F78B9 /* EditorAction.m */,
+				1890E761135A0303002F78B9 /* EditorActionView.h */,
+				1890E762135A0303002F78B9 /* EditorActionView.m */,
 			);
 			name = EditorGame;
 			sourceTree = "<group>";
@@ -445,8 +459,6 @@
 				9943392D134C876200970231 /* BotPlayer.m */,
 				9943392E134C876200970231 /* DeathMatch.h */,
 				9943392F134C876200970231 /* DeathMatch.m */,
-				99433932134C876200970231 /* EditorViewController.h */,
-				99433933134C876200970231 /* EditorViewController.m */,
 				99433934134C876200970231 /* Engine.h */,
 				99433935134C876200970231 /* Engine.m */,
 				99433938134C876200970231 /* Game.h */,
@@ -600,7 +612,6 @@
 				18ADE84F13534575001AF150 /* icon.png in Resources */,
 				99225ADB135471C7008B95AA /* players.png in Resources */,
 				99225ADD135471EC008B95AA /* space.png in Resources */,
-				99225AF0135477B0008B95AA /* EditorGameViewController.xib in Resources */,
 				18592AA61359DC7B00A20BB1 /* Maps in Resources */,
 				18592AA71359DC7B00A20BB1 /* Sounds in Resources */,
 			);
@@ -656,14 +667,17 @@
 				99433973134C876200970231 /* Undestructible.m in Sources */,
 				994339A5134C953000970231 /* XmlParser.m in Sources */,
 				99240527135337D700011965 /* Application.m in Sources */,
-				99225AEF135477B0008B95AA /* EditorGameViewController.m in Sources */,
-				99225AF1135477B0008B95AA /* EditorGameZoneView.m in Sources */,
-				99225AF2135477B0008B95AA /* EditorGameZoneViewController.m in Sources */,
 				994497C61356EE0B00B6BF6C /* GlobalGameViewControllerSingle.m in Sources */,
 				1890E74A1359F185002F78B9 /* GameInformationViewController.m in Sources */,
 				1890E74C1359F197002F78B9 /* GameInformationView.m in Sources */,
 				1890E74D1359F1CF002F78B9 /* GameActionViewController.m in Sources */,
 				1890E74E1359F1DB002F78B9 /* GameActionView.m in Sources */,
+				1890E7541359FE02002F78B9 /* EditorInformation.m in Sources */,
+				1890E7571359FE1A002F78B9 /* EditorAction.m in Sources */,
+				1890E75A1359FF20002F78B9 /* EditorMapZone.m in Sources */,
+				1890E75D135A02CC002F78B9 /* EditorMapZoneView.m in Sources */,
+				1890E760135A02EF002F78B9 /* EditorInformationView.m in Sources */,
+				1890E763135A0303002F78B9 /* EditorActionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

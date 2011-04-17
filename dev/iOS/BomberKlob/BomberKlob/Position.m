@@ -40,6 +40,11 @@
 }
 
 
+- (BOOL)isEqual:(id)object {
+    return (x == ((Position *) object).x) && (y == ((Position *) object).y);
+}
+
+
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     
