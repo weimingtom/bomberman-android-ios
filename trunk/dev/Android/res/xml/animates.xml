@@ -5,11 +5,11 @@
 			<png x="0" y="0" delayNextFrame="0" />
 		</animation>
 		<animation name="destroy" canLoop="false">
-			<png x="1" y="0" delayNextFrame="0" />
-			<png x="2" y="0" delayNextFrame="0" />
-			<png x="3" y="0" delayNextFrame="0" />
-			<png x="4" y="0" delayNextFrame="0" />
-			<png x="5" y="0" delayNextFrame="0" />
+			<png x="1" y="0" delayNextFrame="5" />
+			<png x="2" y="0" delayNextFrame="5" />
+			<png x="3" y="0" delayNextFrame="5" />
+			<png x="4" y="0" delayNextFrame="5" />
+			<png x="5" y="0" delayNextFrame="5" />
 		</animation>
 	</destructible>
 	<destructible name="herb" hit="1" level="1" fireWall="1" life="1" damages="0">
@@ -17,11 +17,11 @@
 			<png x="0" y="1" delayNextFrame="0" />
 		</animation>
 		<animation name="destroy" canLoop="false">
-			<png x="1" y="1" delayNextFrame="0" />
-			<png x="2" y="1" delayNextFrame="0" />
-			<png x="3" y="1" delayNextFrame="0" />
-			<png x="4" y="1" delayNextFrame="0" />
-			<png x="5" y="1" delayNextFrame="0" />
+			<png x="1" y="1" delayNextFrame="5" />
+			<png x="2" y="1" delayNextFrame="5" />
+			<png x="3" y="1" delayNextFrame="5" />
+			<png x="4" y="1" delayNextFrame="5" />
+			<png x="5" y="1" delayNextFrame="5" />
 		</animation>
 	</destructible>
 	<destructible name="pebble" hit="1" level="1" fireWall="1" life="1" damages="0">
@@ -29,11 +29,11 @@
 			<png x="0" y="2" delayNextFrame="0" />
 		</animation>
 		<animation name="destroy" canLoop="false">
-			<png x="1" y="2" delayNextFrame="0" />
-			<png x="2" y="2" delayNextFrame="0" />
-			<png x="3" y="2" delayNextFrame="0" />
-			<png x="4" y="2" delayNextFrame="0" />
-			<png x="5" y="2" delayNextFrame="0" />
+			<png x="1" y="2" delayNextFrame="5" />
+			<png x="2" y="2" delayNextFrame="5" />
+			<png x="3" y="2" delayNextFrame="5" />
+			<png x="4" y="2" delayNextFrame="5" />
+			<png x="5" y="2" delayNextFrame="5" />
 		</animation>
 	</destructible>
 	<destructible name="brick" hit="1" level="1" fireWall="1" life="1" damages="0">
@@ -41,11 +41,11 @@
 			<png x="0" y="3" delayNextFrame="0" />
 		</animation>
 		<animation name="destroy" canLoop="false">
-			<png x="1" y="3" delayNextFrame="0" />
-			<png x="2" y="3" delayNextFrame="0" />
-			<png x="3" y="3" delayNextFrame="0" />
-			<png x="4" y="3" delayNextFrame="0" />
-			<png x="5" y="3" delayNextFrame="0" />
+			<png x="1" y="3" delayNextFrame="5" />
+			<png x="2" y="3" delayNextFrame="5" />
+			<png x="3" y="3" delayNextFrame="5" />
+			<png x="4" y="3" delayNextFrame="5" />
+			<png x="5" y="3" delayNextFrame="5" />
 		</animation>
 	</destructible>
 	<destructible name="box" hit="1" level="1" fireWall="1" life="1" damages="0">
@@ -53,11 +53,11 @@
 			<png x="0" y="4" delayNextFrame="0" />
 		</animation>
 		<animation name="destroy" canLoop="false">
-			<png x="1" y="4" delayNextFrame="0" />
-			<png x="2" y="4" delayNextFrame="0" />
-			<png x="3" y="4" delayNextFrame="0" />
-			<png x="4" y="4" delayNextFrame="0" />
-			<png x="5" y="4" delayNextFrame="0" />
+			<png x="1" y="4" delayNextFrame="5" />
+			<png x="2" y="4" delayNextFrame="5" />
+			<png x="3" y="4" delayNextFrame="5" />
+			<png x="4" y="4" delayNextFrame="5" />
+			<png x="5" y="4" delayNextFrame="5" />
 		</animation>
 	</destructible>
 	<destructible name="column" hit="1" level="1" fireWall="1" life="1" damages="0">
@@ -65,11 +65,11 @@
 			<png x="0" y="5" delayNextFrame="0" />
 		</animation>
 		<animation name="destroy" canLoop="false">
-			<png x="1" y="5" delayNextFrame="0" />
-			<png x="2" y="5" delayNextFrame="0" />
-			<png x="3" y="5" delayNextFrame="0" />
-			<png x="4" y="5" delayNextFrame="0" />
-			<png x="5" y="5" delayNextFrame="0" />
+			<png x="1" y="5" delayNextFrame="5" />
+			<png x="2" y="5" delayNextFrame="5" />
+			<png x="3" y="5" delayNextFrame="5" />
+			<png x="4" y="5" delayNextFrame="5" />
+			<png x="5" y="5" delayNextFrame="5" />
 		</animation>
 	</destructible>
 	
@@ -77,58 +77,79 @@
 	
 	<undestructible name="firecenter" hit="0" level="1" fireWall="0" damages="0">
 		<animation name="destroy" canLoop="false">
-			<png x="0" y="9" delayNextFrame="0" />
-			<png x="1" y="9" delayNextFrame="0" />
-			<png x="2" y="9" delayNextFrame="0" />
-			<png x="3" y="9" delayNextFrame="0" />
+			<png x="0" y="9" delayNextFrame="2" />
+			<png x="1" y="9" delayNextFrame="2" />
+			<png x="2" y="9" delayNextFrame="2" />
+			<png x="3" y="9" delayNextFrame="2" />
+			<png x="2" y="9" delayNextFrame="2" />
+			<png x="1" y="9" delayNextFrame="2" />
+			<png x="0" y="9" delayNextFrame="2" />
 		</animation>
 	</undestructible>
 	<undestructible name="fireup" hit="0" level="1" fireWall="0" damages="0">
 		<animation name="destroy" canLoop="false">
-			<png x="0" y="10" delayNextFrame="0" />
-			<png x="1" y="10" delayNextFrame="0" />
-			<png x="2" y="10" delayNextFrame="0" />
-			<png x="3" y="10" delayNextFrame="0" />
+			<png x="0" y="10" delayNextFrame="2" />
+			<png x="1" y="10" delayNextFrame="2" />
+			<png x="2" y="10" delayNextFrame="2" />
+			<png x="3" y="10" delayNextFrame="2" />
+			<png x="2" y="10" delayNextFrame="2" />
+			<png x="1" y="10" delayNextFrame="2" />
+			<png x="0" y="10" delayNextFrame="2" />
 		</animation>
 	</undestructible>
 	<undestructible name="firedown" hit="0" level="1" fireWall="0" damages="0">
 		<animation name="destroy" canLoop="false">
-			<png x="0" y="11" delayNextFrame="0" />
-			<png x="1" y="11" delayNextFrame="0" />
-			<png x="2" y="11" delayNextFrame="0" />
-			<png x="3" y="11" delayNextFrame="0" />
+			<png x="0" y="11" delayNextFrame="2" />
+			<png x="1" y="11" delayNextFrame="2" />
+			<png x="2" y="11" delayNextFrame="2" />
+			<png x="3" y="11" delayNextFrame="2" />
+			<png x="2" y="11" delayNextFrame="2" />
+			<png x="1" y="11" delayNextFrame="2" />
+			<png x="0" y="11" delayNextFrame="2" />
 		</animation>
 	</undestructible>
 	<undestructible name="fireleft" hit="0" level="1" fireWall="0" damages="0">
 		<animation name="destroy" canLoop="false">
-			<png x="0" y="12" delayNextFrame="0" />
-			<png x="1" y="12" delayNextFrame="0" />
-			<png x="2" y="12" delayNextFrame="0" />
-			<png x="3" y="12" delayNextFrame="0" />
+			<png x="0" y="12" delayNextFrame="2" />
+			<png x="1" y="12" delayNextFrame="2" />
+			<png x="2" y="12" delayNextFrame="2" />
+			<png x="3" y="12" delayNextFrame="2" />
+			<png x="2" y="12" delayNextFrame="2" />
+			<png x="1" y="12" delayNextFrame="2" />
+			<png x="0" y="12" delayNextFrame="2" />
 		</animation>
 	</undestructible>
 	<undestructible name="fireright" hit="0" level="1" fireWall="0" damages="0">
 		<animation name="destroy" canLoop="false">
-			<png x="0" y="13" delayNextFrame="0" />
-			<png x="1" y="13" delayNextFrame="0" />
-			<png x="2" y="13" delayNextFrame="0" />
-			<png x="3" y="13" delayNextFrame="0" />
+			<png x="0" y="13" delayNextFrame="2" />
+			<png x="1" y="13" delayNextFrame="2" />
+			<png x="2" y="13" delayNextFrame="2" />
+			<png x="3" y="13" delayNextFrame="2" />
+			<png x="2" y="13" delayNextFrame="2" />
+			<png x="1" y="13" delayNextFrame="2" />
+			<png x="0" y="13" delayNextFrame="2" />
 		</animation>
 	</undestructible>
 	<undestructible name="firehorizontal" hit="0" level="1" fireWall="0" damages="0">
 		<animation name="destroy" canLoop="false">
-			<png x="0" y="14" delayNextFrame="0" />
-			<png x="1" y="14" delayNextFrame="0" />
-			<png x="2" y="14" delayNextFrame="0" />
-			<png x="3" y="14" delayNextFrame="0" />
+			<png x="0" y="14" delayNextFrame="2" />
+			<png x="1" y="14" delayNextFrame="2" />
+			<png x="2" y="14" delayNextFrame="2" />
+			<png x="3" y="14" delayNextFrame="2" />
+			<png x="2" y="14" delayNextFrame="2" />
+			<png x="1" y="14" delayNextFrame="2" />
+			<png x="0" y="14" delayNextFrame="2" />
 		</animation>
 	</undestructible>
 	<undestructible name="firevertical" hit="0" level="1" fireWall="0" damages="0">
 		<animation name="destroy" canLoop="false">
-			<png x="0" y="15" delayNextFrame="0" />
-			<png x="1" y="15" delayNextFrame="0" />
-			<png x="2" y="15" delayNextFrame="0" />
-			<png x="3" y="15" delayNextFrame="0" />
+			<png x="0" y="15" delayNextFrame="2" />
+			<png x="1" y="15" delayNextFrame="2" />
+			<png x="2" y="15" delayNextFrame="2" />
+			<png x="3" y="15" delayNextFrame="2" />
+			<png x="2" y="15" delayNextFrame="2" />
+			<png x="1" y="15" delayNextFrame="2" />
+			<png x="0" y="15" delayNextFrame="2" />
 		</animation>
 	</undestructible>
 </animates>
