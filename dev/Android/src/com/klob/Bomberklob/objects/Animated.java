@@ -102,7 +102,10 @@ public abstract class Animated extends Objects {
 	
 	@Override
 	public void destroy() {
-		setCurrentAnimation("destroy");		
+		if ( !getCurrentAnimation().equals("destroy") ) {
+			setCurrentAnimation("destroy");
+		}
+				
 	}
 	
 	@Override
