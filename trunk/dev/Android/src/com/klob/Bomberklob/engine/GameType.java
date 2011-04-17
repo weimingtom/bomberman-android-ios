@@ -8,5 +8,6 @@ public class GameType {
 	protected int shield;
 	protected int speed;
 	protected int bombNumber;
+	protected int damages;
 
 }

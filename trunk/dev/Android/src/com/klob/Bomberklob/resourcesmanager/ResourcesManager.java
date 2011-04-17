@@ -46,11 +46,11 @@ public class ResourcesManager {
 		height = context.getResources().getDisplayMetrics().heightPixels;
 		width = context.getResources().getDisplayMetrics().widthPixels;
 		
-		if ( ((height-(50*dpiPx))/21) < ((width-(50*dpiPx))/15) ) {
+		if ( ((height-(50*dpiPx))/21) < ((width-(50*dpiPx))/14) ) {
 			size = (int) ((height-(50*dpiPx))/21);
 		}
 		else {
-			size = (int) ((width-(50*dpiPx))/15);
+			size = (int) ((width-(50*dpiPx))/14);
 		}
 		
 		Log.i("ResourcesManager","dpiPx : " + dpiPx);
@@ -148,9 +148,6 @@ public class ResourcesManager {
 						else if ( xpp.getAttributeValue(null, "name").equals("bombs")) {
 							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.bombs);
 						}
-						else if ( xpp.getAttributeValue(null, "name").equals("explosions")) {
-							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.bombs);
-						}
 
 						if ( p != null ) {
 							Log.i("ResourcesManager","Added Bitmap : " + xpp.getAttributeValue(null, "name"));
@@ -175,7 +172,7 @@ public class ResourcesManager {
 		Log.i("ResourcesManager","---------- Loading animated objects ----------");
 		Hashtable<String, AnimationSequence> objectAnimation = null;
 		String imageName = null;
-		int level = 0, life = 0;
+		int level = 0, life = 0, damages = 0;
 		boolean hit = false, fireWall = false;
 
 		try {
@@ -196,6 +193,7 @@ public class ResourcesManager {
 						if ( xpp.getName().toLowerCase().equals("destructible") ) {
 							life = (xpp.getAttributeIntValue(null, "life", 0));
 						}
+						damages = xpp.getAttributeIntValue(null, "damages", 0);
 					}
 					else if(xpp.getName().toLowerCase().equals("animation")) {			
 						animationname=xpp.getAttributeValue(null, "name");	            	 
@@ -220,11 +218,11 @@ public class ResourcesManager {
 						objectAnimation.put(animationname, animationsequence);
 					}
 					else if(xpp.getName().toLowerCase().equals("destructible")) {
-						objects.put(imageName, new Destructible(imageName, hit, level, fireWall, life, objectAnimation, "idle"));
+						objects.put(imageName, new Destructible(imageName, hit, level, fireWall, damages, life, objectAnimation, "idle"));
 						Log.i("ResourcesManager","Added Destructible : " + imageName);
 					}
 					else if(xpp.getName().toLowerCase().equals("undestructible")) {
-						objects.put(imageName, new Undestructible(imageName, hit, level, fireWall, objectAnimation, "idle"));
+						objects.put(imageName, new Undestructible(imageName, hit, level, fireWall, damages, objectAnimation, "destroy"));
 						Log.i("ResourcesManager","Added Undestructible : " + imageName);
 					}
 				}
@@ -251,7 +249,7 @@ public class ResourcesManager {
 				if(eventType == XmlPullParser.START_TAG) {
 					
 					if(xpp.getName().toLowerCase().equals("png")) {
-						inanimate = new Inanimate(xpp.getAttributeValue(null, "name"), (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "level", 0), (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true), new Point(xpp.getAttributeIntValue(null, "x", 0),xpp.getAttributeIntValue(null, "y", 0)));
+						inanimate = new Inanimate(xpp.getAttributeValue(null, "name"), (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "level", 0), (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "damages", 0), new Point(xpp.getAttributeIntValue(null, "x", 0),xpp.getAttributeIntValue(null, "y", 0)));
 						objects.put(inanimate.getImageName(), inanimate);
 						Log.i("ResourcesManager","Added InanimatedObject : " + inanimate.getImageName());
 						inanimate = null;

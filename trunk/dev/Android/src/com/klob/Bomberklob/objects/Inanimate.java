@@ -17,8 +17,8 @@ public class Inanimate extends Objects {
 	
 	/* Constructeur -------------------------------------------------------- */
 	
-	public Inanimate (String imageName, boolean hit, int level, boolean fireWall, Point tilePosition) {
-		super(imageName, hit, level, fireWall);
+	public Inanimate (String imageName, boolean hit, int level, boolean fireWall, int damages, Point tilePosition) {
+		super(imageName, hit, level, fireWall, damages);
 		this.tilePosition = tilePosition;
 	}
 	
@@ -38,7 +38,7 @@ public class Inanimate extends Objects {
 
 	@Override
 	public boolean hasAnimationFinished() {
-		return true;
+		return false;
 	}
 
 	@Override

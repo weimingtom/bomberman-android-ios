@@ -16,17 +16,19 @@ public abstract class Objects implements Serializable {
 	protected String imageName;
 	protected boolean hit;
 	protected int level;
+	protected int damages;
 	protected boolean fireWall;
 	protected Point position;
 	
 	/* Contructeur --------------------------------------------------------- */
 	
-	public Objects(String imageName, boolean hit, int level, boolean fireWall) {
+	public Objects(String imageName, boolean hit, int level, boolean fireWall, int damages) {
 		this.imageName = imageName;
 		this.hit = hit;
 		this.level = level;
 		this.fireWall = fireWall;
 		this.position = null;
+		this.damages = damages;
 	}
 	
 	public Objects(Objects objects) {
@@ -35,6 +37,7 @@ public abstract class Objects implements Serializable {
 		this.level = objects.level;
 		this.fireWall = objects.fireWall;
 		this.position = objects.position;
+		this.damages = objects.damages;
 	}
 	
 	/* Getters ------------------------------------------------------------- */

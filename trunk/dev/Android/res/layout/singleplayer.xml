@@ -37,7 +37,7 @@
 			</FrameLayout>
 
 			<Button android:layout_alignParentBottom="true"
-				android:layout_height="wrap_content" android:id="@+id/button1"
+				android:layout_height="wrap_content" android:id="@+id/SinglePlayerButtonBomb"
 				android:text="BOOM" android:layout_width="wrap_content"></Button>
 
 		</RelativeLayout>

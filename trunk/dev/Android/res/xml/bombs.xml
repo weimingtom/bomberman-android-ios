@@ -4,17 +4,11 @@
 	    <animation name="idle" canLoop="true" > 
 			<png x="1" y="0" delayNextFrame="0" />
 		</animation>
-	    <animation name="animate" canLoop="true" > 
-			<png x="1" y="0" delayNextFrame="5" /> 
-			<png x="2" y="0" delayNextFrame="5" />
-			<png x="1" y="0" delayNextFrame="5" />
-			<png x="0" y="0" delayNextFrame="5" />
-		</animation>
-		<animation name="explosion" canLoop="true" > 
-			<png x="1" y="0" delayNextFrame="5" /> 
-			<png x="2" y="0" delayNextFrame="5" />
-			<png x="1" y="0" delayNextFrame="5" />
-			<png x="0" y="0" delayNextFrame="5" />
+	    <animation name="destroy" canLoop="true" > 
+			<png x="1" y="0" delayNextFrame="0" /> 
+			<png x="2" y="0" delayNextFrame="0" />
+			<png x="1" y="0" delayNextFrame="0" />
+			<png x="0" y="0" delayNextFrame="0" />
 		</animation>
 	</bomb>
 </bombs>

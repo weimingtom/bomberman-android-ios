@@ -32,8 +32,8 @@ public class Map implements Serializable {
 	
 	public Map() {
 		this.players = new Point[4];
-		this.grounds = new Objects[21][15];
-		this.blocks  = new Objects[21][15];
+		this.grounds = new Objects[21][14];
+		this.blocks  = new Objects[21][14];
 	}
 	
 	/* Getteurs ------------------------------------------------------------ */
@@ -192,6 +192,24 @@ public class Map implements Serializable {
 		this.blocks[p.x][p.y].destroy();
 	}
 	
+	public void update() {
+		for (int i = 0; i < this.grounds.length ; i++) {
+			for (int j = 0; j < this.grounds[0].length ; j++) {
+				if ( this.grounds[i][j] != null ) {
+					this.grounds[i][j].update();
+				}
+				if ( this.blocks[i][j] != null ) {
+					if ( this.blocks[i][j].hasAnimationFinished() ) {
+						this.blocks[i][j] = null;
+					}
+					else {
+						this.blocks[i][j].update();
+					}
+				}
+			}
+		}
+	}
+	
 	/* onDraws ------------------------------------------------------------- */
 	
 	public void onDraw(Canvas canvas, int size) {
@@ -200,6 +218,7 @@ public class Map implements Serializable {
 				if ( this.grounds[i][j] != null ) {
 					this.grounds[i][j].onDraw(canvas, size);
 				}
+				
 				if ( this.blocks[i][j] != null ) {
 					this.blocks[i][j].onDraw(canvas, size);
 				}

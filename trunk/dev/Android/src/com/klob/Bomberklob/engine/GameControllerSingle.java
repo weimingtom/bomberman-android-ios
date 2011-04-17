@@ -54,12 +54,14 @@ public class GameControllerSingle extends GameController {
 			};
 		};
 		this.onTouchEventThread.start();
+		this.engine.setBombThreadRunning(true);
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0) {
 		super.surfaceDestroyed(arg0);
 		this.onTouchEventBoolean = false;
+		this.engine.setBombThreadRunning(false);
 	}
 
 	@Override
@@ -76,5 +78,10 @@ public class GameControllerSingle extends GameController {
 	@Override
 	public void update() {
 		this.engine.update();
+	}
+
+	@Override
+	public void pushBomb() {
+		this.engine.pushBomb();		
 	}
 }
