@@ -503,7 +503,7 @@ public class Engine {
 						
 						/* UP */
 						for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
-							if ( map.getBlocks()[p.x][p.y-k] == null) {
+							if ( map.getBlocks()[p.x][p.y-k] == null ) {
 								if ( map.getGrounds()[p.x][p.y-k].isFireWall() ) {
 									break;
 								}
@@ -517,16 +517,23 @@ public class Engine {
 								}
 							}
 							else {
-								if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
-									map.getBlocks()[p.x][p.y-k].destroy();
+								if ( map.getBlocks()[p.x][p.y-k].isFireWall() ) {
+									if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
+										map.getBlocks()[p.x][p.y-k].destroy();
+									}
+									break;
 								}
-								break;
+								else {
+									if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
+										map.getBlocks()[p.x][p.y-k].destroy();
+									}
+								}
 							}
 						}
 						
 						/* DOWN */
 						for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
-							if ( map.getBlocks()[p.x][p.y+k] == null) {
+							if ( map.getBlocks()[p.x][p.y+k] == null ) {
 								if ( map.getGrounds()[p.x][p.y+k].isFireWall() ) {
 									break;
 								}
@@ -540,16 +547,23 @@ public class Engine {
 								}
 							}
 							else {
-								if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
-									map.getBlocks()[p.x][p.y+k].destroy();
+								if ( map.getBlocks()[p.x][p.y+k].isFireWall() ) {
+									if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
+										map.getBlocks()[p.x][p.y+k].destroy();
+									}
+									break;
 								}
-								break;
+								else {
+									if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
+										map.getBlocks()[p.x][p.y+k].destroy();
+									}
+								}
 							}
 						}
 						
 						/* LEFT */
 						for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
-							if ( map.getBlocks()[p.x-k][p.y] == null) {
+							if ( map.getBlocks()[p.x-k][p.y] == null ) {
 								if ( map.getGrounds()[p.x-k][p.y].isFireWall() ) {
 									break;
 								}
@@ -563,16 +577,23 @@ public class Engine {
 								}
 							}
 							else {
-								if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
-									map.getBlocks()[p.x-k][p.y].destroy();
+								if ( map.getBlocks()[p.x-k][p.y].isFireWall() ) {
+									if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
+										map.getBlocks()[p.x-k][p.y].destroy();
+									}
+									break;
 								}
-								break;
+								else {
+									if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
+										map.getBlocks()[p.x-k][p.y].destroy();
+									}
+								}
 							}
 						}
 						
 						/* RIGHT */
 						for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
-							if ( map.getBlocks()[p.x+k][p.y] == null) {
+							if ( map.getBlocks()[p.x+k][p.y] == null ) {
 								if ( map.getGrounds()[p.x+k][p.y].isFireWall() ) {
 									break;
 								}
@@ -586,10 +607,17 @@ public class Engine {
 								}
 							}
 							else {
-								if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
-									map.getBlocks()[p.x+k][p.y].destroy();
+								if ( map.getBlocks()[p.x+k][p.y].isFireWall() ) {
+									if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
+										map.getBlocks()[p.x+k][p.y].destroy();
+									}
+									break;
 								}
-								break;
+								else {
+									if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
+										map.getBlocks()[p.x+k][p.y].destroy();
+									}
+								}
 							}
 						}
 						bombs.remove(j);
