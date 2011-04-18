@@ -137,10 +137,19 @@ public abstract class Player extends Animated {
 	/* Méthodes publiques -------------------------------------------------- */
 	
 	public Bomb plantingBomb() {
+		
+		Point p = ResourcesManager.coToTile(position.x+(ResourcesManager.getSize()/2), position.y+(ResourcesManager.getSize()/2));
+		p = ResourcesManager.tileToCo(p.x, p.y);
+		
+		for (int i = 0 ; i < bombsPlanted.size() ; i++) {
+			if ( bombsPlanted.get(i).getPosition().x == p.x && bombsPlanted.get(i).getPosition().y == p.y) {
+				return null;
+			}
+		}
+		
 		if ( bombNumber > bombsPlanted.size() ) {
 			Bomb b = new Bomb("normal", true, 1, false, 0, powerExplosion, timeExplosion, ResourcesManager.getBombsAnimations().get("normal"), "destroy");
-			Point p = ResourcesManager.coToTile(position.x+(ResourcesManager.getSize()/2), position.y+(ResourcesManager.getSize()/2));
-			b.setPosition(ResourcesManager.tileToCo(p.x, p.y));
+			b.setPosition(p);
 			bombsPlanted.add(b);
 			return b;
 		}

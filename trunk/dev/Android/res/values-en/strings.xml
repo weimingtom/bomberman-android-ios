@@ -128,11 +128,15 @@
 	<string name="MapEditorCheckBox">Level</string>
 	<string name="SaveMapPlayerError">The number of players on the map is less than 4</string>
 	
-		<!-- Map Editor Menu -->
+	<!-- Map Editor Menu -->
 	
 	<string name="MapEditorMenuResume">Resume</string>
 	<string name="MapEditorMenuSave">Save</string>
 	<string name="MapEditorMenuReset">Reset</string>
 	<string name="MapEditorMenuQuit">Quit</string>
+	
+	<!-- Game  -->
+	
+	<string name="GameTextTime">Time</string>
 
 </resources>

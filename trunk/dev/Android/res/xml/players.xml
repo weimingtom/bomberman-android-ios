@@ -29,52 +29,52 @@
 			<png x="21" y="0" delayNextFrame="0" />
 		</animation>
 		<animation name="down" canLoop="true">
-			<png x="1" y="0" delayNextFrame="0" />
-			<png x="0" y="0" delayNextFrame="0" />
-			<png x="2" y="0" delayNextFrame="0" />
-			<png x="0" y="0" delayNextFrame="0" />
+			<png x="1" y="0" delayNextFrame="5" />
+			<png x="0" y="0" delayNextFrame="5" />
+			<png x="2" y="0" delayNextFrame="5" />
+			<png x="0" y="0" delayNextFrame="5" />
 		</animation>
 		<animation name="right" canLoop="true">
-			<png x="4" y="0" delayNextFrame="0" />
-			<png x="3" y="0" delayNextFrame="0" />
-			<png x="5" y="0" delayNextFrame="0" />
-			<png x="3" y="0" delayNextFrame="0" />
+			<png x="4" y="0" delayNextFrame="5" />
+			<png x="3" y="0" delayNextFrame="5" />
+			<png x="5" y="0" delayNextFrame="5" />
+			<png x="3" y="0" delayNextFrame="5" />
 		</animation>
 		<animation name="left" canLoop="true">
-			<png x="7" y="0" delayNextFrame="0" />
-			<png x="6" y="0" delayNextFrame="0" />
-			<png x="8" y="0" delayNextFrame="0" />
-			<png x="6" y="0" delayNextFrame="0" />
+			<png x="7" y="0" delayNextFrame="5" />
+			<png x="6" y="0" delayNextFrame="5" />
+			<png x="8" y="0" delayNextFrame="5" />
+			<png x="6" y="0" delayNextFrame="5" />
 		</animation>
 		<animation name="up" canLoop="true">
-			<png x="10" y="0" delayNextFrame="0" />
-			<png x="9" y="0" delayNextFrame="0" />
-			<png x="11" y="0" delayNextFrame="0" />
-			<png x="9" y="0" delayNextFrame="0" />
+			<png x="10" y="0" delayNextFrame="5" />
+			<png x="9" y="0" delayNextFrame="5" />
+			<png x="11" y="0" delayNextFrame="5" />
+			<png x="9" y="0" delayNextFrame="5" />
 		</animation>
 		<animation name="down_right" canLoop="true">
-			<png x="13" y="0" delayNextFrame="0" />
-			<png x="12" y="0" delayNextFrame="0" />
-			<png x="14" y="0" delayNextFrame="0" />
-			<png x="12" y="0" delayNextFrame="0" />
+			<png x="13" y="0" delayNextFrame="5" />
+			<png x="12" y="0" delayNextFrame="5" />
+			<png x="14" y="0" delayNextFrame="5" />
+			<png x="12" y="0" delayNextFrame="5" />
 		</animation>
 		<animation name="down_left" canLoop="true">
-			<png x="16" y="0" delayNextFrame="0" />
-			<png x="15" y="0" delayNextFrame="0" />
-			<png x="17" y="0" delayNextFrame="0" />
-			<png x="15" y="0" delayNextFrame="0" />
+			<png x="16" y="0" delayNextFrame="5" />
+			<png x="15" y="0" delayNextFrame="5" />
+			<png x="17" y="0" delayNextFrame="5" />
+			<png x="15" y="0" delayNextFrame="5" />
 		</animation>
 		<animation name="up_left" canLoop="true">
-			<png x="19" y="0" delayNextFrame="0" />
-			<png x="18" y="0" delayNextFrame="0" />
-			<png x="20" y="0" delayNextFrame="0" />
-			<png x="18" y="0" delayNextFrame="0" />
+			<png x="19" y="0" delayNextFrame="5" />
+			<png x="18" y="0" delayNextFrame="5" />
+			<png x="20" y="0" delayNextFrame="5" />
+			<png x="18" y="0" delayNextFrame="5" />
 		</animation>
 		<animation name="up_right" canLoop="true">
-			<png x="22" y="0" delayNextFrame="0" />
-			<png x="21" y="0" delayNextFrame="0" />
-			<png x="23" y="0" delayNextFrame="0" />
-			<png x="21" y="0" delayNextFrame="0" />
+			<png x="22" y="0" delayNextFrame="5" />
+			<png x="21" y="0" delayNextFrame="5" />
+			<png x="23" y="0" delayNextFrame="5" />
+			<png x="21" y="0" delayNextFrame="5" />
 		</animation>
 	</player>
 	<player name="black">
@@ -106,52 +106,52 @@
 			<png x="21" y="1" delayNextFrame="0" />
 		</animation>
 		<animation name="down" canLoop="true">
-			<png x="1" y="1" delayNextFrame="0" />
-			<png x="0" y="1" delayNextFrame="0" />
-			<png x="2" y="1" delayNextFrame="0" />
-			<png x="0" y="1" delayNextFrame="0" />
+			<png x="1" y="1" delayNextFrame="5" />
+			<png x="0" y="1" delayNextFrame="5" />
+			<png x="2" y="1" delayNextFrame="5" />
+			<png x="0" y="1" delayNextFrame="5" />
 		</animation>
 		<animation name="right" canLoop="true">
-			<png x="4" y="1" delayNextFrame="0" />
-			<png x="3" y="1" delayNextFrame="0" />
-			<png x="5" y="1" delayNextFrame="0" />
-			<png x="3" y="1" delayNextFrame="0" />
+			<png x="4" y="1" delayNextFrame="5" />
+			<png x="3" y="1" delayNextFrame="5" />
+			<png x="5" y="1" delayNextFrame="5" />
+			<png x="3" y="1" delayNextFrame="5" />
 		</animation>
 		<animation name="left" canLoop="true">
-			<png x="7" y="1" delayNextFrame="0" />
-			<png x="6" y="1" delayNextFrame="0" />
-			<png x="8" y="1" delayNextFrame="0" />
-			<png x="6" y="1" delayNextFrame="0" />
+			<png x="7" y="1" delayNextFrame="5" />
+			<png x="6" y="1" delayNextFrame="5" />
+			<png x="8" y="1" delayNextFrame="5" />
+			<png x="6" y="1" delayNextFrame="5" />
 		</animation>
 		<animation name="up" canLoop="true">
-			<png x="10" y="1" delayNextFrame="0" />
-			<png x="9" y="1" delayNextFrame="0" />
-			<png x="11" y="1" delayNextFrame="0" />
-			<png x="9" y="1" delayNextFrame="0" />
+			<png x="10" y="1" delayNextFrame="5" />
+			<png x="9" y="1" delayNextFrame="5" />
+			<png x="11" y="1" delayNextFrame="5" />
+			<png x="9" y="1" delayNextFrame="5" />
 		</animation>
 		<animation name="down_right" canLoop="true">
-			<png x="13" y="1" delayNextFrame="0" />
-			<png x="12" y="1" delayNextFrame="0" />
-			<png x="14" y="1" delayNextFrame="0" />
-			<png x="12" y="1" delayNextFrame="0" />
+			<png x="13" y="1" delayNextFrame="5" />
+			<png x="12" y="1" delayNextFrame="5" />
+			<png x="14" y="1" delayNextFrame="5" />
+			<png x="12" y="1" delayNextFrame="5" />
 		</animation>
 		<animation name="down_left" canLoop="true">
-			<png x="16" y="1" delayNextFrame="0" />
-			<png x="15" y="1" delayNextFrame="0" />
-			<png x="17" y="1" delayNextFrame="0" />
-			<png x="15" y="1" delayNextFrame="0" />
+			<png x="16" y="1" delayNextFrame="5" />
+			<png x="15" y="1" delayNextFrame="5" />
+			<png x="17" y="1" delayNextFrame="5" />
+			<png x="15" y="1" delayNextFrame="5" />
 		</animation>
 		<animation name="up_left" canLoop="true">
-			<png x="19" y="1" delayNextFrame="0" />
-			<png x="18" y="1" delayNextFrame="0" />
-			<png x="20" y="1" delayNextFrame="0" />
-			<png x="18" y="1" delayNextFrame="0" />
+			<png x="19" y="1" delayNextFrame="5" />
+			<png x="18" y="1" delayNextFrame="5" />
+			<png x="20" y="1" delayNextFrame="5" />
+			<png x="18" y="1" delayNextFrame="5" />
 		</animation>
 		<animation name="up_right" canLoop="true">
-			<png x="22" y="1" delayNextFrame="0" />
-			<png x="21" y="1" delayNextFrame="0" />
-			<png x="23" y="1" delayNextFrame="0" />
-			<png x="21" y="1" delayNextFrame="0" />
+			<png x="22" y="1" delayNextFrame="5" />
+			<png x="21" y="1" delayNextFrame="5" />
+			<png x="23" y="1" delayNextFrame="5" />
+			<png x="21" y="1" delayNextFrame="5" />
 		</animation>
 	</player>
 	<player name="red">
@@ -183,52 +183,52 @@
 			<png x="21" y="2" delayNextFrame="0" />
 		</animation>
 		<animation name="down" canLoop="true">
-			<png x="1" y="2" delayNextFrame="0" />
-			<png x="0" y="2" delayNextFrame="0" />
-			<png x="2" y="2" delayNextFrame="0" />
-			<png x="0" y="2" delayNextFrame="0" />
+			<png x="1" y="2" delayNextFrame="5" />
+			<png x="0" y="2" delayNextFrame="5" />
+			<png x="2" y="2" delayNextFrame="5" />
+			<png x="0" y="2" delayNextFrame="5" />
 		</animation>
 		<animation name="right" canLoop="true">
-			<png x="4" y="2" delayNextFrame="0" />
-			<png x="3" y="2" delayNextFrame="0" />
-			<png x="5" y="2" delayNextFrame="0" />
-			<png x="3" y="2" delayNextFrame="0" />
+			<png x="4" y="2" delayNextFrame="5" />
+			<png x="3" y="2" delayNextFrame="5" />
+			<png x="5" y="2" delayNextFrame="5" />
+			<png x="3" y="2" delayNextFrame="5" />
 		</animation>
 		<animation name="left" canLoop="true">
-			<png x="7" y="2" delayNextFrame="0" />
-			<png x="6" y="2" delayNextFrame="0" />
-			<png x="8" y="2" delayNextFrame="0" />
-			<png x="6" y="2" delayNextFrame="0" />
+			<png x="7" y="2" delayNextFrame="5" />
+			<png x="6" y="2" delayNextFrame="5" />
+			<png x="8" y="2" delayNextFrame="5" />
+			<png x="6" y="2" delayNextFrame="5" />
 		</animation>
 		<animation name="up" canLoop="true">
-			<png x="10" y="2" delayNextFrame="0" />
-			<png x="9" y="2" delayNextFrame="0" />
-			<png x="11" y="2" delayNextFrame="0" />
-			<png x="9" y="2" delayNextFrame="0" />
+			<png x="10" y="2" delayNextFrame="5" />
+			<png x="9" y="2" delayNextFrame="5" />
+			<png x="11" y="2" delayNextFrame="5" />
+			<png x="9" y="2" delayNextFrame="5" />
 		</animation>
 		<animation name="down_right" canLoop="true">
-			<png x="13" y="2" delayNextFrame="0" />
-			<png x="12" y="2" delayNextFrame="0" />
-			<png x="14" y="2" delayNextFrame="0" />
-			<png x="12" y="2" delayNextFrame="0" />
+			<png x="13" y="2" delayNextFrame="5" />
+			<png x="12" y="2" delayNextFrame="5" />
+			<png x="14" y="2" delayNextFrame="5" />
+			<png x="12" y="2" delayNextFrame="5" />
 		</animation>
 		<animation name="down_left" canLoop="true">
-			<png x="16" y="2" delayNextFrame="0" />
-			<png x="15" y="2" delayNextFrame="0" />
-			<png x="17" y="2" delayNextFrame="0" />
-			<png x="15" y="2" delayNextFrame="0" />
+			<png x="16" y="2" delayNextFrame="5" />
+			<png x="15" y="2" delayNextFrame="5" />
+			<png x="17" y="2" delayNextFrame="5" />
+			<png x="15" y="2" delayNextFrame="5" />
 		</animation>
 		<animation name="up_left" canLoop="true">
-			<png x="19" y="2" delayNextFrame="0" />
-			<png x="18" y="2" delayNextFrame="0" />
-			<png x="20" y="2" delayNextFrame="0" />
-			<png x="18" y="2" delayNextFrame="0" />
+			<png x="19" y="2" delayNextFrame="5" />
+			<png x="18" y="2" delayNextFrame="5" />
+			<png x="20" y="2" delayNextFrame="5" />
+			<png x="18" y="2" delayNextFrame="5" />
 		</animation>
 		<animation name="up_right" canLoop="true">
-			<png x="22" y="2" delayNextFrame="0" />
-			<png x="21" y="2" delayNextFrame="0" />
-			<png x="23" y="2" delayNextFrame="0" />
-			<png x="21" y="2" delayNextFrame="0" />
+			<png x="22" y="2" delayNextFrame="5" />
+			<png x="21" y="2" delayNextFrame="5" />
+			<png x="23" y="2" delayNextFrame="5" />
+			<png x="21" y="2" delayNextFrame="5" />
 		</animation>
 	</player>
 	<player name="blue">
@@ -260,52 +260,52 @@
 			<png x="21" y="3" delayNextFrame="0" />
 		</animation>
 		<animation name="down" canLoop="true">
-			<png x="1" y="3" delayNextFrame="0" />
-			<png x="0" y="3" delayNextFrame="0" />
-			<png x="2" y="3" delayNextFrame="0" />
-			<png x="0" y="3" delayNextFrame="0" />
+			<png x="1" y="3" delayNextFrame="5" />
+			<png x="0" y="3" delayNextFrame="5" />
+			<png x="2" y="3" delayNextFrame="5" />
+			<png x="0" y="3" delayNextFrame="5" />
 		</animation>
 		<animation name="right" canLoop="true">
-			<png x="4" y="3" delayNextFrame="0" />
-			<png x="3" y="3" delayNextFrame="0" />
-			<png x="5" y="3" delayNextFrame="0" />
-			<png x="3" y="3" delayNextFrame="0" />
+			<png x="4" y="3" delayNextFrame="5" />
+			<png x="3" y="3" delayNextFrame="5" />
+			<png x="5" y="3" delayNextFrame="5" />
+			<png x="3" y="3" delayNextFrame="5" />
 		</animation>
 		<animation name="left" canLoop="true">
-			<png x="7" y="3" delayNextFrame="0" />
-			<png x="6" y="3" delayNextFrame="0" />
-			<png x="8" y="3" delayNextFrame="0" />
-			<png x="6" y="3" delayNextFrame="0" />
+			<png x="7" y="3" delayNextFrame="5" />
+			<png x="6" y="3" delayNextFrame="5" />
+			<png x="8" y="3" delayNextFrame="5" />
+			<png x="6" y="3" delayNextFrame="5" />
 		</animation>
 		<animation name="up" canLoop="true">
-			<png x="10" y="3" delayNextFrame="0" />
-			<png x="9" y="3" delayNextFrame="0" />
-			<png x="11" y="3" delayNextFrame="0" />
-			<png x="9" y="3" delayNextFrame="0" />
+			<png x="10" y="3" delayNextFrame="5" />
+			<png x="9" y="3" delayNextFrame="5" />
+			<png x="11" y="3" delayNextFrame="5" />
+			<png x="9" y="3" delayNextFrame="5" />
 		</animation>
 		<animation name="down_right" canLoop="true">
-			<png x="13" y="3" delayNextFrame="0" />
-			<png x="12" y="3" delayNextFrame="0" />
-			<png x="14" y="3" delayNextFrame="0" />
-			<png x="12" y="3" delayNextFrame="0" />
+			<png x="13" y="3" delayNextFrame="5" />
+			<png x="12" y="3" delayNextFrame="5" />
+			<png x="14" y="3" delayNextFrame="5" />
+			<png x="12" y="3" delayNextFrame="5" />
 		</animation>
 		<animation name="down_left" canLoop="true">
-			<png x="16" y="3" delayNextFrame="0" />
-			<png x="15" y="3" delayNextFrame="0" />
-			<png x="17" y="3" delayNextFrame="0" />
-			<png x="15" y="3" delayNextFrame="0" />
+			<png x="16" y="3" delayNextFrame="5" />
+			<png x="15" y="3" delayNextFrame="5" />
+			<png x="17" y="3" delayNextFrame="5" />
+			<png x="15" y="3" delayNextFrame="5" />
 		</animation>
 		<animation name="up_left" canLoop="true">
-			<png x="19" y="3" delayNextFrame="0" />
-			<png x="18" y="3" delayNextFrame="0" />
-			<png x="20" y="3" delayNextFrame="0" />
-			<png x="18" y="3" delayNextFrame="0" />
+			<png x="19" y="3" delayNextFrame="5" />
+			<png x="18" y="3" delayNextFrame="5" />
+			<png x="20" y="3" delayNextFrame="5" />
+			<png x="18" y="3" delayNextFrame="5" />
 		</animation>
 		<animation name="up_right" canLoop="true">
-			<png x="22" y="3" delayNextFrame="0" />
-			<png x="21" y="3" delayNextFrame="0" />
-			<png x="23" y="3" delayNextFrame="0" />
-			<png x="21" y="3" delayNextFrame="0" />
+			<png x="22" y="3" delayNextFrame="5" />
+			<png x="21" y="3" delayNextFrame="5" />
+			<png x="23" y="3" delayNextFrame="5" />
+			<png x="21" y="3" delayNextFrame="5" />
 		</animation>
 	</player>
 </animations>
