@@ -3,6 +3,8 @@ package com.klob.Bomberklob;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.klob.Bomberklob.engine.GameControllerSingle;
 import com.klob.Bomberklob.engine.ObjectsGallery;
@@ -35,6 +38,13 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private ImageButton bomb;
 	
 	private int menuSize = 50;
+	
+	private int timeS;
+	private int timeM = 3; //FIXME
+	private boolean timeBoolean = true;
+	private Thread timeThread;	
+	private TextView timeTextView;
+	private Handler handler;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -81,6 +91,31 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		
 		this.bomb = (ImageButton) findViewById(R.id.SinglePlayerButtonBomb);
 		this.bomb.setOnClickListener(this);
+		
+		
+		this.timeTextView = (TextView) findViewById(R.id.GameTextTime);
+		this.timeTextView.setText(timeM+":00");
+		this.handler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				if ( msg.what == 0 ) {
+					timeS--;
+					if ( timeS == -1 ) {
+						timeM--;
+						timeS = 59;
+					}
+					if ( timeS > 9 ) {
+						timeTextView.setText(timeM+":"+timeS);
+					}
+					else {
+						timeTextView.setText(timeM+":0"+timeS);
+					}
+					if ( timeM == 0 ) {
+						//FIXME FIN DU JEU
+					}
+				}
+			}
+		};
 	}
 
 	@Override
@@ -99,6 +134,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	protected void onResume(){
 		Log.i("SinglePlayerLayout", "onResume");
 		super.onResume();
+		this.setTimeThreadRunning(true);
 
 	}
 
@@ -106,6 +142,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	protected void onPause(){
 		Log.i("SinglePlayerLayout", "onPause");
 		super.onPause();
+		this.setTimeThreadRunning(false);
 	}  
 	
 
@@ -118,7 +155,29 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		else if ( this.bomb == arg0 ) {
 			this.gameControllerSingle.pushBomb();
 		}
-	}	
+	}
+	
+	public void setTimeThreadRunning(boolean bombBoolean2) {
+		this.timeBoolean = bombBoolean2;
+		if ( this.timeBoolean && (this.timeThread == null || this.timeThread.getState() == Thread.State.TERMINATED)) {
+			this.timeThread = new Thread() {
+				@Override
+				public void run() {
+					Log.i("Time Thread","Thread started");
+					while (timeBoolean) {
+						try {
+							sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}		
+						handler.sendMessage(handler.obtainMessage(0));
+					}
+					Log.i("Time Thread","Thread done");
+				};
+			};
+			this.timeThread.start();
+		}
+	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -132,5 +132,9 @@
 	<string name="MapEditorMenuSave">Enregistrer</string>
 	<string name="MapEditorMenuReset">Tout effacer</string>
 	<string name="MapEditorMenuQuit">Quitter</string>
+	
+	<!-- Game  -->
+	
+	<string name="GameTextTime">Temps</string>
 
 </resources>

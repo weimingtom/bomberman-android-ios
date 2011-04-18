@@ -480,7 +480,6 @@ public class Engine {
 		this.single.pushBomb(player);
 	}
 
-
 	public void onDraw(Canvas canvas, int size) {
 		this.single.onDraw(canvas,size);
 	}
