@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Klob</string>
+	
+	<!-- Global -->
+	
+	<string name="ButtonCancel">Retour</string>
+	<string name="ButtonCreate">Créer</string>
+	<string name="ButtonConnection">Connexion</string>
+	<string name="ButtonValidate">Valider</string>
+	<string name="ButtonMenu">Menu</string>
+	
+	<string name="TextUserName">Nom utilisateur  </string>
+	<string name="TextUserPassword">Mot de passe</string>
+	<string name="TextUserPseudo">Pseudo</string>
+	
+	<string name="CheckBoxConnectionAuto">Connexion auto</string>
+	<string name="CheckBoxRememberPassword">Mémoriser mot de passe</string>
+	
+	<!-- Home -->
+	
+	<string name="HomeButtonSinglePlayer">Solo</string>
+	<string name="HomeButtonMultiPlayer">Multijoueurs</string>
+	<string name="HomeButtonOptions">Options</string>
+	<string name="HomeButtonStatistics">Statistiques</string>
+	<string name="HomeButtonCreatingLevel">Création de niveaux</string>
+	<string name="HomeButtonHelp">Aide</string>
+	
+	<string name="HommeSpinnerChooseUserText">Veuillez choisir un compte</string>
+	
+	<!-- SinglePlayer -->
+	
+	<string name="SinglePlayerGameType">Type de la partie</string>
+	<string name="SinglePlayerGameEnemiesNumber">Nombre d\'ennemis</string>
+	<string name="SinglePlayerGameEnemiesDifficulty">Difficulté des ennemis</string>
+	<string name="SinglePlayerGameTime">Temps</string>
+	<string-array name="SinglePlayerGameType">
+		<item>FreeForAll</item>
+	</string-array>
+	<string-array name="SinglePlayerEnemiesNumber">
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+	</string-array>
+	<string-array name="SinglePlayerDifficulty">
+		<item>facile</item>
+		<item>moyen</item>
+		<item>difficile</item>
+	</string-array>
+	<string-array name="SinglePlayerTime">
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>5</item>
+		<item>∞</item>
+	</string-array>
+	
+	<string name="SinglePlayerGameErrorLoadingMap">Aucune carte trouvée !</string>
+	
+	<!-- SinglePlayerLayout -->
+	
+	<string name="SinglePlayerMenuResume">Reprendre</string>
+	<string name="SinglePlayerMenuOptions">Options</string>
+	<string name="SinglePlayerMenuQuit">Quitter</string>
+	<string name="SinglePlayerMenuRestart">Redemarrer</string>
+	
+	<!-- Multiplayer -->
+	
+	<string name="MultiplayerButtonNewAccount">Nouveau Compte</string>
+	
+	<string name="MultiPlayerConnectionErrorAutoConnection">Le nom d\'utilisateur ou le mot de passe sont vides</string>
+	
+	<!-- NewAccountOnline -->
+	
+	<string name="NewAccountOnlineTextVerification">Vérification</string>
+	
+	<!-- Options -->
+
+	<string name="OptionsVolume">Volume</string>	
+	<string name="OptionsLanguages">Langages</string>	
+	<string-array name="languages">
+		<item>English</item>
+		<item>Français</item>
+	</string-array>
+	<string name="OptionsProfilManager">Gestion du Profil</string>
+	
+	<!-- ProfilManager -->
+	
+	<string name="ProfilManagementColors">Couleurs</string>
+	<string-array name="playerColors">
+		<item>Blanc</item>
+		<item>Bleu</item>
+		<item>Rouge</item>
+		<item>Noir</item>
+	</string-array>
+	<string name="ProfilManagementButtonEdit">Modifier</string>
+	<string name="ProfilManagementButtonOnlineAccount">Changer de compte</string>	
+	<string name="ProfilManagementType">Type</string>
+	<string-array name="type">
+		<item>Droitier</item>
+		<item>Gaucher</item>
+	</string-array>
+	
+	<string name="ProfilManagementErrorPseudo">Ce pseudonyme est déjà utilisé</string>
+	
+	<!-- Change Password Multiplayer -->
+	
+	<string name="ChangePasswordMultiplayerTextUserName">Nom d\'utilisateur</string>
+	<string name="ChangePasswordMultiplayerTextOldPass">Ancien mot de passe</string>
+	<string name="ChangePasswordMultiplayerTextNewPass">Nouveau mot de passe</string>
+	<string name="ChangePasswordMultiplayerTextConfirmPass">Confirmer le mot de passe</string>
+
+	<!-- Create Map -->
+	
+	<string name="CreateMapTextViewName">Nom de la carte</string>
+	<string name="CreateMapButtonLoad">Charger une carte</string>
+	<string name="CreateMapErrorName">Ce nom de carte n\'est pas valide !</string>
+	<string name="CreateMapErrorLoad">Il n\'y a pas de carte disponible</string>
+	
+	<!-- Statistics -->
+	
+	<string name="StatisticsGamesWon">Parties Gagnées</string>
+	<string name="StatisticsGamesLost">Partie Perdues</string>
+	
+	<!-- Help -->
+	
+	<string name="HelpGoal">But du jeu</string>
+	<string name="HelpInstructions">Instructions</string>
+	<string name="HelpBonus">Bonus</string>
+	<string name="HelpAbout">A propos</string>
+	
+	<!-- Map Editor -->
+	
+	<string name="MapEditorCheckBox">Niveau</string>
+	<string name="SaveMapPlayerError">Le nombre de joueurs sur la carte est inférieur à 4</string>
+	
+	<!-- Map Editor Menu -->
+	
+	<string name="MapEditorMenuResume">Reprendre</string>
+	<string name="MapEditorMenuSave">Enregistrer</string>
+	<string name="MapEditorMenuReset">Tout effacer</string>
+	<string name="MapEditorMenuQuit">Quitter</string>
+	<string name="MapEditorToggleButtonOn">Blocks</string>
+	<string name="MapEditorToggleButtonOff">Sol</string>
+	
+	<!-- Game  -->
+	
+	<string name="GameTextTime">Temps</string>
+
+</resources>
