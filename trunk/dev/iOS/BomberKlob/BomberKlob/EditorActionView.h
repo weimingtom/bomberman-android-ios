@@ -21,6 +21,7 @@
     
     RessourceManager *resource;
     
+    NSArray *items;
     UIImageView *image1;
     UIImageView *image2;
     UIImageView *image3;
@@ -34,6 +35,7 @@
 
 - (id)initWithFrame:(CGRect)frame controller:(EditorAction *)myController;
 
+- (void)initItems;
 - (void)initUserInterface;
 - (void)initImages;
 

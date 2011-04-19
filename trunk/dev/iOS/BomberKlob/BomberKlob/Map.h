@@ -11,7 +11,7 @@
 #define WIDTH  21
 #define HEIGHT 14
 
-@class RessourceManager, Position, Object, Animated;
+@class RessourceManager, Position, Object, Animated, DBUser, DBMap;
 
 
 @interface Map : NSObject <NSCoding> {
@@ -32,11 +32,13 @@
 @property (nonatomic, retain) NSMutableArray *players;
 
 - (id)init;
-- (id)initWithNameMap:(NSString *)nameMap;
+- (id)initWithMapName:(NSString *)mapName;
 - (void)dealloc;
 
-- (void)save;
+- (void)initBasicMap;
+- (void)saveWithOwner:(DBUser *)owner;
 - (void)load:(NSString*)mapName;
+- (void)makePreviewWithView;
 
 - (void)addGround:(Object *)ground position:(Position *)position;
 - (void)addBlock:(Object *)block position:(Position *)position;

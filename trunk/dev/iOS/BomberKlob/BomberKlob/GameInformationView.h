@@ -15,6 +15,6 @@
 	Engine * engine;
 }
 
-- (id) initWithFrame:(CGRect)frame;
+- (id) initWithFrame:(CGRect)frame Engine:(Engine *)engineValue;
 
 @end

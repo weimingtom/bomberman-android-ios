@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class MapEditor, EditorMapZone, EditorInformation, EditorAction, Position, Object;
+@class MapEditor, EditorMapZone, EditorInformation, EditorAction, PauseMenu, Position, Object;
 
 
 @interface EditorViewController : UIViewController {
@@ -18,13 +18,18 @@
     EditorMapZone *editorMapZone;
     EditorInformation *editorInformation;
     EditorAction *editorAction;
+    PauseMenu *pauseMenu;
 }
 
 @property (nonatomic, retain) MapEditor *mapEditor;
 
-- (id)init;
+- (id)initWithMapName:(NSString *)mapName;
 - (void)dealloc;
 
 - (void)clickOnPosition:(Position *)position;
+- (void)pauseAction;
+- (void)resumeAction;
+- (void)saveAction;
+- (void)quitAction;
 
 @end

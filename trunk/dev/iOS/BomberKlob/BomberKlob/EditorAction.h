@@ -27,7 +27,7 @@
 @property (nonatomic, retain) NSString *selectedObject;
 @property (nonatomic) BOOL removeTool;
 
-- (id)initWithFrame:(CGRect)frame controller:(UIViewController *)myController;
+- (id)initWithFrame:(CGRect)frame controller:(EditorViewController *)myController;
 - (void)dealloc;
 
 

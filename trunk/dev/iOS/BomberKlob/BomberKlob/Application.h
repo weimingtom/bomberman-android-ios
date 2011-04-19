@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-@class DataBase, DBUser, DBSystem;
+@class DataBase, DBUser, DBSystem, DBMap;
 
 
 @interface Application : NSObject {
@@ -42,6 +42,7 @@
 
 - (BOOL)existPlayer;
 - (BOOL)pseudoAlreadyExists:(NSString *)pseudo;
+- (void)addMap:(DBMap *)map;
 
 - (void)playSoundMenu;
 - (void)playSoundButton;

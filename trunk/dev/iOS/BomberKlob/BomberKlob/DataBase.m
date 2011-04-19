@@ -7,6 +7,8 @@
 //
 
 #import "DataBase.h"
+#import "DBMap.h"
+#import "DBUser.h"
 
 
 @implementation DataBase
@@ -143,7 +145,7 @@ static DataBase *_dataBase = nil;
 - (void)insertInto:(NSString *)table values:(NSString *)values {
     char *err; 
     NSString *sql = [NSString stringWithFormat: @"INSERT INTO %@ VALUES %@;", table, values];
-    
+
     if (sqlite3_exec(dataBase, [sql UTF8String], NULL, NULL, &err) != SQLITE_OK) {
         sqlite3_close(dataBase); 
         NSAssert(0, @"Error updating table.");
@@ -181,6 +183,25 @@ static DataBase *_dataBase = nil;
     }
     
     return (sqlite3_prepare_v2(dataBase, [query UTF8String], -1, &statement, nil) == SQLITE_OK)? statement : nil;
+}
+
+
+- (void)createOrUpdateMap:(DBMap *)map {
+    
+    sqlite3_stmt *statement = [self select:@"owner" from:@"Map" where:[NSString stringWithFormat:@"name = '%@'", map.name]];
+    
+    if (sqlite3_step(statement) == SQLITE_ROW) {
+        NSLog(@"%d == %d", sqlite3_column_int(statement, 0), map.owner.identifier);
+        if (sqlite3_column_int(statement, 0) != map.owner.identifier) {
+            [self update:@"Map" set:[NSString stringWithFormat:@"owner = %d", map.owner.identifier] where:[NSString stringWithFormat:@"name = '%@'", map.name]];
+        }
+    }
+    else
+        [self insertInto:@"Map" values:[NSString stringWithFormat:@"('%@', %d, 0)", map.name, map.owner.identifier]];
+        
+        
+        sqlite3_finalize(statement);
+
 }
 
 @end

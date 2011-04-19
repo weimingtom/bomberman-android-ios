@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "sqlite3.h"
 
+@class DBMap;
+
 
 @interface DataBase : NSObject {
     
@@ -27,5 +29,6 @@
 - (void)insertInto:(NSString *)table values:(NSString *)values;
 - (void)update:(NSString *)table set:(NSString *)values where:(NSString *)condition;
 - (sqlite3_stmt *)select:(NSString *)attributes from:(NSString *)table where:(NSString *)condition;
+- (void)createOrUpdateMap:(DBMap *)map;
 
 @end

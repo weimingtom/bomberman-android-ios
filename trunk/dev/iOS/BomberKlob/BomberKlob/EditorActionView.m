@@ -36,6 +36,11 @@
 }
 
 
+- (void)initItems {
+    // TODO: A compléter...
+}
+
+
 - (void)initUserInterface {
     
     [self initImages];

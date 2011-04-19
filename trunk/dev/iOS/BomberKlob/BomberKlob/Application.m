@@ -162,6 +162,15 @@
 }
 
 
+- (void)addMap:(DBMap *)map {
+    NSMutableArray *newMaps = [[NSMutableArray alloc] initWithArray:maps];
+    [newMaps addObject:map];
+    [maps release];
+    
+    maps = [[NSArray alloc] initWithArray:newMaps];
+}
+
+
 - (void)playSoundMenu {
     if (system.volume > 0 && !system.mute)
         [self.playerMenu play];

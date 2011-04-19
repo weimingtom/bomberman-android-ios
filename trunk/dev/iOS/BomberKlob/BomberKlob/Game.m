@@ -24,7 +24,7 @@
         Position *position;
         Player *player;
         NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
-        map = [[Map alloc] initWithNameMap:mapName];
+        map = [[Map alloc] initWithMapName:mapName];
         
         players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
         
