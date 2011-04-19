@@ -9,6 +9,7 @@
 #import "MapEditor.h"
 #import "Map.h"
 #import "Position.h"
+#import "DBUser.h"
 
 
 @implementation MapEditor
@@ -16,11 +17,11 @@
 @synthesize map;
 
 
-- (id)init {
+- (id)initWithMapName:(NSString *)mapName {
     self = [super init];
     
     if (self) {
-        map = [[Map alloc] init];
+        map = [[Map alloc] initWithMapName:mapName];
     }
 
     return self;
@@ -45,6 +46,11 @@
 
 - (void)deleteBlockAtPosition:(Position *)position {
     [map deleteBlockAtPosition:position];
+}
+
+
+- (void)saveMapWithOwner:(DBUser *)owner {
+    [map saveWithOwner:owner];
 }
 
 @end

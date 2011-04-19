@@ -14,6 +14,9 @@
 #import "Inanimated.h"
 #import "Undestructible.h"
 #import "Animated.h"
+#import "DataBase.h"
+#import "DBUser.h"
+#import "DBMap.h"
 
 @implementation Map
 
@@ -30,30 +33,7 @@
     
     if (self) {
 //        Position *position;
-        width = WIDTH;
-        height = HEIGHT;
-        
-        name = @"Default";
-        
-        grounds = [[NSMutableArray alloc] initWithCapacity:height];
-        blocks = [[NSMutableArray alloc] initWithCapacity:height];
-        players = [[NSMutableArray alloc] init];
-        
-        for (int i = 0; i < width; i++){
-            [grounds addObject:[[NSMutableArray alloc] initWithCapacity:width]];
-            [blocks addObject:[[NSMutableArray alloc] initWithCapacity:width]];
-            
-            for (int j = 0; j < height; j++) {
-                [[grounds objectAtIndex:i] addObject: [[Inanimated alloc] initWithImageName:@"grass2" position:[[Position alloc] initWithX:i y:j]]];
-                
-                if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
-                    [[blocks objectAtIndex:i] addObject: [[Undestructible alloc] initWithImageName:@"bloc" position:[[Position alloc] initWithX:i y:j]]];
-                }
-                else {
-                    [[blocks objectAtIndex:i] addObject:@"empty"];
-                }
-            }
-        }
+        [self initBasicMap];
 //        
 //        position = [[Position alloc] initWithX:5 y:2];
 //        [players addObject:position];
@@ -75,14 +55,40 @@
 }
 
 
-- (id)initWithNameMap:(NSString *)nameMap {
+- (id)initWithMapName:(NSString *)mapName {
     self = [super init];
     
     if (self) {       
-        [self load:nameMap];
+        [self load:mapName];
     }
     
     return self;
+}
+
+
+- (void)initBasicMap {
+    width = WIDTH;
+    height = HEIGHT;
+    
+    grounds = [[NSMutableArray alloc] initWithCapacity:height];
+    blocks = [[NSMutableArray alloc] initWithCapacity:height];
+    players = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < width; i++){
+        [grounds addObject:[[NSMutableArray alloc] initWithCapacity:width]];
+        [blocks addObject:[[NSMutableArray alloc] initWithCapacity:width]];
+        
+        for (int j = 0; j < height; j++) {
+            [[grounds objectAtIndex:i] addObject: [[Inanimated alloc] initWithImageName:@"grass2" position:[[Position alloc] initWithX:i y:j]]];
+            
+            if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
+                [[blocks objectAtIndex:i] addObject: [[Undestructible alloc] initWithImageName:@"bloc" position:[[Position alloc] initWithX:i y:j]]];
+            }
+            else {
+                [[blocks objectAtIndex:i] addObject:@"empty"];
+            }
+        }
+    }
 }
 
 
@@ -95,7 +101,7 @@
 }
 
 
-- (void)save {
+- (void)saveWithOwner:(DBUser *)owner {
     NSMutableData *data = [NSMutableData data];
     
     NSString *mapPath = [NSString stringWithFormat:@"%@/Maps/%@.klob", [[NSBundle mainBundle] bundlePath], name];
@@ -108,6 +114,9 @@
     result = [data writeToFile:mapPath atomically:YES];
     [self makePreviewWithView];
     
+    DBMap *dbMap = [[DBMap alloc] initWithName:name owner:owner.identifier official:0];
+    [[DataBase instance] createOrUpdateMap:dbMap];
+    
     [map release];
 }
 
@@ -119,25 +128,32 @@
     NSString *mapPath = [NSString stringWithFormat:@"%@/Maps/%@.klob", [[NSBundle mainBundle] bundlePath], mapName];
     
     data = [NSData dataWithContentsOfFile:mapPath];
-    unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
     
-    myMap = [unarchiver decodeObjectForKey:@"map"];
-    [unarchiver finishDecoding];
-    [unarchiver release];
-    
-    self.name = myMap.name;
-    self.width = myMap.width;
-    self.height = myMap.height;
-    self.grounds = myMap.grounds;
-    self.blocks = myMap.blocks;
-    self.players = myMap.players;
-    
-    [myMap release];
+    if (data != nil) {
+        unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+        
+        myMap = [unarchiver decodeObjectForKey:@"map"];
+        [unarchiver finishDecoding];
+        [unarchiver release];
+        
+        self.name = myMap.name;
+        self.width = myMap.width;
+        self.height = myMap.height;
+        self.grounds = myMap.grounds;
+        self.blocks = myMap.blocks;
+        self.players = myMap.players;
+        
+        [myMap release];
+    }
+    else {
+        self.name = mapName;
+        [self initBasicMap];
+    }
 }
 
 
 - (void)makePreviewWithView {
-    CGSize size = [[UIScreen mainScreen] bounds].size;
+    CGSize size = CGSizeMake([RessourceManager sharedRessource].tileSize * height, [RessourceManager sharedRessource].tileSize * width);
     
     UIGraphicsBeginImageContext(CGSizeMake(size.height, size.width));
     

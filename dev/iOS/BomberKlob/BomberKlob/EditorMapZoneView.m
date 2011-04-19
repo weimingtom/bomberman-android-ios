@@ -15,6 +15,7 @@
 #import "Undestructible.h"
 #import "RessourceManager.h"
 
+// FIXME: Problème lorsque l'on change d'outils (normal -> suppression) et que l'on veut supprimer le bloc que l'on vient de poser.
 @implementation EditorMapZoneView
 
 @synthesize editorMapZone, oldTouchPosition;

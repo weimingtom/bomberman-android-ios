@@ -8,18 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@class User;
+@class DBUser;
 
 
 @interface DBMap : NSObject {
     
     NSString *name;
-    User *owner;
+    DBUser *owner;
     BOOL official;
 }
 
 @property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) User *owner;
+@property (nonatomic, retain) DBUser *owner;
 @property (nonatomic) BOOL official;
 
 - (id)initWithName:(NSString *)aName owner:(NSUInteger)anOwner official:(BOOL)anOfficial;

@@ -29,6 +29,13 @@
 		1890E75D135A02CC002F78B9 /* EditorMapZoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E75C135A02CB002F78B9 /* EditorMapZoneView.m */; };
 		1890E760135A02EF002F78B9 /* EditorInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E75F135A02EF002F78B9 /* EditorInformationView.m */; };
 		1890E763135A0303002F78B9 /* EditorActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E762135A0303002F78B9 /* EditorActionView.m */; };
+		1890E766135C6014002F78B9 /* PauseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E765135C6013002F78B9 /* PauseMenu.m */; };
+		1890E769135C6039002F78B9 /* PauseMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E768135C6038002F78B9 /* PauseMenuView.m */; };
+		1890E76E135C9E36002F78B9 /* EditorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E76C135C9E36002F78B9 /* EditorMenuViewController.m */; };
+		1890E76F135C9E36002F78B9 /* EditorMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1890E76D135C9E36002F78B9 /* EditorMenuViewController.xib */; };
+		1890E774135CB2EC002F78B9 /* LoadMapEditorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E772135CB2EC002F78B9 /* LoadMapEditorMenuViewController.m */; };
+		1890E778135CB5AF002F78B9 /* LoadMapEditorMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E777135CB5AF002F78B9 /* LoadMapEditorMenuView.m */; };
+		1890E77A135CB724002F78B9 /* LoadMapEditorMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1890E779135CB724002F78B9 /* LoadMapEditorMenuViewController.xib */; };
 		18ADE84F13534575001AF150 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18ADE84E13534575001AF150 /* icon.png */; };
 		18C839C913410263001D5747 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C839C813410263001D5747 /* UIKit.framework */; };
 		18C839CB13410263001D5747 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C839CA13410263001D5747 /* Foundation.framework */; };
@@ -141,6 +148,18 @@
 		1890E75F135A02EF002F78B9 /* EditorInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorInformationView.m; sourceTree = "<group>"; };
 		1890E761135A0303002F78B9 /* EditorActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorActionView.h; sourceTree = "<group>"; };
 		1890E762135A0303002F78B9 /* EditorActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorActionView.m; sourceTree = "<group>"; };
+		1890E764135C6012002F78B9 /* PauseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseMenu.h; sourceTree = "<group>"; };
+		1890E765135C6013002F78B9 /* PauseMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseMenu.m; sourceTree = "<group>"; };
+		1890E767135C6037002F78B9 /* PauseMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseMenuView.h; sourceTree = "<group>"; };
+		1890E768135C6038002F78B9 /* PauseMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseMenuView.m; sourceTree = "<group>"; };
+		1890E76B135C9E36002F78B9 /* EditorMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorMenuViewController.h; sourceTree = "<group>"; };
+		1890E76C135C9E36002F78B9 /* EditorMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorMenuViewController.m; sourceTree = "<group>"; };
+		1890E76D135C9E36002F78B9 /* EditorMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorMenuViewController.xib; sourceTree = "<group>"; };
+		1890E771135CB2EC002F78B9 /* LoadMapEditorMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMapEditorMenuViewController.h; sourceTree = "<group>"; };
+		1890E772135CB2EC002F78B9 /* LoadMapEditorMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMapEditorMenuViewController.m; sourceTree = "<group>"; };
+		1890E776135CB5AF002F78B9 /* LoadMapEditorMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMapEditorMenuView.h; sourceTree = "<group>"; };
+		1890E777135CB5AF002F78B9 /* LoadMapEditorMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMapEditorMenuView.m; sourceTree = "<group>"; };
+		1890E779135CB724002F78B9 /* LoadMapEditorMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMapEditorMenuViewController.xib; sourceTree = "<group>"; };
 		18ADE84E13534575001AF150 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		18C839C413410263001D5747 /* BomberKlob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BomberKlob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C839C813410263001D5747 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -304,10 +323,10 @@
 			children = (
 				99240525135337D700011965 /* Application.h */,
 				99240526135337D700011965 /* Application.m */,
-				992405221353379700011965 /* DBMap.h */,
-				992405231353379700011965 /* DBMap.m */,
 				185EEC951348A98D007A1C67 /* DataBase.h */,
 				185EEC961348A98D007A1C67 /* DataBase.m */,
+				992405221353379700011965 /* DBMap.h */,
+				992405231353379700011965 /* DBMap.m */,
 				186E7CD01345313F004B873F /* DBSystem.h */,
 				186E7CD11345313F004B873F /* DBSystem.m */,
 				187A72D7134117800020D828 /* DBUser.h */,
@@ -344,6 +363,28 @@
 				18885588134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib */,
 			);
 			name = CreateAccountMenu;
+			sourceTree = "<group>";
+		};
+		1890E76A135C9D81002F78B9 /* EditorMenu */ = {
+			isa = PBXGroup;
+			children = (
+				1890E76B135C9E36002F78B9 /* EditorMenuViewController.h */,
+				1890E76C135C9E36002F78B9 /* EditorMenuViewController.m */,
+				1890E76D135C9E36002F78B9 /* EditorMenuViewController.xib */,
+			);
+			name = EditorMenu;
+			sourceTree = "<group>";
+		};
+		1890E770135CB286002F78B9 /* LoadMapEditorMenu */ = {
+			isa = PBXGroup;
+			children = (
+				1890E771135CB2EC002F78B9 /* LoadMapEditorMenuViewController.h */,
+				1890E772135CB2EC002F78B9 /* LoadMapEditorMenuViewController.m */,
+				1890E779135CB724002F78B9 /* LoadMapEditorMenuViewController.xib */,
+				1890E776135CB5AF002F78B9 /* LoadMapEditorMenuView.h */,
+				1890E777135CB5AF002F78B9 /* LoadMapEditorMenuView.m */,
+			);
+			name = LoadMapEditorMenu;
 			sourceTree = "<group>";
 		};
 		18C839B913410263001D5747 = {
@@ -386,7 +427,9 @@
 				187A72E2134131020020D828 /* MainMenu */,
 				18543B251350C7610038CC61 /* SinglePlayerMenu */,
 				1846A7E3134C62F600D35626 /* OptionsMenu */,
-				99225AE613547785008B95AA /* EditorGame */,
+				1890E76A135C9D81002F78B9 /* EditorMenu */,
+				1890E770135CB286002F78B9 /* LoadMapEditorMenu */,
+				99225AE613547785008B95AA /* Editor */,
 				1846A7EF134C6C3600D35626 /* AccountManagementMenu */,
 				1846A7C2134B6F5700D35626 /* ChangePlayerMenu */,
 				18819AC8134103CA00CBAF1D /* AppDelegate */,
@@ -408,7 +451,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		99225AE613547785008B95AA /* EditorGame */ = {
+		99225AE613547785008B95AA /* Editor */ = {
 			isa = PBXGroup;
 			children = (
 				99433932134C876200970231 /* EditorViewController.h */,
@@ -417,16 +460,20 @@
 				1890E7591359FF20002F78B9 /* EditorMapZone.m */,
 				1890E75B135A02CB002F78B9 /* EditorMapZoneView.h */,
 				1890E75C135A02CB002F78B9 /* EditorMapZoneView.m */,
-				1890E7521359FE02002F78B9 /* EditorInformation.h */,
-				1890E7531359FE02002F78B9 /* EditorInformation.m */,
-				1890E75E135A02EF002F78B9 /* EditorInformationView.h */,
-				1890E75F135A02EF002F78B9 /* EditorInformationView.m */,
 				1890E7551359FE1A002F78B9 /* EditorAction.h */,
 				1890E7561359FE1A002F78B9 /* EditorAction.m */,
 				1890E761135A0303002F78B9 /* EditorActionView.h */,
 				1890E762135A0303002F78B9 /* EditorActionView.m */,
+				1890E7521359FE02002F78B9 /* EditorInformation.h */,
+				1890E7531359FE02002F78B9 /* EditorInformation.m */,
+				1890E75E135A02EF002F78B9 /* EditorInformationView.h */,
+				1890E75F135A02EF002F78B9 /* EditorInformationView.m */,
+				1890E764135C6012002F78B9 /* PauseMenu.h */,
+				1890E765135C6013002F78B9 /* PauseMenu.m */,
+				1890E767135C6037002F78B9 /* PauseMenuView.h */,
+				1890E768135C6038002F78B9 /* PauseMenuView.m */,
 			);
-			name = EditorGame;
+			name = Editor;
 			sourceTree = "<group>";
 		};
 		99433974134C877000970231 /* Object */ = {
@@ -614,6 +661,8 @@
 				99225ADD135471EC008B95AA /* space.png in Resources */,
 				18592AA61359DC7B00A20BB1 /* Maps in Resources */,
 				18592AA71359DC7B00A20BB1 /* Sounds in Resources */,
+				1890E76F135C9E36002F78B9 /* EditorMenuViewController.xib in Resources */,
+				1890E77A135CB724002F78B9 /* LoadMapEditorMenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,6 +727,11 @@
 				1890E75D135A02CC002F78B9 /* EditorMapZoneView.m in Sources */,
 				1890E760135A02EF002F78B9 /* EditorInformationView.m in Sources */,
 				1890E763135A0303002F78B9 /* EditorActionView.m in Sources */,
+				1890E766135C6014002F78B9 /* PauseMenu.m in Sources */,
+				1890E769135C6039002F78B9 /* PauseMenuView.m in Sources */,
+				1890E76E135C9E36002F78B9 /* EditorMenuViewController.m in Sources */,
+				1890E774135CB2EC002F78B9 /* LoadMapEditorMenuViewController.m in Sources */,
+				1890E778135CB5AF002F78B9 /* LoadMapEditorMenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

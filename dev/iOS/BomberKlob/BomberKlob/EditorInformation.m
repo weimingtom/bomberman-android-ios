@@ -33,4 +33,9 @@
     [super dealloc];
 }
 
+
+- (void)pauseAction {
+    [editorViewController pauseAction];
+}
+
 @end

@@ -1,28 +1,30 @@
 //
-//  EditorInformation.h
+//  PauseMenu.h
 //  BomberKlob
 //
-//  Created by Benjamin Tardieu on 16/04/11.
+//  Created by Benjamin Tardieu on 18/04/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@class EditorInformationView, EditorViewController;
+@class PauseMenuView, EditorViewController;
 
 
-@interface EditorInformation : NSObject {
-    
-    EditorInformationView *editorInformationView;
+@interface PauseMenu : NSObject {
+
+    PauseMenuView *pauseMenuView;
     EditorViewController *editorViewController;
 }
 
-@property (nonatomic, retain) EditorInformationView *editorInformationView;
+@property (nonatomic, retain) PauseMenuView *pauseMenuView;
 @property (nonatomic, retain) EditorViewController *editorViewController;
 
 - (id)initWithFrame:(CGRect)frame controller:(EditorViewController *)myController;
 - (void)dealloc;
 
-- (void)pauseAction;
+- (void)resumeAction;
+- (void)saveAction;
+- (void)quitAction;
 
 @end

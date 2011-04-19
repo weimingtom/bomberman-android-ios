@@ -23,7 +23,7 @@
         editorViewController = myController;
         editorViewAction = [[EditorActionView alloc] initWithFrame:frame controller:self];
         selectedObjectType = @"Inanimated";
-        selectedObject = @"block2";
+        selectedObject = @"bloc";
         removeTool = NO;
     }
     

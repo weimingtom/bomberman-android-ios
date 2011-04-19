@@ -20,7 +20,7 @@
 @property (nonatomic, retain) EditorMapZoneView *editorMapZoneView;
 @property (nonatomic, retain) EditorViewController *editorViewController;
 
-- (id)initWithFrame:(CGRect)frame controller:(UIViewController *)myController;
+- (id)initWithFrame:(CGRect)frame controller:(EditorViewController *)myController;
 - (void)dealloc;
 
 - (void)clickOnPosition:(Position *)position;
