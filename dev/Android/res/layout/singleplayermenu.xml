@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="fill_parent" android:layout_width="fill_parent" android:id="@+id/relativeLayout1" >
-        <LinearLayout android:layout_width="wrap_content" android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_centerInParent="true" android:orientation="vertical" android:background="@drawable/background" android:layout_centerVertical="true" android:gravity="center_vertical|center_horizontal">
-            <Button android:layout_height="wrap_content" android:id="@+id/SinglePlayerMenuResume" android:layout_width="wrap_content" android:text="@string/SinglePlayerMenuResume"></Button>
-            <Button android:layout_height="wrap_content" android:id="@+id/SinglePlayerMenuOptions" android:layout_width="wrap_content" android:text="@string/SinglePlayerMenuOptions"></Button>
-            <Button android:text="@string/SinglePlayerMenuRestart" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/SinglePlayerMenuRestart"></Button>
-            <Button android:layout_height="wrap_content" android:id="@+id/SinglePlayerMenuQuit" android:layout_width="wrap_content" android:text="@string/SinglePlayerMenuQuit"></Button>
-        </LinearLayout>
-    </RelativeLayout>

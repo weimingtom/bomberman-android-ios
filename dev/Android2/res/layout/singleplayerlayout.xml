@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/SinglePlayerRelativeLayoutGlobal">
+
+	<LinearLayout android:id="@+id/linearLayout4"
+		android:orientation="vertical" android:layout_height="fill_parent"
+		android:layout_width="fill_parent">
+		<RelativeLayout android:id="@+id/SinglePlayerRelativeLayoutMenu"
+			android:layout_height="wrap_content" android:background="@color/White"
+			android:layout_width="fill_parent" android:gravity="center_vertical">
+			<Button android:id="@+id/SinglePlayerButtonMenu"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+				android:text="@string/ButtonMenu"></Button>
+			<LinearLayout android:layout_height="wrap_content"
+				android:id="@+id/linearLayout2" android:layout_width="wrap_content"
+				android:layout_centerVertical="false" android:layout_alignParentTop="true"
+				android:layout_centerInParent="true">
+				<LinearLayout android:layout_height="fill_parent"
+					android:gravity="center_horizontal" android:id="@+id/linearLayout3"
+					android:layout_width="wrap_content" android:orientation="vertical">
+					<TextView android:id="@+id/textView1"
+						android:layout_height="wrap_content" android:text="@string/GameTextTime"
+						android:layout_width="wrap_content"></TextView>
+					<TextView android:id="@+id/GameTextTime"
+						android:layout_height="wrap_content" android:text="TextView"
+						android:layout_width="wrap_content"></TextView>
+				</LinearLayout>
+			</LinearLayout>
+		</RelativeLayout>
+		<LinearLayout android:layout_height="fill_parent"
+			android:id="@+id/linearLayout1" android:layout_width="fill_parent"
+			android:orientation="horizontal">
+			<LinearLayout android:layout_height="fill_parent"
+				android:gravity="center" android:background="@color/Grey"
+				android:id="@+id/SinglePlayerLinearLayoutEditorController"
+				android:layout_width="wrap_content">
+				<FrameLayout android:layout_height="wrap_content"
+					android:layout_width="wrap_content" android:id="@+id/SinglePlayerFrameLayoutGame"></FrameLayout>
+			</LinearLayout>
+			<RelativeLayout android:layout_height="wrap_content"
+				android:id="@+id/SinglePlayerRelativeLayoutObjectsGallery"
+				android:background="@color/Brown" android:layout_width="fill_parent">
+				<FrameLayout android:layout_height="wrap_content"
+					android:layout_width="wrap_content" android:layout_centerInParent="true"
+					android:id="@+id/SinglePlayerFrameLayoutBombsGallery"></FrameLayout>
+				<ImageButton android:background="@drawable/bomb_button"
+					android:layout_height="wrap_content"
+					android:layout_alignParentBottom="true" android:layout_width="wrap_content"
+					android:id="@+id/SinglePlayerButtonBomb"
+					android:layout_centerInParent="true"></ImageButton>
+			</RelativeLayout>
+		</LinearLayout>
+	</LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:gravity="center_vertical|center_horizontal" android:id="@+id/SinglePlayerLinearLayoutMenu" android:background="@color/Black">
+		<LinearLayout android:gravity="center_vertical|center_horizontal" android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="wrap_content" android:orientation="vertical">
+			<Button android:id="@+id/SinglePlayerMenuResume" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/SinglePlayerMenuResume"></Button>
+			<Button android:id="@+id/SinglePlayerMenuOptions" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/SinglePlayerMenuOptions"></Button>
+			<Button android:id="@+id/SinglePlayerMenuRestart" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/SinglePlayerMenuRestart"></Button>
+			<Button android:id="@+id/SinglePlayerMenuQuit" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/SinglePlayerMenuQuit"></Button>
+		</LinearLayout>
+	</LinearLayout>
+
+
+</RelativeLayout>

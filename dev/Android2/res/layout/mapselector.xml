@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/background">
+        <LinearLayout android:id="@+id/linearLayout3" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <RelativeLayout android:id="@+id/relativeLayout2" android:gravity="center_vertical" android:layout_height="wrap_content" android:layout_width="wrap_content">
+                <Button android:id="@+id/CreateMapButtonCancel" android:layout_height="wrap_content" android:text="@string/ButtonCancel" android:layout_alignParentLeft="true" android:layout_width="wrap_content" android:gravity="center_vertical" android:layout_centerVertical="true"></Button>
+                <Button android:layout_alignParentRight="true" android:id="@+id/CreateMapButtonValidate" android:layout_height="wrap_content" android:text="@string/ButtonValidate" android:layout_width="wrap_content" android:layout_centerVertical="true"></Button>
+                <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/imageView1" android:src="@drawable/gamename" android:layout_centerInParent="true"></ImageView>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_centerInParent="true" android:orientation="vertical" android:gravity="center_horizontal" android:layout_width="fill_parent">
+            <TextView android:layout_width="wrap_content" android:text="@string/CreateMapTextViewName" android:layout_height="wrap_content" android:id="@+id/textView1"></TextView>
+            <EditText android:text="" android:layout_width="140dip" android:layout_height="wrap_content" android:id="@+id/CreateMapEditTextMapName" android:singleLine="true"></EditText>
+            <Button android:layout_width="wrap_content" android:id="@+id/CreateMapButtonLoad" android:text="@string/CreateMapButtonLoad" android:layout_height="wrap_content"></Button>
+        </LinearLayout>
+    </RelativeLayout>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="Gallery">
-        <attr name="android:galleryItemBackground" />
-    </declare-styleable>
-    <color name="White">#884422</color>
-    <color name="Grey">#808080</color>
-</resources>
