@@ -19,7 +19,6 @@
 @property (nonatomic, retain) Map *map;
 
 - (id)initWithMapName:(NSString *)mapName;
-- (void)dealloc;
 
 - (void)addBlock:(Object *)block position:(Position *)position;
 - (void)deleteBlockAtPosition:(Position *)position;

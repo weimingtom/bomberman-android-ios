@@ -13,6 +13,7 @@
 #import "Map.h"
 #import "DataBase.h"
 #import "DBMap.h"
+#import "EditorViewController.h"
 
 
 @implementation LoadMapEditorMenuViewController
@@ -45,7 +46,7 @@
     NSMutableArray *officialMapsTmp = [[NSMutableArray alloc] init];
     
     DBMap *map;
-    sqlite3_stmt *statement = [[DataBase instance] select:@"*" from:@"Map" where:@"official = 0"];
+    sqlite3_stmt *statement = [[DataBase sharedDataBase] select:@"*" from:@"Map" where:@"official = 0"];
     
     while (sqlite3_step(statement) == SQLITE_ROW) {
         map = [[DBMap alloc] initWithName:[NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 0)] owner:sqlite3_column_int(statement, 1) official:sqlite3_column_int(statement, 1)];
@@ -100,8 +101,17 @@
 }
 
 
+- (void)goToEditor {
+    EditorViewController *editorViewController = [[EditorViewController alloc] initWithMapName:mapName.text];
+    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController pushViewController:editorViewController animated:NO];
+    [editorViewController release];
+}
+
+
 - (IBAction)loadAction:(id)sender {
     NSLog(@"Load");
+    [self goToEditor];
 }
 
 @end

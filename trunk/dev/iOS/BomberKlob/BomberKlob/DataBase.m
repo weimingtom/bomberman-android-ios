@@ -47,7 +47,7 @@ static DataBase *_dataBase = nil;
 }
 
 
-+ (DataBase *)instance {
++ (DataBase *)sharedDataBase {
 	@synchronized([DataBase class]) {
 		if (!_dataBase) {
 			[[self alloc] init];
@@ -60,7 +60,7 @@ static DataBase *_dataBase = nil;
 }
 
 
-- (NSString *)filePath { 
+- (NSString *)dataBasePath { 
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDir = [paths objectAtIndex:0];
     
@@ -70,7 +70,7 @@ static DataBase *_dataBase = nil;
 
 - (void)openDataBase {
     // Create the database if it not exist
-    if (sqlite3_open([[self filePath] UTF8String], &dataBase) != SQLITE_OK) {
+    if (sqlite3_open([[self dataBasePath] UTF8String], &dataBase) != SQLITE_OK) {
         sqlite3_close(dataBase); 
         NSAssert(0, @"Database failed to open.");
     }
@@ -139,6 +139,8 @@ static DataBase *_dataBase = nil;
     for (int i = 0; i < [nameMap count]; i++) {
         [self insertInto:@"Map" values:[NSString stringWithFormat:@"('%@', NULL, 1)", [nameMap objectAtIndex:i]]];
     }
+    
+    [nameMap release];
 }
 
 

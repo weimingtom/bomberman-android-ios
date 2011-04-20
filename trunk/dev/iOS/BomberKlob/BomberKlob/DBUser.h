@@ -15,33 +15,31 @@
     
     DataBase *dataBase;
     
-    NSUInteger identifier;
+    NSInteger identifier;
     NSString *pseudo;
     NSString *userName;
     NSString *password;
     BOOL connectionAuto;
     BOOL rememberPassword;
-    NSUInteger color;
-    NSUInteger menuPosition;
-    NSUInteger gameWon;
-    NSUInteger gameLost;
+    NSInteger color;
+    NSInteger menuPosition;
+    NSInteger gameWon;
+    NSInteger gameLost;
 }
 
-// TODO: A changer...
-@property (readonly) NSUInteger identifier;
+@property (readonly) NSInteger identifier;
 @property (nonatomic, retain) NSString *pseudo;
 @property (nonatomic, retain) NSString *userName;
 @property (nonatomic, retain) NSString *password;
 @property (nonatomic) BOOL connectionAuto;
 @property (nonatomic) BOOL rememberPassword;
-@property (nonatomic) NSUInteger color;
-@property (nonatomic) NSUInteger menuPosition;
-@property (nonatomic) NSUInteger gameWon;
-@property (nonatomic) NSUInteger gameLost;
+@property (nonatomic) NSInteger color;
+@property (nonatomic) NSInteger menuPosition;
+@property (nonatomic) NSInteger gameWon;
+@property (nonatomic) NSInteger gameLost;
 
 - (id)initWithPseudo:(NSString *)aPseudo;
-- (id)initWithId:(NSUInteger)aId;
-- (void)dealloc;
+- (id)initWithId:(NSInteger)aId;
 
 - (void)saveInDataBase;
 

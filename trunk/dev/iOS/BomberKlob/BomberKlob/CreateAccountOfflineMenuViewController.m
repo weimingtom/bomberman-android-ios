@@ -97,7 +97,7 @@
         Application *application = ((BomberKlobAppDelegate *)[UIApplication sharedApplication].delegate).app;
         
         // if the player's name is already used
-        if ([application pseudoAlreadyExists:pseudo.text]) {
+        if ([application pseudoAlreadyUsed:pseudo.text]) {
             UILabel *errorText = (UILabel *)[errorView.subviews objectAtIndex:0]; 
             errorText.text = [NSString stringWithFormat: NSLocalizedString(@"'%@' is already used.", @"Error message when creating an offline account" ), pseudo.text];
             
