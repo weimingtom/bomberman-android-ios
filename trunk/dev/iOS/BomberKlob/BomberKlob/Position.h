@@ -17,8 +17,9 @@
 @property (nonatomic) NSInteger x;
 @property (nonatomic) NSInteger y;
 
-- (id)init;
-- (id)initWithX:(NSInteger)aX y:(NSInteger)aY;
+- (id) init;
+- (id) initWithX:(NSInteger)aX y:(NSInteger)aY;
+- (id) initWithPosition:(Position *) position;
 
 - (BOOL)isEqual:(id)object;
 - (NSString *)description;

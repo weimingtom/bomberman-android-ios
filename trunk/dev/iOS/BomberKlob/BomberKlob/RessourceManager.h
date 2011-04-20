@@ -14,12 +14,16 @@
 	NSInteger screenHeight;
 	NSInteger screenWidth;
 
+	NSMutableDictionary * bitmapsAnimates;
 	NSMutableDictionary * bitmapsInanimates;
 	NSMutableDictionary * bitmapsPlayer;
-}
+	NSMutableDictionary * bitmapsBombs;
 
-@property (nonatomic, retain) NSMutableDictionary * bitmapsInanimates;
+}
+@property (nonatomic, copy) NSMutableDictionary * bitmapsAnimates;
+@property (nonatomic, copy) NSMutableDictionary * bitmapsInanimates;
 @property (nonatomic, copy) NSMutableDictionary * bitmapsPlayer;
+@property (nonatomic, copy) NSMutableDictionary * bitmapsBombs;
 @property (nonatomic) NSInteger tileSize;
 @property (nonatomic) NSInteger screenHeight;
 @property (nonatomic) NSInteger screenWidth;
@@ -36,6 +40,10 @@
 - (void) loadBitmapInanimates;
 
 - (void) loadBitmapPlayer;
+
+- (void) loadBitmapBombs;
+
+- (void) loadBitmapAnimates;
 
 - (void) update;
 

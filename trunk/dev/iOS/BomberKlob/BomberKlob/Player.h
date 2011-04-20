@@ -26,6 +26,7 @@
 
 @property (nonatomic) NSInteger speed;
 @property (nonatomic) NSInteger lifeNumber;
+@property (nonatomic, retain) NSMutableArray * bombsPlanted;
 
 - (id) init;
 - (id) initWithColor:(NSString *)colorValue position:(Position *) positionValue;

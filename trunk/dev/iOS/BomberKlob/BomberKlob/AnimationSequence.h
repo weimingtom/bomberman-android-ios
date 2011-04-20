@@ -19,6 +19,8 @@
 @property (nonatomic) BOOL canLoop;
 @property (nonatomic, retain) NSString * name;
 
+- (id) init;
+
 - (id) initWithNameAndLoop:(NSString *) nameValue:(BOOL)canLoopValue;
 
 - (void) addImageSequence:(CGImageRef *) imageValue;

@@ -12,15 +12,19 @@
 @interface Animated : Object {
     NSDictionary * animations;
 	NSString * currentAnimation;
-	NSUInteger currentFrame;
-	NSUInteger waitDelay;
+	NSInteger currentFrame;
+	NSInteger waitDelay;
+	NSInteger delay;
 }
 
 @property (nonatomic, retain) NSDictionary * animations ;
 @property (nonatomic, retain) NSString * currentAnimation;
-@property (nonatomic) NSUInteger currentFrame;
-@property (nonatomic) NSUInteger waitDelay;
+@property (nonatomic) NSInteger currentFrame;
+@property (nonatomic) NSInteger waitDelay;
 
 - (id) init;
+- (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition animations:(NSDictionary *)anAnimations;
+- (void) update;
+- (BOOL) hasAnimationFinished;
 
 @end

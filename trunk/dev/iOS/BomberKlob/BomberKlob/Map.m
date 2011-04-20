@@ -175,6 +175,7 @@
 
 
 - (void)addBlock:(Object *)block position:(Position *)position {
+	if(position.x < width && position.x >=0 && position.y < height && position.y >= 0)
     [[blocks objectAtIndex:position.x] replaceObjectAtIndex:position.y withObject:block];
 }
 
@@ -193,41 +194,6 @@
 	[self performSelectorOnMainThread:@selector(draw:) withObject:context waitUntilDone:YES];
 	NSThread * threadDraw = [[[NSThread alloc] initWithTarget:self selector:@selector(draw:) object:context]autorelease];
 	[threadDraw start];
-}
-
-
-- (void)draw:(CGContextRef)context:(CGFloat)x:(CGFloat)y{
-	//if (floor(x) != ceil(x)) {
-	//	if ((floor(y) != ceil(y)) {
-    
-    
-    [((Object *) [[grounds objectAtIndex:floor(x)] objectAtIndex:floor(y)]) draw:context];
-    
-    if (![[[blocks objectAtIndex:floor(x)] objectAtIndex:floor(y)] isEqual:@"empty"])
-        [((Object *) [[blocks objectAtIndex:floor(x)] objectAtIndex:floor(y)]) draw:context];
-    
-    
-    [((Object *) [[grounds objectAtIndex:floor(x)] objectAtIndex:ceil(y)]) draw:context];
-    
-    if (![[[blocks objectAtIndex:floor(x)] objectAtIndex:ceil(y)] isEqual:@"empty"])
-        [((Object *) [[blocks objectAtIndex:floor(x)] objectAtIndex:ceil(y)]) draw:context];
-	
-	
-	
-    
-    [((Object *) [[grounds objectAtIndex:ceil(x)] objectAtIndex:floor(y)]) draw:context];
-    
-    if (![[[blocks objectAtIndex:ceil(x)] objectAtIndex:floor(y)] isEqual:@"empty"])
-        [((Object *) [[blocks objectAtIndex:ceil(x)] objectAtIndex:floor(y)]) draw:context];
-	
-	
-    
-    [((Object *) [[grounds objectAtIndex:ceil(x)] objectAtIndex:ceil(y)]) draw:context];
-    
-    if (![[[blocks objectAtIndex:ceil(x)] objectAtIndex:ceil(y)] isEqual:@"empty"])
-        [((Object *) [[blocks objectAtIndex:ceil(x)] objectAtIndex:ceil(y)]) draw:context];
-	//	}
-	//}
 }
 
 
@@ -298,6 +264,25 @@
     [aCoder encodeObject:grounds forKey:@"grounds"];
     [aCoder encodeObject:blocks forKey:@"blocks"];
     [aCoder encodeObject:players forKey:@"players"];
+}
+
+- (void) update{
+	for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {	
+			Object * object = [[blocks objectAtIndex:i] objectAtIndex:j];
+            if (![object isEqual:@"empty"]) {
+				if ([[[object class] description] isEqualToString:@"Undestructible"]) {
+					if (![((Animated *) object) hasAnimationFinished]) {
+						[((Animated *) object) update]; 
+					}
+					else {
+						[[blocks objectAtIndex:i] replaceObjectAtIndex:j withObject:@"empty"];
+					}
+					
+				}
+            }
+        }
+    }
 }
 
 #pragma mark -

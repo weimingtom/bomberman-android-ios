@@ -14,15 +14,17 @@
 
 @implementation XmlParser
 
-@synthesize png, animations;
+@synthesize png, animations,animationsBombs, animationsAnimates;
 
 - (XmlParser *) initXMLParser:(NSString *) typeValue{
 	
 	self = [super init];
 	if (self){
 		type = typeValue;
+	
 	}
 	return self;
+	
 }
 
 
@@ -30,11 +32,14 @@
 	if (png == nil){
 		png = [[NSMutableDictionary alloc] init];
 		animations = [[NSMutableDictionary alloc] init];
+		animationsBombs = [[NSMutableDictionary alloc] init];
+		animationsAnimates = [[NSMutableDictionary alloc] init];
 		currentColorPlayer = [[NSMutableString alloc] init];
 	}
 	else {
 		[png removeAllObjects];
 		[animations removeAllObjects];
+		[animationsBombs removeAllObjects];
 	}
 }
 
@@ -131,7 +136,73 @@
 			return;
 		}
 	}
+	else if(type == @"bombs") {
+		
+		UIImage* imageRef = [UIImage imageNamed:@"bombs.png"];
+		CGImageRef image = imageRef.CGImage;
+		
+		NSUInteger heightOfOneCase = imageRef.size.height/6;
+		NSUInteger widthOfOneCase = imageRef.size.width/3; 
+		if([elementName isEqualToString:@"bombs"]){
+			//animationsBombs = [[NSMutableDictionary alloc] init];
+			
+		}
+		else if([elementName isEqualToString:@"bomb"]){
+			currentColorPlayer = [attributeDict valueForKey:@"name"];
+			[animationsBombs setObject:[[AnimationSequence alloc] init] forKey:currentColorPlayer];
+			AnimationSequence * p = [animationsBombs objectForKey:currentColorPlayer ];
+
+			
+		}		
+		else if ([elementName isEqualToString:@"png"]) {
+			
+			Object * currentObject = [[Object alloc] init];
+			
+			currentObject.imageName = currentAnimation; 
+			currentObject.position.x = [[attributeDict valueForKey:@"x"] intValue];
+			currentObject.position.y = [[attributeDict valueForKey:@"y"] intValue];
+			currentObject.hit = 0;
+			currentObject.level = 0;
+			currentObject.fireWall = 0;
+			
+			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
+			[[animationsBombs objectForKey:currentColorPlayer ] addImageSequence:imageRef];
+			
+			[currentObject release];
+			return;
+		}
+
 	}
+	else if (type == @"animates"){
+		UIImage* imageRef = [UIImage imageNamed:@"animate.png"];
+		CGImageRef image = imageRef.CGImage;
+		
+		NSUInteger heightOfOneCase = imageRef.size.height/16;
+		NSUInteger widthOfOneCase = imageRef.size.width/6; 
+		if([elementName isEqualToString:@"destructible"] ||[elementName isEqualToString:@"undestructible"]){
+			currentColorPlayer = [attributeDict valueForKey:@"name"];
+			[animationsAnimates setObject:[[AnimationSequence alloc] init] forKey:currentColorPlayer];
+			
+		}		
+		else if ([elementName isEqualToString:@"png"]) {
+			
+			Object * currentObject = [[Object alloc] init];
+			
+			currentObject.imageName = currentAnimation; 
+			currentObject.position.x = [[attributeDict valueForKey:@"x"] intValue];
+			currentObject.position.y = [[attributeDict valueForKey:@"y"] intValue];
+			currentObject.hit = 0;
+			currentObject.level = 0;
+			currentObject.fireWall = 0;
+			
+			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
+			[[animationsAnimates objectForKey:currentColorPlayer ] addImageSequence:imageRef];
+			
+			[currentObject release];
+			return;
+		}
+	}
+}
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
 	

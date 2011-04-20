@@ -25,9 +25,6 @@
 		engine = engineValue;
 		dimension = dimensionValue;
 		self.gameView = [[GameView alloc] initWithMap: engine.game.map frame:dimension];	
-
-//		engine = [[Engine alloc] initWithGame:[[Game alloc] initWithMapName:mapName]];
-//		self.gameView = [[GameView alloc] initWithMap: engine.game.map];	
 		gameView.players = engine.game.players;
 		[self.view addSubview:gameView];
 		[gameView release];
@@ -46,7 +43,7 @@
     
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
-	[[NSTimer scheduledTimerWithTimeInterval: 0.03125 target: self selector: @selector(timerTick:) userInfo:nil repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval: 0.04 target: self selector: @selector(timerTick:) userInfo:nil repeats: YES] retain];	
 	
 	[runLoop run];
 	[pool release];
@@ -54,7 +51,6 @@
 }
 
 - (void)timerTick:(NSTimer *)timer {
-//	NSLog(@"timer : %@",timer );
 	if (run) {
 		if (currentDirection == @"right") {
 			engine.moveRight;
@@ -84,14 +80,15 @@
 		//[self.gameView threadUpdate];
 	}
 	else {
-		NSLog(@"Arret du thread");
 		[NSThread exit];
+	}
+	if ([engine.game.players count] > 0 && ![lastPosition isEqual:currentPosition]) {
+		[[engine.game.players objectAtIndex:0] update];
 	}
 }
 
 
 - (void)touchesBegan:(CGPoint) pt{
-//	NSLog(@" SINGLE pt.X : %f , pt.Y : %f",pt.x,pt.y);
 	lastPosition.x = currentPosition.x;
 	lastPosition.y = currentPosition.y;
 	currentPosition.x = pt.x;

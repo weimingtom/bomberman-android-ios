@@ -10,6 +10,7 @@
 #import "RessourceManager.h"
 #import "Map.h"
 #import "Player.h"
+#import "Bomb.h"
 
 
 @implementation GameView
@@ -22,6 +23,7 @@
 	if (self){
 		map = value;
 		[self startTimer];
+		//[self startTimerBombs];
 	}
 	
 	return self;
@@ -78,9 +80,15 @@
 	CGRect dimension = [self bounds];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 
-	[[NSTimer scheduledTimerWithTimeInterval: 0.03125 target: self selector: @selector(setNeedsDisplay) userInfo:self repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval: 0.001 target: self selector: @selector(update) userInfo:self repeats: YES] retain];	
 	[runLoop run];
 	[pool release];
 }
+
+- (void) update{
+	[map update];
+	[self setNeedsDisplay];
+}
+
 
 @end

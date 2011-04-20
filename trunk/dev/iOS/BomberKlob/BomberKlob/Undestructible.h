@@ -13,4 +13,6 @@
     
 }
 
+- (id) initWithImageName:(NSString *)anImageName position:(Position *)aPosition animations:(NSDictionary *)anAnimations;
+
 @end

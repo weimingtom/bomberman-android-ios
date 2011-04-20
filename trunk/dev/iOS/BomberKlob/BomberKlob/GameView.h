@@ -27,6 +27,7 @@
 - (void)drawAll: (CGContextRef) context;
 - (void) startTimer;
 - (void) startTimerThread;
+- (void) update;
 
 
 -(id) getPng:(NSString *)path;

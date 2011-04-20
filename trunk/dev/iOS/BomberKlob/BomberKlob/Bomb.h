@@ -11,9 +11,18 @@
 
 
 @interface Bomb : Animated {
-    NSUInteger power;
-	NSUInteger time;
+    NSInteger power;
 	NSString * type;
+	BOOL explode;
+	NSMutableDictionary * animationExplosed;
 }
+
+@property (nonatomic) NSInteger power;
+
+- (id) initWithImageName:(NSString *)anImageName position:(Position *)aPosition;
+- (void) draw:(CGContextRef) context;
+- (void) update;
+- (BOOL) hasAnimationFinished;
+- (void) destroy;
 
 @end

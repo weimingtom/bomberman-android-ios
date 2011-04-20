@@ -17,6 +17,8 @@
 	NSMutableString * currentProperty;
 	
 	NSMutableDictionary * animations;
+	NSMutableDictionary * animationsBombs;
+	NSMutableDictionary * animationsAnimates;
 	NSMutableString * currentAnimation;
 	NSMutableString * currentCanLoop;
 	NSMutableString * currentColorPlayer;
@@ -25,9 +27,14 @@
 
 @property (nonatomic, retain)NSMutableDictionary * png;
 @property (nonatomic, retain)NSMutableDictionary * animations;
+@property (nonatomic, retain)NSMutableDictionary * animationsBombs;
+@property (nonatomic, retain)NSMutableDictionary * animationsAnimates;
+
+
 
 
 - (XmlParser *) initXMLParser:(NSString *) typeValue;
+
 
 
 @end
