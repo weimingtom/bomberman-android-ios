@@ -18,8 +18,9 @@
     UIImageView *map2;
     UIImageView *map3;
     
-    NSArray *maps;
+    NSMutableArray *maps;
     NSInteger selectedMap;
+    NSInteger startLocation;
 }
 
 @property (nonatomic, retain) LoadMapEditorMenuViewController *loadMapEditorMenuViewController;
@@ -32,5 +33,8 @@
 
 - (NSInteger)nextMap:(NSInteger)currentMap;
 - (NSInteger)previousMap:(NSInteger)currentMap;
+- (void)moveMaps:(CGFloat)movement;
+- (void)changeMap:(CGFloat)movement;
+- (void)replace;
 
 @end

@@ -31,9 +31,7 @@
 @property (nonatomic, retain) NSMutableArray * blocks;
 @property (nonatomic, retain) NSMutableArray *players;
 
-- (id)init;
 - (id)initWithMapName:(NSString *)mapName;
-- (void)dealloc;
 
 - (void)initBasicMap;
 - (void)saveWithOwner:(DBUser *)owner;
@@ -47,8 +45,7 @@
 
 - (void)draw:(CGContextRef)context;
 - (void)drawPlayers:(CGContextRef)context;
-- (void)drawCase:(CGContextRef)context;
-- (void)draw:(CGContextRef)context:(CGFloat)x: (CGFloat)y;
+- (void)drawGrid:(CGContextRef)context;
 
 
 - (void)makePreviewWithView;

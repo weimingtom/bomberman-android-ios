@@ -15,19 +15,14 @@
 
 @implementation Application
 
-@synthesize user;
-@synthesize pseudos;
-@synthesize maps;
-@synthesize system;
-@synthesize playerMenu;
-@synthesize playerButton;
+@synthesize user, pseudos, maps, system, playerMenu, playerButton;
 
 
 - (id)init {
     self = [super init]; 
     
     if (self) {
-        dataBase = [DataBase instance];
+        dataBase = [DataBase sharedDataBase];
         
         [self loadSystem];
         [self loadPseudos];
@@ -95,6 +90,8 @@
     
     system = [[DBSystem alloc] initWithVolume:volume mute:mute language:language lastUser:user];
     sqlite3_finalize(statement);
+    
+    [language release];
 }
 
 
@@ -145,13 +142,12 @@
 }
 
 
-// TODO: A vérifier...
 - (BOOL)existPlayer {
     return (user != nil);
 }
 
 
-- (BOOL)pseudoAlreadyExists:(NSString *)pseudo {
+- (BOOL)pseudoAlreadyUsed:(NSString *)pseudo {
     NSUInteger i = 0;
     
     while (i < [pseudos count] && ![pseudo isEqual:[pseudos objectAtIndex:i]]) {
@@ -168,6 +164,7 @@
     [maps release];
     
     maps = [[NSArray alloc] initWithArray:newMaps];
+    [newMaps release];
 }
 
 
@@ -180,14 +177,6 @@
 - (void)playSoundButton {
     if (system.volume > 0 && !system.mute)
         [self.playerButton play];
-}
-
-
-- (void)setUser:(DBUser *)value {
-    [value retain];
-    [user release];
-    user = value;
-    system.lastUser = value;
 }
 
 
@@ -213,6 +202,15 @@
         [playerMenu pause];
     else if (system.volume > 0) 
         [playerMenu play];
+}
+
+
+
+- (void)setUser:(DBUser *)value {
+    [value retain];
+    [user release];
+    user = value;
+    system.lastUser = value;
 }
 
 @end

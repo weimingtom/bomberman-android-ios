@@ -54,19 +54,6 @@
 	}
 }
 
-
-
-
--(CGImageRef) getPng:(NSString *) path{
-	
-	UIImage* image = [UIImage imageNamed:path];
-	CGImageRef imageRef = image.CGImage;
-	
-    return imageRef;
-	
-	
-}
-
 -(void) startTimer
 {
 	NSThread * updateThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerThread) object:nil]autorelease]; //Create a new thread

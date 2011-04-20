@@ -13,25 +13,19 @@
 
 @implementation DBSystem
 
-@synthesize volume;
-@synthesize mute;
-@synthesize language;
-@synthesize lastUser;
+@synthesize volume, mute, language, lastUser;
 
 
 - (id)initWithVolume:(NSUInteger)aVolume mute:(BOOL)aMute language:(NSString *)aLanguage lastUser:(DBUser *)anUser {
     self = [super init]; 
     
     if (self) {
-        dataBase = [DataBase instance];
+        dataBase = [DataBase sharedDataBase];
         
-        [aLanguage retain];
-        [anUser retain];
-        
-        volume = aVolume;
-        mute = aMute;
-        language = aLanguage;
-        lastUser = anUser;
+        self.volume = aVolume;
+        self.mute = aMute;
+        self.language = aLanguage;
+        self.lastUser = anUser;
     }
     
     return self;
@@ -47,12 +41,6 @@
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"Volume: %d\nMute: %d\nLanguage: %@\nLast user: %@", volume, mute, language, lastUser];
-}
-
-
-// TODO: A compléter...
-- (void)saveInDataBase {
-    
 }
 
 

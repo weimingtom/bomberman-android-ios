@@ -77,7 +77,7 @@
 
 - (BOOL)hasOfficialMap {
     BOOL result = NO;
-    sqlite3_stmt *statement = [[DataBase instance] select:@"*" from:@"Map" where:@"official = 0"];
+    sqlite3_stmt *statement = [[DataBase sharedDataBase] select:@"*" from:@"Map" where:@"official = 0"];
     
     if (sqlite3_step(statement) == SQLITE_ROW) {
         result = YES;

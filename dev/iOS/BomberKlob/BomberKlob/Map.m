@@ -20,35 +20,14 @@
 
 @implementation Map
 
-@synthesize name;
-@synthesize width;
-@synthesize height;
-@synthesize grounds;
-@synthesize blocks;
-@synthesize players;
+@synthesize name, width, height, grounds, blocks, players;
 
 
 - (id)init {
     self = [super init];
     
     if (self) {
-//        Position *position;
         [self initBasicMap];
-//        
-//        position = [[Position alloc] initWithX:5 y:2];
-//        [players addObject:position];
-//        [position release];
-//        position = [[Position alloc] initWithX:15 y:2];
-//        [players addObject:position];
-//        [position release];
-//        position = [[Position alloc] initWithX:15 y:9];
-//        [players addObject:position];
-//        [position release];
-//        position = [[Position alloc] initWithX:5 y:9];
-//        [players addObject:position];
-//        [position release];
-//        
-//        [self save];
     }
     
     return self;
@@ -67,6 +46,12 @@
 
 
 - (void)initBasicMap {
+    NSMutableArray *groundsTmp;
+    NSMutableArray *blocksTmp;
+    Inanimated *groundTmp;
+    Inanimated *blockTmp;
+    Position *positionTmp;
+    
     width = WIDTH;
     height = HEIGHT;
     
@@ -75,19 +60,32 @@
     players = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < width; i++){
-        [grounds addObject:[[NSMutableArray alloc] initWithCapacity:width]];
-        [blocks addObject:[[NSMutableArray alloc] initWithCapacity:width]];
+        groundsTmp = [[NSMutableArray alloc] initWithCapacity:width];
+        blocksTmp = [[NSMutableArray alloc] initWithCapacity:width];
+        [grounds addObject:groundsTmp];
+        [blocks addObject:blocksTmp];
         
         for (int j = 0; j < height; j++) {
-            [[grounds objectAtIndex:i] addObject: [[Inanimated alloc] initWithImageName:@"grass2" position:[[Position alloc] initWithX:i y:j]]];
+            positionTmp = [[Position alloc] initWithX:i y:j];
+            groundTmp = [[Inanimated alloc] initWithImageName:@"grass2" position:positionTmp];
+            [[grounds objectAtIndex:i] addObject: groundTmp];
             
             if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
-                [[blocks objectAtIndex:i] addObject: [[Undestructible alloc] initWithImageName:@"bloc" position:[[Position alloc] initWithX:i y:j]]];
+                blockTmp = [[Inanimated alloc] initWithImageName:@"bloc" position:positionTmp];
+                [[blocks objectAtIndex:i] addObject: blockTmp];
+                
+                [blocksTmp release];
             }
             else {
                 [[blocks objectAtIndex:i] addObject:@"empty"];
             }
+            
+            [groundTmp release];
+            [positionTmp release];
         }
+        
+        [groundsTmp release];
+        [blocksTmp release];
     }
 }
 
@@ -104,7 +102,7 @@
 - (void)saveWithOwner:(DBUser *)owner {
     NSMutableData *data = [NSMutableData data];
     
-    NSString *mapPath = [NSString stringWithFormat:@"%@/Maps/%@.klob", [[NSBundle mainBundle] bundlePath], name];
+    NSString *mapPath = [[NSString alloc] initWithFormat:@"%@/Maps/%@.klob", [[NSBundle mainBundle] bundlePath], name];
     NSKeyedArchiver *map;
     BOOL result;
     
@@ -115,9 +113,11 @@
     [self makePreviewWithView];
     
     DBMap *dbMap = [[DBMap alloc] initWithName:name owner:owner.identifier official:0];
-    [[DataBase instance] createOrUpdateMap:dbMap];
+    [[DataBase sharedDataBase] createOrUpdateMap:dbMap];
     
     [map release];
+    [mapPath release];
+    [dbMap release];
 }
 
 
@@ -125,9 +125,9 @@
     Map *myMap;
     NSData *data;
     NSKeyedUnarchiver *unarchiver;
-    NSString *mapPath = [NSString stringWithFormat:@"%@/Maps/%@.klob", [[NSBundle mainBundle] bundlePath], mapName];
+    NSString *mapPath = [[NSString alloc] initWithFormat:@"%@/Maps/%@.klob", [[NSBundle mainBundle] bundlePath], mapName];
     
-    data = [NSData dataWithContentsOfFile:mapPath];
+    data = [[NSData alloc] initWithContentsOfFile:mapPath];
     
     if (data != nil) {
         unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
@@ -142,13 +142,14 @@
         self.grounds = myMap.grounds;
         self.blocks = myMap.blocks;
         self.players = myMap.players;
-        
-        [myMap release];
     }
     else {
         self.name = mapName;
         [self initBasicMap];
     }
+    
+    [mapPath release];
+    [data release];
 }
 
 
@@ -161,8 +162,7 @@
     [self drawPlayers:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     
-    NSData *img;
-    img = UIImagePNGRepresentation(image);
+    NSData *img = UIImagePNGRepresentation(image);
     [img writeToFile:[NSString stringWithFormat:@"%@/Maps/%@.png",[[NSBundle mainBundle] bundlePath], name] atomically:YES];
     
     UIGraphicsEndImageContext();
@@ -187,13 +187,6 @@
 
 - (void)destroyBlock:(Animated *)block position:(Position *)position {
 	
-}
-
-
-- (void) threadDraw:(CGContextRef) context{
-	[self performSelectorOnMainThread:@selector(draw:) withObject:context waitUntilDone:YES];
-	NSThread * threadDraw = [[[NSThread alloc] initWithTarget:self selector:@selector(draw:) object:context]autorelease];
-	[threadDraw start];
 }
 
 
@@ -225,17 +218,18 @@
         [position release];
         [player release];
     }
+    
+    [colorsPlayers release];
 }
 
 
-- (void)drawCase:(CGContextRef)context {
+- (void)drawGrid:(CGContextRef)context {
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            CGContextFillRect(context, CGRectMake(i*[RessourceManager sharedRessource].tileSize, 0,2 , 15*[RessourceManager sharedRessource].tileSize));
-            CGContextFillRect(context, CGRectMake(0, j*[RessourceManager sharedRessource].tileSize,21*[RessourceManager sharedRessource].tileSize , 2));
+            CGContextFillRect(context, CGRectMake(i * [RessourceManager sharedRessource].tileSize, 0,2 , 15 * [RessourceManager sharedRessource].tileSize));
+            CGContextFillRect(context, CGRectMake(0, j * [RessourceManager sharedRessource].tileSize, 21 * [RessourceManager sharedRessource].tileSize , 2));
         }
     }
-    
 }
 
 

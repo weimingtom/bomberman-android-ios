@@ -40,10 +40,4 @@
     return [NSString stringWithFormat:@"Name: %@\nId owner: %@\nOfficiel: %d", name, owner, official];
 }
 
-
-// TODO: A completer...
-- (void)saveInDataBase {
-    
-}
-
 @end

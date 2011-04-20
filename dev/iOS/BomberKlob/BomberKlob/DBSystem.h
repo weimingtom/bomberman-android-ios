@@ -27,9 +27,7 @@
 @property (nonatomic, retain) DBUser *lastUser;
 
 - (id)initWithVolume:(NSUInteger)aVolume mute:(BOOL)aMute language:(NSString *)aLanguage lastUser:(DBUser *)anUser;
-- (void)dealloc;
 
-- (void)saveInDataBase;
 - (void)updateVolume;
 - (void)updateMute;
 - (void)updateLanguage;

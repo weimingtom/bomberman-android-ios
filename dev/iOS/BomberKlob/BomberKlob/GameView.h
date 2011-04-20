@@ -29,6 +29,4 @@
 - (void) startTimerThread;
 - (void) update;
 
-
--(id) getPng:(NSString *)path;
 @end

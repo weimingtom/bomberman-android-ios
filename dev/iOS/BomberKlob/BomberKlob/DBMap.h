@@ -23,8 +23,5 @@
 @property (nonatomic) BOOL official;
 
 - (id)initWithName:(NSString *)aName owner:(NSUInteger)anOwner official:(BOOL)anOfficial;
-- (void)dealloc;
-
-- (void)saveInDataBase;
 
 @end
