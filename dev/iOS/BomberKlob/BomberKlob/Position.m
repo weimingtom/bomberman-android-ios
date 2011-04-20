@@ -23,6 +23,15 @@
 	return self;
 }
 
+- (id) initWithPosition:(Position *) position{
+	self = [super init];
+	if (self) {
+		x = position.x;
+		y = position.y;
+	}
+	return self;
+}
+
 
 - (id) initWithX:(NSInteger)aX y:(NSInteger)aY {
 	self = [super init];

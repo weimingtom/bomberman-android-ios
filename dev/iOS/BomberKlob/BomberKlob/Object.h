@@ -31,7 +31,7 @@
 - (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition;
 - (void)resize;
 - (void)update;
-- (void)hasAnimationFinished;
+- (BOOL)hasAnimationFinished;
 - (void)destroy;
 
 - (void)draw:(CGContextRef)context;

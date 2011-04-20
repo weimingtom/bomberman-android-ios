@@ -23,6 +23,7 @@
 - (id) initWithMapName:(NSString *)mapName {
 	self = [super init];
 	
+	
 	if (self){
 		engine = [[Engine alloc] initWithGame:[[Game alloc] initWithMapName:mapName]];
 		resource = [RessourceManager sharedRessource];
@@ -54,7 +55,6 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
 	CGPoint pt = [[touches anyObject] locationInView:self.view];
-//	NSLog(@" Global pt.X : %f , pt.Y : %f",pt.x,pt.y);
 	CGRect dimension = gameViewController.dimension;
 	
 	if (pt.x < dimension.size.width && pt.x > 0 && pt.y < dimension.size.height+dimension.origin.y && pt.y > dimension.origin.y){

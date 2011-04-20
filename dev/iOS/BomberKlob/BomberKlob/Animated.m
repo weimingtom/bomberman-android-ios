@@ -9,6 +9,8 @@
 #import "Animated.h"
 #import "AnimationSequence.h"
 #import "Object.h"
+#import "Position.h"
+#import "RessourceManager.h"
 
 @implementation Animated
 
@@ -19,8 +21,51 @@
 	self = [super init];
 	if (self){
 		currentAnimation = @"idle";
+		delay = 0;
 	}
 	return self;
+}
+
+- (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition animations:(NSDictionary *)anAnimations {
+    self = [super initWithImageName:anImageName position:aPosition];
+    if (self) {
+        animations = anAnimations;
+		currentFrame = 0;
+		waitDelay = 5;
+    }
+    return self;
+}
+
+- (void)draw:(CGContextRef)context{
+	if (currentFrame < [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]){
+		UIImage * image = [((AnimationSequence*)[animations objectForKey:imageName]).sequences objectAtIndex:currentFrame];
+		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize)];
+	}
+
+}
+
+- (void) update{
+	if (delay == waitDelay) {
+		delay = 0;
+		if (currentFrame == [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]-1) {
+			currentFrame = -1;
+		}
+		else
+			currentFrame++;
+	}
+	else{
+		delay++;
+	}
+
+}
+
+- (BOOL) hasAnimationFinished{
+
+	if (currentFrame < 0) {
+		return true;
+	}
+	else
+		return false;
 }
 
 @end

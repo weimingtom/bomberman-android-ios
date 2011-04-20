@@ -12,7 +12,7 @@
 
 
 @implementation Player
-@synthesize speed, lifeNumber;
+@synthesize speed, lifeNumber, bombsPlanted;
 
 - (id) init{
 	self = [super init];
@@ -22,9 +22,8 @@
 		powerExplosion = 1;
 		timeExplosion = 3;
 		shield = 1;
-		speed = 2;
+		speed = 1;
 		bombNumber = 1;
-		ressource = [RessourceManager sharedRessource];
 		animations = [ressource.bitmapsPlayer objectForKey:color];
 		position.x = 0;
 		position.y = 0;
@@ -40,12 +39,14 @@
 		powerExplosion = 1;
 		timeExplosion = 3;
 		shield = 1;
-		speed = 2;
+		speed = 1;
 		bombNumber = 1;
 		ressource = [RessourceManager sharedRessource];
 		animations = [ressource.bitmapsPlayer objectForKey:color];
 		position.x = positionValue.x;
 		position.y = positionValue.y;
+		bombsPlanted = [[NSMutableArray alloc] init];
+		waitDelay = 5;
 	}
 	return self;
 }
@@ -73,11 +74,11 @@
 
 	}
 	else if (currentFrame < 3) {
-		currentFrame++;
+		//currentFrame++;
 		position.y -= speed;
 	}
 	else {
-		currentFrame = 0;
+		//currentFrame = 0;
 		position.y-= speed;
 
 	}
@@ -92,12 +93,11 @@
 		position.y+=speed;
 	}
 	else if (currentFrame < 3) {
-		currentFrame++;
+		//currentFrame++;
 		position.y+=speed;
-//		NSLog(@"moveDown + position %@ and speed : %d",position, speed);
 	}
 	else {
-		currentFrame = 0;
+		//currentFrame = 0;
 		position.y+= speed;
 
 	}
@@ -112,11 +112,11 @@
 
 	}
 	else if (currentFrame < 3) {
-		currentFrame++;
+		//currentFrame++;
 		position.x-=speed;
 	}
 	else {
-		currentFrame = 0;
+		//currentFrame = 0;
 		position.x-=speed;
 	}
 }
@@ -129,11 +129,11 @@
 		position.x+=speed;
 	}
 	else if (currentFrame < 3) {
-		currentFrame++;
+		//currentFrame++;
 		position.x+=speed;
 	}
 	else {
-		currentFrame = 0;
+		//currentFrame = 0;
 		position.x+=speed;
 	}
 }
@@ -146,12 +146,12 @@
 		position.y-=speed;
 	}
 	else if (currentFrame < 3) {
-		currentFrame++;
+		//currentFrame++;
 		position.x-=speed;
 		position.y-=speed;
 	}
 	else {
-		currentFrame = 0;
+		//currentFrame = 0;
 		position.x-=speed;
 		position.y-=speed;
 	}
@@ -165,12 +165,12 @@
 		position.y+=speed;
 	}
 	else if (currentFrame < 3) {
-		currentFrame++;
+		//currentFrame++;
 		position.x-=speed;
 		position.y+=speed;
 	}
 	else {
-		currentFrame = 0;
+		//currentFrame = 0;
 		position.x-=speed;
 		position.y+=speed;
 	}
@@ -184,12 +184,12 @@
 		position.y+=speed;
 	}
 	else if (currentFrame < 3) {
-		currentFrame++;
+		//currentFrame++;
 		position.x+=speed;
 		position.y+=speed;
 	}
 	else {
-		currentFrame = 0;
+		//currentFrame = 0;
 		position.x+=speed;
 		position.y+=speed;
 	}
@@ -203,12 +203,12 @@
 		position.y-=speed;
 	}
 	else if (currentFrame < 3) {
-		currentFrame++;
+		//currentFrame++;
 		position.x+=speed;
 		position.y-=speed;
 	}
 	else {
-		currentFrame = 0;
+		//currentFrame = 0;
 		position.x+=speed;
 		position.y-=speed;
 	}
@@ -226,13 +226,35 @@
 
 
 - (void) draw:(CGContextRef)context{
-	//NSLog(@"Position : %@", position);
-		UIImage * image = [((AnimationSequence *)[animations valueForKey:currentAnimation]).sequences objectAtIndex:currentFrame];
-		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize*2)];
-	
 
+	NSMutableArray * sequences = ((AnimationSequence *)[animations valueForKey:currentAnimation]).sequences;
+	
+	if (currentFrame < [sequences count]){
+		UIImage * image = [sequences objectAtIndex:currentFrame];
+		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize*1.5)];
+	}
+	else{
+		if ([sequences count] == 1) {
+			currentFrame = 0;
+			UIImage * image = [sequences objectAtIndex:currentFrame];
+			[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize*1.5)];
+		}
+	}
 }
 
+- (void)update{
+	if (delay == waitDelay) {
+		delay = 0;
+		if (currentFrame >= 3) {
+			currentFrame = 0;
+		}
+		else
+			currentFrame++;
+	}
+	else{
+		delay++;
+	}
+}
 
 
 @end

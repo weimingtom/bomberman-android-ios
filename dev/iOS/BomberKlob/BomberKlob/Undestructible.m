@@ -11,4 +11,17 @@
 
 @implementation Undestructible
 
+- (id) initWithImageName:(NSString *)anImageName position:(Position *)aPosition animations:(NSDictionary *)anAnimations{
+	//NSLog(@"IMAGE NAME: %@ \n POSITION: %@ \n ANIMATIONS : %@",anImageName,aPosition,anAnimations);
+
+	self = [super initWithImageName:anImageName position:aPosition animations:anAnimations];
+	if (self) {
+		//NSLog(@"IMAGE NAME: %@ \n POSITION: %@ \n ANIMATIONS : %@",anImageName,aPosition,anAnimations);
+	}
+	return self;
+}
+
+
+
+
 @end

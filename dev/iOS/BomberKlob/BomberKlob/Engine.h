@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Game, RessourceManager;
+@class Game, RessourceManager, Object;
 
 @interface Engine : NSObject {
     Game * game;
@@ -27,5 +27,7 @@
 - (void) moveLeftDown;
 - (void) moveRightDown;
 - (void) moveRightTop;
+
+- (BOOL) isInCollision: (Object *) player: (NSInteger) xValue: (NSInteger) yValue;
 
 @end

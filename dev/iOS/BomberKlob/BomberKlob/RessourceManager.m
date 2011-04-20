@@ -16,7 +16,7 @@
 
 @implementation RessourceManager
 
-@synthesize bitmapsInanimates, bitmapsPlayer, tileSize, screenWidth, screenHeight;
+@synthesize bitmapsAnimates,bitmapsInanimates, bitmapsPlayer,bitmapsBombs, tileSize, screenWidth, screenHeight;
 
 static RessourceManager * ressource = nil;
 
@@ -52,6 +52,8 @@ static RessourceManager * ressource = nil;
 		[self loadProperty];
 		[self loadBitmapInanimates];
 		[self loadBitmapPlayer];	
+		[self loadBitmapBombs];
+		[self loadBitmapAnimates];
     }
 	
 	return self;
@@ -122,6 +124,55 @@ static RessourceManager * ressource = nil;
 	[parseError release];
 	
 	bitmapsPlayer = parserDelegate.animations;
+}
+
+- (void) loadBitmapBombs{
+	
+	bitmapsBombs = [[NSMutableDictionary alloc] init];
+	
+	
+	NSError * erreur = nil;
+    NSString *xmlFilePath =[[NSBundle mainBundle] pathForResource:@"bombs" ofType:@"xml"];
+    NSString * contenu = [NSString stringWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:&erreur]; // On donne l'adresse de "erreur"
+	
+	NSXMLParser * parseur = [[NSXMLParser alloc] initWithData:[contenu dataUsingEncoding:NSUTF8StringEncoding]];
+	XmlParser * parserDelegate = [[XmlParser alloc] initXMLParser:@"bombs"];	
+	[parseur setDelegate:parserDelegate];
+	[parseur parse];
+	
+	NSError *parseError = [parseur parserError];
+	if (parseError) {
+		NSLog(@"XmlParser - Error parsing data: %@", [parseError localizedDescription]);
+	} 
+	[erreur release];
+	[parseError release];
+	
+	bitmapsBombs = parserDelegate.animationsBombs;
+}
+
+- (void) loadBitmapAnimates{
+	
+	bitmapsAnimates = [[NSMutableDictionary alloc] init];
+	
+	
+	NSError * erreur = nil;
+    NSString *xmlFilePath =[[NSBundle mainBundle] pathForResource:@"animates" ofType:@"xml"];
+    NSString * contenu = [NSString stringWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:&erreur]; // On donne l'adresse de "erreur"
+	
+	NSXMLParser * parseur = [[NSXMLParser alloc] initWithData:[contenu dataUsingEncoding:NSUTF8StringEncoding]];
+	XmlParser * parserDelegate = [[XmlParser alloc] initXMLParser:@"animates"];	
+	[parseur setDelegate:parserDelegate];
+	[parseur parse];
+	
+	NSError *parseError = [parseur parserError];
+	if (parseError) {
+		NSLog(@"XmlParser - Error parsing data: %@", [parseError localizedDescription]);
+	} 
+	[erreur release];
+	[parseError release];
+	
+	bitmapsAnimates = parserDelegate.animationsAnimates;
+	
 }
 
 - (void) update{

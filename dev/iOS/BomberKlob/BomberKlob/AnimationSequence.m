@@ -13,6 +13,14 @@
 
 @synthesize sequences, canLoop, name;
 
+- (id) init{
+	self = [super init];
+	if(self){
+		sequences = [[NSMutableArray alloc] init];
+	}
+	return self;
+}
+
 - (id) initWithNameAndLoop:(NSString *) nameValue:(BOOL)canLoopValue{
 	self = [super init];
 	if(self){
@@ -31,5 +39,6 @@
 	NSString * desc = [NSString stringWithFormat:@"Sequence Name : %@ \n canLoop : %d  \n Sequence : %@",name, canLoop, sequences];
 	return desc;
 }
+
 
 @end
