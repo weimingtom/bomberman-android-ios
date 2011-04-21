@@ -64,8 +64,16 @@
 
 
 - (void)draw:(CGContextRef)context {
-		UIImage *image = [ressource.bitmapsInanimates valueForKey:imageName];
-		[image drawInRect:CGRectMake(ressource.tileSize * position.x, ressource.tileSize * position.y, ressource.tileSize, ressource.tileSize)];
+    UIImage *image = [ressource.bitmapsInanimates valueForKey:imageName];
+    [image drawInRect:CGRectMake(ressource.tileSize * position.x, ressource.tileSize * position.y, ressource.tileSize, ressource.tileSize)];
+}
+
+
+- (void)draw:(CGContextRef)context alpha:(CGFloat)alpha {
+    UIImage *image = [ressource.bitmapsInanimates valueForKey:imageName];
+    [image drawInRect:CGRectMake(ressource.tileSize * position.x, ressource.tileSize * position.y, ressource.tileSize, ressource.tileSize) blendMode:kCGBlendModeNormal alpha:alpha];
+    
+//    [image drawInRect:CGRectMake(ressource.tileSize * position.x, ressource.tileSize * position.y, ressource.tileSize, ressource.tileSize)];
 }
 
 

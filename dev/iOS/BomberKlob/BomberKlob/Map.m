@@ -175,8 +175,17 @@
 
 
 - (void)addBlock:(Object *)block position:(Position *)position {
+    
 	if(position.x < width && position.x >=0 && position.y < height && position.y >= 0)
-    [[blocks objectAtIndex:position.x] replaceObjectAtIndex:position.y withObject:block];
+        [[blocks objectAtIndex:position.x] replaceObjectAtIndex:position.y withObject:block];
+}
+
+
+- (void)addPlayer:(Position *)position {
+    
+    if(position.x < width && position.x >=0 && position.y < height && position.y >= 0) {
+        [players addObject:position];
+    }
 }
 
 
@@ -220,6 +229,45 @@
     }
     
     [colorsPlayers release];
+}
+
+
+- (void)draw:(CGContextRef)context alpha:(CGFloat)alpha {
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            [((Object *) [[grounds objectAtIndex:i] objectAtIndex:j]) draw:context];
+            
+            if (![[[blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"]) {
+                [((Object *) [[blocks objectAtIndex:i] objectAtIndex:j]) draw:context alpha:alpha];
+            }
+        }
+    }
+}
+
+
+- (void)drawPlayers:(CGContextRef)context alpha:(CGFloat)alpha {
+    Position *position;
+    Player *player;
+    NSArray *colorsPlayers = [[NSArray alloc] initWithObjects:@"white", @"blue", @"red", @"black", nil];
+    NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
+    
+    for (int i = 0; i < [players count]; i++) {
+        position = [[Position alloc] initWithX:(((Position *) [players objectAtIndex:i]).x * tileSize) y:(((Position *) [players objectAtIndex:i]).y * tileSize)];
+        player = [[Player alloc] initWithColor:[colorsPlayers objectAtIndex:i] position:position];
+        
+        [player draw:context alpha:alpha];
+        
+        [position release];
+        [player release];
+    }
+    
+    [colorsPlayers release];
+}
+
+
+- (void)drawMapAndPlayers:(CGContextRef)context alpha:(CGFloat)alpha {
+    [self draw:context alpha:alpha];
+    [self drawPlayers:context alpha:alpha];
 }
 
 

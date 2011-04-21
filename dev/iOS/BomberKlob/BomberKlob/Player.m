@@ -241,6 +241,23 @@
 	}
 }
 
+
+- (void) draw:(CGContextRef)context alpha:(CGFloat)alpha {
+    NSMutableArray * sequences = ((AnimationSequence *)[animations valueForKey:currentAnimation]).sequences;
+	
+	if (currentFrame < [sequences count]){
+		UIImage * image = [sequences objectAtIndex:currentFrame];
+        [image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize*1.5) blendMode:kCGBlendModeNormal alpha:alpha];
+	}
+	else{
+		if ([sequences count] == 1) {
+			currentFrame = 0;
+			UIImage * image = [sequences objectAtIndex:currentFrame];
+            [image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize*1.5) blendMode:kCGBlendModeNormal alpha:alpha];
+		}
+	}
+}
+
 - (void)update{
 	if (delay == waitDelay) {
 		delay = 0;

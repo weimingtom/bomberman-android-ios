@@ -45,6 +45,8 @@
 
 - (void) plantingBomb;
 - (void) hurt;
-- (void) draw;
+- (void) draw:(CGContextRef)context;
+- (void) draw:(CGContextRef)context alpha:(CGFloat)alpha;
+
 
 @end

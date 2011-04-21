@@ -46,7 +46,7 @@
     [self initImages];
     
     remove = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    remove.frame = CGRectMake(5, self.frame.size.height - 50, 45, 37);
+    remove.frame = CGRectMake(DELETE_X, DELETE_Y, DELETE_SIZE_WIDTH, DELETE_SIZE_HEIGHT);
     [remove setTitle:@"X" forState:UIControlStateNormal];
     [remove addTarget:self action:@selector(removeAction) forControlEvents:UIControlEventTouchDown];
     
@@ -61,24 +61,24 @@
 
 - (void)initImages {
     image1 = [[UIImageView alloc] initWithImage:[resource.bitmapsInanimates valueForKey:@"bloc"]];
-    image1.frame = CGRectMake((self.frame.size.width / 2) - (ITEM_SIZE / 2), FIRST_ITEM_Y, ITEM_SIZE, ITEM_SIZE);
+    image1.frame = CGRectMake(ITEM_X, FIRST_ITEM_Y, ITEM_SIZE, ITEM_SIZE);
     
     image2 = [[UIImageView alloc] initWithImage:[resource.bitmapsInanimates valueForKey:@"block2"]];
-    image2.frame = CGRectMake((self.frame.size.width / 2) - (ITEM_SIZE / 2), FIRST_ITEM_Y + ITEM_SIZE + MARGE_BETWEEN_ITEM, ITEM_SIZE, ITEM_SIZE);
+    image2.frame = CGRectMake(ITEM_X, FIRST_ITEM_Y + ITEM_SIZE + MARGE_ITEM, ITEM_SIZE, ITEM_SIZE);
     
     image3 = [[UIImageView alloc] initWithImage:[resource.bitmapsInanimates valueForKey:@"block3"]];
-    image3.frame = CGRectMake((self.frame.size.width / 2) - (ITEM_SIZE / 2), FIRST_ITEM_Y + ITEM_SIZE + MARGE_BETWEEN_ITEM + ITEM_SIZE + MARGE_BETWEEN_ITEM, ITEM_SIZE, ITEM_SIZE);
+    image3.frame = CGRectMake(ITEM_X, FIRST_ITEM_Y + ((ITEM_SIZE + MARGE_ITEM) * 2), ITEM_SIZE, ITEM_SIZE);
     
     image4 = [[UIImageView alloc] initWithImage:[resource.bitmapsInanimates valueForKey:@"stone2"]];
-    image4.frame = CGRectMake((self.frame.size.width / 2) - (ITEM_SIZE / 2), FIRST_ITEM_Y + ITEM_SIZE+ MARGE_BETWEEN_ITEM + ITEM_SIZE + MARGE_BETWEEN_ITEM + ITEM_SIZE + MARGE_BETWEEN_ITEM, ITEM_SIZE, ITEM_SIZE);
+    image4.frame = CGRectMake(ITEM_X, FIRST_ITEM_Y + ((ITEM_SIZE + MARGE_ITEM) * 3), ITEM_SIZE, ITEM_SIZE);
     
     image5 = [[UIImageView alloc] initWithImage:[resource.bitmapsInanimates valueForKey:@"stone"]];
-    image5.frame = CGRectMake((self.frame.size.width / 2) - (ITEM_SIZE / 2), FIRST_ITEM_Y + ITEM_SIZE + MARGE_BETWEEN_ITEM + ITEM_SIZE + MARGE_BETWEEN_ITEM + ITEM_SIZE + MARGE_BETWEEN_ITEM + ITEM_SIZE + MARGE_BETWEEN_ITEM, ITEM_SIZE, ITEM_SIZE);
+    image5.frame = CGRectMake(ITEM_X, FIRST_ITEM_Y + ((ITEM_SIZE + MARGE_ITEM) * 4), ITEM_SIZE, ITEM_SIZE);
 }
 
 
 - (void)removeAction {
-    editorAction.removeTool = !editorAction.removeTool;
+    [editorAction changeTool:@"delete"];
 }
 
 @end

@@ -20,11 +20,11 @@
     self = [super init];
     
     if (self) {
-        editorViewController = myController;
+        self.editorViewController = myController;
         editorViewAction = [[EditorActionView alloc] initWithFrame:frame controller:self];
-        selectedObjectType = @"Inanimated";
-        selectedObject = @"bloc";
-        removeTool = NO;
+        self.selectedObjectType = @"Inanimated";
+        self.selectedObject = @"bloc";
+        self.removeTool = NO;
     }
     
     return self;
@@ -34,6 +34,11 @@
 - (void)dealloc {
     [editorViewAction release];
     [super dealloc];
+}
+
+
+- (void)changeTool:(NSString *)tool {
+    editorViewController.selectedTool = tool;
 }
 
 @end

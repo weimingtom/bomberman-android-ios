@@ -34,8 +34,17 @@
 }
 
 
+- (void)displayBlocks:(BOOL)display {
+    [editorViewController displayBlocks:display];
+}
+
+
 - (void)pauseAction {
     [editorViewController pauseAction];
+}
+
+- (void)changeTool:(NSString *)tool {
+    editorViewController.selectedTool = tool;
 }
 
 @end

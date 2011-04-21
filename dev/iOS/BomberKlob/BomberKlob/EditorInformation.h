@@ -23,6 +23,9 @@
 - (id)initWithFrame:(CGRect)frame controller:(EditorViewController *)myController;
 - (void)dealloc;
 
+- (void)displayBlocks:(BOOL)display;
 - (void)pauseAction;
+
+- (void)changeTool:(NSString *)tool;
 
 @end

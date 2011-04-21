@@ -80,7 +80,7 @@
 }
 
 
-- (BOOL)vericationPseudo {
+- (BOOL)checkPseudo {
     
     // if the player doesn't provide his pseudo
     if ([pseudo.text isEqual:@""]) {
@@ -123,7 +123,7 @@
 
 - (void)goToMainMenu {
     
-    if ([self vericationPseudo]) {
+    if ([self checkPseudo]) {
         errorView.hidden = YES;
         
         MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];

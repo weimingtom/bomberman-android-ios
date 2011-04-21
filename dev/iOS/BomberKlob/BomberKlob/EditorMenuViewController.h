@@ -13,14 +13,16 @@
     
     UIBarButtonItem *create;
     UITextField *mapName;
+    UIView *errorView;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *create;
 @property (nonatomic, retain) IBOutlet UITextField *mapName;
+@property (nonatomic, retain) IBOutlet UIView *errorView;
 
-- (BOOL)vericationMapName;
+- (BOOL)checkMapName;
+- (BOOL)mapNameIsAlreadyExist;
 
-- (BOOL)hasOfficialMap;
 - (void)goToEditor;
 - (void)goToLoadMapEditor;
 

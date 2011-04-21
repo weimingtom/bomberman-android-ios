@@ -35,5 +35,6 @@
 - (void)destroy;
 
 - (void)draw:(CGContextRef)context;
+- (void)draw:(CGContextRef)context alpha:(CGFloat)alpha;
 
 @end
