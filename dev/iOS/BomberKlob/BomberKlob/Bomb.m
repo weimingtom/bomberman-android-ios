@@ -16,7 +16,7 @@
 @synthesize power;
 
 - (id) initWithImageName:(NSString *)anImageName position:(Position *)aPosition{
-	self = [super initWithImageName:anImageName position:aPosition];
+	self = [super init];
 	if (self) {
 		currentFrame = 0;
 		power = 3;

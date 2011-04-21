@@ -58,9 +58,9 @@
 
 
 - (void)draw:(CGContextRef)context {
-	for (NSString * key in animations) {
+	/*for (NSString * key in animations) {
 		NSLog(@"Test : %@  ",[animations objectForKey:key]);
-	}
+	}*/
 	if (currentFrame < [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]){
 		UIImage * image = [((AnimationSequence*)[animations objectForKey:imageName]).sequences objectAtIndex:currentFrame];
 		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize)];
@@ -78,18 +78,19 @@
 }
 
 - (void) update{
-	if (delay == waitDelay) {
-		delay = 0;
-		if (currentFrame == [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]-1) {
-			currentFrame = -1;
+	if ([((AnimationSequence *)[animations objectForKey:imageName]).sequences count] > 1) {
+		if (delay == waitDelay) {
+			delay = 0;
+			if (currentFrame == [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]-1) {
+				currentFrame = -1;
+			}
+			else
+				currentFrame++;
 		}
-		else
-			currentFrame++;
+		else{
+			delay++;
+		}
 	}
-	else{
-		delay++;
-	}
-	
 }
 
 - (BOOL) hasAnimationFinished{
