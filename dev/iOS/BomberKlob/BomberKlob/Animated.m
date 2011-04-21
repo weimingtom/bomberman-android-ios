@@ -15,13 +15,13 @@
 @implementation Animated
 
 
-@synthesize waitDelay, animations, currentAnimation, currentFrame;
+@synthesize waitDelay, animations, currentAnimation, currentFrame,delay;
 
 - (id) init{
 	self = [super init];
 	if (self){
-		currentAnimation = @"idle";
-		delay = 0;
+		self.currentAnimation = @"idle";
+		self.delay = 0;
 	}
 	return self;
 }
@@ -29,9 +29,8 @@
 - (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition animations:(NSDictionary *)anAnimations {
     self = [super initWithImageName:anImageName position:aPosition];
     if (self) {
-        animations = anAnimations;
-		currentFrame = 0;
-		waitDelay = 5;
+        self.animations = anAnimations;
+		self.currentFrame = 0;
     }
     return self;
 }

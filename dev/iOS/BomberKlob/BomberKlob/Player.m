@@ -46,7 +46,7 @@
 		position.x = positionValue.x;
 		position.y = positionValue.y;
 		bombsPlanted = [[NSMutableArray alloc] init];
-		waitDelay = 5;
+		waitDelay = 4;
 	}
 	return self;
 }
@@ -226,7 +226,6 @@
 
 
 - (void) draw:(CGContextRef)context{
-
 	NSMutableArray * sequences = ((AnimationSequence *)[animations valueForKey:currentAnimation]).sequences;
 	
 	if (currentFrame < [sequences count]){

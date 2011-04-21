@@ -17,18 +17,14 @@
 	
     GameActionViewController * actionViewController;
 	GameInformationViewController * informationViewController;
-	GameViewControllerSingle * gameViewController;
+	GameViewControllerSingle * gameViewControllerSingle;
 }
 
-@property (nonatomic,retain) GameViewControllerSingle * gameViewController;
+@property (nonatomic,retain) GameViewControllerSingle * gameViewControllerSingle;
 @property (nonatomic,retain) GameInformationViewController * informationViewController;
 @property (nonatomic,retain) GameActionViewController * actionViewController;
+@property (nonatomic,retain) Engine * engine;
 
 - (id) initWithMapName:(NSString *)mapName;
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 
 @end

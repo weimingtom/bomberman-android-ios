@@ -7,18 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-@class GameActionView;
+@class GameActionView, GlobalGameViewControllerSingle;
 
-@interface GameActionViewController : UIViewController {
+@interface GameActionViewController : NSObject {
+	GlobalGameViewControllerSingle * globalController;
 	GameActionView * actionView;
-	CGRect dimension;
     
 }
 
 @property (nonatomic,retain) GameActionView * actionView;
-@property (nonatomic) CGRect dimension;
+@property (nonatomic,retain) GlobalGameViewControllerSingle * globalController;
 
 
-- (id) init;
+- (id) initWithFrame:(CGRect)dimensionValue Controller:(GlobalGameViewControllerSingle *)controllerValue;
 
 @end

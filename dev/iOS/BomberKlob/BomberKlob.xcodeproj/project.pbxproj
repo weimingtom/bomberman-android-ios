@@ -32,10 +32,8 @@
 		1890E766135C6014002F78B9 /* PauseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E765135C6013002F78B9 /* PauseMenu.m */; };
 		1890E769135C6039002F78B9 /* PauseMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E768135C6038002F78B9 /* PauseMenuView.m */; };
 		1890E76E135C9E36002F78B9 /* EditorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E76C135C9E36002F78B9 /* EditorMenuViewController.m */; };
-		1890E76F135C9E36002F78B9 /* EditorMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1890E76D135C9E36002F78B9 /* EditorMenuViewController.xib */; };
 		1890E774135CB2EC002F78B9 /* LoadMapEditorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E772135CB2EC002F78B9 /* LoadMapEditorMenuViewController.m */; };
 		1890E778135CB5AF002F78B9 /* LoadMapEditorMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E777135CB5AF002F78B9 /* LoadMapEditorMenuView.m */; };
-		1890E77A135CB724002F78B9 /* LoadMapEditorMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1890E779135CB724002F78B9 /* LoadMapEditorMenuViewController.xib */; };
 		18ADE84F13534575001AF150 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18ADE84E13534575001AF150 /* icon.png */; };
 		18C839C913410263001D5747 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C839C813410263001D5747 /* UIKit.framework */; };
 		18C839CB13410263001D5747 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C839CA13410263001D5747 /* Foundation.framework */; };
@@ -52,6 +50,7 @@
 		9924052A1353394F00011965 /* AccountManagementMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1846A7F7134C6C7700D35626 /* AccountManagementMenuViewController.xib */; };
 		9924052B1353394F00011965 /* ChangePlayerMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1846A7EB134C635400D35626 /* ChangePlayerMenuViewController.xib */; };
 		9924052C1353398200011965 /* SinglePlayerMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18412F1E13519CE6002C49D7 /* SinglePlayerMenuViewController.xib */; };
+		99262504136041A600E17F33 /* bomb_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 99262503136041A600E17F33 /* bomb_button.png */; };
 		9943395A134C876200970231 /* Animated.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433927134C876200970231 /* Animated.m */; };
 		9943395B134C876200970231 /* AnimationSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433929134C876200970231 /* AnimationSequence.m */; };
 		9943395C134C876200970231 /* Bomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943392B134C876200970231 /* Bomb.m */; };
@@ -178,6 +177,7 @@
 		992405231353379700011965 /* DBMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMap.m; sourceTree = "<group>"; };
 		99240525135337D700011965 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		99240526135337D700011965 /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
+		99262503136041A600E17F33 /* bomb_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb_button.png; sourceTree = "<group>"; };
 		992AFC6E1356415D00D7726C /* GameActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameActionView.h; sourceTree = "<group>"; };
 		992AFC6F1356415D00D7726C /* GameActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameActionView.m; sourceTree = "<group>"; };
 		992AFC721356417100D7726C /* GameActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameActionViewController.h; sourceTree = "<group>"; };
@@ -419,6 +419,7 @@
 		18C839CE13410263001D5747 /* BomberKlob */ = {
 			isa = PBXGroup;
 			children = (
+				992625061360535100E17F33 /* GameSingle */,
 				99433976134C889500970231 /* Resources */,
 				99433975134C87AE00970231 /* Body */,
 				99433974134C877000970231 /* Object */,
@@ -476,6 +477,27 @@
 			name = Editor;
 			sourceTree = "<group>";
 		};
+		992625061360535100E17F33 /* GameSingle */ = {
+			isa = PBXGroup;
+			children = (
+				994497C41356EE0A00B6BF6C /* GlobalGameViewControllerSingle.h */,
+				994497C51356EE0A00B6BF6C /* GlobalGameViewControllerSingle.m */,
+				99433940134C876200970231 /* GameView.h */,
+				99433941134C876200970231 /* GameView.m */,
+				9943393C134C876200970231 /* GameViewControllerSingle.h */,
+				9943393D134C876200970231 /* GameViewControllerSingle.m */,
+				992AFC6E1356415D00D7726C /* GameActionView.h */,
+				992AFC6F1356415D00D7726C /* GameActionView.m */,
+				992AFC721356417100D7726C /* GameActionViewController.h */,
+				992AFC731356417100D7726C /* GameActionViewController.m */,
+				992AFC751356419E00D7726C /* GameInformationView.h */,
+				992AFC761356419E00D7726C /* GameInformationView.m */,
+				992AFC78135641B700D7726C /* GameInformationViewController.h */,
+				992AFC79135641B700D7726C /* GameInformationViewController.m */,
+			);
+			name = GameSingle;
+			sourceTree = "<group>";
+		};
 		99433974134C877000970231 /* Object */ = {
 			isa = PBXGroup;
 			children = (
@@ -512,12 +534,8 @@
 				99433939134C876200970231 /* Game.m */,
 				9943393A134C876200970231 /* GameControllerMultiplayer.h */,
 				9943393B134C876200970231 /* GameControllerMultiplayer.m */,
-				9943393C134C876200970231 /* GameViewControllerSingle.h */,
-				9943393D134C876200970231 /* GameViewControllerSingle.m */,
 				9943393E134C876200970231 /* GameType.h */,
 				9943393F134C876200970231 /* GameType.m */,
-				99433940134C876200970231 /* GameView.h */,
-				99433941134C876200970231 /* GameView.m */,
 				99433942134C876200970231 /* GameViewController.h */,
 				99433943134C876200970231 /* GameViewController.m */,
 				99433944134C876200970231 /* HumanPlayer.h */,
@@ -538,16 +556,6 @@
 				99433957134C876200970231 /* Single.m */,
 				994339A3134C952D00970231 /* XmlParser.h */,
 				994339A4134C952E00970231 /* XmlParser.m */,
-				992AFC6E1356415D00D7726C /* GameActionView.h */,
-				992AFC6F1356415D00D7726C /* GameActionView.m */,
-				992AFC721356417100D7726C /* GameActionViewController.h */,
-				992AFC731356417100D7726C /* GameActionViewController.m */,
-				992AFC751356419E00D7726C /* GameInformationView.h */,
-				992AFC761356419E00D7726C /* GameInformationView.m */,
-				992AFC78135641B700D7726C /* GameInformationViewController.h */,
-				992AFC79135641B700D7726C /* GameInformationViewController.m */,
-				994497C41356EE0A00B6BF6C /* GlobalGameViewControllerSingle.h */,
-				994497C51356EE0A00B6BF6C /* GlobalGameViewControllerSingle.m */,
 			);
 			name = Body;
 			sourceTree = "<group>";
@@ -565,6 +573,7 @@
 		99433977134C889500970231 /* sprites */ = {
 			isa = PBXGroup;
 			children = (
+				99262503136041A600E17F33 /* bomb_button.png */,
 				995FAC5C135C2E7F00FA8557 /* animate.png */,
 				995FAC5D135C2E7F00FA8557 /* bombs.png */,
 				99225ADC135471EC008B95AA /* space.png */,
@@ -661,6 +670,7 @@
 				995FAC5E135C2E8000FA8557 /* animate.png in Resources */,
 				995FAC5F135C2E8000FA8557 /* bombs.png in Resources */,
 				995FAC61135C2EA900FA8557 /* bombs.xml in Resources */,
+				99262504136041A600E17F33 /* bomb_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

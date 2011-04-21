@@ -12,143 +12,21 @@
 #import "Map.h"
 #import "Position.h"
 #import "RessourceManager.h"
+#import "GlobalGameViewControllerSingle.h"
 
 
 @implementation GameViewControllerSingle
-@synthesize dimension;
+@synthesize gameView,globalController;
 
-- (id) initWithFrame:(CGRect)dimensionValue Engine:(Engine *)engineValue{
+- (id) initWithFrame:(CGRect)dimensionValue Controller:(GlobalGameViewControllerSingle *)controllerValue{
 	self = [super init];
 	
 	if (self){
-		RessourceManager * resource = [RessourceManager sharedRessource];
-		engine = engineValue;
-		dimension = dimensionValue;
-		self.gameView = [[GameView alloc] initWithMap: engine.game.map frame:dimension];	
-		gameView.players = engine.game.players;
-		[self.view addSubview:gameView];
-		[gameView release];
+		self.globalController = controllerValue;
+		self.gameView = [[GameView alloc] initWithController:self frame:dimensionValue ];
 	}
 	return self;
 }
 
--(void) startTimer
-{
-	movementThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerThread) object:nil]autorelease]; //Create a new thread
-	[movementThread start]; //start the thread
-}
-
-//the thread starts by sending this message
--(void) startTimerThread {
-    
-	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
-	[[NSTimer scheduledTimerWithTimeInterval: 0.04 target: self selector: @selector(timerTick:) userInfo:nil repeats: YES] retain];	
-	
-	[runLoop run];
-	[pool release];
-	
-}
-
-- (void)timerTick:(NSTimer *)timer {
-	if (run) {
-		if (currentDirection == @"right") {
-			engine.moveRight;
-		}
-		else if (currentDirection == @"left") {
-			engine.moveLeft;
-		}
-		else if (currentDirection == @"down") {
-			engine.moveDown;
-		}
-		else if (currentDirection == @"top") {
-			engine.moveTop;
-		}
-		else if (currentDirection == @"rightTop") {
-			engine.moveRightTop;
-		}
-		else if (currentDirection == @"leftTop") {
-			engine.moveLeftTop;
-		}
-		else if (currentDirection == @"rightDown") {
-			engine.moveRightDown;
-		}
-		else if (currentDirection == @"leftDown") {
-			engine.moveLeftDown;
-		}
-		//[self.gameView setNeedsDisplay];
-		//[self.gameView threadUpdate];
-	}
-	else {
-		[NSThread exit];
-	}
-	if ([engine.game.players count] > 0 && ![lastPosition isEqual:currentPosition]) {
-		[[engine.game.players objectAtIndex:0] update];
-	}
-}
-
-
-- (void)touchesBegan:(CGPoint) pt{
-	lastPosition.x = currentPosition.x;
-	lastPosition.y = currentPosition.y;
-	currentPosition.x = pt.x;
-	currentPosition.y = pt.y;
-	[self startTimer];
-	run = true;
-	currentDirection = @"";
-	
-}
-
-
-
-
-- (void)touchesMoved: (CGPoint) pt {
-	NSUInteger marge = 20;
-	run = YES;
-//	CGPoint pt = [[touches anyObject] locationInView:self.view];
-    
-	lastPosition.x = currentPosition.x;
-	lastPosition.y = currentPosition.y;
-	currentPosition.x = pt.x;
-	currentPosition.y = pt.y;
-	
-	if (lastPosition.x > currentPosition.x && lastPosition.y > currentPosition.y) {
-		currentDirection = @"leftTop";
-	}
-	else if (lastPosition.x > currentPosition.x && lastPosition.y < currentPosition.y) {
-		currentDirection = @"leftDown";
-	}
-	else if (lastPosition.x < currentPosition.x && lastPosition.y < currentPosition.y) {
-		currentDirection = @"rightDown";
-	}
-	else if (lastPosition.x < currentPosition.x && lastPosition.y > currentPosition.y) {
-		currentDirection = @"rightTop";
-	}
-	
-	else if (lastPosition.x > currentPosition.x && lastPosition.y > currentPosition.y-marge && lastPosition.y < currentPosition.y+marge) {
-		currentDirection = @"left";
-	}
-	else if (lastPosition.x < currentPosition.x  && lastPosition.y > currentPosition.y-marge && lastPosition.y < currentPosition.y+marge) {
-		currentDirection = @"right";
-	}
-	else if (lastPosition.y > currentPosition.y && lastPosition.x < currentPosition.x+marge  && lastPosition.x > currentPosition.x-marge) {
-		currentDirection = @"top";
-	}
-	else if (lastPosition.y < currentPosition.y && lastPosition.x < currentPosition.x+marge  && lastPosition.x > currentPosition.x-marge) {
-		currentDirection = @"down";
-	}
-    
-	
-	[self.gameView setNeedsDisplay];
-    
-    
-}
-- (void) touchesCancelled:(CGPoint) pt{
-	run = NO;
-}
-- (void) touchesEnded:(CGPoint) pt{
-	run = NO;
-    
-}
 
 @end

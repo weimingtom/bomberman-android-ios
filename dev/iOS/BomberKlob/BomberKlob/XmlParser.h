@@ -14,14 +14,14 @@
 
 	NSString  * type;
 	NSMutableDictionary * png;
-	NSMutableString * currentProperty;
+	NSMutableString * currentString;
 	
 	NSMutableDictionary * animations;
 	NSMutableDictionary * animationsBombs;
 	NSMutableDictionary * animationsAnimates;
 	NSMutableString * currentAnimation;
 	NSMutableString * currentCanLoop;
-	NSMutableString * currentColorPlayer;
+	NSMutableString * currentProperty;
 
 }
 

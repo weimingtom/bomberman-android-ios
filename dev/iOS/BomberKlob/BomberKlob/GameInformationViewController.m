@@ -9,19 +9,18 @@
 #import "GameInformationViewController.h"
 #import "GameInformationView.h"
 #import "RessourceManager.h"
+#import "GlobalGameViewControllerSingle.h"
 
 @implementation GameInformationViewController
 
-@synthesize informationView, dimension;
+@synthesize informationView, globalController;
 
-- (id) initWithFrame:(CGRect)dimensionValue Engine:(Engine*) engineValue{
+- (id) initWithFrame:(CGRect)dimensionValue Controller:(GlobalGameViewControllerSingle *)controllerValue{
 	self = [super init];
 	
 	if (self){
-		RessourceManager * resource = [RessourceManager sharedRessource];
-		dimension = dimensionValue;
-		self.informationView = [[GameInformationView alloc] initWithFrame:dimension Engine:engineValue];	
-		[self.view addSubview:informationView];
+		globalController = controllerValue;
+		self.informationView = [[GameInformationView alloc] initWithFrame:dimensionValue Controller:self];	
 		[informationView release];
 	}
 	return self;

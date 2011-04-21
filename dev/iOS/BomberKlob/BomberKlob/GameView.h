@@ -7,26 +7,43 @@
 //
 
 #import <Foundation/Foundation.h>
-@class RessourceManager, Map;
+@class RessourceManager, Map, Position, GameViewControllerSingle;
 
 @interface GameView : UIView {
-	NSDictionary * bitmapsInanimates;
+	GameViewControllerSingle * controller;
 	RessourceManager* ressource;
-	Map * map;
-	NSMutableArray * players;
+	Position * currentPosition;
+	Position * lastPosition;
+	
+	NSDictionary * bitmapsInanimates;
+	NSMutableString * currentDirection;
+	
+	BOOL run;
 	
 }
 
-@property (nonatomic,copy) NSDictionary * bitmapsInanimates;
-@property (nonatomic, retain) RessourceManager* ressource;
-@property (nonatomic, retain) Map* map;
-@property (nonatomic, retain) NSMutableArray * players;
+@property (nonatomic,retain) NSDictionary * bitmapsInanimates;
+@property (nonatomic,retain) RessourceManager* ressource;
+@property (nonatomic,retain) Position * currentPosition;
+@property (nonatomic, retain) Position * lastPosition;
+@property (nonatomic,retain) GameViewControllerSingle * controller;
 
-- (id) initWithMap:(Map *) value frame:(CGRect) dimension;
+- (id) initWithController:(GameViewControllerSingle *) controllerValue frame:(CGRect) dimensionValue;
 - (id) initWithFrame:(CGRect)frame;
+
 - (void)drawAll: (CGContextRef) context;
-- (void) startTimer;
-- (void) startTimerThread;
-- (void) update;
+
+- (void)startTimerUpdateMap;
+- (void)startTimerUpdateMapThread;
+- (void)updateMap;
+
+- (void)startTimerMovement;
+- (void)startTimerMovementThread;
+- (void)timerMovement:(NSTimer *)timer;
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 
 @end

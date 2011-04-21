@@ -34,7 +34,7 @@
 		animations = [[NSMutableDictionary alloc] init];
 		animationsBombs = [[NSMutableDictionary alloc] init];
 		animationsAnimates = [[NSMutableDictionary alloc] init];
-		currentColorPlayer = [[NSMutableString alloc] init];
+		currentProperty = [[NSMutableString alloc] init];
 	}
 	else {
 		[png removeAllObjects];
@@ -45,24 +45,14 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
 	if(type == @"inanimates"){
-		// Si l’élément lu correspond à un objet métier 
 		if ([elementName isEqualToString:@"png"]) {
-			// On crée une instance de l’objet métier et on la stocke
-			// dans une variable d’instance
 			Object * currentObject = [[Object alloc] init];
-			// On ajoute l’objet métier à la liste de tous les objets 
-			// lus par le parseur 
-			// Lecture des attributs de l’élément
 			currentObject.imageName = [attributeDict valueForKey:@"name"];
-
             currentObject.position = [[Position alloc] initWithX:[[attributeDict valueForKey:@"x"] integerValue] y:[[attributeDict valueForKey:@"y"] integerValue]];
-//			currentObject.position.x = [[attributeDict valueForKey:@"x"] integerValue];
-//			currentObject.position.y = [[attributeDict valueForKey:@"y"] integerValue];
 			currentObject.hit = [[attributeDict valueForKey:@"hit"] intValue];
 			currentObject.level = [[attributeDict valueForKey:@"level"] intValue];
 			currentObject.fireWall = [[attributeDict valueForKey:@"fireWall"] intValue];
 						
-			// Le traitement est fini pour cet élément. 
 			
 			UIImage* imageRef = [UIImage imageNamed:@"inanimate.png"];
 			CGImageRef image = imageRef.CGImage;
@@ -99,16 +89,16 @@
 		NSUInteger widthOfOneCase = imageRef.size.width/24; // 24 = nombre d'image differentes dans la grande image
 
 		if([elementName isEqualToString:@"player"]){
-			currentColorPlayer = [attributeDict valueForKey:@"name"];
+			currentProperty = [attributeDict valueForKey:@"name"];
 			
-			[animations setObject:[[NSMutableDictionary alloc] init] forKey:currentColorPlayer];
+			[animations setObject:[[NSMutableDictionary alloc] init] forKey:currentProperty];
 			
 		}
 		else if([elementName isEqualToString:@"animation"]){
 			currentAnimation = [attributeDict valueForKey:@"name"];
 			currentCanLoop = [attributeDict valueForKey:@"canLoop"];
 			
-			[[animations objectForKey:currentColorPlayer ] setObject:[[AnimationSequence alloc] initWithNameAndLoop:currentAnimation:currentCanLoop ] forKey:currentAnimation];
+			[[animations objectForKey:currentProperty ] setObject:[[AnimationSequence alloc] initWithNameAndLoop:currentAnimation:currentCanLoop ] forKey:currentAnimation];
 
 			
 			//[animations setObject:[[AnimationSequence alloc] initWithNameAndLoop:currentAnimation:currentCanLoop ] forKey:currentAnimation];
@@ -128,7 +118,7 @@
 			currentObject.fireWall = 0;
 			
 			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
-			[[[animations objectForKey:currentColorPlayer ] objectForKey:currentAnimation] addImageSequence:imageRef];
+			[[[animations objectForKey:currentProperty ] objectForKey:currentAnimation] addImageSequence:imageRef];
 			
 			
 			
@@ -148,9 +138,9 @@
 			
 		}
 		else if([elementName isEqualToString:@"bomb"]){
-			currentColorPlayer = [attributeDict valueForKey:@"name"];
-			[animationsBombs setObject:[[AnimationSequence alloc] init] forKey:currentColorPlayer];
-			AnimationSequence * p = [animationsBombs objectForKey:currentColorPlayer ];
+			currentProperty = [attributeDict valueForKey:@"name"];
+			[animationsBombs setObject:[[AnimationSequence alloc] init] forKey:currentProperty];
+			AnimationSequence * p = [animationsBombs objectForKey:currentProperty ];
 
 			
 		}		
@@ -166,7 +156,7 @@
 			currentObject.fireWall = 0;
 			
 			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
-			[[animationsBombs objectForKey:currentColorPlayer ] addImageSequence:imageRef];
+			[[animationsBombs objectForKey:currentProperty ] addImageSequence:imageRef];
 			
 			[currentObject release];
 			return;
@@ -180,8 +170,8 @@
 		NSUInteger heightOfOneCase = imageRef.size.height/16;
 		NSUInteger widthOfOneCase = imageRef.size.width/6; 
 		if([elementName isEqualToString:@"destructible"] ||[elementName isEqualToString:@"undestructible"]){
-			currentColorPlayer = [attributeDict valueForKey:@"name"];
-			[animationsAnimates setObject:[[AnimationSequence alloc] init] forKey:currentColorPlayer];
+			currentProperty = [attributeDict valueForKey:@"name"];
+			[animationsAnimates setObject:[[AnimationSequence alloc] init] forKey:currentProperty];
 			
 		}		
 		else if ([elementName isEqualToString:@"png"]) {
@@ -196,7 +186,7 @@
 			currentObject.fireWall = 0;
 			
 			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
-			[[animationsAnimates objectForKey:currentColorPlayer ] addImageSequence:imageRef];
+			[[animationsAnimates objectForKey:currentProperty ] addImageSequence:imageRef];
 			
 			[currentObject release];
 			return;
@@ -206,8 +196,8 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
 	
-	if (currentProperty) {
-		[currentProperty appendString:string];
+	if (currentString) {
+		[currentString appendString:string];
 	}
 }
 

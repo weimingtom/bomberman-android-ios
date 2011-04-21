@@ -20,7 +20,7 @@
 	if (self) {
 		currentFrame = 0;
 		power = 3;
-		waitDelay = 0;
+		waitDelay = 1;
 		delay = 0;
 		animations = ressource.bitmapsBombs;
 		explode = NO;
