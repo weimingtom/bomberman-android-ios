@@ -74,13 +74,10 @@
 
 	}
 	else if (currentFrame < 3) {
-		//currentFrame++;
 		position.y -= speed;
 	}
 	else {
-		//currentFrame = 0;
 		position.y-= speed;
-
 	}
 	
 }
@@ -93,13 +90,10 @@
 		position.y+=speed;
 	}
 	else if (currentFrame < 3) {
-		//currentFrame++;
 		position.y+=speed;
 	}
 	else {
-		//currentFrame = 0;
 		position.y+= speed;
-
 	}
 }
 
@@ -112,11 +106,9 @@
 
 	}
 	else if (currentFrame < 3) {
-		//currentFrame++;
 		position.x-=speed;
 	}
 	else {
-		//currentFrame = 0;
 		position.x-=speed;
 	}
 }
@@ -129,11 +121,9 @@
 		position.x+=speed;
 	}
 	else if (currentFrame < 3) {
-		//currentFrame++;
 		position.x+=speed;
 	}
 	else {
-		//currentFrame = 0;
 		position.x+=speed;
 	}
 }
@@ -146,12 +136,10 @@
 		position.y-=speed;
 	}
 	else if (currentFrame < 3) {
-		//currentFrame++;
 		position.x-=speed;
 		position.y-=speed;
 	}
 	else {
-		//currentFrame = 0;
 		position.x-=speed;
 		position.y-=speed;
 	}
@@ -165,12 +153,10 @@
 		position.y+=speed;
 	}
 	else if (currentFrame < 3) {
-		//currentFrame++;
 		position.x-=speed;
 		position.y+=speed;
 	}
 	else {
-		//currentFrame = 0;
 		position.x-=speed;
 		position.y+=speed;
 	}
@@ -184,12 +170,10 @@
 		position.y+=speed;
 	}
 	else if (currentFrame < 3) {
-		//currentFrame++;
 		position.x+=speed;
 		position.y+=speed;
 	}
 	else {
-		//currentFrame = 0;
 		position.x+=speed;
 		position.y+=speed;
 	}
@@ -203,12 +187,10 @@
 		position.y-=speed;
 	}
 	else if (currentFrame < 3) {
-		//currentFrame++;
 		position.x+=speed;
 		position.y-=speed;
 	}
 	else {
-		//currentFrame = 0;
 		position.x+=speed;
 		position.y-=speed;
 	}
@@ -226,17 +208,18 @@
 
 
 - (void) draw:(CGContextRef)context{
+	
 	NSMutableArray * sequences = ((AnimationSequence *)[animations valueForKey:currentAnimation]).sequences;
 	
 	if (currentFrame < [sequences count]){
 		UIImage * image = [sequences objectAtIndex:currentFrame];
-		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize*1.5)];
+		[image drawInRect:CGRectMake(position.x, position.y-(ressource.tileSize/2), ressource.tileSize , ressource.tileSize*1.5)];
 	}
 	else{
 		if ([sequences count] == 1) {
 			currentFrame = 0;
 			UIImage * image = [sequences objectAtIndex:currentFrame];
-			[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize*1.5)];
+			[image drawInRect:CGRectMake(position.x, position.y-(ressource.tileSize/2), ressource.tileSize , ressource.tileSize*1.5)];
 		}
 	}
 }

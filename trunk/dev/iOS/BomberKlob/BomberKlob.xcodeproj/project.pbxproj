@@ -51,6 +51,8 @@
 		9924052B1353394F00011965 /* ChangePlayerMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1846A7EB134C635400D35626 /* ChangePlayerMenuViewController.xib */; };
 		9924052C1353398200011965 /* SinglePlayerMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18412F1E13519CE6002C49D7 /* SinglePlayerMenuViewController.xib */; };
 		99262504136041A600E17F33 /* bomb_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 99262503136041A600E17F33 /* bomb_button.png */; };
+		9926250713607DF700E17F33 /* EditorMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1890E76D135C9E36002F78B9 /* EditorMenuViewController.xib */; };
+		9926250813607E0900E17F33 /* LoadMapEditorMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1890E779135CB724002F78B9 /* LoadMapEditorMenuViewController.xib */; };
 		9943395A134C876200970231 /* Animated.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433927134C876200970231 /* Animated.m */; };
 		9943395B134C876200970231 /* AnimationSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433929134C876200970231 /* AnimationSequence.m */; };
 		9943395C134C876200970231 /* Bomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943392B134C876200970231 /* Bomb.m */; };
@@ -646,6 +648,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9926250813607E0900E17F33 /* LoadMapEditorMenuViewController.xib in Resources */,
+				9926250713607DF700E17F33 /* EditorMenuViewController.xib in Resources */,
 				9924052C1353398200011965 /* SinglePlayerMenuViewController.xib in Resources */,
 				992405291353394F00011965 /* OptionsMenuViewController.xib in Resources */,
 				9924052A1353394F00011965 /* AccountManagementMenuViewController.xib in Resources */,

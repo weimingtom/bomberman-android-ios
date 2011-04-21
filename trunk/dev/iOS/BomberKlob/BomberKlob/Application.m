@@ -225,7 +225,7 @@
     DBMap *map;
     
     for (int i = 0; i < [maps count]; i++) {
-        map = [maps objectAtIndex:i];
+        map = [maps objectAtIndex:i];	
         
         if (map.official == 0) {
             return YES;
