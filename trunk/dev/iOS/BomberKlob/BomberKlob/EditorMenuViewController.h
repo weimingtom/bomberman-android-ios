@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface EditorMenuViewController : UIViewController {
+@interface EditorMenuViewController : UIViewController <UITextFieldDelegate> {
     
     UIBarButtonItem *create;
     UITextField *mapName;

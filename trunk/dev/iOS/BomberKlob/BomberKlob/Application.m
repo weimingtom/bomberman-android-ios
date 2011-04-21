@@ -80,7 +80,7 @@
     while (sqlite3_step(statement) == SQLITE_ROW) {
         volume = sqlite3_column_int(statement, 0); 
         mute = (BOOL) sqlite3_column_int(statement, 1);
-        language = [NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 2)];
+        language = [[NSString alloc] initWithUTF8String:(char *) sqlite3_column_text(statement, 2)];
         
         
         if (sqlite3_column_int(statement, 3) > 0) {
