@@ -9,11 +9,12 @@
 #import "Object.h"
 #import "Position.h"
 #import "RessourceManager.h"
+#import "AnimationSequence.h"
 
 
 @implementation Object
 
-@synthesize imageName, hit, level, fireWall, position;
+@synthesize imageName, hit, level, fireWall, position, animations,currentAnimation,currentFrame,waitDelay,delay;
 
 - (id)init {
 	self = [super init];
@@ -27,13 +28,15 @@
 }
 
 
-- (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition {
+- (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition animations:(NSDictionary *)anAnimations {
 	self = [super init];
 	
 	if (self) {
         self.imageName = anImageName;
         self.position = aPosition;
 		ressource = [RessourceManager sharedRessource];
+		self.animations = anAnimations;
+		self.currentFrame = 0;
 	}
 	
 	return self;
@@ -41,15 +44,6 @@
 
 - (void) resize{
 	
-}
-
-- (void) update{
-	
-}
-
-- (BOOL) hasAnimationFinished{
-	
-	return NO;
 }
 
 - (void) destroy{
@@ -64,16 +58,47 @@
 
 
 - (void)draw:(CGContextRef)context {
-    UIImage *image = [ressource.bitmapsInanimates valueForKey:imageName];
-    [image drawInRect:CGRectMake(ressource.tileSize * position.x, ressource.tileSize * position.y, ressource.tileSize, ressource.tileSize)];
+	for (NSString * key in animations) {
+		NSLog(@"Test : %@  ",[animations objectForKey:key]);
+	}
+	if (currentFrame < [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]){
+		UIImage * image = [((AnimationSequence*)[animations objectForKey:imageName]).sequences objectAtIndex:currentFrame];
+		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize)];
+	}
 }
 
 
-- (void)draw:(CGContextRef)context alpha:(CGFloat)alpha {
-    UIImage *image = [ressource.bitmapsInanimates valueForKey:imageName];
-    [image drawInRect:CGRectMake(ressource.tileSize * position.x, ressource.tileSize * position.y, ressource.tileSize, ressource.tileSize) blendMode:kCGBlendModeNormal alpha:alpha];
+- (void)draw:(CGContextRef)context alpha:(CGFloat)alpha {	
+	if (currentFrame < [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]){
+		UIImage * image = [((AnimationSequence*)[animations objectForKey:imageName]).sequences objectAtIndex:currentFrame];
+		    [image drawInRect:CGRectMake(ressource.tileSize * position.x, ressource.tileSize * position.y, ressource.tileSize, ressource.tileSize) blendMode:kCGBlendModeNormal alpha:alpha];
+	}
     
 //    [image drawInRect:CGRectMake(ressource.tileSize * position.x, ressource.tileSize * position.y, ressource.tileSize, ressource.tileSize)];
+}
+
+- (void) update{
+	if (delay == waitDelay) {
+		delay = 0;
+		if (currentFrame == [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]-1) {
+			currentFrame = -1;
+		}
+		else
+			currentFrame++;
+	}
+	else{
+		delay++;
+	}
+	
+}
+
+- (BOOL) hasAnimationFinished{
+	
+	if (currentFrame < 0) {
+		return true;
+	}
+	else
+		return false;
 }
 
 

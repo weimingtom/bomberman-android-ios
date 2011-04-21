@@ -63,8 +63,9 @@
 			
 			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y*heightOfOneCase, heightOfOneCase, widthOfOneCase))];
 
-			[png setObject:imageRef forKey:currentObject.imageName];
-			[currentObject release];
+			[png setObject:[[AnimationSequence alloc] init] forKey:currentObject.imageName];
+			[[png objectForKey:currentObject.imageName] addImageSequence:imageRef];
+			//[currentObject release];
 
 			
 			return;

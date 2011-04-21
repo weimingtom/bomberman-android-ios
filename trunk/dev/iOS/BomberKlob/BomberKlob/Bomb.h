@@ -7,14 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Animated.h"
+#import "Destructible.h"
 
 
-@interface Bomb : Animated {
+@interface Bomb : Destructible {
     NSInteger power;
 	NSString * type;
 	BOOL explode;
-	NSMutableDictionary * animationExplosed;
 }
 
 @property (nonatomic) NSInteger power;

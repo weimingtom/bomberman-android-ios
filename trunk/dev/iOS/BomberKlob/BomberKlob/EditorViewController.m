@@ -18,7 +18,6 @@
 #import "Map.h"
 #import "Position.h"
 #import "Object.h"
-#import "Inanimated.h"
 #import "PauseMenu.h"
 #import "PauseMenuView.h"
 #import "MainMenuViewController.h"
@@ -90,7 +89,7 @@
         Object *block = nil;
         
         if ([editorAction.selectedObjectType isEqual:@"Inanimated"]) {
-            block = [[Inanimated alloc] initWithImageName:editorAction.selectedObject position:position];
+            //block = [[Inanimated alloc] initWithImageName:editorAction.selectedObject position:position];
         }
         
         if (block != nil)

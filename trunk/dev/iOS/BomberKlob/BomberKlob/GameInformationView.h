@@ -21,4 +21,8 @@
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 
+- (void) initComponents;
+
+- (void)pauseAction;
+
 @end

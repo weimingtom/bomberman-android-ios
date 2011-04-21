@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Animated.h"
+#import "Object.h"
 
-@interface Destructible : Animated {
+@interface Destructible : Object {
     NSUInteger life;
 }
 

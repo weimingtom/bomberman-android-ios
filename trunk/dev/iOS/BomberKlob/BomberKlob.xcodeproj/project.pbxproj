@@ -55,7 +55,6 @@
 		9926250813607E0900E17F33 /* LoadMapEditorMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1890E779135CB724002F78B9 /* LoadMapEditorMenuViewController.xib */; };
 		9926250B1360808400E17F33 /* PauseMenuGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 9926250A1360808100E17F33 /* PauseMenuGame.m */; };
 		9926250E1360817000E17F33 /* PauseMenuGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9926250D1360816E00E17F33 /* PauseMenuGameView.m */; };
-		9943395A134C876200970231 /* Animated.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433927134C876200970231 /* Animated.m */; };
 		9943395B134C876200970231 /* AnimationSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433929134C876200970231 /* AnimationSequence.m */; };
 		9943395C134C876200970231 /* Bomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943392B134C876200970231 /* Bomb.m */; };
 		9943395D134C876200970231 /* BotPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943392D134C876200970231 /* BotPlayer.m */; };
@@ -71,7 +70,6 @@
 		99433967134C876200970231 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433941134C876200970231 /* GameView.m */; };
 		99433968134C876200970231 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433943134C876200970231 /* GameViewController.m */; };
 		99433969134C876200970231 /* HumanPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433945134C876200970231 /* HumanPlayer.m */; };
-		9943396A134C876200970231 /* Inanimated.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433947134C876200970231 /* Inanimated.m */; };
 		9943396B134C876200970231 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433949134C876200970231 /* Map.m */; };
 		9943396C134C876200970231 /* MapEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943394B134C876200970231 /* MapEditor.m */; };
 		9943396D134C876200970231 /* Multiplayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943394D134C876200970231 /* Multiplayer.m */; };
@@ -194,8 +192,6 @@
 		992AFC761356419E00D7726C /* GameInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInformationView.m; sourceTree = "<group>"; };
 		992AFC78135641B700D7726C /* GameInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInformationViewController.h; sourceTree = "<group>"; };
 		992AFC79135641B700D7726C /* GameInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInformationViewController.m; sourceTree = "<group>"; };
-		99433926134C876200970231 /* Animated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animated.h; sourceTree = "<group>"; };
-		99433927134C876200970231 /* Animated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animated.m; sourceTree = "<group>"; };
 		99433928134C876200970231 /* AnimationSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationSequence.h; sourceTree = "<group>"; };
 		99433929134C876200970231 /* AnimationSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationSequence.m; sourceTree = "<group>"; };
 		9943392A134C876200970231 /* Bomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bomb.h; sourceTree = "<group>"; };
@@ -226,8 +222,6 @@
 		99433943134C876200970231 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		99433944134C876200970231 /* HumanPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanPlayer.h; sourceTree = "<group>"; };
 		99433945134C876200970231 /* HumanPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HumanPlayer.m; sourceTree = "<group>"; };
-		99433946134C876200970231 /* Inanimated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inanimated.h; sourceTree = "<group>"; };
-		99433947134C876200970231 /* Inanimated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Inanimated.m; sourceTree = "<group>"; };
 		99433948134C876200970231 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		99433949134C876200970231 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		9943394A134C876200970231 /* MapEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapEditor.h; sourceTree = "<group>"; };
@@ -513,8 +507,6 @@
 		99433974134C877000970231 /* Object */ = {
 			isa = PBXGroup;
 			children = (
-				99433926134C876200970231 /* Animated.h */,
-				99433927134C876200970231 /* Animated.m */,
 				99433928134C876200970231 /* AnimationSequence.h */,
 				99433929134C876200970231 /* AnimationSequence.m */,
 				9943392A134C876200970231 /* Bomb.h */,
@@ -523,8 +515,6 @@
 				99433931134C876200970231 /* Destructible.m */,
 				99433936134C876200970231 /* FrameInfo.h */,
 				99433937134C876200970231 /* FrameInfo.m */,
-				99433946134C876200970231 /* Inanimated.h */,
-				99433947134C876200970231 /* Inanimated.m */,
 				9943394E134C876200970231 /* Object.h */,
 				9943394F134C876200970231 /* Object.m */,
 				99433958134C876200970231 /* Undestructible.h */,
@@ -710,7 +700,6 @@
 				186E7CD31345313F004B873F /* DBSystem.m in Sources */,
 				185EEC971348A98D007A1C67 /* DataBase.m in Sources */,
 				1846A7BF134B6F4D00D35626 /* ChangePlayerMenuViewController.m in Sources */,
-				9943395A134C876200970231 /* Animated.m in Sources */,
 				9943395B134C876200970231 /* AnimationSequence.m in Sources */,
 				9943395C134C876200970231 /* Bomb.m in Sources */,
 				9943395D134C876200970231 /* BotPlayer.m in Sources */,
@@ -726,7 +715,6 @@
 				99433967134C876200970231 /* GameView.m in Sources */,
 				99433968134C876200970231 /* GameViewController.m in Sources */,
 				99433969134C876200970231 /* HumanPlayer.m in Sources */,
-				9943396A134C876200970231 /* Inanimated.m in Sources */,
 				9943396B134C876200970231 /* Map.m in Sources */,
 				9943396C134C876200970231 /* MapEditor.m in Sources */,
 				9943396D134C876200970231 /* Multiplayer.m in Sources */,

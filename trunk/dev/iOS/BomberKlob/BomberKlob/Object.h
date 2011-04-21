@@ -19,6 +19,12 @@
 	NSUInteger level;
 	BOOL fireWall;
 	Position *position;
+	
+	NSDictionary * animations;
+	NSString * currentAnimation;
+	NSInteger currentFrame;
+	NSInteger waitDelay;
+	NSInteger delay;
 }
 
 @property (nonatomic, retain) NSString * imageName;
@@ -27,8 +33,13 @@
 @property (nonatomic) BOOL fireWall;
 @property (nonatomic, retain) Position * position;
 
+@property (nonatomic, retain) NSDictionary * animations ;
+@property (nonatomic, retain) NSString * currentAnimation;
+@property (nonatomic) NSInteger currentFrame;
+@property (nonatomic) NSInteger waitDelay;
+@property (nonatomic) NSInteger delay;
+
 - (id)init;
-- (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition;
 - (void)resize;
 - (void)update;
 - (BOOL)hasAnimationFinished;
@@ -36,5 +47,9 @@
 
 - (void)draw:(CGContextRef)context;
 - (void)draw:(CGContextRef)context alpha:(CGFloat)alpha;
+
+- (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition animations:(NSDictionary *)anAnimations;
+- (void) update;
+- (BOOL) hasAnimationFinished;
 
 @end

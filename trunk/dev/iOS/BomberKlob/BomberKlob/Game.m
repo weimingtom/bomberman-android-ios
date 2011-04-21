@@ -47,6 +47,37 @@
 	return self;
 }
 
+- (id) init {
+	self = [super init];
+    
+	if (self) {
+		//        map = [[Map alloc] init];
+        Position *position;
+        Player *player;
+        NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
+        map = [[Map alloc] init];
+        
+        players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
+        
+        // TODO: Changer le tableau des couleurs en fonction de la couleur de joueur
+        NSArray *colorsPlayers = [[NSArray alloc] initWithObjects:@"white", @"blue", @"red", @"black", nil];
+        
+        for (int i = 0; i < [map.players count]; i++) {
+            position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:i]).x * tileSize) y:(((Position *) [map.players objectAtIndex:i]).y * tileSize)];
+            player = [[Player alloc] initWithColor:[colorsPlayers objectAtIndex:i] position:position];
+            
+            [players addObject:player];
+            
+            [position release];
+            [player release];
+        }
+        
+        [colorsPlayers release];
+	}
+    
+	return self;
+}
+
 
 - (void)dealloc {
     [players release];

@@ -24,6 +24,7 @@
 	
 	if (self){
 		self.controller = controllerValue;
+		[self initComponents];
 	}
 	
 	return self;
@@ -41,7 +42,7 @@
 	for (NSString * key in resource.bitmapsPlayer) {
 		
 		UIImage * image = [((AnimationSequence *)[[resource.bitmapsPlayer valueForKey:key] valueForKey:@"idle"]).sequences objectAtIndex:0];
-		[image drawInRect:CGRectMake(ecart, 0, resource.tileSize , resource.tileSize)];
+		//[image drawInRect:CGRectMake(ecart, 0, resource.tileSize , resource.tileSize)];
 		
 		Player * p = [controller.globalController.engine.game.players objectAtIndex:i];
 		NSString *score = [NSString stringWithFormat:@"%d", p.lifeNumber];
@@ -65,5 +66,19 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	
 }
+
+- (void) initComponents{	
+	
+	UIButton *  bombButton = [UIButton  buttonWithType:UIButtonTypeRoundedRect];
+	bombButton.frame = CGRectMake(0,0, 50, 20);
+	[bombButton setTitle:@"Menu" forState:UIControlStateNormal];
+	[bombButton addTarget:self action:@selector(pauseAction) forControlEvents:UIControlEventTouchUpInside];	
+	[self addSubview:bombButton];
+}
+
+- (void)pauseAction {
+    [controller.globalController pauseAction];
+}
+
 
 @end
