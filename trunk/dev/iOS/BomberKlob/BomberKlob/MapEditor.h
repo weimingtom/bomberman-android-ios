@@ -21,6 +21,7 @@
 - (id)initWithMapName:(NSString *)mapName;
 
 - (void)addBlock:(Object *)block position:(Position *)position;
+- (void)addPlayer:(Position *)position;
 - (void)deleteBlockAtPosition:(Position *)position;
 - (void)saveMapWithOwner:(DBUser *)owner;
 

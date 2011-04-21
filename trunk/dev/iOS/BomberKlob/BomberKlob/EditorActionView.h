@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-#define ITEM_SIZE 30
+#define ITEM_SIZE    30
+#define ITEM_X       (self.frame.size.width / 2) - (ITEM_SIZE / 2)
 #define FIRST_ITEM_Y 50
-#define MARGE_BETWEEN_ITEM 2
+#define MARGE_ITEM   2
+
+#define DELETE_X           (self.frame.size.width / 2) - (DELETE_SIZE_WIDTH / 2)
+#define DELETE_Y           (self.frame.size.height - DELETE_SIZE_HEIGHT - 10)
+#define DELETE_SIZE_WIDTH  32
+#define DELETE_SIZE_HEIGHT 30
 
 @class EditorAction, RessourceManager;
 

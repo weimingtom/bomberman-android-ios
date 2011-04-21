@@ -19,7 +19,7 @@
 @property (nonatomic, retain) IBOutlet UIView *errorView;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *done;
 
-- (BOOL)vericationPseudo;
+- (BOOL)checkPseudo;
 - (void)goToMainMenu;
 
 - (IBAction)doneAction:(id)sender;

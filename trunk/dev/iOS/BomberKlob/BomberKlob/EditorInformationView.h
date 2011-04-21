@@ -8,6 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
+#define PLAYER_X (self.frame.size.width / 3)
+#define PLAYER_Y       ((self.frame.size.height / 2) - (PLAYER_HEIGHT / 2))
+#define PLAYER_MARGE   4
+#define PLAYER_WIDTH   19
+#define PLAYER_HEIGHT  34
+
+#define PAUSE_X      10
+#define PAUSE_Y      ((self.frame.size.height / 2) - (PAUSE_HEIGHT / 2))
+#define PAUSE_WIDTH  60
+#define PAUSE_HEIGHT 30
+
+#define DISPLAY_TYPE_X      (self.frame.size.width - DISPLAY_TYPE_WIDTH - 10)
+#define DISPLAY_TYPE_Y      ((self.frame.size.height / 2) - (DISPLAY_TYPE_HEIGHT / 2))
+#define DISPLAY_TYPE_WIDTH  120
+#define DISPLAY_TYPE_HEIGHT 30
+
+
 @class EditorInformation, RessourceManager;
 
 
@@ -18,10 +35,7 @@
     RessourceManager *resource;
     
     UIButton *pause;
-    UIImageView *player1;
-    UIImageView *player2;
-    UIImageView *player3;
-    UIImageView *player4;
+    UIButton *player;
     UISegmentedControl *displayType;
 }
 
@@ -34,5 +48,6 @@
 
 - (void)displayTypeAction;
 - (void)pauseAction;
+- (void)playerAction;
 
 @end

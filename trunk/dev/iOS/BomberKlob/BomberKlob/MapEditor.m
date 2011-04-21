@@ -39,6 +39,11 @@
 }
 
 
+- (void)addPlayer:(Position *)position {
+    [map addPlayer:position];
+}
+
+
 - (void)deleteGround:(Object *)ground position:(Position *)position {
     
 }

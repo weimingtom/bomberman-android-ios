@@ -205,6 +205,36 @@
 }
 
 
+- (NSArray *)unofficialMaps {
+    DBMap *map;
+    NSMutableArray *unofficialMaps = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < [maps count]; i++) {
+        map = [maps objectAtIndex:i];
+        
+        if (map.official == 0) {
+            [unofficialMaps addObject:map];
+        }
+    }
+    
+    return [unofficialMaps autorelease];
+}
+
+
+- (BOOL)hasUnofficialMaps {
+    DBMap *map;
+    
+    for (int i = 0; i < [maps count]; i++) {
+        map = [maps objectAtIndex:i];
+        
+        if (map.official == 0) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 
 - (void)setUser:(DBUser *)value {
     [value retain];

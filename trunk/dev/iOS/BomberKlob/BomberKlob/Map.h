@@ -40,11 +40,15 @@
 
 - (void)addGround:(Object *)ground position:(Position *)position;
 - (void)addBlock:(Object *)block position:(Position *)position;
+- (void)addPlayer:(Position *)position;
 - (void)deleteBlockAtPosition:(Position *)position;
 - (void)destroyBlock:(Animated *)block position:(Position *)position;
 
 - (void)draw:(CGContextRef)context;
 - (void)drawPlayers:(CGContextRef)context;
+- (void)draw:(CGContextRef)context alpha:(CGFloat)alpha;
+- (void)drawPlayers:(CGContextRef)context alpha:(CGFloat)alpha;
+- (void)drawMapAndPlayers:(CGContextRef)context alpha:(CGFloat)alpha;
 - (void)drawGrid:(CGContextRef)context;
 
 

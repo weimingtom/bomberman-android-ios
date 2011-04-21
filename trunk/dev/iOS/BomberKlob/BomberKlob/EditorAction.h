@@ -30,6 +30,6 @@
 - (id)initWithFrame:(CGRect)frame controller:(EditorViewController *)myController;
 - (void)dealloc;
 
-
+- (void)changeTool:(NSString *)tool;
 
 @end

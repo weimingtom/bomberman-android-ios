@@ -14,7 +14,7 @@
 
 @implementation EditorMapZone
 
-@synthesize editorMapZoneView, editorViewController;
+@synthesize editorMapZoneView, editorViewController, alpha;
 
 
 - (id)initWithFrame:(CGRect)frame controller:(EditorViewController *)myController {
@@ -23,6 +23,7 @@
     if (self) {
         self.editorViewController = myController;
         editorMapZoneView = [[EditorMapZoneView alloc] initWithFrame:frame controller:self];	
+        alpha = 1.0;
     }
     
     return self;
@@ -37,6 +38,18 @@
 
 - (void)clickOnPosition:(Position *)position {
     [editorViewController clickOnPosition:position];
+}
+
+
+- (void)displayBlocks:(BOOL)display {
+    if (display) {
+        alpha = 1.0;
+    }
+    else {
+        self.alpha = ALPHA;
+    }
+    
+    [editorMapZoneView setNeedsDisplay];
 }
 
 @end

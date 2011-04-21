@@ -29,7 +29,7 @@
 
 @implementation EditorViewController
 
-@synthesize mapEditor;
+@synthesize mapEditor, selectedTool;
 
 
 - (id)initWithMapName:(NSString *)mapName {
@@ -38,6 +38,7 @@
 	if (self) {
         CGRect frame;
         RessourceManager *resource = [RessourceManager sharedRessource];
+        selectedTool = @"blocks";
         
 		mapEditor = [[MapEditor alloc] initWithMapName:mapName];
 
@@ -77,8 +78,13 @@
 
 - (void)clickOnPosition:(Position *)position {
     
-    if (editorAction.removeTool) {
+    if (selectedTool == @"delete") {
         [mapEditor deleteBlockAtPosition:position];
+    }
+    else if (selectedTool == @"player") {
+        Position *p = [[Position alloc] initWithX:position.x y:(position.y - 1)];
+        [mapEditor addPlayer:p];
+        [p release];
     }
     else {
         Object *block = nil;
@@ -90,6 +96,11 @@
         if (block != nil)
             [mapEditor addBlock:block position:position];
     }
+}
+
+
+- (void)displayBlocks:(BOOL)display {
+    [editorMapZone displayBlocks:display];
 }
 
 

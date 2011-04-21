@@ -95,6 +95,22 @@
 - (void)addMap:(DBMap *)map;
 
 
+///-------------------------------------
+/// @name Information on Unofficial Maps
+///-------------------------------------
+
+/** Returns all unofficial maps.
+ 
+ @return All unofficial maps.
+ */
+- (NSArray *)unofficialMaps;
+
+/** Returns `YES`if exist unofficial maps, otherwise `No`.
+ 
+ @return `YES` if it exist unofficial maps, otherwise `NO`.
+ */
+- (BOOL)hasUnofficialMaps;
+
 - (void)playSoundMenu;
 - (void)playSoundButton;
 - (void)modifyVolume:(NSInteger)newVolume;

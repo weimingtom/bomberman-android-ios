@@ -35,7 +35,7 @@
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    [editorMapZone.editorViewController.mapEditor.map draw:context];	
+    [editorMapZone.editorViewController.mapEditor.map drawMapAndPlayers:context alpha:editorMapZone.alpha];
 }
 
 
