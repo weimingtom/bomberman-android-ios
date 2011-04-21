@@ -131,7 +131,7 @@
 
 
 - (void)goToLoadMapEditor {
-    Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication]).app;
+    Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
     
     if ([application hasUnofficialMaps]) {
         LoadMapEditorMenuViewController *loadMapEditorMenuViewController = [[LoadMapEditorMenuViewController alloc] initWithNibName:@"LoadMapEditorMenuViewController" bundle:nil];

@@ -39,10 +39,10 @@
 		if (object.position.x+xValue < 0) {
 			return true;
 		}
-		if (object.position.x+xValue + resource.tileSize > resource.screenHeight){
+		if (object.position.x+xValue + resource.tileSize > game.map.width*resource.tileSize){
 			return true;
 		}
-		if (object.position.y+yValue + (resource.tileSize*1.5) > resource.screenWidth){
+		if (object.position.y+yValue + (resource.tileSize) > game.map.height*resource.tileSize){
 				return true;
 		}
 		if (object.position.y+yValue < 0){
@@ -53,10 +53,10 @@
 		int marge = 5; //Margin movement
 		
 		int xmin = floor((object.position.x+xValue+marge) / resource.tileSize);
-		int ymin = floor((object.position.y+yValue+marge+resource.tileSize) / resource.tileSize);
+		int ymin = floor((object.position.y+yValue+marge) / resource.tileSize);
 		
 		int xmax = ceil((object.position.x+xValue + resource.tileSize-marge) / resource.tileSize);
-		int ymax = floor(((object.position.y+yValue + (resource.tileSize*1.5)-marge) / resource.tileSize));
+		int ymax = ceil(((object.position.y+yValue + (resource.tileSize)-marge) / resource.tileSize));
 		
 		
 		//For each cell of the object
