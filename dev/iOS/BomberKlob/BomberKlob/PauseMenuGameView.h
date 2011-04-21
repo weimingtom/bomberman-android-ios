@@ -18,7 +18,6 @@
     RessourceManager *resource;
     
     UIButton *resume;
-    UIButton *save;
     UIButton *quit;
     
     BOOL newMap;
@@ -35,7 +34,7 @@
 - (void)initUserInterface;
 
 - (void)resumeAction;
-- (void)saveAction;
+
 - (void)quitAction;
 
 @end

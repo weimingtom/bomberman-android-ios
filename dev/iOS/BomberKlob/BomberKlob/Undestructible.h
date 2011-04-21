@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Animated.h"
+#import "Object.h"
 
-@interface Undestructible : Animated {
+@interface Undestructible : Object {
     
 }
 

@@ -39,8 +39,6 @@
 }
 
 - (void) initComponents{
-	[UIButton buttonWithType:UIButtonTypeRoundedRect];
-
 	
 	UIImage * bombButtonBackground = [UIImage imageNamed:@"bomb_button.png"];
 	UIButton *  bombButton = [UIButton  buttonWithType:UIButtonTypeRoundedRect];

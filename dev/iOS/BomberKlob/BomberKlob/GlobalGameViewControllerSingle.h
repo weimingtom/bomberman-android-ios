@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class GameActionViewController, GameInformationViewController, GameViewControllerSingle, Engine, RessourceManager;
+@class GameActionViewController, GameInformationViewController, GameViewControllerSingle, Engine, RessourceManager,PauseMenuGame;
 
 
 @interface GlobalGameViewControllerSingle : UIViewController {
@@ -18,14 +18,20 @@
     GameActionViewController * actionViewController;
 	GameInformationViewController * informationViewController;
 	GameViewControllerSingle * gameViewControllerSingle;
+	
+	PauseMenuGame *pauseMenu;
+
 }
 
 @property (nonatomic,retain) GameViewControllerSingle * gameViewControllerSingle;
 @property (nonatomic,retain) GameInformationViewController * informationViewController;
 @property (nonatomic,retain) GameActionViewController * actionViewController;
+@property (nonatomic,retain) PauseMenuGame * pauseMenu;
 @property (nonatomic,retain) Engine * engine;
 
 - (id) initWithMapName:(NSString *)mapName;
+
+- (void) pauseAction;
 - (void) resumeAction;
 
 @end

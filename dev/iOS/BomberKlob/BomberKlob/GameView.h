@@ -17,6 +17,8 @@
 	
 	NSDictionary * bitmapsInanimates;
 	NSMutableString * currentDirection;
+	NSThread * movementThread;
+	NSThread * updateThread;
 	
 	BOOL run;
 	
@@ -45,5 +47,8 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
+
+-(void) stopThread;
+-(void) runThread;
 
 @end

@@ -48,12 +48,6 @@
     [resume setTitle:@"Resume" forState:UIControlStateNormal];
     [resume addTarget:self action:@selector(resumeAction) forControlEvents:UIControlEventTouchDown];
     
-    save = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    save.frame = CGRectMake(0, 0, 60, 37);
-    save.center = CGPointMake(resource.screenHeight / 2, 150);
-    [save setTitle:@"Save" forState:UIControlStateNormal];
-    [save addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchDown];
-    
     quit = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     quit.frame = CGRectMake(0, 0, 56, 37);
     quit.center = CGPointMake(resource.screenHeight / 2, 200);
@@ -70,10 +64,6 @@
     [pauseMenu resumeAction];
 }
 
-
-- (void)saveAction {
-    [pauseMenu saveAction];
-}
 
 
 - (void)quitAction {

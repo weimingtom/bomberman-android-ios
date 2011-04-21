@@ -11,12 +11,11 @@
 #import "Object.h"
 #import "Position.h"
 #import "Player.h"
-#import "Inanimated.h"
 #import "Undestructible.h"
-#import "Animated.h"
 #import "DataBase.h"
 #import "DBUser.h"
 #import "DBMap.h"
+#import "Object.h"
 
 @implementation Map
 
@@ -48,8 +47,8 @@
 - (void)initBasicMap {
     NSMutableArray *groundsTmp;
     NSMutableArray *blocksTmp;
-    Inanimated *groundTmp;
-    Inanimated *blockTmp;
+    Object *groundTmp;
+    Object *blockTmp;
     Position *positionTmp;
     
     width = WIDTH;
@@ -58,6 +57,8 @@
     grounds = [[NSMutableArray alloc] initWithCapacity:height];
     blocks = [[NSMutableArray alloc] initWithCapacity:height];
     players = [[NSMutableArray alloc] init];
+	
+	RessourceManager * resource = [RessourceManager sharedRessource];
     
     for (int i = 0; i < width; i++){
         groundsTmp = [[NSMutableArray alloc] initWithCapacity:width];
@@ -67,11 +68,14 @@
         
         for (int j = 0; j < height; j++) {
             positionTmp = [[Position alloc] initWithX:i y:j];
-            groundTmp = [[Inanimated alloc] initWithImageName:@"grass2" position:positionTmp];
+			NSMutableDictionary * animationsTmp = [[NSMutableDictionary alloc] initWithDictionary:[resource.bitmapsAnimates dictionaryWithValuesForKeys:[[NSArray alloc] initWithObjects:@"grass2", nil]]];
+			
+            groundTmp = [[Undestructible alloc] initWithImageName:@"grass2" position:positionTmp animations:animationsTmp];
             [[grounds objectAtIndex:i] addObject: groundTmp];
             
             if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
-                blockTmp = [[Inanimated alloc] initWithImageName:@"bloc" position:positionTmp];
+				animationsTmp = [[NSMutableDictionary alloc] initWithDictionary:[resource.bitmapsAnimates dictionaryWithValuesForKeys:[[NSArray alloc] initWithObjects:@"bloc", nil]]];
+                blockTmp = [[Undestructible alloc] initWithImageName:@"bloc" position:positionTmp animations:animationsTmp];
                 [[blocks objectAtIndex:i] addObject: blockTmp];
                 
                 [blockTmp release];
@@ -84,6 +88,9 @@
             [positionTmp release];
         }
     }
+	for (int i=0; i < 4; i++) {
+		[players addObject:[[Position alloc] initWithX:2 y:2+i]];
+	}
     
     [groundsTmp release];
     [blocksTmp release];
@@ -314,8 +321,8 @@
 			Object * object = [[blocks objectAtIndex:i] objectAtIndex:j];
             if (![object isEqual:@"empty"]) {
 				if ([[[object class] description] isEqualToString:@"Undestructible"]) {
-					if (![((Animated *) object) hasAnimationFinished]) {
-						[((Animated *) object) update]; 
+					if (![((Undestructible *) object) hasAnimationFinished]) {
+						[((Undestructible *) object) update]; 
 					}
 					else {
 						[[blocks objectAtIndex:i] replaceObjectAtIndex:j withObject:@"empty"];

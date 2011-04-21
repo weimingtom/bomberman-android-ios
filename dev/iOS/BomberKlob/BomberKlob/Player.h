@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "Position.h"
-#import "Animated.h"
+#import "Destructible.h"
 
 
-@interface Player : Animated {
+@interface Player : Destructible {
 	NSMutableArray * bombsPlanted;
 	NSMutableArray * bombsTypes;
 	NSMutableString * color;

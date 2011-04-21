@@ -25,7 +25,7 @@
 		animations = ressource.bitmapsBombs;
 		explode = NO;
 		NSArray * explosionType = [[NSArray alloc] initWithObjects:@"firedown",@"fireup",@"fireleft",@"fireright",@"firevertical",@"firehorizontal",@"firecenter", nil];
-		animationExplosed = [[NSMutableDictionary alloc] initWithDictionary:[ressource.bitmapsAnimates dictionaryWithValuesForKeys:explosionType]];
+
 	}
 	return self;
 }

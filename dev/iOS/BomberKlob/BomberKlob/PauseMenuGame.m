@@ -38,11 +38,6 @@
 }
 
 
-- (void)saveAction {
-    [globalViewController saveAction];
-}
-
-
 - (void)quitAction {
     [globalViewController quitAction];
 }

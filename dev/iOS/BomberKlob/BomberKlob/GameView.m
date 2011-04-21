@@ -63,7 +63,7 @@
 
 -(void) startTimerUpdateMap
 {
-	NSThread * updateThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerUpdateMapThread) object:nil]autorelease]; //Create a new thread
+	updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(startTimerUpdateMapThread) object:nil]; //Create a new thread
 	[updateThread start]; //start the thread
 }
 
@@ -141,7 +141,7 @@
 
 -(void) startTimerMovement
 {
-	NSThread * movementThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerMovementThread) object:nil]autorelease]; //Create a new thread
+	movementThread = [[NSThread alloc] initWithTarget:self selector:@selector(startTimerMovementThread) object:nil]; //Create a new thread
 	[movementThread start]; //start the thread
 }
 
@@ -192,6 +192,14 @@
 }
 
 
+-(void) stopThread{
+	[movementThread cancel];
+	[updateThread cancel];
+}
+-(void) runThread{
+	[movementThread start];
+	[updateThread start];
+}
 
 
 
