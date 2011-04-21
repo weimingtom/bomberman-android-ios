@@ -53,6 +53,8 @@
 		99262504136041A600E17F33 /* bomb_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 99262503136041A600E17F33 /* bomb_button.png */; };
 		9926250713607DF700E17F33 /* EditorMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1890E76D135C9E36002F78B9 /* EditorMenuViewController.xib */; };
 		9926250813607E0900E17F33 /* LoadMapEditorMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1890E779135CB724002F78B9 /* LoadMapEditorMenuViewController.xib */; };
+		9926250B1360808400E17F33 /* PauseMenuGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 9926250A1360808100E17F33 /* PauseMenuGame.m */; };
+		9926250E1360817000E17F33 /* PauseMenuGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9926250D1360816E00E17F33 /* PauseMenuGameView.m */; };
 		9943395A134C876200970231 /* Animated.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433927134C876200970231 /* Animated.m */; };
 		9943395B134C876200970231 /* AnimationSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433929134C876200970231 /* AnimationSequence.m */; };
 		9943395C134C876200970231 /* Bomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943392B134C876200970231 /* Bomb.m */; };
@@ -180,6 +182,10 @@
 		99240525135337D700011965 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		99240526135337D700011965 /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
 		99262503136041A600E17F33 /* bomb_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb_button.png; sourceTree = "<group>"; };
+		992625091360808000E17F33 /* PauseMenuGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseMenuGame.h; sourceTree = "<group>"; };
+		9926250A1360808100E17F33 /* PauseMenuGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseMenuGame.m; sourceTree = "<group>"; };
+		9926250C1360816C00E17F33 /* PauseMenuGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseMenuGameView.h; sourceTree = "<group>"; };
+		9926250D1360816E00E17F33 /* PauseMenuGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseMenuGameView.m; sourceTree = "<group>"; };
 		992AFC6E1356415D00D7726C /* GameActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameActionView.h; sourceTree = "<group>"; };
 		992AFC6F1356415D00D7726C /* GameActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameActionView.m; sourceTree = "<group>"; };
 		992AFC721356417100D7726C /* GameActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameActionViewController.h; sourceTree = "<group>"; };
@@ -496,6 +502,10 @@
 				992AFC761356419E00D7726C /* GameInformationView.m */,
 				992AFC78135641B700D7726C /* GameInformationViewController.h */,
 				992AFC79135641B700D7726C /* GameInformationViewController.m */,
+				992625091360808000E17F33 /* PauseMenuGame.h */,
+				9926250A1360808100E17F33 /* PauseMenuGame.m */,
+				9926250C1360816C00E17F33 /* PauseMenuGameView.h */,
+				9926250D1360816E00E17F33 /* PauseMenuGameView.m */,
 			);
 			name = GameSingle;
 			sourceTree = "<group>";
@@ -744,6 +754,8 @@
 				1890E76E135C9E36002F78B9 /* EditorMenuViewController.m in Sources */,
 				1890E774135CB2EC002F78B9 /* LoadMapEditorMenuViewController.m in Sources */,
 				1890E778135CB5AF002F78B9 /* LoadMapEditorMenuView.m in Sources */,
+				9926250B1360808400E17F33 /* PauseMenuGame.m in Sources */,
+				9926250E1360817000E17F33 /* PauseMenuGameView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
