@@ -21,6 +21,8 @@
 @property (nonatomic, retain) NSString * currentAnimation;
 @property (nonatomic) NSInteger currentFrame;
 @property (nonatomic) NSInteger waitDelay;
+@property (nonatomic) NSInteger delay;
+
 
 - (id) init;
 - (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition animations:(NSDictionary *)anAnimations;

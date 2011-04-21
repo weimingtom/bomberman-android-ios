@@ -12,22 +12,25 @@
 #import "Engine.h"
 #import "Player.h"
 #import "Game.h"
+#import "GameInformationViewController.h"
+#import "GlobalGameViewControllerSingle.h"
 
 
 @implementation GameInformationView
+@synthesize controller;
 
-- (id) initWithFrame:(CGRect)frame Engine:(Engine *)engineValue{
+- (id) initWithFrame:(CGRect)frame Controller:(GameInformationViewController *) controllerValue{
 	self = [super initWithFrame:frame];
 	
 	if (self){
-		resource = [RessourceManager sharedRessource];
-		engine = engineValue;
+		self.controller = controllerValue;
 	}
 	
 	return self;
 }
 
 - (void)drawRect:(CGRect)rect{
+	RessourceManager * resource = [RessourceManager sharedRessource];
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextSetFillColorWithColor(context, [UIColor blueColor].CGColor);
 	CGContextFillRect(context, rect);
@@ -40,7 +43,7 @@
 		UIImage * image = [((AnimationSequence *)[[resource.bitmapsPlayer valueForKey:key] valueForKey:@"idle"]).sequences objectAtIndex:0];
 		[image drawInRect:CGRectMake(ecart, 0, resource.tileSize , resource.tileSize)];
 		
-		Player * p = [engine.game.players objectAtIndex:i];
+		Player * p = [controller.globalController.engine.game.players objectAtIndex:i];
 		NSString *score = [NSString stringWithFormat:@"%d", p.lifeNumber];
 		
 		UIFont * font = [UIFont boldSystemFontOfSize:9.0];
@@ -48,8 +51,18 @@
 		ecart+= 50;
 		i++;
 	}
-	
+}
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+	
+}
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+	
+}
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+	
+}
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	
 }
 

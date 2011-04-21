@@ -10,20 +10,19 @@
 #import "GameActionView.h"
 #import "RessourceManager.h"
 #import "Engine.h"
+#import "GlobalGameViewControllerSingle.h"
 
 
 @implementation GameActionViewController
-@synthesize actionView, dimension;
+@synthesize actionView, globalController;
 
-- (id) initWithFrame:(CGRect)dimensionValue Engine:(Engine*)engineValue{
+- (id) initWithFrame:(CGRect)dimensionValue Controller:(GlobalGameViewControllerSingle *)controllerValue{
 	self = [super init];
 	
 	if (self){
+		self.globalController = controllerValue;
 		RessourceManager * resource = [RessourceManager sharedRessource];
-		dimension = dimensionValue;
-		self.actionView = [[GameActionView alloc] initWithFrame:dimension Engine:engineValue];	
-		[self.view addSubview:actionView];
-		[actionView release];
+		self.actionView = [[GameActionView alloc] initWithFrame:dimensionValue Controller:self];	
 	}
 	return self;
 }

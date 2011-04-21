@@ -14,14 +14,17 @@
 #import "Position.h"
 #import "RessourceManager.h"
 #import "Map.h"
+#import "GameActionViewController.h"
+#import "GlobalGameViewControllerSingle.h"
 
 @implementation GameActionView
+@synthesize controller;
 
-- (id) initWithFrame:(CGRect)frame Engine:(Engine *) engineValue{
+- (id) initWithFrame:(CGRect)frame Controller:(GameActionViewController *) controllerValue{
 	self = [super initWithFrame:frame];
 	
 	if (self){
-		engine = engineValue;
+		self.controller = controllerValue;
 		[self initComponents];
 	}
 	
@@ -37,17 +40,20 @@
 
 - (void) initComponents{
 	[UIButton buttonWithType:UIButtonTypeRoundedRect];
-	UIButton *  bombButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	bombButton.frame = CGRectMake(0,self.bounds.size.height-( self.bounds.size.height/10), self.bounds.size.width, self.bounds.size.height/10);
+
 	
-	[bombButton setTitle:@"BOOM" forState:UIControlStateNormal];
+	UIImage * bombButtonBackground = [UIImage imageNamed:@"bomb_button.png"];
+	UIButton *  bombButton = [UIButton  buttonWithType:UIButtonTypeRoundedRect];
+	bombButton.frame = CGRectMake(0,self.bounds.size.height-(self.frame.size.width), self.frame.size.width, self.frame.size.width);
+	[bombButton setBackgroundImage:bombButtonBackground forState:UIControlStateNormal];
 	[bombButton addTarget:self action:@selector(bombButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-	//[bombButton setBackgroundImage: forState:UIControlStateNormal
+
 	[self addSubview:bombButton];
 }
 
 - (void) bombButtonClicked{
 	RessourceManager * resource = [RessourceManager sharedRessource];
+	Engine * engine = controller.globalController.engine;
 	Player * p = [engine.game.players objectAtIndex:0];
 	NSInteger bx = (p.position.x)/resource.tileSize;
 	NSInteger by = (p.position.y+resource.tileSize)/resource.tileSize;
@@ -58,6 +64,19 @@
 		[engine.game.map addBlock:bomb position:[[Position alloc] initWithX:bx y:by]];
 	}
 	
+	
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+	
+}
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+	
+}
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+	
+}
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	
 }
 

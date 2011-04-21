@@ -8,15 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@class GameInformationView, Engine;
+@class GameInformationView, Engine, GlobalGameViewControllerSingle;
 
-@interface GameInformationViewController : UIViewController {
+@interface GameInformationViewController : NSObject {
     GameInformationView * informationView;
-	CGRect dimension;
+	GlobalGameViewControllerSingle * globalController;
 }
 
 @property (nonatomic,retain) GameInformationView * informationView;
-@property (nonatomic) CGRect dimension;
+@property (nonatomic,retain) GlobalGameViewControllerSingle * globalController;
 
 
 - (id) initWithFrame:(CGRect)dimensionValue Engine:(Engine *) engineValue;
