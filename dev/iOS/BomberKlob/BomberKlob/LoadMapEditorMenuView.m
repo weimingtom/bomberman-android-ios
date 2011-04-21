@@ -142,7 +142,7 @@
     
     loadMapEditorMenuViewController.mapName.text = [NSString stringWithFormat:@"%@", ((DBMap *) [loadMapEditorMenuViewController.mapsNotOfficial objectAtIndex:selectedMap]).name];
     NSLog(@"%@", loadMapEditorMenuViewController.mapsNotOfficial);
-//    loadMapEditorMenuViewController.owner.text = [NSString stringWithFormat:@"%@", ((DBMap *) [loadMapEditorMenuViewController.mapsNotOfficial objectAtIndex:selectedMap]).owner.pseudo];
+    loadMapEditorMenuViewController.owner.text = [NSString stringWithFormat:@"%@", ((DBMap *) [loadMapEditorMenuViewController.mapsNotOfficial objectAtIndex:selectedMap]).owner.pseudo];
 }
 
 

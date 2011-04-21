@@ -70,6 +70,13 @@
 }
 
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self goToEditor];
+
+    return YES;
+}
+
+
 - (BOOL)vericationMapName {
     return YES;
 }

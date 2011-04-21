@@ -74,7 +74,7 @@
                 blockTmp = [[Inanimated alloc] initWithImageName:@"bloc" position:positionTmp];
                 [[blocks objectAtIndex:i] addObject: blockTmp];
                 
-                [blocksTmp release];
+                [blockTmp release];
             }
             else {
                 [[blocks objectAtIndex:i] addObject:@"empty"];
@@ -83,10 +83,10 @@
             [groundTmp release];
             [positionTmp release];
         }
-        
-        [groundsTmp release];
-        [blocksTmp release];
     }
+    
+    [groundsTmp release];
+    [blocksTmp release];
 }
 
 

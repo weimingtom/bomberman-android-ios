@@ -49,7 +49,7 @@
 
 - (BOOL) hasAnimationFinished{
 	
-	
+	return NO;
 }
 
 - (void) destroy{

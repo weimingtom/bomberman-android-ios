@@ -15,17 +15,16 @@
 
 @implementation CreateAccountOfflineMenuViewController
 
-@synthesize pseudo;
-@synthesize errorView;
-@synthesize done;
+@synthesize pseudo, errorView, done;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if (self) {
-        // Custom initialization
+
     }
+    
     return self;
 }
 
@@ -41,7 +40,6 @@
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -93,7 +91,6 @@
     }
     // else if he provide his pseudo
     else {
-        NSMutableArray *pseudos;
         Application *application = ((BomberKlobAppDelegate *)[UIApplication sharedApplication].delegate).app;
         
         // if the player's name is already used
@@ -105,6 +102,7 @@
         }
         // else the player has provide a good pseudo
         else {
+            NSMutableArray *pseudos;
             DBUser *newUser = [[DBUser alloc] initWithPseudo:pseudo.text];
             [newUser saveInDataBase];
             
@@ -115,6 +113,7 @@
             application.user = newUser;
             
             [newUser release];
+            [pseudos release];
             
             return YES;
          }
