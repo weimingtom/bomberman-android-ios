@@ -47,6 +47,7 @@
 		position.y = positionValue.y;
 		bombsPlanted = [[NSMutableArray alloc] init];
 		waitDelay = 4;
+		currentAnimation =@"idle";
 	}
 	return self;
 }

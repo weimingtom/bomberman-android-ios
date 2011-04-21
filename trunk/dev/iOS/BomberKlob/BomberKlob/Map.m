@@ -70,12 +70,12 @@
             positionTmp = [[Position alloc] initWithX:i*resource.tileSize y:j*resource.tileSize];
 			NSMutableDictionary * animationsTmp = [[NSMutableDictionary alloc] initWithDictionary:[resource.bitmapsInanimates dictionaryWithValuesForKeys:[[NSArray alloc] initWithObjects:@"grass2", nil]]];
 			
-            groundTmp = [[Object alloc] initWithImageName:@"grass2" position:positionTmp animations:animationsTmp];
+            groundTmp = [[Undestructible alloc] initWithImageName:@"grass2" position:positionTmp animations:animationsTmp];
             [[grounds objectAtIndex:i] addObject: groundTmp];
             
             if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
 				animationsTmp = [[NSMutableDictionary alloc] initWithDictionary:[resource.bitmapsInanimates dictionaryWithValuesForKeys:[[NSArray alloc] initWithObjects:@"bloc", nil]]];
-                blockTmp = [[Object alloc] initWithImageName:@"bloc" position:positionTmp animations:animationsTmp];
+                blockTmp = [[Undestructible alloc] initWithImageName:@"bloc" position:positionTmp animations:animationsTmp];
                 [[blocks objectAtIndex:i] addObject: blockTmp];
                 
                 [blockTmp release];
