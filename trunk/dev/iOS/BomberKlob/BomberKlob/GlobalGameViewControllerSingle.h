@@ -26,5 +26,6 @@
 @property (nonatomic,retain) Engine * engine;
 
 - (id) initWithMapName:(NSString *)mapName;
+- (void) resumeAction;
 
 @end

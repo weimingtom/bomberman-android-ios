@@ -53,5 +53,8 @@
 	return self;
 }
 
+- (void) resumeAction{
+	
+}
 
 @end
