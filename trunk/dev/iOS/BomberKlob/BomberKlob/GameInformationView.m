@@ -42,7 +42,7 @@
 	for (NSString * key in resource.bitmapsPlayer) {
 		
 		UIImage * image = [((AnimationSequence *)[[resource.bitmapsPlayer valueForKey:key] valueForKey:@"idle"]).sequences objectAtIndex:0];
-		//[image drawInRect:CGRectMake(ecart, 0, resource.tileSize , resource.tileSize)];
+		[image drawInRect:CGRectMake(ecart, 0, resource.tileSize , resource.tileSize)];
 		
 		Player * p = [controller.globalController.engine.game.players objectAtIndex:i];
 		NSString *score = [NSString stringWithFormat:@"%d", p.lifeNumber];

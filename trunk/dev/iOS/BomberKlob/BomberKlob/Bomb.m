@@ -24,6 +24,8 @@
 		delay = 0;
 		animations = ressource.bitmapsBombs;
 		explode = NO;
+		position = aPosition;
+		imageName = anImageName;
 		NSArray * explosionType = [[NSArray alloc] initWithObjects:@"firedown",@"fireup",@"fireleft",@"fireright",@"firevertical",@"firehorizontal",@"firecenter", nil];
 
 	}
