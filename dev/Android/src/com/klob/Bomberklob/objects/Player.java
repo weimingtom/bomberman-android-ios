@@ -13,7 +13,7 @@ import com.klob.Bomberklob.objects.exceptions.TimeBombException;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
-public abstract class Player extends Animated {
+public abstract class Player extends Destructible {
 	
 	/**
 	 * 
@@ -22,43 +22,37 @@ public abstract class Player extends Animated {
 	
 	protected Vector<Bomb> bombsPlanted = new Vector<Bomb>();
 	//FIXME private ???[] bombsTypes;
-	protected int lifeNumber;
 	protected int powerExplosion;
 	protected int timeExplosion;
 	protected int speed;
 	protected int shield;
 	protected int bombNumber;
-	
+	protected boolean immortal;	
 	
 	/* Constructeurs ------------------------------------------------------- */
 	
-	public Player(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation, int lifeNumber, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber, int damages) {
-		super(imageName, false, 1, false, damages, animations, currentAnimation);
-		this.animations = animations;
-		this.lifeNumber = lifeNumber;
+	public Player(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber, boolean immortal) {
+		super(imageName, animations, currentAnimation, hit, level, fireWall, damages, life);
 		this.powerExplosion = powerExplosion;
 		this.timeExplosion = timeExplosion;
 		this.speed = speed;
 		this.shield = shield;
 		this.bombNumber = bombNumber;
+		this.immortal = immortal;
 	}
 	
 	public Player(Player player) {
 		super(player);
 		this.animations = player.animations;
-		this.lifeNumber = player.lifeNumber;
 		this.powerExplosion = player.powerExplosion;
 		this.timeExplosion = player.timeExplosion;
 		this.speed = player.speed;
 		this.shield = player.shield;
 		this.bombNumber = player.bombNumber;
+		this.immortal = player.immortal;
 	}
 	
 	/* Setters ------------------------------------------------------------- */
-	
-	public void setLife(int life) {
-		this.lifeNumber = life;
-	}
 	
 	public void setSpeed(int speed) throws PlayersSpeedException {
 		if ( speed > 0 ) {
@@ -96,6 +90,10 @@ public abstract class Player extends Animated {
 		}
 	}
 	
+	public void setImmortal(boolean immortal) {
+		this.immortal = immortal;
+	}
+	
 	public void setPointX(int x) {
 		this.position.x = x;
 	}
@@ -108,10 +106,6 @@ public abstract class Player extends Animated {
 	
 	public Vector<Bomb> getBombsPlanted() {
 		return this.bombsPlanted;
-	}
-
-	public int getLifeNumber() {
-		return this.lifeNumber;
 	}
 
 	public int getPowerExplosion() {
@@ -148,7 +142,7 @@ public abstract class Player extends Animated {
 		}
 		
 		if ( bombNumber > bombsPlanted.size() ) {
-			Bomb b = new Bomb("normal", true, 1, false, 0, powerExplosion, timeExplosion, ResourcesManager.getBombsAnimations().get("normal"), "destroy");
+			Bomb b = new Bomb("normal", ResourcesManager.getBombsAnimations().get("normal"), "destroy", true, 1, false, 1, 1, powerExplosion, timeExplosion);
 			b.setPosition(p);
 			bombsPlanted.add(b);
 			return b;
@@ -162,9 +156,11 @@ public abstract class Player extends Animated {
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), new Rect((this.getPoint().x*tileSize), (this.getPoint().y*(tileSize+(tileSize/2))), ((this.getPoint().x*tileSize)+tileSize), ( (this.getPoint().y*(tileSize+(tileSize/2)))+(tileSize+(tileSize/2)) )), new Rect(this.position.x, this.position.y-(size/2), this.position.x+size, this.position.y+size), null);
 	}
 
-	// FIXME Bonus immortel ?
 	@Override
 	public boolean isDestructible() {
+		if ( this.immortal ) {
+			return false;
+		}
 		return true;
 	}
 }

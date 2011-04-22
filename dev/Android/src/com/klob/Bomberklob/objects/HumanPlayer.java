@@ -9,8 +9,8 @@ public class HumanPlayer extends Player {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public HumanPlayer(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation, int lifeNumber, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber, int damages) {
-		super(imageName, animations, currentAnimation, lifeNumber, powerExplosion, timeExplosion, speed, shield, bombNumber, damages);
+	public HumanPlayer(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber, boolean immortal) {
+		super(imageName, animations, currentAnimation, hit, level, fireWall, damages, life, powerExplosion, timeExplosion, speed, shield, bombNumber, immortal);
 	}
 	
 	public HumanPlayer(Player Player) {

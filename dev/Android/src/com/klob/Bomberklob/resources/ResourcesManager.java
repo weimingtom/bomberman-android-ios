@@ -17,7 +17,6 @@ import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.objects.AnimationSequence;
 import com.klob.Bomberklob.objects.Destructible;
 import com.klob.Bomberklob.objects.FrameInfo;
-import com.klob.Bomberklob.objects.Inanimate;
 import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.Undestructible;
 

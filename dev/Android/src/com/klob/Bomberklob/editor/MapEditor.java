@@ -96,10 +96,11 @@ public class MapEditor {
 			}
 		}
 		
-		this.players[0] = new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), "idle",1, 1, 1, 1, 1, 1,0);
-		this.players[1] = new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), "idle",1, 1, 1, 1, 1, 1,0);
-		this.players[2] = new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), "idle",1, 1, 1, 1, 1, 1,0);
-		this.players[3] = new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), "idle",1, 1, 1, 1, 1, 1,0);
+		this.players[0] = new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
+		this.players[1] = new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
+		this.players[2] = new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
+		this.players[3] = new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
+		
 
 		for (int i = 0 ; i < 4 ; i++ ) {
 			if ( this.map.getPlayers()[i] != null ) {
