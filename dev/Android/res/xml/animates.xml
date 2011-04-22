@@ -24,7 +24,7 @@
 			<png x="5" y="1" delayNextFrame="1" />
 		</animation>
 	</destructible>
-	<destructible name="pebble" hit="1" level="1" fireWall="1" life="1" damages="0">
+	<destructible name="stone1" hit="1" level="1" fireWall="1" life="1" damages="0">
 		<animation name="idle" canLoop="true">
 			<png x="0" y="2" delayNextFrame="0" />
 		</animation>
@@ -36,7 +36,7 @@
 			<png x="5" y="2" delayNextFrame="1" />
 		</animation>
 	</destructible>
-	<destructible name="brick" hit="1" level="1" fireWall="1" life="1" damages="0">
+	<destructible name="stone2" hit="1" level="1" fireWall="1" life="1" damages="0">
 		<animation name="idle" canLoop="true">
 			<png x="0" y="3" delayNextFrame="0" />
 		</animation>
@@ -72,6 +72,8 @@
 			<png x="5" y="5" delayNextFrame="1" />
 		</animation>
 	</destructible>
+	
+	<!-- column2, stone3, stone4 -->
 	
 	<!-- Explosions -->
 	
