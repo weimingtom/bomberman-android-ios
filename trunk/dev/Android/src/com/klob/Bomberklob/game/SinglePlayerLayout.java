@@ -79,7 +79,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.bombsGallery = new ObjectsGallery(getApplicationContext());
 		this.bombsGallery.setItemsDisplayed(1);
 		this.bombsGallery.setLevel(1);
-		this.bombsGallery.addObjects(new Bomb("normal", false, 1, true, 1, 1, 0, ResourcesManager.getBombsAnimations().get("normal"), "idle"));
+		this.bombsGallery.addObjects(new Bomb("normal", ResourcesManager.getBombsAnimations().get("normal"), "idle", true, 1, false, 1, 1, 3, 50));
 		this.bombsGallery.setSelectedItem("normal");
 		this.bombsGallery.setRectangles(new Point(0,0));
 		this.bombsGallery.update();

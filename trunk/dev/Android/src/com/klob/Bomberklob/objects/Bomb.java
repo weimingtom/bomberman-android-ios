@@ -7,7 +7,7 @@ import android.graphics.Rect;
 
 import com.klob.Bomberklob.resources.ResourcesManager;
 
-public class Bomb extends Animated {
+public class Bomb extends Destructible {
 	
 	/**
 	 * 
@@ -18,10 +18,10 @@ public class Bomb extends Animated {
 	protected int time;
 	//FIXME protected ??? type
 
-	public Bomb(String imageName, boolean hit, int level, boolean fireWall, int damages, int power, int time2, Hashtable<String, AnimationSequence> animations, String currentAnimation) {
-		super(imageName, hit, level, fireWall, damages, animations, currentAnimation);
+	public Bomb(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, int power, int time) {
+		super(imageName, animations, currentAnimation, hit, level, fireWall, damages, life);
 		this.power = power;
-		this.time = time2;
+		this.time = time;
 	}
 	
 	public Bomb(Bomb bombs) {

@@ -3,7 +3,7 @@ package com.klob.Bomberklob.objects;
 import java.util.Hashtable;
 
 
-public class Undestructible extends AnimatedObjects {
+public class Undestructible extends Objects {
 
 	/**
 	 * 
@@ -12,8 +12,8 @@ public class Undestructible extends AnimatedObjects {
 	
 	/* Constructeurs ------------------------------------------------------- */
 
-	public Undestructible(String imageName, boolean hit, int level, boolean fireWall, int damages, Hashtable<String, AnimationSequence> animations, String currentAnimation) {
-		super(imageName, hit, level, fireWall, damages, animations, currentAnimation);
+	public Undestructible(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation,boolean hit, int level, boolean fireWall, int damages) {
+		super(imageName, animations, currentAnimation, hit, level, fireWall, damages);
 	}
 	
 	public Undestructible(Undestructible undestructible) {
@@ -31,5 +31,4 @@ public class Undestructible extends AnimatedObjects {
 	public Undestructible copy() {
 		return new Undestructible(this);
 	}
-
 }

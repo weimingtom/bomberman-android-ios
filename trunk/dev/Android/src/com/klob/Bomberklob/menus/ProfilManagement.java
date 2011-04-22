@@ -62,10 +62,10 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
         });
         
 		this.objectsGallery = new ObjectsGallery(getApplicationContext(), 4, null, 45, 22, 1, false);
-		this.objectsGallery.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), "idle",1, 1, 1, 1, 1, 1, 0));
-		this.objectsGallery.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), "idle",1, 1, 1, 1, 1, 1, 0));
-		this.objectsGallery.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), "idle",1, 1, 1, 1, 1, 1, 0));
-		this.objectsGallery.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), "idle",1, 1, 1, 1, 1, 1, 0));
+		this.objectsGallery.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
+		this.objectsGallery.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
+		this.objectsGallery.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
+		this.objectsGallery.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
 		this.objectsGallery.update();
 		
         FrameLayout f = (FrameLayout) findViewById(R.id.ProfilManagementFrameLayoutObjectsGallery);
