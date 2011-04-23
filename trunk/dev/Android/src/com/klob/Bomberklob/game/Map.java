@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.io.StreamCorruptedException;
 
 import com.klob.Bomberklob.objects.Objects;
+import com.klob.Bomberklob.objects.ObjectsAnimations;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
@@ -200,7 +201,7 @@ public class Map implements Serializable {
 					this.grounds[i][j].update();
 				}
 				if ( this.blocks[i][j] != null ) {
-					if ( this.blocks[i][j].hasAnimationFinished() ) {
+					if ( this.blocks[i][j].hasAnimationFinished() && this.blocks[i][j].getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel())) {
 						this.blocks[i][j] = null;
 					}
 					else {

@@ -117,7 +117,7 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
-					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null ) {
+					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isHit()) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
 							if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
 								this.y--;
@@ -205,7 +205,7 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y+this.size-1);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
-					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null ) {
+					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isHit()) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
 							if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
 								this.y++;
@@ -293,7 +293,7 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x+this.size-1, this.y);
 
 				if ( this.nextTile.x != this.currentTile.x ) {
-					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null ) {
+					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isHit()) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
 							if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
 								this.x++;
@@ -381,7 +381,7 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
 
 				if ( this.nextTile.x != this.currentTile.x ) {
-					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null ) {
+					if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isHit()) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
 							if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
 								this.x--;
@@ -491,8 +491,7 @@ public class Engine {
 		Map map = this.single.getMap();
 
 		for (int i = 0 ; i < players.length ; i++ ) {
-			if ( players[i].getPosition() != null ) {
-				players[i].update();
+			if ( players[i] != null ) {
 				bombs = players[i].getBombsPlanted();
 				for(int j = 0; j < bombs.size() ; j++ ) {
 					if ( bombs.get(j).hasAnimationFinished() ) {
@@ -620,6 +619,14 @@ public class Engine {
 						}
 						bombs.remove(j);
 					}
+				}
+				
+				if ( players[i].hasAnimationFinished() && players[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
+					players[i].setPosition(null);
+				}
+				else if ( players[i].getPosition() != null ) {				
+					/*TODO  Vérifier les dommages et si il est sur un tapis roulant */
+					players[i].update();
 				}
 			}
 		}

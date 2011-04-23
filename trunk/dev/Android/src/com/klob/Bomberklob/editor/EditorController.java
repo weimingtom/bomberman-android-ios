@@ -43,9 +43,7 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 
 	/* Méthodes publiques -------------------------------------------------- */
 	
-	public void addObjects(Objects object, int x, int y) {
-		Point point = new Point(x/objectsSize, y/objectsSize);
-
+	public void addObjects(Objects object, Point point) {
 		if ( object != null && point.x > 0 && point.x < this.mapEditor.getMap().getBlocks().length-1 && point.y > 0 && point.y < this.mapEditor.getMap().getBlocks()[0].length-1) {
 			this.mapEditor.addObject(object, point);			
 		}
@@ -83,6 +81,7 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 		}
 		Log.i("EditorController", "Thread done");
 	}
+
 	
 	public void update() {
 		this.editorView.update();

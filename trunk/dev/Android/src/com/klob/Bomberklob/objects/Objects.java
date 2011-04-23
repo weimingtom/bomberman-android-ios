@@ -152,7 +152,7 @@ public abstract class Objects implements Serializable {
 	
 	public boolean hasAnimationFinished() {
 		AnimationSequence as = animations.get(currentAnimation);
-		if(currentFrame == as.sequence.size() -1 && currentAnimation.equals("destroy") ) {
+		if(currentFrame == as.sequence.size()-1 ) {
 			return true;
 		}
 		return false;
