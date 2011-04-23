@@ -11,7 +11,7 @@
 
 @implementation AnimationSequence
 
-@synthesize sequences, canLoop, name;
+@synthesize sequences, canLoop, name, delayNextFrame;
 
 - (id) init{
 	self = [super init];
@@ -21,11 +21,10 @@
 	return self;
 }
 
-- (id) initWithNameAndLoop:(NSString *) nameValue:(BOOL)canLoopValue{
+- (id) initWithLoop:(BOOL)canLoopValue{
 	self = [super init];
 	if(self){
 		sequences = [[NSMutableArray alloc] init];
-		name = nameValue;
 		canLoop = canLoopValue;
 	}
 	return self;

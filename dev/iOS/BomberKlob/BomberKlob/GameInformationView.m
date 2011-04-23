@@ -41,10 +41,12 @@
 	int ecart = resource.screenHeight / 4;
 	for (NSString * key in resource.bitmapsPlayer) {
 		
-		UIImage * image = [((AnimationSequence *)[[resource.bitmapsPlayer valueForKey:key] valueForKey:@"idle"]).sequences objectAtIndex:0];
+		Object * o = [resource.bitmapsPlayer valueForKey:key];
+		UIImage * image = ((Object *)[resource.bitmapsPlayer valueForKey:key]).idle;
 		[image drawInRect:CGRectMake(ecart, 0, resource.tileSize , resource.tileSize)];
 		
 		Player * p = [controller.globalController.engine.game.players objectAtIndex:i];
+		Game * game = controller.globalController.engine.game;
 		NSString *score = [NSString stringWithFormat:@"%d", p.lifeNumber];
 		
 		UIFont * font = [UIFont boldSystemFontOfSize:9.0];

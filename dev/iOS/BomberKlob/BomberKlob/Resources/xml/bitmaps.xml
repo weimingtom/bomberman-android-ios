@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<bitmaps size="60">
-	<png name="inanimate"/> 
+<bitmaps size="30">
+	<png name="objects"/> 
     <png name="players"/> 
 	<png name="bombs"/> 
-	<png name="animate"/> 
-	<png name="explosions"/> 
 </bitmaps>

@@ -50,10 +50,9 @@ static RessourceManager * ressource = nil;
     
 	if (self != nil) {
 		[self loadProperty];
-		[self loadBitmapInanimates];
-		[self loadBitmapPlayer];	
-		[self loadBitmapBombs];
-		[self loadBitmapAnimates];
+		[self loadPlayer];	
+		[self loadBombs];
+		[self loadObjects];
     }
 	
 	return self;
@@ -67,39 +66,8 @@ static RessourceManager * ressource = nil;
 	screenWidth = [[UIScreen mainScreen] bounds].size.width ;
 }
 
-- (void) loadBitmapInanimates{
-	
-	bitmapsInanimates = [[NSMutableDictionary alloc] init];
 
-	
-	NSError * erreur = nil;
-//	NSString * contenu = [NSString stringWithContentsOfFile:@"/Users/choucomog/Desktop/bomberman-android-ios/dev/iOS/BomberKlob/BomberKlob/Resources/xml/inanimates.xml"
-//												   encoding:NSUTF8StringEncoding
-//													  error:&erreur]; // On donne l'adresse de "erreur"
-    // TODO: A modifier...
-    NSString *xmlFilePath =[[NSBundle mainBundle] pathForResource:@"inanimates" ofType:@"xml"];
-    NSString * contenu = [NSString stringWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:&erreur]; // On donne l'adresse de "erreur"
-	
-	NSXMLParser * parseur = [[NSXMLParser alloc] initWithData:[contenu dataUsingEncoding:NSUTF8StringEncoding]];
-	XmlParser * parserDelegate = [[XmlParser alloc] initXMLParser:@"inanimates"];	
-	[parseur setDelegate:parserDelegate];
-	[parseur parse];
-	
-	NSError *parseError = [parseur parserError];
-	if (parseError) {
-		NSLog(@"XmlParser - Error parsing data: %@", [parseError localizedDescription]);
-	} 
-	[erreur release];
-	[parseError release];
-	
-	UIImage* imageRef = [UIImage imageNamed:@"inanimate.png"];
-	CGImageRef image = imageRef.CGImage;
-	CGImageRef imageTemp;
-	
-	bitmapsInanimates = parserDelegate.png;
-}
-
-- (void) loadBitmapPlayer{
+- (void) loadPlayer{
 	
 	bitmapsPlayer = [[NSMutableDictionary alloc] init];
 	
@@ -123,10 +91,11 @@ static RessourceManager * ressource = nil;
 	[erreur release];
 	[parseError release];
 	
-	bitmapsPlayer = parserDelegate.animations;
+	
+	bitmapsPlayer = parserDelegate.objectsAnimations;
 }
 
-- (void) loadBitmapBombs{
+- (void) loadBombs{
 	
 	bitmapsBombs = [[NSMutableDictionary alloc] init];
 	
@@ -147,20 +116,20 @@ static RessourceManager * ressource = nil;
 	[erreur release];
 	[parseError release];
 	
-	bitmapsBombs = parserDelegate.animationsBombs;
+	bitmapsBombs = parserDelegate.objectsBombs;
 }
 
-- (void) loadBitmapAnimates{
+- (void) loadObjects{
 	
 	bitmapsAnimates = [[NSMutableDictionary alloc] init];
 	
 	
 	NSError * erreur = nil;
-    NSString *xmlFilePath =[[NSBundle mainBundle] pathForResource:@"animates" ofType:@"xml"];
+    NSString *xmlFilePath =[[NSBundle mainBundle] pathForResource:@"objects" ofType:@"xml"];
     NSString * contenu = [NSString stringWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:&erreur]; // On donne l'adresse de "erreur"
 	
 	NSXMLParser * parseur = [[NSXMLParser alloc] initWithData:[contenu dataUsingEncoding:NSUTF8StringEncoding]];
-	XmlParser * parserDelegate = [[XmlParser alloc] initXMLParser:@"animates"];	
+	XmlParser * parserDelegate = [[XmlParser alloc] initXMLParser:@"objects"];	
 	[parseur setDelegate:parserDelegate];
 	[parseur parse];
 	
@@ -171,7 +140,7 @@ static RessourceManager * ressource = nil;
 	[erreur release];
 	[parseError release];
 	
-	bitmapsAnimates = parserDelegate.animationsAnimates;
+	bitmapsAnimates = parserDelegate.objects;
 	
 }
 

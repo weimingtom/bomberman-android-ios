@@ -13,21 +13,31 @@
 
 
 @implementation Bomb
-@synthesize power;
+@synthesize power, explode, type;
+
+- (id) init{
+	self = [super init];
+	if (self) {
+		currentFrame = 0;
+		power = 3;
+		waitDelay = 5;
+		delay = 0;
+		explode = NO;
+		type = @"normal";
+	}
+	return self;
+}
 
 - (id) initWithImageName:(NSString *)anImageName position:(Position *)aPosition{
 	self = [super init];
 	if (self) {
 		currentFrame = 0;
 		power = 3;
-		waitDelay = 1;
+		waitDelay = 5;
 		delay = 0;
-		animations = ressource.bitmapsBombs;
 		explode = NO;
 		position = aPosition;
 		imageName = anImageName;
-		NSArray * explosionType = [[NSArray alloc] initWithObjects:@"firedown",@"fireup",@"fireleft",@"fireright",@"firevertical",@"firehorizontal",@"firecenter", nil];
-
 	}
 	return self;
 }
@@ -42,7 +52,7 @@
 	
 	if (delay == waitDelay) {
 		delay = 0;
-		if (currentFrame >= 4) {
+		if (currentFrame >= 3) {
 			currentFrame = 0;
 			explode = YES;
 		}
@@ -63,6 +73,32 @@
 
 - (void) destroy{
 	explode = YES;
+}
+
+- (Bomb *)copy{
+	Bomb * bombCopy = [[Bomb alloc] init];
+	bombCopy.ressource = ressource;
+    bombCopy.imageName = [[NSString alloc] initWithString:imageName];
+	bombCopy.hit = hit;
+	bombCopy.level = level;
+	bombCopy.fireWall = fireWall;
+	bombCopy.damages = damages;
+	bombCopy.position = [[Position alloc] initWithPosition:position];
+	
+	bombCopy.animations = [[NSMutableDictionary alloc] initWithDictionary:animations];
+	bombCopy.destroyAnimations = [[NSMutableDictionary alloc] initWithDictionary:destroyAnimations];
+	bombCopy.idle = idle;
+	
+	bombCopy.currentAnimation = [[NSString alloc] initWithString:currentAnimation];
+	bombCopy.currentFrame = currentFrame;
+	bombCopy.waitDelay = waitDelay;
+	bombCopy.delay = delay;
+	
+	bombCopy.power = power;
+	bombCopy.type = [[NSMutableString alloc] initWithString:type];
+	bombCopy.explode = explode;
+	
+	return bombCopy;
 }
 
 @end

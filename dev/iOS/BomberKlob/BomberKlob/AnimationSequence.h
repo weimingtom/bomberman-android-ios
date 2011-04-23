@@ -12,16 +12,18 @@
 @interface AnimationSequence : NSObject {
     NSMutableArray * sequences;
 	BOOL canLoop;
+	NSInteger delayNextFrame;
 	NSString * name;
 }
 
 @property (nonatomic,retain) NSMutableArray* sequences;
 @property (nonatomic) BOOL canLoop;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic) NSInteger delayNextFrame;
 
 - (id) init;
 
-- (id) initWithNameAndLoop:(NSString *) nameValue:(BOOL)canLoopValue;
+- (id) initWithLoop:(BOOL)canLoopValue;
 
 - (void) addImageSequence:(CGImageRef *) imageValue;
 

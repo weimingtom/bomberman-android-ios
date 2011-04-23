@@ -16,24 +16,38 @@
 	RessourceManager *ressource;
     NSString *imageName;
 	BOOL hit;
-	NSUInteger level;
+	NSInteger level;
 	BOOL fireWall;
+	NSInteger damages;
 	Position *position;
 	
-	NSDictionary * animations;
+	NSMutableDictionary * animations;
+	NSMutableDictionary * destroyAnimations;
+	UIImage * idle;
+
 	NSString * currentAnimation;
 	NSInteger currentFrame;
 	NSInteger waitDelay;
 	NSInteger delay;
+	BOOL destroy;
+	BOOL animationFinished;
 }
 
 @property (nonatomic, retain) NSString * imageName;
 @property (nonatomic) BOOL hit;
-@property (nonatomic) NSUInteger level;
+@property (nonatomic) NSInteger level;
 @property (nonatomic) BOOL fireWall;
-@property (nonatomic, retain) Position * position;
+@property (nonatomic) BOOL destroy;
 
-@property (nonatomic, retain) NSDictionary * animations ;
+@property (nonatomic) NSInteger damages;
+@property (nonatomic, retain) Position * position;
+@property (nonatomic, retain) RessourceManager * ressource;
+
+
+@property (nonatomic, retain) NSMutableDictionary * animations ;
+@property (nonatomic, retain) NSMutableDictionary * destroyAnimations ;
+@property (nonatomic) UIImage * idle;
+
 @property (nonatomic, retain) NSString * currentAnimation;
 @property (nonatomic) NSInteger currentFrame;
 @property (nonatomic) NSInteger waitDelay;
@@ -51,5 +65,7 @@
 - (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition animations:(NSDictionary *)anAnimations;
 - (void) update;
 - (BOOL) hasAnimationFinished;
+
+- (Object *) copy;
 
 @end

@@ -24,9 +24,15 @@
 
 }
 
+@property (nonatomic,retain) NSMutableArray * bombsPlanted;
+@property (nonatomic,retain)NSMutableArray * bombsTypes;
+@property (nonatomic,retain) NSMutableString * color;
+@property (nonatomic) NSInteger powerExplosion;
+@property (nonatomic) NSInteger timeExplosion;
+@property (nonatomic) NSInteger shield;
+@property (nonatomic) NSInteger bombNumber;
 @property (nonatomic) NSInteger speed;
 @property (nonatomic) NSInteger lifeNumber;
-@property (nonatomic, retain) NSMutableArray * bombsPlanted;
 
 - (id) init;
 - (id) initWithColor:(NSString *)colorValue position:(Position *) positionValue;

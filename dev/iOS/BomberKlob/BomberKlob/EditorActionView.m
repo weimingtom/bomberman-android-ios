@@ -9,6 +9,7 @@
 #import "EditorActionView.h"
 #import "EditorAction.h"
 #import "RessourceManager.h"
+#import "AnimationSequence.h"
 
 
 @implementation EditorActionView

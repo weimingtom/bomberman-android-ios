@@ -14,7 +14,7 @@
 
 @implementation Object
 
-@synthesize imageName, hit, level, fireWall, position, animations,currentAnimation,currentFrame,waitDelay,delay;
+@synthesize imageName, hit, level, fireWall, position, animations,currentAnimation,currentFrame,waitDelay,delay, damages,idle,destroyAnimations,ressource,destroy;
 
 - (id)init {
 	self = [super init];
@@ -22,6 +22,10 @@
 	if (self) {
 		ressource = [RessourceManager sharedRessource];
         position = [[Position alloc] init];
+		animations = [[NSMutableDictionary alloc] init];
+		destroyAnimations = [[NSMutableDictionary alloc] init];
+		currentAnimation = @"idle";
+
 	}
 	
 	return self;
@@ -46,11 +50,6 @@
 	
 }
 
-- (void) destroy{
-	
-	
-}
-
 - (NSString *)description{
 	NSString * desc = [NSString stringWithFormat:@"ImageName : %@ hit : %d, Level : %d, FireWall : %d, X :  %d  Y : %d",imageName, hit, level, fireWall, position.x, position.y];
 	return desc;
@@ -58,12 +57,17 @@
 
 
 - (void)draw:(CGContextRef)context {
-	/*for (NSString * key in animations) {
-		NSLog(@"Test : %@  ",[animations objectForKey:key]);
-	}*/
-	if (currentFrame < [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]){
-		UIImage * image = [((AnimationSequence*)[animations objectForKey:imageName]).sequences objectAtIndex:currentFrame];
-		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize)];
+
+	if ([((AnimationSequence *)[animations objectForKey:imageName]).sequences count] == 1) {
+		[idle drawInRect:CGRectMake(position.x, position.y, ressource.tileSize, ressource.tileSize)];
+	}
+	else if (!destroy) {
+		UIImage * image = [((AnimationSequence *)[animations objectForKey:imageName]).sequences objectAtIndex:currentFrame];
+		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize, ressource.tileSize)];
+	}
+	else {
+		UIImage * image = [((AnimationSequence *)[destroyAnimations objectForKey:imageName]).sequences objectAtIndex:currentFrame];
+		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize, ressource.tileSize)];
 	}
 }
 
@@ -77,29 +81,49 @@
 //    [image drawInRect:CGRectMake(ressource.tileSize * position.x, ressource.tileSize * position.y, ressource.tileSize, ressource.tileSize)];
 }
 
-- (void) update{
-	if ([((AnimationSequence *)[animations objectForKey:imageName]).sequences count] > 1) {
-		if (delay == waitDelay) {
-			delay = 0;
-			if (currentFrame == [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]-1) {
-				currentFrame = -1;
+- (void) update{	
+	if (!destroy) {
+		if ([((AnimationSequence *)[animations objectForKey:imageName]).sequences count] > 2) {
+			if (delay == waitDelay) {
+				delay = 0;
+				if (currentFrame == [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]-1) {
+					currentFrame = 0;
+					if (!((AnimationSequence *)[animations objectForKey:imageName]).canLoop) {
+						animationFinished = YES;
+					}
+				}
+				else
+					currentFrame++;
 			}
-			else
-				currentFrame++;
-		}
-		else{
-			delay++;
+			else{
+				delay++;
+			}
 		}
 	}
+	else {
+		if ([((AnimationSequence *)[destroyAnimations objectForKey:imageName]).sequences count] > 2) {
+			if (delay == waitDelay) {
+				delay = 0;
+				if (currentFrame == [((AnimationSequence *)[destroyAnimations objectForKey:imageName]).sequences count]-1) {
+					currentFrame = 0;
+					if (!((AnimationSequence *)[animations objectForKey:imageName]).canLoop) {
+						
+						animationFinished = YES;
+					}
+				}
+				else
+					currentFrame++;
+			}
+			else{
+				delay++;
+			}
+		}
+	}
+
 }
 
 - (BOOL) hasAnimationFinished{
-	
-	if (currentFrame < 0) {
-		return true;
-	}
-	else
-		return false;
+	return animationFinished;
 }
 
 
@@ -122,6 +146,34 @@
     [aCoder encodeObject:imageName forKey:@"imageName"];
     [aCoder encodeBool:hit forKey:@"hit"];
     [aCoder encodeObject:position forKey:@"position"];
+}
+
+- (Object *) copy{
+	Object * objectCopy = [[Object alloc] init];
+	objectCopy.ressource = ressource;
+    objectCopy.imageName = [[NSString alloc] initWithString:imageName];
+	objectCopy.hit = hit;
+	objectCopy.level = level;
+	objectCopy.fireWall = fireWall;
+	objectCopy.damages = damages;
+	objectCopy.position = [[Position alloc] initWithPosition:position];
+	
+	objectCopy.animations = [[NSMutableDictionary alloc] initWithDictionary:animations];
+	objectCopy.destroyAnimations = [[NSMutableDictionary alloc] initWithDictionary:destroyAnimations];
+	objectCopy.idle = idle;
+	
+	objectCopy.currentAnimation = [[NSString alloc] initWithString:currentAnimation];
+	objectCopy.currentFrame = currentFrame;
+	objectCopy.waitDelay = waitDelay;
+	objectCopy.delay = delay;
+	objectCopy.destroy = destroy;
+	
+	return objectCopy;
+}
+
+- (void) destroy{
+	destroy = YES;
+	
 }
 
 @end

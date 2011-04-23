@@ -11,10 +11,13 @@
 #import "Position.h"
 #import "Player.h"
 #import "AnimationSequence.h"
-
+#import "Undestructible.h"
+#import "Destructible.h"
+#import "Player.h"
+#import "Bomb.h"
 @implementation XmlParser
 
-@synthesize png, animations,animationsBombs, animationsAnimates;
+@synthesize objectsBombs,objects,objectsAnimations,objectsInanimates, objectsIdle;
 
 - (XmlParser *) initXMLParser:(NSString *) typeValue{
 	
@@ -29,59 +32,16 @@
 
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
-	if (png == nil){
-		png = [[NSMutableDictionary alloc] init];
-		animations = [[NSMutableDictionary alloc] init];
-		animationsBombs = [[NSMutableDictionary alloc] init];
-		animationsAnimates = [[NSMutableDictionary alloc] init];
+
+		objectsInanimates = [[NSMutableDictionary alloc] init];
+		objectsAnimations = [[NSMutableDictionary alloc] init];
+		objectsBombs = [[NSMutableDictionary alloc] init];
+		objects = [[NSMutableDictionary alloc] init];
 		currentProperty = [[NSMutableString alloc] init];
-	}
-	else {
-		[png removeAllObjects];
-		[animations removeAllObjects];
-		[animationsBombs removeAllObjects];
-	}
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
-	if(type == @"inanimates"){
-		if ([elementName isEqualToString:@"png"]) {
-			Object * currentObject = [[Object alloc] init];
-			currentObject.imageName = [attributeDict valueForKey:@"name"];
-            currentObject.position = [[Position alloc] initWithX:[[attributeDict valueForKey:@"x"] integerValue] y:[[attributeDict valueForKey:@"y"] integerValue]];
-			currentObject.hit = [[attributeDict valueForKey:@"hit"] intValue];
-			currentObject.level = [[attributeDict valueForKey:@"level"] intValue];
-			currentObject.fireWall = [[attributeDict valueForKey:@"fireWall"] intValue];
-						
-			
-			UIImage* imageRef = [UIImage imageNamed:@"inanimate.png"];
-			CGImageRef image = imageRef.CGImage;
-			CGImageRef imageTemp;
-			
-			NSUInteger heightOfOneCase = imageRef.size.height/3;
-			NSUInteger widthOfOneCase = imageRef.size.width/6;
-			
-			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y*heightOfOneCase, heightOfOneCase, widthOfOneCase))];
-
-			[png setObject:[[AnimationSequence alloc] init] forKey:currentObject.imageName];
-			[[png objectForKey:currentObject.imageName] addImageSequence:imageRef];
-			//[currentObject release];
-
-			
-			return;
-		}
-		/*// Si le texte de l’élément contient une propriété de 
-		 // l’objet métier, alors on prépare une variable 
-		 // temporaire pour enregistrer son contenu 
-		 if ([elementName isEqualToString:@"telephone"]) {
-		 currentProperty = [NSMutableString string];
-		 } 
-		 else if ([elementName isEqualToString@"adresse"]) {
-		 currentProperty = [NSMutableString string];
-		 }*/
-		
-	}
-	else if (type == @"player"){
+	if (type == @"player"){
 		
 		UIImage* imageRef = [UIImage imageNamed:@"players.png"];
 		CGImageRef image = imageRef.CGImage;
@@ -91,39 +51,44 @@
 
 		if([elementName isEqualToString:@"player"]){
 			currentProperty = [attributeDict valueForKey:@"name"];
-			
-			[animations setObject:[[NSMutableDictionary alloc] init] forKey:currentProperty];
-			
+			[objectsAnimations setObject:[[Player alloc] init] forKey:currentProperty];
 		}
 		else if([elementName isEqualToString:@"animation"]){
-			currentAnimation = [attributeDict valueForKey:@"name"];
 			currentCanLoop = [attributeDict valueForKey:@"canLoop"];
+			currentAnimation = [attributeDict valueForKey:@"name"];
 			
-			[[animations objectForKey:currentProperty ] setObject:[[AnimationSequence alloc] initWithNameAndLoop:currentAnimation:currentCanLoop ] forKey:currentAnimation];
+			AnimationSequence * sequences = [[AnimationSequence alloc] initWithLoop:currentCanLoop];
+			AnimationSequence * destroySequences = [[AnimationSequence alloc] initWithLoop:currentCanLoop];
 
-			
-			//[animations setObject:[[AnimationSequence alloc] initWithNameAndLoop:currentAnimation:currentCanLoop ] forKey:currentAnimation];
+			[((Player *)[objectsAnimations objectForKey:currentProperty ]).animations setObject:sequences forKey:currentAnimation];
+			[((Player *)[objectsAnimations objectForKey:currentProperty ]).destroyAnimations setObject:destroySequences forKey:currentAnimation];
 
 		}
-		
+	
 		else if ([elementName isEqualToString:@"png"]) {
+			Player * currentObject = [objectsAnimations objectForKey:currentProperty ];
+			int x = [[attributeDict valueForKey:@"x"] intValue];
+			int y = [[attributeDict valueForKey:@"y"] intValue];
 			
-			Player * currentObject = [[Player alloc] init];
+			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(x*widthOfOneCase,y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
+			
+			if ([currentAnimation isEqual:@"idle"]){
+				currentObject.idle = imageRef;
+				[(AnimationSequence *)[currentObject.animations objectForKey:currentAnimation] addImageSequence:imageRef];
+			}
+			else if ([currentAnimation isEqual:@"destroy"]){
+				currentDelayNextFrame = [attributeDict valueForKey:@"delayNextFrame"];
+				[(AnimationSequence *)[currentObject.destroyAnimations objectForKey:currentAnimation] setDelayNextFrame:currentDelayNextFrame];
+				currentObject.imageName = currentAnimation;
+				[(AnimationSequence *)[currentObject.destroyAnimations objectForKey:currentAnimation] addImageSequence:imageRef];
+			}
+			else {
+				currentDelayNextFrame = [attributeDict valueForKey:@"delayNextFrame"];
+				[(AnimationSequence *)[currentObject.animations objectForKey:currentAnimation] setDelayNextFrame:currentDelayNextFrame];
+				currentObject.imageName = currentAnimation;
+				[(AnimationSequence *)[currentObject.animations objectForKey:currentAnimation] addImageSequence:imageRef];
+			}
 
-			currentObject.imageName = currentAnimation; 
-			currentObject.position.x = [[attributeDict valueForKey:@"x"] intValue];
-			currentObject.position.y = [[attributeDict valueForKey:@"y"] intValue];
-			currentObject.waitDelay = [[attributeDict valueForKey:@"nextFrameDelay"] intValue];
-			currentObject.hit = 0;
-			currentObject.level = 0;
-			currentObject.fireWall = 0;
-			
-			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
-			[[[animations objectForKey:currentProperty ] objectForKey:currentAnimation] addImageSequence:imageRef];
-			
-			
-			
-			[currentObject release];
 			return;
 		}
 	}
@@ -132,64 +97,109 @@
 		UIImage* imageRef = [UIImage imageNamed:@"bombs.png"];
 		CGImageRef image = imageRef.CGImage;
 		
-		NSUInteger heightOfOneCase = imageRef.size.height/6;
-		NSUInteger widthOfOneCase = imageRef.size.width/3; 
-		if([elementName isEqualToString:@"bombs"]){
-			//animationsBombs = [[NSMutableDictionary alloc] init];
-			
-		}
-		else if([elementName isEqualToString:@"bomb"]){
-			currentProperty = [attributeDict valueForKey:@"name"];
-			[animationsBombs setObject:[[AnimationSequence alloc] init] forKey:currentProperty];
-			AnimationSequence * p = [animationsBombs objectForKey:currentProperty ];
+		NSInteger heightOfOneCase = imageRef.size.height/4;
+		NSInteger widthOfOneCase = imageRef.size.width/4; 
 
-			
-		}		
+		if([elementName isEqualToString:@"bomb"]){
+			currentProperty = [attributeDict valueForKey:@"name"];
+			Bomb * bomb = [[Bomb alloc] init];
+			[objectsBombs setObject:bomb forKey:currentProperty];
+			AnimationSequence * sequences = [[AnimationSequence alloc] init];
+			AnimationSequence * destroySequences = [[AnimationSequence alloc] init];
+			[bomb.animations setObject:sequences forKey:currentProperty];
+			[bomb.destroyAnimations setObject:destroySequences forKey:currentProperty];
+
+			bomb.imageName = currentProperty;
+		}
+		else if([elementName isEqualToString:@"animation"]){
+			currentString = [attributeDict valueForKey:@"name"];
+			currentCanLoop = [attributeDict valueForKey:@"canLoop"];
+		}
 		else if ([elementName isEqualToString:@"png"]) {
 			
-			Object * currentObject = [[Object alloc] init];
+			Bomb * currentObject = [objectsBombs objectForKey:currentProperty];
+			int x = [[attributeDict valueForKey:@"x"] intValue];
+			int y = [[attributeDict valueForKey:@"y"] intValue];
+			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(x*widthOfOneCase, y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
 			
-			currentObject.imageName = currentAnimation; 
-			currentObject.position.x = [[attributeDict valueForKey:@"x"] intValue];
-			currentObject.position.y = [[attributeDict valueForKey:@"y"] intValue];
-			currentObject.hit = 0;
-			currentObject.level = 0;
-			currentObject.fireWall = 0;
-			
-			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
-			[[animationsBombs objectForKey:currentProperty ] addImageSequence:imageRef];
-			
-			[currentObject release];
+			if ([currentString isEqual:@"idle"]) {
+				currentObject.idle = imageRef;
+			}
+			else if ([currentString isEqual:@"animate"]) {
+				[(AnimationSequence *)[currentObject.animations objectForKey:currentProperty] addImageSequence:imageRef];
+				[(AnimationSequence *)[currentObject.animations objectForKey:currentProperty] setCanLoop:currentCanLoop];
+			}
+			else {
+				[(AnimationSequence *)[currentObject.destroyAnimations objectForKey:currentProperty] addImageSequence:imageRef];
+				[(AnimationSequence *)[currentObject.destroyAnimations objectForKey:currentProperty] setCanLoop:currentCanLoop];
+			}
 			return;
 		}
 
 	}
-	else if (type == @"animates"){
-		UIImage* imageRef = [UIImage imageNamed:@"animate.png"];
+	else if (type == @"objects"){
+		UIImage* imageRef = [UIImage imageNamed:@"objects.png"];
 		CGImageRef image = imageRef.CGImage;
 		
-		NSUInteger heightOfOneCase = imageRef.size.height/16;
+		NSUInteger heightOfOneCase = imageRef.size.height/17;
 		NSUInteger widthOfOneCase = imageRef.size.width/6; 
+		
 		if([elementName isEqualToString:@"destructible"] ||[elementName isEqualToString:@"undestructible"]){
 			currentProperty = [attributeDict valueForKey:@"name"];
-			[animationsAnimates setObject:[[AnimationSequence alloc] init] forKey:currentProperty];
+			Object * currentObject;
+			if ([elementName isEqualToString:@"destructible"])
+				currentObject = [[Destructible alloc] init];
+			if ([elementName isEqualToString:@"undestructible"])
+				currentObject = [[Undestructible alloc] init];
+			if ([currentProperty rangeOfString:@"fire"].location != NSNotFound)
+				currentObject.destroy = YES;
+
+			currentObject.imageName = currentProperty; 
+			currentObject.hit = [[attributeDict valueForKey:@"hit"] intValue];
+			currentObject.level = [[attributeDict valueForKey:@"level"] intValue];
+			currentObject.fireWall = [[attributeDict valueForKey:@"fireWall"] intValue];
+			if ([elementName isEqualToString:@"destructible"])
+				((Destructible *)currentObject).life = [[attributeDict valueForKey:@"life"] intValue];
+			currentObject.damages = [[attributeDict valueForKey:@"damages"] intValue];
+
+			AnimationSequence * sequences = [[AnimationSequence alloc] init];
+			AnimationSequence * destroySequences = [[AnimationSequence alloc] init];
+			[currentObject.animations setObject:sequences forKey:currentProperty];
+			[currentObject.destroyAnimations setObject:destroySequences forKey:currentProperty];
+			[objects setObject:currentObject forKey:currentProperty];
 			
-		}		
+		}
+		if([elementName isEqualToString:@"animation"]){
+			currentString = [attributeDict valueForKey:@"name"];
+			currentCanLoop = [attributeDict valueForKey:@"canLoop"];
+			
+		}
 		else if ([elementName isEqualToString:@"png"]) {
+			Object * currentObject = [objects objectForKey:currentProperty];
+			int x = [[attributeDict valueForKey:@"x"] intValue];
+			int y = [[attributeDict valueForKey:@"y"] intValue];
+			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(x*widthOfOneCase, y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
 			
-			Object * currentObject = [[Object alloc] init];
+			if ([currentString isEqual:@"idle"]) {
+				currentObject.idle = imageRef;
+				[(AnimationSequence *)[currentObject.animations objectForKey:currentProperty] addImageSequence:imageRef];
+			}
+			else if ([currentString isEqual:@"animate"]) {
+
+				[(AnimationSequence *)[currentObject.animations objectForKey:currentProperty] addImageSequence:imageRef];
+				[(AnimationSequence *)[currentObject.animations objectForKey:currentProperty] setDelayNextFrame:[[attributeDict valueForKey:@"delayNextFrame"] intValue]];
+				[(AnimationSequence *)[currentObject.animations objectForKey:currentProperty] setCanLoop:currentCanLoop];
+
+			}
+			else {
+
+				[(AnimationSequence *)[currentObject.destroyAnimations objectForKey:currentProperty] addImageSequence:imageRef];
+				[(AnimationSequence *)[currentObject.destroyAnimations objectForKey:currentProperty] setDelayNextFrame:[[attributeDict valueForKey:@"delayNextFrame"] intValue]];
+				[(AnimationSequence *)[currentObject.destroyAnimations objectForKey:currentProperty] setCanLoop:currentCanLoop];
+
+			}
+
 			
-			currentObject.imageName = currentAnimation; 
-			currentObject.position.x = [[attributeDict valueForKey:@"x"] intValue];
-			currentObject.position.y = [[attributeDict valueForKey:@"y"] intValue];
-			currentObject.hit = 0;
-			currentObject.level = 0;
-			currentObject.fireWall = 0;
-			
-			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(currentObject.position.x*widthOfOneCase, currentObject.position.y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
-			[[animationsAnimates objectForKey:currentProperty ] addImageSequence:imageRef];
-			
-			[currentObject release];
 			return;
 		}
 	}
@@ -197,8 +207,8 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
 	
-	if (currentString) {
-		[currentString appendString:string];
+	if (characters) {
+		[characters appendString:string];
 	}
 }
 

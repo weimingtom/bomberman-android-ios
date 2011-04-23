@@ -21,6 +21,7 @@
     
 	if (self) {
 //        map = [[Map alloc] init];
+		RessourceManager * resource = [RessourceManager sharedRessource];
         Position *position;
         Player *player;
         NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
@@ -33,11 +34,12 @@
         
         for (int i = 0; i < [map.players count]; i++) {
             position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:i]).x * tileSize) y:(((Position *) [map.players objectAtIndex:i]).y * tileSize)];
-            player = [[Player alloc] initWithColor:[colorsPlayers objectAtIndex:i] position:position];
+			player = [(Player *)[resource.bitmapsPlayer objectForKey:[colorsPlayers objectAtIndex:i]] copy];
+			player.position = position;
             
             [players addObject:player];
             
-            [position release];
+            //[position release];
             [player release];
         }
         
@@ -51,10 +53,10 @@
 	self = [super init];
     
 	if (self) {
-		//        map = [[Map alloc] init];
+		RessourceManager * resource = [RessourceManager sharedRessource];
         Position *position;
         Player *player;
-        NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
+        NSInteger tileSize = resource.tileSize;
         map = [[Map alloc] init];
         
         players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
@@ -64,11 +66,11 @@
         
         for (int i = 0; i < [map.players count]; i++) {
             position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:i]).x * tileSize) y:(((Position *) [map.players objectAtIndex:i]).y * tileSize)];
-            player = [[Player alloc] initWithColor:[colorsPlayers objectAtIndex:i] position:position];
-            
+			player = [(Player *)[resource.bitmapsPlayer objectForKey:[colorsPlayers objectAtIndex:i]] copy];
+			player.position = position;            
             [players addObject:player];
             
-            [position release];
+//            [position release];
             [player release];
         }
         
