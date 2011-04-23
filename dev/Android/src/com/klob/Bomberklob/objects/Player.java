@@ -13,7 +13,7 @@ import com.klob.Bomberklob.objects.exceptions.TimeBombException;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
-public abstract class Player extends Destructible {
+public abstract class Player extends Objects {
 	
 	/**
 	 * 
@@ -25,18 +25,20 @@ public abstract class Player extends Destructible {
 	protected int powerExplosion;
 	protected int timeExplosion;
 	protected int speed;
+	protected int life;
 	protected int shield;
 	protected int bombNumber;
 	protected boolean immortal;	
 	
 	/* Constructeurs ------------------------------------------------------- */
 	
-	public Player(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber, boolean immortal) {
-		super(imageName, animations, currentAnimation, hit, level, fireWall, damages, life);
+	public Player(String imageName, Hashtable<String, AnimationSequence> animations, PlayerAnimations currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber, boolean immortal) {
+		super(imageName, animations, currentAnimation.getLabel(), hit, level, fireWall, damages);
 		this.powerExplosion = powerExplosion;
 		this.timeExplosion = timeExplosion;
 		this.speed = speed;
 		this.shield = shield;
+		this.life = life;
 		this.bombNumber = bombNumber;
 		this.immortal = immortal;
 	}
@@ -102,6 +104,14 @@ public abstract class Player extends Destructible {
 		this.position.y = y;
 	}
 	
+	public void setCurrentAnimation(PlayerAnimations animation) {
+		if ( animations.get(currentAnimation) != null ) {
+			this.currentAnimation = animation.getLabel();
+			this.currentFrame = 0;
+			this.waitDelay = animations.get(currentAnimation).sequence.get(currentFrame).nextFrameDelay;
+		}
+	}
+	
 	/* Getters ------------------------------------------------------------- */
 	
 	public Vector<Bomb> getBombsPlanted() {
@@ -142,7 +152,7 @@ public abstract class Player extends Destructible {
 		}
 		
 		if ( bombNumber > bombsPlanted.size() ) {
-			Bomb b = new Bomb("normal", ResourcesManager.getBombsAnimations().get("normal"), "destroy", true, 1, false, 1, 1, powerExplosion, timeExplosion);
+			Bomb b = new Bomb("normal", ResourcesManager.getBombsAnimations().get("normal"), ObjectsAnimations.ANIMATE, true, 1, false, 1, 1, powerExplosion, timeExplosion);
 			b.setPosition(p);
 			bombsPlanted.add(b);
 			return b;
@@ -162,5 +172,10 @@ public abstract class Player extends Destructible {
 			return false;
 		}
 		return true;
+	}
+	
+	@Override
+	public void destroy() {
+		currentAnimation = PlayerAnimations.KILL.getLabel();
 	}
 }

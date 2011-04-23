@@ -154,11 +154,13 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 		for(Entry<String, Objects> entry : objects.entrySet()) {
 			Objects valeur = objects.get(entry.getKey());
-			if ( valeur.getLevel() == 0 ) {
-				this.grounds.add(valeur.copy());
-			}
-			else {
-				this.blocks.add(valeur.copy());
+			if ( valeur.getAnimations().get("idle") != null ) {
+				if ( valeur.getLevel() == 0 ) {
+					this.grounds.add(valeur.copy());
+				}
+				else {
+					this.blocks.add(valeur.copy());
+				}
 			}
 			i++;
 		}

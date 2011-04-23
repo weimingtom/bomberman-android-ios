@@ -2,7 +2,6 @@ package com.klob.Bomberklob.objects;
 
 import java.util.Hashtable;
 
-
 public class Destructible extends Objects {
 	
 	/**
@@ -14,8 +13,8 @@ public class Destructible extends Objects {
 	
 	/* Constructeurs ------------------------------------------------------- */
 	
-	public Destructible(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life) {
-		super(imageName, animations, currentAnimation, hit, level, fireWall, damages);
+	public Destructible(String imageName, Hashtable<String, AnimationSequence> animations, ObjectsAnimations currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life) {
+		super(imageName, animations, currentAnimation.getLabel(), hit, level, fireWall, damages);
 		this.life = life;
 	}
 	
@@ -46,5 +45,10 @@ public class Destructible extends Objects {
 	@Override
 	public Destructible copy() {
 		return new Destructible(this);
+	}
+
+	@Override
+	public void destroy() {
+		currentAnimation = ObjectsAnimations.ANIMATE.getLabel();
 	}
 }

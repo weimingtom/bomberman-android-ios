@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<animates>
+<objects>
 	<destructible name="wall" hit="1" level="1" fireWall="1" life="1" damages="0">
 		<animation name="idle" canLoop="true">
 			<png x="0" y="0" delayNextFrame="0" />
@@ -154,4 +154,97 @@
 			<png x="0" y="15" delayNextFrame="1" />
 		</animation>
 	</undestructible>
-</animates>
+	
+	<!-- Inanimés -->
+	
+	<!-- Level 0 -->
+
+	<undestructible name="grass1" hit="0" level="0" fireWall="0" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="4" y="9" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+	<undestructible name="grass2" hit="0" level="0" fireWall="0" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="4" y="12" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+	
+	<undestructible name="sand" hit="0" level="0" fireWall="0" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="5" y="12" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+	
+	<undestructible name="stone1" hit="0" level="0" fireWall="0" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="4" y="14" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+	<undestructible name="stone2" hit="0" level="0" fireWall="0" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="5" y="15" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+
+	<undestructible name="snow" hit="0" level="0" fireWall="0" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="4" y="10" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+
+	<undestructible name="tiling1" hit="0" level="0" fireWall="0" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="5" y="10" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+	<undestructible name="tiling2" hit="0" level="0" fireWall="0" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="5" y="11" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+	<undestructible name="tiling3" hit="0" level="0" fireWall="0" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="4" y="13" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+	<undestructible name="tiling4" hit="0" level="0" fireWall="0" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="5" y="13" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+	<undestructible name="tiling5" hit="0" level="0" fireWall="0" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="5" y="14" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+	<undestructible name="tiling6" hit="0" level="0" fireWall="0" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="4" y="13" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+	
+	<!-- Level 1 -->
+
+	<undestructible name="block1" hit="1" level="1" fireWall="1" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="5" y="9" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+	<undestructible name="block2" hit="1" level="1" fireWall="1" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="4" y="11" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>		
+	<undestructible name="block3" hit="1" level="1" fireWall="1" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="4" y="16" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>
+	<undestructible name="block4" hit="1" level="1" fireWall="1" damages="0">
+		<animation name="idle" canLoop="false">
+			<png x="5" y="16" delayNextFrame="0"/>	
+		</animation>
+	</undestructible>	
+	
+</objects>

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.menus.Home;
 import com.klob.Bomberklob.objects.Bomb;
+import com.klob.Bomberklob.objects.ObjectsAnimations;
 import com.klob.Bomberklob.resources.ObjectsGallery;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
@@ -79,7 +80,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.bombsGallery = new ObjectsGallery(getApplicationContext());
 		this.bombsGallery.setItemsDisplayed(1);
 		this.bombsGallery.setLevel(1);
-		this.bombsGallery.addObjects(new Bomb("normal", ResourcesManager.getBombsAnimations().get("normal"), "idle", true, 1, false, 1, 1, 3, 50));
+		this.bombsGallery.addObjects(new Bomb("normal", ResourcesManager.getBombsAnimations().get("normal"), ObjectsAnimations.IDLE, true, 1, false, 1, 1, 3, 50));
 		this.bombsGallery.setSelectedItem("normal");
 		this.bombsGallery.setRectangles(new Point(0,0));
 		this.bombsGallery.update();

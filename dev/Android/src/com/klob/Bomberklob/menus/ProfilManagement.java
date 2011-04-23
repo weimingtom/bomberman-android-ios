@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.model.Model;
 import com.klob.Bomberklob.objects.HumanPlayer;
+import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.resources.ObjectsGallery;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
@@ -62,10 +63,10 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
         });
         
 		this.objectsGallery = new ObjectsGallery(getApplicationContext(), 4, null, 45, 22, 1, false);
-		this.objectsGallery.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
-		this.objectsGallery.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
-		this.objectsGallery.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
-		this.objectsGallery.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
+		this.objectsGallery.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
+		this.objectsGallery.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
+		this.objectsGallery.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
+		this.objectsGallery.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
 		this.objectsGallery.update();
 		
         FrameLayout f = (FrameLayout) findViewById(R.id.ProfilManagementFrameLayoutObjectsGallery);

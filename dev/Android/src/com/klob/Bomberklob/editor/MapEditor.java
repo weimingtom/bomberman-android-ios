@@ -6,6 +6,7 @@ import com.klob.Bomberklob.game.Map;
 import com.klob.Bomberklob.objects.HumanPlayer;
 import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.Player;
+import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
@@ -76,7 +77,7 @@ public class MapEditor {
 			map = new Map();
 			map.setName(mapName);
 
-			Objects o = ResourcesManager.getObjects().get("bloc").copy();
+			Objects o = ResourcesManager.getObjects().get("block1").copy();
 
 			for (int j = 0 ; j < map.getGrounds()[0].length ; j++) {
 				map.addBlock(o.copy(), new Point(0,j));
@@ -87,7 +88,7 @@ public class MapEditor {
 				map.addBlock(o.copy(), new Point(j,map.getGrounds()[0].length-1));
 			}
 			
-			o = ResourcesManager.getObjects().get("grass").copy();
+			o = ResourcesManager.getObjects().get("grass1").copy();
 
 			for (int j = 1 ; j < map.getGrounds().length-1 ; j++) {
 				for (int k = 1 ; k < map.getGrounds()[0].length-1 ; k++ ) {
@@ -96,10 +97,10 @@ public class MapEditor {
 			}
 		}
 		
-		this.players[0] = new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
-		this.players[1] = new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
-		this.players[2] = new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
-		this.players[3] = new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), "idle", true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
+		this.players[0] = new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
+		this.players[1] = new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
+		this.players[2] = new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
+		this.players[3] = new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
 		
 
 		for (int i = 0 ; i < 4 ; i++ ) {

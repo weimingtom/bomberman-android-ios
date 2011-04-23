@@ -12,8 +12,8 @@ public class Undestructible extends Objects {
 	
 	/* Constructeurs ------------------------------------------------------- */
 
-	public Undestructible(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation,boolean hit, int level, boolean fireWall, int damages) {
-		super(imageName, animations, currentAnimation, hit, level, fireWall, damages);
+	public Undestructible(String imageName, Hashtable<String, AnimationSequence> animations, ObjectsAnimations currentAnimation,boolean hit, int level, boolean fireWall, int damages) {
+		super(imageName, animations, currentAnimation.getLabel(), hit, level, fireWall, damages);
 	}
 	
 	public Undestructible(Undestructible undestructible) {
@@ -31,4 +31,7 @@ public class Undestructible extends Objects {
 	public Undestructible copy() {
 		return new Undestructible(this);
 	}
+
+	@Override
+	public void destroy() {}
 }
