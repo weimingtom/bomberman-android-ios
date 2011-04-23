@@ -101,7 +101,7 @@ public class Engine {
 		}
 
 		if ( !this.single.getPlayers()[0].getCurrentAnimation().equals(playerAnimation.getLabel()) ) {
-			this.single.getPlayers()[0].setCurrentAnimation(playerAnimation.getLabel());
+			this.single.getPlayers()[0].setCurrentAnimation(playerAnimation);
 		}
 	}
 

@@ -37,10 +37,11 @@ public abstract class Objects implements Serializable {
 		this.fireWall = fireWall;
 		this.position = null;
 		this.damages = damages;
+		
 		this.animations = animations;
 		this.currentAnimation = currentAnimation;
 		this.currentFrame = 0;
-		this.waitDelay = animations.get(currentAnimation).sequence.get(currentFrame).nextFrameDelay;
+		this.waitDelay = animations.get(this.currentAnimation).sequence.get(this.currentFrame).nextFrameDelay;
 	}
 	
 	public Objects(Objects objects) {
@@ -50,9 +51,11 @@ public abstract class Objects implements Serializable {
 		this.fireWall = objects.fireWall;
 		this.position = objects.position;
 		this.damages = objects.damages;
+		
+		this.animations = objects.animations;
 		this.currentAnimation = objects.currentAnimation;
 		this.currentFrame = objects.currentFrame;
-		this.waitDelay = objects.animations.get(currentAnimation).sequence.get(currentFrame).nextFrameDelay;
+		this.waitDelay = this.animations.get(this.currentAnimation).sequence.get(this.currentFrame).nextFrameDelay;
 	}
 	
 	/* Getters ------------------------------------------------------------- */
@@ -99,22 +102,20 @@ public abstract class Objects implements Serializable {
 	
 	/* Setteurs ------------------------------------------------------------ */
 
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
-
 	public void setPosition(Point position) {
 		this.position = position;
 	}
 	
-	public void setCurrentAnimation(String s) {
-		this.currentAnimation = s;
-		this.currentFrame = 0;
-		this.waitDelay = animations.get(currentAnimation).sequence.get(currentFrame).nextFrameDelay;
-	}
-	
 	public void setAnimations(Hashtable<String, AnimationSequence> animations) {
 		this.animations = animations;
+	}
+	
+	public void setCurrentAnimation(ObjectsAnimations animation) {
+		if ( animations.get(currentAnimation) != null ) {
+			this.currentAnimation = animation.getLabel();
+			this.currentFrame = 0;
+			this.waitDelay = animations.get(currentAnimation).sequence.get(currentFrame).nextFrameDelay;
+		}
 	}
 	
 	/* Méthodes abstraites publiques --------------------------------------- */
@@ -147,12 +148,7 @@ public abstract class Objects implements Serializable {
 		}
 	}
 	
-	public void destroy() {
-		if ( !getCurrentAnimation().equals("destroy") ) {
-			setCurrentAnimation("destroy");
-		}
-				
-	}
+	public abstract void destroy();
 	
 	public boolean hasAnimationFinished() {
 		AnimationSequence as = animations.get(currentAnimation);
@@ -164,7 +160,7 @@ public abstract class Objects implements Serializable {
 	
 	public void onDraw(Canvas canvas,int size) {
 		int tileSize = ResourcesManager.getTileSize();
-        canvas.drawBitmap(ResourcesManager.getBitmaps().get("animate"), new Rect(this.getPoint().x*tileSize, this.getPoint().y*tileSize, (this.getPoint().x*tileSize)+tileSize, (this.getPoint().y*tileSize)+tileSize), new Rect(this.position.x, this.position.y, (this.position.x)+size, (this.position.y)+size), null);
+        canvas.drawBitmap(ResourcesManager.getBitmaps().get("objects"), new Rect(this.getPoint().x*tileSize, this.getPoint().y*tileSize, (this.getPoint().x*tileSize)+tileSize, (this.getPoint().y*tileSize)+tileSize), new Rect(this.position.x, this.position.y, (this.position.x)+size, (this.position.y)+size), null);
 	}
 	
 	@Override

@@ -18,6 +18,7 @@ import com.klob.Bomberklob.objects.AnimationSequence;
 import com.klob.Bomberklob.objects.Destructible;
 import com.klob.Bomberklob.objects.FrameInfo;
 import com.klob.Bomberklob.objects.Objects;
+import com.klob.Bomberklob.objects.ObjectsAnimations;
 import com.klob.Bomberklob.objects.Undestructible;
 
 public class ResourcesManager {
@@ -134,14 +135,11 @@ public class ResourcesManager {
 					}
 					else if(xpp.getName().toLowerCase().equals("png")) {
 
-						if ( xpp.getAttributeValue(null, "name").equals("inanimate")) {
-							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.inanimate);
-						}
-						else if ( xpp.getAttributeValue(null, "name").equals("players")) {
+						if ( xpp.getAttributeValue(null, "name").equals("players")) {
 							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.players);
 						}
-						else if ( xpp.getAttributeValue(null, "name").equals("animate")) {
-							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.animate);
+						else if ( xpp.getAttributeValue(null, "name").equals("objects")) {
+							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.objects);
 						}
 						else if ( xpp.getAttributeValue(null, "name").equals("bombs")) {
 							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.bombs);
@@ -163,12 +161,12 @@ public class ResourcesManager {
 		Log.i("ResourcesManager","----------      Bitmaps loaded      ----------");
 	}
 
-	public static void animatedObjectsInitialisation() {
+	public static void objectsInitialisation() {
 
-		XmlResourceParser xpp = context.getResources().getXml(R.xml.animates);
+		XmlResourceParser xpp = context.getResources().getXml(R.xml.objects);
 
 		Log.i("ResourcesManager","---------- Loading animated objects ----------");
-		Hashtable<String, AnimationSequence> objectAnimation = null;
+		Hashtable<String, AnimationSequence> animations = null;
 		String imageName = null;
 		int level = 0, life = 0, damages = 0;
 		boolean hit = false, fireWall = false;
@@ -183,7 +181,7 @@ public class ResourcesManager {
 				if(eventType == XmlPullParser.START_TAG) {
 					
 					if (xpp.getName().toLowerCase().equals("destructible") || xpp.getName().toLowerCase().equals("undestructible") ) {
-						objectAnimation = new Hashtable<String, AnimationSequence>();
+						animations = new Hashtable<String, AnimationSequence>();
 						imageName = xpp.getAttributeValue(null, "name");
 						hit = (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true);
 						level = xpp.getAttributeIntValue(null, "level", 0);
@@ -194,7 +192,7 @@ public class ResourcesManager {
 						damages = xpp.getAttributeIntValue(null, "damages", 0);
 					}
 					else if(xpp.getName().toLowerCase().equals("animation")) {			
-						animationname=xpp.getAttributeValue(null, "name");	            	 
+						animationname=xpp.getAttributeValue(null, "name");	    
 						animationsequence = new AnimationSequence();
 						animationsequence.name=animationname;
 						animationsequence.sequence=new ArrayList<FrameInfo>();
@@ -213,15 +211,25 @@ public class ResourcesManager {
 				else if(eventType == XmlPullParser.END_TAG) {
 										
 					if(xpp.getName().toLowerCase().equals("animation")) {
-						objectAnimation.put(animationname, animationsequence);
+						animations.put(animationname, animationsequence);
 					}
 					else if(xpp.getName().toLowerCase().equals("destructible")) {
-						objects.put(imageName, new Destructible(imageName, hit, level, fireWall, damages, life, objectAnimation, "idle"));
+						objects.put(imageName, new Destructible(imageName, animations, ObjectsAnimations.IDLE, hit, level, fireWall, damages, life));
 						Log.i("ResourcesManager","Added Destructible : " + imageName);
 					}
 					else if(xpp.getName().toLowerCase().equals("undestructible")) {
-						objects.put(imageName, new Undestructible(imageName, hit, level, fireWall, damages, objectAnimation, "destroy"));
-						Log.i("ResourcesManager","Added Undestructible : " + imageName);
+						if ( animations.get(ObjectsAnimations.IDLE.getLabel()) != null ) {
+							objects.put(imageName, new Undestructible(imageName, animations, ObjectsAnimations.IDLE, hit, level, fireWall, damages));
+							Log.i("ResourcesManager","Added Undestructible : " + imageName);
+						}
+						else if ( animations.get(ObjectsAnimations.ANIMATE.getLabel()) != null ) {
+							objects.put(imageName, new Undestructible(imageName, animations, ObjectsAnimations.ANIMATE, hit, level, fireWall, damages));
+							Log.i("ResourcesManager","Added Undestructible : " + imageName);
+						}
+						else if ( animations.get(ObjectsAnimations.DESTROY.getLabel()) != null ) {
+							objects.put(imageName, new Undestructible(imageName, animations, ObjectsAnimations.DESTROY, hit, level, fireWall, damages));
+							Log.i("ResourcesManager","Added Undestructible : " + imageName);
+						}
 					}
 				}
 				eventType = xpp.next();
@@ -231,36 +239,6 @@ public class ResourcesManager {
 			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+e.toString());
 		}
 		Log.i("ResourcesManager","---------- Animated objects loaded  ----------");
-	}
-	
-	public static void inanimatedObjectsInitialisation(){
-		
-		XmlResourceParser xpp = context.getResources().getXml(R.xml.inanimates);
-		
-		Log.i("ResourcesManager","--------- Loading inanimated objects ---------");
-		try {
-			int eventType = xpp.getEventType();
-			Inanimate inanimate = null;
-
-			while (eventType != XmlPullParser.END_DOCUMENT) {
-
-				if(eventType == XmlPullParser.START_TAG) {
-					
-					if(xpp.getName().toLowerCase().equals("png")) {
-						inanimate = new Inanimate(xpp.getAttributeValue(null, "name"), (xpp.getAttributeIntValue(null, "hit", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "level", 0), (xpp.getAttributeIntValue(null, "fireWall", 0) == 0 ? false : true), xpp.getAttributeIntValue(null, "damages", 0), new Point(xpp.getAttributeIntValue(null, "x", 0),xpp.getAttributeIntValue(null, "y", 0)));
-						objects.put(inanimate.getImageName(), inanimate);
-						Log.i("ResourcesManager","Added InanimatedObject : " + inanimate.getImageName());
-						inanimate = null;
-					}
-					
-				}
-				eventType = xpp.next();
-			}
-		}
-		catch (Exception e) {
-			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+ e.toString());
-		}
-		Log.i("ResourcesManager","--------- Inanimated objects loaded  ---------");
 	}
 	
 	public static void playersInitialisation() {

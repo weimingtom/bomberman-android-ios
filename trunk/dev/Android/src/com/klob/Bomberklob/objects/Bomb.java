@@ -18,7 +18,7 @@ public class Bomb extends Destructible {
 	protected int time;
 	//FIXME protected ??? type
 
-	public Bomb(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, int power, int time) {
+	public Bomb(String imageName, Hashtable<String, AnimationSequence> animations, ObjectsAnimations currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, int power, int time) {
 		super(imageName, animations, currentAnimation, hit, level, fireWall, damages, life);
 		this.power = power;
 		this.time = time;

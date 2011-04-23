@@ -61,8 +61,7 @@ public class Main extends Activity {
 					Context context = createPackageContext(getPackageName(), Context.CONTEXT_INCLUDE_CODE);
 					
 					ResourcesManager.setInstance(getApplicationContext());
-					ResourcesManager.animatedObjectsInitialisation();
-					ResourcesManager.inanimatedObjectsInitialisation();
+					ResourcesManager.objectsInitialisation();
 					ResourcesManager.playersInitialisation();
 					ResourcesManager.bombsInitialisation();
 					
@@ -70,9 +69,6 @@ public class Main extends Activity {
 						intent = new Intent(context, CreateAccountOffline.class);
 						
 						AssetManager am = getAssets();
-						for (int i = 0 ; i < 1 ; i++ ) {
-							System.out.println("File : " + am.getLocales());
-						}
 					}
 					else {
 						intent = new Intent(context, Home.class);

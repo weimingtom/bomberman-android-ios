@@ -18,10 +18,11 @@ public enum PlayerAnimations {
 	STOP_UP_RIGHT("stop_up_right"),
 	STOP_UP_LEFT("stop_up_left"),
 	STOP_DOWN_RIGHT("stop_down_right"),
-	STOP_DOWN_LEFT("stop_down_left");
+	STOP_DOWN_LEFT("stop_down_left"),
+	KILL("kill");
 	
 
-	protected String label;
+	private String label;
 
 	PlayerAnimations(String pLabel) {
 		this.label = pLabel;
