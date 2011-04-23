@@ -165,7 +165,7 @@ public class ResourcesManager {
 
 		XmlResourceParser xpp = context.getResources().getXml(R.xml.objects);
 
-		Log.i("ResourcesManager","---------- Loading animated objects ----------");
+		Log.i("ResourcesManager","-------------- Loading objects  --------------");
 		Hashtable<String, AnimationSequence> animations = null;
 		String imageName = null;
 		int level = 0, life = 0, damages = 0;
@@ -238,7 +238,7 @@ public class ResourcesManager {
 		catch (Exception e) {
 			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+e.toString());
 		}
-		Log.i("ResourcesManager","---------- Animated objects loaded  ----------");
+		Log.i("ResourcesManager","--------------- Objects loaded ---------------");
 	}
 	
 	public static void playersInitialisation() {

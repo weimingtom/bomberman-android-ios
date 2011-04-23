@@ -53,6 +53,9 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 	private ToggleButton mapEditorToggleButton;
 
 	private int menuSize = 50;
+	
+	private Point point;
+	private Objects object;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -83,19 +86,38 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 
 				@Override
 				public boolean onTouch(View arg0, MotionEvent arg1) {
-					Objects object = ResourcesManager.getObjects().get(objectsGallery.getSelectedItem());
+										
+					switch (arg1.getAction()) {		
+					case MotionEvent.ACTION_DOWN:
+						object = ResourcesManager.getObjects().get(objectsGallery.getSelectedItem());
 
-					if ( object == null ) {
-						Hashtable<String, AnimationSequence> animations = ResourcesManager.getPlayersAnimations().get(objectsGallery2.getSelectedItem());
-						if ( animations != null ) {
-							object = new HumanPlayer(objectsGallery2.getSelectedItem(), ResourcesManager.getPlayersAnimations().get(objectsGallery2.getSelectedItem()), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
+						if ( object == null ) {
+							Hashtable<String, AnimationSequence> animations = ResourcesManager.getPlayersAnimations().get(objectsGallery2.getSelectedItem());
+							if ( animations != null ) {
+								object = new HumanPlayer(objectsGallery2.getSelectedItem(), ResourcesManager.getPlayersAnimations().get(objectsGallery2.getSelectedItem()), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
+							}
 						}
-					}
 
-					if ( object != null ) {
-						editorController.addObjects(object.copy(), (int) arg1.getX(), (int) arg1.getY());
+						if ( object != null ) {
+							point = ResourcesManager.coToTile((int) arg1.getX(), (int) arg1.getY());
+							editorController.addObjects(object.copy(), point);
+						}
+						System.out.println("CkmHE");
+						break;
+					case MotionEvent.ACTION_MOVE:
+						Point point2 = ResourcesManager.coToTile((int) arg1.getX(), (int) arg1.getY());
+						if ( point.x != point2.x || point.y != point2.y ) {
+							point = point2;
+							editorController.addObjects(object.copy(), point);
+						}
+						break;
+					case MotionEvent.ACTION_UP:
+						point = null;
+						object = null;
+						break;
 					}
-					return false;
+					
+					return true;
 				}
 			});
 			this.editorController.update();
