@@ -12,7 +12,7 @@
 
 
 @implementation Player
-@synthesize speed, lifeNumber, bombsPlanted;
+@synthesize speed, lifeNumber, bombsPlanted, bombNumber,bombsTypes,powerExplosion,shield,timeExplosion, color;
 
 - (id) init{
 	self = [super init];
@@ -24,9 +24,12 @@
 		shield = 1;
 		speed = 1;
 		bombNumber = 1;
-		animations = [ressource.bitmapsPlayer objectForKey:color];
 		position.x = 0;
 		position.y = 0;
+		currentAnimation = @"idle";
+		bombsPlanted = [[NSMutableArray alloc] init];
+		bombsTypes = [[NSMutableArray alloc] init];
+
 	}
 	return self;
 }
@@ -42,10 +45,8 @@
 		speed = 1;
 		bombNumber = 1;
 		ressource = [RessourceManager sharedRessource];
-		animations = [ressource.bitmapsPlayer objectForKey:color];
 		position.x = positionValue.x;
 		position.y = positionValue.y;
-		bombsPlanted = [[NSMutableArray alloc] init];
 		waitDelay = 4;
 		currentAnimation =@"idle";
 	}
@@ -209,7 +210,7 @@
 
 
 - (void) draw:(CGContextRef)context{
-	
+
 	NSMutableArray * sequences = ((AnimationSequence *)[animations valueForKey:currentAnimation]).sequences;
 	
 	if (currentFrame < [sequences count]){
@@ -254,6 +255,38 @@
 	else{
 		delay++;
 	}
+}
+
+- (Player *)copy {
+	Player * playerTmp = [[Player alloc] init];
+	playerTmp.ressource = ressource;
+    playerTmp.imageName = [[NSString alloc] initWithString:imageName];
+	playerTmp.hit = hit;
+	playerTmp.level = level;
+	playerTmp.fireWall = fireWall;
+	playerTmp.damages = damages;
+	playerTmp.position = [[Position alloc] initWithPosition:position];
+	
+	playerTmp.animations = [[NSMutableDictionary alloc] initWithDictionary:animations];
+	playerTmp.destroyAnimations = [[NSMutableDictionary alloc] initWithDictionary:destroyAnimations];
+	playerTmp.idle = idle;
+	
+	playerTmp.currentAnimation = [[NSString alloc] initWithString:currentAnimation];
+	playerTmp.currentFrame = currentFrame;
+	playerTmp.waitDelay = waitDelay;
+	playerTmp.delay = delay;
+	
+	playerTmp.bombsPlanted = [[NSMutableArray alloc] initWithArray:bombsPlanted];
+	playerTmp.bombsTypes = [[NSMutableArray alloc] initWithArray:bombsTypes];
+	playerTmp.color = [[NSMutableString alloc] initWithString:color];
+	playerTmp.lifeNumber = lifeNumber;
+	playerTmp.powerExplosion = powerExplosion;
+	playerTmp.timeExplosion = timeExplosion;
+	playerTmp.shield = shield;
+	playerTmp.speed = speed;
+	playerTmp.bombNumber = bombNumber;
+	
+	return playerTmp;
 }
 
 

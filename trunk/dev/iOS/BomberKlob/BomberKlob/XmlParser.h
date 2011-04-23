@@ -13,22 +13,28 @@
 @interface XmlParser : NSXMLParser {
 
 	NSString  * type;
-	NSMutableDictionary * png;
 	NSMutableString * currentString;
-	
-	NSMutableDictionary * animations;
-	NSMutableDictionary * animationsBombs;
-	NSMutableDictionary * animationsAnimates;
 	NSMutableString * currentAnimation;
+	NSMutableString * characters;
+	
+	NSMutableDictionary * objectsAnimations;
+	NSMutableDictionary * objectsBombs;
+	NSMutableDictionary * objects;
+	NSMutableDictionary * objectsInanimates;
+	NSMutableDictionary * objectsIdle;
+
+	NSInteger currentDelayNextFrame;
 	NSMutableString * currentCanLoop;
 	NSMutableString * currentProperty;
 
 }
 
-@property (nonatomic, retain)NSMutableDictionary * png;
-@property (nonatomic, retain)NSMutableDictionary * animations;
-@property (nonatomic, retain)NSMutableDictionary * animationsBombs;
-@property (nonatomic, retain)NSMutableDictionary * animationsAnimates;
+@property (nonatomic, retain)NSMutableDictionary * objectsAnimations;
+@property (nonatomic, retain)NSMutableDictionary * objectsBombs;
+@property (nonatomic, retain)NSMutableDictionary * objects;
+@property (nonatomic, retain)NSMutableDictionary * objectsInanimates;
+@property (nonatomic, retain)NSMutableDictionary * objectsIdle;
+
 
 
 

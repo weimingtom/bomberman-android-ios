@@ -68,32 +68,37 @@
         
         for (int j = 0; j < height; j++) {
             positionTmp = [[Position alloc] initWithX:i*resource.tileSize y:j*resource.tileSize];
-			NSMutableDictionary * animationsTmp = [[NSMutableDictionary alloc] initWithDictionary:[resource.bitmapsInanimates dictionaryWithValuesForKeys:[[NSArray alloc] initWithObjects:@"grass2", nil]]];
 			
-            groundTmp = [[Undestructible alloc] initWithImageName:@"grass2" position:positionTmp animations:animationsTmp];
-            [[grounds objectAtIndex:i] addObject: groundTmp];
+			Object * objectTmp = [(Object *)[resource.bitmapsAnimates objectForKey:@"grass2"] copy];
+			objectTmp.position = positionTmp;
+            [[grounds objectAtIndex:i] addObject: objectTmp];
             
             if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
-				animationsTmp = [[NSMutableDictionary alloc] initWithDictionary:[resource.bitmapsInanimates dictionaryWithValuesForKeys:[[NSArray alloc] initWithObjects:@"bloc", nil]]];
-                blockTmp = [[Undestructible alloc] initWithImageName:@"bloc" position:positionTmp animations:animationsTmp];
-                [[blocks objectAtIndex:i] addObject: blockTmp];
-                
-                [blockTmp release];
+				objectTmp = [(Object *)[resource.bitmapsAnimates objectForKey:@"herb"] copy];
+				objectTmp.position = positionTmp;
+				[[blocks objectAtIndex:i] addObject: objectTmp];
             }
+			else if (i==10 && j == 10){
+				objectTmp = [(Object *)[resource.bitmapsAnimates objectForKey:@"herb"] copy];
+				objectTmp.position = positionTmp;
+				[[blocks objectAtIndex:i] addObject: objectTmp];
+			}
             else {
                 [[blocks objectAtIndex:i] addObject:@"empty"];
             }
+			
+			
             
-            [groundTmp release];
-            [positionTmp release];
+            //[groundTmp release];
+            //[positionTmp release];
         }
     }
 	for (int i=0; i < 4; i++) {
 		[players addObject:[[Position alloc] initWithX:2 y:2+i]];
 	}
     
-    [groundsTmp release];
-    [blocksTmp release];
+    //[groundsTmp release];
+    //[blocksTmp release];
 }
 
 
@@ -320,14 +325,11 @@
         for (int j = 0; j < height; j++) {	
 			Object * object = [[blocks objectAtIndex:i] objectAtIndex:j];
             if (![object isEqual:@"empty"]) {
-				if ([[[object class] description] isEqualToString:@"Undestructible"]) {
-					if (![((Undestructible *) object) hasAnimationFinished]) {
-						[((Undestructible *) object) update]; 
-					}
-					else {
-						[[blocks objectAtIndex:i] replaceObjectAtIndex:j withObject:@"empty"];
-					}
-					
+				if (![object hasAnimationFinished]) {
+					[object update]; 
+				}
+				else {
+					[[blocks objectAtIndex:i] replaceObjectAtIndex:j withObject:@"empty"];	
 				}
             }
         }

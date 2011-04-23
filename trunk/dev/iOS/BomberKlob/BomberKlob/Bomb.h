@@ -17,6 +17,8 @@
 }
 
 @property (nonatomic) NSInteger power;
+@property (nonatomic) BOOL explode;
+@property (nonatomic,retain) NSString * type;
 
 - (id) initWithImageName:(NSString *)anImageName position:(Position *)aPosition;
 - (void) draw:(CGContextRef) context;

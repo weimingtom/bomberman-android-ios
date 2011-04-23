@@ -10,9 +10,11 @@
 #import "Object.h"
 
 @interface Destructible : Object {
-    NSUInteger life;
+    NSInteger life;
 }
 
-@property (nonatomic) NSUInteger life;
+@property (nonatomic) NSInteger life;
+
+- (id) init;
 
 @end
