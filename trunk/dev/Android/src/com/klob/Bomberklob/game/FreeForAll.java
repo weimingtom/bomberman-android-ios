@@ -4,7 +4,7 @@ public class FreeForAll extends GameType {
 	
 	public FreeForAll() {
 		hit = false;
-		life = 3;
+		life = 1;
 		fireWall = false;
 		powerExplosion = 5;
 		timeExplosion = 30;

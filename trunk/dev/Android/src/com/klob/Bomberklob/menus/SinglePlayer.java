@@ -153,6 +153,7 @@ public class SinglePlayer extends Activity implements View.OnClickListener{
 			intent.putExtra("enemies", Integer.parseInt(enemiesNumber.getSelectedItem().toString()));
 			intent.putExtra("gametype", gameType.getSelectedItem().toString());
 			intent.putExtra("random", false);
+			intent.putExtra("time", time.getSelectedItemPosition());
 			intent.putExtra("difficulty", enemiesDifficulty.getSelectedItemPosition());
 			startActivity(intent);
 			this.finish();

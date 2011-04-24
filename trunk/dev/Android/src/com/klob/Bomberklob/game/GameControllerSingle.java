@@ -42,7 +42,7 @@ public class GameControllerSingle extends GameController {
 		this.onTouchEventThread = new Thread() {
 			@Override
 			public void run() {
-				while (onTouchEventBoolean) {
+				while (onTouchEventBoolean && engine.getSingle().getPlayers()[0] != null) {
 					engine.move(animation);
 					try {
 						sleep(50);
@@ -82,6 +82,8 @@ public class GameControllerSingle extends GameController {
 
 	@Override
 	public void pushBomb() {
-		this.engine.pushBomb(this.engine.getSingle().getPlayers()[0]);		
+		if ( this.engine.getSingle().getPlayers()[0] != null ) {
+			this.engine.pushBomb(this.engine.getSingle().getPlayers()[0]);	
+		}
 	}
 }

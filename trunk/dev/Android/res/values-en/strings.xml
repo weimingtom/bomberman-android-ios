@@ -52,7 +52,6 @@
 		<item>2</item>
 		<item>3</item>
 		<item>5</item>
-		<item>∞</item>
 	</string-array>
 
 	<string name="SinglePlayerGameErrorLoadingMap">No maps found !</string>

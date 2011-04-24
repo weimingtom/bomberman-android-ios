@@ -130,6 +130,10 @@ public abstract class Player extends Objects {
 		return this.speed;
 	}
 
+	public int getLife() {
+		return this.life;
+	}
+	
 	public int getShield() {
 		return this.shield;
 	}
@@ -152,7 +156,7 @@ public abstract class Player extends Objects {
 		}
 		
 		if ( bombNumber > bombsPlanted.size() ) {
-			Bomb b = new Bomb("normal", ResourcesManager.getBombsAnimations().get("normal"), ObjectsAnimations.ANIMATE, true, 1, false, 1, 1, powerExplosion, timeExplosion);
+			Bomb b = new Bomb("normal", ResourcesManager.getBombsAnimations().get("normal"), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, powerExplosion, timeExplosion);
 			b.setPosition(p);
 			bombsPlanted.add(b);
 			return b;
@@ -162,8 +166,10 @@ public abstract class Player extends Objects {
 
 	@Override
 	public void onDraw(Canvas canvas, int size) {
-		int tileSize = ResourcesManager.getTileSize();
-		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), new Rect((this.getPoint().x*tileSize), (this.getPoint().y*(tileSize+(tileSize/2))), ((this.getPoint().x*tileSize)+tileSize), ( (this.getPoint().y*(tileSize+(tileSize/2)))+(tileSize+(tileSize/2)) )), new Rect(this.position.x, this.position.y-(size/2), this.position.x+size, this.position.y+size), null);
+		if(cf!=null) {
+			//color filter code here
+		}
+		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), this.getRect(), new Rect(this.position.x, this.position.y-(size/2), this.position.x+size, this.position.y+size), null);
 	}
 
 	@Override
@@ -172,6 +178,13 @@ public abstract class Player extends Objects {
 			return false;
 		}
 		return true;
+	}
+	
+	public void decreaseLife() {
+		System.out.println("LIFE = " + this.life);
+		if ( this.life > 0 ) {
+			this.life--;
+		}
 	}
 	
 	@Override
