@@ -79,6 +79,16 @@
 		<animation name="kill" canLoop="false">
 			<framerect top="0" left="690" bottom="45" right="720" delayNextFrame="5" />
 		</animation>
+		<animation name="touched" canLoop="false">
+			<framerect top="0" left="30" bottom="45" right="60" delayNextFrame="5" />
+			<framerect top="0" left="0"  bottom="45" right="30" delayNextFrame="5" />
+			<framerect top="0" left="60" bottom="45" right="90" delayNextFrame="5" />
+			<framerect top="0" left="0"  bottom="45" right="30" delayNextFrame="5" />
+			<framerect top="0" left="30" bottom="45" right="60" delayNextFrame="5" />
+			<framerect top="0" left="0"  bottom="45" right="30" delayNextFrame="5" />
+			<framerect top="0" left="60" bottom="45" right="90" delayNextFrame="5" />
+			<framerect top="0" left="0"  bottom="45" right="30" delayNextFrame="5" />
+		</animation>
 	</player>
 	
 	<player name="black">

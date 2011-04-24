@@ -8,6 +8,7 @@ import com.klob.Bomberklob.resources.ResourcesManager;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.Paint;
 import android.graphics.Rect;
 
 public abstract class Objects implements Serializable {
@@ -31,6 +32,8 @@ public abstract class Objects implements Serializable {
 
 	//TODO
 	protected ColorFilter cf;
+	protected Paint paint;
+	
 
 	/* Contructeur --------------------------------------------------------- */
 
@@ -46,6 +49,8 @@ public abstract class Objects implements Serializable {
 		this.currentAnimation = currentAnimation;
 		this.currentFrame = 0;
 		this.waitDelay = animations.get(this.currentAnimation).sequence.get(this.currentFrame).nextFrameDelay;
+		
+		this.paint = new Paint();
 	}
 
 	public Objects(Objects objects) {
@@ -60,6 +65,8 @@ public abstract class Objects implements Serializable {
 		this.currentAnimation = objects.currentAnimation;
 		this.currentFrame = objects.currentFrame;
 		this.waitDelay = this.animations.get(this.currentAnimation).sequence.get(this.currentFrame).nextFrameDelay;
+		
+		this.paint = objects.paint;
 	}
 
 	/* Getters ------------------------------------------------------------- */
@@ -98,6 +105,14 @@ public abstract class Objects implements Serializable {
 
 	public int getWaitDelay() {
 		return this.waitDelay;
+	}
+	
+	public Paint getPaint() {
+		return this.paint;
+	}
+	
+	public ColorFilter getColorFilter() {
+		return this.cf;
 	}
 
 	public int getDamage() {
@@ -171,7 +186,7 @@ public abstract class Objects implements Serializable {
 		if(cf!=null) {
 			//color filter code here
 		}
-		canvas.drawBitmap(ResourcesManager.getBitmaps().get("objects"), this.getRect(), new Rect(this.position.x, this.position.y, (this.position.x)+size, (this.position.y)+size), null);
+		canvas.drawBitmap(ResourcesManager.getBitmaps().get("objects"), this.getRect(), new Rect(this.position.x, this.position.y, (this.position.x)+size, (this.position.y)+size), this.paint);
 	}
 
 

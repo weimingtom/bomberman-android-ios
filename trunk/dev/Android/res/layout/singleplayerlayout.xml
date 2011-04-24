@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
-	xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/SinglePlayerRelativeLayoutGlobal">
+<RelativeLayout android:layout_width="fill_parent"
+	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/SinglePlayerRelativeLayoutGlobal">
 
 	<LinearLayout android:id="@+id/linearLayout4"
 		android:orientation="vertical" android:layout_height="fill_parent"
@@ -8,6 +9,38 @@
 		<RelativeLayout android:id="@+id/SinglePlayerRelativeLayoutMenu"
 			android:layout_height="wrap_content" android:background="@color/White"
 			android:layout_width="fill_parent" android:gravity="center_vertical">
+			<LinearLayout android:id="@+id/linearLayout5"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true">
+				<LinearLayout android:layout_height="fill_parent"
+					android:id="@+id/linearLayout6" android:layout_width="wrap_content"
+					android:background="@drawable/bombpower" android:gravity="bottom|right">
+					<TextView android:text="1" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:id="@+id/SinglePlayerTextViewBombPower"></TextView>
+				</LinearLayout>
+				<LinearLayout android:layout_height="fill_parent"
+					android:id="@+id/linearLayout7" android:layout_width="wrap_content"
+					android:background="@drawable/bombnumber" android:gravity="bottom|right">
+					<TextView android:layout_height="wrap_content"
+						android:id="@+id/SinglePlayerTextViewBombNumber"
+						android:layout_width="wrap_content" android:text="1"></TextView>
+				</LinearLayout>
+				<LinearLayout android:layout_height="fill_parent"
+					android:id="@+id/linearLayout8" android:layout_width="wrap_content"
+					android:background="@drawable/playerspeed" android:gravity="bottom|right">
+					<TextView android:layout_height="wrap_content"
+						android:id="@+id/SinglePlayerTextViewPlayerSpeed"
+						android:layout_width="wrap_content" android:text="1"></TextView>
+				</LinearLayout>
+				<LinearLayout android:layout_height="fill_parent"
+					android:id="@+id/linearLayout9" android:layout_width="wrap_content"
+					android:background="@drawable/playerlife" android:gravity="bottom|right">
+					<TextView android:layout_height="wrap_content"
+						android:id="@+id/SinglePlayerTextViewPlayerLife"
+						android:layout_width="wrap_content" android:text="1"></TextView>
+				</LinearLayout>
+			</LinearLayout>
 			<Button android:id="@+id/SinglePlayerButtonMenu"
 				android:layout_height="wrap_content" android:layout_width="wrap_content"
 				android:text="@string/ButtonMenu"></Button>
@@ -51,12 +84,24 @@
 			</RelativeLayout>
 		</LinearLayout>
 	</LinearLayout>
-	<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:gravity="center_vertical|center_horizontal" android:id="@+id/SinglePlayerLinearLayoutMenu" android:background="@color/Black">
-		<LinearLayout android:gravity="center_vertical|center_horizontal" android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="wrap_content" android:orientation="vertical">
-			<Button android:id="@+id/SinglePlayerMenuResume" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/SinglePlayerMenuResume"></Button>
-			<Button android:id="@+id/SinglePlayerMenuOptions" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/SinglePlayerMenuOptions"></Button>
-			<Button android:id="@+id/SinglePlayerMenuRestart" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/SinglePlayerMenuRestart"></Button>
-			<Button android:id="@+id/SinglePlayerMenuQuit" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/SinglePlayerMenuQuit"></Button>
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:gravity="center_vertical|center_horizontal"
+		android:id="@+id/SinglePlayerLinearLayoutMenu" android:background="@color/Black">
+		<LinearLayout android:gravity="center_vertical|center_horizontal"
+			android:layout_height="wrap_content" android:id="@+id/linearLayout1"
+			android:layout_width="wrap_content" android:orientation="vertical">
+			<Button android:id="@+id/SinglePlayerMenuResume"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+				android:text="@string/SinglePlayerMenuResume"></Button>
+			<Button android:id="@+id/SinglePlayerMenuOptions"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+				android:text="@string/SinglePlayerMenuOptions"></Button>
+			<Button android:id="@+id/SinglePlayerMenuRestart"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+				android:text="@string/SinglePlayerMenuRestart"></Button>
+			<Button android:id="@+id/SinglePlayerMenuQuit"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"
+				android:text="@string/SinglePlayerMenuQuit"></Button>
 		</LinearLayout>
 	</LinearLayout>
 
