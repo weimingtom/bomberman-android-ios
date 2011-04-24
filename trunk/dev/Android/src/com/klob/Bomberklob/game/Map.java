@@ -94,7 +94,6 @@ public class Map implements Serializable {
 			ObjectOutputStream oos= new ObjectOutputStream(fos);
 
 			try {
-				System.out.println("GROUNDS : " + this.grounds[1][5].getPosition().x);
 				oos.writeObject(this); 
 				oos.flush();
 			} finally {
@@ -145,9 +144,6 @@ public class Map implements Serializable {
 			this.blocks = map.getBlocks();
 			this.players = map.getPlayers();
 			this.name = map.getName();
-			
-			System.out.println("GROUNDS : " + this.grounds[1][5].getPosition().x);
-
 			return true;
 		}
 		return false;

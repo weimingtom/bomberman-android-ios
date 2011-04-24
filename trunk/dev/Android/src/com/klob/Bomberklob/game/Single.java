@@ -33,7 +33,9 @@ public class Single extends Game {
 			colors.add(entry.getKey());
 		}
 		
-		if ( colors.size() >= this.players.length ) {		
+		System.out.println("ETST : " + colors.size() + " " + this.players.length);
+		
+		if ( colors.size() >= this.players.length ) {
 			this.players[0] = new HumanPlayer(Model.getUser().getColor(), ResourcesManager.getPlayersAnimations().get(Model.getUser().getColor()), PlayerAnimations.IDLE,gameType.hit, 1, gameType.fireWall, gameType.damages, gameType.life, gameType.powerExplosion, gameType.timeExplosion, gameType.speed, gameType.shield, gameType.bombNumber, gameType.immortal);
 			this.players[0].setPosition(new Point(this.map.getPlayers()[0].x*ResourcesManager.getSize(), this.map.getPlayers()[0].y*ResourcesManager.getSize()));
 			colors.remove(this.players[0].getImageName());
