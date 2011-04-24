@@ -2,7 +2,7 @@ package com.klob.Bomberklob.objects;
 
 import java.io.Serializable;
 
-import com.klob.Bomberklob.resources.Point;
+import com.klob.Bomberklob.resources.Rect;
 
 public class FrameInfo implements Serializable {
 	/**
@@ -10,6 +10,6 @@ public class FrameInfo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public Point point = new Point();
+	public Rect rect = new Rect();
 	public int nextFrameDelay;
 }

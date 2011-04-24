@@ -3,6 +3,7 @@ package com.klob.Bomberklob.game;
 import java.util.Vector;
 
 import com.klob.Bomberklob.objects.Bomb;
+import com.klob.Bomberklob.objects.ObjectsAnimations;
 import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.resources.Point;
@@ -487,149 +488,206 @@ public class Engine {
 
 	public void update() {
 		Player[] players = this.single.getPlayers();
-		Vector<Bomb> bombs;
 		Map map = this.single.getMap();
 
 		for (int i = 0 ; i < players.length ; i++ ) {
 			if ( players[i] != null ) {
-				bombs = players[i].getBombsPlanted();
-				for(int j = 0; j < bombs.size() ; j++ ) {
-					if ( bombs.get(j).hasAnimationFinished() ) {
-						Point p = ResourcesManager.coToTile(bombs.get(j).getPosition().x, bombs.get(j).getPosition().y);
-						map.addBlock(ResourcesManager.getObjects().get("firecenter").copy(), p);
-						
-						/* UP */
-						for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
-							if ( map.getBlocks()[p.x][p.y-k] == null ) {
-								if ( map.getGrounds()[p.x][p.y-k].isFireWall() ) {
-									break;
-								}
-								else {
-									if ( k < bombs.get(j).getPower()-1 ) {
-										map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y-k));
+
+				/* Bombes -------------------------------------------------- */
+
+				this.updateBombs(players[i].getBombsPlanted());				
+
+				/* Joueurs ------------------------------------------------- */
+
+				if ( players[i].getPosition() != null ) {
+
+					/* Si l'animation courante correspond à KILL et qu'elle est finie on supprime le personnage */
+					if ( players[i].hasAnimationFinished() && players[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
+						/* On met la position à null et non la valeur du joueur dans le tableau car sinon on ne mettra jamais ses bombes à jour une fois qu'il est mort */
+						players[i].setPosition(null);
+					}
+					else {					
+						/* Si le joueur vient de se faire toucher */
+						if ( players[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) ) {
+							/* Si l'animation est finie */
+							if ( players[i].hasAnimationFinished() ) {
+								/* On lance un timer qui fera "clignoter" le personnage */							
+							}
+						}
+						else /*if le timer est fini */ {
+							Point point = players[i].getPosition();
+							point = ResourcesManager.coToTile(point.x,point.y);
+
+							if ( map.getBlocks()[point.x][point.y] != null ) {
+								if ( map.getBlocks()[point.x][point.y].getDamage() != 0 ) {
+									players[i].decreaseLife();
+									if ( players[i].getLife() == 0 ) {
+										//players[i].setCurrentAnimation(PlayerAnimations.KILL);
 									}
 									else {
-										map.addBlock(ResourcesManager.getObjects().get("fireup").copy(), new Point(p.x ,p.y-k));
+										//players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
 									}
 								}
 							}
-							else {
-								if ( map.getBlocks()[p.x][p.y-k].isFireWall() ) {
-									if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
-										map.getBlocks()[p.x][p.y-k].destroy();
-									}
-									break;
+							else if ( map.getGrounds()[point.x][point.y].getDamage() != 0 ){
+								players[i].decreaseLife();
+								if ( players[i].getLife() == 0 ) {
+									//players[i].setCurrentAnimation(PlayerAnimations.KILL);
 								}
 								else {
-									if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
-										map.getBlocks()[p.x][p.y-k].destroy();
-									}
+									//players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
 								}
 							}
 						}
-						
-						/* DOWN */
-						for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
-							if ( map.getBlocks()[p.x][p.y+k] == null ) {
-								if ( map.getGrounds()[p.x][p.y+k].isFireWall() ) {
-									break;
-								}
-								else {
-									if ( k < bombs.get(j).getPower()-1 ) {
-										map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y+k));
-									}
-									else {
-										map.addBlock(ResourcesManager.getObjects().get("firedown").copy(), new Point(p.x ,p.y+k));
-									}
-								}
-							}
-							else {
-								if ( map.getBlocks()[p.x][p.y+k].isFireWall() ) {
-									if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
-										map.getBlocks()[p.x][p.y+k].destroy();
-									}
-									break;
-								}
-								else {
-									if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
-										map.getBlocks()[p.x][p.y+k].destroy();
-									}
-								}
-							}
-						}
-						
-						/* LEFT */
-						for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
-							if ( map.getBlocks()[p.x-k][p.y] == null ) {
-								if ( map.getGrounds()[p.x-k][p.y].isFireWall() ) {
-									break;
-								}
-								else {
-									if ( k < bombs.get(j).getPower()-1 ) {
-										map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x-k ,p.y));
-									}
-									else {
-										map.addBlock(ResourcesManager.getObjects().get("fireleft").copy(), new Point(p.x-k ,p.y));
-									}
-								}
-							}
-							else {
-								if ( map.getBlocks()[p.x-k][p.y].isFireWall() ) {
-									if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
-										map.getBlocks()[p.x-k][p.y].destroy();
-									}
-									break;
-								}
-								else {
-									if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
-										map.getBlocks()[p.x-k][p.y].destroy();
-									}
-								}
-							}
-						}
-						
-						/* RIGHT */
-						for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
-							if ( map.getBlocks()[p.x+k][p.y] == null ) {
-								if ( map.getGrounds()[p.x+k][p.y].isFireWall() ) {
-									break;
-								}
-								else {
-									if ( k < bombs.get(j).getPower()-1 ) {
-										map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x+k ,p.y));
-									}
-									else {
-										map.addBlock(ResourcesManager.getObjects().get("fireright").copy(), new Point(p.x+k ,p.y));
-									}
-								}
-							}
-							else {
-								if ( map.getBlocks()[p.x+k][p.y].isFireWall() ) {
-									if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
-										map.getBlocks()[p.x+k][p.y].destroy();
-									}
-									break;
-								}
-								else {
-									if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
-										map.getBlocks()[p.x+k][p.y].destroy();
-									}
-								}
-							}
-						}
-						bombs.remove(j);
+						/*TODO  Vérifier tapis roulant */
+						players[i].update();
 					}
 				}
-				
-				if ( players[i].hasAnimationFinished() && players[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
-					players[i].setPosition(null);
-				}
-				else if ( players[i].getPosition() != null ) {				
-					/*TODO  Vérifier les dommages et si il est sur un tapis roulant */
-					players[i].update();
-				}
+
 			}
 		}
 		this.single.getMap().update();
+	}
+
+	private void updateBombs(Vector<Bomb> bombs) {
+		Map map = this.single.getMap();
+
+		for(int j = 0; j < bombs.size() ; j++ ) {
+
+			/* Si la bombe doit exploser */
+			if ( bombs.get(j).timeElapsed() && bombs.get(j).getCurrentAnimation().equals(ObjectsAnimations.ANIMATE.getLabel())) {
+				/* On passe son animation à DESTROY */
+				bombs.get(j).setCurrentAnimation(ObjectsAnimations.DESTROY);
+			}
+			/* Si la bombe a comme animation DESTROY et qu'elle est finie alors on ajoute les flammes et on supprime la bombe */
+			else if ( bombs.get(j).hasAnimationFinished() && bombs.get(j).getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel())) {
+
+				Point p = ResourcesManager.coToTile(bombs.get(j).getPosition().x, bombs.get(j).getPosition().y);
+				map.addBlock(ResourcesManager.getObjects().get("firecenter").copy(), p);
+
+				/* UP */
+				for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
+					if ( map.getBlocks()[p.x][p.y-k] == null ) {
+						if ( map.getGrounds()[p.x][p.y-k].isFireWall() ) {
+							break;
+						}
+						else {
+							if ( k < bombs.get(j).getPower()-1 ) {
+								map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y-k));
+							}
+							else {
+								map.addBlock(ResourcesManager.getObjects().get("fireup").copy(), new Point(p.x ,p.y-k));
+							}
+						}
+					}
+					else {
+						if ( map.getBlocks()[p.x][p.y-k].isFireWall() ) {
+							if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
+								map.getBlocks()[p.x][p.y-k].destroy();
+							}
+							break;
+						}
+						else {
+							if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
+								map.getBlocks()[p.x][p.y-k].destroy();
+							}
+						}
+					}
+				}
+
+				/* DOWN */
+				for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
+					if ( map.getBlocks()[p.x][p.y+k] == null ) {
+						if ( map.getGrounds()[p.x][p.y+k].isFireWall() ) {
+							break;
+						}
+						else {
+							if ( k < bombs.get(j).getPower()-1 ) {
+								map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y+k));
+							}
+							else {
+								map.addBlock(ResourcesManager.getObjects().get("firedown").copy(), new Point(p.x ,p.y+k));
+							}
+						}
+					}
+					else {
+						if ( map.getBlocks()[p.x][p.y+k].isFireWall() ) {
+							if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
+								map.getBlocks()[p.x][p.y+k].destroy();
+							}
+							break;
+						}
+						else {
+							if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
+								map.getBlocks()[p.x][p.y+k].destroy();
+							}
+						}
+					}
+				}
+
+				/* LEFT */
+				for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
+					if ( map.getBlocks()[p.x-k][p.y] == null ) {
+						if ( map.getGrounds()[p.x-k][p.y].isFireWall() ) {
+							break;
+						}
+						else {
+							if ( k < bombs.get(j).getPower()-1 ) {
+								map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x-k ,p.y));
+							}
+							else {
+								map.addBlock(ResourcesManager.getObjects().get("fireleft").copy(), new Point(p.x-k ,p.y));
+							}
+						}
+					}
+					else {
+						if ( map.getBlocks()[p.x-k][p.y].isFireWall() ) {
+							if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
+								map.getBlocks()[p.x-k][p.y].destroy();
+							}
+							break;
+						}
+						else {
+							if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
+								map.getBlocks()[p.x-k][p.y].destroy();
+							}
+						}
+					}
+				}
+
+				/* RIGHT */
+				for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
+					if ( map.getBlocks()[p.x+k][p.y] == null ) {
+						if ( map.getGrounds()[p.x+k][p.y].isFireWall() ) {
+							break;
+						}
+						else {
+							if ( k < bombs.get(j).getPower()-1 ) {
+								map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x+k ,p.y));
+							}
+							else {
+								map.addBlock(ResourcesManager.getObjects().get("fireright").copy(), new Point(p.x+k ,p.y));
+							}
+						}
+					}
+					else {
+						if ( map.getBlocks()[p.x+k][p.y].isFireWall() ) {
+							if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
+								map.getBlocks()[p.x+k][p.y].destroy();
+							}
+							break;
+						}
+						else {
+							if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
+								map.getBlocks()[p.x+k][p.y].destroy();
+							}
+						}
+					}
+				}
+
+				/* Puis on supprime la bombe */
+				bombs.remove(j);
+			}
+		}
 	}
 }

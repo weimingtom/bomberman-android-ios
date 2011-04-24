@@ -19,7 +19,8 @@ public enum PlayerAnimations {
 	STOP_UP_LEFT("stop_up_left"),
 	STOP_DOWN_RIGHT("stop_down_right"),
 	STOP_DOWN_LEFT("stop_down_left"),
-	KILL("kill");
+	KILL("kill"),
+	TOUCHED("touched");
 	
 
 	private String label;

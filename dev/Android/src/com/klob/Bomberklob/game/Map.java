@@ -21,25 +21,25 @@ import android.util.Log;
 
 
 public class Map implements Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private String name;
 	private Point[] players;
 	private Objects[][] grounds;
 	private Objects[][] blocks;
-	
+
 	public Map() {
 		this.players = new Point[4];
 		this.grounds = new Objects[21][14];
 		this.blocks  = new Objects[21][14];
 	}
-	
+
 	/* Getteurs ------------------------------------------------------------ */
-	
+
 	public String getName() {
 		return this.name;
 	}
@@ -51,14 +51,14 @@ public class Map implements Serializable {
 	public Objects[][] getBlocks() {
 		return this.blocks;
 	}
-	
+
 	public Point[] getPlayers() {
 		return players;
 	}
 
-	
+
 	/* Setteurs ------------------------------------------------------------ */
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -74,7 +74,7 @@ public class Map implements Serializable {
 	public void setPlayers(Point[] players) {
 		this.players = players;
 	}
-	
+
 	/* Méthodes publiques -------------------------------------------------- */
 
 	public boolean saveMap() {
@@ -84,16 +84,17 @@ public class Map implements Serializable {
 				return false;
 			}
 		}
-		
+
 		File dir = ResourcesManager.getContext().getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
 		File f = new File (dir.getAbsolutePath()+"/"+this.name+".klob");
-		
+
 		try {
 			f.createNewFile();
 			FileOutputStream fos = new FileOutputStream(f);
 			ObjectOutputStream oos= new ObjectOutputStream(fos);
 
 			try {
+				System.out.println("GROUNDS : " + this.grounds[1][5].getPosition().x);
 				oos.writeObject(this); 
 				oos.flush();
 			} finally {
@@ -110,55 +111,58 @@ public class Map implements Serializable {
 	}
 
 	public boolean loadMap(String s) {
-		
+
 		File dir = ResourcesManager.getContext().getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
 		File f = new File (dir.getAbsolutePath()+"/"+s+".klob");
 		Log.i("Map", "File loaded : " + f.getAbsolutePath());
 		Map map = null;
 
-			try {
-				FileInputStream fis = new FileInputStream(f);
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				
-				try {	
-					map  = (Map) ois.readObject(); 
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} finally {
-					try {
-						ois.close();
-					} finally {
-						fis.close();
-					}
-				}
-			} catch (FileNotFoundException e) {
-				return false;
-			} catch (StreamCorruptedException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		try {
+			FileInputStream fis = new FileInputStream(f);
+			ObjectInputStream ois = new ObjectInputStream(fis);
 
-			if(map != null) {
+			try {	
+				map  = (Map) ois.readObject(); 
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					ois.close();
+				} finally {
+					fis.close();
+				}
+			}
+		} catch (FileNotFoundException e) {
+			return false;
+		} catch (StreamCorruptedException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		if(map != null) {			
 			this.grounds = map.getGrounds();
 			this.blocks = map.getBlocks();
 			this.players = map.getPlayers();
 			this.name = map.getName();
+			
+			System.out.println("GROUNDS : " + this.grounds[1][5].getPosition().x);
+
 			return true;
 		}
 		return false;
 	}
-	
+
 	public void addGround(Objects o, Point p) {
 		o.setPosition(new Point(p.x*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
 		this.grounds[p.x][p.y] = o;
 	}
-	
+
 	public void addBlock(Objects o, Point p) {
 		o.setPosition(new Point(p.x*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
 		this.blocks[p.x][p.y] = o;
 	}
-	
+
 	public int addPlayer(Point p) {
 		if ( this.blocks[p.x][p.y] != null ) {
 			this.blocks[p.x][p.y] = null;
@@ -171,15 +175,15 @@ public class Map implements Serializable {
 		}
 		return -1;
 	}
-	
+
 	public void deleteGround(Point p) {
 		this.grounds[p.x][p.y] = null;
 	}
-	
+
 	public void deleteBlock(Point p) {
 		this.blocks[p.x][p.y] = null;
 	}
-	
+
 	public int deletePlayer(Point p) {
 		for (int i = 0 ; i < this.players.length ; i++ ) {
 			if (this.players[i] != null && this.players[i].x == p.x && this.players[i].y == p.y ) {
@@ -189,11 +193,11 @@ public class Map implements Serializable {
 		}
 		return -1;
 	}
-	
+
 	public void destroyBlock(Point p) {
 		this.blocks[p.x][p.y].destroy();
 	}
-	
+
 	public void update() {
 		for (int i = 0; i < this.grounds.length ; i++) {
 			for (int j = 0; j < this.grounds[0].length ; j++) {
@@ -211,16 +215,16 @@ public class Map implements Serializable {
 			}
 		}
 	}
-	
+
 	/* onDraws ------------------------------------------------------------- */
-	
+
 	public void onDraw(Canvas canvas, int size) {
 		for (int i = 0; i < this.grounds.length ; i++) {
 			for (int j = 0; j < this.grounds[0].length ; j++) {
 				if ( this.grounds[i][j] != null ) {
 					this.grounds[i][j].onDraw(canvas, size);
 				}
-				
+
 				if ( this.blocks[i][j] != null ) {
 					this.blocks[i][j].onDraw(canvas, size);
 				}
@@ -237,7 +241,7 @@ public class Map implements Serializable {
 			}
 		}
 	}
-	
+
 	public void blocksOnDraw(Canvas canvas, int size) {
 		for (int i = 0; i < this.blocks.length ; i++) {
 			for (int j = 0; j < this.blocks[0].length ; j++) {

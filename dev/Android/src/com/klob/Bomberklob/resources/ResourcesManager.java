@@ -26,7 +26,6 @@ public class ResourcesManager {
 	private static ResourcesManager resourcesmanager;
 
 	private static Context context;
-	private static int tileSize;
 	private static float dpiPx;
 	private static int size;
 	private static int height;
@@ -53,7 +52,6 @@ public class ResourcesManager {
 		}
 		
 		Log.i("ResourcesManager","dpiPx : " + dpiPx);
-		Log.i("ResourcesManager","tileSize : " + tileSize);
 		Log.i("ResourcesManager","size : " + size);
 		
 		bitmapsInitialisation();
@@ -92,10 +90,6 @@ public class ResourcesManager {
 		return context;
 	}
 
-	public static int getTileSize() {
-		return tileSize;
-	}
-
 	public static int getSize() {
 		return size;
 	}
@@ -130,10 +124,7 @@ public class ResourcesManager {
 
 				if(eventType == XmlPullParser.START_TAG) {
 					
-					if(xpp.getName().toLowerCase().equals("bitmaps")) {
-						tileSize = xpp.getAttributeIntValue(null, "size", 0);
-					}
-					else if(xpp.getName().toLowerCase().equals("png")) {
+					if(xpp.getName().toLowerCase().equals("png")) {
 
 						if ( xpp.getAttributeValue(null, "name").equals("players")) {
 							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.players);
@@ -198,12 +189,14 @@ public class ResourcesManager {
 						animationsequence.sequence=new ArrayList<FrameInfo>();
 						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);	
 					}
-					else if(xpp.getName().toLowerCase().equals("png")) {
+					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
-						Point point = new Point();
-						point.x = xpp.getAttributeIntValue(null, "x", 0);
-						point.y = xpp.getAttributeIntValue(null, "y", 0);
-						frameinfo.point = point;
+						Rect frame = new Rect();
+						frame.top = xpp.getAttributeIntValue(null, "top", 0);
+						frame.bottom = xpp.getAttributeIntValue(null, "bottom", 0);
+						frame.left = xpp.getAttributeIntValue(null, "left", 0);
+						frame.right = xpp.getAttributeIntValue(null, "right", 0);
+						frameinfo.rect = frame;	
 						frameinfo.nextFrameDelay = xpp.getAttributeIntValue(null,"delayNextFrame", 0);
 						animationsequence.sequence.add(frameinfo);
 					}
@@ -269,12 +262,14 @@ public class ResourcesManager {
 						animationsequence.sequence=new ArrayList<FrameInfo>();
 						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);	
 					}
-					else if(xpp.getName().toLowerCase().equals("png")) {
+					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
-						Point point = new Point();
-						point.x = xpp.getAttributeIntValue(null, "x", 0);
-						point.y = xpp.getAttributeIntValue(null, "y", 0);
-						frameinfo.point = point;
+					  	Rect frame = new Rect();
+						frame.top = xpp.getAttributeIntValue(null, "top", 0);
+						frame.bottom = xpp.getAttributeIntValue(null, "bottom", 0);
+						frame.left = xpp.getAttributeIntValue(null, "left", 0);
+						frame.right = xpp.getAttributeIntValue(null, "right", 0);
+						frameinfo.rect = frame;				
 						frameinfo.nextFrameDelay = xpp.getAttributeIntValue(null,"delayNextFrame", 0);
 						animationsequence.sequence.add(frameinfo);
 					}
@@ -330,12 +325,14 @@ public class ResourcesManager {
 						animationsequence.sequence=new ArrayList<FrameInfo>();
 						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);	
 					}
-					else if(xpp.getName().toLowerCase().equals("png")) {
+					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
-						Point point = new Point();
-						point.x = xpp.getAttributeIntValue(null, "x", 0);
-						point.y = xpp.getAttributeIntValue(null, "y", 0);
-						frameinfo.point = point;
+						Rect frame = new Rect();
+						frame.top = xpp.getAttributeIntValue(null, "top", 0);
+						frame.bottom = xpp.getAttributeIntValue(null, "bottom", 0);
+						frame.left = xpp.getAttributeIntValue(null, "left", 0);
+						frame.right = xpp.getAttributeIntValue(null, "right", 0);
+						frameinfo.rect = frame;	
 						frameinfo.nextFrameDelay = xpp.getAttributeIntValue(null,"delayNextFrame", 0);
 						animationsequence.sequence.add(frameinfo);
 					}

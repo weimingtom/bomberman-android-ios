@@ -291,7 +291,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 					break;
 				case MotionEvent.ACTION_MOVE:
 					if (!vertical) {
-						if ( (int) event.getX() > this.x + (ResourcesManager.getTileSize()/2)) {
+						if ( (int) event.getX() > this.x + (ResourcesManager.getSize()/2)) {
 		
 							this.x = (int) event.getX();
 		
@@ -312,7 +312,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 								}
 							}
 						}
-						else if ( (int) event.getX() < this.x - (ResourcesManager.getTileSize()/2)) {
+						else if ( (int) event.getX() < this.x - (ResourcesManager.getSize()/2)) {
 		
 							this.x = (int) event.getX();
 		
@@ -335,7 +335,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 						}
 					}
 					else {			
-						if ( (int) event.getY() < this.y - (ResourcesManager.getTileSize()/2)) {
+						if ( (int) event.getY() < this.y - (ResourcesManager.getSize()/2)) {
 		
 							this.y = (int) event.getY();
 		
@@ -356,7 +356,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 								}
 							}
 						}
-						else if ( (int) event.getY() > this.y + (ResourcesManager.getTileSize()/2)) {
+						else if ( (int) event.getY() > this.y + (ResourcesManager.getSize()/2)) {
 		
 							this.y = (int) event.getY();
 		

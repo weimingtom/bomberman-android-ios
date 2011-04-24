@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<bitmaps size="30">
+<bitmaps>
 	<png name="objects"/> 
     <png name="players"/> 
 	<png name="bombs"/> 
