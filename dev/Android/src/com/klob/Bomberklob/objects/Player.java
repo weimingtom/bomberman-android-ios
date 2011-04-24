@@ -169,7 +169,7 @@ public abstract class Player extends Objects {
 		if(cf!=null) {
 			//color filter code here
 		}
-		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), this.getRect(), new Rect(this.position.x, this.position.y-(size/2), this.position.x+size, this.position.y+size), null);
+		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), this.getRect(), new Rect(this.position.x, this.position.y-(size/2), this.position.x+size, this.position.y+size), this.paint);
 	}
 
 	@Override
@@ -181,7 +181,6 @@ public abstract class Player extends Objects {
 	}
 	
 	public void decreaseLife() {
-		System.out.println("LIFE = " + this.life);
 		if ( this.life > 0 ) {
 			this.life--;
 		}

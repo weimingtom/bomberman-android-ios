@@ -1,5 +1,7 @@
 package com.klob.Bomberklob.game;
 
+import com.klob.Bomberklob.objects.PlayerAnimations;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.Log;
@@ -43,7 +45,9 @@ public class GameControllerSingle extends GameController {
 			@Override
 			public void run() {
 				while (onTouchEventBoolean && engine.getSingle().getPlayers()[0] != null) {
-					engine.move(animation);
+					if ( !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
+						engine.move(animation);
+					}
 					try {
 						sleep(50);
 					} catch (InterruptedException e) {

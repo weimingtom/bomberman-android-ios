@@ -123,7 +123,7 @@ public class Engine {
 							if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
 								this.y--;
 							}
-							else if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
+							else if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 									this.y--;
 								}
@@ -146,7 +146,7 @@ public class Engine {
 							}
 						}
 						else {
-							if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
+							if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit()) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 									if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
 										this.x++;
@@ -165,7 +165,7 @@ public class Engine {
 						}
 					}
 					else {
-						if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
+						if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit()) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 								if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
 									this.x++;
@@ -211,7 +211,7 @@ public class Engine {
 							if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
 								this.y++;
 							}
-							else if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
+							else if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 									this.y++;
 								}
@@ -234,7 +234,7 @@ public class Engine {
 							}
 						}
 						else {
-							if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
+							if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit()) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 									if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
 										this.x++;
@@ -253,7 +253,7 @@ public class Engine {
 						}
 					}
 					else {
-						if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null ) {
+						if ( this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 								if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
 									this.x++;
@@ -299,7 +299,7 @@ public class Engine {
 							if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
 								this.x++;
 							}
-							else if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
+							else if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit()) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 									this.x++;
 								}
@@ -322,7 +322,7 @@ public class Engine {
 							}
 						}
 						else {
-							if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
+							if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit()) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 									if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
 										this.y++;
@@ -341,7 +341,7 @@ public class Engine {
 						}
 					}
 					else {
-						if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
+						if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit()) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 								if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
 									this.y++;
@@ -387,7 +387,7 @@ public class Engine {
 							if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
 								this.x--;
 							}
-							else if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
+							else if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit()) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 									this.x--;
 								}
@@ -410,7 +410,7 @@ public class Engine {
 							}
 						}
 						else {
-							if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
+							if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit()) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 									if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
 										this.y++;
@@ -429,7 +429,7 @@ public class Engine {
 						}
 					}
 					else {
-						if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null ) {
+						if ( this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit()) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 								if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
 									this.y++;
@@ -511,31 +511,65 @@ public class Engine {
 						if ( players[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) ) {
 							/* Si l'animation est finie */
 							if ( players[i].hasAnimationFinished() ) {
-								/* On lance un timer qui fera "clignoter" le personnage */							
+								/* On lance un timer qui fera "clignoter" le personnage */
+
+								players[i].setCurrentAnimation(PlayerAnimations.IDLE);
+								players[i].setImmortal(true);
+
+								class mThread extends Thread {
+
+									Player p;
+
+									public mThread(Player p) {
+										this.p = p;
+									}	
+
+									public void run() {										
+										int j = 0;
+
+										while (j < 20) {
+											try {
+												sleep(50);
+												p.getPaint().setAlpha(0);
+												sleep(50);
+												p.getPaint().setAlpha(255);
+
+											} catch (InterruptedException e) {
+												e.printStackTrace();
+											}
+											j++;
+										}
+										p.setImmortal(false);
+									};
+								}								
+								Thread thread = new mThread(players[i]);
+								thread.start();
 							}
 						}
-						else /*if le timer est fini */ {
+						else if ( players[i].isDestructible() ) {
 							Point point = players[i].getPosition();
-							point = ResourcesManager.coToTile(point.x,point.y);
+							Point point1 = ResourcesManager.coToTile(point.x,point.y);
+							Point point2 = ResourcesManager.coToTile(point.x+ResourcesManager.getSize()-1,point.y);
+							Point point3 = ResourcesManager.coToTile(point.x+ResourcesManager.getSize()-1,point.y+ResourcesManager.getSize()-1);
+							Point point4 = ResourcesManager.coToTile(point.x,point.y+ResourcesManager.getSize()-1);
 
-							if ( map.getBlocks()[point.x][point.y] != null ) {
-								if ( map.getBlocks()[point.x][point.y].getDamage() != 0 ) {
-									players[i].decreaseLife();
-									if ( players[i].getLife() == 0 ) {
-										//players[i].setCurrentAnimation(PlayerAnimations.KILL);
-									}
-									else {
-										//players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
-									}
-								}
-							}
-							else if ( map.getGrounds()[point.x][point.y].getDamage() != 0 ){
+							if ( (map.getBlocks()[point1.x][point1.y] != null && map.getBlocks()[point1.x][point1.y].getDamage() != 0) || (map.getBlocks()[point2.x][point2.y] != null && map.getBlocks()[point2.x][point2.y].getDamage() != 0) ||(map.getBlocks()[point3.x][point3.y] != null && map.getBlocks()[point3.x][point3.y].getDamage() != 0) || (map.getBlocks()[point4.x][point4.y] != null && map.getBlocks()[point4.x][point4.y].getDamage() != 0)) {
 								players[i].decreaseLife();
 								if ( players[i].getLife() == 0 ) {
-									//players[i].setCurrentAnimation(PlayerAnimations.KILL);
+									players[i].setCurrentAnimation(PlayerAnimations.KILL);
 								}
 								else {
-									//players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
+									players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
+								}
+							}
+							else if ( (map.getGrounds()[point1.x][point1.y].getDamage() != 0) || ( map.getGrounds()[point2.x][point2.y].getDamage() != 0) || (map.getGrounds()[point3.x][point3.y].getDamage() != 0) || (map.getGrounds()[point4.x][point4.y].getDamage() != 0) ) {
+
+								players[i].decreaseLife();
+								if ( players[i].getLife() == 0 ) {
+									players[i].setCurrentAnimation(PlayerAnimations.KILL);
+								}
+								else {
+									players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
 								}
 							}
 						}

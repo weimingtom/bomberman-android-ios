@@ -3,6 +3,7 @@ package com.klob.Bomberklob.game;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -48,7 +49,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private int timeM;
 	private boolean timeBoolean = true;
 	private Thread timeThread;	
-	private TextView timeTextView;
+	private TextView timeTextView, bombpower, bombnumber, playerspeed, playerlife;
 	private Handler handler;
 
 	@Override
@@ -100,6 +101,16 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
         
         this.restart = (Button) findViewById(R.id.SinglePlayerMenuRestart);
         this.restart.setOnClickListener(this);
+        
+        this.bombpower = (TextView) findViewById(R.id.SinglePlayerTextViewBombPower);
+        this.bombpower.setTextColor(Color.WHITE);
+        this.bombnumber = (TextView) findViewById(R.id.SinglePlayerTextViewBombNumber);
+        this.bombnumber.setTextColor(Color.WHITE);
+        this.playerlife = (TextView) findViewById(R.id.SinglePlayerTextViewPlayerLife);
+        this.playerlife.setTextColor(Color.WHITE);
+        this.playerspeed = (TextView) findViewById(R.id.SinglePlayerTextViewPlayerSpeed);
+        this.playerspeed.setTextColor(Color.WHITE);
+        
 
 		this.handler = new Handler() {
 			@Override
@@ -119,6 +130,11 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 					if ( timeM == 0 ) {
 						//FIXME FIN DU JEU
 					}
+					
+					bombpower.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getPowerExplosion()));
+					bombnumber.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getBombNumber()));
+					playerlife.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getLife()));
+					playerspeed.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getSpeed()));
 				}
 			}
 		};
@@ -268,5 +284,10 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		
 		this.timeTextView = (TextView) findViewById(R.id.GameTextTime);
 		this.timeTextView.setText(timeM+":00");
+		
+		bombpower.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getPowerExplosion()));
+		bombnumber.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getBombNumber()));
+		playerlife.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getLife()));
+		playerspeed.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getSpeed()));
 	}
 }
