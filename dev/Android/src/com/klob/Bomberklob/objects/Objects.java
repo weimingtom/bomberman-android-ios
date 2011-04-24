@@ -3,12 +3,12 @@ package com.klob.Bomberklob.objects;
 import java.io.Serializable;
 import java.util.Hashtable;
 
+import com.klob.Bomberklob.resources.Paint;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
-import android.graphics.Paint;
 import android.graphics.Rect;
 
 public abstract class Objects implements Serializable {
