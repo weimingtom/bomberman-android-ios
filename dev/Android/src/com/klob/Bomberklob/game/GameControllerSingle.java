@@ -4,7 +4,6 @@ import com.klob.Bomberklob.objects.PlayerAnimations;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.widget.FrameLayout;
@@ -12,9 +11,6 @@ import android.widget.FrameLayout;
 public class GameControllerSingle extends GameController {
 	
 	private Engine engine;
-
-	private Thread onTouchEventThread;
-	private boolean onTouchEventBoolean;
 	
 	/* Constructeurs  ------------------------------------------------------ */
 	
@@ -40,31 +36,12 @@ public class GameControllerSingle extends GameController {
 	public void surfaceCreated(SurfaceHolder arg0) {
 		super.surfaceCreated(arg0);
 		this.setLayoutParams(new FrameLayout.LayoutParams(this.engine.getSingle().getMap().getBlocks().length*this.objectsSize, this.engine.getSingle().getMap().getBlocks()[0].length*this.objectsSize));
-		this.onTouchEventBoolean = true;
-		this.onTouchEventThread = new Thread() {
-			@Override
-			public void run() {
-				while (onTouchEventBoolean && engine.getSingle().getPlayers()[0] != null) {
-					if ( !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
-						engine.move(animation);
-					}
-					try {
-						sleep(50);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				Log.i("GameControllerSingle","Thread done");
-			};
-		};
-		this.onTouchEventThread.start();
 		this.engine.setBombThreadRunning(true);
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0) {
 		super.surfaceDestroyed(arg0);
-		this.onTouchEventBoolean = false;
 		this.engine.setBombThreadRunning(false);
 	}
 
@@ -81,6 +58,9 @@ public class GameControllerSingle extends GameController {
 
 	@Override
 	public void update() {
+		if ( !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
+			engine.move(animation);
+		}
 		this.engine.update();
 	}
 

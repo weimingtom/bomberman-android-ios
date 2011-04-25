@@ -168,9 +168,6 @@ public abstract class Player extends Objects {
 
 	@Override
 	public void onDraw(Canvas canvas, int size) {
-		if(cf!=null) {
-			//color filter code here
-		}
 		
 		Rect rect = this.getRect();
 		int i = (rect.right - rect.left) - ResourcesManager.getTileSize();
