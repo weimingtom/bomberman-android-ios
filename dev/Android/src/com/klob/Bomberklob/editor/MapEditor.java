@@ -97,10 +97,10 @@ public class MapEditor {
 			}
 		}
 		
-		this.players[0] = new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
-		this.players[1] = new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
-		this.players[2] = new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
-		this.players[3] = new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
+		this.players[0] = new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, 0);
+		this.players[1] = new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, 0);
+		this.players[2] = new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, 0);
+		this.players[3] = new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, 0);
 		
 
 		for (int i = 0 ; i < 4 ; i++ ) {

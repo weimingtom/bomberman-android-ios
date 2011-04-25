@@ -94,7 +94,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 						if ( object == null ) {
 							Hashtable<String, AnimationSequence> animations = ResourcesManager.getPlayersAnimations().get(objectsGallery2.getSelectedItem());
 							if ( animations != null ) {
-								object = new HumanPlayer(objectsGallery2.getSelectedItem(), ResourcesManager.getPlayersAnimations().get(objectsGallery2.getSelectedItem()), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true);
+								object = new HumanPlayer(objectsGallery2.getSelectedItem(), ResourcesManager.getPlayersAnimations().get(objectsGallery2.getSelectedItem()), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, 0);
 							}
 						}
 
@@ -174,10 +174,10 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 		this.mapEditorFrameLayoutObjectsGallery.addView(this.objectsGallery);
 
 		this.objectsGallery2 = new ObjectsGallery(getApplicationContext(), 4, null, 30, 15, 1, false);
-		this.objectsGallery2.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
-		this.objectsGallery2.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
-		this.objectsGallery2.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
-		this.objectsGallery2.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, true));
+		this.objectsGallery2.addObjects(new HumanPlayer("white", ResourcesManager.getPlayersAnimations().get("white"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, 0));
+		this.objectsGallery2.addObjects(new HumanPlayer("blue", ResourcesManager.getPlayersAnimations().get("blue"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, 0));
+		this.objectsGallery2.addObjects(new HumanPlayer("black", ResourcesManager.getPlayersAnimations().get("black"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, 0));
+		this.objectsGallery2.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, 0));
 		this.objectsGallery2.setOnTouchListener(new OnTouchListener() {
 
 			@Override

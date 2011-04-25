@@ -12,6 +12,6 @@ public class FreeForAll extends GameType {
 		speed = 1;
 		bombNumber = 3;
 		damages = 0;
-		immortal = false;
+		immortal = 0;
 	}
 }

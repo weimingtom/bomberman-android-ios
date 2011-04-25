@@ -11,6 +11,6 @@ public class GameType {
 	protected int speed;
 	protected int bombNumber;
 	protected int damages;
-	protected boolean immortal;
+	protected int immortal;
 
 }
