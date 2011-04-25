@@ -18,13 +18,14 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 
 	protected int x;
 	protected int y;
-	protected PlayerAnimations animation = PlayerAnimations.IDLE;
+	protected PlayerAnimations animation;
 
 	/* Constructeurs  ------------------------------------------------------ */
 
 	public GameController(Context context) {		
 		super(context);
 		this.gameView = new GameView(getHolder(), this);
+		this.animation = PlayerAnimations.IDLE;
 		getHolder().addCallback(this);
 	}
 

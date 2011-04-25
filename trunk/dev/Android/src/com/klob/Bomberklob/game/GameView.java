@@ -11,7 +11,7 @@ public class GameView extends Thread {
     private GameController gameController;
     private boolean run = false;
     
- // desired fps
+    // desired fps
 	private final static int 	MAX_FPS = 30;	
 	// maximum number of frames to be skipped
 	private final static int	MAX_FRAME_SKIPS = 0;	
