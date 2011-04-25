@@ -28,11 +28,13 @@ public abstract class Player extends Objects {
 	protected int life;
 	protected int shield;
 	protected int bombNumber;
-	protected boolean immortal;	
+	protected int immortal;	
+	
+	
 	
 	/* Constructeurs ------------------------------------------------------- */
 	
-	public Player(String imageName, Hashtable<String, AnimationSequence> animations, PlayerAnimations currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber, boolean immortal) {
+	public Player(String imageName, Hashtable<String, AnimationSequence> animations, PlayerAnimations currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber, int immortal) {
 		super(imageName, animations, currentAnimation.getLabel(), hit, level, fireWall, damages);
 		this.powerExplosion = powerExplosion;
 		this.timeExplosion = timeExplosion;
@@ -92,7 +94,7 @@ public abstract class Player extends Objects {
 		}
 	}
 	
-	public void setImmortal(boolean immortal) {
+	public void setImmortal(int immortal) {
 		this.immortal = immortal;
 	}
 	
@@ -177,12 +179,23 @@ public abstract class Player extends Objects {
 			i = ((i*ResourcesManager.getSize())/ResourcesManager.getTileSize())/2;
 		}
 		
+		if ( immortal%2 == 0) {
+			this.paint.setAlpha(255);
+		}
+		else {
+			this.paint.setAlpha(0);
+		}
+		
+		if (immortal > 0 ){
+			immortal--;
+		}
+		
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), rect, new Rect(this.position.x-i, this.position.y-(size/2), this.position.x+size+i, this.position.y+size), this.paint);
 	}
 
 	@Override
 	public boolean isDestructible() {
-		if ( this.immortal ) {
+		if ( this.immortal != 0) {
 			return false;
 		}
 		return true;

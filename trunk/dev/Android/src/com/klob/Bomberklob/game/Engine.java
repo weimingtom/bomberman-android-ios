@@ -512,38 +512,8 @@ public class Engine {
 							/* Si l'animation est finie */
 							if ( players[i].hasAnimationFinished() ) {
 								/* On lance un timer qui fera "clignoter" le personnage */
-
 								players[i].setCurrentAnimation(PlayerAnimations.IDLE);
-								players[i].setImmortal(true);
-
-								class mThread extends Thread {
-
-									Player p;
-
-									public mThread(Player p) {
-										this.p = p;
-									}	
-
-									public void run() {										
-										int j = 0;
-
-										while (j < 20) {
-											try {
-												sleep(50);
-												p.getPaint().setAlpha(0);
-												sleep(50);
-												p.getPaint().setAlpha(255);
-
-											} catch (InterruptedException e) {
-												e.printStackTrace();
-											}
-											j++;
-										}
-										p.setImmortal(false);
-									};
-								}								
-								Thread thread = new mThread(players[i]);
-								thread.start();
+								players[i].setImmortal(50);
 							}
 						}
 						else if ( players[i].isDestructible() ) {
