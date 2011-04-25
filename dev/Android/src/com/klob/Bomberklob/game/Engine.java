@@ -1,8 +1,10 @@
 package com.klob.Bomberklob.game;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import com.klob.Bomberklob.objects.Bomb;
+import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.ObjectsAnimations;
 import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.PlayerAnimations;
@@ -550,11 +552,12 @@ public class Engine {
 
 			}
 		}
-		this.single.getMap().update();
+		this.single.update();
 	}
 
 	private void updateBombs(Vector<Bomb> bombs) {
 		Map map = this.single.getMap();
+		ArrayList<Objects> blocks = this.single.getBlocks(); 
 
 		for(int j = 0; j < bombs.size() ; j++ ) {
 
@@ -568,6 +571,7 @@ public class Engine {
 
 				Point p = ResourcesManager.coToTile(bombs.get(j).getPosition().x, bombs.get(j).getPosition().y);
 				map.addBlock(ResourcesManager.getObjects().get("firecenter").copy(), p);
+				blocks.add(map.getBlocks()[p.x][p.y]);
 
 				/* UP */
 				for ( int k = 1 ; k < bombs.get(j).getPower() ; k++ ) {
@@ -578,9 +582,11 @@ public class Engine {
 						else {
 							if ( k < bombs.get(j).getPower()-1 ) {
 								map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y-k));
+								blocks.add(map.getBlocks()[p.x][p.y-k]);
 							}
 							else {
 								map.addBlock(ResourcesManager.getObjects().get("fireup").copy(), new Point(p.x ,p.y-k));
+								blocks.add(map.getBlocks()[p.x][p.y-k]);
 							}
 						}
 					}
@@ -608,9 +614,11 @@ public class Engine {
 						else {
 							if ( k < bombs.get(j).getPower()-1 ) {
 								map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y+k));
+								blocks.add(map.getBlocks()[p.x][p.y+k]);
 							}
 							else {
 								map.addBlock(ResourcesManager.getObjects().get("firedown").copy(), new Point(p.x ,p.y+k));
+								blocks.add(map.getBlocks()[p.x][p.y+k]);
 							}
 						}
 					}
@@ -638,9 +646,11 @@ public class Engine {
 						else {
 							if ( k < bombs.get(j).getPower()-1 ) {
 								map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x-k ,p.y));
+								blocks.add(map.getBlocks()[p.x-k][p.y]);
 							}
 							else {
 								map.addBlock(ResourcesManager.getObjects().get("fireleft").copy(), new Point(p.x-k ,p.y));
+								blocks.add(map.getBlocks()[p.x-k][p.y]);
 							}
 						}
 					}
@@ -668,9 +678,11 @@ public class Engine {
 						else {
 							if ( k < bombs.get(j).getPower()-1 ) {
 								map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x+k ,p.y));
+								blocks.add(map.getBlocks()[p.x+k][p.y]);
 							}
 							else {
 								map.addBlock(ResourcesManager.getObjects().get("fireright").copy(), new Point(p.x+k ,p.y));
+								blocks.add(map.getBlocks()[p.x+k][p.y]);
 							}
 						}
 					}

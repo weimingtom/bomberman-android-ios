@@ -177,6 +177,10 @@ public abstract class Player extends Objects {
 		}
 		
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), rect, new Rect(this.position.x-i, this.position.y-(size/2), this.position.x+size+i, this.position.y+size), this.paint);
+	
+		for (int j = 0 ; j < bombsPlanted.size() ; j++ ) {
+			bombsPlanted.get(j).onDraw(canvas, size);
+		}
 	}
 
 	@Override
@@ -212,6 +216,10 @@ public abstract class Player extends Objects {
 		
 		if (immortal > 0 ){
 			immortal--;
+		}
+		
+		for (int j = 0 ; j < bombsPlanted.size() ; j++ ) {
+			bombsPlanted.get(j).update();
 		}
 	}
 }
