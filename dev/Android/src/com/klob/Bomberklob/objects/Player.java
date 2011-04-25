@@ -179,17 +179,6 @@ public abstract class Player extends Objects {
 			i = ((i*ResourcesManager.getSize())/ResourcesManager.getTileSize())/2;
 		}
 		
-		if ( immortal%2 == 0) {
-			this.paint.setAlpha(255);
-		}
-		else {
-			this.paint.setAlpha(0);
-		}
-		
-		if (immortal > 0 ){
-			immortal--;
-		}
-		
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), rect, new Rect(this.position.x-i, this.position.y-(size/2), this.position.x+size+i, this.position.y+size), this.paint);
 	}
 
@@ -210,5 +199,22 @@ public abstract class Player extends Objects {
 	@Override
 	public void destroy() {
 		currentAnimation = PlayerAnimations.KILL.getLabel();
+	}
+	
+	@Override
+	public void update() {
+		
+		super.update();
+		
+		if ( immortal%2 == 0) {
+			this.paint.setAlpha(255);
+		}
+		else {
+			this.paint.setAlpha(0);
+		}
+		
+		if (immortal > 0 ){
+			immortal--;
+		}
 	}
 }
