@@ -77,17 +77,20 @@
 			<framerect top="0" left="630" bottom="45" right="660" delayNextFrame="5" />
 		</animation>
 		<animation name="kill" canLoop="false">
-			<framerect top="0" left="690" bottom="45" right="720" delayNextFrame="5" />
+			<framerect top="0" left="800" bottom="45" right="834" delayNextFrame="1" />
+			<framerect top="0" left="838" bottom="45" right="872" delayNextFrame="1" />
+			<framerect top="0" left="876" bottom="45" right="918" delayNextFrame="1" />
+			<framerect top="0" left="926" bottom="45" right="972" delayNextFrame="1" />
 		</animation>
 		<animation name="touched" canLoop="false">
-			<framerect top="0" left="30" bottom="45" right="60" delayNextFrame="5" />
-			<framerect top="0" left="0"  bottom="45" right="30" delayNextFrame="5" />
-			<framerect top="0" left="60" bottom="45" right="90" delayNextFrame="5" />
-			<framerect top="0" left="0"  bottom="45" right="30" delayNextFrame="5" />
-			<framerect top="0" left="30" bottom="45" right="60" delayNextFrame="5" />
-			<framerect top="0" left="0"  bottom="45" right="30" delayNextFrame="5" />
-			<framerect top="0" left="60" bottom="45" right="90" delayNextFrame="5" />
-			<framerect top="0" left="0"  bottom="45" right="30" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="1" />
+			<framerect top="0" left="760" bottom="45" right="798" delayNextFrame="1" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="1" />
+			<framerect top="0" left="760" bottom="45" right="798" delayNextFrame="1" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="1" />
+			<framerect top="0" left="760" bottom="45" right="798" delayNextFrame="1" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="1" />
+			<framerect top="0" left="760" bottom="45" right="798" delayNextFrame="1" />
 		</animation>
 	</player>
 	
@@ -167,8 +170,19 @@
 			<framerect top="45" left="690" bottom="90" right="720" delayNextFrame="5" />
 			<framerect top="45" left="630" bottom="90" right="660" delayNextFrame="5" />
 		</animation>
-		<animation name="kill" canLoop="false">
-			<framerect top="45" left="690" bottom="90" right="720" delayNextFrame="5" />
+				<animation name="kill" canLoop="false">
+			<framerect top="0" left="690" bottom="45" right="720" delayNextFrame="5" />
+		</animation>
+		<animation name="touched" canLoop="false">
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
 		</animation>
 	</player>
 	
@@ -249,7 +263,18 @@
 			<framerect top="90" left="630" bottom="135" right="660" delayNextFrame="5" />
 		</animation>
 		<animation name="kill" canLoop="false">
-			<framerect top="90" left="690" bottom="135" right="720" delayNextFrame="5" />
+			<framerect top="0" left="690" bottom="45" right="720" delayNextFrame="5" />
+		</animation>
+		<animation name="touched" canLoop="false">
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
 		</animation>
 	</player>
 	
@@ -330,7 +355,18 @@
 			<framerect top="135" left="630" bottom="180" right="660" delayNextFrame="5" />
 		</animation>
 		<animation name="kill" canLoop="false">
-			<framerect top="135" left="690" bottom="180" right="720" delayNextFrame="5" />
+			<framerect top="0" left="690" bottom="45" right="720" delayNextFrame="5" />
+		</animation>
+		<animation name="touched" canLoop="false">
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
 		</animation>
 	</player>
 	
