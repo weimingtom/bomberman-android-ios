@@ -186,7 +186,15 @@ public abstract class Objects implements Serializable {
 		if(cf!=null) {
 			//color filter code here
 		}
-		canvas.drawBitmap(ResourcesManager.getBitmaps().get("objects"), this.getRect(), new Rect(this.position.x, this.position.y, (this.position.x)+size, (this.position.y)+size), this.paint);
+		
+		Rect rect = this.getRect();
+		int i = (rect.right - rect.left) - ResourcesManager.getTileSize();
+		
+		if ( i != 0 ) {
+			i = (i*ResourcesManager.getSize())/ResourcesManager.getTileSize();
+		}
+		
+		canvas.drawBitmap(ResourcesManager.getBitmaps().get("objects"), rect, new Rect(this.position.x-i, this.position.y, (this.position.x)+size+i, (this.position.y)+size), this.paint);
 	}
 
 

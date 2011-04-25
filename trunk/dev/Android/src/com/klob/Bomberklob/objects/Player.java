@@ -169,7 +169,15 @@ public abstract class Player extends Objects {
 		if(cf!=null) {
 			//color filter code here
 		}
-		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), this.getRect(), new Rect(this.position.x, this.position.y-(size/2), this.position.x+size, this.position.y+size), this.paint);
+		
+		Rect rect = this.getRect();
+		int i = (rect.right - rect.left) - ResourcesManager.getTileSize();
+		
+		if ( i != 0 ) {
+			i = ((i*ResourcesManager.getSize())/ResourcesManager.getTileSize())/2;
+		}
+		
+		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), rect, new Rect(this.position.x-i, this.position.y-(size/2), this.position.x+size+i, this.position.y+size), this.paint);
 	}
 
 	@Override

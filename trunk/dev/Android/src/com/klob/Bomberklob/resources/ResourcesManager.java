@@ -28,6 +28,7 @@ public class ResourcesManager {
 	private static Context context;
 	private static float dpiPx;
 	private static int size;
+	private static int tileSize;
 	private static int height;
 	private static int width;
 	private static HashMap<String, Bitmap>	bitmaps = new HashMap<String, Bitmap>();
@@ -43,18 +44,19 @@ public class ResourcesManager {
 
 		height = context.getResources().getDisplayMetrics().heightPixels;
 		width = context.getResources().getDisplayMetrics().widthPixels;
-		
+
 		if ( ((height-(50*dpiPx))/21) < ((width-(50*dpiPx))/14) ) {
 			size = (int) ((height-(50*dpiPx))/21);
 		}
 		else {
 			size = (int) ((width-(50*dpiPx))/14);
 		}
+
+		bitmapsInitialisation();
 		
 		Log.i("ResourcesManager","dpiPx : " + dpiPx);
+		Log.i("ResourcesManager","tileSize : " + tileSize);
 		Log.i("ResourcesManager","size : " + size);
-		
-		bitmapsInitialisation();
 	}
 
 	/* Getters ------------------------------------------------------------- */
@@ -73,15 +75,15 @@ public class ResourcesManager {
 	public static HashMap<String, Objects> getObjects() {
 		return objects;
 	}
-	
+
 	public static HashMap<String, Hashtable<String, AnimationSequence>> getPlayersAnimations() {
 		return playersAnimation;
 	}
-	
+
 	public static HashMap<String, Hashtable<String, AnimationSequence>> getBombsAnimations() {
 		return bombsAnimation;
 	}
-	
+
 	public static float getDpiPx() {
 		return dpiPx;
 	}
@@ -90,10 +92,14 @@ public class ResourcesManager {
 		return context;
 	}
 
+	public static int getTileSize() {
+		return tileSize;
+	}
+
 	public static int getSize() {
 		return size;
 	}
-	
+
 	public static int getHeight() {
 		return height;
 	}
@@ -101,7 +107,7 @@ public class ResourcesManager {
 	public static int getWidth() {
 		return width;
 	}
-	
+
 	/* Setters ------------------------------------------------------------- */
 
 	public static void setDpiPx(float dpiPx) {
@@ -123,8 +129,11 @@ public class ResourcesManager {
 			while (eventType != XmlPullParser.END_DOCUMENT){
 
 				if(eventType == XmlPullParser.START_TAG) {
-					
-					if(xpp.getName().toLowerCase().equals("png")) {
+
+					if(xpp.getName().toLowerCase().equals("bitmaps")) {
+						tileSize = xpp.getAttributeIntValue(null, "size", 0);
+					}
+					else if(xpp.getName().toLowerCase().equals("png")) {
 
 						if ( xpp.getAttributeValue(null, "name").equals("players")) {
 							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.players);
@@ -142,6 +151,7 @@ public class ResourcesManager {
 							p = null;
 						}
 					}
+
 				}
 				eventType = xpp.next();
 			}
@@ -170,7 +180,7 @@ public class ResourcesManager {
 			while (eventType != XmlPullParser.END_DOCUMENT){
 
 				if(eventType == XmlPullParser.START_TAG) {
-					
+
 					if (xpp.getName().toLowerCase().equals("destructible") || xpp.getName().toLowerCase().equals("undestructible") ) {
 						animations = new Hashtable<String, AnimationSequence>();
 						imageName = xpp.getAttributeValue(null, "name");
@@ -202,7 +212,7 @@ public class ResourcesManager {
 					}
 				}
 				else if(eventType == XmlPullParser.END_TAG) {
-										
+
 					if(xpp.getName().toLowerCase().equals("animation")) {
 						animations.put(animationname, animationsequence);
 					}
@@ -233,11 +243,11 @@ public class ResourcesManager {
 		}
 		Log.i("ResourcesManager","--------------- Objects loaded ---------------");
 	}
-	
+
 	public static void playersInitialisation() {
 
 		XmlResourceParser xpp = context.getResources().getXml(R.xml.players);
-		
+
 		Log.i("ResourcesManager","--------------- Loading player ---------------");
 		Hashtable<String, AnimationSequence> playerAnimation = null;
 		String name = null;
@@ -246,11 +256,11 @@ public class ResourcesManager {
 			int eventType = xpp.getEventType();
 			String animationname="";
 			AnimationSequence animationsequence = new AnimationSequence();;
-			
+
 			while (eventType != XmlPullParser.END_DOCUMENT){
 
 				if(eventType == XmlPullParser.START_TAG) {
-					
+
 					if(xpp.getName().toLowerCase().equals("player")) {
 						playerAnimation = new Hashtable<String, AnimationSequence>();
 						name = xpp.getAttributeValue(null, "name");
@@ -264,7 +274,7 @@ public class ResourcesManager {
 					}
 					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
-					  	Rect frame = new Rect();
+						Rect frame = new Rect();
 						frame.top = xpp.getAttributeIntValue(null, "top", 0);
 						frame.bottom = xpp.getAttributeIntValue(null, "bottom", 0);
 						frame.left = xpp.getAttributeIntValue(null, "left", 0);
@@ -296,9 +306,9 @@ public class ResourcesManager {
 		}
 		System.out.println("--------------- Player Loaded ----------------");
 	}
-	
+
 	public static void bombsInitialisation() {
-		
+
 		XmlResourceParser xpp = context.getResources().getXml(R.xml.bombs);
 
 		Log.i("ResourcesManager","---------------- Loading bombs ---------------");
@@ -309,11 +319,11 @@ public class ResourcesManager {
 			int eventType = xpp.getEventType();
 			String animationname="";
 			AnimationSequence animationsequence = new AnimationSequence();;
-			
+
 			while (eventType != XmlPullParser.END_DOCUMENT){
 
 				if(eventType == XmlPullParser.START_TAG) {
-					
+
 					if(xpp.getName().toLowerCase().equals("bomb")) {
 						bombAnimation = new Hashtable<String, AnimationSequence>();
 						name = xpp.getAttributeValue(null, "name");
@@ -359,7 +369,7 @@ public class ResourcesManager {
 		}
 		Log.i("ResourcesManager","---------------- Bombs loaded  ---------------");
 	}
-	
+
 	/**
 	 * Calculates the tile of the coordinate
 	 * 
@@ -368,7 +378,7 @@ public class ResourcesManager {
 	 * @return the tile position
 	 */
 	public static Point coToTile(int x, int y) {
-		
+
 		if ( x < 0 || y < 0) {
 			return null;
 		}
@@ -376,7 +386,7 @@ public class ResourcesManager {
 			return new Point(x/size, y/size);
 		}
 	}
-	
+
 	/**
 	 * Calculates the coordinate of the tile
 	 * 
@@ -385,7 +395,7 @@ public class ResourcesManager {
 	 * @return coordinate of the tile
 	 */
 	public static Point tileToCo(int x, int y) {
-		
+
 		if ( x < 0 || y < 0) {
 			return null;
 		}
