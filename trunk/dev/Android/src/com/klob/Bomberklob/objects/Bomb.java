@@ -16,18 +16,23 @@ public class Bomb extends Destructible {
 
 	protected int power;
 	protected int time;
+	protected Player player;
 	//FIXME protected ??? type
 
-	public Bomb(String imageName, Hashtable<String, AnimationSequence> animations, ObjectsAnimations currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, int power, int time) {
+	public Bomb(String imageName, Hashtable<String, AnimationSequence> animations, ObjectsAnimations currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, Player player) {
 		super(imageName, animations, currentAnimation, hit, level, fireWall, damages, life);
-		this.power = power;
-		this.time = time;
+		this.player = player;
+		if ( this.player != null ) {
+			this.power = this.player.powerExplosion;
+			this.time = this.player.timeExplosion;
+		}
 	}
 
 	public Bomb(Bomb bombs) {
 		super(bombs);
 		this.power = bombs.power;
 		this.time = bombs.time;
+		this.player = bombs.player;
 	}
 
 	public int getPower() {
@@ -37,14 +42,15 @@ public class Bomb extends Destructible {
 	public int getTime() {
 		return time;
 	}
+	
+	public Player getPlayer() {
+		return player;
+	}
 
 	/* Méthodes publiques -------------------------------------------------- */
 
 	@Override
 	public void onDraw(Canvas canvas,int size) {
-		if(cf!=null) {
-			//color filter code here
-		}
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("bombs"), this.getRect(), new Rect(this.position.x, this.position.y, (this.position.x)+size, (this.position.y)+size), null);
 	}
 

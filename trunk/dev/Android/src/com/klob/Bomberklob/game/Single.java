@@ -48,22 +48,12 @@ public class Single extends Game {
 	}
 	
 	public void pauseGame() {
-		for (int i = 0 ; i < this.players.length ; i++ ) {
-			Vector<Bomb> bombs = this.players[i].getBombsPlanted();
-			for (int j = 0; j < bombs.size() ; j++ ) {
-				
-			}
-		}
+
 	}
-	
-	
+
 	@Override
 	public void pushBomb(Player player) {
+		// TODO Auto-generated method stub
 		
-		Bomb b = player.plantingBomb();		
-		if ( b != null ) {
-			Point p = ResourcesManager.coToTile(b.getPosition().x, b.getPosition().y);
-			this.map.getBlocks()[p.x][p.y] = b;
-		}
 	}
 }
