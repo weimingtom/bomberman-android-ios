@@ -66,7 +66,9 @@ public class GameView extends Thread {
 		int framesSkipped;	// number of frames being skipped 
 		
         while (this.run) {
-            c = null;            
+            c = null;
+            
+            
             try {
                 c = this.surfaceHolder.lockCanvas(null);
                 synchronized (this.surfaceHolder) {

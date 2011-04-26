@@ -41,4 +41,16 @@ public class Point extends android.graphics.Point implements Serializable{
 		x = in.readInt(); 
 		y = in.readInt(); 
 	}
+	
+	@Override
+	public boolean equals(Object point) {
+		
+		if (point instanceof Point) {
+			if ( this.x == ((Point) point).x && this.y == ((Point) point).y ) {
+				return true;
+			}
+		}
+		
+		return false;		
+	}
 }

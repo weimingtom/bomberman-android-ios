@@ -19,9 +19,11 @@ public abstract class Player extends Objects {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	protected Vector<Bomb> bombsPlanted = new Vector<Bomb>();
+
 	//FIXME private ???[] bombsTypes;
+	
+	protected String bombSelected = "normal";
+	
 	protected int powerExplosion;
 	protected int timeExplosion;
 	protected int speed;
@@ -74,6 +76,15 @@ public abstract class Player extends Objects {
 		else {
 			throw new BombPowerException();
 		}
+	}	
+	
+	public void setBombNumber(int bombNumber) throws BombPowerException {
+		if ( bombNumber >= 0) {
+			this.bombNumber = bombNumber;
+		}
+		else {
+			throw new BombPowerException();
+		}
 	}
 	
 	public void setBombTime(int bombTime) throws TimeBombException {
@@ -114,11 +125,11 @@ public abstract class Player extends Objects {
 		}
 	}
 	
-	/* Getters ------------------------------------------------------------- */
-	
-	public Vector<Bomb> getBombsPlanted() {
-		return this.bombsPlanted;
+	public String getBombSelected() {
+		return bombSelected;
 	}
+	
+	/* Getters ------------------------------------------------------------- */
 
 	public int getPowerExplosion() {
 		return this.powerExplosion;
@@ -145,26 +156,6 @@ public abstract class Player extends Objects {
 	}
 	
 	/* Méthodes publiques -------------------------------------------------- */
-	
-	public Bomb plantingBomb() {
-		
-		Point p = ResourcesManager.coToTile(position.x+(ResourcesManager.getSize()/2), position.y+(ResourcesManager.getSize()/2));
-		p = ResourcesManager.tileToCo(p.x, p.y);
-		
-		for (int i = 0 ; i < bombsPlanted.size() ; i++) {
-			if ( bombsPlanted.get(i).getPosition().x == p.x && bombsPlanted.get(i).getPosition().y == p.y) {
-				return null;
-			}
-		}
-		
-		if ( bombNumber > bombsPlanted.size() ) {
-			Bomb b = new Bomb("normal", ResourcesManager.getBombsAnimations().get("normal"), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, powerExplosion, timeExplosion);
-			b.setPosition(p);
-			bombsPlanted.add(b);
-			return b;
-		}
-		return null;
-	}
 
 	@Override
 	public void onDraw(Canvas canvas, int size) {
@@ -177,10 +168,6 @@ public abstract class Player extends Objects {
 		}
 		
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), rect, new Rect(this.position.x-i, this.position.y-(size/2), this.position.x+size+i, this.position.y+size), this.paint);
-	
-		for (int j = 0 ; j < bombsPlanted.size() ; j++ ) {
-			bombsPlanted.get(j).onDraw(canvas, size);
-		}
 	}
 
 	@Override
@@ -195,6 +182,10 @@ public abstract class Player extends Objects {
 		if ( this.life > 0 ) {
 			this.life--;
 		}
+	}
+	
+	public void increaseBombs() {
+		this.bombNumber++;
 	}
 	
 	@Override
@@ -216,10 +207,6 @@ public abstract class Player extends Objects {
 		
 		if (immortal > 0 ){
 			immortal--;
-		}
-		
-		for (int j = 0 ; j < bombsPlanted.size() ; j++ ) {
-			bombsPlanted.get(j).update();
 		}
 	}
 }
