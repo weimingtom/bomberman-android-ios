@@ -49,25 +49,25 @@ public class Editor extends Activity implements View.OnClickListener {
     
     @Override
 	protected void onStop() {
-		Log.i("CreateMap", "onStop ");
+		Log.i("Editor", "onStop ");
 		super.onStop();
 	}
 	
 	@Override
 	protected void onDestroy(){
-		Log.i("CreateMap", "onDestroy");
+		Log.i("Editor", "onDestroy");
 		super.onDestroy();
 	}
 	
 	@Override
 	protected void onResume(){
-		Log.i("CreateMap", "onResume ");
+		Log.i("Editor", "onResume ");
 		super.onResume();
 	}
 	
 	@Override
 	protected void onPause(){
-		Log.i("CreateMap", "onPause ");
+		Log.i("Editor", "onPause ");
 		super.onPause();
 	}  
 
