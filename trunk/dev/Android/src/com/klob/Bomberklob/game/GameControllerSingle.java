@@ -25,7 +25,7 @@ public class GameControllerSingle extends GameController {
 		return engine;
 	}
 	
-	/* Méthodes publiques -------------------------------------------------- */
+	/* Méthodes surchargées ------------------------------------------------ */
 	
 	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {

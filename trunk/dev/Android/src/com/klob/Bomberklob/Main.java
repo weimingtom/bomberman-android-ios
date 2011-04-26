@@ -1,15 +1,15 @@
 package com.klob.Bomberklob;
 
-import com.klob.Bomberklob.menus.CreateAccountOffline;
-import com.klob.Bomberklob.menus.Home;
-import com.klob.Bomberklob.model.Model;
-import com.klob.Bomberklob.resources.ResourcesManager;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -18,6 +18,11 @@ import android.os.Message;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.klob.Bomberklob.menus.CreateAccountOffline;
+import com.klob.Bomberklob.menus.Home;
+import com.klob.Bomberklob.model.Model;
+import com.klob.Bomberklob.resources.ResourcesManager;
 
 public class Main extends Activity {
 
@@ -59,16 +64,72 @@ public class Main extends Activity {
 				res.updateConfiguration(conf, res.getDisplayMetrics());
 				try {
 					Context context = createPackageContext(getPackageName(), Context.CONTEXT_INCLUDE_CODE);
-					
+
 					ResourcesManager.setInstance(getApplicationContext());
 					ResourcesManager.objectsInitialisation();
 					ResourcesManager.playersInitialisation();
 					ResourcesManager.bombsInitialisation();
-					
+
 					if ( Model.getSystem().getLastUser() == -1 ) {
+
+						try {
+
+							String mapsDirectory = "maps";
+							File ls = getFilesDir();
+							File rep = new File(ls.getAbsolutePath()+"/"+mapsDirectory);
+							rep.mkdir();
+
+							String[] maps = getAssets().list(mapsDirectory);
+
+							Log.i("Main", "-------------- Copy  Maps --------------");
+
+							for (int i = 0 ; i < maps.length ; i ++ ) {
+								String mapName = maps[i].toString();
+
+								Log.i("Main", "Map in progress : "+ mapName);
+
+								File rep2 = new File(rep.getAbsolutePath()+"/"+mapName);
+								rep2.mkdir();
+								String[] map = getAssets().list(mapsDirectory+"/"+mapName);
+
+								for (int j = 0 ; j < map.length ; j++ ) {
+
+									InputStream in = null;
+									OutputStream out = null;
+									try {
+										in = getAssets().open(mapsDirectory+"/"+mapName+"/"+map[j]);
+										out = new FileOutputStream(rep2.getAbsolutePath() + "/" + map[j]);
+
+										byte[] buffer = new byte[1024];
+										int read;
+										while((read = in.read(buffer)) != -1){
+											out.write(buffer, 0, read);
+										}
+
+										in.close();
+										in = null;
+										out.flush();
+										out.close();
+										out = null;
+
+										Log.i("Main", "File "+ map[j] +" copied !");
+
+									} catch(Exception e) {
+										Log.e("tag", e.getMessage());
+									} 
+
+								}
+								Model.getSystem().getDatabase().newMap(mapName, "KLOB", 1);
+
+								Log.i("Main", "--------- Map copied --------");
+							}
+
+							Log.i("Main", "------------- Maps  Copied -------------");
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+
 						intent = new Intent(context, CreateAccountOffline.class);
-						
-						AssetManager am = getAssets();
 					}
 					else {
 						intent = new Intent(context, Home.class);
@@ -76,7 +137,7 @@ public class Main extends Activity {
 				} catch (NameNotFoundException e) {
 					e.printStackTrace();
 				}
-				
+
 				handler.sendMessage(handler.obtainMessage(0));
 			};
 		};

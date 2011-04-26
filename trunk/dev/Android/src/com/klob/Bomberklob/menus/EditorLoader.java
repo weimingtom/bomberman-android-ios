@@ -49,7 +49,7 @@ public class EditorLoader extends Activity implements View.OnClickListener {
 			
 			String[] mapBitmap = new String[this.maps.size()];
 			for (int i = 0; i < mapBitmap.length ; i++) {
-				mapBitmap[i] = this.getDir("maps", i).getAbsolutePath()+"/"+this.maps.get(i).getName()+".png";
+				mapBitmap[i] = this.getFilesDir().getAbsolutePath()+"/maps/"+this.maps.get(i).getName()+"/"+this.maps.get(i).getName()+".png";
 			}
 			
 			this.mapName = (TextView) findViewById(R.id.EditorLoaderTextViewMapName);

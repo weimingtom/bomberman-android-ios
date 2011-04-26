@@ -45,11 +45,11 @@ public class ResourcesManager {
 		height = context.getResources().getDisplayMetrics().heightPixels;
 		width = context.getResources().getDisplayMetrics().widthPixels;
 
-		if ( ((height-(50*dpiPx))/21) < ((width-(50*dpiPx))/14) ) {
+		if ( ((height-(50*dpiPx))/21) < ((width-(50*dpiPx))/15) ) {
 			size = (int) ((height-(50*dpiPx))/21);
 		}
 		else {
-			size = (int) ((width-(50*dpiPx))/14);
+			size = (int) ((width-(50*dpiPx))/15);
 		}
 
 		bitmapsInitialisation();

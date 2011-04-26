@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Hashtable;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -260,9 +259,8 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 				Canvas pictureCanvas = new Canvas(bm);
 				this.editorController.getMapEditor().getMap().groundsOnDraw(pictureCanvas, ResourcesManager.getSize());
 				this.editorController.getMapEditor().onDraw(pictureCanvas, true);
-
-				File dir = this.getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
-				File f = new File (dir.getAbsolutePath()+"/"+bundle.getString("map")+".png");
+				
+				File f =  new File (getFilesDir().getAbsolutePath()+"/maps/"+bundle.getString("map")+"/"+bundle.getString("map")+".png");
 
 				try {
 					f.createNewFile();
@@ -275,6 +273,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 					ioe.printStackTrace();
 				}
 
+				// FIXME Map non officielles 1 => 0
 				Model.getSystem().getDatabase().newMap(bundle.getString("map"), Model.getUser().getPseudo(), 1);
 				Intent intent = new Intent(EditorLayout.this, Home.class);
 				startActivity(intent);

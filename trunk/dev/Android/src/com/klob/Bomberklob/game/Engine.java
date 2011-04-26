@@ -107,6 +107,110 @@ public class Engine {
 			this.single.getPlayers()[0].setCurrentAnimation(playerAnimation);
 		}
 	}
+	
+
+	public void pushBomb(Player player) {
+
+		if ( player != null ) {
+			Point p = ResourcesManager.coToTile(player.getPosition().x+(ResourcesManager.getSize()/2), player.getPosition().y+(ResourcesManager.getSize()/2));
+
+			if ( this.bombs.get(p) == null ) {
+				if ( player.getBombNumber() > 0 ) {
+					Bomb b = new Bomb(player.getBombSelected(), ResourcesManager.getBombsAnimations().get(player.getBombSelected()), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, player);
+					b.setPosition(ResourcesManager.tileToCo(p.x, p.y));
+					this.bombs.put(p, b);
+					try {
+						player.setBombNumber(player.getBombNumber()-1);
+					} catch (BombPowerException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+
+	public void onDraw(Canvas canvas, int size) {
+		this.single.onDraw(canvas,size);
+
+		/* FIXME */
+		for(Entry<Point, Bomb> entry : bombs.entrySet()) {
+			bombs.get(entry.getKey()).onDraw(canvas, size);							
+		}
+	}
+
+	public void update() {
+		Player[] players = this.single.getPlayers();
+		Map map = this.single.getMap();
+
+		/* Bombes -------------------------------------------------- */
+
+		this.updateBombs();				
+
+		/* Joueurs ------------------------------------------------- */
+
+		for (int i = 0 ; i < players.length ; i++ ) {
+			if ( players[i] != null ) {
+
+				if ( players[i].getPosition() != null ) {
+
+					/* Si l'animation courante correspond à KILL et qu'elle est finie on supprime le personnage */
+					if ( players[i].hasAnimationFinished() && players[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
+						/* On met joueur à null ce qui stopera le thread d'écoute */
+						players[i].setPosition(null);
+					}
+					else {					
+						/* Si le joueur vient de se faire toucher */
+						if ( players[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) ) {
+							/* Si l'animation est finie */
+							if ( players[i].hasAnimationFinished() ) {
+								/* On lance un timer qui fera "clignoter" le personnage */
+								players[i].setCurrentAnimation(PlayerAnimations.IDLE);
+								players[i].setImmortal(50);
+							}
+						}
+						else if ( players[i].isDestructible() ) {
+							Point point = players[i].getPosition();
+							Point point1 = ResourcesManager.coToTile(point.x,point.y);
+							Point point2 = ResourcesManager.coToTile(point.x+ResourcesManager.getSize()-1,point.y);
+							Point point3 = ResourcesManager.coToTile(point.x+ResourcesManager.getSize()-1,point.y+ResourcesManager.getSize()-1);
+							Point point4 = ResourcesManager.coToTile(point.x,point.y+ResourcesManager.getSize()-1);
+
+							if ( (map.getBlocks()[point1.x][point1.y] != null && map.getBlocks()[point1.x][point1.y].getDamage() != 0) || (map.getBlocks()[point2.x][point2.y] != null && map.getBlocks()[point2.x][point2.y].getDamage() != 0) ||(map.getBlocks()[point3.x][point3.y] != null && map.getBlocks()[point3.x][point3.y].getDamage() != 0) || (map.getBlocks()[point4.x][point4.y] != null && map.getBlocks()[point4.x][point4.y].getDamage() != 0)) {
+								players[i].decreaseLife();
+								if ( players[i].getLife() == 0 ) {
+									players[i].setCurrentAnimation(PlayerAnimations.KILL);
+								}
+								else {
+									players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
+								}
+							}
+							else if ( (map.getGrounds()[point1.x][point1.y].getDamage() != 0) || ( map.getGrounds()[point2.x][point2.y].getDamage() != 0) || (map.getGrounds()[point3.x][point3.y].getDamage() != 0) || (map.getGrounds()[point4.x][point4.y].getDamage() != 0) ) {
+
+								players[i].decreaseLife();
+								if ( players[i].getLife() == 0 ) {
+									players[i].setCurrentAnimation(PlayerAnimations.KILL);
+								}
+								else {
+									players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
+								}
+							}
+						}
+						/*TODO  Vérifier tapis roulant */
+						players[i].update();
+
+						/* IA */
+						if ( i != 0 ) {
+							
+						}
+					}
+				}
+
+			}
+		}
+		this.single.update();
+	}
+	
+	/* Méthodes privées ---------------------------------------------------- */
 
 	private void moveUp(Player player) {
 
@@ -480,111 +584,6 @@ public class Engine {
 		moveDown(player);
 	}
 
-	public void pushBomb(Player player) {
-
-		if ( player != null ) {
-			Point p = ResourcesManager.coToTile(player.getPosition().x+(ResourcesManager.getSize()/2), player.getPosition().y+(ResourcesManager.getSize()/2));
-
-			if ( this.bombs.get(p) == null ) {
-				if ( player.getBombNumber() > 0 ) {
-					Bomb b = new Bomb(player.getBombSelected(), ResourcesManager.getBombsAnimations().get(player.getBombSelected()), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, player);
-					b.setPosition(ResourcesManager.tileToCo(p.x, p.y));
-					this.bombs.put(p, b);
-					try {
-						player.setBombNumber(player.getBombNumber()-1);
-					} catch (BombPowerException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-	}
-
-	public void onDraw(Canvas canvas, int size) {
-		this.single.onDraw(canvas,size);
-
-		/* FIXME */
-		for(Entry<Point, Bomb> entry : bombs.entrySet()) {
-			bombs.get(entry.getKey()).onDraw(canvas, size);							
-		}
-	}
-
-	public void update() {
-		Player[] players = this.single.getPlayers();
-		Map map = this.single.getMap();
-
-		/* Bombes -------------------------------------------------- */
-
-		this.updateBombs();				
-
-		/* Joueurs ------------------------------------------------- */
-
-		for (int i = 0 ; i < players.length ; i++ ) {
-			if ( players[i] != null ) {
-
-				if ( players[i].getPosition() != null ) {
-
-					/* Si l'animation courante correspond à KILL et qu'elle est finie on supprime le personnage */
-					if ( players[i].hasAnimationFinished() && players[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
-						/* On met joueur à null ce qui stopera le thread d'écoute */
-						players[i].setPosition(null);
-					}
-					else {					
-						/* Si le joueur vient de se faire toucher */
-						if ( players[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) ) {
-							/* Si l'animation est finie */
-							if ( players[i].hasAnimationFinished() ) {
-								/* On lance un timer qui fera "clignoter" le personnage */
-								players[i].setCurrentAnimation(PlayerAnimations.IDLE);
-								players[i].setImmortal(50);
-							}
-						}
-						else if ( players[i].isDestructible() ) {
-							Point point = players[i].getPosition();
-							Point point1 = ResourcesManager.coToTile(point.x,point.y);
-							Point point2 = ResourcesManager.coToTile(point.x+ResourcesManager.getSize()-1,point.y);
-							Point point3 = ResourcesManager.coToTile(point.x+ResourcesManager.getSize()-1,point.y+ResourcesManager.getSize()-1);
-							Point point4 = ResourcesManager.coToTile(point.x,point.y+ResourcesManager.getSize()-1);
-
-							if ( (map.getBlocks()[point1.x][point1.y] != null && map.getBlocks()[point1.x][point1.y].getDamage() != 0) || (map.getBlocks()[point2.x][point2.y] != null && map.getBlocks()[point2.x][point2.y].getDamage() != 0) ||(map.getBlocks()[point3.x][point3.y] != null && map.getBlocks()[point3.x][point3.y].getDamage() != 0) || (map.getBlocks()[point4.x][point4.y] != null && map.getBlocks()[point4.x][point4.y].getDamage() != 0)) {
-								players[i].decreaseLife();
-								if ( players[i].getLife() == 0 ) {
-									players[i].setCurrentAnimation(PlayerAnimations.KILL);
-								}
-								else {
-									players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
-								}
-							}
-							else if ( (map.getGrounds()[point1.x][point1.y].getDamage() != 0) || ( map.getGrounds()[point2.x][point2.y].getDamage() != 0) || (map.getGrounds()[point3.x][point3.y].getDamage() != 0) || (map.getGrounds()[point4.x][point4.y].getDamage() != 0) ) {
-
-								players[i].decreaseLife();
-								if ( players[i].getLife() == 0 ) {
-									players[i].setCurrentAnimation(PlayerAnimations.KILL);
-								}
-								else {
-									players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
-								}
-							}
-						}
-						/*TODO  Vérifier tapis roulant */
-						players[i].update();
-
-
-						/* IA */
-						if ( i != 0 ) {
-
-							/* Trajet d'une bombe */
-							/*if ( !bombTarget(players[i]) ) {
-
-							}*/
-						}
-					}
-				}
-
-			}
-		}
-		this.single.update();
-	}
 
 	private void updateBombs() {
 		Map map = this.single.getMap();
@@ -761,38 +760,5 @@ public class Engine {
 				bombs.remove(entry.getKey());
 			}
 		}
-	}
-
-	public boolean bombTarget(Player player) {
-
-		Map map = this.single.getMap();
-		Point p = ResourcesManager.coToTile(player.getPosition().x, player.getPosition().y);
-
-		int x = p.x;
-		int y = p.y;
-
-		/* UP */
-		while ( map.getBlocks()[x][y] != null ) {
-			y++;
-		}				
-
-		y = p.y;
-
-		/* DOWN */
-		while ( map.getBlocks()[x][y] != null ) {
-
-		}
-
-		/* LEFT */
-		while ( map.getBlocks()[x][y] != null ) {
-
-		}
-
-		/* RIGHT */
-		while ( map.getBlocks()[x][y] != null ) {
-
-		}
-
-		return false;
 	}
 }

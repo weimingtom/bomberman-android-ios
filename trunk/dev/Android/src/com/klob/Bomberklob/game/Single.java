@@ -3,11 +3,9 @@ package com.klob.Bomberklob.game;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map.Entry;
-import java.util.Vector;
 
 import com.klob.Bomberklob.model.Model;
 import com.klob.Bomberklob.objects.AnimationSequence;
-import com.klob.Bomberklob.objects.Bomb;
 import com.klob.Bomberklob.objects.BotPlayer;
 import com.klob.Bomberklob.objects.HumanPlayer;
 import com.klob.Bomberklob.objects.Player;

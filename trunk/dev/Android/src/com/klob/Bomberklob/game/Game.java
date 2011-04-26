@@ -29,6 +29,7 @@ public abstract class Game {
 		if ( this.map.loadMap(mapName) ) {
 			this.players = new Player[enemies+1];
 			this.random = random;
+			
 			this.blocks = new ArrayList<Objects>();
 
 			bm = Bitmap.createBitmap(ResourcesManager.getSize()*this.map.getGrounds().length, ResourcesManager.getSize()*this.map.getGrounds()[0].length, Bitmap.Config.ARGB_8888);
@@ -56,7 +57,7 @@ public abstract class Game {
 			this.gameType = new FreeForAll();
 		}
 		else {
-
+			//FIXME Erreur de chargement de la carte
 		}			
 	}
 
