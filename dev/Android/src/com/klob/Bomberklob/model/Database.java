@@ -247,7 +247,7 @@ public class Database extends SQLiteOpenHelper{
 		
 		if ( res == 0 ) {
 			this.base.insert("Map", null, entree);
-			Log.i("Database", "New map added : \n+Name : " + name +"\nOwner : " + owner + "\nOfficial : " + i);	
+			Log.i("Database", "New map added : \nName : " + name +"\nOwner : " + owner + "\nOfficial : " + i);	
 		}
 		else {
 			this.base.update("Map", entree, "name ='"+owner+"'", null);

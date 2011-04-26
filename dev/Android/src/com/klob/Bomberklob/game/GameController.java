@@ -22,7 +22,7 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 
 	/* Constructeurs  ------------------------------------------------------ */
 
-	public GameController(Context context) {		
+	public GameController(Context context) {                
 		super(context);
 		this.gameView = new GameView(getHolder(), this);
 		this.animation = PlayerAnimations.IDLE;
@@ -40,8 +40,16 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 	public void setGameView(GameView gameView) {
 		this.gameView = gameView;
 	}
+	
+	/* Méthodes abstraites ------------------------------------------------- */
+	
+	public abstract void onDraw(Canvas canvas, int size);
 
-	/* Méthodes publiques -------------------------------------------------- */
+	public abstract void update();
+
+	public abstract void pushBomb();
+
+	/* Méthodes surchargées ------------------------------------------------ */
 
 	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
@@ -71,19 +79,13 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 
 			}
 		}
-		Log.i("GameController", "Thread done");		
+		Log.i("GameController", "Thread done");         
 	}
-
-	public abstract void onDraw(Canvas canvas, int size);
-
-	public abstract void update();
-
-	public abstract void pushBomb();
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event){
 		if (this.isEnabled()) {
-			switch (event.getAction()) {		
+			switch (event.getAction()) {            
 			case MotionEvent.ACTION_DOWN:
 				this.x = (int) event.getX();
 				this.y = (int) event.getY();
@@ -131,34 +133,46 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 				}
 				break;
 			case MotionEvent.ACTION_UP:
-				if ( animation == PlayerAnimations.RIGHT) {
-					animation = PlayerAnimations.STOP_RIGHT;
-				}
-				else if ( animation == PlayerAnimations.LEFT) {
-					animation = PlayerAnimations.STOP_LEFT;
-				}
-				else if ( animation == PlayerAnimations.UP) {
-					animation = PlayerAnimations.STOP_UP;
-				}
-				else if ( animation == PlayerAnimations.DOWN) {
-					animation = PlayerAnimations.STOP_DOWN;
-				}
-				else if ( animation == PlayerAnimations.DOWN_RIGHT) {
-					animation = PlayerAnimations.STOP_DOWN_RIGHT;
-				}
-				else if ( animation == PlayerAnimations.DOWN_LEFT) {
-					animation = PlayerAnimations.STOP_DOWN_LEFT;
-				}
-				else if ( animation == PlayerAnimations.UP_RIGHT) {
-					animation = PlayerAnimations.STOP_UP_RIGHT;
-				}
-				else if ( animation == PlayerAnimations.UP_LEFT) {
-					animation = PlayerAnimations.STOP_UP_LEFT;
-				}
+				stopPlayer();
 				break;
 			}
 		}
-		return true;		
+		return true;            
+	}
+
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		stopPlayer();
+	}
+
+	/* Méthodes privées ---------------------------------------------------- */
+
+	private void stopPlayer() {
+		if ( animation == PlayerAnimations.RIGHT) {
+			animation = PlayerAnimations.STOP_RIGHT;
+		}
+		else if ( animation == PlayerAnimations.LEFT) {
+			animation = PlayerAnimations.STOP_LEFT;
+		}
+		else if ( animation == PlayerAnimations.UP) {
+			animation = PlayerAnimations.STOP_UP;
+		}
+		else if ( animation == PlayerAnimations.DOWN) {
+			animation = PlayerAnimations.STOP_DOWN;
+		}
+		else if ( animation == PlayerAnimations.DOWN_RIGHT) {
+			animation = PlayerAnimations.STOP_DOWN_RIGHT;
+		}
+		else if ( animation == PlayerAnimations.DOWN_LEFT) {
+			animation = PlayerAnimations.STOP_DOWN_LEFT;
+		}
+		else if ( animation == PlayerAnimations.UP_RIGHT) {
+			animation = PlayerAnimations.STOP_UP_RIGHT;
+		}
+		else if ( animation == PlayerAnimations.UP_LEFT) {
+			animation = PlayerAnimations.STOP_UP_LEFT;
+		}
 	}
 
 }

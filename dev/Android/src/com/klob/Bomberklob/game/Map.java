@@ -15,10 +15,8 @@ import com.klob.Bomberklob.objects.ObjectsAnimations;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.util.Log;
-
 
 public class Map implements Serializable {
 
@@ -34,8 +32,8 @@ public class Map implements Serializable {
 
 	public Map() {
 		this.players = new Point[4];
-		this.grounds = new Objects[21][14];
-		this.blocks  = new Objects[21][14];
+		this.grounds = new Objects[21][15];
+		this.blocks  = new Objects[21][15];
 	}
 
 	/* Getteurs ------------------------------------------------------------ */
@@ -84,9 +82,10 @@ public class Map implements Serializable {
 				return false;
 			}
 		}
-
-		File dir = ResourcesManager.getContext().getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
-		File f = new File (dir.getAbsolutePath()+"/"+this.name+".klob");
+		
+		File f =  new File (ResourcesManager.getContext().getFilesDir().getAbsolutePath()+"/maps/"+this.name);
+		f.mkdir();
+		f = new File (f.getAbsolutePath()+"/"+this.name+".klob");
 
 		try {
 			f.createNewFile();
@@ -111,8 +110,7 @@ public class Map implements Serializable {
 
 	public boolean loadMap(String s) {
 
-		File dir = ResourcesManager.getContext().getDir("maps", Context.MODE_WORLD_READABLE|Context.MODE_WORLD_WRITEABLE);
-		File f = new File (dir.getAbsolutePath()+"/"+s+".klob");
+		File f =  new File (ResourcesManager.getContext().getFilesDir().getAbsolutePath()+"/maps/"+s+"/"+s+".klob");
 		Log.i("Map", "File loaded : " + f.getAbsolutePath());
 		Map map = null;
 

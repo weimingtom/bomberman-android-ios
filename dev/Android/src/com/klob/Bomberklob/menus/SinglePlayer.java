@@ -65,9 +65,10 @@ public class SinglePlayer extends Activity implements View.OnClickListener{
 		this.mapName = (TextView) findViewById(R.id.SinglePlayerGameMapName);
 		this.mapName.setText(maps.get(0).getName());
 
+		
 		String[] mapBitmap = new String[this.maps.size()];
 		for (int i = 0; i < mapBitmap.length ; i++) {
-			mapBitmap[i] = this.getDir("maps", i).getAbsolutePath()+"/"+this.maps.get(i).getName()+".png";
+			mapBitmap[i] = this.getFilesDir().getAbsolutePath()+"/maps/"+this.maps.get(i).getName()+"/"+this.maps.get(i).getName()+".png";
 		}
 
 		this.gallery = (Gallery) findViewById(R.id.galleryz);

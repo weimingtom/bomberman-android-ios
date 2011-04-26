@@ -172,8 +172,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		Log.i("SinglePlayerLayout", "onPause");
 		super.onPause();
 		this.setTimeThreadRunning(false);
-	}  
-
+	} 
 
 	@Override
 	public void onClick(View arg0) {
