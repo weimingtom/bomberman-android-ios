@@ -32,7 +32,7 @@ public class MapEditor {
 	/* Méthodes publiques -------------------------------------------------- */
 
 	public void addObject (Objects objects, Point point) {
-		if ( point.x > 1 && point.x < map.getBlocks().length && point.y > 1 && point.y < map.getBlocks()[0].length) {
+		if ( point.x >= 0 && point.x < map.getBlocks().length && point.y >= 0 && point.y < map.getBlocks()[0].length) {
 			if ( objects.getLevel() == 0 ) {
 				this.map.addGround(objects, point);
 			}
