@@ -32,40 +32,42 @@ public class MapEditor {
 	/* Méthodes publiques -------------------------------------------------- */
 
 	public void addObject (Objects objects, Point point) {
-		if ( objects.getLevel() == 0 ) {
-			this.map.addGround(objects, point);
-		}
-		else {
-			int j = 0,i = 0;
-				
-			for (i = 0 ; i < 4 ; i++) {
-				if ( this.players[i].getImageName().equals(objects.getImageName())) {
-					break;
-				}
-			}				
-				
-			if ( i < 4 ) {
-				if ( (j = this.map.deletePlayer(point)) != -1 ) {
-					this.players[j].setPosition(null);
-				}
-				else {
-					map.getBlocks()[point.x][point.y] = null;
-				}
-				
-				if ( j != i ) {
-					this.players[i].setPosition(new Point(point.x*ResourcesManager.getSize() , point.y*ResourcesManager.getSize()));
-					this.map.getPlayers()[i] = point;
-				}
+		if ( point.x > 1 && point.x < map.getBlocks().length && point.y > 1 && point.y < map.getBlocks()[0].length) {
+			if ( objects.getLevel() == 0 ) {
+				this.map.addGround(objects, point);
 			}
 			else {
-				if ( map.getBlocks()[point.x][point.y] != null && objects.getImageName().equals(map.getBlocks()[point.x][point.y].getImageName())) {
-					map.getBlocks()[point.x][point.y] = null;
-				}
-				else {
+				int j = 0,i = 0;
+					
+				for (i = 0 ; i < 4 ; i++) {
+					if ( this.players[i].getImageName().equals(objects.getImageName())) {
+						break;
+					}
+				}				
+					
+				if ( i < 4 ) {
 					if ( (j = this.map.deletePlayer(point)) != -1 ) {
 						this.players[j].setPosition(null);
 					}
-					this.map.addBlock(objects, point);
+					else {
+						map.getBlocks()[point.x][point.y] = null;
+					}
+					
+					if ( j != i ) {
+						this.players[i].setPosition(new Point(point.x*ResourcesManager.getSize() , point.y*ResourcesManager.getSize()));
+						this.map.getPlayers()[i] = point;
+					}
+				}
+				else {
+					if ( map.getBlocks()[point.x][point.y] != null && objects.getImageName().equals(map.getBlocks()[point.x][point.y].getImageName())) {
+						map.getBlocks()[point.x][point.y] = null;
+					}
+					else {
+						if ( (j = this.map.deletePlayer(point)) != -1 ) {
+							this.players[j].setPosition(null);
+						}
+						this.map.addBlock(objects, point);
+					}
 				}
 			}
 		}
