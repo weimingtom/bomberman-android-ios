@@ -273,12 +273,13 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 			this.bombsGallery.update();
 			this.singlePlayerFrameLayoutBombsGallery.addView(this.bombsGallery);
 			
-			if ( this.gameControllerSingle != null ) {
-				this.singlePlayerFrameLayoutGame.removeView(this.gameControllerSingle);
-				this.gameControllerSingle = null;
+			if ( this.gameControllerSingle == null ) {
+				this.gameControllerSingle = new GameControllerSingle(getApplicationContext(), bundle.getString("map"), bundle.getInt("enemies"), bundle.getString("gametype"), bundle.getBoolean("random"), bundle.getInt("difficulty"));
+				this.singlePlayerFrameLayoutGame.addView(this.gameControllerSingle);
 			}
-			this.gameControllerSingle = new GameControllerSingle(getApplicationContext(), bundle.getString("map"), bundle.getInt("enemies"), bundle.getString("gametype"), bundle.getBoolean("random"), bundle.getInt("difficulty"));
-			this.singlePlayerFrameLayoutGame.addView(this.gameControllerSingle);
+			else {
+				this.gameControllerSingle.restartGame();
+			}
 		}
 		
 		this.timeTextView = (TextView) findViewById(R.id.GameTextTime);
@@ -288,5 +289,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		bombnumber.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getBombNumber()));
 		playerlife.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getLife()));
 		playerspeed.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getSpeed()));
+
 	}
 }

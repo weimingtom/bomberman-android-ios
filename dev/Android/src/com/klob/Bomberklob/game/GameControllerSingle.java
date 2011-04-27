@@ -70,4 +70,14 @@ public class GameControllerSingle extends GameController {
 			this.engine.pushBomb(this.engine.getSingle().getPlayers()[0]);	
 		}
 	}
+	
+	/* Méthodes publiques -------------------------------------------------- */
+	
+	public void restartGame() {
+		
+		/* Animation du joueur par defaut */
+		this.animation = PlayerAnimations.IDLE;
+		
+		this.engine.restartGame();
+	}
 }
