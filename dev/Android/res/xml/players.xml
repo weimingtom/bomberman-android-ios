@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animations>
 	<player name="white">
+	
+		<bitmaps>
+			<png name="idle" top="0" left="976" bottom="24" right="1000"/>
+			<png name="touched" top="0" left="1000" bottom="24" right="1024"/>
+			<png name="kill" top="0" left="1024" bottom="24" right="1048"/>
+		</bitmaps>
+		
 		<animation name="idle" canLoop="false">
 			<framerect top="0" left="0" bottom="45" right="30" delayNextFrame="0" />
 		</animation>
@@ -95,6 +102,13 @@
 	</player>
 	
 	<player name="black">
+	
+		<bitmaps>
+			<png name="idle" top="96" left="976" bottom="120" right="1000"/>
+			<png name="touched" top="96" left="1000" bottom="120" right="1024"/>
+			<png name="kill" top="96" left="1024" bottom="120" right="1048"/>
+		</bitmaps>
+	
 		<animation name="idle" canLoop="false">
 			<framerect top="45" left="0" bottom="90" right="30" delayNextFrame="0" />
 		</animation>
@@ -187,6 +201,13 @@
 	</player>
 	
 	<player name="red">
+	
+		<bitmaps>
+			<png name="idle" top="48" left="976" bottom="72" right="1000"/>
+			<png name="touched" top="48" left="1000" bottom="72" right="1024"/>
+			<png name="kill" top="48" left="1024" bottom="72" right="1048"/>
+		</bitmaps>
+	
 		<animation name="idle" canLoop="false">
 			<framerect top="90" left="0" bottom="135" right="30" delayNextFrame="0" />
 		</animation>
@@ -279,6 +300,13 @@
 	</player>
 	
 	<player name="blue">
+	
+		<bitmaps>
+			<png name="idle" top="24" left="976" bottom="48" right="1000"/>
+			<png name="touched" top="24" left="1000" bottom="48" right="1024"/>
+			<png name="kill" top="24" left="1024" bottom="48" right="1048"/>
+		</bitmaps>
+	
 		<animation name="idle" canLoop="false">
 			<framerect top="135" left="0" bottom="180" right="30" delayNextFrame="0" />
 		</animation>

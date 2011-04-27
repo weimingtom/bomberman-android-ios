@@ -2,9 +2,7 @@ package com.klob.Bomberklob.game;
 
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -15,9 +13,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -30,6 +28,8 @@ import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.menus.Home;
 import com.klob.Bomberklob.objects.Bomb;
 import com.klob.Bomberklob.objects.ObjectsAnimations;
+import com.klob.Bomberklob.objects.Player;
+import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.resources.ObjectsGallery;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
@@ -50,6 +50,8 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private ImageView singlePlayerLinearLayoutStartImage;
 
 	private int menuSize = 50;
+	
+	private ImageView[] imageView = new ImageView[4];
 
 	private int timeS;
 	private int timeM;
@@ -107,6 +109,11 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 
 		this.restart = (Button) findViewById(R.id.SinglePlayerMenuRestart);
 		this.restart.setOnClickListener(this);
+		
+		this.imageView[0] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer0);
+		this.imageView[1] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer1);
+		this.imageView[2] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer2);
+		this.imageView[3] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer3);
 
 		this.bombpower = (TextView) findViewById(R.id.SinglePlayerTextViewBombPower);
 		this.bombpower.setTextColor(Color.WHITE);
@@ -122,7 +129,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 			@Override
 			public void handleMessage(Message msg) {
 				if ( msg.what == 0 ) {
-
 					timeS--;
 					if ( timeS == -1 ) {
 						timeM--;
@@ -137,11 +143,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 					if ( timeM == 0 ) {
 						//FIXME FIN DU JEU
 					}
-
-					bombpower.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getPowerExplosion()));
-					bombnumber.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getBombNumber()));
-					playerlife.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getLife()));
-					playerspeed.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getSpeed()));
 				}
 				else if ( msg.what == 1 ) {
 					singlePlayerLinearLayoutStartImage.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ready));
@@ -152,6 +153,10 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 				else if ( msg.what == 3 ) {
 					singlePlayerRelativeLayoutGlobal.removeView(singlePlayerLinearLayoutStart);
 					resumeGame();
+				}
+				else if ( msg.what == 4 ) {
+					//FIXME BEUUUUUUUUUUUUUUUUUUUURK =D
+					updatePlayersStats();					
 				}
 			}
 		};
@@ -231,7 +236,9 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 					Log.i("Time Thread","Thread started");
 					while (timeBoolean) {
 						try {
-							sleep(1000);
+							sleep(500);
+							handler.sendMessage(handler.obtainMessage(4));
+							sleep(500);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -288,11 +295,8 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 
 			this.timeTextView = (TextView) findViewById(R.id.GameTextTime);
 			this.timeTextView.setText(timeM+":00");
-
-			bombpower.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getPowerExplosion()));
-			bombnumber.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getBombNumber()));
-			playerlife.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getLife()));
-			playerspeed.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getSpeed()));
+			
+			updatePlayersStats();
 
 			startGame();
 		}
@@ -301,7 +305,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		}
 	}
 
-	//FIXME Mouais ...
 	public void startGame() {		
 		
 		pauseGame();
@@ -344,5 +347,32 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.menu.setClickable(true);
 		this.setTimeThreadRunning(true);
 		//FIXME Lancer IA
+	}
+	
+	public void updatePlayersStats() {
+		Player[] p = gameControllerSingle.getEngine().getSingle().getPlayers();
+		
+		bombpower.setText(String.valueOf(p[0].getPowerExplosion()));
+		bombnumber.setText(String.valueOf(p[0].getBombNumber()));
+		playerlife.setText(String.valueOf(p[0].getLife()));
+		playerspeed.setText(String.valueOf(p[0].getSpeed()));
+		
+		for (int i = 0 ; i < p.length ; i++ ) {
+			if (p[i] != null) {
+				//FIXME Récupérer le score
+				if (!p[i].isDestructible() || p[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel())) {
+					this.imageView[i].setBackgroundDrawable(new BitmapDrawable(ResourcesManager.getBitmaps().get(p[i].getImageName()+"touched")));
+				}
+				else if (p[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
+					this.imageView[i].setBackgroundDrawable(new BitmapDrawable(ResourcesManager.getBitmaps().get(p[i].getImageName()+p[i].getCurrentAnimation())));
+				}
+				else {
+					this.imageView[i].setBackgroundDrawable(new BitmapDrawable(ResourcesManager.getBitmaps().get(p[i].getImageName()+"idle")));
+				}
+			}
+			else {
+
+			}
+		}
 	}
 }

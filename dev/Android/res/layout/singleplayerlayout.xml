@@ -2,88 +2,6 @@
 <RelativeLayout android:layout_width="fill_parent"
 	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/SinglePlayerRelativeLayoutGlobal">
-
-	<LinearLayout android:id="@+id/linearLayout4"
-		android:orientation="vertical" android:layout_height="fill_parent"
-		android:layout_width="fill_parent">
-		<RelativeLayout android:id="@+id/SinglePlayerRelativeLayoutMenu"
-			android:layout_height="wrap_content" android:background="@color/White"
-			android:layout_width="fill_parent" android:gravity="center_vertical">
-			<LinearLayout android:id="@+id/linearLayout5"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:layout_alignParentRight="true"
-				android:layout_centerVertical="true">
-				<LinearLayout android:layout_height="fill_parent"
-					android:id="@+id/linearLayout6" android:layout_width="wrap_content"
-					android:background="@drawable/bombpower" android:gravity="bottom|right">
-					<TextView android:text="1" android:layout_width="wrap_content"
-						android:layout_height="wrap_content" android:id="@+id/SinglePlayerTextViewBombPower"></TextView>
-				</LinearLayout>
-				<LinearLayout android:layout_height="fill_parent"
-					android:id="@+id/linearLayout7" android:layout_width="wrap_content"
-					android:background="@drawable/bombnumber" android:gravity="bottom|right">
-					<TextView android:layout_height="wrap_content"
-						android:id="@+id/SinglePlayerTextViewBombNumber"
-						android:layout_width="wrap_content" android:text="1"></TextView>
-				</LinearLayout>
-				<LinearLayout android:layout_height="fill_parent"
-					android:id="@+id/linearLayout8" android:layout_width="wrap_content"
-					android:background="@drawable/playerspeed" android:gravity="bottom|right">
-					<TextView android:layout_height="wrap_content"
-						android:id="@+id/SinglePlayerTextViewPlayerSpeed"
-						android:layout_width="wrap_content" android:text="1"></TextView>
-				</LinearLayout>
-				<LinearLayout android:layout_height="fill_parent"
-					android:id="@+id/linearLayout9" android:layout_width="wrap_content"
-					android:background="@drawable/playerlife" android:gravity="bottom|right">
-					<TextView android:layout_height="wrap_content"
-						android:id="@+id/SinglePlayerTextViewPlayerLife"
-						android:layout_width="wrap_content" android:text="1"></TextView>
-				</LinearLayout>
-			</LinearLayout>
-			<Button android:id="@+id/SinglePlayerButtonMenu"
-				android:layout_height="wrap_content" android:layout_width="wrap_content"
-				android:text="@string/ButtonMenu"></Button>
-			<LinearLayout android:layout_height="wrap_content"
-				android:id="@+id/linearLayout2" android:layout_width="wrap_content"
-				android:layout_centerVertical="false" android:layout_alignParentTop="true"
-				android:layout_centerInParent="true">
-				<LinearLayout android:layout_height="fill_parent"
-					android:gravity="center_horizontal" android:id="@+id/linearLayout3"
-					android:layout_width="wrap_content" android:orientation="vertical">
-					<TextView android:id="@+id/textView1"
-						android:layout_height="wrap_content" android:text="@string/GameTextTime"
-						android:layout_width="wrap_content"></TextView>
-					<TextView android:id="@+id/GameTextTime"
-						android:layout_height="wrap_content" android:text="TextView"
-						android:layout_width="wrap_content"></TextView>
-				</LinearLayout>
-			</LinearLayout>
-		</RelativeLayout>
-		<LinearLayout android:layout_height="fill_parent"
-			android:id="@+id/linearLayout1" android:layout_width="fill_parent"
-			android:orientation="horizontal">
-			<LinearLayout android:layout_height="fill_parent"
-				android:gravity="center" android:background="@color/Grey"
-				android:id="@+id/SinglePlayerLinearLayoutEditorController"
-				android:layout_width="wrap_content">
-				<FrameLayout android:layout_height="wrap_content"
-					android:layout_width="wrap_content" android:id="@+id/SinglePlayerFrameLayoutGame"></FrameLayout>
-			</LinearLayout>
-			<RelativeLayout android:layout_height="wrap_content"
-				android:id="@+id/SinglePlayerRelativeLayoutObjectsGallery"
-				android:background="@color/Brown" android:layout_width="fill_parent">
-				<FrameLayout android:layout_height="wrap_content"
-					android:layout_width="wrap_content" android:layout_centerInParent="true"
-					android:id="@+id/SinglePlayerFrameLayoutBombsGallery"></FrameLayout>
-				<ImageButton android:background="@drawable/bomb_button"
-					android:layout_height="wrap_content"
-					android:layout_alignParentBottom="true" android:layout_width="wrap_content"
-					android:id="@+id/SinglePlayerButtonBomb"
-					android:layout_centerInParent="true"></ImageButton>
-			</RelativeLayout>
-		</LinearLayout>
-	</LinearLayout>
 	<LinearLayout android:layout_width="fill_parent"
 		android:layout_height="fill_parent" android:gravity="center_vertical|center_horizontal"
 		android:id="@+id/SinglePlayerLinearLayoutMenu" android:background="@color/Black">
@@ -106,6 +24,52 @@
 	</LinearLayout>
 	<LinearLayout android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@color/Black" android:id="@+id/SinglePlayerLinearLayoutStart" android:gravity="center_vertical|center_horizontal">
 		<ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/ready" android:id="@+id/SinglePlayerLinearLayoutStartImage"></ImageView>
+	</LinearLayout>
+	<LinearLayout android:layout_width="fill_parent" android:orientation="vertical" android:layout_height="fill_parent" android:id="@+id/linearLayout4">
+		<RelativeLayout android:layout_height="wrap_content" android:id="@+id/SinglePlayerRelativeLayoutMenu" android:layout_width="fill_parent" android:gravity="center_vertical" android:background="@drawable/tilebackground">
+			<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:id="@+id/linearLayout5">
+				<LinearLayout android:background="@drawable/bombpower" android:gravity="bottom|right" android:layout_height="fill_parent" android:layout_width="wrap_content" android:id="@+id/linearLayout6">
+					<TextView android:text="1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/SinglePlayerTextViewBombPower"></TextView>
+				</LinearLayout>
+				<LinearLayout android:background="@drawable/bombnumber" android:gravity="bottom|right" android:layout_height="fill_parent" android:layout_width="wrap_content" android:id="@+id/linearLayout7">
+					<TextView android:text="1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/SinglePlayerTextViewBombNumber"></TextView>
+				</LinearLayout>
+				<LinearLayout android:background="@drawable/playerspeed" android:gravity="bottom|right" android:layout_height="fill_parent" android:layout_width="wrap_content" android:id="@+id/linearLayout8">
+					<TextView android:text="1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/SinglePlayerTextViewPlayerSpeed"></TextView>
+				</LinearLayout>
+				<LinearLayout android:background="@drawable/playerlife" android:gravity="bottom|right" android:layout_height="fill_parent" android:layout_width="wrap_content" android:id="@+id/linearLayout9">
+					<TextView android:text="1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/SinglePlayerTextViewPlayerLife"></TextView>
+				</LinearLayout>
+			</LinearLayout>
+			<Button android:text="@string/ButtonMenu" android:layout_width="wrap_content" android:id="@+id/SinglePlayerButtonMenu" android:layout_height="wrap_content"></Button>
+			<LinearLayout android:layout_width="wrap_content" android:layout_centerHorizontal="true" android:layout_centerVertical="false" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:id="@+id/linearLayout2">
+				<LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:id="@+id/linearLayout10" android:layout_height="wrap_content">
+					<ImageView android:id="@+id/SinglePlayerLayoutImageViewPlayer0" android:layout_height="wrap_content" android:layout_width="wrap_content"></ImageView>
+				</LinearLayout>
+				<LinearLayout android:layout_width="wrap_content" android:id="@+id/linearLayout11" android:layout_height="wrap_content">
+					<ImageView android:id="@+id/SinglePlayerLayoutImageViewPlayer1" android:layout_height="wrap_content" android:layout_width="wrap_content"></ImageView>
+				</LinearLayout>
+				<LinearLayout android:orientation="vertical" android:gravity="center_horizontal" android:layout_width="wrap_content" android:id="@+id/linearLayout3" android:layout_height="wrap_content">
+					<TextView android:text="@string/GameTextTime" android:layout_height="wrap_content" android:textColor="@color/White" android:layout_width="wrap_content" android:id="@+id/textView1"></TextView>
+					<TextView android:text="TextView" android:layout_height="wrap_content" android:textColor="@color/White" android:layout_width="wrap_content" android:id="@+id/GameTextTime"></TextView>
+				</LinearLayout>
+				<LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout12" android:layout_width="wrap_content">
+					<ImageView android:id="@+id/SinglePlayerLayoutImageViewPlayer2" android:layout_height="wrap_content" android:layout_width="wrap_content"></ImageView>
+				</LinearLayout>
+				<LinearLayout android:layout_width="wrap_content" android:id="@+id/linearLayout13" android:layout_height="wrap_content">
+					<ImageView android:id="@+id/SinglePlayerLayoutImageViewPlayer3" android:layout_height="wrap_content" android:layout_width="wrap_content"></ImageView>
+				</LinearLayout>
+			</LinearLayout>
+		</RelativeLayout>
+		<LinearLayout android:orientation="horizontal" android:layout_height="fill_parent" android:layout_width="fill_parent" android:id="@+id/linearLayout1">
+			<LinearLayout android:background="@color/Grey" android:gravity="center" android:layout_height="fill_parent" android:layout_width="wrap_content" android:id="@+id/SinglePlayerLinearLayoutEditorController">
+				<FrameLayout android:id="@+id/SinglePlayerFrameLayoutGame" android:layout_height="wrap_content" android:layout_width="wrap_content"></FrameLayout>
+			</LinearLayout>
+			<RelativeLayout android:layout_height="wrap_content" android:id="@+id/SinglePlayerRelativeLayoutObjectsGallery" android:layout_width="fill_parent" android:background="@drawable/tilebackground">
+				<FrameLayout android:layout_width="wrap_content" android:id="@+id/SinglePlayerFrameLayoutBombsGallery" android:layout_centerInParent="true" android:layout_height="wrap_content"></FrameLayout>
+				<ImageButton android:layout_width="wrap_content" android:id="@+id/SinglePlayerButtonBomb" android:layout_alignParentBottom="true" android:background="@drawable/bomb_button" android:layout_centerInParent="true" android:layout_height="wrap_content"></ImageButton>
+			</RelativeLayout>
+		</LinearLayout>
 	</LinearLayout>
 
 
