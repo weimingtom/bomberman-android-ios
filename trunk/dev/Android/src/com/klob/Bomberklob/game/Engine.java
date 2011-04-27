@@ -210,6 +210,14 @@ public class Engine {
 		this.single.update();
 	}
 	
+	
+	public void restartGame () {		
+		/* Remise à 0 du vecteur de bombes */
+		this.bombs = new ConcurrentHashMap<Point, Bomb>();
+		
+		this.single.restartGame();		
+	}
+	
 	/* Méthodes privées ---------------------------------------------------- */
 
 	private void moveUp(Player player) {

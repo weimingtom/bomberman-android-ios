@@ -8,6 +8,7 @@ import com.klob.Bomberklob.model.Model;
 import com.klob.Bomberklob.objects.AnimationSequence;
 import com.klob.Bomberklob.objects.BotPlayer;
 import com.klob.Bomberklob.objects.HumanPlayer;
+import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.resources.Point;
@@ -48,10 +49,32 @@ public class Single extends Game {
 	public void pauseGame() {
 
 	}
+	
+	public void restartGame() {
+		
+		/* Variables remises a vide */
+		for (int i = 1 ; i < this.players.length ; i++ ) {
+			this.players[i] = null;
+		}
+		this.blocks = new ArrayList<Objects>();
+		
+		/* Liste des blocks destructibles remise à l'état initial */
+		for (int i = 0; i < this.map.getGrounds().length ; i++) {
+			for (int j = 0; j < this.map.getGrounds()[0].length ; j++) {
+				if ( this.map.getBlocks()[i][j] != null) {
+					if (!this.map.getBlocks()[i][j].isDestructible()) {
+						blocks.add(this.map.getBlocks()[i][j]);
+					}
+				}
+			}
+		}
+		
+		/* Nouvelle initialisation de la partie */
+		initGame();
+	}
 
 	@Override
 	public void pushBomb(Player player) {
 		// TODO Auto-generated method stub
-		
 	}
 }
