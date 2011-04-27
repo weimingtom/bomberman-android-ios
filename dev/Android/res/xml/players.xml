@@ -184,19 +184,21 @@
 			<framerect top="45" left="690" bottom="90" right="720" delayNextFrame="5" />
 			<framerect top="45" left="630" bottom="90" right="660" delayNextFrame="5" />
 		</animation>
-				<animation name="kill" canLoop="false">
-			<framerect top="0" left="690" bottom="45" right="720" delayNextFrame="5" />
+		<animation name="kill" canLoop="false">
+			<framerect top="45" left="800" bottom="90" right="834" delayNextFrame="1" />
+			<framerect top="45" left="838" bottom="90" right="872" delayNextFrame="1" />
+			<framerect top="45" left="876" bottom="90" right="918" delayNextFrame="1" />
+			<framerect top="45" left="926" bottom="90" right="972" delayNextFrame="1" />
 		</animation>
 		<animation name="touched" canLoop="false">
-			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
-			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
-			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
-			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
-			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
-			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
-			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
-			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
-			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="5" />
+			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="1" />
+			<framerect top="45" left="760" bottom="90" right="798" delayNextFrame="1" />
+			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="1" />
+			<framerect top="45" left="760" bottom="90" right="798" delayNextFrame="1" />
+			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="1" />
+			<framerect top="45" left="760" bottom="90" right="798" delayNextFrame="1" />
+			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="1" />
+			<framerect top="45" left="760" bottom="90" right="798" delayNextFrame="1" />
 		</animation>
 	</player>
 	

@@ -39,7 +39,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private GameControllerSingle gameControllerSingle;
 
 	private ObjectsGallery bombsGallery;
-	private LinearLayout singlePlayerControllerLayout, singlePlayerLinearLayoutMenu, singlePlayerLinearLayoutStart;
+	private LinearLayout singlePlayerControllerLayout, singlePlayerLinearLayoutMenu, singlePlayerLinearLayoutStart, singlePlayerLinearLayoutBonus1, singlePlayerLinearLayoutBonus2, singlePlayerLinearLayoutBonus3, singlePlayerLinearLayoutBonus4;
 	private RelativeLayout singlePlayerRelativeLayoutObjectsGallery, singlePlayerRelativeLayoutMenu, singlePlayerRelativeLayoutGlobal;
 	private FrameLayout singlePlayerFrameLayoutGame, singlePlayerFrameLayoutBombsGallery;
 
@@ -110,21 +110,31 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.restart = (Button) findViewById(R.id.SinglePlayerMenuRestart);
 		this.restart.setOnClickListener(this);
 		
+		
+		this.singlePlayerLinearLayoutBonus1 = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutBonus1);
+		this.singlePlayerLinearLayoutBonus1.setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
+		
+		this.singlePlayerLinearLayoutBonus2 = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutBonus2);
+		this.singlePlayerLinearLayoutBonus2.setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
+		
+		this.singlePlayerLinearLayoutBonus3 = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutBonus3);
+		this.singlePlayerLinearLayoutBonus3.setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
+		
+		this.singlePlayerLinearLayoutBonus4 = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutBonus4);
+		this.singlePlayerLinearLayoutBonus4.setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
+		
+		
 		this.imageView[0] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer0);
-		this.imageView[0].setMinimumHeight((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
-		this.imageView[0].setMinimumWidth((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
+		this.imageView[0].setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
 		
 		this.imageView[1] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer1);
-		this.imageView[1].setMinimumHeight((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
-		this.imageView[1].setMinimumWidth((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
+		this.imageView[1].setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
 		
 		this.imageView[2] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer2);
-		this.imageView[2].setMinimumHeight((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
-		this.imageView[2].setMinimumWidth((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
+		this.imageView[2].setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
 		
 		this.imageView[3] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer3);
-		this.imageView[3].setMinimumHeight((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
-		this.imageView[3].setMinimumWidth((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
+		this.imageView[3].setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
 
 		this.bombpower = (TextView) findViewById(R.id.SinglePlayerTextViewBombPower);
 		this.bombpower.setTextColor(Color.WHITE);
