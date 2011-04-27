@@ -137,7 +137,7 @@ public class SinglePlayer extends Activity implements View.OnClickListener{
 			ImageView img = new ImageView(m_context);
 			img.setImageBitmap(BitmapFactory.decodeFile(m_images[position]));
 			img.setScaleType(ImageView.ScaleType.FIT_XY);
-			img.setLayoutParams(new Gallery.LayoutParams( (int) ((ResourcesManager.getSize()*15)/1.75) , (int) ((ResourcesManager.getSize()*13)/1.75) ) );
+			img.setLayoutParams(new Gallery.LayoutParams( (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_WIDTH)/1.5) , (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_HEIGHT)/1.5) ) );
 			img.setBackgroundResource(m_itemBackground);
 			return img;
 		}

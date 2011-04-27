@@ -24,6 +24,10 @@ import com.klob.Bomberklob.objects.Undestructible;
 public class ResourcesManager {
 
 	private static ResourcesManager resourcesmanager;
+	
+	
+	public final static int MAP_HEIGHT = 15;
+	public final static int MAP_WIDTH = 21;
 
 	private static Context context;
 	private static float dpiPx;
@@ -45,11 +49,11 @@ public class ResourcesManager {
 		height = context.getResources().getDisplayMetrics().heightPixels;
 		width = context.getResources().getDisplayMetrics().widthPixels;
 
-		if ( ((height-(50*dpiPx))/21) < ((width-(50*dpiPx))/15) ) {
-			size = (int) ((height-(50*dpiPx))/21);
+		if ( ((height-(50*dpiPx))/MAP_WIDTH) < ((width-(50*dpiPx))/MAP_HEIGHT) ) {
+			size = (int) ((height-(50*dpiPx))/MAP_WIDTH);
 		}
 		else {
-			size = (int) ((width-(50*dpiPx))/15);
+			size = (int) ((width-(50*dpiPx))/MAP_HEIGHT);
 		}
 
 		bitmapsInitialisation();
@@ -57,6 +61,8 @@ public class ResourcesManager {
 		Log.i("ResourcesManager","dpiPx : " + dpiPx);
 		Log.i("ResourcesManager","tileSize : " + tileSize);
 		Log.i("ResourcesManager","size : " + size);
+		Log.i("ResourcesManager","height : " + height);
+		Log.i("ResourcesManager","width : " + width);
 	}
 
 	/* Getters ------------------------------------------------------------- */
