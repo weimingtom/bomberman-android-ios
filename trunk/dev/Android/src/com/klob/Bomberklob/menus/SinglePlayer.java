@@ -58,6 +58,7 @@ public class SinglePlayer extends Activity implements View.OnClickListener{
 
 		this.gameType = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerType);
 		this.enemiesNumber  = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesNumber);
+		this.enemiesNumber.setSelection(2);
 		this.enemiesDifficulty = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerEnemiesDifficulty);
 		this.time = (Spinner) findViewById(R.id.SinglePlayerGameSpinnerTime);
 		this.time.setSelection(2);
