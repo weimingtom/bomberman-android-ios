@@ -1,5 +1,8 @@
 package com.klob.Bomberklob.resources;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -10,6 +13,7 @@ import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.util.Log;
 import android.util.TypedValue;
 
@@ -24,8 +28,8 @@ import com.klob.Bomberklob.objects.Undestructible;
 public class ResourcesManager {
 
 	private static ResourcesManager resourcesmanager;
-	
-	
+
+
 	public final static int MAP_HEIGHT = 15;
 	public final static int MAP_WIDTH = 21;
 
@@ -57,7 +61,7 @@ public class ResourcesManager {
 		}
 
 		bitmapsInitialisation();
-		
+
 		Log.i("ResourcesManager","dpiPx : " + dpiPx);
 		Log.i("ResourcesManager","tileSize : " + tileSize);
 		Log.i("ResourcesManager","size : " + size);
@@ -270,7 +274,22 @@ public class ResourcesManager {
 					if(xpp.getName().toLowerCase().equals("player")) {
 						playerAnimation = new Hashtable<String, AnimationSequence>();
 						name = xpp.getAttributeValue(null, "name");
-					}					
+					}
+					else if(xpp.getName().toLowerCase().equals("png")) {
+
+						android.graphics.Rect frame = new android.graphics.Rect();
+						frame.top = xpp.getAttributeIntValue(null, "top", 0);
+						frame.bottom = xpp.getAttributeIntValue(null, "bottom", 0);
+						frame.left = xpp.getAttributeIntValue(null, "left", 0);
+						frame.right = xpp.getAttributeIntValue(null, "right", 0);
+
+						Bitmap bm = Bitmap.createBitmap(frame.right-frame.left, frame.bottom-frame.top, Bitmap.Config.ARGB_8888);
+						Canvas c = new Canvas(bm);
+						c.drawBitmap(bitmaps.get("players"), frame, new android.graphics.Rect(0 , 0 , frame.right-frame.left, frame.bottom-frame.top), new Paint());					
+
+						bitmaps.put(name+xpp.getAttributeValue(null, "name"), bm);
+						Log.i("ResourcesManager","Added Bitmap : " + name+xpp.getAttributeValue(null, "name"));
+					}
 					else if(xpp.getName().toLowerCase().equals("animation")) {
 						animationname=xpp.getAttributeValue(null, "name");	            	 
 						animationsequence = new AnimationSequence();
