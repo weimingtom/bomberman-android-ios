@@ -104,6 +104,9 @@
 				android:text="@string/SinglePlayerMenuQuit"></Button>
 		</LinearLayout>
 	</LinearLayout>
+	<LinearLayout android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@color/Black" android:id="@+id/SinglePlayerLinearLayoutStart" android:gravity="center_vertical|center_horizontal">
+		<ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/ready" android:id="@+id/SinglePlayerLinearLayoutStartImage"></ImageView>
+	</LinearLayout>
 
 
 </RelativeLayout>
