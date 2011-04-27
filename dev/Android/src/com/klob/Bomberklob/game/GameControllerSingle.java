@@ -36,13 +36,11 @@ public class GameControllerSingle extends GameController {
 	public void surfaceCreated(SurfaceHolder arg0) {
 		super.surfaceCreated(arg0);
 		this.setLayoutParams(new FrameLayout.LayoutParams(this.engine.getSingle().getMap().getBlocks().length*this.objectsSize, this.engine.getSingle().getMap().getBlocks()[0].length*this.objectsSize));
-		this.engine.setBombThreadRunning(true);
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0) {
 		super.surfaceDestroyed(arg0);
-		this.engine.setBombThreadRunning(false);
 	}
 
 	@Override
@@ -69,6 +67,12 @@ public class GameControllerSingle extends GameController {
 		if ( this.engine.getSingle().getPlayers()[0].getPosition() != null ) {
 			this.engine.pushBomb(this.engine.getSingle().getPlayers()[0]);	
 		}
+	}
+	
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		this.engine.setBombThreadRunning(enabled);
 	}
 	
 	/* Méthodes publiques -------------------------------------------------- */

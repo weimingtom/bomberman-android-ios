@@ -2,8 +2,12 @@ package com.klob.Bomberklob.game;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,6 +21,7 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,7 +39,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private GameControllerSingle gameControllerSingle;
 
 	private ObjectsGallery bombsGallery;
-	private LinearLayout singlePlayerControllerLayout, singlePlayerLinearLayoutMenu;
+	private LinearLayout singlePlayerControllerLayout, singlePlayerLinearLayoutMenu, singlePlayerLinearLayoutStart;
 	private RelativeLayout singlePlayerRelativeLayoutObjectsGallery, singlePlayerRelativeLayoutMenu, singlePlayerRelativeLayoutGlobal;
 	private FrameLayout singlePlayerFrameLayoutGame, singlePlayerFrameLayoutBombsGallery;
 
@@ -42,6 +47,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 
 	private Button menu, options, quit, restart, resume;
 	private ImageButton bomb;
+	private ImageView singlePlayerLinearLayoutStartImage;
 
 	private int menuSize = 50;
 
@@ -66,12 +72,12 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 
 		this.singlePlayerRelativeLayoutMenu = (RelativeLayout) findViewById(R.id.SinglePlayerRelativeLayoutMenu);
 		this.singlePlayerRelativeLayoutMenu.setLayoutParams(new LinearLayout.LayoutParams( ResourcesManager.getHeight(), (int) (menuSize*ResourcesManager.getDpiPx())) );
-		
+
 		this.singlePlayerRelativeLayoutObjectsGallery = (RelativeLayout) findViewById(R.id.SinglePlayerRelativeLayoutObjectsGallery);
 		this.singlePlayerRelativeLayoutObjectsGallery.setLayoutParams(new LinearLayout.LayoutParams( (int) (menuSize*ResourcesManager.getDpiPx()), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
-		
+
 		this.singlePlayerFrameLayoutGame = (FrameLayout) findViewById(R.id.SinglePlayerFrameLayoutGame);
-		
+
 		this.singlePlayerControllerLayout = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutEditorController);
 		this.singlePlayerControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
 		this.singlePlayerControllerLayout.setOnTouchListener(new OnTouchListener() {
@@ -81,7 +87,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 				return true;
 			}
 		});	
-		
+
 		this.singlePlayerFrameLayoutBombsGallery = (FrameLayout) findViewById(R.id.SinglePlayerFrameLayoutBombsGallery);
 
 		this.menu = (Button) findViewById(R.id.SinglePlayerButtonMenu);
@@ -89,33 +95,34 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 
 		this.bomb = (ImageButton) findViewById(R.id.SinglePlayerButtonBomb);
 		this.bomb.setOnClickListener(this);
-		
-        this.resume = (Button) findViewById(R.id.SinglePlayerMenuResume);
-        this.resume.setOnClickListener(this);
-        
-        this.options = (Button) findViewById(R.id.SinglePlayerMenuOptions);
-        this.options.setOnClickListener(this);
-        
-        this.quit = (Button) findViewById(R.id.SinglePlayerMenuQuit);
-        this.quit.setOnClickListener(this);
-        
-        this.restart = (Button) findViewById(R.id.SinglePlayerMenuRestart);
-        this.restart.setOnClickListener(this);
-        
-        this.bombpower = (TextView) findViewById(R.id.SinglePlayerTextViewBombPower);
-        this.bombpower.setTextColor(Color.WHITE);
-        this.bombnumber = (TextView) findViewById(R.id.SinglePlayerTextViewBombNumber);
-        this.bombnumber.setTextColor(Color.WHITE);
-        this.playerlife = (TextView) findViewById(R.id.SinglePlayerTextViewPlayerLife);
-        this.playerlife.setTextColor(Color.WHITE);
-        this.playerspeed = (TextView) findViewById(R.id.SinglePlayerTextViewPlayerSpeed);
-        this.playerspeed.setTextColor(Color.WHITE);
-        
+
+		this.resume = (Button) findViewById(R.id.SinglePlayerMenuResume);
+		this.resume.setOnClickListener(this);
+
+		this.options = (Button) findViewById(R.id.SinglePlayerMenuOptions);
+		this.options.setOnClickListener(this);
+
+		this.quit = (Button) findViewById(R.id.SinglePlayerMenuQuit);
+		this.quit.setOnClickListener(this);
+
+		this.restart = (Button) findViewById(R.id.SinglePlayerMenuRestart);
+		this.restart.setOnClickListener(this);
+
+		this.bombpower = (TextView) findViewById(R.id.SinglePlayerTextViewBombPower);
+		this.bombpower.setTextColor(Color.WHITE);
+		this.bombnumber = (TextView) findViewById(R.id.SinglePlayerTextViewBombNumber);
+		this.bombnumber.setTextColor(Color.WHITE);
+		this.playerlife = (TextView) findViewById(R.id.SinglePlayerTextViewPlayerLife);
+		this.playerlife.setTextColor(Color.WHITE);
+		this.playerspeed = (TextView) findViewById(R.id.SinglePlayerTextViewPlayerSpeed);
+		this.playerspeed.setTextColor(Color.WHITE);
+
 
 		this.handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				if ( msg.what == 0 ) {
+
 					timeS--;
 					if ( timeS == -1 ) {
 						timeM--;
@@ -130,20 +137,33 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 					if ( timeM == 0 ) {
 						//FIXME FIN DU JEU
 					}
-					
+
 					bombpower.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getPowerExplosion()));
 					bombnumber.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getBombNumber()));
 					playerlife.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getLife()));
 					playerspeed.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getSpeed()));
 				}
+				else if ( msg.what == 1 ) {
+					singlePlayerLinearLayoutStartImage.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ready));
+				}
+				else if ( msg.what == 2 ) {
+					singlePlayerLinearLayoutStartImage.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.go));
+				}
+				else if ( msg.what == 3 ) {
+					singlePlayerRelativeLayoutGlobal.removeView(singlePlayerLinearLayoutStart);
+					resumeGame();
+				}
 			}
 		};
-		
+
 		this.singlePlayerLinearLayoutMenu = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutMenu);
+		this.singlePlayerLinearLayoutStart = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutStart);
+		this.singlePlayerLinearLayoutStartImage = (ImageView) findViewById(R.id.SinglePlayerLinearLayoutStartImage);
 
 		this.singlePlayerRelativeLayoutGlobal = (RelativeLayout) findViewById(R.id.SinglePlayerRelativeLayoutGlobal);
 		this.singlePlayerRelativeLayoutGlobal.removeView(findViewById(R.id.SinglePlayerLinearLayoutMenu));
-	
+		this.singlePlayerRelativeLayoutGlobal.removeView(findViewById(R.id.SinglePlayerLinearLayoutStart));
+
 		this.initGame();
 	}
 
@@ -163,55 +183,39 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	protected void onResume(){
 		Log.i("SinglePlayerLayout", "onResume");
 		super.onResume();
-		this.setTimeThreadRunning(true);
-
 	}
 
 	@Override
 	protected void onPause(){
 		Log.i("SinglePlayerLayout", "onPause");
 		super.onPause();
-		this.setTimeThreadRunning(false);
+		this.pauseGame();
+		this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutMenu);
 	} 
 
 	@Override
 	public void onClick(View arg0) {
-		
+
 		if ( this.bomb == arg0 ) {
 			this.gameControllerSingle.pushBomb();
 		}
 		else if ( this.menu == arg0 ) {
-			this.bombsGallery.setEnabled(false);
-			this.gameControllerSingle.setEnabled(false);
-			this.bomb.setClickable(false);
-			this.menu.setClickable(false);
+			this.pauseGame();
 			this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutMenu);
-			this.setTimeThreadRunning(false);
-			this.gameControllerSingle.getEngine().setBombThreadRunning(false);
 		}
 		else if ( arg0 == this.resume) {
-			this.bombsGallery.setEnabled(true);
-			this.gameControllerSingle.setEnabled(true);
-			this.bomb.setClickable(true);
-			this.menu.setClickable(true);
 			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutMenu);
-			this.setTimeThreadRunning(true);
-			this.gameControllerSingle.getEngine().setBombThreadRunning(true);
+			this.resumeGame();
 		}
 		else if ( arg0 == this.options) {
 
 		}
 		else if ( arg0 == this.restart) {
 			this.initGame();
-			this.bombsGallery.setEnabled(true);
-			this.gameControllerSingle.setEnabled(true);
-			this.bomb.setClickable(true);
-			this.menu.setClickable(true);
 			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutMenu);
-			this.setTimeThreadRunning(true);
-			this.gameControllerSingle.getEngine().setBombThreadRunning(true);
 		}
 		else if ( arg0 == this.quit) {
+			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutMenu);
 			Intent intent = new Intent(SinglePlayerLayout.this, Home.class);
 			startActivity(intent);
 			this.finish();
@@ -239,13 +243,14 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 			this.timeThread.start();
 		}
 	}
-	
+
 	public void initGame() {
-		
+
 		this.bundle = getIntent().getExtras();
+
 		if( bundle.getString("map") != null) {
 			int i = bundle.getInt("time");
-			
+
 			if ( i == 0 ) {
 				this.timeM = 1;
 			}
@@ -259,7 +264,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 				this.timeM = 5;
 			}
 			this.timeS = 0;
-			
+
 			if ( this.bombsGallery != null ) {
 				this.singlePlayerFrameLayoutBombsGallery.removeView(this.bombsGallery);
 				this.bombsGallery = null;
@@ -272,7 +277,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 			this.bombsGallery.setRectangles(new Point(0,0));
 			this.bombsGallery.update();
 			this.singlePlayerFrameLayoutBombsGallery.addView(this.bombsGallery);
-			
+
 			if ( this.gameControllerSingle == null ) {
 				this.gameControllerSingle = new GameControllerSingle(getApplicationContext(), bundle.getString("map"), bundle.getInt("enemies"), bundle.getString("gametype"), bundle.getBoolean("random"), bundle.getInt("difficulty"));
 				this.singlePlayerFrameLayoutGame.addView(this.gameControllerSingle);
@@ -280,15 +285,64 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 			else {
 				this.gameControllerSingle.restartGame();
 			}
-		}
-		
-		this.timeTextView = (TextView) findViewById(R.id.GameTextTime);
-		this.timeTextView.setText(timeM+":00");
-		
-		bombpower.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getPowerExplosion()));
-		bombnumber.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getBombNumber()));
-		playerlife.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getLife()));
-		playerspeed.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getSpeed()));
 
+			this.timeTextView = (TextView) findViewById(R.id.GameTextTime);
+			this.timeTextView.setText(timeM+":00");
+
+			bombpower.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getPowerExplosion()));
+			bombnumber.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getBombNumber()));
+			playerlife.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getLife()));
+			playerspeed.setText(String.valueOf(gameControllerSingle.getEngine().getSingle().getPlayers()[0].getSpeed()));
+
+			startGame();
+		}
+		else {
+			// FIXME MapNotFoundException
+		}
+	}
+
+	//FIXME Mouais ...
+	public void startGame() {		
+		
+		pauseGame();
+		this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutStart);
+
+		new Thread() {
+
+			@Override
+			public void run() {
+				Log.i("Start Thread","Thread started");
+				
+				try {
+					sleep(2000);
+					handler.sendMessage(handler.obtainMessage(2));
+					sleep(2000);
+					handler.sendMessage(handler.obtainMessage(1));
+					
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				handler.sendMessage(handler.obtainMessage(3));
+				Log.i("Start Thread","Thread done");
+			};
+		}.start();
+	}
+
+	public void pauseGame() {
+		this.bombsGallery.setEnabled(false);
+		this.gameControllerSingle.setEnabled(false);
+		this.bomb.setClickable(false);
+		this.menu.setClickable(false);
+		this.setTimeThreadRunning(false);
+		//FIXME Stopper IA
+	}
+
+	public void resumeGame() {
+		this.bombsGallery.setEnabled(true);
+		this.gameControllerSingle.setEnabled(true);
+		this.bomb.setClickable(true);
+		this.menu.setClickable(true);
+		this.setTimeThreadRunning(true);
+		//FIXME Lancer IA
 	}
 }

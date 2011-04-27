@@ -215,6 +215,9 @@ public class Engine {
 		/* Remise à 0 du vecteur de bombes */
 		this.bombs = new ConcurrentHashMap<Point, Bomb>();
 		
+		/* Thread des bombes mis à l'arrêt */
+		this.setBombThreadRunning(false);
+		
 		this.single.restartGame();		
 	}
 	

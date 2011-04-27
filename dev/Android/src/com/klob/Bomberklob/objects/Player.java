@@ -1,7 +1,6 @@
 package com.klob.Bomberklob.objects;
 
 import java.util.Hashtable;
-import java.util.Vector;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -10,7 +9,6 @@ import com.klob.Bomberklob.objects.exceptions.BombPowerException;
 import com.klob.Bomberklob.objects.exceptions.PlayersSpeedException;
 import com.klob.Bomberklob.objects.exceptions.ShieldException;
 import com.klob.Bomberklob.objects.exceptions.TimeBombException;
-import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
 public abstract class Player extends Objects {
