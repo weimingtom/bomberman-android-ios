@@ -51,23 +51,26 @@ public class Single extends Game {
 	}
 	
 	public void restartGame() {
+
+		this.map.loadMap(this.map.getName());
 		
 		/* Variables remises a vide */
 		for (int i = 1 ; i < this.players.length ; i++ ) {
 			this.players[i] = null;
 		}
-		this.blocks = new ArrayList<Objects>();
+		this.blocks.clear();
 		
 		/* Liste des blocks destructibles remise à l'état initial */
 		for (int i = 0; i < this.map.getGrounds().length ; i++) {
 			for (int j = 0; j < this.map.getGrounds()[0].length ; j++) {
 				if ( this.map.getBlocks()[i][j] != null) {
-					if (!this.map.getBlocks()[i][j].isDestructible()) {
+					if (this.map.getBlocks()[i][j].isDestructible()) {
 						blocks.add(this.map.getBlocks()[i][j]);
 					}
 				}
 			}
 		}
+		
 		
 		/* Nouvelle initialisation de la partie */
 		initGame();

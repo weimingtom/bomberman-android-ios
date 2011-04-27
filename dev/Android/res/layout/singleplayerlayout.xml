@@ -26,7 +26,7 @@
 		<ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/ready" android:id="@+id/SinglePlayerLinearLayoutStartImage"></ImageView>
 	</LinearLayout>
 	<LinearLayout android:layout_width="fill_parent" android:orientation="vertical" android:layout_height="fill_parent" android:id="@+id/linearLayout4">
-		<RelativeLayout android:layout_height="wrap_content" android:id="@+id/SinglePlayerRelativeLayoutMenu" android:layout_width="fill_parent" android:gravity="center_vertical" android:background="@drawable/tilebackground">
+		<RelativeLayout android:layout_height="wrap_content" android:id="@+id/SinglePlayerRelativeLayoutMenu" android:layout_width="fill_parent" android:background="@drawable/tilebackground" android:gravity="center_vertical">
 			<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:id="@+id/linearLayout5">
 				<LinearLayout android:background="@drawable/bombpower" android:gravity="bottom|right" android:layout_height="fill_parent" android:layout_width="wrap_content" android:id="@+id/linearLayout6">
 					<TextView android:text="1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/SinglePlayerTextViewBombPower"></TextView>
@@ -42,7 +42,7 @@
 				</LinearLayout>
 			</LinearLayout>
 			<Button android:text="@string/ButtonMenu" android:layout_width="wrap_content" android:id="@+id/SinglePlayerButtonMenu" android:layout_height="wrap_content"></Button>
-			<LinearLayout android:layout_width="wrap_content" android:layout_centerHorizontal="true" android:layout_centerVertical="false" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:id="@+id/linearLayout2">
+			<LinearLayout android:layout_width="wrap_content" android:layout_centerHorizontal="true" android:id="@+id/linearLayout2" android:layout_height="fill_parent" android:gravity="center_vertical">
 				<LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:id="@+id/linearLayout10" android:layout_height="wrap_content">
 					<ImageView android:id="@+id/SinglePlayerLayoutImageViewPlayer0" android:layout_height="wrap_content" android:layout_width="wrap_content"></ImageView>
 				</LinearLayout>

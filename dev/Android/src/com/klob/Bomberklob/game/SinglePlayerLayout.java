@@ -111,9 +111,20 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.restart.setOnClickListener(this);
 		
 		this.imageView[0] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer0);
+		this.imageView[0].setMinimumHeight((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
+		this.imageView[0].setMinimumWidth((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
+		
 		this.imageView[1] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer1);
+		this.imageView[1].setMinimumHeight((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
+		this.imageView[1].setMinimumWidth((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
+		
 		this.imageView[2] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer2);
+		this.imageView[2].setMinimumHeight((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
+		this.imageView[2].setMinimumWidth((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
+		
 		this.imageView[3] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer3);
+		this.imageView[3].setMinimumHeight((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
+		this.imageView[3].setMinimumWidth((int) ((menuSize-10)*ResourcesManager.getDpiPx()));
 
 		this.bombpower = (TextView) findViewById(R.id.SinglePlayerTextViewBombPower);
 		this.bombpower.setTextColor(Color.WHITE);
@@ -369,9 +380,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 				else {
 					this.imageView[i].setBackgroundDrawable(new BitmapDrawable(ResourcesManager.getBitmaps().get(p[i].getImageName()+"idle")));
 				}
-			}
-			else {
-
 			}
 		}
 	}
