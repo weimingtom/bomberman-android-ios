@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.model.Model;
@@ -127,7 +128,12 @@ public class Home extends Activity implements View.OnClickListener{
 			intent = new Intent(Home.this, Help.class);
 		}
 		else  if ( this.singlePlayer == v ) {
-			intent = new Intent(Home.this, SinglePlayer.class);
+			if ( Model.getSystem().getDatabase().getMaps().size() > 0 ) {
+				intent = new Intent(Home.this, SinglePlayer.class);
+			}
+			else {
+				Toast.makeText(Home.this, R.string.SinglePlayerGameErrorLoadingMap, Toast.LENGTH_SHORT).show();
+			}
 		}
 
 		if ( null != intent) {

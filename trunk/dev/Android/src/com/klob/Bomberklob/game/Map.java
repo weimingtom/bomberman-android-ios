@@ -83,7 +83,11 @@ public class Map implements Serializable {
 			}
 		}
 		
-		File f =  new File (ResourcesManager.getContext().getFilesDir().getAbsolutePath()+"/maps/"+this.name);
+		
+		
+		File f =  new File (ResourcesManager.getContext().getFilesDir().getAbsolutePath()+"/maps");
+		f.mkdir();
+		f =  new File (f.getAbsolutePath()+"/"+this.name);
 		f.mkdir();
 		f = new File (f.getAbsolutePath()+"/"+this.name+".klob");
 
@@ -244,6 +248,21 @@ public class Map implements Serializable {
 				}
 			}
 		}
+	}
+	
+	public void resize() {
+		for (int i = 0; i < this.grounds.length ; i++) {
+			for (int j = 0; j < this.grounds[0].length ; j++) {
+				if ( this.grounds[i][j] != null ) {
+					this.grounds[i][j].setPosition(new Point(i*ResourcesManager.getSize(), j*ResourcesManager.getSize()));
+				}
+
+				if ( this.blocks[i][j] != null ) {
+					this.blocks[i][j].setPosition(new Point(i*ResourcesManager.getSize(), j*ResourcesManager.getSize()));
+				}
+			}
+		}
+		Log.i("Map", "--------- Map resized --------");
 	}
 
 }

@@ -42,16 +42,20 @@ public class EditorLoader extends Activity implements View.OnClickListener {
 		setContentView(R.layout.editorloader);
 
 		this.maps = Model.getSystem().getDatabase().getMaps();
-
-		if ( maps.size() > 0 ) {
-
-			//FIXME Seulement les maps officielles
-			
-			String[] mapBitmap = new String[this.maps.size()];
-			for (int i = 0; i < mapBitmap.length ; i++) {
-				mapBitmap[i] = this.getFilesDir().getAbsolutePath()+"/maps/"+this.maps.get(i).getName()+"/"+this.maps.get(i).getName()+".png";
+		
+		Vector<String> mapBitmap = new Vector<String>();
+		for (int i = 0; i < this.maps.size() ; i++) {
+			if ( this.maps.get(i).isOfficial() ) {
+				this.maps.remove(i);
+				i--;
 			}
-			
+			else {
+				mapBitmap.add(this.getFilesDir().getAbsolutePath()+"/maps/"+this.maps.get(i).getName()+"/"+this.maps.get(i).getName()+".png");
+			}
+		}
+
+		if ( mapBitmap.size() > 0 ) {
+
 			this.mapName = (TextView) findViewById(R.id.EditorLoaderTextViewMapName);
 			this.mapName.setText(maps.get(0).getName());
 			
@@ -82,11 +86,11 @@ public class EditorLoader extends Activity implements View.OnClickListener {
 	}
 	
 	public static class ImageAdapter extends BaseAdapter {
-		private String[] m_images;
+		private Vector<String> m_images;
 		private Context m_context;
 		private int m_itemBackground;
 
-		public ImageAdapter(Context context, String[] images) {
+		public ImageAdapter(Context context, Vector<String> images) {
 			this.m_context = context;
 			this.m_images=images;
 			TypedArray array = context.obtainStyledAttributes(R.styleable.Gallery);
@@ -96,7 +100,7 @@ public class EditorLoader extends Activity implements View.OnClickListener {
 
 		@Override
 		public int getCount() {
-			return this.m_images.length;
+			return this.m_images.size();
 		}
 		@Override
 		public Object getItem(int position) {
@@ -110,9 +114,9 @@ public class EditorLoader extends Activity implements View.OnClickListener {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ImageView img = new ImageView(m_context);
-			img.setImageBitmap(BitmapFactory.decodeFile(m_images[position]));
+			img.setImageBitmap(BitmapFactory.decodeFile(m_images.get(position)));
 			img.setScaleType(ImageView.ScaleType.FIT_XY);
-			img.setLayoutParams(new Gallery.LayoutParams( (int) ((ResourcesManager.getSize()*15)/1.75) , (int) ((ResourcesManager.getSize()*13)/1.75) ) );
+			img.setLayoutParams(new Gallery.LayoutParams( (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_WIDTH)/1.5) , (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_HEIGHT)/1.5)) );
 			img.setBackgroundResource(m_itemBackground);
 			return img;
 		}

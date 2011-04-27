@@ -12,6 +12,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,6 +23,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.klob.Bomberklob.game.Map;
 import com.klob.Bomberklob.menus.CreateAccountOffline;
 import com.klob.Bomberklob.menus.Home;
 import com.klob.Bomberklob.model.Model;
@@ -78,6 +83,10 @@ public class Main extends Activity {
 							File ls = getFilesDir();
 							File rep = new File(ls.getAbsolutePath()+"/"+mapsDirectory);
 							rep.mkdir();
+							Map mapMap;
+
+							InputStream in = null;
+							OutputStream out = null;
 
 							String[] maps = getAssets().list(mapsDirectory);
 
@@ -94,11 +103,11 @@ public class Main extends Activity {
 
 								for (int j = 0 ; j < map.length ; j++ ) {
 
-									InputStream in = null;
-									OutputStream out = null;
 									try {
+										File file = new File(rep2.getAbsolutePath() + "/" + map[j]);
+										System.out.println("PATH : " + file.getAbsolutePath());
 										in = getAssets().open(mapsDirectory+"/"+mapName+"/"+map[j]);
-										out = new FileOutputStream(rep2.getAbsolutePath() + "/" + map[j]);
+										out = new FileOutputStream(file);
 
 										byte[] buffer = new byte[1024];
 										int read;
@@ -106,6 +115,23 @@ public class Main extends Activity {
 											out.write(buffer, 0, read);
 										}
 
+										if ( map[j].indexOf(".klob") != -1) {
+											/* Si on vient de copier la carte on la redimensionne à la résolution de l'écran sur lequel le jeu tournera */
+											mapMap = new Map();
+											mapMap.loadMap(mapName);
+											mapMap.resize();
+											mapMap.saveMap();
+										}
+										else if ( map[j].indexOf(".png") != -1 ) {
+											/* De même pour l'image associée */
+											Bitmap bitmap = BitmapFactory.decodeFile(getFilesDir().getAbsolutePath()+"/"+mapsDirectory+"/"+mapName+"/"+mapName+".png");
+											bitmap = Bitmap.createScaledBitmap(bitmap, (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_HEIGHT)/1.5) , (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_WIDTH)/1.5) , true);
+											file.delete();
+											file.createNewFile();
+											out = new FileOutputStream(file);
+											bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+										}
+										
 										in.close();
 										in = null;
 										out.flush();
