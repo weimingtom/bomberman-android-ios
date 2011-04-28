@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
+import android.graphics.Canvas;
+import android.util.Log;
+
 import com.klob.Bomberklob.objects.Bomb;
 import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.ObjectsAnimations;
@@ -12,9 +15,6 @@ import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.objects.exceptions.BombPowerException;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
-
-import android.graphics.Canvas;
-import android.util.Log;
 
 public class Engine {
 

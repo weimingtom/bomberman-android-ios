@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -59,6 +60,8 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private Thread timeThread;	
 	private TextView timeTextView, bombpower, bombnumber, playerspeed, playerlife;
 	private Handler handler;
+	
+	private MediaPlayer mp;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -173,6 +176,9 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 				}
 				else if ( msg.what == 3 ) {
 					singlePlayerRelativeLayoutGlobal.removeView(singlePlayerLinearLayoutStart);
+					mp = MediaPlayer.create(getApplicationContext(), R.raw.battle_mode);
+					mp.setLooping(true);
+					mp.start();
 					resumeGame();
 				}
 				else if ( msg.what == 4 ) {
@@ -209,6 +215,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	protected void onResume(){
 		Log.i("SinglePlayerLayout", "onResume");
 		super.onResume();
+		mp.start();
 	}
 
 	@Override
@@ -216,6 +223,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		Log.i("SinglePlayerLayout", "onPause");
 		super.onPause();
 		this.pauseGame();
+		mp.pause();
 		this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutMenu);
 	} 
 
@@ -227,9 +235,11 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		}
 		else if ( this.menu == arg0 ) {
 			this.pauseGame();
+			mp.pause();
 			this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutMenu);
 		}
 		else if ( arg0 == this.resume) {
+			mp.start();
 			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutMenu);
 			this.resumeGame();
 		}
@@ -237,10 +247,12 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 
 		}
 		else if ( arg0 == this.restart) {
+			mp.stop();
 			this.initGame();
 			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutMenu);
 		}
 		else if ( arg0 == this.quit) {
+			mp.stop();
 			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutMenu);
 			Intent intent = new Intent(SinglePlayerLayout.this, Home.class);
 			startActivity(intent);
@@ -330,6 +342,9 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		
 		pauseGame();
 		this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutStart);
+		
+		mp = MediaPlayer.create(getApplicationContext(), R.raw.battle_start);
+		mp.start();
 
 		new Thread() {
 

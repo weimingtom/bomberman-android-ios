@@ -3,13 +3,13 @@ package com.klob.Bomberklob.objects;
 import java.io.Serializable;
 import java.util.Hashtable;
 
-import com.klob.Bomberklob.resources.Paint;
-import com.klob.Bomberklob.resources.Point;
-import com.klob.Bomberklob.resources.ResourcesManager;
-
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Rect;
+
+import com.klob.Bomberklob.resources.Paint;
+import com.klob.Bomberklob.resources.Point;
+import com.klob.Bomberklob.resources.ResourcesManager;
 
 public abstract class Objects implements Serializable {
 
@@ -29,6 +29,7 @@ public abstract class Objects implements Serializable {
 	protected String currentAnimation;
 	protected int currentFrame;
 	protected int waitDelay;
+	protected String sound = "";
 
 	//TODO
 	protected ColorFilter cf;
@@ -49,8 +50,15 @@ public abstract class Objects implements Serializable {
 		this.currentAnimation = currentAnimation;
 		this.currentFrame = 0;
 		this.waitDelay = animations.get(this.currentAnimation).sequence.get(this.currentFrame).nextFrameDelay;
+		this.sound = animations.get(this.currentAnimation).sound;
+		
+		System.out.println("SOUND : "  + sound);
 		
 		this.paint = new Paint();
+		
+		if ( !sound.equals("") ) {
+			ResourcesManager.playSoundPool(this.sound);
+		}
 	}
 
 	public Objects(Objects objects) {
@@ -65,8 +73,13 @@ public abstract class Objects implements Serializable {
 		this.currentAnimation = objects.currentAnimation;
 		this.currentFrame = objects.currentFrame;
 		this.waitDelay = this.animations.get(this.currentAnimation).sequence.get(this.currentFrame).nextFrameDelay;
+		this.sound = objects.sound;
 		
 		this.paint = objects.paint;
+		
+		if ( !sound.equals("") ) {
+			ResourcesManager.playSoundPool(this.sound);
+		}
 	}
 
 	/* Getters ------------------------------------------------------------- */
@@ -139,6 +152,12 @@ public abstract class Objects implements Serializable {
 			this.currentAnimation = animation.getLabel();
 			this.currentFrame = 0;
 			this.waitDelay = animations.get(currentAnimation).sequence.get(currentFrame).nextFrameDelay;
+			this.sound = animations.get(currentAnimation).sound;
+			
+			System.out.println("CHANGEMENT D'ANIM : " + this.sound);
+			if ( !sound.equals("") ) {
+				ResourcesManager.playSoundPool(this.sound);
+			}
 		}
 	}
 
@@ -197,6 +216,11 @@ public abstract class Objects implements Serializable {
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("objects"), rect, new Rect(this.position.x-i, this.position.y, (this.position.x)+size+i, (this.position.y)+size), this.paint);
 	}
 
+	public void playCurrentAnimationSound() {
+		if ( !sound.equals("") ) {
+			ResourcesManager.playSoundPool(this.sound);
+		}
+	}
 
 	@Override
 	public String toString() {

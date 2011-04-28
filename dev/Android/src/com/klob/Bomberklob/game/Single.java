@@ -8,7 +8,6 @@ import com.klob.Bomberklob.model.Model;
 import com.klob.Bomberklob.objects.AnimationSequence;
 import com.klob.Bomberklob.objects.BotPlayer;
 import com.klob.Bomberklob.objects.HumanPlayer;
-import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.resources.Point;

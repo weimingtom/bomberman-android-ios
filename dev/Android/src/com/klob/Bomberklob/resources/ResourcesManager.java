@@ -1,8 +1,5 @@
 package com.klob.Bomberklob.resources;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -14,10 +11,14 @@ import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.Log;
 import android.util.TypedValue;
 
 import com.klob.Bomberklob.R;
+import com.klob.Bomberklob.model.Model;
 import com.klob.Bomberklob.objects.AnimationSequence;
 import com.klob.Bomberklob.objects.Destructible;
 import com.klob.Bomberklob.objects.FrameInfo;
@@ -43,13 +44,20 @@ public class ResourcesManager {
 	private static HashMap<String, Objects> objects = new HashMap<String, Objects>();
 	private static HashMap<String, Hashtable<String, AnimationSequence>> playersAnimation = new HashMap<String, Hashtable<String, AnimationSequence>>();
 	private static HashMap<String, Hashtable<String, AnimationSequence>> bombsAnimation = new HashMap<String, Hashtable<String, AnimationSequence>>();
+	
+	/* Sons */
+	private static HashMap<String, Integer> sounds = new HashMap<String, Integer>();
+	private static AudioManager soundManager;
+	private static SoundPool soundPool;
 
+	
 	/* Constructeur -------------------------------------------------------- */
 
 	private ResourcesManager(Context context) {
 		ResourcesManager.context = context;
+		
+		/* Ecran */
 		ResourcesManager.dpiPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, context.getResources().getDisplayMetrics());
-
 		height = context.getResources().getDisplayMetrics().heightPixels;
 		width = context.getResources().getDisplayMetrics().widthPixels;
 
@@ -59,8 +67,15 @@ public class ResourcesManager {
 		else {
 			size = (int) ((width-(50*dpiPx))/MAP_HEIGHT);
 		}
+		
+		/* Son */
+		soundsInitialisation();
 
+		/* Images */
 		bitmapsInitialisation();
+		objectsInitialisation();
+		playersInitialisation();
+		bombsInitialisation();
 
 		Log.i("ResourcesManager","dpiPx : " + dpiPx);
 		Log.i("ResourcesManager","tileSize : " + tileSize);
@@ -144,8 +159,7 @@ public class ResourcesManager {
 						tileSize = xpp.getAttributeIntValue(null, "size", 0);
 					}
 					else if(xpp.getName().toLowerCase().equals("png")) {
-
-						if ( xpp.getAttributeValue(null, "name").equals("players")) {
+						if ( xpp.getAttributeValue(null, "name").equals("players")) {							
 							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.players);
 						}
 						else if ( xpp.getAttributeValue(null, "name").equals("objects")) {
@@ -207,7 +221,8 @@ public class ResourcesManager {
 						animationsequence = new AnimationSequence();
 						animationsequence.name=animationname;
 						animationsequence.sequence=new ArrayList<FrameInfo>();
-						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);	
+						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);
+						animationsequence.sound = xpp.getAttributeValue(null, "sound");	
 					}
 					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
@@ -296,6 +311,7 @@ public class ResourcesManager {
 						animationsequence.name=animationname;
 						animationsequence.sequence=new ArrayList<FrameInfo>();
 						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);	
+						animationsequence.sound = xpp.getAttributeValue(null, "sound");	
 					}
 					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
@@ -358,7 +374,8 @@ public class ResourcesManager {
 						animationsequence = new AnimationSequence();
 						animationsequence.name=animationname;
 						animationsequence.sequence=new ArrayList<FrameInfo>();
-						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);	
+						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);
+						animationsequence.sound = xpp.getAttributeValue(null, "sound");	
 					}
 					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
@@ -395,6 +412,25 @@ public class ResourcesManager {
 		Log.i("ResourcesManager","---------------- Bombs loaded  ---------------");
 	}
 
+	public static void soundsInitialisation() {
+		
+		soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 100);
+		soundManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);		
+
+		sounds.put("destroy1", soundPool.load(context, R.raw.destroy1,1));
+		sounds.put("bombplanted", soundPool.load(context, R.raw.bombplanted,1));
+		sounds.put("explosion1", soundPool.load(context, R.raw.explosion1,1));
+
+	}
+	
+	public static int playSoundPool(String s) {
+		return soundPool.play(sounds.get(s), Model.getSystem().getVolume(), Model.getSystem().getVolume(), 1, 0, 1f);
+	}
+	
+	public static void stopSoundPool(String s) {
+		soundPool.stop(sounds.get(s));
+	}
+	
 	/**
 	 * Calculates the tile of the coordinate
 	 * 

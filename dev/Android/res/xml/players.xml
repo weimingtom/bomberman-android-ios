@@ -8,88 +8,88 @@
 			<png name="kill" top="0" left="1024" bottom="24" right="1048"/>
 		</bitmaps>
 		
-		<animation name="idle" canLoop="false">
+		<animation name="idle" canLoop="false" sound="">
 			<framerect top="0" left="0" bottom="45" right="30" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_down" canLoop="false">
+		<animation name="stop_down" canLoop="false" sound="">
 			<framerect top="0" left="0" bottom="45" right="30" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_right" canLoop="false">
+		<animation name="stop_right" canLoop="false" sound="">
 			<framerect top="0" left="90" bottom="45" right="120" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_left" canLoop="false">
+		<animation name="stop_left" canLoop="false" sound="">
 			<framerect top="0" left="180" bottom="45" right="210" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_up" canLoop="false">
+		<animation name="stop_up" canLoop="false" sound="">
 			<framerect top="0" left="270" bottom="45" right="300" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_down_right" canLoop="false">
+		<animation name="stop_down_right" canLoop="false" sound="">
 			<framerect top="0" left="360" bottom="45" right="390" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_down_left" canLoop="false">
+		<animation name="stop_down_left" canLoop="false" sound="">
 			<framerect top="0" left="450" bottom="45" right="480" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_up_left" canLoop="false">
+		<animation name="stop_up_left" canLoop="false" sound="">
 			<framerect top="0" left="540" bottom="45" right="570" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_up_right" canLoop="false">
+		<animation name="stop_up_right" canLoop="false" sound="">
 			<framerect top="0" left="630" bottom="45" right="660" delayNextFrame="0" />
 		</animation>
-		<animation name="down" canLoop="true">
+		<animation name="down" canLoop="true" sound="">
 			<framerect top="0" left="30" bottom="45" right="60" delayNextFrame="5" />
 			<framerect top="0" left="0"  bottom="45" right="30" delayNextFrame="5" />
 			<framerect top="0" left="60" bottom="45" right="90" delayNextFrame="5" />
 			<framerect top="0" left="0"  bottom="45" right="30" delayNextFrame="5" />
 		</animation>
-		<animation name="right" canLoop="true">
+		<animation name="right" canLoop="true" sound="">
 			<framerect top="0" left="120" bottom="45" right="150" delayNextFrame="5" />
 			<framerect top="0" left="90"  bottom="45" right="120" delayNextFrame="5" />
 			<framerect top="0" left="150" bottom="45" right="180" delayNextFrame="5" />
 			<framerect top="0" left="90"  bottom="45" right="120" delayNextFrame="5" />
 		</animation>
-		<animation name="left" canLoop="true">
+		<animation name="left" canLoop="true" sound="">
 			<framerect top="0" left="210" bottom="45" right="240" delayNextFrame="5" />
 			<framerect top="0" left="180" bottom="45" right="210" delayNextFrame="5" />
 			<framerect top="0" left="240" bottom="45" right="270" delayNextFrame="5" />
 			<framerect top="0" left="180" bottom="45" right="210" delayNextFrame="5" />
 		</animation>
-		<animation name="up" canLoop="true">
+		<animation name="up" canLoop="true" sound="">
 			<framerect top="0" left="300" bottom="45" right="330" delayNextFrame="5" />
 			<framerect top="0" left="270" bottom="45" right="300" delayNextFrame="5" />
 			<framerect top="0" left="330" bottom="45" right="360" delayNextFrame="5" />
 			<framerect top="0" left="270" bottom="45" right="300" delayNextFrame="5" />
 		</animation>
-		<animation name="down_right" canLoop="true">
+		<animation name="down_right" canLoop="true" sound="">
 			<framerect top="0" left="390" bottom="45" right="420" delayNextFrame="5" />
 			<framerect top="0" left="360" bottom="45" right="390" delayNextFrame="5" />
 			<framerect top="0" left="420" bottom="45" right="450" delayNextFrame="5" />
 			<framerect top="0" left="360" bottom="45" right="390" delayNextFrame="5" />
 		</animation>
-		<animation name="down_left" canLoop="true">
+		<animation name="down_left" canLoop="true" sound="">
 			<framerect top="0" left="480" bottom="45" right="510" delayNextFrame="5" />
 			<framerect top="0" left="450" bottom="45" right="480" delayNextFrame="5" />
 			<framerect top="0" left="510" bottom="45" right="540" delayNextFrame="5" />
 			<framerect top="0" left="450" bottom="45" right="480" delayNextFrame="5" />
 		</animation>
-		<animation name="up_left" canLoop="true">
+		<animation name="up_left" canLoop="true" sound="">
 			<framerect top="0" left="570" bottom="45" right="600" delayNextFrame="5" />
 			<framerect top="0" left="540" bottom="45" right="570" delayNextFrame="5" />
 			<framerect top="0" left="600" bottom="45" right="630" delayNextFrame="5" />
 			<framerect top="0" left="540" bottom="45" right="570" delayNextFrame="5" />
 		</animation>
-		<animation name="up_right" canLoop="true">
+		<animation name="up_right" canLoop="true" sound="">
 			<framerect top="0" left="660" bottom="45" right="690" delayNextFrame="5" />
 			<framerect top="0" left="630" bottom="45" right="660" delayNextFrame="5" />
 			<framerect top="0" left="690" bottom="45" right="720" delayNextFrame="5" />
 			<framerect top="0" left="630" bottom="45" right="660" delayNextFrame="5" />
 		</animation>
-		<animation name="kill" canLoop="false">
+		<animation name="kill" canLoop="false" sound="">
 			<framerect top="0" left="800" bottom="45" right="834" delayNextFrame="1" />
 			<framerect top="0" left="838" bottom="45" right="872" delayNextFrame="1" />
 			<framerect top="0" left="876" bottom="45" right="918" delayNextFrame="1" />
 			<framerect top="0" left="926" bottom="45" right="972" delayNextFrame="1" />
 		</animation>
-		<animation name="touched" canLoop="false">
+		<animation name="touched" canLoop="false" sound="">
 			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="1" />
 			<framerect top="0" left="760" bottom="45" right="798" delayNextFrame="1" />
 			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="1" />
@@ -109,88 +109,88 @@
 			<png name="kill" top="96" left="1024" bottom="120" right="1048"/>
 		</bitmaps>
 	
-		<animation name="idle" canLoop="false">
+		<animation name="idle" canLoop="false" sound="">
 			<framerect top="45" left="0" bottom="90" right="30" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_down" canLoop="false">
+		<animation name="stop_down" canLoop="false" sound="">
 			<framerect top="45" left="0" bottom="90" right="30" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_right" canLoop="false">
+		<animation name="stop_right" canLoop="false" sound="">
 			<framerect top="45" left="90" bottom="90" right="120" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_left" canLoop="false">
+		<animation name="stop_left" canLoop="false" sound="">
 			<framerect top="45" left="180" bottom="90" right="210" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_up" canLoop="false">
+		<animation name="stop_up" canLoop="false" sound="">
 			<framerect top="45" left="270" bottom="90" right="300" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_down_right" canLoop="false">
+		<animation name="stop_down_right" canLoop="false" sound="">
 			<framerect top="45" left="360" bottom="90" right="390" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_down_left" canLoop="false">
+		<animation name="stop_down_left" canLoop="false" sound="">
 			<framerect top="45" left="450" bottom="90" right="480" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_up_left" canLoop="false">
+		<animation name="stop_up_left" canLoop="false" sound="">
 			<framerect top="45" left="540" bottom="90" right="570" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_up_right" canLoop="false">
+		<animation name="stop_up_right" canLoop="false" sound="">
 			<framerect top="45" left="630" bottom="90" right="660" delayNextFrame="0" />
 		</animation>
-		<animation name="down" canLoop="true">
+		<animation name="down" canLoop="true" sound="">
 			<framerect top="45" left="30" bottom="90" right="60" delayNextFrame="5" />
 			<framerect top="45" left="0"  bottom="90" right="30" delayNextFrame="5" />
 			<framerect top="45" left="60" bottom="90" right="90" delayNextFrame="5" />
 			<framerect top="45" left="0"  bottom="90" right="30" delayNextFrame="5" />
 		</animation>
-		<animation name="right" canLoop="true">
+		<animation name="right" canLoop="true" sound="">
 			<framerect top="45" left="120" bottom="90" right="150" delayNextFrame="5" />
 			<framerect top="45" left="90"  bottom="90" right="120" delayNextFrame="5" />
 			<framerect top="45" left="150" bottom="90" right="180" delayNextFrame="5" />
 			<framerect top="45" left="90"  bottom="90" right="120" delayNextFrame="5" />
 		</animation>
-		<animation name="left" canLoop="true">
+		<animation name="left" canLoop="true" sound="">
 			<framerect top="45" left="210" bottom="90" right="240" delayNextFrame="5" />
 			<framerect top="45" left="180" bottom="90" right="210" delayNextFrame="5" />
 			<framerect top="45" left="240" bottom="90" right="270" delayNextFrame="5" />
 			<framerect top="45" left="180" bottom="90" right="210" delayNextFrame="5" />
 		</animation>
-		<animation name="up" canLoop="true">
+		<animation name="up" canLoop="true" sound="">
 			<framerect top="45" left="300" bottom="90" right="330" delayNextFrame="5" />
 			<framerect top="45" left="270" bottom="90" right="300" delayNextFrame="5" />
 			<framerect top="45" left="330" bottom="90" right="360" delayNextFrame="5" />
 			<framerect top="45" left="270" bottom="90" right="300" delayNextFrame="5" />
 		</animation>
-		<animation name="down_right" canLoop="true">
+		<animation name="down_right" canLoop="true" sound="">
 			<framerect top="45" left="390" bottom="90" right="420" delayNextFrame="5" />
 			<framerect top="45" left="360" bottom="90" right="390" delayNextFrame="5" />
 			<framerect top="45" left="420" bottom="90" right="450" delayNextFrame="5" />
 			<framerect top="45" left="360" bottom="90" right="390" delayNextFrame="5" />
 		</animation>
-		<animation name="down_left" canLoop="true">
+		<animation name="down_left" canLoop="true" sound="">
 			<framerect top="45" left="480" bottom="90" right="510" delayNextFrame="5" />
 			<framerect top="45" left="450" bottom="90" right="480" delayNextFrame="5" />
 			<framerect top="45" left="510" bottom="90" right="540" delayNextFrame="5" />
 			<framerect top="45" left="450" bottom="90" right="480" delayNextFrame="5" />
 		</animation>
-		<animation name="up_left" canLoop="true">
+		<animation name="up_left" canLoop="true" sound="">
 			<framerect top="45" left="570" bottom="90" right="600" delayNextFrame="5" />
 			<framerect top="45" left="540" bottom="90" right="570" delayNextFrame="5" />
 			<framerect top="45" left="600" bottom="90" right="630" delayNextFrame="5" />
 			<framerect top="45" left="540" bottom="90" right="570" delayNextFrame="5" />
 		</animation>
-		<animation name="up_right" canLoop="true">
+		<animation name="up_right" canLoop="true" sound="">
 			<framerect top="45" left="660" bottom="90" right="690" delayNextFrame="5" />
 			<framerect top="45" left="630" bottom="90" right="660" delayNextFrame="5" />
 			<framerect top="45" left="690" bottom="90" right="720" delayNextFrame="5" />
 			<framerect top="45" left="630" bottom="90" right="660" delayNextFrame="5" />
 		</animation>
-		<animation name="kill" canLoop="false">
+		<animation name="kill" canLoop="false" sound="">
 			<framerect top="45" left="800" bottom="90" right="834" delayNextFrame="1" />
 			<framerect top="45" left="838" bottom="90" right="872" delayNextFrame="1" />
 			<framerect top="45" left="876" bottom="90" right="918" delayNextFrame="1" />
 			<framerect top="45" left="926" bottom="90" right="972" delayNextFrame="1" />
 		</animation>
-		<animation name="touched" canLoop="false">
+		<animation name="touched" canLoop="false" sound="">
 			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="1" />
 			<framerect top="45" left="760" bottom="90" right="798" delayNextFrame="1" />
 			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="1" />
@@ -210,88 +210,88 @@
 			<png name="kill" top="48" left="1024" bottom="72" right="1048"/>
 		</bitmaps>
 	
-		<animation name="idle" canLoop="false">
+		<animation name="idle" canLoop="false" sound="">
 			<framerect top="90" left="0" bottom="135" right="30" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_down" canLoop="false">
+		<animation name="stop_down" canLoop="false" sound="">
 			<framerect top="90" left="0" bottom="135" right="30" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_right" canLoop="false">
+		<animation name="stop_right" canLoop="false" sound="">
 			<framerect top="90" left="90" bottom="135" right="120" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_left" canLoop="false">
+		<animation name="stop_left" canLoop="false" sound="">
 			<framerect top="90" left="180" bottom="135" right="210" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_up" canLoop="false">
+		<animation name="stop_up" canLoop="false" sound="">
 			<framerect top="90" left="270" bottom="135" right="300" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_down_right" canLoop="false">
+		<animation name="stop_down_right" canLoop="false" sound="">
 			<framerect top="90" left="360" bottom="135" right="390" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_down_left" canLoop="false">
+		<animation name="stop_down_left" canLoop="false" sound="">
 			<framerect top="90" left="450" bottom="135" right="480" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_up_left" canLoop="false">
+		<animation name="stop_up_left" canLoop="false" sound="">
 			<framerect top="90" left="540" bottom="135" right="570" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_up_right" canLoop="false">
+		<animation name="stop_up_right" canLoop="false" sound="">
 			<framerect top="90" left="630" bottom="135" right="660" delayNextFrame="0" />
 		</animation>
-		<animation name="down" canLoop="true">
+		<animation name="down" canLoop="true" sound="">
 			<framerect top="90" left="30" bottom="135" right="60" delayNextFrame="5" />
 			<framerect top="90" left="0"  bottom="135" right="30" delayNextFrame="5" />
 			<framerect top="90" left="60" bottom="135" right="90" delayNextFrame="5" />
 			<framerect top="90" left="0"  bottom="135" right="30" delayNextFrame="5" />
 		</animation>
-		<animation name="right" canLoop="true">
+		<animation name="right" canLoop="true" sound="">
 			<framerect top="90" left="120" bottom="135" right="150" delayNextFrame="5" />
 			<framerect top="90" left="90"  bottom="135" right="120" delayNextFrame="5" />
 			<framerect top="90" left="150" bottom="135" right="180" delayNextFrame="5" />
 			<framerect top="90" left="90"  bottom="135" right="120" delayNextFrame="5" />
 		</animation>
-		<animation name="left" canLoop="true">
+		<animation name="left" canLoop="true" sound="">
 			<framerect top="90" left="210" bottom="135" right="240" delayNextFrame="5" />
 			<framerect top="90" left="180" bottom="135" right="210" delayNextFrame="5" />
 			<framerect top="90" left="240" bottom="135" right="270" delayNextFrame="5" />
 			<framerect top="90" left="180" bottom="135" right="210" delayNextFrame="5" />
 		</animation>
-		<animation name="up" canLoop="true">
+		<animation name="up" canLoop="true" sound="">
 			<framerect top="90" left="300" bottom="135" right="330" delayNextFrame="5" />
 			<framerect top="90" left="270" bottom="135" right="300" delayNextFrame="5" />
 			<framerect top="90" left="330" bottom="135" right="360" delayNextFrame="5" />
 			<framerect top="90" left="270" bottom="135" right="300" delayNextFrame="5" />
 		</animation>
-		<animation name="down_right" canLoop="true">
+		<animation name="down_right" canLoop="true" sound="">
 			<framerect top="90" left="390" bottom="135" right="420" delayNextFrame="5" />
 			<framerect top="90" left="360" bottom="135" right="390" delayNextFrame="5" />
 			<framerect top="90" left="420" bottom="135" right="450" delayNextFrame="5" />
 			<framerect top="90" left="360" bottom="135" right="390" delayNextFrame="5" />
 		</animation>
-		<animation name="down_left" canLoop="true">
+		<animation name="down_left" canLoop="true" sound="">
 			<framerect top="90" left="480" bottom="135" right="510" delayNextFrame="5" />
 			<framerect top="90" left="450" bottom="135" right="480" delayNextFrame="5" />
 			<framerect top="90" left="510" bottom="135" right="540" delayNextFrame="5" />
 			<framerect top="90" left="450" bottom="135" right="480" delayNextFrame="5" />
 		</animation>
-		<animation name="up_left" canLoop="true">
+		<animation name="up_left" canLoop="true" sound="">
 			<framerect top="90" left="570" bottom="135" right="600" delayNextFrame="5" />
 			<framerect top="90" left="540" bottom="135" right="570" delayNextFrame="5" />
 			<framerect top="90" left="600" bottom="135" right="630" delayNextFrame="5" />
 			<framerect top="90" left="540" bottom="135" right="570" delayNextFrame="5" />
 		</animation>
-		<animation name="up_right" canLoop="true">
+		<animation name="up_right" canLoop="true" sound="">
 			<framerect top="90" left="660" bottom="135" right="690" delayNextFrame="5" />
 			<framerect top="90" left="630" bottom="135" right="660" delayNextFrame="5" />
 			<framerect top="90" left="690" bottom="135" right="720" delayNextFrame="5" />
 			<framerect top="90" left="630" bottom="135" right="660" delayNextFrame="5" />
 		</animation>
-		<animation name="kill" canLoop="false">
+		<animation name="kill" canLoop="false" sound="">
 			<framerect top="90" left="800" bottom="135" right="834" delayNextFrame="1" />
 			<framerect top="90" left="838" bottom="135" right="872" delayNextFrame="1" />
 			<framerect top="90" left="876" bottom="135" right="918" delayNextFrame="1" />
 			<framerect top="90" left="926" bottom="135" right="972" delayNextFrame="1" />
 		</animation>
-		<animation name="touched" canLoop="false">
+		<animation name="touched" canLoop="false" sound="">
 			<framerect top="90" left="722" bottom="135" right="758" delayNextFrame="1" />
 			<framerect top="90" left="760" bottom="135" right="798" delayNextFrame="1" />
 			<framerect top="90" left="722" bottom="135" right="758" delayNextFrame="1" />
@@ -311,88 +311,88 @@
 			<png name="kill" top="24" left="1024" bottom="48" right="1048"/>
 		</bitmaps>
 	
-		<animation name="idle" canLoop="false">
+		<animation name="idle" canLoop="false" sound="">
 			<framerect top="135" left="0" bottom="180" right="30" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_down" canLoop="false">
+		<animation name="stop_down" canLoop="false" sound="">
 			<framerect top="135" left="0" bottom="180" right="30" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_right" canLoop="false">
+		<animation name="stop_right" canLoop="false" sound="">
 			<framerect top="135" left="90" bottom="180" right="120" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_left" canLoop="false">
+		<animation name="stop_left" canLoop="false" sound="">
 			<framerect top="135" left="180" bottom="180" right="210" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_up" canLoop="false">
+		<animation name="stop_up" canLoop="false" sound="">
 			<framerect top="135" left="270" bottom="180" right="300" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_down_right" canLoop="false">
+		<animation name="stop_down_right" canLoop="false" sound="">
 			<framerect top="135" left="360" bottom="180" right="390" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_down_left" canLoop="false">
+		<animation name="stop_down_left" canLoop="false" sound="">
 			<framerect top="135" left="450" bottom="180" right="480" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_up_left" canLoop="false">
+		<animation name="stop_up_left" canLoop="false" sound="">
 			<framerect top="135" left="540" bottom="180" right="570" delayNextFrame="0" />
 		</animation>
-		<animation name="stop_up_right" canLoop="false">
+		<animation name="stop_up_right" canLoop="false" sound="">
 			<framerect top="135" left="630" bottom="180" right="660" delayNextFrame="0" />
 		</animation>
-		<animation name="down" canLoop="true">
+		<animation name="down" canLoop="true" sound="">
 			<framerect top="135" left="30" bottom="180" right="60" delayNextFrame="5" />
 			<framerect top="135" left="0"  bottom="180" right="30" delayNextFrame="5" />
 			<framerect top="135" left="60" bottom="180" right="90" delayNextFrame="5" />
 			<framerect top="135" left="0"  bottom="180" right="30" delayNextFrame="5" />
 		</animation>
-		<animation name="right" canLoop="true">
+		<animation name="right" canLoop="true" sound="">
 			<framerect top="135" left="120" bottom="180" right="150" delayNextFrame="5" />
 			<framerect top="135" left="90"  bottom="180" right="120" delayNextFrame="5" />
 			<framerect top="135" left="150" bottom="180" right="180" delayNextFrame="5" />
 			<framerect top="135" left="90"  bottom="180" right="120" delayNextFrame="5" />
 		</animation>
-		<animation name="left" canLoop="true">
+		<animation name="left" canLoop="true" sound="">
 			<framerect top="135" left="210" bottom="180" right="240" delayNextFrame="5" />
 			<framerect top="135" left="180" bottom="180" right="210" delayNextFrame="5" />
 			<framerect top="135" left="240" bottom="180" right="270" delayNextFrame="5" />
 			<framerect top="135" left="180" bottom="180" right="210" delayNextFrame="5" />
 		</animation>
-		<animation name="up" canLoop="true">
+		<animation name="up" canLoop="true" sound="">
 			<framerect top="135" left="300" bottom="180" right="330" delayNextFrame="5" />
 			<framerect top="135" left="270" bottom="180" right="300" delayNextFrame="5" />
 			<framerect top="135" left="330" bottom="180" right="360" delayNextFrame="5" />
 			<framerect top="135" left="270" bottom="180" right="300" delayNextFrame="5" />
 		</animation>
-		<animation name="down_right" canLoop="true">
+		<animation name="down_right" canLoop="true" sound="">
 			<framerect top="135" left="390" bottom="180" right="420" delayNextFrame="5" />
 			<framerect top="135" left="360" bottom="180" right="390" delayNextFrame="5" />
 			<framerect top="135" left="420" bottom="180" right="450" delayNextFrame="5" />
 			<framerect top="135" left="360" bottom="180" right="390" delayNextFrame="5" />
 		</animation>
-		<animation name="down_left" canLoop="true">
+		<animation name="down_left" canLoop="true" sound="">
 			<framerect top="135" left="480" bottom="180" right="510" delayNextFrame="5" />
 			<framerect top="135" left="450" bottom="180" right="480" delayNextFrame="5" />
 			<framerect top="135" left="510" bottom="180" right="540" delayNextFrame="5" />
 			<framerect top="135" left="450" bottom="180" right="480" delayNextFrame="5" />
 		</animation>
-		<animation name="up_left" canLoop="true">
+		<animation name="up_left" canLoop="true" sound="">
 			<framerect top="135" left="570" bottom="180" right="600" delayNextFrame="5" />
 			<framerect top="135" left="540" bottom="180" right="570" delayNextFrame="5" />
 			<framerect top="135" left="600" bottom="180" right="630" delayNextFrame="5" />
 			<framerect top="135" left="540" bottom="180" right="570" delayNextFrame="5" />
 		</animation>
-		<animation name="up_right" canLoop="true">
+		<animation name="up_right" canLoop="true" sound="">
 			<framerect top="135" left="660" bottom="180" right="690" delayNextFrame="5" />
 			<framerect top="135" left="630" bottom="180" right="660" delayNextFrame="5" />
 			<framerect top="135" left="690" bottom="180" right="720" delayNextFrame="5" />
 			<framerect top="135" left="630" bottom="180" right="660" delayNextFrame="5" />
 		</animation>
-		<animation name="kill" canLoop="false">
+		<animation name="kill" canLoop="false" sound="">
 			<framerect top="135" left="800" bottom="180" right="834" delayNextFrame="1" />
 			<framerect top="135" left="838" bottom="180" right="872" delayNextFrame="1" />
 			<framerect top="135" left="876" bottom="180" right="918" delayNextFrame="1" />
 			<framerect top="135" left="926" bottom="180" right="972" delayNextFrame="1" />
 		</animation>
-		<animation name="touched" canLoop="false">
+		<animation name="touched" canLoop="false" sound="">
 			<framerect top="135" left="722" bottom="180" right="758" delayNextFrame="1" />
 			<framerect top="135" left="760" bottom="180" right="798" delayNextFrame="1" />
 			<framerect top="135" left="722" bottom="180" right="758" delayNextFrame="1" />

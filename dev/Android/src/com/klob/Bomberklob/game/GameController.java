@@ -1,14 +1,14 @@
 package com.klob.Bomberklob.game;
 
-import com.klob.Bomberklob.objects.PlayerAnimations;
-import com.klob.Bomberklob.resources.ResourcesManager;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import com.klob.Bomberklob.objects.PlayerAnimations;
+import com.klob.Bomberklob.resources.ResourcesManager;
 
 public abstract class GameController extends SurfaceView implements SurfaceHolder.Callback {
 
