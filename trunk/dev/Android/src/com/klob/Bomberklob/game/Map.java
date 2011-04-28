@@ -10,13 +10,13 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.StreamCorruptedException;
 
+import android.graphics.Canvas;
+import android.util.Log;
+
 import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.ObjectsAnimations;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
-
-import android.graphics.Canvas;
-import android.util.Log;
 
 public class Map implements Serializable {
 

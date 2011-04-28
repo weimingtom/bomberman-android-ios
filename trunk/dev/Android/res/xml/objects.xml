@@ -2,10 +2,10 @@
 
 <objects>
         <destructible name="wall" hit="1" level="1" fireWall="1" life="1" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="0" left="0" bottom="30" right="30" delayNextFrame="0" />
                 </animation>
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="destroy1">
                         <framerect top="0" left="30"  bottom="30" right="60"  delayNextFrame="1" />
                         <framerect top="0" left="60"  bottom="30" right="90"  delayNextFrame="1" />
                         <framerect top="0" left="90"  bottom="30" right="120" delayNextFrame="1" />
@@ -14,10 +14,10 @@
                 </animation>
         </destructible>
         <destructible name="herb" hit="1" level="1" fireWall="1" life="1" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="30" left="0" bottom="60" right="30" delayNextFrame="0" />
                 </animation>
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="destroy1">
                         <framerect top="30" left="30"  bottom="60" right="60"  delayNextFrame="1" />
                         <framerect top="30" left="60"  bottom="60" right="90"  delayNextFrame="1" />
                         <framerect top="30" left="90"  bottom="60" right="120" delayNextFrame="1" />
@@ -26,10 +26,10 @@
                 </animation>
         </destructible>
         <destructible name="stone1" hit="1" level="1" fireWall="1" life="1" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="60" left="0" bottom="90" right="30" delayNextFrame="0" />
                 </animation>
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="destroy1">
                         <framerect top="60" left="30"  bottom="90" right="60"  delayNextFrame="1" />
                         <framerect top="60" left="60"  bottom="90" right="90"  delayNextFrame="1" />
                         <framerect top="60" left="90"  bottom="90" right="120" delayNextFrame="1" />
@@ -38,10 +38,10 @@
                 </animation>
         </destructible>
         <destructible name="stone2" hit="1" level="1" fireWall="1" life="1" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="90" left="0" bottom="120" right="30" delayNextFrame="0" />
                 </animation>
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="destroy1">
                         <framerect top="90" left="30"  bottom="120" right="60"  delayNextFrame="1" />
                         <framerect top="90" left="60"  bottom="120" right="90"  delayNextFrame="1" />
                         <framerect top="90" left="90"  bottom="120" right="120" delayNextFrame="1" />
@@ -50,10 +50,10 @@
                 </animation>
         </destructible>
         <destructible name="box" hit="1" level="1" fireWall="1" life="1" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="120" left="0" bottom="150" right="30" delayNextFrame="0" />
                 </animation>
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="destroy1">
                         <framerect top="120" left="30"  bottom="150" right="60"  delayNextFrame="1" />
                         <framerect top="120" left="60"  bottom="150" right="90"  delayNextFrame="1" />
                         <framerect top="120" left="90"  bottom="150" right="120" delayNextFrame="1" />
@@ -62,10 +62,10 @@
                 </animation>
         </destructible>
         <destructible name="column1" hit="1" level="1" fireWall="1" life="1" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="150" left="0" bottom="180" right="30" delayNextFrame="0" />
                 </animation>
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="destroy1">
                         <framerect top="150" left="30"  bottom="180" right="60"  delayNextFrame="1" />
                         <framerect top="150" left="60"  bottom="180" right="90"  delayNextFrame="1" />
                         <framerect top="150" left="90"  bottom="180" right="120" delayNextFrame="1" />
@@ -74,10 +74,10 @@
                 </animation>
         </destructible>
         <destructible name="column2" hit="1" level="1" fireWall="1" life="1" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="180" left="0" bottom="210" right="30" delayNextFrame="0" />
                 </animation>
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="destroy1">
                         <framerect top="180" left="30"  bottom="210" right="60"  delayNextFrame="1" />
                         <framerect top="180" left="60"  bottom="210" right="90"  delayNextFrame="1" />
                         <framerect top="180" left="90"  bottom="210" right="120" delayNextFrame="1" />
@@ -86,10 +86,10 @@
                 </animation>
         </destructible>
         <destructible name="stone3" hit="1" level="1" fireWall="1" life="1" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="210" left="0" bottom="240" right="30" delayNextFrame="0" />
                 </animation>
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="destroy1">
                         <framerect top="210" left="30"  bottom="240" right="60"  delayNextFrame="1" />
                         <framerect top="210" left="60"  bottom="240" right="90"  delayNextFrame="1" />
                         <framerect top="210" left="90"  bottom="240" right="120" delayNextFrame="1" />
@@ -98,10 +98,10 @@
                 </animation>
         </destructible>
         <destructible name="stone4" hit="1" level="1" fireWall="1" life="1" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="240" left="0" bottom="270" right="30" delayNextFrame="0" />
                 </animation>
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="destroy1">
                         <framerect top="240" left="30"  bottom="270" right="60"  delayNextFrame="1" />
                         <framerect top="240" left="60"  bottom="270" right="90"  delayNextFrame="1" />
                         <framerect top="240" left="90"  bottom="270" right="120" delayNextFrame="1" />
@@ -113,7 +113,7 @@
         <!-- Explosions -->
         
         <undestructible name="firecenter" hit="0" level="1" fireWall="0" damages="1">
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="">
                         <framerect top="270" left="0"   bottom="300" right="30"  delayNextFrame="1" />
                         <framerect top="270" left="30"  bottom="300" right="60"  delayNextFrame="1" />
                         <framerect top="270" left="60"  bottom="300" right="90"  delayNextFrame="1" />
@@ -124,7 +124,7 @@
                 </animation>
         </undestructible>
         <undestructible name="fireup" hit="0" level="1" fireWall="0" damages="1">
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="">
                         <framerect top="300" left="0"   bottom="330" right="30"  delayNextFrame="1" />
                         <framerect top="300" left="30"  bottom="330" right="60"  delayNextFrame="1" />
                         <framerect top="300" left="60"  bottom="330" right="90"  delayNextFrame="1" />
@@ -135,7 +135,7 @@
                 </animation>
         </undestructible>
         <undestructible name="firedown" hit="0" level="1" fireWall="0" damages="1">
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="">
                         <framerect top="330" left="0"   bottom="360" right="30"  delayNextFrame="1" />
                         <framerect top="330" left="30"  bottom="360" right="60"  delayNextFrame="1" />
                         <framerect top="330" left="60"  bottom="360" right="90"  delayNextFrame="1" />
@@ -146,7 +146,7 @@
                 </animation>
         </undestructible>
         <undestructible name="fireleft" hit="0" level="1" fireWall="0" damages="1">
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="">
                         <framerect top="360" left="0"   bottom="390" right="30"  delayNextFrame="1" />
                         <framerect top="360" left="30"  bottom="390" right="60"  delayNextFrame="1" />
                         <framerect top="360" left="60"  bottom="390" right="90"  delayNextFrame="1" />
@@ -157,7 +157,7 @@
                 </animation>
         </undestructible>
         <undestructible name="fireright" hit="0" level="1" fireWall="0" damages="1">
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="">
                         <framerect top="390" left="0"   bottom="420" right="30"  delayNextFrame="1" />
                         <framerect top="390" left="30"  bottom="420" right="60"  delayNextFrame="1" />
                         <framerect top="390" left="60"  bottom="420" right="90"  delayNextFrame="1" />
@@ -168,7 +168,7 @@
                 </animation>
         </undestructible>
         <undestructible name="firehorizontal" hit="0" level="1" fireWall="0" damages="1">
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="">
                         <framerect top="420" left="0"   bottom="450" right="30"  delayNextFrame="1" />
                         <framerect top="420" left="30"  bottom="450" right="60"  delayNextFrame="1" />
                         <framerect top="420" left="60"  bottom="450" right="90"  delayNextFrame="1" />
@@ -179,7 +179,7 @@
                 </animation>
         </undestructible>
         <undestructible name="firevertical" hit="0" level="1" fireWall="0" damages="1">
-                <animation name="destroy" canLoop="false">
+                <animation name="destroy" canLoop="false" sound="">
                         <framerect top="450" left="0"   bottom="480" right="30"  delayNextFrame="1" />
                         <framerect top="450" left="30"  bottom="480" right="60"  delayNextFrame="1" />
                         <framerect top="450" left="60"  bottom="480" right="90"  delayNextFrame="1" />
@@ -195,66 +195,66 @@
         <!-- Level 0 -->
 
         <undestructible name="grass1" hit="0" level="0" fireWall="0" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="270" left="120" bottom="300" right="150" delayNextFrame="0" />
                 </animation>
         </undestructible>
         <undestructible name="grass2" hit="0" level="0" fireWall="0" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="360" left="120" bottom="390" right="150" delayNextFrame="0" />
                 </animation>
         </undestructible>
         
         <undestructible name="sand" hit="0" level="0" fireWall="0" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="360" left="150" bottom="390" right="180" delayNextFrame="0" />
                 </animation>
         </undestructible>
         
         <undestructible name="stone1" hit="0" level="0" fireWall="0" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="420" left="120" bottom="450" right="150" delayNextFrame="0" />
                 </animation>
         </undestructible>
         <undestructible name="stone2" hit="0" level="0" fireWall="0" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="450" left="150" bottom="480" right="180" delayNextFrame="0" />
                 </animation>
         </undestructible>
 
         <undestructible name="snow" hit="0" level="0" fireWall="0" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="300" left="120" bottom="330" right="150" delayNextFrame="0" />
                 </animation>
         </undestructible>
 
         <undestructible name="tiling1" hit="0" level="0" fireWall="0" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="300" left="150" bottom="330" right="180" delayNextFrame="0" />
                 </animation>
         </undestructible>
         <undestructible name="tiling2" hit="0" level="0" fireWall="0" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="330" left="150" bottom="360" right="180" delayNextFrame="0" />
                 </animation>
         </undestructible>
         <undestructible name="tiling3" hit="0" level="0" fireWall="0" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="390" left="120" bottom="420" right="150" delayNextFrame="0" />
                 </animation>
         </undestructible>
         <undestructible name="tiling4" hit="0" level="0" fireWall="0" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="390" left="150" bottom="420" right="180" delayNextFrame="0" />
                 </animation>
         </undestructible>
         <undestructible name="tiling5" hit="0" level="0" fireWall="0" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="420" left="150" bottom="450" right="180" delayNextFrame="0" />
                 </animation>
         </undestructible>
         <undestructible name="tiling6" hit="0" level="0" fireWall="0" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="450" left="120" bottom="480" right="150" delayNextFrame="0" />
                 </animation>
         </undestructible>
@@ -262,22 +262,22 @@
         <!-- Level 1 -->
 
         <undestructible name="block1" hit="1" level="1" fireWall="1" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="270" left="150" bottom="300" right="180" delayNextFrame="0" />
                 </animation>
         </undestructible>
         <undestructible name="block2" hit="1" level="1" fireWall="1" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="330" left="120" bottom="360" right="150" delayNextFrame="0" />
                 </animation>
         </undestructible>               
         <undestructible name="block3" hit="1" level="1" fireWall="1" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="480" left="120" bottom="510" right="150" delayNextFrame="0" />
                 </animation>
         </undestructible>
         <undestructible name="block4" hit="1" level="1" fireWall="1" damages="0">
-                <animation name="idle" canLoop="false">
+                <animation name="idle" canLoop="false" sound="">
                         <framerect top="480" left="150" bottom="510" right="180" delayNextFrame="0" />
                 </animation>
         </undestructible>       

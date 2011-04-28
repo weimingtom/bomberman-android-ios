@@ -1,9 +1,9 @@
 package com.klob.Bomberklob.game;
 
-import com.klob.Bomberklob.resources.ResourcesManager;
-
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
+
+import com.klob.Bomberklob.resources.ResourcesManager;
 
 public class GameView extends Thread {
 	

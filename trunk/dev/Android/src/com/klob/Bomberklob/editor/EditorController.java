@@ -1,14 +1,14 @@
 package com.klob.Bomberklob.editor;
 
-import com.klob.Bomberklob.objects.Objects;
-import com.klob.Bomberklob.resources.Point;
-import com.klob.Bomberklob.resources.ResourcesManager;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
+
+import com.klob.Bomberklob.objects.Objects;
+import com.klob.Bomberklob.resources.Point;
+import com.klob.Bomberklob.resources.ResourcesManager;
 
 public class EditorController extends SurfaceView implements SurfaceHolder.Callback {
 

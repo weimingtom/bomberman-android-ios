@@ -1,12 +1,12 @@
 package com.klob.Bomberklob.game;
 
-import com.klob.Bomberklob.objects.PlayerAnimations;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.widget.FrameLayout;
+
+import com.klob.Bomberklob.objects.PlayerAnimations;
 
 public class GameControllerSingle extends GameController {
 	
