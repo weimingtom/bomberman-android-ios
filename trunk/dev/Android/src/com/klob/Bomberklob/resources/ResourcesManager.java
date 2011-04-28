@@ -223,6 +223,7 @@ public class ResourcesManager {
 						animationsequence.sequence=new ArrayList<FrameInfo>();
 						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);
 						animationsequence.sound = xpp.getAttributeValue(null, "sound");	
+						System.out.println("SOUND : " + animationname + "|" + xpp.getAttributeValue(null, "name")+ "|" + xpp.getAttributeValue(null, "sound") + "|" + animationsequence.sound);	
 					}
 					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
