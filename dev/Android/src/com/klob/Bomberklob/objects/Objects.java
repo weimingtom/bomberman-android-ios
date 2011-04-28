@@ -52,13 +52,7 @@ public abstract class Objects implements Serializable {
 		this.waitDelay = animations.get(this.currentAnimation).sequence.get(this.currentFrame).nextFrameDelay;
 		this.sound = animations.get(this.currentAnimation).sound;
 		
-		System.out.println("SOUND : "  + sound);
-		
 		this.paint = new Paint();
-		
-		if ( !sound.equals("") ) {
-			ResourcesManager.playSoundPool(this.sound);
-		}
 	}
 
 	public Objects(Objects objects) {
@@ -73,13 +67,9 @@ public abstract class Objects implements Serializable {
 		this.currentAnimation = objects.currentAnimation;
 		this.currentFrame = objects.currentFrame;
 		this.waitDelay = this.animations.get(this.currentAnimation).sequence.get(this.currentFrame).nextFrameDelay;
-		this.sound = objects.sound;
-		
+		this.sound = this.animations.get(this.currentAnimation).sound;
+
 		this.paint = objects.paint;
-		
-		if ( !sound.equals("") ) {
-			ResourcesManager.playSoundPool(this.sound);
-		}
 	}
 
 	/* Getters ------------------------------------------------------------- */
@@ -153,8 +143,7 @@ public abstract class Objects implements Serializable {
 			this.currentFrame = 0;
 			this.waitDelay = animations.get(currentAnimation).sequence.get(currentFrame).nextFrameDelay;
 			this.sound = animations.get(currentAnimation).sound;
-			
-			System.out.println("CHANGEMENT D'ANIM : " + this.sound);
+
 			if ( !sound.equals("") ) {
 				ResourcesManager.playSoundPool(this.sound);
 			}

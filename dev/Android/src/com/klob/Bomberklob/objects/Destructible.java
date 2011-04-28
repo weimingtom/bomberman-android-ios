@@ -49,6 +49,6 @@ public class Destructible extends Objects {
 
 	@Override
 	public void destroy() {
-		currentAnimation = ObjectsAnimations.DESTROY.getLabel();
+		setCurrentAnimation(ObjectsAnimations.DESTROY);
 	}
 }

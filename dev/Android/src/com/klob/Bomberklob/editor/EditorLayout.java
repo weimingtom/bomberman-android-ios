@@ -275,7 +275,6 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 					ioe.printStackTrace();
 				}
 
-				// FIXME Map non officielles 1 => 0
 				Model.getSystem().getDatabase().newMap(bundle.getString("map"), Model.getUser().getPseudo(), 0);
 				Intent intent = new Intent(EditorLayout.this, Home.class);
 				startActivity(intent);

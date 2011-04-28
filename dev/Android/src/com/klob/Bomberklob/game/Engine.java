@@ -118,6 +118,7 @@ public class Engine {
 				if ( player.getBombNumber() > 0 ) {
 					Bomb b = new Bomb(player.getBombSelected(), ResourcesManager.getBombsAnimations().get(player.getBombSelected()), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, player);
 					b.setPosition(ResourcesManager.tileToCo(p.x, p.y));
+					b.playCurrentAnimationSound();
 					this.bombs.put(p, b);
 					try {
 						player.setBombNumber(player.getBombNumber()-1);
