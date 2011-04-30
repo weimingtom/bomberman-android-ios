@@ -11,7 +11,7 @@
 @class Position;
 @class RessourceManager;
 
-@interface Objects : NSObject <NSCoding> {
+@interface Objects : NSObject <NSCoding, NSCopying> {
     
 	RessourceManager *ressource;
     NSString *imageName;
@@ -23,9 +23,9 @@
 	
 	NSMutableDictionary * animations;
 	NSMutableDictionary * destroyAnimations;
-	UIImage * idle;
+	UIImage *idle;
 
-	NSString * currentAnimation;
+	NSString *currentAnimation;
 	NSInteger currentFrame;
 	NSInteger waitDelay;
 	NSInteger delay;
@@ -41,12 +41,12 @@
 
 @property (nonatomic) NSInteger damages;
 @property (nonatomic, retain) Position * position;
-@property (nonatomic, retain) RessourceManager * ressource;
+@property (nonatomic, assign) RessourceManager * ressource;
 
 
 @property (nonatomic, retain) NSMutableDictionary * animations ;
 @property (nonatomic, retain) NSMutableDictionary * destroyAnimations ;
-@property (nonatomic) UIImage * idle;
+@property (nonatomic, assign) UIImage *idle;
 
 @property (nonatomic, retain) NSString * currentAnimation;
 @property (nonatomic) NSInteger currentFrame;
@@ -65,7 +65,5 @@
 - (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition animations:(NSDictionary *)anAnimations;
 - (void) update;
 - (BOOL) hasAnimationFinished;
-
-- (Objects *) copy;
 
 @end

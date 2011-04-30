@@ -78,80 +78,72 @@ static RessourceManager * ressource = nil;
 }
 
 
-- (void) loadPlayer{
+- (void) loadPlayer{	
+	NSError *error = nil;
+    NSString *xmlFilePath = [[NSBundle mainBundle] pathForResource:@"players" ofType:@"xml"];
+    NSString *content = [[NSString alloc] initWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:&error];
 	
-	bitmapsPlayer = [[NSMutableDictionary alloc] init];
+	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+	XmlParser *parserDelegate = [[XmlParser alloc] initXMLParser:@"player"];	
+	[parser setDelegate:parserDelegate];
+	[parser parse];
 	
-	
-	NSError * erreur = nil;
-//	NSString * contenu = [NSString stringWithContentsOfFile:@"/Users/choucomog/bomberman-android-ios/dev/iOS/BomberKlob/BomberKlob/Resources/xml/players.xml"
-//												   encoding:NSUTF8StringEncoding
-//													  error:&erreur]; // On donne l'adresse de "erreur"
-    NSString *xmlFilePath =[[NSBundle mainBundle] pathForResource:@"players" ofType:@"xml"];
-    NSString * contenu = [NSString stringWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:&erreur]; // On donne l'adresse de "erreur"
-	
-	NSXMLParser * parseur = [[NSXMLParser alloc] initWithData:[contenu dataUsingEncoding:NSUTF8StringEncoding]];
-	XmlParser * parserDelegate = [[XmlParser alloc] initXMLParser:@"player"];	
-	[parseur setDelegate:parserDelegate];
-	[parseur parse];
-	
-	NSError *parseError = [parseur parserError];
+	NSError *parseError = [parser parserError];
 	if (parseError) {
 		NSLog(@"XmlParser - Error parsing data: %@", [parseError localizedDescription]);
 	} 
-	[erreur release];
-	[parseError release];
 	
-	
-	bitmapsPlayer = parserDelegate.objectsAnimations;
+	self.bitmapsPlayer = parserDelegate.objectsAnimations;
+    
+    [content release];
+	[parser release];
+//	[parserDelegate release];
 }
+
 
 - (void) loadBombs{
-	
-	bitmapsBombs = [[NSMutableDictionary alloc] init];
-	
-	
-	NSError * erreur = nil;
+	NSError *error = nil;
     NSString *xmlFilePath =[[NSBundle mainBundle] pathForResource:@"bombs" ofType:@"xml"];
-    NSString * contenu = [NSString stringWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:&erreur]; // On donne l'adresse de "erreur"
+    NSString *content = [[NSString alloc] initWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:&error];
 	
-	NSXMLParser * parseur = [[NSXMLParser alloc] initWithData:[contenu dataUsingEncoding:NSUTF8StringEncoding]];
-	XmlParser * parserDelegate = [[XmlParser alloc] initXMLParser:@"bombs"];	
-	[parseur setDelegate:parserDelegate];
-	[parseur parse];
+	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+	XmlParser *parserDelegate = [[XmlParser alloc] initXMLParser:@"bombs"];	
+	[parser setDelegate:parserDelegate];
+	[parser parse];
 	
-	NSError *parseError = [parseur parserError];
+	NSError *parseError = [parser parserError];
 	if (parseError) {
 		NSLog(@"XmlParser - Error parsing data: %@", [parseError localizedDescription]);
 	} 
-	[erreur release];
-	[parseError release];
 	
-	bitmapsBombs = parserDelegate.objectsBombs;
+	self.bitmapsBombs = parserDelegate.objectsBombs;
+    
+    [content release];
+	[parser release];
+//	[parserDelegate release];
 }
 
+
 - (void) loadObjects{
-	
-	bitmapsAnimates = [[NSMutableDictionary alloc] init];
-	
-	
-	NSError * erreur = nil;
+	NSError *error = nil;
     NSString *xmlFilePath =[[NSBundle mainBundle] pathForResource:@"objects" ofType:@"xml"];
-    NSString * contenu = [NSString stringWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:&erreur]; // On donne l'adresse de "erreur"
+    NSString *content = [[NSString alloc] initWithContentsOfFile:xmlFilePath encoding:NSUTF8StringEncoding error:&error];
 	
-	NSXMLParser * parseur = [[NSXMLParser alloc] initWithData:[contenu dataUsingEncoding:NSUTF8StringEncoding]];
-	XmlParser * parserDelegate = [[XmlParser alloc] initXMLParser:@"objects"];	
-	[parseur setDelegate:parserDelegate];
-	[parseur parse];
+	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+	XmlParser *parserDelegate = [[XmlParser alloc] initXMLParser:@"objects"];	
+	[parser setDelegate:parserDelegate];
+	[parser parse];
 	
-	NSError *parseError = [parseur parserError];
+	NSError *parseError = [parser parserError];
 	if (parseError) {
 		NSLog(@"XmlParser - Error parsing data: %@", [parseError localizedDescription]);
 	} 
-	[erreur release];
-	[parseError release];
 	
-	bitmapsAnimates = parserDelegate.objects;
+	self.bitmapsAnimates = parserDelegate.objects;
+    
+    [content release];
+	[parser release];
+//	[parserDelegate release];
 	
 }
 

@@ -25,7 +25,6 @@
 		animations = [[NSMutableDictionary alloc] init];
 		destroyAnimations = [[NSMutableDictionary alloc] init];
 		currentAnimation = @"idle";
-
 	}
 	
 	return self;
@@ -159,28 +158,40 @@
     [aCoder encodeObject:position forKey:@"position"];
 }
 
-- (Objects *) copy{
-	Objects * objectCopy = [[Objects alloc] init];
-	objectCopy.ressource = ressource;
-    objectCopy.imageName = [[NSString alloc] initWithString:imageName];
-	objectCopy.hit = hit;
-	objectCopy.level = level;
-	objectCopy.fireWall = fireWall;
-	objectCopy.damages = damages;
-	objectCopy.position = [[Position alloc] initWithPosition:position];
-	
-	objectCopy.animations = [[NSMutableDictionary alloc] initWithDictionary:animations];
-	objectCopy.destroyAnimations = [[NSMutableDictionary alloc] initWithDictionary:destroyAnimations];
-	objectCopy.idle = idle;
-	
-	objectCopy.currentAnimation = [[NSString alloc] initWithString:currentAnimation];
-	objectCopy.currentFrame = currentFrame;
-	objectCopy.waitDelay = waitDelay;
-	objectCopy.delay = delay;
-	objectCopy.destroyable = destroyable;
-	
-	return objectCopy;
+
+- (id)copyWithZone:(NSZone *)zone {
+    Objects *copy = [[Objects alloc] init];
+    NSString *imageNameCopy = [[NSString alloc] initWithString:imageName];
+    Position *positionCopy = [[Position alloc] initWithPosition:position];
+    NSMutableDictionary *animationCopy = [[NSMutableDictionary alloc] initWithDictionary:animations];
+    NSMutableDictionary *destroyAnimationsCopy = [[NSMutableDictionary alloc] initWithDictionary:destroyAnimations];
+    NSString *currentAnimationCopy = [[NSString alloc] initWithString:currentAnimation];
+    
+    copy.ressource = ressource;
+    copy.imageName = imageNameCopy;
+    copy.hit = hit;
+    copy.level = level;
+    copy.fireWall = fireWall;
+    copy.damages = damages;
+    copy.position = positionCopy;
+    copy.animations = animationCopy;
+    copy.destroyAnimations = destroyAnimationsCopy;
+    copy.idle = idle;
+    copy.currentAnimation = currentAnimationCopy;
+    copy.currentFrame = currentFrame;
+    copy.waitDelay = waitDelay;
+    copy.delay = delay;
+    copy.destroyable = destroyable;
+    
+    [imageNameCopy release];
+    [positionCopy release];
+    [animationCopy release];
+    [destroyAnimationsCopy release];
+    [currentAnimationCopy release];
+    
+    return copy;
 }
+
 
 - (void) destroy{
 	destroyable = YES;

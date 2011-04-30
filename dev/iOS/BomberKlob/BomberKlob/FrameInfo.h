@@ -10,11 +10,11 @@
 
 
 @interface FrameInfo : NSObject {
-    CGRect * rect;
+    CGRect rect;
 	NSUInteger nextFrameDelay;
 }
 
-@property (nonatomic) CGRect * rect;
+@property (nonatomic) CGRect rect;
 @property (nonatomic) NSUInteger nextFrameDelay;
 
 @end

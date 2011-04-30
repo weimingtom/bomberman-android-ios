@@ -13,4 +13,7 @@
 
 @synthesize rect, nextFrameDelay;
 
+- (void)dealloc {
+    [super dealloc];
+}
 @end
