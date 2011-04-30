@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Map, Position, Object, DBUser;
+@class Map, Position, Objects, DBUser;
 
 
 @interface MapEditor : NSObject {
@@ -20,7 +20,7 @@
 
 - (id)initWithMapName:(NSString *)mapName;
 
-- (void)addBlock:(Object *)block position:(Position *)position;
+- (void)addBlock:(Objects *)block position:(Position *)position;
 - (void)addPlayer:(Position *)position;
 - (void)deleteBlockAtPosition:(Position *)position;
 - (void)saveMapWithOwner:(DBUser *)owner;

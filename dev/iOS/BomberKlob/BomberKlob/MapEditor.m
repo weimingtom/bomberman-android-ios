@@ -10,6 +10,8 @@
 #import "Map.h"
 #import "Position.h"
 #import "DBUser.h"
+#import "RessourceManager.h"
+#import "Objects.h"
 
 
 @implementation MapEditor
@@ -34,8 +36,12 @@
 }
 
 
-- (void)addBlock:(Object *)block position:(Position *)position {
+- (void)addBlock:(Objects *)block position:(Position *)position {
+    NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
+    Position *p = [[Position alloc] initWithX:(position.x * tileSize) y:(position.y * tileSize)];
+    block.position = p;
     [map addBlock:block position:position];
+    [p release];
 }
 
 
@@ -44,7 +50,7 @@
 }
 
 
-- (void)deleteGround:(Object *)ground position:(Position *)position {
+- (void)deleteGround:(Objects *)ground position:(Position *)position {
     
 }
 

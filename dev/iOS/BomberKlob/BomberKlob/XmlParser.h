@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Object;
+@class Objects;
 
 @interface XmlParser : NSXMLParser {
 

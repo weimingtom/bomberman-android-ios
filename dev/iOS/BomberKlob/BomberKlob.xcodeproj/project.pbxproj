@@ -42,6 +42,7 @@
 		18C839D613410263001D5747 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C839D513410263001D5747 /* main.m */; };
 		18C839D913410263001D5747 /* BomberKlobAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C839D813410263001D5747 /* BomberKlobAppDelegate.m */; };
 		18C839DC13410263001D5747 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C839DA13410263001D5747 /* MainWindow.xib */; };
+		18F03ED5136C3C4D0030496F /* objects.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F03ED4136C3C4D0030496F /* objects.png */; };
 		99225ADB135471C7008B95AA /* players.png in Resources */ = {isa = PBXBuildFile; fileRef = 99225ADA135471C7008B95AA /* players.png */; };
 		99225ADD135471EC008B95AA /* space.png in Resources */ = {isa = PBXBuildFile; fileRef = 99225ADC135471EC008B95AA /* space.png */; };
 		99240527135337D700011965 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 99240526135337D700011965 /* Application.m */; };
@@ -56,7 +57,6 @@
 		9926250B1360808400E17F33 /* PauseMenuGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 9926250A1360808100E17F33 /* PauseMenuGame.m */; };
 		9926250E1360817000E17F33 /* PauseMenuGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9926250D1360816E00E17F33 /* PauseMenuGameView.m */; };
 		9926252A1362E67E00E17F33 /* objects.xml in Resources */ = {isa = PBXBuildFile; fileRef = 992625291362E67E00E17F33 /* objects.xml */; };
-		992625341362F54000E17F33 /* objects.png in Resources */ = {isa = PBXBuildFile; fileRef = 992625331362F54000E17F33 /* objects.png */; };
 		9943395B134C876200970231 /* AnimationSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433929134C876200970231 /* AnimationSequence.m */; };
 		9943395C134C876200970231 /* Bomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943392B134C876200970231 /* Bomb.m */; };
 		9943395D134C876200970231 /* BotPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943392D134C876200970231 /* BotPlayer.m */; };
@@ -75,7 +75,7 @@
 		9943396B134C876200970231 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433949134C876200970231 /* Map.m */; };
 		9943396C134C876200970231 /* MapEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943394B134C876200970231 /* MapEditor.m */; };
 		9943396D134C876200970231 /* Multiplayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943394D134C876200970231 /* Multiplayer.m */; };
-		9943396E134C876200970231 /* Object.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943394F134C876200970231 /* Object.m */; };
+		9943396E134C876200970231 /* Objects.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943394F134C876200970231 /* Objects.m */; };
 		9943396F134C876200970231 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433951134C876200970231 /* Player.m */; };
 		99433970134C876200970231 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433953134C876200970231 /* Position.m */; };
 		99433971134C876200970231 /* RessourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433955134C876200970231 /* RessourceManager.m */; };
@@ -173,6 +173,7 @@
 		18C839D713410263001D5747 /* BomberKlobAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BomberKlobAppDelegate.h; sourceTree = "<group>"; };
 		18C839D813410263001D5747 /* BomberKlobAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BomberKlobAppDelegate.m; sourceTree = "<group>"; };
 		18C839DB13410263001D5747 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		18F03ED4136C3C4D0030496F /* objects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = objects.png; sourceTree = "<group>"; };
 		99225ADA135471C7008B95AA /* players.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = players.png; sourceTree = "<group>"; };
 		99225ADC135471EC008B95AA /* space.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = space.png; sourceTree = "<group>"; };
 		992405221353379700011965 /* DBMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMap.h; sourceTree = "<group>"; };
@@ -185,7 +186,6 @@
 		9926250C1360816C00E17F33 /* PauseMenuGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseMenuGameView.h; sourceTree = "<group>"; };
 		9926250D1360816E00E17F33 /* PauseMenuGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseMenuGameView.m; sourceTree = "<group>"; };
 		992625291362E67E00E17F33 /* objects.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = objects.xml; sourceTree = "<group>"; };
-		992625331362F54000E17F33 /* objects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = objects.png; sourceTree = "<group>"; };
 		992AFC6E1356415D00D7726C /* GameActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameActionView.h; sourceTree = "<group>"; };
 		992AFC6F1356415D00D7726C /* GameActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameActionView.m; sourceTree = "<group>"; };
 		992AFC721356417100D7726C /* GameActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameActionViewController.h; sourceTree = "<group>"; };
@@ -230,8 +230,8 @@
 		9943394B134C876200970231 /* MapEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapEditor.m; sourceTree = "<group>"; };
 		9943394C134C876200970231 /* Multiplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Multiplayer.h; sourceTree = "<group>"; };
 		9943394D134C876200970231 /* Multiplayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Multiplayer.m; sourceTree = "<group>"; };
-		9943394E134C876200970231 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
-		9943394F134C876200970231 /* Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Object.m; sourceTree = "<group>"; };
+		9943394E134C876200970231 /* Objects.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Objects.h; sourceTree = "<group>"; };
+		9943394F134C876200970231 /* Objects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Objects.m; sourceTree = "<group>"; };
 		99433950134C876200970231 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		99433951134C876200970231 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		99433952134C876200970231 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Position.h; sourceTree = "<group>"; };
@@ -421,14 +421,13 @@
 		18C839CE13410263001D5747 /* BomberKlob */ = {
 			isa = PBXGroup;
 			children = (
-				992625061360535100E17F33 /* GameSingle */,
-				99433976134C889500970231 /* Resources */,
 				99433975134C87AE00970231 /* Body */,
 				99433974134C877000970231 /* Object */,
 				187A72D2134117400020D828 /* ModelMenu */,
 				188855851341071700DA88B9 /* CreateAccountMenu */,
 				187A72E2134131020020D828 /* MainMenu */,
 				18543B251350C7610038CC61 /* SinglePlayerMenu */,
+				992625061360535100E17F33 /* GameSingle */,
 				1846A7E3134C62F600D35626 /* OptionsMenu */,
 				1890E76A135C9D81002F78B9 /* EditorMenu */,
 				1890E770135CB286002F78B9 /* LoadMapEditorMenu */,
@@ -436,6 +435,7 @@
 				1846A7EF134C6C3600D35626 /* AccountManagementMenu */,
 				1846A7C2134B6F5700D35626 /* ChangePlayerMenu */,
 				18819AC8134103CA00CBAF1D /* AppDelegate */,
+				99433976134C889500970231 /* Resources */,
 				18C839CF13410263001D5747 /* Supporting Files */,
 			);
 			path = BomberKlob;
@@ -515,8 +515,8 @@
 				99433931134C876200970231 /* Destructible.m */,
 				99433936134C876200970231 /* FrameInfo.h */,
 				99433937134C876200970231 /* FrameInfo.m */,
-				9943394E134C876200970231 /* Object.h */,
-				9943394F134C876200970231 /* Object.m */,
+				9943394E134C876200970231 /* Objects.h */,
+				9943394F134C876200970231 /* Objects.m */,
 				99433958134C876200970231 /* Undestructible.h */,
 				99433959134C876200970231 /* Undestructible.m */,
 			);
@@ -575,7 +575,7 @@
 		99433977134C889500970231 /* sprites */ = {
 			isa = PBXGroup;
 			children = (
-				992625331362F54000E17F33 /* objects.png */,
+				18F03ED4136C3C4D0030496F /* objects.png */,
 				99262503136041A600E17F33 /* bomb_button.png */,
 				995FAC5C135C2E7F00FA8557 /* animate.png */,
 				995FAC5D135C2E7F00FA8557 /* bombs.png */,
@@ -674,7 +674,7 @@
 				995FAC61135C2EA900FA8557 /* bombs.xml in Resources */,
 				99262504136041A600E17F33 /* bomb_button.png in Resources */,
 				9926252A1362E67E00E17F33 /* objects.xml in Resources */,
-				992625341362F54000E17F33 /* objects.png in Resources */,
+				18F03ED5136C3C4D0030496F /* objects.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,7 +718,7 @@
 				9943396B134C876200970231 /* Map.m in Sources */,
 				9943396C134C876200970231 /* MapEditor.m in Sources */,
 				9943396D134C876200970231 /* Multiplayer.m in Sources */,
-				9943396E134C876200970231 /* Object.m in Sources */,
+				9943396E134C876200970231 /* Objects.m in Sources */,
 				9943396F134C876200970231 /* Player.m in Sources */,
 				99433970134C876200970231 /* Position.m in Sources */,
 				99433971134C876200970231 /* RessourceManager.m in Sources */,

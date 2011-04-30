@@ -10,6 +10,11 @@
 
 @implementation GameControllerMultiplayer
 
+- (void)dealloc {
+    [multiPlayer release];
+    [super dealloc];
+}
+
 - (void) sendRequest{
 	
 }

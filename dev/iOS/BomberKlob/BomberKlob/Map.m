@@ -8,14 +8,14 @@
 
 #import "Map.h"
 #import "RessourceManager.h"
-#import "Object.h"
+#import "Objects.h"
 #import "Position.h"
 #import "Player.h"
 #import "Undestructible.h"
 #import "DataBase.h"
 #import "DBUser.h"
 #import "DBMap.h"
-#import "Object.h"
+#import "Objects.h"
 
 @implementation Map
 
@@ -47,8 +47,8 @@
 - (void)initBasicMap {
     NSMutableArray *groundsTmp;
     NSMutableArray *blocksTmp;
-    Object *groundTmp;
-    Object *blockTmp;
+    Objects *groundTmp;
+    Objects *blockTmp;
     Position *positionTmp;
     
     width = WIDTH;
@@ -67,38 +67,32 @@
         [blocks addObject:blocksTmp];
         
         for (int j = 0; j < height; j++) {
-            positionTmp = [[Position alloc] initWithX:i*resource.tileSize y:j*resource.tileSize];
+            positionTmp = [[Position alloc] initWithX:(i * resource.tileSize) y:(j * resource.tileSize)];
 			
-			Object * objectTmp = [(Object *)[resource.bitmapsAnimates objectForKey:@"grass2"] copy];
-			objectTmp.position = positionTmp;
-            [[grounds objectAtIndex:i] addObject: objectTmp];
+			groundTmp = [(Objects *)[resource.bitmapsAnimates objectForKey:@"grass2"] copy];
+			groundTmp.position = positionTmp;
+            [[grounds objectAtIndex:i] addObject:groundTmp];
             
             if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
-				objectTmp = [(Object *)[resource.bitmapsAnimates objectForKey:@"herb"] copy];
-				objectTmp.position = positionTmp;
-				[[blocks objectAtIndex:i] addObject: objectTmp];
+				blockTmp = [(Undestructible *)[resource.bitmapsAnimates objectForKey:@"block1"] copy];
+				blockTmp.position = positionTmp;
+				[[blocks objectAtIndex:i] addObject:blockTmp];
+                [blockTmp release];
             }
-			else if (i==10 && j == 10){
-				objectTmp = [(Object *)[resource.bitmapsAnimates objectForKey:@"herb"] copy];
-				objectTmp.position = positionTmp;
-				[[blocks objectAtIndex:i] addObject: objectTmp];
-			}
             else {
                 [[blocks objectAtIndex:i] addObject:@"empty"];
             }
 			
-			
-            
-            //[groundTmp release];
-            //[positionTmp release];
+            [groundTmp release];
+            [positionTmp release];
         }
+        
+        [groundsTmp release];
+        [blocksTmp release];
     }
 	for (int i=0; i < 4; i++) {
 		[players addObject:[[Position alloc] initWithX:2 y:2+i]];
 	}
-    
-    //[groundsTmp release];
-    //[blocksTmp release];
 }
 
 
@@ -159,7 +153,7 @@
         self.name = mapName;
         [self initBasicMap];
     }
-    
+
     [mapPath release];
     [data release];
 }
@@ -181,21 +175,21 @@
 }
 
 
-- (void)addGround:(Object *)ground position:(Position *)position {
+- (void)addGround:(Objects *)ground position:(Position *)position {
 	
 }
 
 
-- (void)addBlock:(Object *)block position:(Position *)position {
+- (void)addBlock:(Objects *)block position:(Position *)position {
     
-	if(position.x < width && position.x >=0 && position.y < height && position.y >= 0)
+	if(position.x < width && position.x >= 0 && position.y < height && position.y >= 0)
         [[blocks objectAtIndex:position.x] replaceObjectAtIndex:position.y withObject:block];
 }
 
 
 - (void)addPlayer:(Position *)position {
     
-    if(position.x < width && position.x >=0 && position.y < height && position.y >= 0) {
+    if(position.x < width && position.x >= 0 && position.y < height && position.y >= 0) {
         [players addObject:position];
     }
 }
@@ -212,12 +206,13 @@
 
 
 - (void)draw:(CGContextRef)context {
+
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            [((Object *) [[grounds objectAtIndex:i] objectAtIndex:j]) draw:context];
+            [((Objects *) [[grounds objectAtIndex:i] objectAtIndex:j]) draw:context];
 
             if (![[[blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"]) {
-                [((Object *) [[blocks objectAtIndex:i] objectAtIndex:j]) draw:context];
+                [((Objects *) [[blocks objectAtIndex:i] objectAtIndex:j]) draw:context];
             }
         }
     }
@@ -245,12 +240,13 @@
 
 
 - (void)draw:(CGContextRef)context alpha:(CGFloat)alpha {
+
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            [((Object *) [[grounds objectAtIndex:i] objectAtIndex:j]) draw:context];
+            [((Objects *) [[grounds objectAtIndex:i] objectAtIndex:j]) draw:context];
             
             if (![[[blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"]) {
-                [((Object *) [[blocks objectAtIndex:i] objectAtIndex:j]) draw:context alpha:alpha];
+                [((Objects *) [[blocks objectAtIndex:i] objectAtIndex:j]) draw:context alpha:alpha];
             }
         }
     }
@@ -323,7 +319,7 @@
 - (void) update{
 	for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {	
-			Object * object = [[blocks objectAtIndex:i] objectAtIndex:j];
+			Objects * object = [[blocks objectAtIndex:i] objectAtIndex:j];
             if (![object isEqual:@"empty"]) {
 				if (![object hasAnimationFinished]) {
 					[object update]; 

@@ -11,7 +11,7 @@
 #define ALPHA 0.2
 
 
-@class EditorMapZoneView, EditorViewController, Position, Object;
+@class EditorMapZoneView, EditorViewController, Position, Objects;
 
 @interface EditorMapZone : NSObject {
     

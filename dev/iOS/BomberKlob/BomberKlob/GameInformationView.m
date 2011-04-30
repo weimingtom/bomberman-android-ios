@@ -41,8 +41,8 @@
 	int ecart = resource.screenHeight / 4;
 	for (NSString * key in resource.bitmapsPlayer) {
 		
-		Object * o = [resource.bitmapsPlayer valueForKey:key];
-		UIImage * image = ((Object *)[resource.bitmapsPlayer valueForKey:key]).idle;
+		Objects * o = [resource.bitmapsPlayer valueForKey:key];
+		UIImage * image = ((Objects *)[resource.bitmapsPlayer valueForKey:key]).idle;
 		[image drawInRect:CGRectMake(ecart, 0, resource.tileSize , resource.tileSize)];
 		
 		Player * p = [controller.globalController.engine.game.players objectAtIndex:i];

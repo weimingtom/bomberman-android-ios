@@ -53,6 +53,15 @@
 	return self;
 }
 
+
+- (void)dealloc {
+    [bombsPlanted release];
+    [bombsTypes release];
+    [color release];
+    [super dealloc];
+}
+
+
 - (void) live{
 	
 }
@@ -243,6 +252,7 @@
 	}
 }
 
+
 - (void)update{
 	if (delay == waitDelay) {
 		delay = 0;
@@ -288,6 +298,5 @@
 	
 	return playerTmp;
 }
-
 
 @end

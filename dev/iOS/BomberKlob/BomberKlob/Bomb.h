@@ -24,6 +24,6 @@
 - (void) draw:(CGContextRef) context;
 - (void) update;
 - (BOOL) hasAnimationFinished;
-- (void) destroy;
+- (void) destroyable;
 
 @end

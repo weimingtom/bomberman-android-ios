@@ -19,4 +19,10 @@
 	return self;
 }
 
+
+- (void)dealloc {
+    [timer release];
+    [super dealloc];
+}
+
 @end

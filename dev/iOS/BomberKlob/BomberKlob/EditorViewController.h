@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class MapEditor, EditorMapZone, EditorInformation, EditorAction, PauseMenu, Position, Object;
+@class MapEditor, EditorMapZone, EditorInformation, EditorAction, PauseMenu, Position, Objects;
 
 
 @interface EditorViewController : UIViewController {

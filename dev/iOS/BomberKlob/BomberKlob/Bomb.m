@@ -71,7 +71,7 @@
 		return false;
 }
 
-- (void) destroy{
+- (void) destroyable{
 	explode = YES;
 }
 

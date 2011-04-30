@@ -19,4 +19,10 @@
 	return self;
 }
 
+
+- (void)dealloc {
+    [gameType release];
+    [super dealloc];
+}
+
 @end

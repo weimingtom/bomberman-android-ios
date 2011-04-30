@@ -6,15 +6,15 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "Object.h"
+#import "Objects.h"
 #import "Position.h"
 #import "RessourceManager.h"
 #import "AnimationSequence.h"
 
 
-@implementation Object
+@implementation Objects
 
-@synthesize imageName, hit, level, fireWall, position, animations,currentAnimation,currentFrame,waitDelay,delay, damages,idle,destroyAnimations,ressource,destroy;
+@synthesize imageName, hit, level, fireWall, position, animations,currentAnimation,currentFrame,waitDelay,delay, damages,idle,destroyAnimations,ressource,destroyable;
 
 - (id)init {
 	self = [super init];
@@ -46,6 +46,16 @@
 	return self;
 }
 
+
+- (void)dealloc {
+    [imageName release];
+    [position release];
+    [animations release];
+    [currentAnimation release];
+    [super dealloc];
+}
+
+
 - (void) resize{
 	
 }
@@ -61,7 +71,7 @@
 	if ([((AnimationSequence *)[animations objectForKey:imageName]).sequences count] == 1) {
 		[idle drawInRect:CGRectMake(position.x, position.y, ressource.tileSize, ressource.tileSize)];
 	}
-	else if (!destroy) {
+	else if (!destroyable) {
 		UIImage * image = [((AnimationSequence *)[animations objectForKey:imageName]).sequences objectAtIndex:currentFrame];
 		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize, ressource.tileSize)];
 	}
@@ -73,16 +83,15 @@
 
 
 - (void)draw:(CGContextRef)context alpha:(CGFloat)alpha {	
+
 	if (currentFrame < [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]){
 		UIImage * image = [((AnimationSequence*)[animations objectForKey:imageName]).sequences objectAtIndex:currentFrame];
-		    [image drawInRect:CGRectMake(ressource.tileSize * position.x, ressource.tileSize * position.y, ressource.tileSize, ressource.tileSize) blendMode:kCGBlendModeNormal alpha:alpha];
+		    [image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize, ressource.tileSize) blendMode:kCGBlendModeNormal alpha:alpha];
 	}
-    
-//    [image drawInRect:CGRectMake(ressource.tileSize * position.x, ressource.tileSize * position.y, ressource.tileSize, ressource.tileSize)];
 }
 
 - (void) update{	
-	if (!destroy) {
+	if (!destroyable) {
 		if ([((AnimationSequence *)[animations objectForKey:imageName]).sequences count] > 2) {
 			if (delay == waitDelay) {
 				delay = 0;
@@ -136,6 +145,8 @@
         self.imageName = [aDecoder decodeObjectForKey:@"imageName"];
         self.hit = [aDecoder decodeBoolForKey:@"hit"];
         self.position = [aDecoder decodeObjectForKey:@"position"];
+        
+        animations = [[NSMutableDictionary alloc] initWithDictionary:[ressource.bitmapsInanimates dictionaryWithValuesForKeys:[[NSArray alloc] initWithObjects:imageName, nil]]];
     }
     
     return self;
@@ -148,8 +159,8 @@
     [aCoder encodeObject:position forKey:@"position"];
 }
 
-- (Object *) copy{
-	Object * objectCopy = [[Object alloc] init];
+- (Objects *) copy{
+	Objects * objectCopy = [[Objects alloc] init];
 	objectCopy.ressource = ressource;
     objectCopy.imageName = [[NSString alloc] initWithString:imageName];
 	objectCopy.hit = hit;
@@ -166,14 +177,13 @@
 	objectCopy.currentFrame = currentFrame;
 	objectCopy.waitDelay = waitDelay;
 	objectCopy.delay = delay;
-	objectCopy.destroy = destroy;
+	objectCopy.destroyable = destroyable;
 	
 	return objectCopy;
 }
 
 - (void) destroy{
-	destroy = YES;
-	
+	destroyable = YES;
 }
 
 @end
