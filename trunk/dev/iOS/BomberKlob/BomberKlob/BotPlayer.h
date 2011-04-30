@@ -10,7 +10,7 @@
 #import "Player.h"
 
 @interface BotPlayer : Player {
-	NSString * difficulty;
+	NSString *difficulty;
 }
 
 @end

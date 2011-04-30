@@ -11,4 +11,9 @@
 
 @implementation BotPlayer
 
+- (void)dealloc {
+    [difficulty release];
+    [super dealloc];
+}
+
 @end

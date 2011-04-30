@@ -11,7 +11,7 @@
 #define WIDTH  21
 #define HEIGHT 14
 
-@class RessourceManager, Position, Object, Animated, DBUser, DBMap;
+@class RessourceManager, Position, Objects, Animated, DBUser, DBMap;
 
 
 @interface Map : NSObject <NSCoding> {
@@ -38,8 +38,8 @@
 - (void)load:(NSString*)mapName;
 - (void)makePreviewWithView;
 
-- (void)addGround:(Object *)ground position:(Position *)position;
-- (void)addBlock:(Object *)block position:(Position *)position;
+- (void)addGround:(Objects *)ground position:(Position *)position;
+- (void)addBlock:(Objects *)block position:(Position *)position;
 - (void)addPlayer:(Position *)position;
 - (void)deleteBlockAtPosition:(Position *)position;
 - (void)destroyBlock:(Animated *)block position:(Position *)position;

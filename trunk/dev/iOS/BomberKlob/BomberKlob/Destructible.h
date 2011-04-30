@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Object.h"
+#import "Objects.h"
 
-@interface Destructible : Object {
+@interface Destructible : Objects {
     NSInteger life;
 }
 

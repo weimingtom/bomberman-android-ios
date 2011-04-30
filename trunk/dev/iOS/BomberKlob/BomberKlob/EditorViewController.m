@@ -17,13 +17,14 @@
 #import "RessourceManager.h"
 #import "Map.h"
 #import "Position.h"
-#import "Object.h"
+#import "Objects.h"
 #import "PauseMenu.h"
 #import "PauseMenuView.h"
 #import "MainMenuViewController.h"
 #import "BomberKlobAppDelegate.h"
 #import "Application.h"
 #import "DBMap.h"
+#import "Undestructible.h"
 
 
 @implementation EditorViewController
@@ -81,15 +82,14 @@
         [mapEditor deleteBlockAtPosition:position];
     }
     else if (selectedTool == @"player") {
-        Position *p = [[Position alloc] initWithX:position.x y:(position.y - 1)];
-        [mapEditor addPlayer:p];
-        [p release];
+        [mapEditor addPlayer:position];
     }
     else {
-        Object *block = nil;
+        Objects *block = nil;
         
         if ([editorAction.selectedObjectType isEqual:@"Inanimated"]) {
-            //block = [[Inanimated alloc] initWithImageName:editorAction.selectedObject position:position];
+            block = [(Undestructible *)[[RessourceManager sharedRessource].bitmapsAnimates objectForKey:editorAction.selectedObject] copy];
+//            block = [[Undestructible alloc] initWithImageName:editorAction.selectedObject position:position];
         }
         
         if (block != nil)

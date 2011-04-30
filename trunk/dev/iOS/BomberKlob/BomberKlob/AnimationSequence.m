@@ -30,6 +30,7 @@
 	return self;
 }
 
+
 - (void) addImageSequence:(CGImageRef *) imageValue{
 	[sequences addObject:imageValue];
 }

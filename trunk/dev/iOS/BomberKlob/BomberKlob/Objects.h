@@ -11,7 +11,7 @@
 @class Position;
 @class RessourceManager;
 
-@interface Object : NSObject <NSCoding> {
+@interface Objects : NSObject <NSCoding> {
     
 	RessourceManager *ressource;
     NSString *imageName;
@@ -29,7 +29,7 @@
 	NSInteger currentFrame;
 	NSInteger waitDelay;
 	NSInteger delay;
-	BOOL destroy;
+	BOOL destroyable;
 	BOOL animationFinished;
 }
 
@@ -37,7 +37,7 @@
 @property (nonatomic) BOOL hit;
 @property (nonatomic) NSInteger level;
 @property (nonatomic) BOOL fireWall;
-@property (nonatomic) BOOL destroy;
+@property (nonatomic) BOOL destroyable;
 
 @property (nonatomic) NSInteger damages;
 @property (nonatomic, retain) Position * position;
@@ -66,6 +66,6 @@
 - (void) update;
 - (BOOL) hasAnimationFinished;
 
-- (Object *) copy;
+- (Objects *) copy;
 
 @end

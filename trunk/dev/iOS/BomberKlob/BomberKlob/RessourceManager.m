@@ -8,7 +8,7 @@
 
 #import "RessourceManager.h"
 #import "XmlParser.h"
-#import "Object.h"
+#import "Objects.h"
 #import "Position.h"
 #import "Player.h"
 #import "AnimationSequence.h"
@@ -33,6 +33,7 @@ static RessourceManager * ressource = nil;
 	return nil;
 }
 
+
 +(id)alloc
 {
 	@synchronized([RessourceManager class])
@@ -45,6 +46,7 @@ static RessourceManager * ressource = nil;
 	return nil;
 }
 
+
 -(id)init {
 	self = [super init];
     
@@ -56,6 +58,15 @@ static RessourceManager * ressource = nil;
     }
 	
 	return self;
+}
+
+
+- (void)dealloc {
+    [bitmapsAnimates release];
+    [bitmapsInanimates release];
+    [bitmapsPlayer release];
+    [bitmapsBombs release];
+    [super dealloc];
 }
 
 
@@ -144,19 +155,20 @@ static RessourceManager * ressource = nil;
 	
 }
 
+
 - (void) update{
 
 	
 }
 
+
 - (void) hasAnimationFinished{
 	
 }
 
+
 - (void) destroy{
 	
 }
-
-
 
 @end

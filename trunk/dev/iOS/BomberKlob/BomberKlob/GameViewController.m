@@ -35,15 +35,13 @@
 }
 
 
-
-// Dealloc
 - (void)dealloc {
-	
 	[gameView release];
-	
+    [currentPosition release];
+    [lastPosition release];
 	[super dealloc];
-	
 }
+
 
 - (void) managementMovement{
 	

@@ -25,7 +25,7 @@
 - (id) initWithMapName:(NSString *)mapName {
 	self = [super init];
 	if (self){
-		//engine = [[Engine alloc] initWithGame:[[Game alloc] initWithMapName:mapName]];
+//		engine = [[Engine alloc] initWithGame:[[Game alloc] initWithMapName:mapName]];
 		resource = [RessourceManager sharedRessource];
 		engine = [[Engine alloc] initWithGame:[[Game alloc] init]];
 		CGRect dimension ;

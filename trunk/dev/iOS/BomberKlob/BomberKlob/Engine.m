@@ -30,7 +30,13 @@
 }
 
 
-- (BOOL) isInCollision: (Object *) object: (NSInteger) xValue: (NSInteger) yValue{
+- (void)dealloc {
+    [game release];
+    [super dealloc];
+}
+
+
+- (BOOL) isInCollision: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue{
 	
 	// If the object is a player
 	if ([[[object class] description] isEqualToString:@"Player"] ) {
@@ -211,7 +217,7 @@
 							[fire release];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Bomb"]){
-							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroy];
+							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroyable];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Undestructible"]){
 							if ([((Undestructible *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]).imageName isEqual:@"firedown"]) {
@@ -222,7 +228,7 @@
 							}
 						}
 						else {
-							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroy];
+							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroyable];
 						}
 					}
 					//UP
@@ -242,7 +248,7 @@
 							[fire release];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Bomb"]){
-							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroy];
+							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroyable];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Undestructible"]){
 							if ([((Undestructible *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]).imageName isEqual:@"fireup"]) {
@@ -253,7 +259,7 @@
 							}
 						}
 						else {
-							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroy];
+							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroyable];
 						}
 					}
 					
@@ -274,7 +280,7 @@
 							[fire release];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Bomb"]){
-							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroy];
+							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroyable];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Undestructible"]){
 							if ([((Undestructible *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]).imageName isEqual:@"fireleft"]) {
@@ -285,7 +291,7 @@
 							}
 						}
 						else {
-							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroy];
+							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroyable];
 						}
 					}
 					
@@ -306,7 +312,7 @@
 							[fire release];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Bomb"]){
-							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroy];
+							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroyable];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Undestructible"]){
 							if ([((Undestructible *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]).imageName isEqual:@"fireright"]) {
@@ -317,7 +323,7 @@
 							}
 						}
 						else {
-							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroy];
+							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroyable];
 						}
 					}
 				}

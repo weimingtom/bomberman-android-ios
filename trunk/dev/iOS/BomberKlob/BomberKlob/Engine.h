@@ -1,14 +1,6 @@
-//
-//  Engine.h
-//  BombermanIOS
-//
-//  Created by Kilian Coubo on 04/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
-@class Game, RessourceManager, Object;
+@class Game, RessourceManager, Objects;
 
 /** The `Engine` class allows to make all the calculations of the game (collisions, delay bomb explosions ... ). */
 @interface Engine : NSObject {
@@ -35,7 +27,7 @@
  
  @return `YES` if the object is in collision, `NO` otherwise.
  */
-- (BOOL) isInCollision: (Object *) player: (NSInteger) xValue: (NSInteger) yValue;
+- (BOOL) isInCollision: (Objects *) player: (NSInteger) xValue: (NSInteger) yValue;
 
 ///-------------------------------------------
 /// @name Allows you to Manage the Movements of Players

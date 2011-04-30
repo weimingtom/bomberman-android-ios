@@ -13,6 +13,7 @@
 
 @synthesize x, y;
 
+
 - (id) init {
 	self = [super init];
 	
@@ -22,6 +23,7 @@
     
 	return self;
 }
+
 
 - (id) initWithPosition:(Position *) position{
 	self = [super init];
@@ -40,6 +42,11 @@
 		y = aY;
 	}
 	return self;
+}
+
+
+- (void)dealloc {
+    [super dealloc];
 }
 
 

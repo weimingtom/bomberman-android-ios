@@ -11,4 +11,9 @@
 
 @implementation HumanPlayer
 
+- (void)dealloc {
+    [actions release];
+    [super dealloc];
+}
+
 @end

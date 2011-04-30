@@ -7,7 +7,7 @@
 //
 
 #import "XmlParser.h"
-#import "Object.h"
+#import "Objects.h"
 #import "Position.h"
 #import "Player.h"
 #import "AnimationSequence.h"
@@ -15,6 +15,7 @@
 #import "Destructible.h"
 #import "Player.h"
 #import "Bomb.h"
+
 @implementation XmlParser
 
 @synthesize objectsBombs,objects,objectsAnimations,objectsInanimates, objectsIdle;
@@ -26,8 +27,23 @@
 		type = typeValue;
 	
 	}
-	return self;
-	
+    
+	return self;	
+}
+
+
+- (void)dealloc {
+    [type release];
+    [currentString release];
+    [currentAnimation release];
+    [characters release];
+    [objectsAnimations release];
+    [objectsBombs release];
+    [objectsInanimates release];
+    [objectsIdle release];
+    [currentCanLoop release];
+    [currentProperty release];
+    [super dealloc];
 }
 
 
@@ -146,13 +162,13 @@
 		
 		if([elementName isEqualToString:@"destructible"] ||[elementName isEqualToString:@"undestructible"]){
 			currentProperty = [attributeDict valueForKey:@"name"];
-			Object * currentObject;
+			Objects * currentObject;
 			if ([elementName isEqualToString:@"destructible"])
 				currentObject = [[Destructible alloc] init];
 			if ([elementName isEqualToString:@"undestructible"])
 				currentObject = [[Undestructible alloc] init];
 			if ([currentProperty rangeOfString:@"fire"].location != NSNotFound)
-				currentObject.destroy = YES;
+				currentObject.destroyable = YES;
 
 			currentObject.imageName = currentProperty; 
 			currentObject.hit = [[attributeDict valueForKey:@"hit"] intValue];
@@ -175,7 +191,7 @@
 			
 		}
 		else if ([elementName isEqualToString:@"png"]) {
-			Object * currentObject = [objects objectForKey:currentProperty];
+			Objects * currentObject = [objects objectForKey:currentProperty];
 			int x = [[attributeDict valueForKey:@"x"] intValue];
 			int y = [[attributeDict valueForKey:@"y"] intValue];
 			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(x*widthOfOneCase, y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];

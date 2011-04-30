@@ -10,11 +10,19 @@
 
 
 @implementation Multiplayer
+
 - (id) initWithName:(NSString*) nameValue {
 	if([super init] == self){
 		name = nameValue;
 		adressServer = @"http://127.0.0.1/MyServletDeTueur";
 	}
+}
+
+
+- (void)dealloc {
+    [name release];
+    [adressServer release];
+    [super dealloc];
 }
 
 @end

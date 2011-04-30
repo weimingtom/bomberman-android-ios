@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Object.h"
+#import "Objects.h"
 
-@interface Undestructible : Object {
+@interface Undestructible : Objects {
     
 }
 
