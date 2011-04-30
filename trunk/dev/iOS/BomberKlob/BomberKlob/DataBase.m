@@ -61,8 +61,8 @@ static DataBase *_dataBase = nil;
 
 
 - (NSString *)dataBasePath { 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDir = [paths objectAtIndex:0];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDir = [paths objectAtIndex:0];
 //    return [documentsDir stringByAppendingPathComponent:@"dataBase.sqlite"];
     return [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"dataBase.sqlite"];
 }

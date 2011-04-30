@@ -42,6 +42,11 @@
 	return self;
 }
 
+- (void)dealloc {
+    [type release];
+    [super dealloc];
+}
+
 - (void) draw:(CGContextRef) context{
 		AnimationSequence * a = ((AnimationSequence *)[animations valueForKey:imageName]);
 		UIImage * image = [((AnimationSequence *)[animations valueForKey:imageName]).sequences objectAtIndex:currentFrame];

@@ -31,6 +31,13 @@
 }
 
 
+- (void)dealloc {
+    [sequences release];
+    [name release];
+    [super dealloc];
+}
+
+
 - (void) addImageSequence:(CGImageRef *) imageValue{
 	[sequences addObject:imageValue];
 }

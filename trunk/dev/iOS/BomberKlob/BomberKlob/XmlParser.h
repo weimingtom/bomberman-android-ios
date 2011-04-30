@@ -10,37 +10,30 @@
 
 @class Objects;
 
-@interface XmlParser : NSXMLParser {
+@interface XmlParser : NSXMLParser <NSXMLParserDelegate> {
 
-	NSString  * type;
-	NSMutableString * currentString;
-	NSMutableString * currentAnimation;
-	NSMutableString * characters;
+	NSString  *type;
+	NSMutableString *currentString;
+	NSMutableString *currentAnimation;
+	NSMutableString *characters;
 	
-	NSMutableDictionary * objectsAnimations;
-	NSMutableDictionary * objectsBombs;
-	NSMutableDictionary * objects;
-	NSMutableDictionary * objectsInanimates;
-	NSMutableDictionary * objectsIdle;
+	NSMutableDictionary *objectsAnimations;
+	NSMutableDictionary *objectsBombs;
+	NSMutableDictionary *objects;
+	NSMutableDictionary *objectsInanimates;
+	NSMutableDictionary *objectsIdle;
 
 	NSInteger currentDelayNextFrame;
-	NSMutableString * currentCanLoop;
-	NSMutableString * currentProperty;
-
+	NSMutableString *currentCanLoop;
+	NSMutableString *currentProperty;
 }
 
-@property (nonatomic, retain)NSMutableDictionary * objectsAnimations;
-@property (nonatomic, retain)NSMutableDictionary * objectsBombs;
-@property (nonatomic, retain)NSMutableDictionary * objects;
-@property (nonatomic, retain)NSMutableDictionary * objectsInanimates;
-@property (nonatomic, retain)NSMutableDictionary * objectsIdle;
-
-
-
-
+@property (nonatomic, retain) NSMutableDictionary *objectsAnimations;
+@property (nonatomic, retain) NSMutableDictionary *objectsBombs;
+@property (nonatomic, retain) NSMutableDictionary *objects;
+@property (nonatomic, retain) NSMutableDictionary *objectsInanimates;
+@property (nonatomic, retain) NSMutableDictionary *objectsIdle;
 
 - (XmlParser *) initXMLParser:(NSString *) typeValue;
-
-
 
 @end
