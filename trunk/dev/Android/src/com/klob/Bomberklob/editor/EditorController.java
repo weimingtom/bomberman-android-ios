@@ -50,12 +50,10 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 		this.editorView.update();
 	}
 
-	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
 		this.editorView.update();
 	}
 
-	@Override
 	public void surfaceCreated(SurfaceHolder arg0) {
 		if (this.editorView.getState() == Thread.State.TERMINATED) {
 			this.editorView = new EditorView(getHolder(), this);
@@ -65,8 +63,6 @@ public class EditorController extends SurfaceView implements SurfaceHolder.Callb
 		Log.i("EditorController", "Thread started");
 	}
 
-
-	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0) {
 		boolean retry = true;
 		this.editorView.setRun(false);

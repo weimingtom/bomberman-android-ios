@@ -43,7 +43,7 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 		setContentView(R.layout.newaccountonline);
 		
 		InputFilter filter = new InputFilter() {
-		    @Override
+
 			public CharSequence filter(CharSequence source, int start, int end,Spanned dest, int dstart, int dend) { 
 		        for (int i = start; i < end; i++) { 
 		             if (!Character.isLetterOrDigit(source.charAt(i)) && Character.isSpaceChar(source.charAt(i))) { 
@@ -75,7 +75,7 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 
 		this.password = (CheckBox) findViewById(R.id.NewAccountOnLineCheckBoxPassword);
 		this.password.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-			@Override 
+
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
 				if (isChecked) {
 					Model.getUser().setRememberPassword(true);
@@ -93,7 +93,7 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 
 		this.connectionAuto = (CheckBox) findViewById(R.id.NewAccountOnLineCheckBoxConnection);
 		this.connectionAuto.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-			@Override 
+
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
 				if (isChecked && !userAccountPassword1.getText().toString().equals("") && !userAccountName.getText().toString().equals("")) {
 					// FIXME encoder le mdp
@@ -136,7 +136,6 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 	}
 
 
-	@Override
 	public void onClick(View view) {
 
 		Intent intent = null;

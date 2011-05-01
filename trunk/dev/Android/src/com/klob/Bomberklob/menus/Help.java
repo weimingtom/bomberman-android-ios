@@ -56,7 +56,6 @@ public class Help extends Activity implements View.OnClickListener {
 		super.onPause();
 	}
     
-    @Override
 	public void onClick(View v) {
     	
     	Intent intent = null;

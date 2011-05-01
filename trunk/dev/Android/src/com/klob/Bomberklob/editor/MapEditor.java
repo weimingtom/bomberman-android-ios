@@ -126,7 +126,7 @@ public class MapEditor {
 			this.map.groundsOnDraw(canvas, ResourcesManager.getSize());
 		}
 		else {
-			this.map.onDraw(canvas, ResourcesManager.getSize());
+			this.map.editorOnDraw(canvas, ResourcesManager.getSize());
 			for (int i = 0 ; i < 4 ; i++) {
 				if ( this.players[i].getPosition() != null ) {
 					this.players[i].onDraw(canvas, ResourcesManager.getSize());

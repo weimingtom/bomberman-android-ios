@@ -33,7 +33,7 @@ public class NewAccountOffline extends Activity implements View.OnClickListener{
         setContentView(R.layout.newaccountoffline);
 		
 		InputFilter filter = new InputFilter() {
-		    @Override
+
 			public CharSequence filter(CharSequence source, int start, int end,Spanned dest, int dstart, int dend) {
 		    	
 		        for (int i = start; i < end; i++) { 
@@ -78,8 +78,6 @@ public class NewAccountOffline extends Activity implements View.OnClickListener{
 		super.onPause();
 	}
 	
-	
-	@Override
 	public void onClick(View view) {
 		
 		Intent intent = null;
@@ -88,7 +86,6 @@ public class NewAccountOffline extends Activity implements View.OnClickListener{
 			String pseudo = this.pseudo.getText().toString();
 			
 			if ( !pseudo.equals("") ) { // FIXME Rajouter une taille min ?
-				pseudo = pseudo.toLowerCase();
 				if ( Model.getSystem().getDatabase().existingAccount(pseudo)) {
 					Model.getSystem().getDatabase().newAccount(pseudo);
 					Model.getSystem().getDatabase().setLastUser(pseudo);

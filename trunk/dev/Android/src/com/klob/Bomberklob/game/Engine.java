@@ -1,6 +1,5 @@
 package com.klob.Bomberklob.game;
 
-import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -599,7 +598,7 @@ public class Engine {
 
 	private void updateBombs() {
 		Map map = this.single.getMap();
-		ArrayList<Objects> blocks = this.single.getBlocks(); 
+		ConcurrentHashMap<Point, Objects> animatedObjects = map.getAnimatedObjects();
 		Bomb bomb = null;
 
 		for(Entry<Point, Bomb> entry : bombs.entrySet()) {
@@ -619,7 +618,7 @@ public class Engine {
 
 				Point p = ResourcesManager.coToTile(bomb.getPosition().x, bomb.getPosition().y);
 				map.addBlock(ResourcesManager.getObjects().get("firecenter").copy(), p);
-				blocks.add(map.getBlocks()[p.x][p.y]);
+				animatedObjects.put(new Point(p.x,p.y), map.getBlocks()[p.x][p.y]);
 
 				/* UP */
 				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
@@ -638,25 +637,37 @@ public class Engine {
 							/* On affiche le feu */
 							if ( k < bomb.getPower()-1 ) {
 								map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y-k));
-								blocks.add(map.getBlocks()[p.x][p.y-k]);
+								animatedObjects.put(new Point(p.x,p.y-k), map.getBlocks()[p.x][p.y-k]);
 							}
 							else {
 								map.addBlock(ResourcesManager.getObjects().get("fireup").copy(), new Point(p.x ,p.y-k));
-								blocks.add(map.getBlocks()[p.x][p.y-k]);
+								animatedObjects.put(new Point(p.x,p.y-k), map.getBlocks()[p.x][p.y-k]);
 							}
 						}
 					}
 					/* Si il y a un block */
 					else {
-						if ( map.getBlocks()[p.x][p.y-k].isFireWall() ) {
-							if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
-								map.getBlocks()[p.x][p.y-k].destroy();
+						if ( map.getBlocks()[p.x][p.y-k].getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
+							if ( k < bomb.getPower()-1 ) {
+								map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y-k));
+								animatedObjects.put(new Point(p.x,p.y-k), map.getBlocks()[p.x][p.y-k]);
 							}
-							break;
+							else {
+								map.addBlock(ResourcesManager.getObjects().get("fireup").copy(), new Point(p.x ,p.y-k));
+								animatedObjects.put(new Point(p.x,p.y-k), map.getBlocks()[p.x][p.y-k]);
+							}
 						}
 						else {
-							if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
-								map.getBlocks()[p.x][p.y-k].destroy();
+							if ( map.getBlocks()[p.x][p.y-k].isFireWall() ) {
+								if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
+									map.getBlocks()[p.x][p.y-k].destroy();
+								}
+								break;
+							}
+							else {
+								if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
+									map.getBlocks()[p.x][p.y-k].destroy();
+								}
 							}
 						}
 					}
@@ -674,24 +685,36 @@ public class Engine {
 						else {
 							if ( k < bomb.getPower()-1 ) {
 								map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y+k));
-								blocks.add(map.getBlocks()[p.x][p.y+k]);
+								animatedObjects.put(new Point(p.x,p.y+k), map.getBlocks()[p.x][p.y+k]);
 							}
 							else {
 								map.addBlock(ResourcesManager.getObjects().get("firedown").copy(), new Point(p.x ,p.y+k));
-								blocks.add(map.getBlocks()[p.x][p.y+k]);
+								animatedObjects.put(new Point(p.x,p.y+k), map.getBlocks()[p.x][p.y+k]);
 							}
 						}
 					}
 					else {
-						if ( map.getBlocks()[p.x][p.y+k].isFireWall() ) {
-							if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
-								map.getBlocks()[p.x][p.y+k].destroy();
+						if ( map.getBlocks()[p.x][p.y+k].getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
+							if ( k < bomb.getPower()-1 ) {
+								map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y+k));
+								animatedObjects.put(new Point(p.x,p.y+k), map.getBlocks()[p.x][p.y+k]);
 							}
-							break;
+							else {
+								map.addBlock(ResourcesManager.getObjects().get("firedown").copy(), new Point(p.x ,p.y+k));
+								animatedObjects.put(new Point(p.x,p.y+k), map.getBlocks()[p.x][p.y+k]);
+							}
 						}
 						else {
-							if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
-								map.getBlocks()[p.x][p.y+k].destroy();
+							if ( map.getBlocks()[p.x][p.y+k].isFireWall() ) {
+								if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
+									map.getBlocks()[p.x][p.y+k].destroy();
+								}
+								break;
+							}
+							else {
+								if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
+									map.getBlocks()[p.x][p.y+k].destroy();
+								}
 							}
 						}
 					}
@@ -709,24 +732,36 @@ public class Engine {
 						else {
 							if ( k < bomb.getPower()-1 ) {
 								map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x-k ,p.y));
-								blocks.add(map.getBlocks()[p.x-k][p.y]);
+								animatedObjects.put(new Point(p.x-k,p.y), map.getBlocks()[p.x-k][p.y]);
 							}
 							else {
 								map.addBlock(ResourcesManager.getObjects().get("fireleft").copy(), new Point(p.x-k ,p.y));
-								blocks.add(map.getBlocks()[p.x-k][p.y]);
+								animatedObjects.put(new Point(p.x-k,p.y), map.getBlocks()[p.x-k][p.y]);
 							}
 						}
 					}
 					else {
-						if ( map.getBlocks()[p.x-k][p.y].isFireWall() ) {
-							if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
-								map.getBlocks()[p.x-k][p.y].destroy();
+						if ( map.getBlocks()[p.x-k][p.y].getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
+							if ( k < bomb.getPower()-1 ) {
+								map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x-k ,p.y));
+								animatedObjects.put(new Point(p.x-k,p.y), map.getBlocks()[p.x-k][p.y]);
 							}
-							break;
+							else {
+								map.addBlock(ResourcesManager.getObjects().get("fireleft").copy(), new Point(p.x-k ,p.y));
+								animatedObjects.put(new Point(p.x-k,p.y), map.getBlocks()[p.x-k][p.y]);
+							}
 						}
-						else {
-							if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
-								map.getBlocks()[p.x-k][p.y].destroy();
+						else {							
+							if ( map.getBlocks()[p.x-k][p.y].isFireWall() ) {
+								if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
+									map.getBlocks()[p.x-k][p.y].destroy();
+								}
+								break;
+							}
+							else {
+								if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
+									map.getBlocks()[p.x-k][p.y].destroy();
+								}
 							}
 						}
 					}
@@ -744,24 +779,36 @@ public class Engine {
 						else {
 							if ( k < bomb.getPower()-1 ) {
 								map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x+k ,p.y));
-								blocks.add(map.getBlocks()[p.x+k][p.y]);
+								animatedObjects.put(new Point(p.x+k,p.y), map.getBlocks()[p.x+k][p.y]);
 							}
 							else {
 								map.addBlock(ResourcesManager.getObjects().get("fireright").copy(), new Point(p.x+k ,p.y));
-								blocks.add(map.getBlocks()[p.x+k][p.y]);
+								animatedObjects.put(new Point(p.x+k,p.y), map.getBlocks()[p.x+k][p.y]);
 							}
 						}
 					}
 					else {
-						if ( map.getBlocks()[p.x+k][p.y].isFireWall() ) {
-							if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
-								map.getBlocks()[p.x+k][p.y].destroy();
+						if ( map.getBlocks()[p.x+k][p.y].getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
+							if ( k < bomb.getPower()-1 ) {
+								map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x+k ,p.y));
+								animatedObjects.put(new Point(p.x+k,p.y), map.getBlocks()[p.x+k][p.y]);
 							}
-							break;
+							else {
+								map.addBlock(ResourcesManager.getObjects().get("fireright").copy(), new Point(p.x+k ,p.y));
+								animatedObjects.put(new Point(p.x+k,p.y), map.getBlocks()[p.x+k][p.y]);
+							}
 						}
 						else {
-							if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
-								map.getBlocks()[p.x+k][p.y].destroy();
+							if ( map.getBlocks()[p.x+k][p.y].isFireWall() ) {
+								if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
+									map.getBlocks()[p.x+k][p.y].destroy();
+								}
+								break;
+							}
+							else {
+								if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
+									map.getBlocks()[p.x+k][p.y].destroy();
+								}
 							}
 						}
 					}

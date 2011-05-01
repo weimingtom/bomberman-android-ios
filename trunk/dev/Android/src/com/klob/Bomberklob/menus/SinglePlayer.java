@@ -75,7 +75,7 @@ public class SinglePlayer extends Activity implements View.OnClickListener{
 		this.gallery = (Gallery) findViewById(R.id.galleryz);
 		this.gallery.setAdapter(new ImageAdapter(getApplicationContext(), mapBitmap));
 		this.gallery.setOnItemClickListener(new OnItemClickListener() {
-			@Override
+
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 				mapName.setText(maps.get(position).getName());
 			}
@@ -120,20 +120,16 @@ public class SinglePlayer extends Activity implements View.OnClickListener{
 			array.recycle();
 		}
 
-		@Override
 		public int getCount() {
 			return this.m_images.length;
 		}
-		@Override
 		public Object getItem(int position) {
 			return position;
 		}
-		@Override
 		public long getItemId(int position) {
 			return position;
 		}
 
-		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ImageView img = new ImageView(m_context);
 			img.setImageBitmap(BitmapFactory.decodeFile(m_images[position]));
@@ -144,7 +140,6 @@ public class SinglePlayer extends Activity implements View.OnClickListener{
 		}
 	}
 
-	@Override
 	public void onClick(View view) {
 
 		Intent intent = null;

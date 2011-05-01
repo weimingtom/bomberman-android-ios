@@ -57,19 +57,6 @@ public class Single extends Game {
 		for (int i = 1 ; i < this.players.length ; i++ ) {
 			this.players[i] = null;
 		}
-		this.blocks.clear();
-		
-		/* Liste des blocks destructibles remise à l'état initial */
-		for (int i = 0; i < this.map.getGrounds().length ; i++) {
-			for (int j = 0; j < this.map.getGrounds()[0].length ; j++) {
-				if ( this.map.getBlocks()[i][j] != null) {
-					if (this.map.getBlocks()[i][j].isDestructible()) {
-						blocks.add(this.map.getBlocks()[i][j]);
-					}
-				}
-			}
-		}
-		
 		
 		/* Nouvelle initialisation de la partie */
 		initGame();
@@ -78,5 +65,10 @@ public class Single extends Game {
 	@Override
 	public void pushBomb(Player player) {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void update() {
+		this.map.update();
 	}
 }

@@ -40,22 +40,22 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private GameControllerSingle gameControllerSingle;
 
 	private ObjectsGallery bombsGallery;
-	private LinearLayout singlePlayerControllerLayout, singlePlayerLinearLayoutMenu, singlePlayerLinearLayoutStart, singlePlayerLinearLayoutBonus1, singlePlayerLinearLayoutBonus2, singlePlayerLinearLayoutBonus3, singlePlayerLinearLayoutBonus4;
+	private LinearLayout singlePlayerControllerLayout, singlePlayerLinearLayoutMenu, singlePlayerLinearLayoutStart, singlePlayerLinearLayoutBonus1, singlePlayerLinearLayoutBonus2, singlePlayerLinearLayoutBonus3, singlePlayerLinearLayoutBonus4, singlePlayerLinearLayoutEnd;
 	private RelativeLayout singlePlayerRelativeLayoutObjectsGallery, singlePlayerRelativeLayoutMenu, singlePlayerRelativeLayoutGlobal;
 	private FrameLayout singlePlayerFrameLayoutGame, singlePlayerFrameLayoutBombsGallery;
 
 	private Bundle bundle;
 
-	private Button menu, options, quit, restart, resume;
+	private Button menu, options, quit, quit2, restart, restart2, resume;
 	private ImageButton bomb;
-	private ImageView singlePlayerLinearLayoutStartImage;
+	private ImageView singlePlayerLinearLayoutStartImage , singlePlayerLinearLayoutEndImageView;
 
 	private int menuSize = 50;
 	
 	private ImageView[] imageView = new ImageView[4];
 
 	private int timeS;
-	private int timeM;
+	private int timeM = -1;
 	private boolean timeBoolean = true;
 	private Thread timeThread;	
 	private TextView timeTextView, bombpower, bombnumber, playerspeed, playerlife;
@@ -86,7 +86,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.singlePlayerControllerLayout = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutEditorController);
 		this.singlePlayerControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
 		this.singlePlayerControllerLayout.setOnTouchListener(new OnTouchListener() {
-			@Override
+
 			public boolean onTouch(View arg0, MotionEvent arg1) {
 				gameControllerSingle.onTouchEvent(arg1);
 				return true;
@@ -112,6 +112,12 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 
 		this.restart = (Button) findViewById(R.id.SinglePlayerMenuRestart);
 		this.restart.setOnClickListener(this);
+		
+		this.quit2 = (Button) findViewById(R.id.SinglePlayerLinearLayoutEndButtonLeave);
+		this.quit2.setOnClickListener(this);
+
+		this.restart2 = (Button) findViewById(R.id.SinglePlayerLinearLayoutEndButtonRestart);
+		this.restart2.setOnClickListener(this);
 		
 		
 		this.singlePlayerLinearLayoutBonus1 = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutBonus1);
@@ -164,8 +170,8 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 					else {
 						timeTextView.setText(timeM+":0"+timeS);
 					}
-					if ( timeM == 0 ) {
-						//FIXME FIN DU JEU
+					if ( timeM == 0 && timeS == 0 ) {
+						draw();
 					}
 				}
 				else if ( msg.what == 1 ) {
@@ -181,20 +187,28 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 					mp.start();
 					resumeGame();
 				}
-				else if ( msg.what == 4 ) {
-					//FIXME BEUUUUUUUUUUUUUUUUUUUURK =D
+				else if ( msg.what == 4 ) { 
 					updatePlayersStats();					
+				}
+				else if ( msg.what == 5 ) { //Lose
+					lose();					
+				}
+				else if ( msg.what == 6 ) { //Win
+					win();				
 				}
 			}
 		};
 
+		this.singlePlayerLinearLayoutEnd  = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutEnd);
 		this.singlePlayerLinearLayoutMenu = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutMenu);
 		this.singlePlayerLinearLayoutStart = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutStart);
 		this.singlePlayerLinearLayoutStartImage = (ImageView) findViewById(R.id.SinglePlayerLinearLayoutStartImage);
+		this.singlePlayerLinearLayoutEndImageView = (ImageView) findViewById(R.id.SinglePlayerLinearLayoutEndImageView);
 
 		this.singlePlayerRelativeLayoutGlobal = (RelativeLayout) findViewById(R.id.SinglePlayerRelativeLayoutGlobal);
 		this.singlePlayerRelativeLayoutGlobal.removeView(findViewById(R.id.SinglePlayerLinearLayoutMenu));
 		this.singlePlayerRelativeLayoutGlobal.removeView(findViewById(R.id.SinglePlayerLinearLayoutStart));
+		this.singlePlayerRelativeLayoutGlobal.removeView(findViewById(R.id.SinglePlayerLinearLayoutEnd));
 
 		this.initGame();
 	}
@@ -227,7 +241,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutMenu);
 	} 
 
-	@Override
 	public void onClick(View arg0) {
 
 		if ( this.bomb == arg0 ) {
@@ -246,7 +259,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		else if ( arg0 == this.options) {
 
 		}
-		else if ( arg0 == this.restart) {
+		else if ( arg0 == this.restart ) {
 			mp.stop();
 			this.initGame();
 			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutMenu);
@@ -257,6 +270,18 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 			Intent intent = new Intent(SinglePlayerLayout.this, Home.class);
 			startActivity(intent);
 			this.finish();
+		}
+		else if ( arg0 == this.quit2) {
+			mp.stop();
+			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutEnd);
+			Intent intent = new Intent(SinglePlayerLayout.this, Home.class);
+			startActivity(intent);
+			this.finish();
+		}
+		else if ( arg0 == this.restart2 ) {
+			mp.stop();
+			this.initGame();
+			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutEnd);
 		}
 	}
 
@@ -387,6 +412,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	
 	public void updatePlayersStats() {
 		Player[] p = gameControllerSingle.getEngine().getSingle().getPlayers();
+		int j = 0;
 		
 		bombpower.setText(String.valueOf(p[0].getPowerExplosion()));
 		bombnumber.setText(String.valueOf(p[0].getBombNumber()));
@@ -395,17 +421,44 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		
 		for (int i = 0 ; i < p.length ; i++ ) {
 			if (p[i] != null) {
-				//FIXME Récupérer le score
 				if (!p[i].isDestructible() || p[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel())) {
 					this.imageView[i].setBackgroundDrawable(new BitmapDrawable(ResourcesManager.getBitmaps().get(p[i].getImageName()+"touched")));
 				}
 				else if (p[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
 					this.imageView[i].setBackgroundDrawable(new BitmapDrawable(ResourcesManager.getBitmaps().get(p[i].getImageName()+p[i].getCurrentAnimation())));
+					if ( i == 0 ) {
+						handler.sendMessage(handler.obtainMessage(5));
+					}
+					else {
+						j++;
+					}
 				}
 				else {
 					this.imageView[i].setBackgroundDrawable(new BitmapDrawable(ResourcesManager.getBitmaps().get(p[i].getImageName()+"idle")));
 				}
 			}
 		}
+		
+		if ( j == bundle.getInt("enemies") ) {
+			handler.sendMessage(handler.obtainMessage(6));
+		}
+	}
+	
+	private void win() {
+		pauseGame();
+		this.singlePlayerLinearLayoutEndImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.winner));
+		this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutEnd);
+	}
+	
+	private void lose() {
+		pauseGame();
+		this.singlePlayerLinearLayoutEndImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.loser));
+		this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutEnd);
+	}
+	
+	private void draw() {
+		pauseGame();
+		this.singlePlayerLinearLayoutEndImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.draw));
+		this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutEnd);
 	}
 }

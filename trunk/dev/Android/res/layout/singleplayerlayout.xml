@@ -22,7 +22,7 @@
 				android:text="@string/SinglePlayerMenuQuit"></Button>
 		</LinearLayout>
 	</LinearLayout>
-	<LinearLayout android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@color/Black" android:id="@+id/SinglePlayerLinearLayoutStart" android:gravity="center_vertical|center_horizontal">
+	<LinearLayout android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@color/Black" android:id="@+id/SinglePlayerLinearLayoutStart" android:gravity="center_vertical|center_horizontal" android:orientation="vertical">
 		<ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/ready" android:id="@+id/SinglePlayerLinearLayoutStartImage"></ImageView>
 	</LinearLayout>
 	<LinearLayout android:layout_width="fill_parent" android:orientation="vertical" android:layout_height="fill_parent" android:id="@+id/linearLayout4">
@@ -70,6 +70,13 @@
 				<ImageButton android:layout_width="wrap_content" android:id="@+id/SinglePlayerButtonBomb" android:layout_alignParentBottom="true" android:background="@drawable/bomb_button" android:layout_centerInParent="true" android:layout_height="wrap_content"></ImageButton>
 			</RelativeLayout>
 		</LinearLayout>
+	</LinearLayout>
+	<LinearLayout android:gravity="center_vertical|center_horizontal" android:id="@+id/SinglePlayerLinearLayoutEnd" android:layout_width="fill_parent" android:orientation="vertical" android:background="@color/Black" android:layout_height="fill_parent">
+		<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/linearLayout6">
+			<Button android:layout_width="wrap_content" android:text="@string/SinglePlayerMenuQuit" android:layout_height="wrap_content" android:id="@+id/SinglePlayerLinearLayoutEndButtonLeave"></Button>
+			<Button android:layout_width="wrap_content" android:text="@string/SinglePlayerMenuRestart" android:layout_height="wrap_content" android:id="@+id/SinglePlayerLinearLayoutEndButtonRestart"></Button>
+		</LinearLayout>
+		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/winner" android:id="@+id/SinglePlayerLinearLayoutEndImageView"></ImageView>
 	</LinearLayout>
 
 
