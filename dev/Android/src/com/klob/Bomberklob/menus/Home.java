@@ -60,7 +60,6 @@ public class Home extends Activity implements View.OnClickListener{
 		this.accounts.setSelection(Model.getSystem().getLastUser()-1);
 		this.accounts.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				if ( !accounts.getSelectedItem().toString().equals(Model.getUser().getPseudo()) ) {
 					Model.setUser(accounts.getSelectedItem().toString());
@@ -68,7 +67,6 @@ public class Home extends Activity implements View.OnClickListener{
 				}
 			}
 
-			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
 
 			}
@@ -104,7 +102,6 @@ public class Home extends Activity implements View.OnClickListener{
 	}
 
 
-	@Override
 	public void onClick(View v) {
 
 		Intent intent = null;

@@ -65,7 +65,7 @@ public class EditorLoader extends Activity implements View.OnClickListener {
 			this.gallery = (Gallery) findViewById(R.id.galleryz);
 			this.gallery.setAdapter(new ImageAdapter(getApplicationContext(), mapBitmap));
 			this.gallery.setOnItemClickListener(new OnItemClickListener() {
-				@Override
+
 				public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 					mapName.setText(maps.get(position).getName());
 					mapOwner.setText(maps.get(position).getOwner());
@@ -98,20 +98,19 @@ public class EditorLoader extends Activity implements View.OnClickListener {
 			array.recycle();
 		}
 
-		@Override
+
 		public int getCount() {
 			return this.m_images.size();
 		}
-		@Override
+
 		public Object getItem(int position) {
 			return position;
 		}
-		@Override
+
 		public long getItemId(int position) {
 			return position;
 		}
 
-		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ImageView img = new ImageView(m_context);
 			img.setImageBitmap(BitmapFactory.decodeFile(m_images.get(position)));
@@ -122,7 +121,6 @@ public class EditorLoader extends Activity implements View.OnClickListener {
 		}
 	}
 
-	@Override
 	public void onClick(View v) {
 		if ( this.load == v) {
 			setResult(2000, getIntent().putExtra("map", mapName.getText().toString()));

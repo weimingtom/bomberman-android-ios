@@ -67,7 +67,6 @@ public class ChangePasswordMultiplayer extends Activity implements View.OnClickL
 		super.onPause();
 	}
     
-    @Override
 	public void onClick(View v) {
 		
 		Intent intent = null;

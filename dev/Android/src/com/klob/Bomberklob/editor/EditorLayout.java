@@ -83,7 +83,6 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 			this.editorController = new EditorController(getApplicationContext(), bundle.getString("map"));
 			this.editorController.setOnTouchListener(new OnTouchListener() {
 
-				@Override
 				public boolean onTouch(View arg0, MotionEvent arg1) {
 										
 					switch (arg1.getAction()) {		
@@ -104,7 +103,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 						break;
 					case MotionEvent.ACTION_MOVE:
 						Point point2 = ResourcesManager.coToTile((int) arg1.getX(), (int) arg1.getY());
-						if ( point.x != point2.x || point.y != point2.y) {
+						if ( point2 != null && (point.x != point2.x || point.y != point2.y) ) {
 							point = point2;
 							editorController.addObjects(object.copy(), point);
 						}
@@ -129,7 +128,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 		this.mapEditorToggleButton = (ToggleButton) findViewById(R.id.MapEditorToggleButton);
 		this.mapEditorToggleButton.setChecked(true);
 		this.mapEditorToggleButton.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-			@Override 
+
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
 				if (isChecked) {
 					objectsGallery.setLevel(1);
@@ -158,7 +157,6 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 		this.objectsGallery.setLevel(1);
 		this.objectsGallery.setOnTouchListener(new OnTouchListener() {
 
-			@Override
 			public boolean onTouch(View arg0, MotionEvent arg1) {	
 				objectsGallery2.setSelectedItem(null);
 				objectsGallery2.setRectangles(new Point(-1,-1));
@@ -178,7 +176,6 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 		this.objectsGallery2.addObjects(new HumanPlayer("red", ResourcesManager.getPlayersAnimations().get("red"), PlayerAnimations.IDLE, true, 1, false, 1, 1, 1, 1, 1, 1, 1, 0));
 		this.objectsGallery2.setOnTouchListener(new OnTouchListener() {
 
-			@Override
 			public boolean onTouch(View arg0, MotionEvent arg1) {
 				objectsGallery.setSelectedItem(null);
 				objectsGallery.setRectangles(new Point(-1,-1));
@@ -233,7 +230,6 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 		super.onPause();
 	}
 
-	@Override
 	public void onClick(View arg0) {
 		if ( this.menu == arg0 ) {
 			this.menu.setClickable(false);

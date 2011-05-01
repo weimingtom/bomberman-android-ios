@@ -289,10 +289,20 @@ public class Database extends SQLiteOpenHelper{
 	
 	public boolean existingAccount(String pseudonymAccount) {
 		this.base = this.getReadableDatabase();
-		int res = this.base.rawQuery("SELECT pseudo FROM UserAccounts WHERE pseudo ='"+pseudonymAccount+"' ", null).getCount();
+		
+		Cursor cursor = this.base.rawQuery("SELECT * FROM UserAccounts", null);
+		if (cursor.moveToFirst()) {
+			do {
+				if ( cursor.getString(1).toLowerCase().equals(pseudonymAccount.toLowerCase()) )  {
+					this.close();
+					return true;
+				}
+			} while (cursor.moveToNext());
+		}
+		
 		this.close();
 		
-		return res == 0 ? true : false;
+		return false;
 	}
 	
 	public boolean existingMap(String mapName) {

@@ -12,7 +12,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.util.Log;
 import android.util.TypedValue;
@@ -223,7 +222,6 @@ public class ResourcesManager {
 						animationsequence.sequence=new ArrayList<FrameInfo>();
 						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);
 						animationsequence.sound = xpp.getAttributeValue(null, "sound");	
-						System.out.println("SOUND : " + animationname + "|" + xpp.getAttributeValue(null, "name")+ "|" + xpp.getAttributeValue(null, "sound") + "|" + animationsequence.sound);	
 					}
 					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();

@@ -191,13 +191,11 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		}
 	}
 
-	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
 		System.out.println("surfaceChanged : SurfaceHolder " + arg0.toString() + "| int " + arg1+ "| int " +arg2+ "| int " +arg3);
 		this.thread.update();
 	}
 
-	@Override
 	public void surfaceCreated(SurfaceHolder arg0) {
 		if (this.thread.getState() == Thread.State.TERMINATED) {
 			this.thread = new ObjectsGalleryThread(getHolder(), this);
@@ -207,7 +205,6 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		Log.i("ObjectsGallery", "Thread started");
 	}
 
-	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0) {
 		boolean retry = true;
 		this.thread.setRun(false);

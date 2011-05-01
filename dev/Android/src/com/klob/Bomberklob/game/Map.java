@@ -9,7 +9,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.StreamCorruptedException;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.Log;
 
@@ -29,14 +32,23 @@ public class Map implements Serializable {
 	private Point[] players;
 	private Objects[][] grounds;
 	private Objects[][] blocks;
+	
+	private transient Bitmap bm;
+	private transient ConcurrentHashMap<Point, Objects> animatedObjects;
 
 	public Map() {
 		this.players = new Point[4];
 		this.grounds = new Objects[21][15];
 		this.blocks  = new Objects[21][15];
+		this.animatedObjects = new ConcurrentHashMap<Point, Objects>();
+
 	}
 
 	/* Getteurs ------------------------------------------------------------ */
+
+	public ConcurrentHashMap<Point, Objects> getAnimatedObjects() {
+		return animatedObjects;
+	}
 
 	public String getName() {
 		return this.name;
@@ -81,9 +93,7 @@ public class Map implements Serializable {
 			if ( this.players[i] == null ) {
 				return false;
 			}
-		}
-		
-		
+		}		
 		
 		File f =  new File (ResourcesManager.getContext().getFilesDir().getAbsolutePath()+"/maps");
 		f.mkdir();
@@ -145,7 +155,27 @@ public class Map implements Serializable {
 			this.grounds = map.getGrounds();
 			this.blocks = map.getBlocks();
 			this.players = map.getPlayers();
-			this.name = map.getName();
+			this.name = map.getName();			
+
+			this.bm = Bitmap.createBitmap(ResourcesManager.getSize()*this.grounds.length, ResourcesManager.getSize()*this.grounds[0].length, Bitmap.Config.ARGB_8888);
+
+			Canvas pictureCanvas = new Canvas(this.bm);
+
+			//FIXME prendre le cas où on aurait de l'eau ou un sol animé !
+			this.groundsOnDraw(pictureCanvas, ResourcesManager.getSize());
+
+			for (int i = 0; i < this.grounds.length ; i++) {
+				for (int j = 0; j < this.grounds[0].length ; j++) {
+					if ( this.blocks[i][j] != null) {
+						if ( !this.blocks[i][j].isDestructible()) {
+							this.blocks[i][j].onDraw(pictureCanvas, ResourcesManager.getSize());
+						}
+						else {
+							animatedObjects.put(new Point(i,j), this.blocks[i][j]);
+						}
+					}
+				}
+			}
 			return true;
 		}
 		return false;
@@ -197,26 +227,22 @@ public class Map implements Serializable {
 	}
 
 	public void update() {
-		for (int i = 0; i < this.grounds.length ; i++) {
-			for (int j = 0; j < this.grounds[0].length ; j++) {
-				if ( this.grounds[i][j] != null ) {
-					this.grounds[i][j].update();
-				}
-				if ( this.blocks[i][j] != null ) {
-					if ( this.blocks[i][j].hasAnimationFinished() && this.blocks[i][j].getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel())) {
-						this.blocks[i][j] = null;
-					}
-					else {
-						this.blocks[i][j].update();
-					}
-				}
+		
+		for(Entry<Point, Objects> entry : animatedObjects.entrySet()) {
+			Objects o = animatedObjects.get(entry.getKey());
+			if (o.getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) && o.hasAnimationFinished()) {
+				this.deleteBlock(entry.getKey());
+				animatedObjects.remove(entry.getKey());
+			}
+			else {
+				o.update();
 			}
 		}
 	}
 
 	/* onDraws ------------------------------------------------------------- */
 
-	public void onDraw(Canvas canvas, int size) {
+	public void editorOnDraw(Canvas canvas, int size) {
 		for (int i = 0; i < this.grounds.length ; i++) {
 			for (int j = 0; j < this.grounds[0].length ; j++) {
 				if ( this.grounds[i][j] != null ) {
@@ -227,6 +253,14 @@ public class Map implements Serializable {
 					this.blocks[i][j].onDraw(canvas, size);
 				}
 			}
+		}
+	}
+	
+	public void gameOnDraw(Canvas canvas, int size) {
+		canvas.drawBitmap(bm, 0, 0, null);
+		
+		for(Entry<Point, Objects> entry : animatedObjects.entrySet()) {
+			animatedObjects.get(entry.getKey()).onDraw(canvas, size);
 		}
 	}
 

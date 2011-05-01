@@ -59,7 +59,7 @@ public class MultiPlayer extends Activity implements View.OnClickListener {
 		}
 		
 		InputFilter filter = new InputFilter() {
-		    @Override
+
 			public CharSequence filter(CharSequence source, int start, int end,Spanned dest, int dstart, int dend) { 
 		        for (int i = start; i < end; i++) { 
 		             if (!Character.isLetterOrDigit(source.charAt(i)) && Character.isSpaceChar(source.charAt(i))) { 
@@ -80,7 +80,7 @@ public class MultiPlayer extends Activity implements View.OnClickListener {
 		
 		this.connectionAuto = (CheckBox) findViewById(R.id.MultiPlayerGameCheckBoxConnection);
 		this.connectionAuto.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-			@Override 
+
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
 				if (isChecked && userAccountPassword.getText().toString().equals("") || userAccountName.getText().toString().equals("")) {
 					connectionAuto.setChecked(false);
@@ -118,7 +118,6 @@ public class MultiPlayer extends Activity implements View.OnClickListener {
 		super.onPause();
 	}
 	
-	@Override
 	public void onClick(View view) {
 		
 		Intent intent = null;

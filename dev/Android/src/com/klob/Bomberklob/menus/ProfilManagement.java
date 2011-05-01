@@ -53,7 +53,6 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
         this.pseudo.setText(Model.getUser().getPseudo());
         this.pseudo.setOnKeyListener(new OnKeyListener() {
         	
-            @Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                 	return true;
@@ -77,7 +76,7 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
         
         this.connectionAuto = (CheckBox) findViewById(R.id.ProfilManagementCheckBoxConnection);
 		this.connectionAuto.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-			@Override 
+
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
 				if (isChecked && !Model.getUser().getUserName().equals("") && !Model.getUser().getPassword().equals("")) {
 					Model.getUser().setConnectionAuto(true);
@@ -93,7 +92,7 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
 		
 		this.password = (CheckBox) findViewById(R.id.ProfilManagementCheckBoxPassword);
 		this.password.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-			@Override 
+
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
 				if (isChecked) {
 					Model.getUser().setRememberPassword(true);
@@ -141,7 +140,6 @@ public class ProfilManagement extends Activity implements View.OnClickListener{
 		super.onPause();
 	}
     
-    @Override
 	public void onClick(View v) {
 		
 		Intent intent = null;

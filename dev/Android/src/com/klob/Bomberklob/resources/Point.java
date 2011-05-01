@@ -53,4 +53,10 @@ public class Point extends android.graphics.Point implements Serializable{
 		
 		return false;		
 	}
+	
+	@Override
+	public String toString() {
+		
+		return "("+x+","+y+")";		
+	}
 }

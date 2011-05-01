@@ -51,12 +51,10 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 
 	/* Méthodes surchargées ------------------------------------------------ */
 
-	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
 
 	}
 
-	@Override
 	public void surfaceCreated(SurfaceHolder arg0) {
 		if (this.gameView.getState() == Thread.State.TERMINATED) {
 			this.gameView = new GameView(getHolder(), this);
@@ -67,7 +65,6 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 		Log.i("GameController", "Thread started");
 	}
 
-	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0) {
 		boolean retry = true;
 		this.gameView.setRun(false);

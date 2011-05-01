@@ -58,13 +58,13 @@ public class Options extends Activity implements View.OnClickListener{
 		this.soundVolume.setProgress(Model.getSystem().getVolume());
 		this.soundVolume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
-			@Override
+
 			public void onStopTrackingTouch(SeekBar arg0) {}
 
-			@Override
+	
 			public void onStartTrackingTouch(SeekBar arg0) {}
 
-			@Override
+
 			public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
 				Model.getSystem().setVolume(arg1);
 				Model.getSystem().getDatabase().setVolume(arg1);
@@ -79,13 +79,13 @@ public class Options extends Activity implements View.OnClickListener{
 		this.languages.setAdapter(a);
 		this.languages.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-			@Override
+
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				Model.getSystem().setLanguage(languages.getSelectedItem().toString());
 				Model.getSystem().getDatabase().setLanguage(languages.getSelectedItem().toString());
 			}
 
-			@Override
+
 			public void onNothingSelected(AdapterView<?> arg0) {}
 		});
 
@@ -98,7 +98,7 @@ public class Options extends Activity implements View.OnClickListener{
 
 		this.mute = (CheckBox) findViewById(R.id.OptionsCheckBoxVolume);
 		this.mute.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-			@Override 
+
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
 				if (isChecked) {
 					//FIXME On fait quoi ???
@@ -134,7 +134,6 @@ public class Options extends Activity implements View.OnClickListener{
 		super.onPause();
 	}
 
-	@Override
 	public void onClick(View v) {
 
 		Intent intent = null;
