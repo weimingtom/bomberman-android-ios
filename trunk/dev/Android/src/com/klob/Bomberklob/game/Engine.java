@@ -25,7 +25,9 @@ public class Engine {
 
 	private boolean bombBoolean = true;
 	private Thread bombThread;	
-	ConcurrentHashMap<Point, Bomb> bombs;
+	private ConcurrentHashMap<Point, Bomb> bombs;
+	
+	private ConcurrentHashMap<Point, Integer> zoneDangereuses;
 
 	/* Constructeur -------------------------------------------------------- */
 
@@ -35,6 +37,7 @@ public class Engine {
 		this.bombs = new ConcurrentHashMap<Point, Bomb>();
 		this.x = 0;
 		this.y = 0;
+		this.zoneDangereuses = new ConcurrentHashMap<Point, Integer>();
 	}
 
 
@@ -76,37 +79,7 @@ public class Engine {
 
 	/* Méthodes publiques -------------------------------------------------- */
 
-	public void move(PlayerAnimations playerAnimation) {
-		if ( playerAnimation == PlayerAnimations.UP) {
-			moveUp(this.single.getPlayers()[0]);
-		}
-		else if ( playerAnimation == PlayerAnimations.DOWN) {
-			moveDown(this.single.getPlayers()[0]);
-		}
-		else if ( playerAnimation == PlayerAnimations.LEFT) {
-			moveLeft(this.single.getPlayers()[0]);
-		}
-		else if ( playerAnimation == PlayerAnimations.RIGHT) {
-			moveRight(this.single.getPlayers()[0]);
-		}
-		else if ( playerAnimation == PlayerAnimations.DOWN_LEFT) {
-			downLeft(this.single.getPlayers()[0]);
-		}
-		else if ( playerAnimation == PlayerAnimations.DOWN_RIGHT) {
-			downRight(this.single.getPlayers()[0]);
-		}
-		else if ( playerAnimation == PlayerAnimations.UP_LEFT) {
-			upLeft(this.single.getPlayers()[0]);
-		}
-		else if ( playerAnimation == PlayerAnimations.UP_RIGHT) {
-			upRight(this.single.getPlayers()[0]);
-		}
-
-		if ( !this.single.getPlayers()[0].getCurrentAnimation().equals(playerAnimation.getLabel()) ) {
-			this.single.getPlayers()[0].setCurrentAnimation(playerAnimation);
-		}
-	}
-	
+		
 
 	public void pushBomb(Player player) {
 
@@ -115,10 +88,86 @@ public class Engine {
 
 			if ( this.bombs.get(p) == null ) {
 				if ( player.getBombNumber() > 0 ) {
-					Bomb b = new Bomb(player.getBombSelected(), ResourcesManager.getBombsAnimations().get(player.getBombSelected()), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, player);
-					b.setPosition(ResourcesManager.tileToCo(p.x, p.y));
-					b.playCurrentAnimationSound();
-					this.bombs.put(p, b);
+					Bomb bomb = new Bomb(player.getBombSelected(), ResourcesManager.getBombsAnimations().get(player.getBombSelected()), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, player);
+					
+					Map map = this.single.getMap();
+					this.zoneDangereuses.put(p,1);
+					
+					/* UP */
+					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
+						if ( this.bombs.get(new Point(p.x, p.y-k)) != null ) {
+							break;
+						}
+						else if ( map.getBlocks()[p.x][p.y-k] == null ) {
+							if ( map.getGrounds()[p.x][p.y-k].isFireWall() ) {
+								break;
+							}
+							else {
+								this.zoneDangereuses.put(new Point(p.x, p.y-k),1);
+							}
+						}
+						else {
+							break;
+						}
+					}
+
+					/* DOWN */
+					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
+						if ( this.bombs.get(new Point(p.x, p.y+k)) != null ) {
+							break;
+						}
+						else if ( map.getBlocks()[p.x][p.y+k] == null ) {
+							if ( map.getGrounds()[p.x][p.y+k].isFireWall() ) {
+								break;
+							}
+							else {
+								this.zoneDangereuses.put(new Point(p.x, p.y+k),1);
+							}
+						}
+						else {
+							break;
+						}
+					}
+
+					/* LEFT */
+					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
+						if ( this.bombs.get(new Point(p.x-k, p.y)) != null ) {
+							break;
+						}
+						else if ( map.getBlocks()[p.x-k][p.y] == null ) {
+							if ( map.getGrounds()[p.x-k][p.y].isFireWall() ) {
+								break;
+							}
+							else {
+								this.zoneDangereuses.put(new Point(p.x-k, p.y),1);
+							}
+						}
+						else {
+							break;
+						}
+					}
+
+					/* RIGHT */
+					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
+						if ( this.bombs.get(new Point(p.x+k, p.y)) != null ) {
+							break;
+						}
+						else if ( map.getBlocks()[p.x+k][p.y] == null ) {
+							if ( map.getGrounds()[p.x+k][p.y].isFireWall() ) {
+								break;
+							}
+							else {
+								this.zoneDangereuses.put(new Point(p.x+k, p.y),1);
+							}
+						}
+						else {
+							break;
+						}
+					}
+					
+					bomb.setPosition(ResourcesManager.tileToCo(p.x, p.y));
+					bomb.playCurrentAnimationSound();
+					this.bombs.put(p, bomb);
 					try {
 						player.setBombNumber(player.getBombNumber()-1);
 					} catch (BombPowerException e) {
@@ -144,7 +193,16 @@ public class Engine {
 
 		/* Bombes -------------------------------------------------- */
 
-		this.updateBombs();				
+		this.updateBombs();			
+		
+		/* Zones dangereuses --------------------------------------- */
+
+		for(Entry<Point, Integer> entry : zoneDangereuses.entrySet()) {
+			Point key = entry.getKey();
+			if ( map.getBlocks()[key.x][key.y] == null ) {
+				zoneDangereuses.put(key,0);
+			}
+		}
 
 		/* Joueurs ------------------------------------------------- */
 
@@ -158,7 +216,8 @@ public class Engine {
 						/* On met joueur à null ce qui stopera le thread d'écoute */
 						players[i].setPosition(null);
 					}
-					else {					
+					else {			
+						
 						/* Si le joueur vient de se faire toucher */
 						if ( players[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) ) {
 							/* Si l'animation est finie */
@@ -175,6 +234,18 @@ public class Engine {
 							Point point3 = ResourcesManager.coToTile(point.x+ResourcesManager.getSize()-1,point.y+ResourcesManager.getSize()-1);
 							Point point4 = ResourcesManager.coToTile(point.x,point.y+ResourcesManager.getSize()-1);
 
+							/* IA */
+							if ( i != 0 ) {
+								/* Defensif (On est dans une zone dangereuse) */
+								if ( (zoneDangereuses.get(point1) == Integer.valueOf(1)) || (zoneDangereuses.get(point2) == Integer.valueOf(1)) || (zoneDangereuses.get(point3) == Integer.valueOf(1)) || (zoneDangereuses.get(point4) == Integer.valueOf(1))) {
+									
+								}
+								/* Offensif */
+								else {
+									players[i].setCurrentAnimation(PlayerAnimations.UP);
+								}
+							}
+							
 							if ( (map.getBlocks()[point1.x][point1.y] != null && map.getBlocks()[point1.x][point1.y].getDamage() != 0) || (map.getBlocks()[point2.x][point2.y] != null && map.getBlocks()[point2.x][point2.y].getDamage() != 0) ||(map.getBlocks()[point3.x][point3.y] != null && map.getBlocks()[point3.x][point3.y].getDamage() != 0) || (map.getBlocks()[point4.x][point4.y] != null && map.getBlocks()[point4.x][point4.y].getDamage() != 0)) {
 								players[i].decreaseLife();
 								if ( players[i].getLife() == 0 ) {
@@ -195,13 +266,12 @@ public class Engine {
 								}
 							}
 						}
+						
+						
 						/*TODO  Vérifier tapis roulant */
+						move(players[i]);
 						players[i].update();
 
-						/* IA */
-						if ( i != 0 ) {
-							
-						}
 					}
 				}
 
@@ -222,6 +292,33 @@ public class Engine {
 	}
 	
 	/* Méthodes privées ---------------------------------------------------- */
+	
+	private void move(Player player) {
+		if ( player.getCurrentAnimation().equals(PlayerAnimations.UP.getLabel())) {
+			moveUp(player);
+		}
+		else if ( player.getCurrentAnimation().equals(PlayerAnimations.DOWN.getLabel())) {
+			moveDown(player);
+		}
+		else if ( player.getCurrentAnimation().equals(PlayerAnimations.LEFT.getLabel())) {
+			moveLeft(player);
+		}
+		else if ( player.getCurrentAnimation().equals(PlayerAnimations.RIGHT.getLabel())) {
+			moveRight(player);
+		}
+		else if ( player.getCurrentAnimation().equals(PlayerAnimations.DOWN_LEFT.getLabel())) {
+			downLeft(player);
+		}
+		else if ( player.getCurrentAnimation().equals(PlayerAnimations.DOWN_RIGHT.getLabel())) {
+			downRight(player);
+		}
+		else if ( player.getCurrentAnimation().equals(PlayerAnimations.UP_LEFT.getLabel())) {
+			upLeft(player);
+		}
+		else if ( player.getCurrentAnimation().equals(PlayerAnimations.UP_RIGHT.getLabel())) {
+			upRight(player);
+		}
+	}
 
 	private void moveUp(Player player) {
 
@@ -594,7 +691,6 @@ public class Engine {
 		moveRight(player);
 		moveDown(player);
 	}
-
 
 	private void updateBombs() {
 		Map map = this.single.getMap();

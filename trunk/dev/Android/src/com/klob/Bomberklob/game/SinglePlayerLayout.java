@@ -346,7 +346,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 			this.bombsGallery.setLevel(1);
 			this.bombsGallery.addObjects(new Bomb("normal", ResourcesManager.getBombsAnimations().get("normal"), ObjectsAnimations.IDLE, true, 1, false, 1, 1, null));
 			this.bombsGallery.setSelectedItem("normal");
-			this.bombsGallery.setRectangles(new Point(0,0));
 			this.bombsGallery.update();
 			this.singlePlayerFrameLayoutBombsGallery.addView(this.bombsGallery);
 
@@ -405,7 +404,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.bomb.setClickable(false);
 		this.menu.setClickable(false);
 		this.setTimeThreadRunning(false);
-		//FIXME Stopper IA
 	}
 
 	public void resumeGame() {
@@ -414,7 +412,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.bomb.setClickable(true);
 		this.menu.setClickable(true);
 		this.setTimeThreadRunning(true);
-		//FIXME Lancer IA
 	}
 	
 	public void updatePlayersStats() {

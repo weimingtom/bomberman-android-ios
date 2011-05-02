@@ -56,10 +56,13 @@ public class GameControllerSingle extends GameController {
 
 	@Override
 	public void update() {
-		if ( !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
-			engine.move(animation);
+		if ( !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(animation.getLabel() ) ) {
+			engine.getSingle().getPlayers()[0].setCurrentAnimation(animation);
 		}
-		this.engine.update();
+		
+		if ( this.isEnabled() ) {
+			this.engine.update();
+		}
 	}
 
 	@Override
