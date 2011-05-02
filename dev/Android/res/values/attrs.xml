@@ -4,7 +4,7 @@
         <attr name="android:galleryItemBackground" />
     </declare-styleable>
     <color name="White">#FFFFFF</color>
-    <color name="Gray">#808080</color>
+    <color name="Gray">#8c8a8c</color>
     <color name="Black">#6000</color>
     <color name="Brown">#884422</color>
 </resources>

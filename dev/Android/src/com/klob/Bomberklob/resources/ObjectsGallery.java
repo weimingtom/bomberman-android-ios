@@ -96,7 +96,33 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	/* Setters ------------------------------------------------------------- */
 
 	public void setSelectedItem(String selectedItem) {
-		this.selectedItem = selectedItem;
+		
+		if (this.level == 0 ) {
+			for(int i = 0 ; i < this.grounds.size() ; i++) {
+				if ( this.grounds.get(i).getImageName().equals(selectedItem) ) {
+					if ( this.vertical ) {
+						setRectangles(new Point(0, i));
+					}
+					else {
+						setRectangles(new Point(i, 0));
+					}
+					this.selectedItem = selectedItem;
+				}
+			}
+		}
+		else {
+			for(int i = 0 ; i < this.blocks.size() ; i++) {
+				if ( this.blocks.get(i).getImageName().equals(selectedItem) ) {
+					if ( this.vertical ) {
+						setRectangles(new Point(0, i));
+					}
+					else {
+						setRectangles(new Point(i, 0));
+					}
+					this.selectedItem = selectedItem;
+				}
+			}
+		}
 	}
 
 	public void setLevel(int level) {
@@ -198,7 +224,6 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	}
 
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
-		System.out.println("surfaceChanged : SurfaceHolder " + arg0.toString() + "| int " + arg1+ "| int " +arg2+ "| int " +arg3);
 		this.thread.update();
 	}
 
