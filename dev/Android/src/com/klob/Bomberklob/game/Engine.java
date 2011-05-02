@@ -26,8 +26,6 @@ public class Engine {
 	private boolean bombBoolean = true;
 	private Thread bombThread;	
 	private ConcurrentHashMap<Point, Bomb> bombs;
-	
-	private ConcurrentHashMap<Point, Integer> zoneDangereuses;
 
 	/* Constructeur -------------------------------------------------------- */
 
@@ -37,7 +35,6 @@ public class Engine {
 		this.bombs = new ConcurrentHashMap<Point, Bomb>();
 		this.x = 0;
 		this.y = 0;
-		this.zoneDangereuses = new ConcurrentHashMap<Point, Integer>();
 	}
 
 
@@ -77,9 +74,7 @@ public class Engine {
 		}
 	}
 
-	/* Méthodes publiques -------------------------------------------------- */
-
-		
+	/* Méthodes publiques -------------------------------------------------- */		
 
 	public void pushBomb(Player player) {
 
@@ -91,7 +86,8 @@ public class Engine {
 					Bomb bomb = new Bomb(player.getBombSelected(), ResourcesManager.getBombsAnimations().get(player.getBombSelected()), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, player);
 					
 					Map map = this.single.getMap();
-					this.zoneDangereuses.put(p,1);
+					ConcurrentHashMap<Point, Integer> zoneDangereuses = map.getZoneDangereuses();
+					zoneDangereuses.put(p,1);
 					
 					/* UP */
 					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
@@ -103,7 +99,7 @@ public class Engine {
 								break;
 							}
 							else {
-								this.zoneDangereuses.put(new Point(p.x, p.y-k),1);
+								zoneDangereuses.put(new Point(p.x, p.y-k),1);
 							}
 						}
 						else {
@@ -121,7 +117,7 @@ public class Engine {
 								break;
 							}
 							else {
-								this.zoneDangereuses.put(new Point(p.x, p.y+k),1);
+								zoneDangereuses.put(new Point(p.x, p.y+k),1);
 							}
 						}
 						else {
@@ -139,7 +135,7 @@ public class Engine {
 								break;
 							}
 							else {
-								this.zoneDangereuses.put(new Point(p.x-k, p.y),1);
+								zoneDangereuses.put(new Point(p.x-k, p.y),1);
 							}
 						}
 						else {
@@ -157,7 +153,7 @@ public class Engine {
 								break;
 							}
 							else {
-								this.zoneDangereuses.put(new Point(p.x+k, p.y),1);
+								zoneDangereuses.put(new Point(p.x+k, p.y),1);
 							}
 						}
 						else {
@@ -190,19 +186,11 @@ public class Engine {
 	public void update() {
 		Player[] players = this.single.getPlayers();
 		Map map = this.single.getMap();
+		ConcurrentHashMap<Point, Integer> zoneDangereuses = map.getZoneDangereuses();
 
 		/* Bombes -------------------------------------------------- */
 
 		this.updateBombs();			
-		
-		/* Zones dangereuses --------------------------------------- */
-
-		for(Entry<Point, Integer> entry : zoneDangereuses.entrySet()) {
-			Point key = entry.getKey();
-			if ( map.getBlocks()[key.x][key.y] == null ) {
-				zoneDangereuses.put(key,0);
-			}
-		}
 
 		/* Joueurs ------------------------------------------------- */
 
@@ -242,7 +230,7 @@ public class Engine {
 								}
 								/* Offensif */
 								else {
-									players[i].setCurrentAnimation(PlayerAnimations.UP);
+									
 								}
 							}
 							
