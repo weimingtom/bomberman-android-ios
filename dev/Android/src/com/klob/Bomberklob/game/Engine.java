@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.util.Log;
 
 import com.klob.Bomberklob.objects.Bomb;
+import com.klob.Bomberklob.objects.BotPlayer;
 import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.ObjectsAnimations;
 import com.klob.Bomberklob.objects.Player;
@@ -223,14 +224,91 @@ public class Engine {
 							Point point4 = ResourcesManager.coToTile(point.x,point.y+ResourcesManager.getSize()-1);
 
 							/* IA */
-							if ( i != 0 ) {
-								/* Defensif (On est dans une zone dangereuse) */
-								if ( (zoneDangereuses.get(point1) == Integer.valueOf(1)) || (zoneDangereuses.get(point2) == Integer.valueOf(1)) || (zoneDangereuses.get(point3) == Integer.valueOf(1)) || (zoneDangereuses.get(point4) == Integer.valueOf(1))) {
-									
+							if ( i != 0 && !players[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) && !players[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel()) ) {
+								/*Si le bot n'a pas d'objectif*/
+								if ( ((BotPlayer) players[i]).getObjectif() == null ) {
+									/* Defensif (On est dans une zone dangereuse) */
+									if ( (zoneDangereuses.get(point1) == Integer.valueOf(1)) || (zoneDangereuses.get(point2) == Integer.valueOf(1)) || (zoneDangereuses.get(point3) == Integer.valueOf(1)) || (zoneDangereuses.get(point4) == Integer.valueOf(1))) {
+										((BotPlayer) players[i]).setObjectif(new Point((int)(Math.random() * (20-1)) + 1,(int)(Math.random() * (14-1)) + 1));
+									}
+									/* Offensif */
+									else {
+										
+									}
 								}
-								/* Offensif */
 								else {
+									Point objectif = ((BotPlayer) players[i]).getObjectif();
+									String animation = players[i].getCurrentAnimation();
 									
+									/* Si on a atteind l'objectif */
+									if ( point1.x == objectif.x && point1.y == objectif.y ) {
+										((BotPlayer) players[i]).setObjectif(null);
+										if ( animation.equals(PlayerAnimations.RIGHT.getLabel())) {
+											players[i].setCurrentAnimation(PlayerAnimations.STOP_RIGHT);
+										}
+										else if ( animation.equals(PlayerAnimations.LEFT.getLabel())) {
+											players[i].setCurrentAnimation(PlayerAnimations.STOP_LEFT);
+										}
+										else if ( animation.equals(PlayerAnimations.UP.getLabel())) {
+											players[i].setCurrentAnimation(PlayerAnimations.STOP_UP);
+										}
+										else if ( animation.equals(PlayerAnimations.DOWN.getLabel())) {
+											players[i].setCurrentAnimation(PlayerAnimations.STOP_DOWN);
+										}
+										else if ( animation.equals(PlayerAnimations.DOWN_RIGHT.getLabel()) ) {
+											players[i].setCurrentAnimation(PlayerAnimations.STOP_DOWN_RIGHT);
+										}
+										else if ( animation.equals(PlayerAnimations.DOWN_LEFT.getLabel()) ) {
+											players[i].setCurrentAnimation(PlayerAnimations.STOP_DOWN_LEFT);
+										}
+										else if ( animation.equals(PlayerAnimations.UP_RIGHT.getLabel()) ) {
+											players[i].setCurrentAnimation(PlayerAnimations.STOP_UP_RIGHT);
+										}
+										else if ( animation.equals(PlayerAnimations.UP_LEFT.getLabel()) ) {
+											players[i].setCurrentAnimation(PlayerAnimations.STOP_UP_LEFT);
+										}
+									}
+									
+									if ( point1.x < objectif.x && point1.y < objectif.y ) {
+										if ( !animation.equals(PlayerAnimations.DOWN_RIGHT.getLabel())) {
+											players[i].setCurrentAnimation(PlayerAnimations.DOWN_RIGHT);
+										}										
+									}
+									else if ( point1.x > objectif.x && point1.y < objectif.y ) {
+										if ( !animation.equals(PlayerAnimations.DOWN_LEFT.getLabel())) {
+											players[i].setCurrentAnimation(PlayerAnimations.DOWN_LEFT);
+										}										
+									}
+									else if ( point1.x > objectif.x && point1.y > objectif.y ) {
+										if ( !animation.equals(PlayerAnimations.UP_LEFT.getLabel())) {
+											players[i].setCurrentAnimation(PlayerAnimations.UP_LEFT);
+										}										
+									}
+									else if ( point1.x < objectif.x && point1.y > objectif.y ) {
+										if ( !animation.equals(PlayerAnimations.UP_RIGHT.getLabel())) {
+											players[i].setCurrentAnimation(PlayerAnimations.UP_RIGHT);
+										}										
+									}
+									else if ( point1.x < objectif.x ) {
+										if ( !animation.equals(PlayerAnimations.RIGHT.getLabel())) {
+											players[i].setCurrentAnimation(PlayerAnimations.RIGHT);
+										}										
+									}
+									else if ( point1.x > objectif.x  ) {
+										if ( !animation.equals(PlayerAnimations.LEFT.getLabel())) {
+											players[i].setCurrentAnimation(PlayerAnimations.LEFT);
+										}										
+									}
+									else if ( point1.y > objectif.y ) {
+										if ( !animation.equals(PlayerAnimations.UP.getLabel())) {
+											players[i].setCurrentAnimation(PlayerAnimations.UP);
+										}										
+									}
+									else if ( point1.y < objectif.y ) {
+										if ( !animation.equals(PlayerAnimations.DOWN.getLabel())) {
+											players[i].setCurrentAnimation(PlayerAnimations.DOWN);
+										}										
+									}
 								}
 							}
 							
