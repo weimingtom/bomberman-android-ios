@@ -1,19 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:id="@+id/relativeLayout1"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/background">
-    <RelativeLayout android:layout_width="fill_parent" android:id="@+id/relativeLayout2" android:layout_height="wrap_content">
-        <Button android:layout_width="wrap_content" android:layout_alignParentLeft="true" android:layout_height="wrap_content" android:layout_centerInParent="true" android:text="@string/ButtonCancel" android:id="@+id/EditorLoaderButtonCancel"></Button>
-        <ImageView android:src="@drawable/gamename" android:layout_width="wrap_content" android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_centerInParent="true"></ImageView>
-        <Button android:layout_width="wrap_content" android:layout_alignParentRight="true" android:layout_height="wrap_content" android:layout_centerInParent="true" android:text="@string/ButtonValidate" android:id="@+id/EditorLoaderButtonLoad"></Button>
-    </RelativeLayout>
-	<LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content"
-		android:layout_centerInParent="true" android:layout_alignParentLeft="false" android:orientation="vertical" android:gravity="center_horizontal" android:layout_width="fill_parent">
-		
+	xmlns:android="http://schemas.android.com/apk/res/android" android:background="@color/Gray">
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:id="@+id/linearLayout6">
+		<RelativeLayout android:id="@+id/relativeLayout3"
+			android:layout_width="fill_parent" android:background="@drawable/menutoolbarbackgroundxml"
+			android:layout_height="50dip">
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:id="@+id/textView5"
+				android:textSize="20dip" android:textColor="@color/White"
+				android:layout_centerInParent="true" android:text="@string/EditorLoaderMenu"></TextView>
+			<Button android:layout_width="wrap_content"
+				android:layout_alignParentLeft="true" android:layout_height="wrap_content"
+				android:layout_centerInParent="true" android:text="@string/ButtonCancel"
+				android:id="@+id/EditorLoaderButtonCancel"></Button>
+
+			<Button android:layout_width="wrap_content"
+				android:layout_alignParentRight="true" android:layout_height="wrap_content"
+				android:layout_centerInParent="true" android:text="@string/ButtonValidate"
+				android:id="@+id/EditorLoaderButtonLoad"></Button>
+
+
+		</RelativeLayout>
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/linearLayout1"
+		android:layout_height="wrap_content" android:layout_centerInParent="true"
+		android:layout_alignParentLeft="false" android:orientation="vertical"
+		android:gravity="center_horizontal" android:layout_width="fill_parent">
+
 		<Gallery android:id="@+id/galleryz" android:layout_height="fill_parent"
-				android:layout_width="fill_parent"></Gallery>
-		<TextView android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/EditorLoaderTextViewMapName"></TextView>
-		<TextView android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/EditorLoaderTextViewMapOwner"></TextView>
-		
-		</LinearLayout>
+			android:layout_width="fill_parent"></Gallery>
+		<TextView android:text="TextView" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:id="@+id/EditorLoaderTextViewMapName"></TextView>
+		<TextView android:text="TextView" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:id="@+id/EditorLoaderTextViewMapOwner"></TextView>
+
+	</LinearLayout>
 </RelativeLayout>

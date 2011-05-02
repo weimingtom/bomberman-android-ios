@@ -34,15 +34,15 @@ public class Editor extends Activity implements View.OnClickListener {
 
         setContentView(R.layout.mapselector);
         
-        this.mapName = (EditText) findViewById(R.id.CreateMapEditTextMapName);
+        this.mapName = (EditText) findViewById(R.id.MapSelectorEditTextMapName);
 		
-		this.load = (Button) findViewById(R.id.CreateMapButtonLoad);
+		this.load = (Button) findViewById(R.id.MapSelectorButtonLoad);
 		this.load.setOnClickListener(this);
 		
-		this.cancel = (Button) findViewById(R.id.CreateMapButtonCancel);
+		this.cancel = (Button) findViewById(R.id.MapSelectorButtonCancel);
 		this.cancel.setOnClickListener(this);
 		
-		this.validate = (Button) findViewById(R.id.CreateMapButtonValidate);
+		this.validate = (Button) findViewById(R.id.MapSelectorButtonValidate);
 		this.validate.setOnClickListener(this);
 
     }
@@ -84,7 +84,7 @@ public class Editor extends Activity implements View.OnClickListener {
 				intent.putExtra("map", name);
 			}
 			else {
-				Toast.makeText(Editor.this, R.string.CreateMapErrorName, Toast.LENGTH_SHORT).show();
+				Toast.makeText(Editor.this, R.string.MapSelectorErrorName, Toast.LENGTH_SHORT).show();
 			}
 		}
 		else if ( this.cancel == v ) {
@@ -113,7 +113,7 @@ public class Editor extends Activity implements View.OnClickListener {
 			this.finish();
 		}
 		else if ( resultCode == 2001 ){
-			Toast.makeText(Editor.this, R.string.CreateMapErrorLoad, Toast.LENGTH_SHORT).show();
+			Toast.makeText(Editor.this, R.string.MapSelectorErrorLoad, Toast.LENGTH_SHORT).show();
 		}
 	}
 }

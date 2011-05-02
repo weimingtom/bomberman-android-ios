@@ -147,7 +147,7 @@ public class Options extends Activity implements View.OnClickListener{
 			Context context = this.createPackageContext(getPackageName(), Context.CONTEXT_INCLUDE_CODE);
 
 			if(v == managementProfile){
-				intent = new Intent(context, ProfilManagement.class);
+				intent = new Intent(context, ProfileManager.class);
 			}
 			else if( v == cancel)	{
 				intent = new Intent(context, Home.class);

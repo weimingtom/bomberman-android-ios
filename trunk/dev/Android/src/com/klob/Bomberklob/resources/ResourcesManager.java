@@ -46,7 +46,6 @@ public class ResourcesManager {
 	
 	/* Sons */
 	private static HashMap<String, Integer> sounds = new HashMap<String, Integer>();
-	private static AudioManager soundManager;
 	private static SoundPool soundPool;
 
 	
@@ -60,11 +59,11 @@ public class ResourcesManager {
 		height = context.getResources().getDisplayMetrics().heightPixels;
 		width = context.getResources().getDisplayMetrics().widthPixels;
 
-		if ( ((height-(50*dpiPx))/MAP_WIDTH) < ((width-(50*dpiPx))/MAP_HEIGHT) ) {
-			size = (int) ((height-(50*dpiPx))/MAP_WIDTH);
+		if ( ((width-(50*dpiPx))/MAP_WIDTH) < ((height-(50*dpiPx))/MAP_HEIGHT) ) {
+			size = (int) ((width-(50*dpiPx))/MAP_WIDTH);
 		}
 		else {
-			size = (int) ((width-(50*dpiPx))/MAP_HEIGHT);
+			size = (int) ((height-(50*dpiPx))/MAP_HEIGHT);
 		}
 		
 		/* Son */
@@ -414,7 +413,6 @@ public class ResourcesManager {
 	public static void soundsInitialisation() {
 		
 		soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 100);
-		soundManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);		
 
 		sounds.put("destroy1", soundPool.load(context, R.raw.destroy1,1));
 		sounds.put("bombplanted", soundPool.load(context, R.raw.bombplanted,1));

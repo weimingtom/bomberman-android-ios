@@ -75,7 +75,7 @@ public class ChangePasswordMultiplayer extends Activity implements View.OnClickL
 			// FIXME Requete au serveur
 		}    	
 		else if( v == this.cancel){
-			intent = new Intent(ChangePasswordMultiplayer.this, ProfilManagement.class);
+			intent = new Intent(ChangePasswordMultiplayer.this, ProfileManager.class);
 		}
 		
 		if (intent != null) {

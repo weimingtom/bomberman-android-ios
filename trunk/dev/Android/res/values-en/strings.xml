@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Klob</string>
+	<string name="app_name">BLOK</string>
 	
 	<!-- Global -->
 	
@@ -30,6 +30,7 @@
 	
 	<!-- SinglePlayer -->
 	
+	<string name="SinglePlayerMenu">Single Player</string>
 	<string name="SinglePlayerGameType">Game Type</string>
 	<string name="SinglePlayerGameEnemiesNumber">Number of enemies</string>
 	<string name="SinglePlayerGameEnemiesDifficulty">Difficulty of the enemies</string>
@@ -75,6 +76,7 @@
 	
 	<!-- Options -->
 	
+	<string name="OptionsMenu">Options</string>
 	<string name="OptionsVolume">Volume</string>
 	<string name="OptionsLanguages">Languages</string>
 	<string-array name="languages">
@@ -84,24 +86,26 @@
 	<string name="OptionsProfilManager">Profil Manager</string>
 	
 	
-	<!-- ProfilManager -->
+	<!-- ProfileManager -->
 	
-	<string name="ProfilManagementColors">Colors</string>
+	<string name="ProfileManagerMenu">Profile Manager</string>
+	<string name="ProfileManagerMenuGlobal">Global</string>
+	<string name="ProfileManagerColors">Colors</string>
 	<string-array name="playerColors">
 		<item>White</item>
 		<item>Blue</item>
 		<item>Red</item>
 		<item>Dark</item>
 	</string-array>
-	<string name="ProfilManagementButtonEdit">Edit</string>
-	<string name="ProfilManagementButtonOnlineAccount">Change Account</string>
-	<string name="ProfilManagementType">Type</string>
+	<string name="ProfileManagerButtonEdit">Edit</string>
+	<string name="ProfileManagerButtonOnlineAccount">Change Account</string>
+	<string name="ProfileManagerType">Type</string>
 	<string-array name="type">
 		<item>Right-handed</item>
 		<item>Left-handed</item>
 	</string-array>
 	
-	<string name="ProfilManagementErrorPseudo">This pseudo is already used</string>
+	<string name="ProfileManagerErrorPseudo">This pseudo is already used</string>
 	
 	
 	<!-- Change Password Multiplayer -->
@@ -113,16 +117,16 @@
 
 	<!-- Create Map -->
 	
-	<string name="CreateMapTextViewName">Map name</string>
-	<string name="CreateMapButtonLoad">Load Map</string>
-	<string name="CreateMapErrorName">Name map is not valid !</string>
-	<string name="CreateMapErrorLoad">There are no maps available</string>
+	<string name="MapSelectorMenu">Create Map</string>
+	<string name="MapSelectorTextViewName">Map name</string>
+	<string name="MapSelectorButtonLoad">Load</string>
+	<string name="MapSelectorErrorName">Name map is not valid !</string>
+	<string name="MapSelectorErrorLoad">There are no maps available</string>
+
+	<!--  Editor Loader -->
 	
-	<!-- Statistics -->
-	
-	<string name="StatisticsGamesWon">Games won</string>
-	<string name="StatisticsGamesLost">Games lost</string>
-	
+	<string name="EditorLoaderMenu">Load a map</string>
+		
 	<!-- Help -->
 	
 	<string name="HelpGoal">Goal of the game</string>

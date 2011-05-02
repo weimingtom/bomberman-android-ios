@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Klob</string>
+	<string name="app_name">BLOK</string>
 	
 	<!-- Global -->
 	
@@ -19,7 +19,8 @@
 	
 	<!-- Home -->
 	
-	<string name="HomeButtonSinglePlayer">Solo</string>
+	
+	<string name="HomeButtonSinglePlayer">Un joueur</string>
 	<string name="HomeButtonMultiPlayer">Multijoueurs</string>
 	<string name="HomeButtonOptions">Options</string>
 	<string name="HomeButtonStatistics">Statistiques</string>
@@ -30,6 +31,7 @@
 	
 	<!-- SinglePlayer -->
 	
+	<string name="SinglePlayerMenu">Un joueur</string>
 	<string name="SinglePlayerGameType">Type de la partie</string>
 	<string name="SinglePlayerGameEnemiesNumber">Nombre d\'ennemis</string>
 	<string name="SinglePlayerGameEnemiesDifficulty">Difficulté des ennemis</string>
@@ -66,7 +68,6 @@
 	<!-- Multiplayer -->
 	
 	<string name="MultiplayerButtonNewAccount">Nouveau Compte</string>
-	
 	<string name="MultiPlayerConnectionErrorAutoConnection">Le nom d\'utilisateur ou le mot de passe sont vides</string>
 	
 	<!-- NewAccountOnline -->
@@ -75,6 +76,7 @@
 	
 	<!-- Options -->
 
+	<string name="OptionsMenu">Options</string>
 	<string name="OptionsVolume">Volume</string>	
 	<string name="OptionsLanguages">Langages</string>	
 	<string-array name="languages">
@@ -83,24 +85,26 @@
 	</string-array>
 	<string name="OptionsProfilManager">Gestion du Profil</string>
 	
-	<!-- ProfilManager -->
+	<!-- ProfileManager -->
 	
-	<string name="ProfilManagementColors">Couleurs</string>
+	<string name="ProfileManagerMenu">Gestionnaire de profil</string>
+	<string name="ProfileManagerMenuGlobal">Global</string>
+	<string name="ProfileManagerColors">Couleurs</string>
 	<string-array name="playerColors">
 		<item>Blanc</item>
 		<item>Bleu</item>
 		<item>Rouge</item>
 		<item>Noir</item>
 	</string-array>
-	<string name="ProfilManagementButtonEdit">Modifier</string>
-	<string name="ProfilManagementButtonOnlineAccount">Changer de compte</string>	
-	<string name="ProfilManagementType">Type</string>
+	<string name="ProfileManagerButtonEdit">Modifier</string>
+	<string name="ProfileManagerButtonOnlineAccount">Changer de compte</string>	
+	<string name="ProfileManagerType">Type</string>
 	<string-array name="type">
 		<item>Droitier</item>
 		<item>Gaucher</item>
 	</string-array>
 	
-	<string name="ProfilManagementErrorPseudo">Ce pseudonyme est déjà utilisé</string>
+	<string name="ProfileManagerErrorPseudo">Ce pseudonyme est déjà utilisé</string>
 	
 	<!-- Change Password Multiplayer -->
 	
@@ -111,15 +115,15 @@
 
 	<!-- Create Map -->
 	
-	<string name="CreateMapTextViewName">Nom de la carte</string>
-	<string name="CreateMapButtonLoad">Charger une carte</string>
-	<string name="CreateMapErrorName">Ce nom de carte n\'est pas valide !</string>
-	<string name="CreateMapErrorLoad">Il n\'y a pas de carte disponible</string>
+	<string name="MapSelectorMenu">Créer une carte</string>
+	<string name="MapSelectorTextViewName">Nom de la carte</string>
+	<string name="MapSelectorButtonLoad">Charger</string>
+	<string name="MapSelectorErrorName">Ce nom de carte n\'est pas valide !</string>
+	<string name="MapSelectorErrorLoad">Il n\'y a pas de carte disponible</string>
 	
-	<!-- Statistics -->
+	<!--  Editor Loader -->
 	
-	<string name="StatisticsGamesWon">Parties Gagnées</string>
-	<string name="StatisticsGamesLost">Partie Perdues</string>
+	<string name="EditorLoaderMenu">Charger une carte</string>
 	
 	<!-- Help -->
 	

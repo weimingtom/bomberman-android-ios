@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/background">
+    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" >
         <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_centerInParent="true" android:src="@drawable/gamename"></ImageView>
         <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_centerInParent="true" android:orientation="vertical" android:gravity="center_horizontal" android:layout_width="wrap_content">
             <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1" android:gravity="center_vertical">

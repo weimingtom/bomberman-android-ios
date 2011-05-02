@@ -43,7 +43,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 
 	private ObjectsGallery objectsGallery, objectsGallery2;
 	private LinearLayout editorControllerLayout, mapEditorLinearLayoutMenu;
-	private RelativeLayout editorRelativeLayoutObjectsGallery, editorRelativeLayoutMenu, mapEditorRelativeLayoutGlobal;
+	private RelativeLayout editorRelativeLayoutObjectsGallery, editorRelativeLayoutMenu;
 	private FrameLayout mapEditorFrameLayoutEditorController, mapEditorFrameLayoutObjectsGallery, mapEditorFrameLayoutPlayersGallery;
 
 	private Bundle bundle;
@@ -69,13 +69,13 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 		getWindowManager().getDefaultDisplay().getMetrics(dm);	
 
 		this.editorRelativeLayoutMenu = (RelativeLayout) findViewById(R.id.MapEditorRelativeLayoutToolsBar);
-		this.editorRelativeLayoutMenu.setLayoutParams(new LinearLayout.LayoutParams( ResourcesManager.getHeight(), (int) (menuSize*ResourcesManager.getDpiPx())) );
+		this.editorRelativeLayoutMenu.setLayoutParams(new LinearLayout.LayoutParams( ResourcesManager.getWidth(), (int) (menuSize*ResourcesManager.getDpiPx())) );
 
 		this.editorRelativeLayoutObjectsGallery = (RelativeLayout) findViewById(R.id.MapEditorRelativeLayoutObjectsGallery);
-		this.editorRelativeLayoutObjectsGallery.setLayoutParams(new LinearLayout.LayoutParams( (int) (menuSize*ResourcesManager.getDpiPx()), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
+		this.editorRelativeLayoutObjectsGallery.setLayoutParams(new LinearLayout.LayoutParams( (int) (menuSize*ResourcesManager.getDpiPx()), (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())) ) );
 
 		this.editorControllerLayout = (LinearLayout) findViewById(R.id.MapEditorLinearLayoutEditorController);
-		this.editorControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
+		this.editorControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())) ) );
 
 
 		this.bundle = getIntent().getExtras();
@@ -201,9 +201,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 		this.save.setOnClickListener(this);
 
 		this.mapEditorLinearLayoutMenu = (LinearLayout) findViewById(R.id.MapEditorLinearLayoutMenu);
-
-		this.mapEditorRelativeLayoutGlobal = (RelativeLayout) findViewById(R.id.MapEditorRelativeLayoutGlobal);
-		this.mapEditorRelativeLayoutGlobal.removeView(findViewById(R.id.MapEditorLinearLayoutMenu));
+		this.mapEditorLinearLayoutMenu.setVisibility(View.INVISIBLE);
 	}
 
 	@Override
@@ -237,7 +235,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 			this.editorController.setEnabled(false);
 			this.objectsGallery.setEnabled(false);
 			this.objectsGallery2.setEnabled(false);
-			this.mapEditorRelativeLayoutGlobal.addView(this.mapEditorLinearLayoutMenu);
+			this.mapEditorLinearLayoutMenu.setVisibility(View.VISIBLE);
 		}
 		else if ( this.resume == arg0 ) {
 
@@ -246,7 +244,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 			this.editorController.setEnabled(true);
 			this.objectsGallery.setEnabled(true);
 			this.objectsGallery2.setEnabled(true);
-			this.mapEditorRelativeLayoutGlobal.removeView(this.mapEditorLinearLayoutMenu);
+			this.mapEditorLinearLayoutMenu.setVisibility(View.INVISIBLE);
 		}
 		else if ( this.save == arg0 ) {
 			Bitmap bm = Bitmap.createBitmap(this.editorController.getWidth(), this.editorController.getHeight(), Bitmap.Config.ARGB_8888);
@@ -284,7 +282,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 			this.menu.setClickable(true);
 			this.mapEditorToggleButton.setClickable(true);		
 			this.editorController.setEnabled(true);
-			this.mapEditorRelativeLayoutGlobal.removeView(this.mapEditorLinearLayoutMenu);
+			this.mapEditorLinearLayoutMenu.setVisibility(View.INVISIBLE);
 			this.editorController.getMapEditor().loadMap(bundle.getString("map"));
 			this.editorController.update();
 		}

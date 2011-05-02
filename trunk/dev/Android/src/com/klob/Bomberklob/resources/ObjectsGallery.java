@@ -45,6 +45,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 	Point point = new Point(-1,-1);
 
 	private boolean vertical = true;
+	private int color;
 
 	/* Constructeurs ------------------------------------------------------- */
 	
@@ -54,6 +55,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		this.verticalPadding = 0;
 		this.selectedItem = null;
 		this.level = 0;
+		this.color = Color.WHITE;
 		this.initialisation();
 	}
 	
@@ -64,6 +66,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		this.objectsSize = (int) (objectsSize*ResourcesManager.getDpiPx());
 		this.verticalPadding = (int) (verticalPadding*ResourcesManager.getDpiPx());
 		this.level = level;
+		this.color = Color.WHITE;
 		this.vertical = vertical;
 		this.initialisation();
 	}
@@ -121,6 +124,9 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		this.objectsSize = (int) (objectsSize*ResourcesManager.getDpiPx());
 	}
 
+	public void setBackgroundColor(int color) {
+		this.color = color;
+	}
 
 	public void setRectangles(Point point) {
 		rects[0] = new Rect(point.x*objectsSize, point.y*objectsSize, point.x*objectsSize+objectsSize, point.y*objectsSize+objectsSize/15); //HAUT
@@ -225,7 +231,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 		int i,j;
 
-		canvas.drawColor(Color.WHITE);
+		canvas.drawColor(this.color);
 
 		if ( this.level == 0 ) {
 			for (i = this.currentGroundsItem, j = 0 ; j < this.itemsDisplayed && j < this.grounds.size() ; i++, j++ ) {

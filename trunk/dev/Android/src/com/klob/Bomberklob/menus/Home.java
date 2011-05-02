@@ -23,7 +23,6 @@ public class Home extends Activity implements View.OnClickListener{
 	private Button singlePlayer;
 	private Button multiPlayer;
 	private Button options;
-	private Button statistics;
 	private Button createMap;
 	private Button help;
 
@@ -42,14 +41,12 @@ public class Home extends Activity implements View.OnClickListener{
 		this.singlePlayer = (Button)findViewById(R.id.HomeButtonSolo);        
 		this.multiPlayer = (Button)findViewById(R.id.HomeButtonMulti);
 		this.options = (Button)findViewById(R.id.HomeButtonOptions);
-		this.statistics = (Button)findViewById(R.id.HomeButtonStatistics);
 		this.createMap = (Button)findViewById(R.id.HomeButtonCreatingLevel);
 		this.help = (Button)findViewById(R.id.HomeButtonHelp);
 
 		this.singlePlayer.setOnClickListener(this);
 		this.multiPlayer.setOnClickListener(this);
 		this.options.setOnClickListener(this);
-		this.statistics.setOnClickListener(this);
 		this.createMap.setOnClickListener(this);
 		this.help.setOnClickListener(this);
 
@@ -117,9 +114,6 @@ public class Home extends Activity implements View.OnClickListener{
 		}
 		else if ( this.createMap == v ) {
 			intent = new Intent(Home.this, Editor.class);
-		}
-		else if ( this.statistics == v ) {
-			intent = new Intent(Home.this, Statistics.class);
 		}
 		else if ( this.help == v ) {
 			intent = new Intent(Home.this, Help.class);
