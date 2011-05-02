@@ -90,7 +90,8 @@
         [groundsTmp release];
         [blocksTmp release];
     }
-	for (int i=0; i < 4; i++) {
+    
+	for (int i = 0; i < 4; i++) {
 		[players addObject:[[Position alloc] initWithX:2 y:2+i]];
 	}
 }
