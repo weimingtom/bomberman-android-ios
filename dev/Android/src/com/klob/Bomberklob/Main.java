@@ -74,37 +74,39 @@ public class Main extends Activity {
 
 						try {
 
-							String mapsDirectory = "maps";
+							String mapsDirectory = "maps", mapName;
 							File ls = getFilesDir();
-							File rep = new File(ls.getAbsolutePath()+"/"+mapsDirectory);
+							File rep = new File(ls.getAbsolutePath()+"/"+mapsDirectory), rep2, file;
 							rep.mkdir();
 							Map mapMap;
+							Bitmap bitmap;
+							byte[] buffer;
 
 							InputStream in = null;
 							OutputStream out = null;
 
-							String[] maps = getAssets().list(mapsDirectory);
+							String[] maps = getAssets().list(mapsDirectory), map;
 
 							Log.i("Main", "-------------- Copy  Maps --------------");
 
 							for (int i = 0 ; i < maps.length ; i ++ ) {
-								String mapName = maps[i].toString();
+								mapName = maps[i].toString();
 
 								Log.i("Main", "Map in progress : "+ mapName);
 
-								File rep2 = new File(rep.getAbsolutePath()+"/"+mapName);
+								rep2 = new File(rep.getAbsolutePath()+"/"+mapName);
 								rep2.mkdir();
-								String[] map = getAssets().list(mapsDirectory+"/"+mapName);
+								map = getAssets().list(mapsDirectory+"/"+mapName);
 
 								for (int j = 0 ; j < map.length ; j++ ) {
 
 									try {
-										File file = new File(rep2.getAbsolutePath() + "/" + map[j]);
+										file = new File(rep2.getAbsolutePath() + "/" + map[j]);
 										System.out.println("PATH : " + file.getAbsolutePath());
 										in = getAssets().open(mapsDirectory+"/"+mapName+"/"+map[j]);
 										out = new FileOutputStream(file);
 
-										byte[] buffer = new byte[1024];
+										buffer = new byte[1024];
 										int read;
 										while((read = in.read(buffer)) != -1){
 											out.write(buffer, 0, read);
@@ -119,7 +121,7 @@ public class Main extends Activity {
 										}
 										else if ( map[j].indexOf(".png") != -1 ) {
 											/* De même pour l'image associée */
-											Bitmap bitmap = BitmapFactory.decodeFile(getFilesDir().getAbsolutePath()+"/"+mapsDirectory+"/"+mapName+"/"+mapName+".png");
+											bitmap = BitmapFactory.decodeFile(getFilesDir().getAbsolutePath()+"/"+mapsDirectory+"/"+mapName+"/"+mapName+".png");
 											bitmap = Bitmap.createScaledBitmap(bitmap, (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_HEIGHT)/1.5) , (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_WIDTH)/1.5) , true);
 											file.delete();
 											file.createNewFile();
@@ -145,6 +147,14 @@ public class Main extends Activity {
 								Log.i("Main", "--------- Map copied --------");
 							}
 
+							/* Variables mise à null par sécuritée */
+							mapsDirectory = mapName = null;
+							ls = null;
+							rep = rep2 = file = null;
+							mapMap = null;
+							bitmap = null;							
+							buffer = null;
+							
 							Log.i("Main", "------------- Maps  Copied -------------");
 						} catch (IOException e) {
 							e.printStackTrace();

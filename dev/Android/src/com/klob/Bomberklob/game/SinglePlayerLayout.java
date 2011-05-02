@@ -184,6 +184,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 					singlePlayerLinearLayoutStartImage.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.go));
 				}
 				else if ( msg.what == 3 ) {
+					singlePlayerLinearLayoutStartImage.setImageBitmap(null);
 					singlePlayerLinearLayoutStart.setVisibility(View.INVISIBLE);
 					mp = MediaPlayer.create(getApplicationContext(), R.raw.battle_mode);
 					mp.setLooping(true);
@@ -207,6 +208,8 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.singlePlayerLinearLayoutStart = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutStart);
 		this.singlePlayerLinearLayoutStartImage = (ImageView) findViewById(R.id.SinglePlayerLinearLayoutStartImage);
 		this.singlePlayerLinearLayoutEndImageView = (ImageView) findViewById(R.id.SinglePlayerLinearLayoutEndImageView);
+		
+		this.singlePlayerLinearLayoutEndImageView.setImageBitmap(null);
 
 		this.singlePlayerLinearLayoutEnd.setVisibility(View.INVISIBLE);
 		this.singlePlayerLinearLayoutMenu.setVisibility(View.INVISIBLE);
@@ -218,12 +221,14 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	protected void onStop() {
 		Log.i("SinglePlayerLayout", "onStop");
 		super.onStop();
+		mp.stop();
 	}
 
 	@Override
 	protected void onDestroy(){
 		Log.i("SinglePlayerLayout", "onDestroy");
 		super.onDestroy();
+		mp.stop();
 	}
 
 	@Override

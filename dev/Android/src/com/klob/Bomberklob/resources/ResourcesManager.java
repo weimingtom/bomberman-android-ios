@@ -169,7 +169,7 @@ public class ResourcesManager {
 
 						if ( p != null ) {
 							Log.i("ResourcesManager","Added Bitmap : " + xpp.getAttributeValue(null, "name"));
-							ResourcesManager.bitmaps.put(xpp.getAttributeValue(null, "name"), p);
+							bitmaps.put(xpp.getAttributeValue(null, "name"), p);
 							p = null;
 						}
 					}
@@ -181,6 +181,11 @@ public class ResourcesManager {
 		catch (Exception e) {
 			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+e.toString());
 		}
+		
+		/* Variables mise à null par sécuritée */
+		xpp = null;
+		p = null;		
+		
 		Log.i("ResourcesManager","----------      Bitmaps loaded      ----------");
 	}
 
@@ -229,7 +234,8 @@ public class ResourcesManager {
 						frame.bottom = xpp.getAttributeIntValue(null, "bottom", 0);
 						frame.left = xpp.getAttributeIntValue(null, "left", 0);
 						frame.right = xpp.getAttributeIntValue(null, "right", 0);
-						frameinfo.rect = frame;	
+						frameinfo.rect = frame;
+						frame = null;
 						frameinfo.nextFrameDelay = xpp.getAttributeIntValue(null,"delayNextFrame", 0);
 						animationsequence.sequence.add(frameinfo);
 					}
@@ -256,6 +262,10 @@ public class ResourcesManager {
 							objects.put(imageName, new Undestructible(imageName, animations, ObjectsAnimations.DESTROY, hit, level, fireWall, damages));
 							Log.i("ResourcesManager","Added Undestructible : " + imageName);
 						}
+						
+						/* Variables mise à null par sécuritée */
+						animationname= null;
+						animationsequence = null;
 					}
 				}
 				eventType = xpp.next();
@@ -264,6 +274,12 @@ public class ResourcesManager {
 		catch (Exception e) {
 			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+e.toString());
 		}
+		
+		/* Variables mise à null par sécuritée */
+		xpp = null;
+		animations = null;
+		imageName = null;
+		
 		Log.i("ResourcesManager","--------------- Objects loaded ---------------");
 	}
 
@@ -343,6 +359,12 @@ public class ResourcesManager {
 		catch (Exception e) {
 			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+e.toString());
 		}
+		
+		/* Variables mise à null par sécuritée */
+		xpp = null;
+		playerAnimation = null;
+		name = null;
+		
 		System.out.println("--------------- Player Loaded ----------------");
 	}
 
@@ -407,6 +429,12 @@ public class ResourcesManager {
 		catch (Exception e) {
 			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+e.toString());
 		}
+		
+		/* Variables mise à null par sécuritée */
+		xpp = null;
+		bombAnimation = null;
+		name = null;
+		
 		Log.i("ResourcesManager","---------------- Bombs loaded  ---------------");
 	}
 
