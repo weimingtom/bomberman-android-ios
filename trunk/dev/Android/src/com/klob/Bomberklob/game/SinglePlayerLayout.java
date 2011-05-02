@@ -32,7 +32,6 @@ import com.klob.Bomberklob.objects.ObjectsAnimations;
 import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.resources.ObjectsGallery;
-import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
 public class SinglePlayerLayout extends Activity implements View.OnClickListener {
@@ -384,10 +383,10 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 				Log.i("Start Thread","Thread started");
 				
 				try {
+					handler.sendMessage(handler.obtainMessage(1));
 					sleep(2000);
 					handler.sendMessage(handler.obtainMessage(2));
 					sleep(2000);
-					handler.sendMessage(handler.obtainMessage(1));
 					
 				} catch (InterruptedException e) {
 					e.printStackTrace();
