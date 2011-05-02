@@ -41,7 +41,6 @@ public class Map implements Serializable {
 		this.grounds = new Objects[21][15];
 		this.blocks  = new Objects[21][15];
 		this.animatedObjects = new ConcurrentHashMap<Point, Objects>();
-
 	}
 
 	/* Getteurs ------------------------------------------------------------ */
@@ -124,16 +123,25 @@ public class Map implements Serializable {
 
 	public boolean loadMap(String s) {
 
+		
 		File f =  new File (ResourcesManager.getContext().getFilesDir().getAbsolutePath()+"/maps/"+s+"/"+s+".klob");
 		Log.i("Map", "File loaded : " + f.getAbsolutePath());
-		Map map = null;
+		Map map = null;		
+		this.players = new Point[4];
+		this.grounds = new Objects[21][15];
+		this.blocks  = new Objects[21][15];
+		this.animatedObjects = new ConcurrentHashMap<Point, Objects>();
+	
 
 		try {
 			FileInputStream fis = new FileInputStream(f);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 
-			try {	
+			try {
+				long l = System.currentTimeMillis();
+				Log.i("MAP", "Start loading");
 				map  = (Map) ois.readObject(); 
+				Log.i("MAP", "End loading at : " + (System.currentTimeMillis()-l));
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} finally {
@@ -150,6 +158,7 @@ public class Map implements Serializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 
 		if(map != null) {			
 			this.grounds = map.getGrounds();
@@ -176,6 +185,10 @@ public class Map implements Serializable {
 					}
 				}
 			}
+			
+			f =  null;
+			map = null;
+			
 			return true;
 		}
 		return false;

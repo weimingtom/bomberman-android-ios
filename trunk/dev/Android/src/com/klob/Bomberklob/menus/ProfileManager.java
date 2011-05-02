@@ -75,7 +75,7 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 		tabs.addTab(tspec3);
 		
 		for (int i = 0; i < tabs.getTabWidget().getChildCount() ; i++) {
-			tabs.getTabWidget().getChildAt(i).getLayoutParams().height = 20;
+			tabs.getTabWidget().getChildAt(i).getLayoutParams().height = (int) (30*ResourcesManager.getDpiPx());
 		}
 		
         this.pseudo = (EditText) findViewById(R.id.ProfileManagerEditTextPseudo);
