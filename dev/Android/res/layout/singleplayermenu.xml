@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_height="fill_parent" android:layout_width="fill_parent"
-	android:orientation="vertical" android:id="@+id/linearLayout1"
-	android:background="@drawable/background">
+	android:orientation="vertical" android:id="@+id/linearLayout1" android:background="@color/Gray">
 
 	<LinearLayout android:layout_height="wrap_content"
 		android:layout_width="fill_parent" android:id="@+id/linearLayout6">
 		<RelativeLayout android:id="@+id/relativeLayout3"
-			android:layout_height="wrap_content" android:layout_width="fill_parent">
+			android:layout_width="fill_parent" android:background="@drawable/menutoolbarbackgroundxml" android:layout_height="50dip">
 			<Button android:layout_width="wrap_content"
 				android:id="@+id/SinglePlayerGameButtonCancel" android:text="@string/ButtonCancel"
 				android:layout_height="wrap_content" android:layout_centerVertical="true"></Button>
-			<ImageView android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:id="@+id/imageView1"
-				android:src="@drawable/gamename" android:layout_centerInParent="true"></ImageView>
+			<TextView android:layout_width="wrap_content" android:text="@string/SinglePlayerMenu" android:layout_height="wrap_content" android:id="@+id/textView5" android:textSize="20dip" android:textColor="@color/White" android:layout_centerInParent="true"></TextView>
 			<Button android:layout_width="wrap_content" android:id="@+id/SinglePlayerGameButtonGo"
 				android:text="@string/ButtonCreate" android:layout_height="wrap_content"
 				android:layout_alignParentRight="true"

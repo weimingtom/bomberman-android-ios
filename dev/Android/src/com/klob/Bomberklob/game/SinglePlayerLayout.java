@@ -41,7 +41,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 
 	private ObjectsGallery bombsGallery;
 	private LinearLayout singlePlayerControllerLayout, singlePlayerLinearLayoutMenu, singlePlayerLinearLayoutStart, singlePlayerLinearLayoutBonus1, singlePlayerLinearLayoutBonus2, singlePlayerLinearLayoutBonus3, singlePlayerLinearLayoutBonus4, singlePlayerLinearLayoutEnd;
-	private RelativeLayout singlePlayerRelativeLayoutObjectsGallery, singlePlayerRelativeLayoutMenu, singlePlayerRelativeLayoutGlobal;
+	private RelativeLayout singlePlayerRelativeLayoutObjectsGallery, singlePlayerRelativeLayoutMenu;
 	private FrameLayout singlePlayerFrameLayoutGame, singlePlayerFrameLayoutBombsGallery;
 
 	private Bundle bundle;
@@ -76,15 +76,15 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		getWindowManager().getDefaultDisplay().getMetrics(dm);	
 
 		this.singlePlayerRelativeLayoutMenu = (RelativeLayout) findViewById(R.id.SinglePlayerRelativeLayoutMenu);
-		this.singlePlayerRelativeLayoutMenu.setLayoutParams(new LinearLayout.LayoutParams( ResourcesManager.getHeight(), (int) (menuSize*ResourcesManager.getDpiPx())) );
+		this.singlePlayerRelativeLayoutMenu.setLayoutParams(new LinearLayout.LayoutParams( ResourcesManager.getWidth(), (int) (menuSize*ResourcesManager.getDpiPx())) );
 
 		this.singlePlayerRelativeLayoutObjectsGallery = (RelativeLayout) findViewById(R.id.SinglePlayerRelativeLayoutObjectsGallery);
-		this.singlePlayerRelativeLayoutObjectsGallery.setLayoutParams(new LinearLayout.LayoutParams( (int) (menuSize*ResourcesManager.getDpiPx()), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
+		this.singlePlayerRelativeLayoutObjectsGallery.setLayoutParams(new LinearLayout.LayoutParams( (int) (menuSize*ResourcesManager.getDpiPx()), (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())) ) );
 
 		this.singlePlayerFrameLayoutGame = (FrameLayout) findViewById(R.id.SinglePlayerFrameLayoutGame);
 
 		this.singlePlayerControllerLayout = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutEditorController);
-		this.singlePlayerControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())) ) );
+		this.singlePlayerControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())) ) );
 		this.singlePlayerControllerLayout.setOnTouchListener(new OnTouchListener() {
 
 			public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -159,18 +159,21 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 			@Override
 			public void handleMessage(Message msg) {
 				if ( msg.what == 0 ) {
-					timeS--;
-					if ( timeS == -1 ) {
-						timeM--;
-						timeS = 59;
-					}
-					if ( timeS > 9 ) {
-						timeTextView.setText(timeM+":"+timeS);
-					}
-					else {
-						timeTextView.setText(timeM+":0"+timeS);
+					if ( timeM > 0 ) {
+						timeS--;
+						if ( timeS == -1 ) {
+							timeM--;
+							timeS = 59;
+						}
+						if ( timeS > 9 ) {
+							timeTextView.setText(timeM+":"+timeS);
+						}
+						else {
+							timeTextView.setText(timeM+":0"+timeS);
+						}
 					}
 					if ( timeM == 0 && timeS == 0 ) {
+						setTimeThreadRunning(false);
 						draw();
 					}
 				}
@@ -181,7 +184,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 					singlePlayerLinearLayoutStartImage.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.go));
 				}
 				else if ( msg.what == 3 ) {
-					singlePlayerRelativeLayoutGlobal.removeView(singlePlayerLinearLayoutStart);
+					singlePlayerLinearLayoutStart.setVisibility(View.INVISIBLE);
 					mp = MediaPlayer.create(getApplicationContext(), R.raw.battle_mode);
 					mp.setLooping(true);
 					mp.start();
@@ -205,10 +208,8 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.singlePlayerLinearLayoutStartImage = (ImageView) findViewById(R.id.SinglePlayerLinearLayoutStartImage);
 		this.singlePlayerLinearLayoutEndImageView = (ImageView) findViewById(R.id.SinglePlayerLinearLayoutEndImageView);
 
-		this.singlePlayerRelativeLayoutGlobal = (RelativeLayout) findViewById(R.id.SinglePlayerRelativeLayoutGlobal);
-		this.singlePlayerRelativeLayoutGlobal.removeView(findViewById(R.id.SinglePlayerLinearLayoutMenu));
-		this.singlePlayerRelativeLayoutGlobal.removeView(findViewById(R.id.SinglePlayerLinearLayoutStart));
-		this.singlePlayerRelativeLayoutGlobal.removeView(findViewById(R.id.SinglePlayerLinearLayoutEnd));
+		this.singlePlayerLinearLayoutEnd.setVisibility(View.INVISIBLE);
+		this.singlePlayerLinearLayoutMenu.setVisibility(View.INVISIBLE);
 
 		this.initGame();
 	}
@@ -238,7 +239,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		super.onPause();
 		this.pauseGame();
 		mp.pause();
-		this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutMenu);
+		this.singlePlayerLinearLayoutMenu.setVisibility(View.VISIBLE);
 	} 
 
 	public void onClick(View arg0) {
@@ -249,11 +250,11 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		else if ( this.menu == arg0 ) {
 			this.pauseGame();
 			mp.pause();
-			this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutMenu);
-		}
+			this.singlePlayerLinearLayoutMenu.setVisibility(View.VISIBLE);
+			}
 		else if ( arg0 == this.resume) {
 			mp.start();
-			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutMenu);
+			this.singlePlayerLinearLayoutMenu.setVisibility(View.INVISIBLE);
 			this.resumeGame();
 		}
 		else if ( arg0 == this.options) {
@@ -262,18 +263,19 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		else if ( arg0 == this.restart ) {
 			mp.stop();
 			this.initGame();
-			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutMenu);
+			this.singlePlayerLinearLayoutMenu.setVisibility(View.INVISIBLE);
 		}
 		else if ( arg0 == this.quit) {
 			mp.stop();
-			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutMenu);
+			this.singlePlayerLinearLayoutMenu.setVisibility(View.INVISIBLE);
 			Intent intent = new Intent(SinglePlayerLayout.this, Home.class);
 			startActivity(intent);
 			this.finish();
 		}
 		else if ( arg0 == this.quit2) {
 			mp.stop();
-			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutEnd);
+			this.singlePlayerLinearLayoutEnd.setVisibility(View.INVISIBLE);
+
 			Intent intent = new Intent(SinglePlayerLayout.this, Home.class);
 			startActivity(intent);
 			this.finish();
@@ -281,7 +283,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		else if ( arg0 == this.restart2 ) {
 			mp.stop();
 			this.initGame();
-			this.singlePlayerRelativeLayoutGlobal.removeView(this.singlePlayerLinearLayoutEnd);
+			this.singlePlayerLinearLayoutEnd.setVisibility(View.INVISIBLE);
 		}
 	}
 
@@ -366,7 +368,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	public void startGame() {		
 		
 		pauseGame();
-		this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutStart);
+		this.singlePlayerLinearLayoutStart.setVisibility(View.VISIBLE);
 		
 		mp = MediaPlayer.create(getApplicationContext(), R.raw.battle_start);
 		mp.start();
@@ -447,18 +449,18 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private void win() {
 		pauseGame();
 		this.singlePlayerLinearLayoutEndImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.winner));
-		this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutEnd);
+		this.singlePlayerLinearLayoutEnd.setVisibility(View.VISIBLE);
 	}
 	
 	private void lose() {
 		pauseGame();
 		this.singlePlayerLinearLayoutEndImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.loser));
-		this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutEnd);
+		this.singlePlayerLinearLayoutEnd.setVisibility(View.VISIBLE);
 	}
 	
 	private void draw() {
 		pauseGame();
 		this.singlePlayerLinearLayoutEndImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.draw));
-		this.singlePlayerRelativeLayoutGlobal.addView(this.singlePlayerLinearLayoutEnd);
+		this.singlePlayerLinearLayoutEnd.setVisibility(View.VISIBLE);
 	}
 }

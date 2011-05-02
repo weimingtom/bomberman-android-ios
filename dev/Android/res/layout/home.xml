@@ -1,27 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/background">
-        <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_centerInParent="true" android:src="@drawable/gamename"></ImageView>
-        
-        <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center_horizontal" android:layout_centerInParent="true" android:layout_width="wrap_content">
-			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/HomeButtonSinglePlayer" android:id="@+id/HomeButtonSolo"></Button>
-			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/HomeButtonMultiPlayer" android:id="@+id/HomeButtonMulti"></Button>
-			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/HomeButtonOptions" android:id="@+id/HomeButtonOptions"></Button>
-			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/HomeButtonStatistics" android:id="@+id/HomeButtonStatistics"></Button>
-			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/HomeButtonCreatingLevel" android:id="@+id/HomeButtonCreatingLevel"></Button>
-			<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/HomeButtonHelp" android:id="@+id/HomeButtonHelp"></Button>
+<RelativeLayout android:id="@+id/relativeLayout1"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android" android:background="@color/Gray">
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:id="@+id/linearLayout6">
+		<RelativeLayout android:id="@+id/relativeLayout3"
+			android:layout_width="fill_parent" android:background="@drawable/menutoolbarbackgroundxml"
+			android:layout_height="50dip">
+			
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:id="@+id/HomeButtonOptions"
+			android:text="@string/HomeButtonOptions"
+			android:layout_alignParentRight="true" android:layout_centerVertical="true"></Button>
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:id="@+id/HomeButtonHelp"
+			android:text="@string/HomeButtonHelp" android:layout_centerVertical="true"></Button>
+		</RelativeLayout>
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/linearLayout1"
+		android:layout_height="wrap_content" android:orientation="vertical"
+		android:gravity="center_horizontal" android:layout_centerInParent="true"
+		android:layout_width="wrap_content">
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="@string/HomeButtonSinglePlayer"
+			android:id="@+id/HomeButtonSolo"></Button>
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="@string/HomeButtonMultiPlayer"
+			android:id="@+id/HomeButtonMulti"></Button>
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="@string/HomeButtonCreatingLevel"
+			android:id="@+id/HomeButtonCreatingLevel"></Button>
+	</LinearLayout>
+	<RelativeLayout android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:id="@+id/relativeLayout2"
+		android:layout_alignParentBottom="true">
+		<LinearLayout android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:id="@+id/linearLayout2"
+			android:layout_centerHorizontal="true">
+			<Spinner android:layout_width="wrap_content"
+				android:layout_weight="1" android:layout_height="wrap_content"
+				android:prompt="@string/HommeSpinnerChooseUserText" android:id="@+id/accounts"
+				android:layout_gravity="center_horizontal"></Spinner>
+			<ImageButton android:background="@drawable/plus"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				style="@android:style/Widget.Button.Small" android:id="@+id/addAccount"
+				android:layout_marginLeft="10px" android:layout_gravity="center_vertical"></ImageButton>
 		</LinearLayout>
-        
-        <LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/linearLayout2" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true">
-	        <Spinner android:id="@+id/accounts" 
-	        	android:layout_gravity="center_horizontal"
-				android:layout_weight="1"
-				android:layout_height="wrap_content"
-				android:layout_width="wrap_content" android:prompt="@string/HommeSpinnerChooseUserText"/>
-	
-			<ImageButton android:id="@+id/addAccount"
-				android:layout_width="wrap_content" style="@android:style/Widget.Button.Small"
-				android:background="@drawable/plus" android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical" android:layout_marginLeft="10px"
-			/>
-        </LinearLayout>
-    </RelativeLayout>
+	</RelativeLayout>
+</RelativeLayout>
