@@ -24,7 +24,7 @@
 	NSMutableDictionary *objectsIdle;
 
 	NSInteger currentDelayNextFrame;
-	NSMutableString *currentCanLoop;
+	BOOL currentCanLoop;
 	NSMutableString *currentProperty;
 }
 

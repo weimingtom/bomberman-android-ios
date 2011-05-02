@@ -47,37 +47,54 @@
     [super dealloc];
 }
 
-- (void) draw:(CGContextRef) context{
-		AnimationSequence * a = ((AnimationSequence *)[animations valueForKey:imageName]);
-		UIImage * image = [((AnimationSequence *)[animations valueForKey:imageName]).sequences objectAtIndex:currentFrame];
-		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize)];
-}
 
 - (void) update{
 	
-	if (delay == waitDelay) {
-		delay = 0;
-		if (currentFrame >= 3) {
-			currentFrame = 0;
-			explode = YES;
+	if (!destroyable) {
+		if ([((AnimationSequence *)[animations objectForKey:imageName]).sequences count] > 2) {
+			if (delay == ((AnimationSequence *)[animations objectForKey:imageName]).delayNextFrame) {
+				delay = 0;
+				if (currentFrame == [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]-1 ) {
+					currentFrame = 0;
+					destroyable= YES;
+				}
+				else
+					currentFrame++;
+			}
+			else{
+				delay++;
+			}
 		}
-		else
-			currentFrame++;
 	}
-	else{
-		delay++;
+	else {
+		NSLog(@"BombFrame : %d",currentFrame);
+		if ([((AnimationSequence *)[destroyAnimations objectForKey:imageName]).sequences count] > 2) {
+			if (delay == 10) {
+				delay = 0;
+				if (currentFrame == [((AnimationSequence *)[destroyAnimations objectForKey:imageName]).sequences count]-1) {
+					if (!((AnimationSequence *)[destroyAnimations objectForKey:imageName]).canLoop) {
+						animationFinished = YES;
+					}
+					else {
+						currentFrame = 0;
+					}
+				}
+			}
+			else{
+				delay++;
+			}
+		}
 	}
+
 }
 
 - (BOOL) hasAnimationFinished{
-	if (explode == YES)
-		return true;
-	else
-		return false;
+	return destroyable;
 }
 
 - (void) destroyable{
-	explode = YES;
+	destroyable = YES;
+	currentFrame = 0;
 }
 
 - (Bomb *)copy{

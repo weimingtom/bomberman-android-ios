@@ -63,10 +63,6 @@
     
 	if (type == @"player") {
 		UIImage* imageRef = [UIImage imageNamed:@"players.png"];
-//		CGImageRef image = imageRef.CGImage;
-		
-		NSUInteger heightOfOneCase = imageRef.size.height/4;
-		NSUInteger widthOfOneCase = imageRef.size.width/24; // 24 = nombre d'image differentes dans la grande image
 
 		if([elementName isEqualToString:@"player"]) {
             Player *player = [[Player alloc] init];
@@ -75,7 +71,7 @@
             [player release];
 		}
 		else if([elementName isEqualToString:@"animation"]) {
-			currentCanLoop = [attributeDict valueForKey:@"canLoop"];
+			currentCanLoop = [[attributeDict valueForKey:@"canLoop"] intValue];
 			currentAnimation = [attributeDict valueForKey:@"name"];
 			
 			AnimationSequence *sequences = [[AnimationSequence alloc] initWithLoop:currentCanLoop];
@@ -87,12 +83,15 @@
             [sequences release];
 			[destroySequences release];
 		}
-		else if ([elementName isEqualToString:@"png"]) {
+		else if ([elementName isEqualToString:@"framerect"]) {
 			Player *currentObject = [objectsAnimations objectForKey:currentProperty];
-			NSInteger x = [[attributeDict valueForKey:@"x"] integerValue];
-			NSInteger y = [[attributeDict valueForKey:@"y"] integerValue];
+			NSInteger x = [[attributeDict valueForKey:@"left"] integerValue];
+			NSInteger y = [[attributeDict valueForKey:@"top"] integerValue];
+			NSInteger width = [[attributeDict valueForKey:@"right"] integerValue] - x;
+			NSInteger height = [[attributeDict valueForKey:@"bottom"] integerValue] - y;
 			
-			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(x*widthOfOneCase,y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
+			
+			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(x,y,width , height))];
 			
 			if ([currentAnimation isEqual:@"idle"]){
 				currentObject.idle = imageRef;
@@ -118,10 +117,7 @@
 	}
 	else if(type == @"bombs") {
 		UIImage* imageRef = [UIImage imageNamed:@"bombs.png"];
-//		CGImageRef image = imageRef.CGImage;
 		
-		NSInteger heightOfOneCase = imageRef.size.height/4;
-		NSInteger widthOfOneCase = imageRef.size.width/4; 
 
 		if([elementName isEqualToString:@"bomb"]){
 			currentProperty = [attributeDict valueForKey:@"name"];
@@ -139,13 +135,18 @@
 		}
 		else if([elementName isEqualToString:@"animation"]){
 			currentString = [attributeDict valueForKey:@"name"];
-			currentCanLoop = [attributeDict valueForKey:@"canLoop"];
+			currentCanLoop = [[attributeDict valueForKey:@"canLoop"] intValue];
 		}
-		else if ([elementName isEqualToString:@"png"]) {
+		else if ([elementName isEqualToString:@"framerect"]) {
 			Bomb * currentObject = [objectsBombs objectForKey:currentProperty];
-			NSInteger x = [[attributeDict valueForKey:@"x"] integerValue];
-			NSInteger y = [[attributeDict valueForKey:@"y"] integerValue];
-			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(x*widthOfOneCase, y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
+			NSInteger x = [[attributeDict valueForKey:@"left"] integerValue];
+			NSInteger y = [[attributeDict valueForKey:@"top"] integerValue];
+			NSInteger width = [[attributeDict valueForKey:@"right"] integerValue] - x;
+			NSInteger height = [[attributeDict valueForKey:@"bottom"] integerValue] - y;
+			
+			
+			
+			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(x, y,width , height))];
 			
 			if ([currentString isEqual:@"idle"]) {
 				currentObject.idle = imageRef;
@@ -166,11 +167,7 @@
 	}
 	else if (type == @"objects"){
 		UIImage* imageRef = [UIImage imageNamed:@"objects.png"];
-//		CGImageRef image = imageRef.CGImage;
-		
-		NSUInteger heightOfOneCase = imageRef.size.height/17;
-		NSUInteger widthOfOneCase = imageRef.size.width/6; 
-		
+ 		
 		if([elementName isEqualToString:@"destructible"] || [elementName isEqualToString:@"undestructible"]){
 			currentProperty = [attributeDict valueForKey:@"name"];
 			Objects *currentObject = nil;
@@ -207,13 +204,15 @@
 		}
 		if([elementName isEqualToString:@"animation"]) {
 			currentString = [attributeDict valueForKey:@"name"];
-			currentCanLoop = [attributeDict valueForKey:@"canLoop"];
+			currentCanLoop = [[attributeDict valueForKey:@"canLoop"] intValue];
 		}
-		else if ([elementName isEqualToString:@"png"]) {
+		else if ([elementName isEqualToString:@"framerect"]) {
 			Objects * currentObject = [objects objectForKey:currentProperty];
-			NSInteger x = [[attributeDict valueForKey:@"x"] integerValue];
-			NSInteger y = [[attributeDict valueForKey:@"y"] integerValue];
-			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(x*widthOfOneCase, y*heightOfOneCase,widthOfOneCase , heightOfOneCase))];
+			NSInteger x = [[attributeDict valueForKey:@"left"] integerValue];
+			NSInteger y = [[attributeDict valueForKey:@"top"] integerValue];
+			NSInteger width = [[attributeDict valueForKey:@"right"] integerValue] - x;
+			NSInteger height = [[attributeDict valueForKey:@"bottom"] integerValue] - y;
+			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(x, y,width , height))];
 			
 			if ([currentString isEqual:@"idle"]) {
 				currentObject.idle = imageRef;
@@ -233,7 +232,6 @@
 				[(AnimationSequence *)[currentObject.destroyAnimations objectForKey:currentProperty] setCanLoop:currentCanLoop];
 
 			}
-
 			[imageRef release];
             
 			return;

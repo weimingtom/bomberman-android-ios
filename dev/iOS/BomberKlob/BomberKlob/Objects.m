@@ -67,15 +67,15 @@
 
 - (void)draw:(CGContextRef)context {
 
-	if ([((AnimationSequence *)[animations objectForKey:imageName]).sequences count] == 1) {
-		[idle drawInRect:CGRectMake(position.x, position.y, ressource.tileSize, ressource.tileSize)];
-	}
-	else if (!destroyable) {
-		UIImage * image = [((AnimationSequence *)[animations objectForKey:imageName]).sequences objectAtIndex:currentFrame];
+	if (destroyable){
+		UIImage * image = [((AnimationSequence *)[destroyAnimations objectForKey:imageName]).sequences objectAtIndex:currentFrame];
 		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize, ressource.tileSize)];
 	}
+	else if ([((AnimationSequence *)[animations objectForKey:imageName]).sequences count] == 1) {
+		[idle drawInRect:CGRectMake(position.x, position.y, ressource.tileSize, ressource.tileSize)];
+	}
 	else {
-		UIImage * image = [((AnimationSequence *)[destroyAnimations objectForKey:imageName]).sequences objectAtIndex:currentFrame];
+		UIImage * image = [((AnimationSequence *)[animations objectForKey:imageName]).sequences objectAtIndex:currentFrame];
 		[image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize, ressource.tileSize)];
 	}
 }
@@ -92,12 +92,14 @@
 - (void) update{	
 	if (!destroyable) {
 		if ([((AnimationSequence *)[animations objectForKey:imageName]).sequences count] > 2) {
-			if (delay == waitDelay) {
+			if (delay == ((AnimationSequence *)[animations objectForKey:imageName]).delayNextFrame) {
 				delay = 0;
-				if (currentFrame == [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]-1) {
-					currentFrame = 0;
+				if (currentFrame == [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]-1 ) {
 					if (!((AnimationSequence *)[animations objectForKey:imageName]).canLoop) {
 						animationFinished = YES;
+					}
+					else{
+						currentFrame = 0;
 					}
 				}
 				else
@@ -110,17 +112,20 @@
 	}
 	else {
 		if ([((AnimationSequence *)[destroyAnimations objectForKey:imageName]).sequences count] > 2) {
-			if (delay == waitDelay) {
+			if (delay == ((AnimationSequence *)[destroyAnimations objectForKey:imageName]).delayNextFrame) {
 				delay = 0;
 				if (currentFrame == [((AnimationSequence *)[destroyAnimations objectForKey:imageName]).sequences count]-1) {
-					currentFrame = 0;
-					if (!((AnimationSequence *)[animations objectForKey:imageName]).canLoop) {
-						
+					if (((AnimationSequence *)[destroyAnimations objectForKey:imageName]).canLoop == 0) {
 						animationFinished = YES;
 					}
+					else {
+						currentFrame = 0;
+					}
+						
 				}
-				else
+				else {
 					currentFrame++;
+				}
 			}
 			else{
 				delay++;
@@ -195,6 +200,7 @@
 
 - (void) destroy{
 	destroyable = YES;
+	currentFrame = 0;
 }
 
 @end

@@ -34,6 +34,15 @@
     [game release];
     [super dealloc];
 }
+- (void) collisionWithPlayer: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue{
+	for (Player * player in game.players) {
+		CGRect rectObject = CGRectMake(object.position.x+xValue, object.position.y+yValue, resource.tileSize,resource.tileSize);
+		CGRect rectPlayer = CGRectMake(player.position.x, player.position.y,resource.tileSize,resource.tileSize);
+		if (CGRectIntersectsRect(rectObject, rectPlayer)) {
+			[player destroy];
+		}
+	}
+}
 
 
 - (BOOL) isInCollision: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue{
@@ -70,8 +79,10 @@
 			for (int j =ymin; j <= ymax; j++) {
 				if ((xmin >= 0 && ymin >=0) && (xmax < game.map.width && ymax < game.map.height)) {
 					//If it's a bomb
-					if([[[[[game.map.blocks objectAtIndex:i] objectAtIndex:j] class] description] isEqual:@"Bomb"])
+					if([[[[[game.map.blocks objectAtIndex:i] objectAtIndex:j] class] description] isEqual:@"Bomb"]) {
 						return false;
+					}
+					
 					//If it is another thing nonempty
 					else if (![[[game.map.blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"]){
 						return true;
@@ -85,6 +96,8 @@
 	}
 	// If it's not a player
 	else {
+
+		
 		//We first checks if there is a collision with sides of the screen
 		if (object.position.x+xValue < 0) {
 			return true;
@@ -92,7 +105,7 @@
 		if (object.position.x+xValue + resource.tileSize > resource.screenHeight){
 			return true;
 		}
-		if (object.position.y+yValue + resource.tileSize*2 > resource.screenWidth){
+		if (object.position.y+yValue + resource.tileSize > resource.screenWidth){
 			return true;
 		}
 		if (object.position.y+yValue < 0){
@@ -182,6 +195,47 @@
     
 }
 
+- (void) stopTop{
+	Player * player = ((Player *)[game.players objectAtIndex:0]);
+	[player stopTop];
+}
+
+- (void) stopDown{
+	Player * player = ((Player *)[game.players objectAtIndex:0]);
+	[player stopDown];
+}
+
+- (void) stopLeft{
+	Player * player = ((Player *)[game.players objectAtIndex:0]);
+	[player stopLeft];
+}
+
+- (void) stopRight{
+	Player * player = ((Player *)[game.players objectAtIndex:0]);
+	[player stopRight];
+}
+
+
+- (void) stopLeftTop{
+	Player * player = ((Player *)[game.players objectAtIndex:0]);
+	[player stopLeftTop];
+}
+
+- (void) stopRightTop{
+	Player * player = ((Player *)[game.players objectAtIndex:0]);
+	[player stopRightTop];
+}
+
+- (void) stopLeftDown{
+	Player * player = ((Player *)[game.players objectAtIndex:0]);
+	[player stopLeftDown];
+}
+
+- (void) stopRightDown{
+	Player * player = ((Player *)[game.players objectAtIndex:0]);
+	[player stopRightDown];
+}
+
 - (void) updateBombs{
 
 	NSMutableArray * bombsDeleted = [[NSMutableArray alloc] init];
@@ -193,6 +247,7 @@
 				
 				Undestructible * fire = [[resource.bitmapsAnimates objectForKey:@"firecenter"] copy];
 				fire.position = [[Position alloc] initWithPosition:bomb.position];
+				[self collisionWithPlayer:fire :0 :0];
 				
 				[game.map addBlock:fire position:[[Position alloc] initWithX:bomb.position.x/resource.tileSize y:bomb.position.y/resource.tileSize]];
 				[fire release];
@@ -212,12 +267,13 @@
 							fire = [[resource.bitmapsAnimates objectForKey:@"firedown"] copy];
 							fire.position = firePosition;
 						}
+						[self collisionWithPlayer:fire :0 :0];
 						if (![self isInCollision:fire :0 :0]){
 							[game.map addBlock:fire position:firePositionMap];
 							[fire release];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Bomb"]){
-							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroyable];
+							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroy];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Undestructible"]){
 							if ([((Undestructible *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]).imageName isEqual:@"firedown"]) {
@@ -228,7 +284,7 @@
 							}
 						}
 						else {
-							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroyable];
+							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroy];
 						}
 					}
 					//UP
@@ -243,12 +299,13 @@
 							fire = [[resource.bitmapsAnimates objectForKey:@"fireup"] copy];
 							fire.position = firePosition;
 						}
+						[self collisionWithPlayer:fire :0 :0];
 						if (![self isInCollision:fire :0 :0]){
 							[game.map addBlock:fire position:firePositionMap];
 							[fire release];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Bomb"]){
-							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroyable];
+							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroy];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Undestructible"]){
 							if ([((Undestructible *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]).imageName isEqual:@"fireup"]) {
@@ -259,7 +316,7 @@
 							}
 						}
 						else {
-							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroyable];
+							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroy];
 						}
 					}
 					
@@ -275,12 +332,13 @@
 							fire = [[resource.bitmapsAnimates objectForKey:@"fireleft"] copy];
 							fire.position = firePosition;
 						}
+						[self collisionWithPlayer:fire :0 :0];
 						if (![self isInCollision:fire :0 :0]){
 							[game.map addBlock:fire position:firePositionMap];
 							[fire release];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Bomb"]){
-							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroyable];
+							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroy];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Undestructible"]){
 							if ([((Undestructible *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]).imageName isEqual:@"fireleft"]) {
@@ -291,7 +349,7 @@
 							}
 						}
 						else {
-							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroyable];
+							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroy];
 						}
 					}
 					
@@ -307,12 +365,13 @@
 							fire = [[resource.bitmapsAnimates objectForKey:@"fireright"] copy];
 							fire.position = firePosition;
 						}
+						[self collisionWithPlayer:fire :0 :0];
 						if (![self isInCollision:fire :0 :0]){
 							[game.map addBlock:fire position:firePositionMap];
 							[fire release];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Bomb"]){
-							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroyable];
+							[((Bomb *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]) destroy];
 						}
 						else if([[[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] class] description] isEqual:@"Undestructible"]){
 							if ([((Undestructible *)[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y]).imageName isEqual:@"fireright"]) {
@@ -323,7 +382,7 @@
 							}
 						}
 						else {
-							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroyable];
+							[[[game.map.blocks objectAtIndex:firePositionMap.x] objectAtIndex:firePositionMap.y] destroy];
 						}
 					}
 				}
