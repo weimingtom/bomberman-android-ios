@@ -35,12 +35,14 @@ public class Map implements Serializable {
 	
 	private transient Bitmap bm;
 	private transient ConcurrentHashMap<Point, Objects> animatedObjects;
+	private transient ConcurrentHashMap<Point, Integer> zoneDangereuses;
 
 	public Map() {
 		this.players = new Point[4];
 		this.grounds = new Objects[21][15];
 		this.blocks  = new Objects[21][15];
 		this.animatedObjects = new ConcurrentHashMap<Point, Objects>();
+		this.zoneDangereuses = new ConcurrentHashMap<Point, Integer>();
 	}
 
 	/* Getteurs ------------------------------------------------------------ */
@@ -65,6 +67,9 @@ public class Map implements Serializable {
 		return players;
 	}
 
+	public ConcurrentHashMap<Point, Integer> getZoneDangereuses() {
+		return zoneDangereuses;
+	}
 
 	/* Setteurs ------------------------------------------------------------ */
 
@@ -244,6 +249,9 @@ public class Map implements Serializable {
 		for(Entry<Point, Objects> entry : animatedObjects.entrySet()) {
 			Objects o = animatedObjects.get(entry.getKey());
 			if (o.getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) && o.hasAnimationFinished()) {
+				if ( o.getDamage() != 0 ) {
+					zoneDangereuses.put(entry.getKey(),0);
+				}
 				this.deleteBlock(entry.getKey());
 				animatedObjects.remove(entry.getKey());
 			}
