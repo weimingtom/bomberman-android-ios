@@ -216,7 +216,7 @@ public class Engine {
 								players[i].setImmortal(50);
 							}
 						}
-						else if ( players[i].isDestructible() ) {
+						else {
 							Point point = players[i].getPosition();
 							Point point1 = ResourcesManager.coToTile(point.x,point.y);
 							Point point2 = ResourcesManager.coToTile(point.x+ResourcesManager.getSize()-1,point.y);
@@ -224,12 +224,22 @@ public class Engine {
 							Point point4 = ResourcesManager.coToTile(point.x,point.y+ResourcesManager.getSize()-1);
 
 							/* IA */
-							if ( i != 0 && !players[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) && !players[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel()) ) {
+							if ( i != 0 && !players[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel()) ) {
 								/*Si le bot n'a pas d'objectif*/
 								if ( ((BotPlayer) players[i]).getObjectif() == null ) {
 									/* Defensif (On est dans une zone dangereuse) */
 									if ( (zoneDangereuses.get(point1) == Integer.valueOf(1)) || (zoneDangereuses.get(point2) == Integer.valueOf(1)) || (zoneDangereuses.get(point3) == Integer.valueOf(1)) || (zoneDangereuses.get(point4) == Integer.valueOf(1))) {
-										((BotPlayer) players[i]).setObjectif(new Point((int)(Math.random() * (20-1)) + 1,(int)(Math.random() * (14-1)) + 1));
+										
+										int x = 0;
+										int y = 0;
+										
+										do {
+											x = (int)(Math.random() * (20-1)) + 1;
+											y = (int)(Math.random() * (14-1)) + 1;
+										} while ( map.getBlocks()[x][y] != null || (zoneDangereuses.get(new Point(x,y)) == Integer.valueOf(1)) );
+
+										
+										((BotPlayer) players[i]).setObjectif(new Point(x,y));
 									}
 									/* Offensif */
 									else {
@@ -312,23 +322,25 @@ public class Engine {
 								}
 							}
 							
-							if ( (map.getBlocks()[point1.x][point1.y] != null && map.getBlocks()[point1.x][point1.y].getDamage() != 0) || (map.getBlocks()[point2.x][point2.y] != null && map.getBlocks()[point2.x][point2.y].getDamage() != 0) ||(map.getBlocks()[point3.x][point3.y] != null && map.getBlocks()[point3.x][point3.y].getDamage() != 0) || (map.getBlocks()[point4.x][point4.y] != null && map.getBlocks()[point4.x][point4.y].getDamage() != 0)) {
-								players[i].decreaseLife();
-								if ( players[i].getLife() == 0 ) {
-									players[i].setCurrentAnimation(PlayerAnimations.KILL);
+							if ( players[i].isDestructible() ) {							
+								if ( (map.getBlocks()[point1.x][point1.y] != null && map.getBlocks()[point1.x][point1.y].getDamage() != 0) || (map.getBlocks()[point2.x][point2.y] != null && map.getBlocks()[point2.x][point2.y].getDamage() != 0) ||(map.getBlocks()[point3.x][point3.y] != null && map.getBlocks()[point3.x][point3.y].getDamage() != 0) || (map.getBlocks()[point4.x][point4.y] != null && map.getBlocks()[point4.x][point4.y].getDamage() != 0)) {
+									players[i].decreaseLife();
+									if ( players[i].getLife() == 0 ) {
+										players[i].setCurrentAnimation(PlayerAnimations.KILL);
+									}
+									else {
+										players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
+									}
 								}
-								else {
-									players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
-								}
-							}
-							else if ( (map.getGrounds()[point1.x][point1.y].getDamage() != 0) || ( map.getGrounds()[point2.x][point2.y].getDamage() != 0) || (map.getGrounds()[point3.x][point3.y].getDamage() != 0) || (map.getGrounds()[point4.x][point4.y].getDamage() != 0) ) {
-
-								players[i].decreaseLife();
-								if ( players[i].getLife() == 0 ) {
-									players[i].setCurrentAnimation(PlayerAnimations.KILL);
-								}
-								else {
-									players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
+								else if ( (map.getGrounds()[point1.x][point1.y].getDamage() != 0) || ( map.getGrounds()[point2.x][point2.y].getDamage() != 0) || (map.getGrounds()[point3.x][point3.y].getDamage() != 0) || (map.getGrounds()[point4.x][point4.y].getDamage() != 0) ) {
+	
+									players[i].decreaseLife();
+									if ( players[i].getLife() == 0 ) {
+										players[i].setCurrentAnimation(PlayerAnimations.KILL);
+									}
+									else {
+										players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
+									}
 								}
 							}
 						}
