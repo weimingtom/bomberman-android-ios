@@ -9,10 +9,11 @@
 #import "Player.h"
 #import "RessourceManager.h"
 #import "AnimationSequence.h"
+#import "Bomb.h"
 
 
 @implementation Player
-@synthesize speed, lifeNumber, bombsPlanted, bombNumber,bombsTypes,powerExplosion,shield,timeExplosion, color;
+@synthesize speed, lifeNumber, bombsPlanted, bombNumber,bombsTypes,powerExplosion,shield,timeExplosion, color, bombPosed;
 
 - (id) init{
 	self = [super init];
@@ -78,144 +79,210 @@
 
 
 - (void) moveTop{
-	if (currentAnimation != @"up") {
-		currentAnimation = @"up";
-		currentFrame = 0;
-		position.y -= speed;
-
+	if (!istouched) {
+		if (currentAnimation != @"up") {
+			currentAnimation = @"up";
+			currentFrame = 0;
+			position.y -= speed;
+			
+		}
+		else if (currentFrame < 3) {
+			position.y -= speed;
+		}
+		else {
+			position.y-= speed;
+		}
 	}
-	else if (currentFrame < 3) {
-		position.y -= speed;
-	}
-	else {
-		position.y-= speed;
-	}
-	
 }
 
 
 - (void) moveDown{
-	if (currentAnimation != @"down") {
-		currentAnimation = @"down";
-		currentFrame = 0;
-		position.y+=speed;
-	}
-	else if (currentFrame < 3) {
-		position.y+=speed;
-	}
-	else {
-		position.y+= speed;
+	if (!istouched) {
+		if (currentAnimation != @"down") {
+			currentAnimation = @"down";
+			currentFrame = 0;
+			position.y+=speed;
+		}
+		else if (currentFrame < 3) {
+			position.y+=speed;
+		}
+		else {
+			position.y+= speed;
+		}
 	}
 }
 
 
 - (void) moveLeft{
-	if (currentAnimation != @"left") {
-		currentAnimation = @"left";
-		currentFrame = 0;
-		position.x-=speed;
-
-	}
-	else if (currentFrame < 3) {
-		position.x-=speed;
-	}
-	else {
-		position.x-=speed;
+	if (!istouched) {
+		if (currentAnimation != @"left") {
+			currentAnimation = @"left";
+			currentFrame = 0;
+			position.x-=speed;
+			
+		}
+		else if (currentFrame < 3) {
+			position.x-=speed;
+		}
+		else {
+			position.x-=speed;
+		}
 	}
 }
 
 
 - (void) moveRight{
-	if (currentAnimation != @"right") {
-		currentAnimation = @"right";
-		currentFrame = 0;
-		position.x+=speed;
-	}
-	else if (currentFrame < 3) {
-		position.x+=speed;
-	}
-	else {
-		position.x+=speed;
+	if (!istouched) {
+		if (currentAnimation != @"right") {
+			currentAnimation = @"right";
+			currentFrame = 0;
+			position.x+=speed;
+		}
+		else if (currentFrame < 3) {
+			position.x+=speed;
+		}
+		else {
+			position.x+=speed;
+		}
 	}
 }
 
 - (void) moveLeftTop{
-	if (currentAnimation != @"upLeft") {
-		currentAnimation = @"upLeft";
-		currentFrame = 0;
-		position.x-=speed;
-		position.y-=speed;
-	}
-	else if (currentFrame < 3) {
-		position.x-=speed;
-		position.y-=speed;
-	}
-	else {
-		position.x-=speed;
-		position.y-=speed;
+	if (!istouched) {
+		if (currentAnimation != @"up_left") {
+			currentAnimation = @"up_left";
+			currentFrame = 0;
+			position.x-=speed;
+			position.y-=speed;
+		}
+		else if (currentFrame < 3) {
+			position.x-=speed;
+			position.y-=speed;
+		}
+		else {
+			position.x-=speed;
+			position.y-=speed;
+		}
 	}
 }
 
 - (void) moveLeftDown{
-	if (currentAnimation != @"downLeft") {
-		currentAnimation = @"downLeft";
-		currentFrame = 0;
-		position.x-=speed;
-		position.y+=speed;
-	}
-	else if (currentFrame < 3) {
-		position.x-=speed;
-		position.y+=speed;
-	}
-	else {
-		position.x-=speed;
-		position.y+=speed;
+	if (!istouched) {
+		if (currentAnimation != @"down_left") {
+			currentAnimation = @"down_left";
+			currentFrame = 0;
+			position.x-=speed;
+			position.y+=speed;
+		}
+		else if (currentFrame < 3) {
+			position.x-=speed;
+			position.y+=speed;
+		}
+		else {
+			position.x-=speed;
+			position.y+=speed;
+		}
 	}
 }
 
 - (void) moveRightDown{
-	if (currentAnimation != @"downRight") {
-		currentAnimation = @"downRight";
-		currentFrame = 0;
-		position.x+=speed;
-		position.y+=speed;
-	}
-	else if (currentFrame < 3) {
-		position.x+=speed;
-		position.y+=speed;
-	}
-	else {
-		position.x+=speed;
-		position.y+=speed;
+	if (!istouched) {
+		if (currentAnimation != @"down_right") {
+			currentAnimation = @"down_right";
+			currentFrame = 0;
+			position.x+=speed;
+			position.y+=speed;
+		}
+		else if (currentFrame < 3) {
+			position.x+=speed;
+			position.y+=speed;
+		}
+		else {
+			position.x+=speed;
+			position.y+=speed;
+		}
 	}
 }
 
 - (void) moveRightTop{
-	if (currentAnimation != @"upRight") {
-		currentAnimation = @"upRight";
+	if (!istouched) {
+		if (currentAnimation != @"up_right") {
+			currentAnimation = @"up_right";
+			currentFrame = 0;
+			position.x+=speed;
+			position.y-=speed;
+		}
+		else if (currentFrame < 3) {
+			position.x+=speed;
+			position.y-=speed;
+		}
+		else {
+			position.x+=speed;
+			position.y-=speed;
+		}
+	}
+}
+
+- (void) stopTop{
+	if (!istouched) {
+		currentAnimation = @"stop_up";
 		currentFrame = 0;
-		position.x+=speed;
-		position.y-=speed;
 	}
-	else if (currentFrame < 3) {
-		position.x+=speed;
-		position.y-=speed;
+}
+
+- (void) stopDown{
+	if (!istouched) {
+		currentAnimation = @"stop_down";
+		currentFrame = 0;
 	}
-	else {
-		position.x+=speed;
-		position.y-=speed;
+}
+- (void) stopLeft{
+	if (!istouched) {
+		currentAnimation = @"stop_left";
+		currentFrame = 0;
+	}
+}
+
+- (void) stopRight{
+	if (!istouched) {
+		currentAnimation = @"stop_right";
+		currentFrame = 0;
+	}
+}
+
+- (void) stopLeftTop{
+	if (!istouched) {
+		currentAnimation = @"stop_up_left";
+		currentFrame = 0;
+	}
+}
+
+- (void) stopRightTop{
+	if (!istouched) {
+		currentAnimation = @"stop_up_right";
+		currentFrame = 0;
+	}
+}
+- (void) stopLeftDown{
+	if (!istouched) {
+		currentAnimation = @"stop_down_left";
+		currentFrame = 0;
+	}
+}
+- (void) stopRightDown{
+	if (!istouched) {
+		currentAnimation = @"stop_down_right";
+		currentFrame = 0;
 	}
 }
 
 
-- (void) plantingBomb{
-	
+
+- (void) plantingBomb:(Bomb *) aBomb{
+	[bombsPlanted addObject:aBomb];
+	bombPosed = YES;
 }
 
-
-- (void) hurt{
-	
-}
 
 
 - (void) draw:(CGContextRef)context{
@@ -254,10 +321,13 @@
 
 
 - (void)update{
-	if (delay == waitDelay) {
+	if (delay >= ((AnimationSequence *)[animations objectForKey:currentAnimation]).delayNextFrame) {
 		delay = 0;
-		if (currentFrame >= 3) {
+		if (currentFrame >= [((AnimationSequence *)[animations objectForKey:currentAnimation]).sequences count]-1) {
 			currentFrame = 0;
+			if (istouched) {
+				istouched = NO;
+			}
 		}
 		else
 			currentFrame++;
@@ -297,6 +367,18 @@
 	playerTmp.bombNumber = bombNumber;
 	
 	return playerTmp;
+}
+
+- (void) hurt{
+	currentAnimation = @"touched";
+	currentFrame = 0;
+	istouched = YES;
+}
+
+- (void)destroy {
+	currentFrame = 0;
+	currentAnimation = @"touched";
+	istouched = YES;
 }
 
 @end

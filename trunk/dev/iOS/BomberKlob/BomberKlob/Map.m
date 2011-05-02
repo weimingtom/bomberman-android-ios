@@ -74,7 +74,7 @@
             [[grounds objectAtIndex:i] addObject:groundTmp];
             
             if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
-				blockTmp = [(Undestructible *)[resource.bitmapsAnimates objectForKey:@"block1"] copy];
+				blockTmp = [(Undestructible *)[resource.bitmapsAnimates objectForKey:@"herb"] copy];
 				blockTmp.position = positionTmp;
 				[[blocks objectAtIndex:i] addObject:blockTmp];
                 [blockTmp release];

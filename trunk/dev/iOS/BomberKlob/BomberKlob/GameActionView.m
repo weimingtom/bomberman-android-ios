@@ -59,7 +59,7 @@
 	Bomb * bomb = [[resource.bitmapsBombs objectForKey:@"normal"] copy];
 	bomb.position = bombPosition;
 	if (![engine isInCollision:bomb :0 :0]) {
-		[p.bombsPlanted addObject:bomb];
+		[p plantingBomb:bomb];
 		[engine.game.map addBlock:bomb position:[[Position alloc] initWithX:bx y:by]];
 	}
 	

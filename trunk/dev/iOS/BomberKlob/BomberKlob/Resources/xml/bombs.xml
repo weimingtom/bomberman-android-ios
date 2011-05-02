@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <bombs>
 	<bomb name="normal">
-	    <animation name="idle" canLoop="false" > 
-			<png x="1" y="0" delayNextFrame="0" />
+		<animation name="idle" canLoop="false" sound="">
+			<framerect top="0" left="30" bottom="30" right="60" delayNextFrame="0" />
 		</animation>
-	    <animation name="animate" canLoop="true" > 
-			<png x="1" y="0" delayNextFrame="5" /> 
-			<png x="2" y="0" delayNextFrame="5" />
-			<png x="1" y="0" delayNextFrame="5" />
-			<png x="0" y="0" delayNextFrame="5" />
+		<animation name="animate" canLoop="true" sound="bombplanted">
+			<framerect top="0" left="30" bottom="30" right="60" delayNextFrame="1" />
+			<framerect top="0" left="60" bottom="30" right="90" delayNextFrame="1" />
+			<framerect top="0" left="30" bottom="30" right="60" delayNextFrame="1" />
+			<framerect top="0" left="0"  bottom="30" right="30" delayNextFrame="1" />
 		</animation>
-		<animation name="destroy" canLoop="false" > 
-			<png x="1" y="0" delayNextFrame="0" /> 
+		<animation name="destroy" canLoop="false" sound="explosion1"> 
+			<framerect top="0" left="90"  bottom="30" right="120" delayNextFrame="1" />
 		</animation>
 	</bomb>
 </bombs>

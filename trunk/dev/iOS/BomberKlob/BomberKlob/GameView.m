@@ -30,6 +30,8 @@
 		lastPosition = [[Position alloc] init];
 		currentPosition = [[Position alloc] init];
 		[self startTimerUpdateMap];
+		[self startTimerMovement];
+
 	}
 	
 	return self;
@@ -84,13 +86,87 @@
 	[self setNeedsDisplay];
 }
 
+-(void) startTimerMovement
+{
+	movementThread = [[NSThread alloc] initWithTarget:self selector:@selector(startTimerMovementThread) object:nil]; //Create a new thread
+	[movementThread start]; //start the thread
+}
+
+-(void) startTimerMovementThread {
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
+	[[NSTimer scheduledTimerWithTimeInterval: 0.02 target: self selector: @selector(timerMovement:) userInfo:nil repeats: YES] retain];
+	[runLoop run];	
+	[pool release];
+
+}
+
+- (void)timerMovement:(NSTimer *)timer {
+	Engine * engine = controller.globalController.engine;
+	if (run) {
+		if (currentDirection == @"right") {
+			[engine moveRight];
+		}
+		else if (currentDirection == @"left") {
+			[engine moveLeft];
+		}
+		else if (currentDirection == @"down") {
+			[engine moveDown];
+		}
+		else if (currentDirection == @"top") {
+			[engine moveTop];
+		}
+		else if (currentDirection == @"rightTop") {
+			[engine moveRightTop];
+		}
+		else if (currentDirection == @"leftTop") {
+			[engine moveLeftTop];
+		}
+		else if (currentDirection == @"rightDown") {
+			[engine moveRightDown];
+		}
+		else if (currentDirection == @"leftDown") {
+			[engine moveLeftDown];
+		}
+	}
+	else {
+		if ([currentDirection isEqualToString:@"stop_up"]) {
+			[engine stopTop];
+		}
+		else if ([currentDirection isEqualToString:@"stop_down"]) {
+			[engine stopDown];
+		}
+		else if ([currentDirection isEqualToString:@"stop_right"]) {
+			[engine stopRight];
+		}
+		else if ([currentDirection isEqualToString:@"stop_left"]) {
+			[engine stopLeft];
+		}
+		else if ([currentDirection isEqualToString:@"stop_up_right"]) {
+			[engine stopRightTop];
+		}
+		else if ([currentDirection isEqualToString:@"stop_up_left"]) {
+			[engine stopLeftTop];
+		}
+		else if ([currentDirection isEqualToString:@"stop_down_right"]) {
+			[engine stopRightDown];
+		}
+		else if ([currentDirection isEqualToString:@"stop_down_left"]) {
+			[engine stopLeftDown];
+		}
+	}
+	if ([engine.game.players count] > 0 && ![lastPosition isEqual:currentPosition]) {
+		[[engine.game.players objectAtIndex:0] update];
+	}
+}
+
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
 	CGPoint pt = [[touches anyObject] locationInView:self];
 	lastPosition.x = currentPosition.x;
 	lastPosition.y = currentPosition.y;
 	currentPosition.x = pt.x;
 	currentPosition.y = pt.y;
-	[self startTimerMovement];
 	run = YES;
 	currentDirection = @"";
 }
@@ -137,60 +213,31 @@
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	run = NO;
-}
-
--(void) startTimerMovement
-{
-	movementThread = [[NSThread alloc] initWithTarget:self selector:@selector(startTimerMovementThread) object:nil]; //Create a new thread
-	[movementThread start]; //start the thread
-}
-
--(void) startTimerMovementThread {
-    
-	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
-	[[NSTimer scheduledTimerWithTimeInterval: 0.02 target: self selector: @selector(timerMovement:) userInfo:nil repeats: YES] retain];
-	[runLoop run];
-	[pool release];
-	
-}
-
-- (void)timerMovement:(NSTimer *)timer {
-	Engine * engine = controller.globalController.engine;
-	if (run) {
-		if (currentDirection == @"right") {
-			engine.moveRight;
-		}
-		else if (currentDirection == @"left") {
-			engine.moveLeft;
-		}
-		else if (currentDirection == @"down") {
-			engine.moveDown;
-		}
-		else if (currentDirection == @"top") {
-			engine.moveTop;
-		}
-		else if (currentDirection == @"rightTop") {
-			engine.moveRightTop;
-		}
-		else if (currentDirection == @"leftTop") {
-			engine.moveLeftTop;
-		}
-		else if (currentDirection == @"rightDown") {
-			engine.moveRightDown;
-		}
-		else if (currentDirection == @"leftDown") {
-			engine.moveLeftDown;
-		}
+	if ([currentDirection isEqualToString:@"top"]) {
+		currentDirection = @"stop_up";
 	}
-	else {
-		[NSThread exit];
+	else if ([currentDirection isEqualToString:@"down"]) {
+		currentDirection = @"stop_down";
 	}
-	if ([engine.game.players count] > 0 && ![lastPosition isEqual:currentPosition]) {
-		[[engine.game.players objectAtIndex:0] update];
+	else if ([currentDirection isEqualToString:@"right"]) {
+		currentDirection = @"stop_right";
+	}
+	else if ([currentDirection isEqualToString:@"left"]) {
+		currentDirection = @"stop_left";
+	}
+	else if ([currentDirection isEqualToString:@"rightTop"]) {
+		currentDirection = @"stop_up_right";
+	}
+	else if ([currentDirection isEqualToString:@"leftTop"]) {
+		currentDirection = @"stop_up_left";
+	}
+	else if ([currentDirection isEqualToString:@"rightDown"]) {
+		currentDirection = @"stop_down_right";
+	}
+	else if ([currentDirection isEqualToString:@"leftDown"]) {
+		currentDirection = @"stop_down_left";
 	}
 }
-
 
 -(void) stopThread{
 	[movementThread cancel];

@@ -29,6 +29,14 @@
  */
 - (BOOL) isInCollision: (Objects *) player: (NSInteger) xValue: (NSInteger) yValue;
 
+
+/** Lets see if the object is in collisions with a player. If Yes the player will be destroy.
+
+ */
+- (void) collisionWithPlayer: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue;
+
+
+
 ///----------------------------------------
 /// @name Managing the Movements of Players
 ///----------------------------------------
@@ -56,6 +64,23 @@
 
 /** Allows you to manage the movements to the Right-Top corner. */
 - (void) moveRightTop;
+
+- (void) stopTop;
+
+- (void) stopDown;
+
+- (void) stopLeft;
+
+- (void) stopRight;
+
+- (void) stopLeftTop;
+
+- (void) stopRightTop;
+
+- (void) stopLeftDown;
+
+- (void) stopRightDown;
+
 
 
 ///------------------------
