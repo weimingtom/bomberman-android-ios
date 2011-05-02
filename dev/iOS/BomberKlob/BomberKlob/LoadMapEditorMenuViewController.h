@@ -15,12 +15,16 @@
     UILabel *owner;
     
     NSArray *mapsNotOfficial;
+    NSArray *imageMapsNotOfficial;
     UIBarButtonItem *load;
+    
+    NSArray *maps;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *mapName;
 @property (nonatomic, retain) IBOutlet UILabel *owner;
 @property (nonatomic, retain) NSArray *mapsNotOfficial;
+@property (nonatomic, retain) NSArray *imageMapsNotOfficial;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *load;
 
 - (void)initMapNotOfficial;

@@ -9,6 +9,10 @@
 #import "SinglePlayerMenuViewController.h"
 #import "GameViewControllerSingle.h"
 #import "GlobalGameViewControllerSingle.h"
+#import "BomberKlobAppDelegate.h"
+#import "Application.h"
+#import "MapMenu.h"
+#import "DBMap.h"
 
 
 @implementation SinglePlayerMenuViewController
@@ -17,8 +21,18 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
     if (self) {
-        // Custom initialization
+        Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+        NSMutableArray *images = [[NSMutableArray alloc] initWithCapacity:[application.maps count]];
+        
+        for (int i = 0; i < [application.maps count]; i++) {
+            [images addObject:[UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@.png", ((DBMap *) [application.maps objectAtIndex:i]).name]]];
+        }
+        
+        MapMenu *menu = [[MapMenu alloc] initWithFrame:CGRectMake(0, 5, 480, 142) imageWidth:170 imageHeight:115 imageMargin:-20 reductionPercentage:20 items:application.maps images:images displayNameOwner:NO];
+        
+        [self.view addSubview:menu];
     }
     return self;
 }

@@ -12,16 +12,16 @@
 @property (nonatomic, retain) Game * game;
 
 
-///----------------------------
+///--------------------------
 /// @name Initializing Engine
-///----------------------------
+///--------------------------
 
 /** Initializes the `Engine` with a `Game`. */
 - (id) initWithGame:(Game *) gameValue;
 
-///-------------------------------------------
-/// @name Allows you to Manage the Collision of Objects
-///-------------------------------------------
+///----------------------------------------
+/// @name Managing the Collision of Objects
+///----------------------------------------
 
 /** Lets see if the object is in collisions by advancing of x and y.
  
@@ -29,9 +29,9 @@
  */
 - (BOOL) isInCollision: (Objects *) player: (NSInteger) xValue: (NSInteger) yValue;
 
-///-------------------------------------------
-/// @name Allows you to Manage the Movements of Players
-///-------------------------------------------
+///----------------------------------------
+/// @name Managing the Movements of Players
+///----------------------------------------
 
 /** Allows you to manage the movements to the Top. */
 - (void) moveTop;
@@ -58,9 +58,9 @@
 - (void) moveRightTop;
 
 
-///-------------------------------------------
-/// @name Allows you to Update the Bomb
-///-------------------------------------------
+///------------------------
+/// @name Updating the Bomb
+///------------------------
 
 /** Allows to update the animations bombs and explode them. */
 - (void) updateBombs;

@@ -14,20 +14,26 @@
 #import "DataBase.h"
 #import "DBMap.h"
 #import "EditorViewController.h"
+#import "MapMenu.h"
 
 
 @implementation LoadMapEditorMenuViewController
-@synthesize load;
-@synthesize mapName;
-@synthesize owner;
-@synthesize mapsNotOfficial;
+
+@synthesize load, mapName, owner, mapsNotOfficial, imageMapsNotOfficial;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if (self) {
-        // Custom initialization
+//        maps = [[NSMutableArray alloc] initWithObjects:map1, map2, map3, nil];
+//        
+        [self initMapNotOfficial];
+        MapMenu *menu = [[MapMenu alloc] initWithFrame:CGRectMake(0, 5, 480, 225) imageWidth:375 imageHeight:225 imageMargin:-20 reductionPercentage:20 items:mapsNotOfficial images:imageMapsNotOfficial displayNameOwner:YES];
+        
+        [self.view addSubview:menu];
+
+//        MapMenu *menu = [[Menu alloc] initWithFrame:CGRectMake(0, 0, 480, 225) horizontal:YES imageWidth:375 imageHeight:225 imageMargin:-20 reductionPercentage:20 items:mapsNotOfficial images:imageMapsNotOfficial];
     }
     
     return self;
@@ -44,13 +50,17 @@
 
 - (void)initMapNotOfficial {
     NSMutableArray *officialMapsTmp = [[NSMutableArray alloc] init];
+    NSMutableArray *imageMapsNotOfficialTmp = [[NSMutableArray alloc] init];
     
     DBMap *map;
     sqlite3_stmt *statement = [[DataBase sharedDataBase] select:@"*" from:@"Map" where:@"official = 0"];
     
     while (sqlite3_step(statement) == SQLITE_ROW) {
         map = [[DBMap alloc] initWithName:[NSString stringWithUTF8String:(char *) sqlite3_column_text(statement, 0)] owner:sqlite3_column_int(statement, 1) official:sqlite3_column_int(statement, 1)];
+        
         [officialMapsTmp addObject:map];
+        [imageMapsNotOfficialTmp addObject:[UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@.png", map.name]]];
+        
         [map release];
     }
     
@@ -58,8 +68,11 @@
     
     if ([officialMapsTmp count] > 0) {
         self.mapsNotOfficial = officialMapsTmp;
-        [officialMapsTmp release];
+        self.imageMapsNotOfficial = imageMapsNotOfficialTmp;
     }
+    
+    [officialMapsTmp release];
+    [imageMapsNotOfficialTmp release];
 }
 
 

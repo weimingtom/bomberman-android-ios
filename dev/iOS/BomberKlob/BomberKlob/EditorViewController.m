@@ -89,7 +89,6 @@
         
         if ([editorAction.selectedObjectType isEqual:@"Inanimated"]) {
             block = [(Undestructible *)[[RessourceManager sharedRessource].bitmapsAnimates objectForKey:editorAction.selectedObject] copy];
-//            block = [[Undestructible alloc] initWithImageName:editorAction.selectedObject position:position];
         }
         
         if (block != nil)
