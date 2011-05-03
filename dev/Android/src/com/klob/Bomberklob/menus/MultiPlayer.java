@@ -48,20 +48,6 @@ public class MultiPlayer extends Activity implements View.OnClickListener {
 		this.userPseudo = (TextView) findViewById(R.id.MultiPlayerGameUserName);
 		this.userPseudo.setText(Model.getUser().getPseudo());
 		
-		this.password = (CheckBox) findViewById(R.id.MultiPlayerGameCheckBoxPassword);
-		Log.i("","::::: " + Model.getUser().getRememberPassword());
-		if(Model.getUser().getRememberPassword()){
-			password.setChecked(true);
-			userAccountName.setText(Model.getUser().getUserName());
-			Log.i("", " mot de passe de remplissage: "+ Model.getUser().getPassword());
-			password.setText(Model.getUser().getPassword());
-			
-		}
-		
-//		if ( Model.getUser().getRememberPassword() ) {
-//			this.password.setChecked(true);
-//		}
-		
 		InputFilter filter = new InputFilter() {
 
 			public CharSequence filter(CharSequence source, int start, int end,Spanned dest, int dstart, int dend) { 
@@ -73,7 +59,7 @@ public class MultiPlayer extends Activity implements View.OnClickListener {
 		        return null;   
 		    }  
 		};
-
+		
 		this.userAccountName = (EditText) findViewById(R.id.MultiPlayerGameEditTextName);
 //		this.userAccountName.setText(Model.getUser().getUserName());
 		this.userAccountName.setFilters(new InputFilter[]{filter});
@@ -81,6 +67,20 @@ public class MultiPlayer extends Activity implements View.OnClickListener {
 		this.userAccountPassword = (EditText) findViewById(R.id.MultiPlayerGameEditTextPassword);
 //		this.userAccountPassword.setText(Model.getUser().getPassword());
 		this.userAccountPassword.setFilters(new InputFilter[]{filter});
+		
+		this.password = (CheckBox) findViewById(R.id.MultiPlayerGameCheckBoxPassword);
+		if(Model.getUser().getRememberPassword()){
+			password.setChecked(true);
+			userAccountName.setText(Model.getUser().getUserName());
+			userAccountPassword.setText(Model.getUser().getPassword());
+		}
+		
+//		if ( Model.getUser().getRememberPassword() ) {
+//			this.password.setChecked(true);
+//		}
+		
+		
+		
 		
 		this.connectionAuto = (CheckBox) findViewById(R.id.MultiPlayerGameCheckBoxConnection);
 //		this.connectionAuto.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
@@ -112,7 +112,11 @@ public class MultiPlayer extends Activity implements View.OnClickListener {
 	
 	
 	
-	
+	/**
+	 * fonction de cryptage md5 pour les mots de passe
+	 * @param password
+	 * @return passwordEncrypted
+	 */
 	private static final String md5(final String password) {
 	    try {
 	        
@@ -135,6 +139,11 @@ public class MultiPlayer extends Activity implements View.OnClickListener {
 	    return "";
 	}
 
+	/**
+	 * simple fonction de vérification de chaîne de caractères
+	 * @param chaine
+	 * @return true/false
+	 */
 	private boolean testString(String chaine){
 		if(chaine.contains("\t") || chaine.contains("\n") || chaine.contains("\r") || chaine.contains(" ") || chaine.equals("")){
 			return false;

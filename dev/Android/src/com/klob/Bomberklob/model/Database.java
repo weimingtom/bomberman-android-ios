@@ -92,23 +92,39 @@ public class Database extends SQLiteOpenHelper{
 	
 	/** ajout d'une map **/
 	public void newMap(String name, String owner, int i){
+//		Cursor cursor = base.rawQuery("SELECT * FROM Map WHERE name ='"+name+"' ", null);
+//		entree.put("name", name);
+//		entree.put("owner", owner);
+//		entree.put("official", i);
+//		
+//		if(cursor.moveToFirst()){
+//			if(!cursor.isNull(0)){
+//				this.base.update("Map", entree, "name ='"+owner+"'", null);
+//				Log.i("Database", "New map : Map already exists, update");				
+//			}
+//			else{
+//				this.base.insert("Map", null, entree);
+//				Log.i("Database", "New map added : \nName : " + name +"\nOwner : " + owner + "\nOfficial : " + i);
+//			}
+//		}
+		
 		this.base = this.getWritableDatabase();
-		int res = this.base.rawQuery("SELECT * FROM Map WHERE name ='"+name+"' ", null).getCount();
-		
-		ContentValues entree = new ContentValues();
-		entree.put("name", name);
-		entree.put("owner", owner);
-		entree.put("official", i);
-		
-		if ( res == 0 ) {
-			this.base.insert("Map", null, entree);
-			Log.i("Database", "New map added : \nName : " + name +"\nOwner : " + owner + "\nOfficial : " + i);	
-		}
-		else {
-			this.base.update("Map", entree, "name ='"+owner+"'", null);
-			Log.i("Database", "New map : Map already exists, update");	
-		}
-		this.close();
+        int res = this.base.rawQuery("SELECT * FROM Map WHERE name ='"+name+"' ", null).getCount();
+        
+        ContentValues entree = new ContentValues();
+        entree.put("name", name);
+        entree.put("owner", owner);
+        entree.put("official", i);
+        
+        if ( res == 0 ) {
+                this.base.insert("Map", null, entree);
+                Log.i("Database", "New map added : \nName : " + name +"\nOwner : " + owner + "\nOfficial : " + i);      
+        }
+        else {
+                this.base.update("Map", entree, "name ='"+owner+"'", null);
+                Log.i("Database", "New map : Map already exists, update");      
+        }
+        this.close();
 	}
 	
 	
@@ -161,7 +177,7 @@ public class Database extends SQLiteOpenHelper{
 			Log.i("DataBase", "Last user : " + pseudonymAccount);
 		}
 		cursor.close();
-		this.close();
+		base.close();
 	}
 	
 	/** update couleur du joueur **/
@@ -277,7 +293,7 @@ public class Database extends SQLiteOpenHelper{
 		
 		Log.i("DataBase", "Update user : " + user.getPseudo());
 
-		this.close();
+		base.close();
 	}
 	
 	public void changePseudo(String oldPseudo, String newPseudo) {
@@ -288,7 +304,7 @@ public class Database extends SQLiteOpenHelper{
 		entree.put("pseudo", newPseudo);
 		this.base.update("PlayerAccount", entree, "pseudo ='"+oldPseudo+"' ", null);
 
-		this.close();
+		base.close();
 	}
 	
 	
@@ -350,7 +366,7 @@ public class Database extends SQLiteOpenHelper{
 		Log.i("DataBase", "Get last user : " + res);
 
 		cursor.close();
-		this.close();
+		base.close();
 		
 		return res;
 	}	
@@ -443,7 +459,7 @@ public class Database extends SQLiteOpenHelper{
 		}
 		
 		cursor.close();
-		this.close();
+		base.close();
 		
 		return vec;
 	}
@@ -459,7 +475,7 @@ public class Database extends SQLiteOpenHelper{
 			user = new User(cursor.getString(1), cursor.getString(2), cursor.getString(3), (cursor.getInt(4) == 0 ? false : true), (cursor.getInt(5) == 0 ? false : true), cursor.getString(6), cursor.getInt(7), cursor.getInt(8), cursor.getInt(9));
 		}
 		cursor.close();
-		this.close();
+		base.close();
 		
 		return user;
 	}
@@ -474,7 +490,7 @@ public class Database extends SQLiteOpenHelper{
 			user = new User(cursor.getString(1), cursor.getString(2), cursor.getString(3), (cursor.getInt(4) == 0 ? false : true), (cursor.getInt(5) == 0 ? false : true), cursor.getString(6), cursor.getInt(7), cursor.getInt(8), cursor.getInt(9));
 		}
 		cursor.close();
-		this.close();
+		base.close();
 		
 		return user;
 	}
@@ -492,7 +508,7 @@ public String getLanguage() {
 		Log.i("DataBase", "Get language : " + res);
 
 		cursor.close();
-		this.close();
+		base.close();
 		
 		return res;
 	}
@@ -526,13 +542,13 @@ public String getLanguage() {
 		if (cursor.moveToFirst()) {
 			do {
 				if ( cursor.getString(0).toLowerCase().equals(pseudonymAccount.toLowerCase()) )  {
-					this.close();
+					base.close();
 					return true;
 				}
 			} while (cursor.moveToNext());
 		}
-		
-		this.close();
+		cursor.close();
+		base.close();
 		
 		return false;
 	}
@@ -541,7 +557,7 @@ public String getLanguage() {
 	public boolean existingMap(String mapName) {
 		this.base = this.getReadableDatabase();
 		int res = this.base.rawQuery("SELECT name FROM Map WHERE name ='"+mapName+"' ", null).getCount();
-		this.close();
+		base.close();
 		
 		return res == 0 ? false : true;
 	}
@@ -551,6 +567,8 @@ public String getLanguage() {
 		
 		base = getReadableDatabase();
 		boolean res = false;
+		
+		Log.i("BDD", "param: "+ userId + " : " + userName + " : " + password);
 		
 		Cursor cursor = base.rawQuery("select userName,password from PlayerAccount where id ='" +userId+ "'", null);
 		if(cursor.moveToFirst()){
