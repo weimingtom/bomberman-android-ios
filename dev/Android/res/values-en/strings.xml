@@ -67,12 +67,13 @@
 	<!-- Multiplayer -->
 	
 	<string name="MultiplayerButtonNewAccount">New Account</string>
-	
 	<string name="MultiPlayerConnectionErrorAutoConnection">The username or password is empty</string>
+	<string name="MultiPlayerConnectionError">Error during identification</string>
 	
 	<!-- NewAccountOnline -->
 	
 	<string name="NewAccountOnlineTextVerification">Verification</string>
+	<string name="NewAccountOnlineTextPasswordError">The password and verification must be the same</string>
 	
 	<!-- Options -->
 	
@@ -106,6 +107,8 @@
 	</string-array>
 	
 	<string name="ProfileManagerErrorPseudo">This pseudo is already used</string>
+	<string name="ProfilManagementAuthError">Error during the authentification</string>
+	<string name="ProfilManagementErrorUserMissing">You must create a multiplayer account</string>
 	
 	
 	<!-- Change Password Multiplayer -->

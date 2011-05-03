@@ -1,5 +1,8 @@
 package com.klob.Bomberklob.menus;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,41 +71,43 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 		this.cancel.setOnClickListener(this);
 
 		this.password = (CheckBox) findViewById(R.id.NewAccountOnLineCheckBoxPassword);
-		this.password.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
+		this.password.setOnClickListener(this);
+//		this.password.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
+//
+//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
+//				if (isChecked) {
+//					Model.getUser().setRememberPassword(true);
+//				}
+//				else {
+//					Model.getUser().setRememberPassword(false);
+//				}
+//				Model.getSystem().getDatabase().updateUser(Model.getUser());
+//			}
+//		});
 
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
-				if (isChecked) {
-					Model.getUser().setRememberPassword(true);
-				}
-				else {
-					Model.getUser().setRememberPassword(false);
-				}
-				Model.getSystem().getDatabase().updateUser(Model.getUser());
-			}
-		});
-
-		if ( Model.getUser().getRememberPassword() ) {
-			this.password.setChecked(true);
-		}
+//		if ( Model.getUser().getRememberPassword() ) {
+//			this.password.setChecked(true);
+//		}
 
 		this.connectionAuto = (CheckBox) findViewById(R.id.NewAccountOnLineCheckBoxConnection);
-		this.connectionAuto.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
-				if (isChecked && !userAccountPassword1.getText().toString().equals("") && !userAccountName.getText().toString().equals("")) {
-					// FIXME encoder le mdp
-					Model.getUser().setPassword(userAccountPassword1.getText().toString());
-					Model.getUser().setUserName(userAccountName.getText().toString());
-					Model.getUser().setConnectionAuto(true);
-				}
-				else {
-					connectionAuto.setChecked(false);
-					Model.getUser().setConnectionAuto(false);
-					Toast.makeText(NewAccountOnLine.this, R.string.MultiPlayerConnectionErrorAutoConnection , Toast.LENGTH_SHORT).show();
-				}
-				Model.getSystem().getDatabase().updateUser(Model.getUser());
-			}
-		});
+		this.connectionAuto.setOnClickListener(this);
+//		this.connectionAuto.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
+//
+//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
+//				if (isChecked && !userAccountPassword1.getText().toString().equals("") && !userAccountName.getText().toString().equals("")) {
+//					// FIXME encoder le mdp
+//					Model.getUser().setPassword(userAccountPassword1.getText().toString());
+//					Model.getUser().setUserName(userAccountName.getText().toString());
+//					Model.getUser().setConnectionAuto(true);
+//				}
+//				else {
+//					connectionAuto.setChecked(false);
+//					Model.getUser().setConnectionAuto(false);
+//					Toast.makeText(NewAccountOnLine.this, R.string.MultiPlayerConnectionErrorAutoConnection , Toast.LENGTH_SHORT).show();
+//				}
+//				Model.getSystem().getDatabase().updateUser(Model.getUser());
+//			}
+//		});
 	}
 
 	@Override
@@ -130,6 +133,36 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 		Log.i("NewAccountOnLine", "onPause");
 		super.onPause();
 	}
+	
+	private boolean testerString(String chaine){
+		if(chaine.contains("\t") || chaine.contains("\n") || chaine.contains("\r") || chaine.contains(" ") || chaine.equals("")){
+			return false;
+		}
+		return true;
+	}
+	
+	
+	private static final String md5(final String password) {
+	    try {
+	        
+	        MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+	        digest.update(password.getBytes());
+	        byte messageDigest[] = digest.digest();
+	 
+	        StringBuffer hexString = new StringBuffer();
+	        for (int i = 0; i < messageDigest.length; i++) {
+	            String h = Integer.toHexString(0xFF & messageDigest[i]);
+	            while (h.length() < 2)
+	                h = "0" + h;
+	            hexString.append(h);
+	        }
+	        return hexString.toString();
+	 
+	    } catch (NoSuchAlgorithmException e) {
+	        e.printStackTrace();
+	    }
+	    return "";
+	}
 
 
 	public void onClick(View view) {
@@ -138,26 +171,62 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 		
 
 		if( view == this.validate ) {
+//			if ( !this.userAccountName.getText().toString().equals("") && !this.userAccountPassword1.getText().toString().equals("")) {
+//				if ( !this.userAccountPassword1.getText().toString().equals(this.userAccountPassword2.getText().toString()) ) {
+//					Model.getUser().setUserName(this.userAccountName.getText().toString());
+//					
+//					if (Model.getUser().getRememberPassword()) {
+//						// FIXME Encoder le mdp
+//						Model.getUser().setPassword(this.userAccountPassword1.getText().toString());
+//					}
+//					
+//					Model.getSystem().getDatabase().updateUser(Model.getUser());
+//					//FIXME Connexion avec le serveur
+//				}
+//				else {
+//					//FIXME
+//				}
+//			}
+//			else {
+//				Toast.makeText(NewAccountOnLine.this, R.string.MultiPlayerConnectionErrorAutoConnection , Toast.LENGTH_SHORT).show();
+//			}
 			
-			if ( !this.userAccountName.getText().toString().equals("") && !this.userAccountPassword1.getText().toString().equals("")) {
-				if ( !this.userAccountPassword1.getText().toString().equals(this.userAccountPassword2.getText().toString()) ) {
-					Model.getUser().setUserName(this.userAccountName.getText().toString());
+			if( !testerString(userAccountName.getText().toString()) || !testerString(userAccountPassword1.getText().toString()) || !testerString(userAccountPassword2.getText().toString())){
+	 			Toast.makeText(NewAccountOnLine.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
+	 		}
+			/** TODO factorisation a faire **/
+//	 		else if(password.getText().toString().compareTo("")!=0 
+//			&& (repassword.getText().toString().compareTo("")!=0) && (userName.getText().toString().compareTo("")!=0)){
+			else if(!userAccountPassword1.getText().toString().equals(userAccountPassword2.getText().toString())){
+					Toast.makeText(NewAccountOnLine.this, R.string.NewAccountOnlineTextPasswordError,Toast.LENGTH_SHORT).show();
+				}
+				else{
+					/** test disponibilité sur serveur **/
+					/** TODO insertion compte sur serveur	**/
+					int userId = Model.getSystem().getDatabase().getLastUserId();
+					String pwd =  md5(userAccountPassword1.getText().toString());
+
+					Model.getSystem().getDatabase().addAccountMulti(userId, userAccountName.getText().toString(), pwd);
+					Model.getUser().setUserName(userAccountName.getText().toString());
+					Model.getUser().setPassword(pwd);
 					
-					if (Model.getUser().getRememberPassword()) {
-						// FIXME Encoder le mdp
-						Model.getUser().setPassword(this.userAccountPassword1.getText().toString());
+					/** save password **/
+					if(password.isChecked()){
+							Model.getUser().setRememberPassword(true);
+							Model.getSystem().getDatabase().updateSavePwdUser(userId, 1);
+					}
+					/** auto connect **/
+					if(connectionAuto.isChecked()){
+							Model.getUser().setConnectionAuto(true);
+							Model.getUser().setRememberPassword(true);
+							Model.getSystem().getDatabase().updateAutoConnectUser(userId, 1);
 					}
 					
-					Model.getSystem().getDatabase().updateUser(Model.getUser());
-					//FIXME Connexion avec le serveur
+					Toast.makeText(NewAccountOnLine.this, "Inscription réalisée avec succès", Toast.LENGTH_SHORT).show();
+						Intent intentMulti = new Intent(NewAccountOnLine.this, HomeMulti.class);
+						startActivity(intentMulti);
 				}
-				else {
-					//FIXME
-				}
-			}
-			else {
-				Toast.makeText(NewAccountOnLine.this, R.string.MultiPlayerConnectionErrorAutoConnection , Toast.LENGTH_SHORT).show();
-			}
+			
 		}
 		else if( view == this.cancel ) {
 			intent = new Intent(NewAccountOnLine.this, MultiPlayer.class);

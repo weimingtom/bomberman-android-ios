@@ -8,7 +8,7 @@ public class User {
 	protected boolean connectionAuto;
 	protected boolean remenberPassword;
 	protected String color;
-	protected String menuPosition;
+	protected int menuPosition;
 	protected int gameWon;
 	protected int gameLost;
 	
@@ -16,7 +16,7 @@ public class User {
 	
 	public User(String pseudo, String userName, String password,
 			boolean connectionAuto, boolean remenberPassword, String color,
-			String menuPosition, int gameWon, int gameLost) {
+			int menuPosition, int gameWon, int gameLost) {
 		this.pseudo = pseudo;
 		this.userName = userName;
 		this.password = password;
@@ -54,7 +54,7 @@ public class User {
 		return this.color;
 	}
 
-	public String getMenuPosition() {
+	public int getMenuPosition() {
 		return this.menuPosition;
 	}
 
@@ -92,7 +92,7 @@ public class User {
 		this.color = color;
 	}
 
-	public void setMenuPosition(String menuPosition) {
+	public void setMenuPosition(int menuPosition) {
 		this.menuPosition = menuPosition;
 	}
 

@@ -69,10 +69,13 @@
 	
 	<string name="MultiplayerButtonNewAccount">Nouveau Compte</string>
 	<string name="MultiPlayerConnectionErrorAutoConnection">Le nom d\'utilisateur ou le mot de passe sont vides</string>
+	<string name="MultiPlayerConnectionError">Erreur lors de l\'identification</string>
 	
 	<!-- NewAccountOnline -->
 	
 	<string name="NewAccountOnlineTextVerification">Vérification</string>
+	<string name="NewAccountOnlineTextPasswordError">Le mot de passe et sa vérification doivent être identiques</string>
+	
 	
 	<!-- Options -->
 
@@ -105,6 +108,8 @@
 	</string-array>
 	
 	<string name="ProfileManagerErrorPseudo">Ce pseudonyme est déjà utilisé</string>
+	<string name="ProfilManagementErrorUserMissing">Veuillez créer un compte multijoueurs</string>
+	<string name="ProfilManagementAuthError">Erreur lors de l\'authentification</string>
 	
 	<!-- Change Password Multiplayer -->
 	
