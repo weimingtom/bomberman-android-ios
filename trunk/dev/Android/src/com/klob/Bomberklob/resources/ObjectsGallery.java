@@ -150,6 +150,7 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 		this.objectsSize = (int) (objectsSize*ResourcesManager.getDpiPx());
 	}
 
+	@Override
 	public void setBackgroundColor(int color) {
 		this.color = color;
 	}

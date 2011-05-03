@@ -32,7 +32,7 @@ public class Map implements Serializable {
 	private Point[] players;
 	private Objects[][] grounds;
 	private Objects[][] blocks;
-	
+
 	private transient Bitmap bm;
 	private transient ConcurrentHashMap<Point, Objects> animatedObjects;
 	private transient ConcurrentHashMap<Point, Integer> zoneDangereuses;
@@ -98,7 +98,7 @@ public class Map implements Serializable {
 				return false;
 			}
 		}		
-		
+
 		File f =  new File (ResourcesManager.getContext().getFilesDir().getAbsolutePath()+"/maps");
 		f.mkdir();
 		f =  new File (f.getAbsolutePath()+"/"+this.name);
@@ -128,15 +128,9 @@ public class Map implements Serializable {
 
 	public boolean loadMap(String s) {
 
-		
+		Map map = null;	
 		File f =  new File (ResourcesManager.getContext().getFilesDir().getAbsolutePath()+"/maps/"+s+"/"+s+".klob");
-		Log.i("Map", "File loaded : " + f.getAbsolutePath());
-		Map map = null;		
-		this.players = new Point[4];
-		this.grounds = new Objects[21][15];
-		this.blocks  = new Objects[21][15];
-		this.animatedObjects = new ConcurrentHashMap<Point, Objects>();
-	
+		Log.i("Map", "File loaded : " + f.getAbsolutePath());	
 
 		try {
 			FileInputStream fis = new FileInputStream(f);
@@ -162,38 +156,19 @@ public class Map implements Serializable {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
+		}		
 
-		if(map != null) {			
+		if ( map != null ) {			
 			this.grounds = map.getGrounds();
 			this.blocks = map.getBlocks();
 			this.players = map.getPlayers();
 			this.name = map.getName();			
 
-			this.bm = Bitmap.createBitmap(ResourcesManager.getSize()*this.grounds.length, ResourcesManager.getSize()*this.grounds[0].length, Bitmap.Config.ARGB_8888);
+			restart();
 
-			Canvas pictureCanvas = new Canvas(this.bm);
-
-			//FIXME prendre le cas où on aurait de l'eau ou un sol animé !
-			this.groundsOnDraw(pictureCanvas, ResourcesManager.getSize());
-
-			for (int i = 0; i < this.grounds.length ; i++) {
-				for (int j = 0; j < this.grounds[0].length ; j++) {
-					if ( this.blocks[i][j] != null) {
-						if ( !this.blocks[i][j].isDestructible()) {
-							this.blocks[i][j].onDraw(pictureCanvas, ResourcesManager.getSize());
-						}
-						else {
-							animatedObjects.put(new Point(i,j), this.blocks[i][j]);
-						}
-					}
-				}
-			}
-			
 			f =  null;
 			map = null;
-			
+
 			return true;
 		}
 		return false;
@@ -245,14 +220,17 @@ public class Map implements Serializable {
 	}
 
 	public void update() {
-		
+
+		/* Pour tous les objets animés */
 		for(Entry<Point, Objects> entry : animatedObjects.entrySet()) {
 			Objects o = animatedObjects.get(entry.getKey());
+			/* Si sont animation est DESTROY et qu'elle est finie */
 			if (o.getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) && o.hasAnimationFinished()) {
+				/* Si l'objet était dangereux on l'enlève de la hashmap de zones dangereuses */
 				if ( o.getDamage() != 0 ) {
 					zoneDangereuses.put(entry.getKey(),0);
 				}
-				this.deleteBlock(entry.getKey());
+				/* Et du vecteur d'objets animés */
 				animatedObjects.remove(entry.getKey());
 			}
 			else {
@@ -276,10 +254,10 @@ public class Map implements Serializable {
 			}
 		}
 	}
-	
+
 	public void gameOnDraw(Canvas canvas, int size) {
 		canvas.drawBitmap(bm, 0, 0, null);
-		
+
 		for(Entry<Point, Objects> entry : animatedObjects.entrySet()) {
 			animatedObjects.get(entry.getKey()).onDraw(canvas, size);
 		}
@@ -304,7 +282,7 @@ public class Map implements Serializable {
 			}
 		}
 	}
-	
+
 	public void resize() {
 		for (int i = 0; i < this.grounds.length ; i++) {
 			for (int j = 0; j < this.grounds[0].length ; j++) {
@@ -320,4 +298,25 @@ public class Map implements Serializable {
 		Log.i("Map", "--------- Map resized --------");
 	}
 
+	public void restart() {
+		this.bm = Bitmap.createBitmap(ResourcesManager.getSize()*this.grounds.length, ResourcesManager.getSize()*this.grounds[0].length, Bitmap.Config.ARGB_8888);
+
+		Canvas pictureCanvas = new Canvas(this.bm);
+
+		//FIXME prendre le cas où on aurait de l'eau ou un sol animé !
+		this.groundsOnDraw(pictureCanvas, ResourcesManager.getSize());
+
+		for (int i = 0; i < this.grounds.length ; i++) {
+			for (int j = 0; j < this.grounds[0].length ; j++) {
+				if ( this.blocks[i][j] != null) {
+					if ( !this.blocks[i][j].isDestructible()) {
+						this.blocks[i][j].onDraw(pictureCanvas, ResourcesManager.getSize());
+					}
+					else {
+						animatedObjects.put(new Point(i,j), this.blocks[i][j].copy());
+					}
+				}
+			}
+		}
+	}
 }
