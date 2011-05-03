@@ -1,18 +1,13 @@
-//
-//  LoadMapEditorMenuViewController.h
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 18/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
+#import "ManageMapMenu.h"
 
 
-@interface LoadMapEditorMenuViewController : UIViewController {
+@interface LoadMapEditorMenuViewController : UIViewController<ManageMapMenu> {
     
     UILabel *mapName;
     UILabel *owner;
+    
+    NSString *mapNameNew;
     
     NSArray *mapsNotOfficial;
     NSArray *imageMapsNotOfficial;
@@ -23,6 +18,7 @@
 
 @property (nonatomic, retain) IBOutlet UILabel *mapName;
 @property (nonatomic, retain) IBOutlet UILabel *owner;
+@property (nonatomic, retain) NSString *mapNameNew;
 @property (nonatomic, retain) NSArray *mapsNotOfficial;
 @property (nonatomic, retain) NSArray *imageMapsNotOfficial;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *load;

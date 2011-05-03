@@ -1,11 +1,3 @@
-//
-//  EditorInformationView.m
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 16/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "EditorInformationView.h"
 #import "EditorInformation.h"
 #import "RessourceManager.h"
@@ -34,6 +26,12 @@
 
 - (void)dealloc {
     [editorInformation release];
+    [pause release];
+    [playerWhite release];
+    [playerBlue release];
+    [playerRed release];
+    [playerBlue release];
+    [displayType release];
     [super dealloc];
 }
 
@@ -44,10 +42,25 @@
     [pause setTitle:@"Pause" forState:UIControlStateNormal];
     [pause addTarget:self action:@selector(pauseAction) forControlEvents:UIControlEventTouchDown];
     
-    player = [[UIButton alloc] init];
-    [player setImage:[[[resource.bitmapsPlayer objectForKey:@"white"] copy] valueForKey:@"idle"] forState:UIControlStateNormal];
-    player.frame = CGRectMake(PLAYER_X, PLAYER_Y, PLAYER_WIDTH, PLAYER_HEIGHT);
-    [player addTarget:self action:@selector(playerAction) forControlEvents:UIControlEventTouchUpInside];
+    playerWhite = [[UIButton alloc] init];
+    [playerWhite setImage:[[[resource.bitmapsPlayer objectForKey:@"white"] copy] valueForKey:@"idle"] forState:UIControlStateNormal];
+    playerWhite.frame = CGRectMake(FIRST_PLAYER_X, PLAYER_Y, PLAYER_WIDTH, PLAYER_HEIGHT);
+    [playerWhite addTarget:self action:@selector(playerAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    playerBlue = [[UIButton alloc] init];
+    [playerBlue setImage:[[[resource.bitmapsPlayer objectForKey:@"blue"] copy] valueForKey:@"idle"] forState:UIControlStateNormal];
+    playerBlue.frame = CGRectMake(FIRST_PLAYER_X + (PLAYER_WIDTH + PLAYER_MARGE), PLAYER_Y, PLAYER_WIDTH, PLAYER_HEIGHT);
+    [playerBlue addTarget:self action:@selector(playerAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    playerRed = [[UIButton alloc] init];
+    [playerRed setImage:[[[resource.bitmapsPlayer objectForKey:@"red"] copy] valueForKey:@"idle"] forState:UIControlStateNormal];
+    playerRed.frame = CGRectMake(FIRST_PLAYER_X + (2 * (PLAYER_WIDTH + PLAYER_MARGE)), PLAYER_Y, PLAYER_WIDTH, PLAYER_HEIGHT);
+    [playerRed addTarget:self action:@selector(playerAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    playerBlack = [[UIButton alloc] init];
+    [playerBlack setImage:[[[resource.bitmapsPlayer objectForKey:@"black"] copy] valueForKey:@"idle"] forState:UIControlStateNormal];
+    playerBlack.frame = CGRectMake(FIRST_PLAYER_X + (3 * (PLAYER_WIDTH + PLAYER_MARGE)), PLAYER_Y, PLAYER_WIDTH, PLAYER_HEIGHT);
+    [playerBlack addTarget:self action:@selector(playerAction:) forControlEvents:UIControlEventTouchUpInside];
     
     NSArray *segmentTextContent = [NSArray arrayWithObjects: @"Ground", @"All", nil];
     displayType = [[UISegmentedControl alloc] initWithItems:segmentTextContent];
@@ -55,11 +68,13 @@
     [displayType addTarget:self action:@selector(displayTypeAction) forControlEvents:UIControlEventValueChanged];
 
     displayType.segmentedControlStyle = UISegmentedControlStyleBar;
-//    displayType.tintColor=[UIColor colorWithRed:36/255.0 green:61/255.0 blue:103/255.0 alpha:1];
     displayType.selectedSegmentIndex = 1;
     
     [self addSubview:pause];
-    [self addSubview:player];
+    [self addSubview:playerWhite];
+    [self addSubview:playerBlue];
+    [self addSubview:playerRed];
+    [self addSubview:playerBlack];
     [self addSubview:displayType];
 }
 
@@ -83,7 +98,21 @@
 }
 
 
-- (void)playerAction {
+- (void)playerAction:(id)sender {
+    
+    if (sender == playerWhite) {
+        self.editorInformation.colorPlayer = @"white";
+    }
+    else if (sender == playerBlue) {
+        self.editorInformation.colorPlayer = @"blue";
+    }
+    else if (sender == playerRed) {
+        self.editorInformation.colorPlayer = @"red";
+    }
+    else if (sender == playerBlack) {
+        self.editorInformation.colorPlayer = @"black";
+    }
+    
     [editorInformation changeTool:@"player"];
 }
 

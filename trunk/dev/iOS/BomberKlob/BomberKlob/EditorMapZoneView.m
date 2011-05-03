@@ -1,11 +1,3 @@
-//
-//  EditorMapZoneView.m
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 16/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "EditorMapZoneView.h"
 #import "EditorMapZone.h"
 #import "EditorViewController.h"
@@ -15,7 +7,7 @@
 #import "Undestructible.h"
 #import "RessourceManager.h"
 
-// FIXME: Problème lorsque l'on change d'outils (normal -> suppression) et que l'on veut supprimer le bloc que l'on vient de poser.
+
 @implementation EditorMapZoneView
 
 @synthesize editorMapZone, oldTouchPosition;
@@ -41,6 +33,7 @@
 
 - (void)dealloc {
     [editorMapZone release];
+    [oldTouchPosition release];
     [super dealloc];
 }
 
@@ -78,7 +71,7 @@
 
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    
+    self.oldTouchPosition = nil;
 }
 
 #pragma mark -

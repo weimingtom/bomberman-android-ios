@@ -20,7 +20,6 @@
 	self = [super init];
     
 	if (self) {
-//        map = [[Map alloc] init];
 		RessourceManager * resource = [RessourceManager sharedRessource];
         Position *position;
         Player *player;
@@ -29,21 +28,17 @@
         
         players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
         
-        // TODO: Changer le tableau des couleurs en fonction de la couleur de joueur
-        NSArray *colorsPlayers = [[NSArray alloc] initWithObjects:@"white", @"blue", @"red", @"black", nil];
-        
-        for (int i = 0; i < [map.players count]; i++) {
-            position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:i]).x * tileSize) y:(((Position *) [map.players objectAtIndex:i]).y * tileSize)];
-			player = [(Player *)[resource.bitmapsPlayer objectForKey:[colorsPlayers objectAtIndex:i]] copy];
-			player.position = position;
+        NSLog(@"%@", map.players);
+        for (NSString *key in map.players) {
+            position = [[Position alloc] initWithX:(((Position *) [map.players objectForKey:key]).x * tileSize) y:(((Position *) [map.players objectForKey:key]).y * tileSize)];
+            player = [(Player *)[[RessourceManager sharedRessource].bitmapsPlayer objectForKey:key] copy];
+            player.position = position;
             
             [players addObject:player];
             
-            //[position release];
+            [position release];
             [player release];
         }
-        
-        [colorsPlayers release];
 	}
     
 	return self;

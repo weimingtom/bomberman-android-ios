@@ -1,11 +1,3 @@
-//
-//  EditorMap.m
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 16/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "EditorMapZone.h"
 #import "EditorMapZoneView.h"
 #import "EditorViewController.h"
@@ -32,6 +24,7 @@
 
 - (void)dealloc {
     [editorMapZoneView release];
+    [editorViewController release];
     [super dealloc];
 }
 
@@ -43,7 +36,7 @@
 
 - (void)displayBlocks:(BOOL)display {
     if (display) {
-        alpha = 1.0;
+        self.alpha = 1.0;
     }
     else {
         self.alpha = ALPHA;

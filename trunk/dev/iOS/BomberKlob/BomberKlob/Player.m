@@ -286,7 +286,7 @@
 
 
 - (void) draw:(CGContextRef)context{
-
+    
 	NSMutableArray * sequences = ((AnimationSequence *)[animations valueForKey:currentAnimation]).sequences;
 	
 	if (currentFrame < [sequences count]){
@@ -305,16 +305,14 @@
 
 - (void) draw:(CGContextRef)context alpha:(CGFloat)alpha {
     NSMutableArray * sequences = ((AnimationSequence *)[animations valueForKey:currentAnimation]).sequences;
-	
+
 	if (currentFrame < [sequences count]){
 		UIImage * image = [sequences objectAtIndex:currentFrame];
-        [image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize*1.5) blendMode:kCGBlendModeNormal alpha:alpha];
+		[image drawInRect:CGRectMake(position.x, position.y-(ressource.tileSize/2), ressource.tileSize , ressource.tileSize*1.5) blendMode:kCGBlendModeNormal alpha:alpha];
 	}
-	else{
+	else {
 		if ([sequences count] == 1) {
-			currentFrame = 0;
-			UIImage * image = [sequences objectAtIndex:currentFrame];
-            [image drawInRect:CGRectMake(position.x, position.y, ressource.tileSize , ressource.tileSize*1.5) blendMode:kCGBlendModeNormal alpha:alpha];
+            [idle drawInRect:CGRectMake(position.x, position.y-(ressource.tileSize/2), ressource.tileSize , ressource.tileSize*1.5) blendMode:kCGBlendModeNormal alpha:alpha];
 		}
 	}
 }
@@ -344,7 +342,7 @@
 	playerTmp.hit = hit;
 	playerTmp.level = level;
 	playerTmp.fireWall = fireWall;
-	playerTmp.damages = damages;
+	playerTmp.damage = damage;
 	playerTmp.position = [[Position alloc] initWithPosition:position];
 	
 	playerTmp.animations = [[NSMutableDictionary alloc] initWithDictionary:animations];

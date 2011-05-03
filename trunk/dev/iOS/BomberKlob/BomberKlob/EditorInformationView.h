@@ -1,14 +1,6 @@
-//
-//  EditorInformationView.h
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 16/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
-#define PLAYER_X (self.frame.size.width / 3)
+#define FIRST_PLAYER_X (self.frame.size.width / 3)
 #define PLAYER_Y       ((self.frame.size.height / 2) - (PLAYER_HEIGHT / 2))
 #define PLAYER_MARGE   4
 #define PLAYER_WIDTH   19
@@ -35,7 +27,10 @@
     RessourceManager *resource;
     
     UIButton *pause;
-    UIButton *player;
+    UIButton *playerWhite;
+    UIButton *playerBlue;
+    UIButton *playerRed;
+    UIButton *playerBlack;
     UISegmentedControl *displayType;
 }
 
@@ -48,6 +43,6 @@
 
 - (void)displayTypeAction;
 - (void)pauseAction;
-- (void)playerAction;
+- (void)playerAction:(NSString *)colorValue;
 
 @end

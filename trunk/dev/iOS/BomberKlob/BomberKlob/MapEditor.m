@@ -36,6 +36,15 @@
 }
 
 
+- (void)addGround:(Objects *)ground position:(Position *)position {
+    NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
+    Position *p = [[Position alloc] initWithX:(position.x * tileSize) y:(position.y * tileSize)];
+    ground.position = p;
+    [map addGround:ground position:position];
+    [p release];
+}
+
+
 - (void)addBlock:(Objects *)block position:(Position *)position {
     NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
     Position *p = [[Position alloc] initWithX:(position.x * tileSize) y:(position.y * tileSize)];
@@ -45,18 +54,19 @@
 }
 
 
-- (void)addPlayer:(Position *)position {
-    [map addPlayer:position];
+- (void)addPlayer:(Position *)position color:(NSString *)color {
+    [map addPlayer:position color:color];
 }
 
 
-- (void)deleteGround:(Objects *)ground position:(Position *)position {
+- (void)deleteObjectAtPosition:(Position *)position {
     
-}
-
-
-- (void)deleteBlockAtPosition:(Position *)position {
-    [map deleteBlockAtPosition:position];
+    if ([map thereIsBlock:position]) {
+        [map deleteBlockAtPosition:position];
+    }
+    else if ([map thereIsPlayer:position]) {
+        [map deletePlayerAtPosition:position];
+    }
 }
 
 

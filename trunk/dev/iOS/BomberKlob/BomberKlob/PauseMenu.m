@@ -1,11 +1,3 @@
-//
-//  PauseMenu.m
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 18/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "PauseMenu.h"
 #import "EditorViewController.h"
 #import "PauseMenuView.h"
@@ -29,7 +21,8 @@
 
 
 - (void)dealloc {
-    
+    [pauseMenuView release];
+    [editorViewController release];
     [super dealloc];
 }
 
@@ -41,6 +34,7 @@
 
 - (void)saveAction {
     [editorViewController saveAction];
+    [editorViewController quitAction];
 }
 
 

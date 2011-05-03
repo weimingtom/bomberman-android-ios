@@ -16,8 +16,7 @@
 
 
 @implementation SinglePlayerMenuViewController
-@synthesize play;
-@synthesize mapName;
+@synthesize play, mapName, mapNameNew;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -30,7 +29,7 @@
             [images addObject:[UIImage imageNamed:[NSString stringWithFormat:@"Maps/%@.png", ((DBMap *) [application.maps objectAtIndex:i]).name]]];
         }
         
-        MapMenu *menu = [[MapMenu alloc] initWithFrame:CGRectMake(0, 5, 480, 142) imageWidth:170 imageHeight:115 imageMargin:-20 reductionPercentage:20 items:application.maps images:images displayNameOwner:NO];
+        MapMenu *menu = [[MapMenu alloc] initWithFrame:CGRectMake(0, 5, 480, 142) controller:self imageWidth:170 imageHeight:115 imageMargin:-20 reductionPercentage:20 items:application.maps images:images displayNameOwner:NO];
         
         [self.view addSubview:menu];
     }
@@ -78,9 +77,10 @@
     return (interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
+
 - (IBAction)playAction:(id)sender {
 	
-	GlobalGameViewControllerSingle * globalGameViewControllerSingle = [[GlobalGameViewControllerSingle alloc] initWithMapName:mapName.text];
+	GlobalGameViewControllerSingle * globalGameViewControllerSingle = [[GlobalGameViewControllerSingle alloc] initWithMapName:mapNameNew];
 	[self.navigationController pushViewController:globalGameViewControllerSingle animated:YES];
 
 	
@@ -89,4 +89,11 @@
 	self.navigationController.navigationBarHidden = YES; 
 	[globalGameViewControllerSingle release];
 }
+
+
+- (void)changeMap:(NSString *)mapNameValue {
+    self.mapNameNew = mapNameValue;
+}
+
+
 @end

@@ -4,7 +4,7 @@
 
 @implementation Menu
 
-@synthesize imageWidth, imageHeight, imageMargin, items, images, imagesPosition;
+@synthesize imageWidth, imageHeight, imageMargin, items, images, imagesPosition, selectedImageIndex;
 
 
 - (id)initWithFrame:(CGRect)frame horizontal:(BOOL)isHorizontal imageWidth:(NSInteger)imageWidthValue imageHeight:(NSInteger)imageHeightValue imageMargin:(NSInteger)imageMarginValue reductionPercentage:(NSInteger)reductionPercentageValue items:(NSArray *)itemsValue images:(NSArray *)imagesValue {
@@ -186,13 +186,13 @@
             currentImageHeight = ((currentImageHeight * (100 - reductionPercentage)) / 100);
             currentImageMargin = ((currentImageMargin * (100 - reductionPercentage)) / 100);
             
-            if (horizontal) {
-                currentImagePositionLeft = CGPointMake((currentImagePositionLeft.x - (currentImageWidth + oldImageMargin)), (currentImagePositionLeft.y + ((oldImageHeight - currentImageHeight) / 2)));
-                currentImagePositionRight = CGPointMake((currentImagePositionRight.x + (oldImageWidth + oldImageMargin)), (currentImagePositionRight.y + ((oldImageHeight - currentImageHeight) / 2)));
+            if (horizontal) { 
+                currentImagePositionLeft = CGPointMake((currentImagePositionLeft.x - (currentImageWidth + oldImageMargin)), ((self.frame.size.height / 2) - (currentImageHeight / 2)));
+                currentImagePositionRight = CGPointMake((currentImagePositionRight.x + (oldImageWidth + oldImageMargin)), ((self.frame.size.height / 2) - (currentImageHeight / 2)));
             }
-            else {                
-                currentImagePositionLeft = CGPointMake((currentImagePositionLeft.x + ((oldImageWidth - currentImageWidth) / 2)), (currentImagePositionLeft.y - (currentImageHeight + oldImageMargin)));
-                currentImagePositionRight = CGPointMake((currentImagePositionRight.x + ((oldImageWidth - currentImageWidth) / 2)), (currentImagePositionRight.y + (oldImageHeight + oldImageMargin)));
+            else { 
+                currentImagePositionLeft = CGPointMake(((self.frame.size.width / 2) - (currentImageWidth / 2)), (currentImagePositionLeft.y - (currentImageHeight + oldImageMargin)));
+                currentImagePositionRight = CGPointMake(((self.frame.size.width / 2) - (currentImageWidth / 2)), (currentImagePositionRight.y + (oldImageHeight + oldImageMargin)));
             }
             
             oldImageWidth = currentImageWidth;
@@ -263,16 +263,18 @@
             movement = (touchPoint.y - startLocation.y);
         }
         
-        [self changeImage:movement];
-        
-        [UIView beginAnimations:@"Move" context:nil];
-        [UIView setAnimationDuration:0.3];
-        [UIView setAnimationBeginsFromCurrentState:YES];
-        
-        [self moveImages];
-        [self replaceImages:movement];
-        
-        [UIView commitAnimations];	
+        if (abs(movement) > SENSIBILITY) {
+            [self changeImage:movement];
+            
+            [UIView beginAnimations:@"Move" context:nil];
+            [UIView setAnimationDuration:0.3];
+            [UIView setAnimationBeginsFromCurrentState:YES];
+            
+            [self moveImages];
+            [self replaceImages:movement];
+            
+            [UIView commitAnimations];
+        }
     }
 }
 
@@ -310,6 +312,7 @@
     
     UIImageView *currentImage = [[UIImageView alloc] initWithImage:[images objectAtIndex:index]];
     currentImage.frame = [[imagesPosition objectAtIndex:0] getCGRect];
+    currentImage.alpha = 0.0;
     [imagesDisplayed addObject:currentImage];
     [self insertSubview:currentImage atIndex:0];
     [currentImage release];
@@ -329,6 +332,7 @@
     
     UIImageView *currentImage = [[UIImageView alloc] initWithImage:[images objectAtIndex:index]];
     currentImage.frame = [[imagesPosition lastObject] getCGRect];
+    currentImage.alpha = 0.0;
     [imagesDisplayed insertObject:currentImage atIndex:0];
     [self insertSubview:currentImage atIndex:0];
     [currentImage release];
@@ -338,6 +342,7 @@
 - (void)replaceImages:(NSInteger)movement {
 
     for (int i = 0; i < (([imagesDisplayed count] - 1) / 2); i++) {
+        
         if (movement == 0 || movement > 0) {
             [self bringSubviewToFront:[imagesDisplayed objectAtIndex:i]];
             [self bringSubviewToFront:[imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) - i)]];
@@ -345,6 +350,15 @@
         else {
             [self bringSubviewToFront:[imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) - i)]];
             [self bringSubviewToFront:[imagesDisplayed objectAtIndex:i]];
+        }
+        
+        if (i == 0) {
+            ((UIImageView *) [imagesDisplayed objectAtIndex:i]).alpha = 0.0;
+            ((UIImageView *) [imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) - i)]).alpha = 0.0;
+        }
+        else {
+            ((UIImageView *) [imagesDisplayed objectAtIndex:i]).alpha = 1.0;
+            ((UIImageView *) [imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) - i)]).alpha = 1.0;
         }
     }
     
