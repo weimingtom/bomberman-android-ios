@@ -190,7 +190,7 @@
 			if ([elementName isEqualToString:@"destructible"])
 				((Destructible *)currentObject).life = [[attributeDict valueForKey:@"life"] integerValue];
             
-			currentObject.damages = [[attributeDict valueForKey:@"damages"] integerValue];
+			currentObject.damage = [[attributeDict valueForKey:@"damages"] integerValue];
 
 			AnimationSequence * sequences = [[AnimationSequence alloc] init];
 			AnimationSequence * destroySequences = [[AnimationSequence alloc] init];
@@ -202,7 +202,7 @@
             [sequences release];
             [destroySequences release];
 		}
-		if([elementName isEqualToString:@"animation"]) {
+		else if([elementName isEqualToString:@"animation"]) {
 			currentString = [attributeDict valueForKey:@"name"];
 			currentCanLoop = [[attributeDict valueForKey:@"canLoop"] intValue];
 		}

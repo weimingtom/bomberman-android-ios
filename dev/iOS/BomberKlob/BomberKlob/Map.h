@@ -21,7 +21,7 @@
     NSInteger height;
 	NSMutableArray *grounds;
 	NSMutableArray *blocks;
-    NSMutableArray *players;
+    NSMutableDictionary *players;
 }
 
 @property (nonatomic, retain) NSString *name;
@@ -29,7 +29,7 @@
 @property (nonatomic) NSInteger height;
 @property (nonatomic, retain) NSMutableArray * grounds;
 @property (nonatomic, retain) NSMutableArray * blocks;
-@property (nonatomic, retain) NSMutableArray *players;
+@property (nonatomic, retain) NSMutableDictionary *players;
 
 - (id)initWithMapName:(NSString *)mapName;
 
@@ -40,8 +40,9 @@
 
 - (void)addGround:(Objects *)ground position:(Position *)position;
 - (void)addBlock:(Objects *)block position:(Position *)position;
-- (void)addPlayer:(Position *)position;
+- (void)addPlayer:(Position *)position color:(NSString *)color;
 - (void)deleteBlockAtPosition:(Position *)position;
+- (void)deletePlayerAtPosition:(Position *)position;
 - (void)destroyBlock:(Animated *)block position:(Position *)position;
 
 - (void)draw:(CGContextRef)context;
@@ -51,8 +52,9 @@
 - (void)drawMapAndPlayers:(CGContextRef)context alpha:(CGFloat)alpha;
 - (void)drawGrid:(CGContextRef)context;
 
-
-- (void)makePreviewWithView;
+- (BOOL)isEmpty:(Position *)position;
+- (BOOL)thereIsBlock:(Position *)position;
+- (BOOL)thereIsPlayer:(Position *)position;
 
 
 @end

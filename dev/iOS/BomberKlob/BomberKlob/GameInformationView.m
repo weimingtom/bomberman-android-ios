@@ -45,12 +45,12 @@
 		UIImage * image = ((Objects *)[resource.bitmapsPlayer valueForKey:key]).idle;
 		[image drawInRect:CGRectMake(ecart, 0, resource.tileSize , resource.tileSize)];
 		
-		Player * p = [controller.globalController.engine.game.players objectAtIndex:i];
+//		Player * p = [controller.globalController.engine.game.players objectAtIndex:i];
 		Game * game = controller.globalController.engine.game;
-		NSString *score = [NSString stringWithFormat:@"%d", p.lifeNumber];
+//		NSString *score = [NSString stringWithFormat:@"%d", p.lifeNumber];
 		
 		UIFont * font = [UIFont boldSystemFontOfSize:9.0];
-		[score drawInRect:CGRectMake(ecart+(resource.tileSize/2)-2, resource.tileSize, resource.tileSize, resource.tileSize) withFont:font];
+//		[score drawInRect:CGRectMake(ecart+(resource.tileSize/2)-2, resource.tileSize, resource.tileSize, resource.tileSize) withFont:font];
 		ecart+= 50;
 		i++;
 	}

@@ -67,7 +67,7 @@
 		}
 	}
 	else {
-		NSLog(@"BombFrame : %d",currentFrame);
+        
 		if ([((AnimationSequence *)[destroyAnimations objectForKey:imageName]).sequences count] > 2) {
 			if (delay == 10) {
 				delay = 0;
@@ -104,7 +104,7 @@
 	bombCopy.hit = hit;
 	bombCopy.level = level;
 	bombCopy.fireWall = fireWall;
-	bombCopy.damages = damages;
+	bombCopy.damage = damage;
 	bombCopy.position = [[Position alloc] initWithPosition:position];
 	
 	bombCopy.animations = [[NSMutableDictionary alloc] initWithDictionary:animations];

@@ -1,11 +1,3 @@
-//
-//  EditorController.m
-//  BombermanIOS
-//
-//  Created by Kilian Coubo on 04/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "EditorViewController.h"
 #import "MapEditor.h"
 #import "EditorMapZone.h"
@@ -53,6 +45,7 @@
         
         frame = CGRectMake(0, 0, resource.screenHeight, resource.screenWidth);
         pauseMenu = [[PauseMenu alloc] initWithFrame:frame controller:self];
+        pauseMenu.pauseMenuView.alpha = 0.0;
         
         [self.view addSubview:editorMapZone.editorMapZoneView];
         [self.view addSubview:editorInformation.editorInformationView];
@@ -72,6 +65,8 @@
     [editorMapZone release];
     [editorInformation release];
     [editorAction release];
+    [pauseMenu release];
+    [selectedTool release];
     [super dealloc];
 }
 
@@ -79,20 +74,20 @@
 - (void)clickOnPosition:(Position *)position {
     
     if (selectedTool == @"delete") {
-        [mapEditor deleteBlockAtPosition:position];
+        [mapEditor deleteObjectAtPosition:position];
     }
     else if (selectedTool == @"player") {
-        [mapEditor addPlayer:position];
+        [mapEditor addPlayer:position color:editorInformation.colorPlayer];
     }
     else {
-        Objects *block = nil;
+        Objects *block = [[[RessourceManager sharedRessource].bitmapsAnimates objectForKey:[editorAction getSelectedObject]] copy];
         
-        if ([editorAction.selectedObjectType isEqual:@"Inanimated"]) {
-            block = [(Undestructible *)[[RessourceManager sharedRessource].bitmapsAnimates objectForKey:editorAction.selectedObject] copy];
+        if ([editorAction.selectedObjectType isEqual:@"level0"]) {
+            [mapEditor addGround:block position:position];
         }
-        
-        if (block != nil)
+        else if ([editorAction.selectedObjectType isEqual:@"level1"]) {
             [mapEditor addBlock:block position:position];
+        }
     }
 }
 
@@ -104,6 +99,14 @@
 
 - (void)pauseAction {
     [self.view addSubview:pauseMenu.pauseMenuView];
+    
+    [UIView beginAnimations:@"DisplayPause" context:nil];
+    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    
+    pauseMenu.pauseMenuView.alpha = 1.0;
+    
+    [UIView commitAnimations];
 }
 
 
@@ -114,7 +117,8 @@
 }
 
 
-- (void)resumeAction {
+- (void)resumeAction {    
+    pauseMenu.pauseMenuView.alpha = 0.0;    
     [pauseMenu.pauseMenuView removeFromSuperview];
 }
 

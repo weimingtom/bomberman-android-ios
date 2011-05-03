@@ -1,15 +1,9 @@
-//
-//  EditorActionView.m
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 16/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "EditorActionView.h"
 #import "EditorAction.h"
 #import "RessourceManager.h"
 #import "AnimationSequence.h"
+#import "ItemMenu.h"
+#import "Objects.h"
 
 
 @implementation EditorActionView
@@ -22,10 +16,10 @@
     if (self) {
         self.editorAction = myController;
         self.backgroundColor = [UIColor yellowColor];
-        
         resource = [RessourceManager sharedRessource];
 
-        [self initUserInterface];
+        [self initItems];
+        [self buildUserInterface];
     }
     
     return self;
@@ -33,48 +27,93 @@
 
 - (void)dealloc {
     [editorAction release];
+    [itemsLevel0 release];
+    [itemsLevel1 release];
+    [shitchTool release];
+    [remove release];
+    [itemsLevel0 release];
+    [itemsLevel1 release];
     [super dealloc];
 }
 
 
 - (void)initItems {
-    // TODO: A compléter...
+    NSMutableArray *itemsLevel0Tmp = [[NSMutableArray alloc] init];
+    NSMutableArray *itemsLevel1Tmp = [[NSMutableArray alloc] init];
+    
+    Objects *object;
+    NSEnumerator *enumerator = [resource.bitmapsAnimates keyEnumerator];
+    id key;
+    
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^fire(a-z)*" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRange rangeOfFirstMatch;
+    
+    while ((key = [enumerator nextObject])) {
+        object = [resource.bitmapsAnimates objectForKey:key];
+        rangeOfFirstMatch = [regex rangeOfFirstMatchInString:object.imageName options:0 range:NSMakeRange(0, [object.imageName length])];
+        
+        if (NSEqualRanges(rangeOfFirstMatch, NSMakeRange(NSNotFound, 0))) {
+        
+            if (object.level == 0) {
+                [itemsLevel0Tmp addObject:object];
+            }
+            else if (object.level == 1) {
+                [itemsLevel1Tmp addObject:object];
+            }
+        }
+    }
+
+    itemsLevel0 = [[NSArray alloc] initWithArray:[itemsLevel0Tmp sortedArrayUsingSelector:@selector(compareImageName:)]];
+    itemsLevel1 = [[NSArray alloc] initWithArray:[itemsLevel1Tmp sortedArrayUsingSelector:@selector(compareImageName:)]];
+    
+    [itemsLevel0Tmp release];
+    [itemsLevel1Tmp release];
 }
 
 
-- (void)initUserInterface {
+- (void)buildUserInterface {
     
-    [self initImages];
+    shitchTool = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    shitchTool.frame = CGRectMake(SHITCH_TOOL_X, SHITCH_TOOL_Y, SHITCH_TOOL_WIDTH, SHITCH_TOOL_HEIGHT);
+    [shitchTool setTitle:@"Block" forState:UIControlStateNormal];
+    [shitchTool addTarget:self action:@selector(shitchToolTypeAction) forControlEvents:UIControlEventTouchDown];
     
     remove = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    remove.frame = CGRectMake(DELETE_X, DELETE_Y, DELETE_SIZE_WIDTH, DELETE_SIZE_HEIGHT);
+    remove.frame = CGRectMake(DELETE_X, DELETE_Y, DELETE_WIDTH, DELETE_HEIGHT);
     [remove setTitle:@"X" forState:UIControlStateNormal];
     [remove addTarget:self action:@selector(removeAction) forControlEvents:UIControlEventTouchDown];
+
+    itemMenuLevel0 = [[ItemMenu alloc] initWithFrame:CGRectMake(ITEM_MENU_X, ITEM_MENU_Y, ITEM_MENU_WIDTH, ITEM_MENU_HEIGHT) controller:editorAction imageWidth:ITEM_SIZE imageHeight:ITEM_SIZE imageMargin:MARGE_ITEM reductionPercentage:REDUCTION_PERCENTAGE items:itemsLevel0];
+    itemMenuLevel1 = [[ItemMenu alloc] initWithFrame:CGRectMake(ITEM_MENU_X, ITEM_MENU_Y, ITEM_MENU_WIDTH, ITEM_MENU_HEIGHT) controller:editorAction imageWidth:ITEM_SIZE imageHeight:ITEM_SIZE imageMargin:MARGE_ITEM reductionPercentage:REDUCTION_PERCENTAGE items:itemsLevel1];
+    itemMenuLevel1.alpha = 0.0;
     
-    [self addSubview:image1];
-    [self addSubview:image2];
-    [self addSubview:image3];
-    [self addSubview:image4];
-    [self addSubview:image5];
+    
+    [self addSubview:shitchTool];
+    [self addSubview:itemMenuLevel0];
+    [self addSubview:itemMenuLevel1];
     [self addSubview:remove];
 }
 
 
-- (void)initImages {
-    image1 = [[UIImageView alloc] initWithImage:[resource.bitmapsInanimates valueForKey:@"bloc"]];
-    image1.frame = CGRectMake(ITEM_X, FIRST_ITEM_Y, ITEM_SIZE, ITEM_SIZE);
+- (void)shitchToolTypeAction {
     
-    image2 = [[UIImageView alloc] initWithImage:[resource.bitmapsInanimates valueForKey:@"block2"]];
-    image2.frame = CGRectMake(ITEM_X, FIRST_ITEM_Y + ITEM_SIZE + MARGE_ITEM, ITEM_SIZE, ITEM_SIZE);
+    [UIView beginAnimations:@"SwitchTool" context:nil];
+    [UIView setAnimationDuration:0.4];
+    [UIView setAnimationBeginsFromCurrentState:YES];
     
-    image3 = [[UIImageView alloc] initWithImage:[resource.bitmapsInanimates valueForKey:@"block3"]];
-    image3.frame = CGRectMake(ITEM_X, FIRST_ITEM_Y + ((ITEM_SIZE + MARGE_ITEM) * 2), ITEM_SIZE, ITEM_SIZE);
+    if (editorAction.selectedObjectType == @"level0") {
+        editorAction.selectedObjectType = @"level1";
+        itemMenuLevel0.alpha = 0.0;
+        itemMenuLevel1.alpha = 1.0;
+    }
+    else if (editorAction.selectedObjectType == @"level1") {
+        editorAction.selectedObjectType = @"level0";
+        itemMenuLevel0.alpha = 1.0;
+        itemMenuLevel1.alpha = 0.0;
+    }
     
-    image4 = [[UIImageView alloc] initWithImage:[resource.bitmapsInanimates valueForKey:@"stone2"]];
-    image4.frame = CGRectMake(ITEM_X, FIRST_ITEM_Y + ((ITEM_SIZE + MARGE_ITEM) * 3), ITEM_SIZE, ITEM_SIZE);
-    
-    image5 = [[UIImageView alloc] initWithImage:[resource.bitmapsInanimates valueForKey:@"stone"]];
-    image5.frame = CGRectMake(ITEM_X, FIRST_ITEM_Y + ((ITEM_SIZE + MARGE_ITEM) * 4), ITEM_SIZE, ITEM_SIZE);
+    [UIView commitAnimations];
 }
 
 

@@ -1,35 +1,29 @@
-//
-//  EditorAction.h
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 16/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
+#import "ManageItemMenu.h"
 
 @class EditorActionView, EditorViewController;
 
 
-@interface EditorAction : NSObject {
+@interface EditorAction : NSObject <ManageItemMenu> {
     
     EditorActionView *editorActionView;
     EditorViewController *editorViewController;
     
     NSString *selectedObjectType;
-    NSString *selectedObject;
-    BOOL removeTool;
+    NSString *selectedObjectLevel0;
+    NSString *selectedObjectLevel1;
 }
 
 @property (nonatomic, retain) EditorActionView *editorViewAction;
 @property (nonatomic, retain) EditorViewController *editorViewController;
 @property (nonatomic, retain) NSString *selectedObjectType;
-@property (nonatomic, retain) NSString *selectedObject;
-@property (nonatomic) BOOL removeTool;
+@property (nonatomic, retain) NSString *selectedObjectLevel0;
+@property (nonatomic, retain) NSString *selectedObjectLevel1;
 
 - (id)initWithFrame:(CGRect)frame controller:(EditorViewController *)myController;
 - (void)dealloc;
 
 - (void)changeTool:(NSString *)tool;
+- (NSString *)getSelectedObject;
 
 @end

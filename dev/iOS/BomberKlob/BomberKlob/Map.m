@@ -56,7 +56,7 @@
     
     grounds = [[NSMutableArray alloc] initWithCapacity:height];
     blocks = [[NSMutableArray alloc] initWithCapacity:height];
-    players = [[NSMutableArray alloc] init];
+    players = [[NSMutableDictionary alloc] init];
 	
 	RessourceManager * resource = [RessourceManager sharedRessource];
     
@@ -74,7 +74,7 @@
             [[grounds objectAtIndex:i] addObject:groundTmp];
             
             if (i == 0 || j == 0 || i == (width - 1) || j == (height - 1)) {
-				blockTmp = [(Undestructible *)[resource.bitmapsAnimates objectForKey:@"herb"] copy];
+				blockTmp = [(Undestructible *)[resource.bitmapsAnimates objectForKey:@"block1"] copy];
 				blockTmp.position = positionTmp;
 				[[blocks objectAtIndex:i] addObject:blockTmp];
                 [blockTmp release];
@@ -91,9 +91,11 @@
         [blocksTmp release];
     }
     
-	for (int i = 0; i < 4; i++) {
-		[players addObject:[[Position alloc] initWithX:2 y:2+i]];
-	}
+//	for (int i = 0; i < 4; i++) {
+//        Position *p = [[Position alloc] initWithX:(i * resource.tileSize) y:(2 * resource.tileSize)];
+//        [self addPlayer:p color:@"white"];
+////		[players addObject:[[Position alloc] initWithX:2 y:2+i]];
+//	}
 }
 
 
@@ -178,26 +180,38 @@
 
 - (void)addGround:(Objects *)ground position:(Position *)position {
 	
+    if(position.x < width && position.x >= 0 && position.y < height && position.y >= 0)
+        [[grounds objectAtIndex:position.x] replaceObjectAtIndex:position.y withObject:ground];
 }
 
 
 - (void)addBlock:(Objects *)block position:(Position *)position {
     
-	if(position.x < width && position.x >= 0 && position.y < height && position.y >= 0)
+	if(position.x < width && position.x >= 0 && position.y < height && position.y >= 0 && [self isEmpty:position])
         [[blocks objectAtIndex:position.x] replaceObjectAtIndex:position.y withObject:block];
 }
 
 
-- (void)addPlayer:(Position *)position {
+- (void)addPlayer:(Position *)position color:(NSString *)color {
     
-    if(position.x < width && position.x >= 0 && position.y < height && position.y >= 0) {
-        [players addObject:position];
+    if(position.x < width && position.x >= 0 && position.y < height && position.y >= 0 && [self isEmpty:position]) {
+        [players setValue:position forKey:color];
     }
 }
 
 
 - (void)deleteBlockAtPosition:(Position *)position {
 	[[blocks objectAtIndex:position.x] replaceObjectAtIndex:position.y withObject:@"empty"];
+}
+
+
+- (void)deletePlayerAtPosition:(Position *)position {
+    
+    for (id key in players) {
+        if ([[players objectForKey:key] isEqual:position]) {
+            [players removeObjectForKey:key];
+        }
+    }
 }
 
 
@@ -223,20 +237,18 @@
 - (void) drawPlayers:(CGContextRef)context {
     Position *position;
     Player *player;
-    NSArray *colorsPlayers = [[NSArray alloc] initWithObjects:@"white", @"blue", @"red", @"black", nil];
     NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
     
-    for (int i = 0; i < [players count]; i++) {
-        position = [[Position alloc] initWithX:(((Position *) [players objectAtIndex:i]).x * tileSize) y:(((Position *) [players objectAtIndex:i]).y * tileSize)];
-        player = [[Player alloc] initWithColor:[colorsPlayers objectAtIndex:i] position:position];
+    for (NSString *key in players) {
+        position = [[Position alloc] initWithX:(((Position *) [players objectForKey:key]).x * tileSize) y:(((Position *) [players objectForKey:key]).y * tileSize)];
+        player = [(Player *)[[RessourceManager sharedRessource].bitmapsPlayer objectForKey:key] copy];
+        player.position = position;
         
         [player draw:context];
         
         [position release];
         [player release];
     }
-    
-    [colorsPlayers release];
 }
 
 
@@ -257,20 +269,18 @@
 - (void)drawPlayers:(CGContextRef)context alpha:(CGFloat)alpha {
     Position *position;
     Player *player;
-    NSArray *colorsPlayers = [[NSArray alloc] initWithObjects:@"white", @"blue", @"red", @"black", nil];
     NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
-    
-    for (int i = 0; i < [players count]; i++) {
-        position = [[Position alloc] initWithX:(((Position *) [players objectAtIndex:i]).x * tileSize) y:(((Position *) [players objectAtIndex:i]).y * tileSize)];
-        player = [[Player alloc] initWithColor:[colorsPlayers objectAtIndex:i] position:position];
+
+    for (NSString *key in players) {
+        position = [[Position alloc] initWithX:(((Position *) [players objectForKey:key]).x * tileSize) y:(((Position *) [players objectForKey:key]).y * tileSize)];
+        player = [(Player *)[[RessourceManager sharedRessource].bitmapsPlayer objectForKey:key] copy];
+        player.position = position;
         
         [player draw:context alpha:alpha];
         
         [position release];
         [player release];
     }
-    
-    [colorsPlayers release];
 }
 
 
@@ -287,6 +297,46 @@
             CGContextFillRect(context, CGRectMake(0, j * [RessourceManager sharedRessource].tileSize, 21 * [RessourceManager sharedRessource].tileSize , 2));
         }
     }
+}
+
+
+- (void) update{
+	for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {	
+			Objects * object = [[blocks objectAtIndex:i] objectAtIndex:j];
+            if (![object isEqual:@"empty"]) {
+				if (![object hasAnimationFinished]) {
+					[object update]; 
+				}
+				else {
+					[[blocks objectAtIndex:i] replaceObjectAtIndex:j withObject:@"empty"];	
+				}
+            }
+        }
+    }
+}
+
+
+- (BOOL)isEmpty:(Position *)position {
+    
+    return ![self thereIsBlock:position] && ![self thereIsPlayer:position];
+}
+
+
+- (BOOL)thereIsBlock:(Position *)position {
+    return ![[[blocks objectAtIndex:position.x] objectAtIndex:position.y] isEqual:@"empty"];
+}
+
+
+- (BOOL)thereIsPlayer:(Position *)position {
+    
+    for (id key in players) {
+        if ([[players objectForKey:key] isEqual:position]) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 
@@ -315,22 +365,6 @@
     [aCoder encodeObject:grounds forKey:@"grounds"];
     [aCoder encodeObject:blocks forKey:@"blocks"];
     [aCoder encodeObject:players forKey:@"players"];
-}
-
-- (void) update{
-	for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {	
-			Objects * object = [[blocks objectAtIndex:i] objectAtIndex:j];
-            if (![object isEqual:@"empty"]) {
-				if (![object hasAnimationFinished]) {
-					[object update]; 
-				}
-				else {
-					[[blocks objectAtIndex:i] replaceObjectAtIndex:j withObject:@"empty"];	
-				}
-            }
-        }
-    }
 }
 
 #pragma mark -

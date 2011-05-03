@@ -1,11 +1,3 @@
-//
-//  EditorInformation.h
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 16/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
 @class EditorInformationView, EditorViewController;
@@ -15,10 +7,13 @@
     
     EditorInformationView *editorInformationView;
     EditorViewController *editorViewController;
+    
+    NSString *colorPlayer;
 }
 
 @property (nonatomic, retain) EditorInformationView *editorInformationView;
 @property (nonatomic, retain) EditorViewController *editorViewController;
+@property (nonatomic, retain) NSString *colorPlayer;
 
 - (id)initWithFrame:(CGRect)frame controller:(EditorViewController *)myController;
 - (void)dealloc;

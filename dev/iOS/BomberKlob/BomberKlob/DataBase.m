@@ -61,11 +61,10 @@ static DataBase *_dataBase = nil;
 
 
 - (NSString *)dataBasePath { 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDir = [paths objectAtIndex:0];
-    
-   // return [documentsDir stringByAppendingPathComponent:@"dataBase.sqlite"];
-	return [[[NSBundle mainBundle]bundlePath] stringByAppendingPathComponent:@"database.sqlite"];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDir = [paths objectAtIndex:0];
+//    return [documentsDir stringByAppendingPathComponent:@"dataBase.sqlite"];
+    return [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"dataBase.sqlite"];
 }
 
 
@@ -194,7 +193,7 @@ static DataBase *_dataBase = nil;
     sqlite3_stmt *statement = [self select:@"owner" from:@"Map" where:[NSString stringWithFormat:@"name = '%@'", map.name]];
     
     if (sqlite3_step(statement) == SQLITE_ROW) {
-        NSLog(@"%d == %d", sqlite3_column_int(statement, 0), map.owner.identifier);
+
         if (sqlite3_column_int(statement, 0) != map.owner.identifier) {
             [self update:@"Map" set:[NSString stringWithFormat:@"owner = %d", map.owner.identifier] where:[NSString stringWithFormat:@"name = '%@'", map.name]];
         }

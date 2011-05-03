@@ -25,9 +25,9 @@
 - (id) initWithMapName:(NSString *)mapName {
 	self = [super init];
 	if (self){
-//		engine = [[Engine alloc] initWithGame:[[Game alloc] initWithMapName:mapName]];
+		engine = [[Engine alloc] initWithGame:[[Game alloc] initWithMapName:mapName]];
 		resource = [RessourceManager sharedRessource];
-		engine = [[Engine alloc] initWithGame:[[Game alloc] init]];
+//		engine = [[Engine alloc] initWithGame:[[Game alloc] init]];
 		CGRect dimension ;
 		dimension = CGRectMake(0, resource.screenWidth-(engine.game.map.height*resource.tileSize),resource.tileSize*engine.game.map.width,resource.tileSize*engine.game.map.height);
 		self.gameViewControllerSingle = [[GameViewControllerSingle alloc] initWithFrame:dimension Controller:self];

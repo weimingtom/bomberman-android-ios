@@ -18,7 +18,7 @@
 	BOOL hit;
 	NSInteger level;
 	BOOL fireWall;
-	NSInteger damages;
+	NSInteger damage;
 	Position *position;
 	
 	NSMutableDictionary * animations;
@@ -39,7 +39,7 @@
 @property (nonatomic) BOOL fireWall;
 @property (nonatomic) BOOL destroyable;
 
-@property (nonatomic) NSInteger damages;
+@property (nonatomic) NSInteger damage;
 @property (nonatomic, retain) Position * position;
 @property (nonatomic, assign) RessourceManager * ressource;
 
@@ -52,6 +52,7 @@
 @property (nonatomic) NSInteger currentFrame;
 @property (nonatomic) NSInteger waitDelay;
 @property (nonatomic) NSInteger delay;
+@property (nonatomic) BOOL animationFinished;
 
 - (id)init;
 - (void)resize;
@@ -65,5 +66,7 @@
 - (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition animations:(NSDictionary *)anAnimations;
 - (void) update;
 - (BOOL) hasAnimationFinished;
+
+- (NSComparisonResult)compareImageName:(Objects *)object;
 
 @end

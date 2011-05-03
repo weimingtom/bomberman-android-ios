@@ -1,11 +1,3 @@
-//
-//  EditorInformation.m
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 16/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "EditorInformation.h"
 #import "EditorInformationView.h"
 #import "EditorViewController.h"
@@ -13,7 +5,7 @@
 
 @implementation EditorInformation
 
-@synthesize editorInformationView, editorViewController;
+@synthesize editorInformationView, editorViewController, colorPlayer;
 
 
 - (id)initWithFrame:(CGRect)frame controller:(EditorViewController *)myController {
@@ -30,6 +22,8 @@
 
 - (void)dealloc {
     [editorInformationView release];
+    [editorViewController release];
+    [colorPlayer release];
     [super dealloc];
 }
 

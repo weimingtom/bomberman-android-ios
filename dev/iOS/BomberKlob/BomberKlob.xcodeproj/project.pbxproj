@@ -12,6 +12,7 @@
 		1846A7BF134B6F4D00D35626 /* ChangePlayerMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846A7BD134B6F4D00D35626 /* ChangePlayerMenuViewController.m */; };
 		184A63A31347AF34000F5C50 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 184A63A21347AF34000F5C50 /* libsqlite3.dylib */; };
 		184B234C136EABA4008FE541 /* MapMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 184B234B136EABA4008FE541 /* MapMenu.m */; };
+		184B234F136EDEE3008FE541 /* ItemMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 184B234E136EDEE3008FE541 /* ItemMenu.m */; };
 		18543B121350A2E90038CC61 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18543B111350A2E90038CC61 /* AVFoundation.framework */; };
 		18592AA61359DC7B00A20BB1 /* Maps in Resources */ = {isa = PBXBuildFile; fileRef = 18592AA41359DC7B00A20BB1 /* Maps */; };
 		18592AA71359DC7B00A20BB1 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 18592AA51359DC7B00A20BB1 /* Sounds */; };
@@ -139,6 +140,9 @@
 		184A63A21347AF34000F5C50 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		184B234A136EABA4008FE541 /* MapMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMenu.h; sourceTree = "<group>"; };
 		184B234B136EABA4008FE541 /* MapMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMenu.m; sourceTree = "<group>"; };
+		184B234D136EDEE3008FE541 /* ItemMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemMenu.h; sourceTree = "<group>"; };
+		184B234E136EDEE3008FE541 /* ItemMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemMenu.m; sourceTree = "<group>"; };
+		184B2350136EF089008FE541 /* ManageItemMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageItemMenu.h; sourceTree = "<group>"; };
 		18543B111350A2E90038CC61 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		18543B2E1350C9350038CC61 /* SettingGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingGameViewController.h; sourceTree = "<group>"; };
 		18543B2F1350C9350038CC61 /* SettingGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingGameViewController.m; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 		187A72E61341312D0020D828 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		187A72EB1341315C0020D828 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenuViewController.xib; sourceTree = "<group>"; };
 		187A72F613413DCA0020D828 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1882CCA2137056F8007C2C93 /* ManageMapMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageMapMenu.h; sourceTree = "<group>"; };
 		1885F897136C768400C4A4A1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/CreateAccountOfflineMenuViewController.xib; sourceTree = "<group>"; };
 		1885F898136C769B00C4A4A1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/MainMenuViewController.xib; sourceTree = "<group>"; };
 		1885F89A136C779300C4A4A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EditorMenuViewController.xib; sourceTree = "<group>"; };
@@ -320,6 +325,10 @@
 				1802057A136E154100E4F8CB /* Menu.m */,
 				184B234A136EABA4008FE541 /* MapMenu.h */,
 				184B234B136EABA4008FE541 /* MapMenu.m */,
+				1882CCA2137056F8007C2C93 /* ManageMapMenu.h */,
+				184B234D136EDEE3008FE541 /* ItemMenu.h */,
+				184B234E136EDEE3008FE541 /* ItemMenu.m */,
+				184B2350136EF089008FE541 /* ManageItemMenu.h */,
 			);
 			name = GenericMenu;
 			sourceTree = "<group>";
@@ -563,6 +572,8 @@
 				99433929134C876200970231 /* AnimationSequence.m */,
 				9943392A134C876200970231 /* Bomb.h */,
 				9943392B134C876200970231 /* Bomb.m */,
+				99433950134C876200970231 /* Player.h */,
+				99433951134C876200970231 /* Player.m */,
 				99433930134C876200970231 /* Destructible.h */,
 				99433931134C876200970231 /* Destructible.m */,
 				99433936134C876200970231 /* FrameInfo.h */,
@@ -600,8 +611,6 @@
 				9943394B134C876200970231 /* MapEditor.m */,
 				9943394C134C876200970231 /* Multiplayer.h */,
 				9943394D134C876200970231 /* Multiplayer.m */,
-				99433950134C876200970231 /* Player.h */,
-				99433951134C876200970231 /* Player.m */,
 				99433952134C876200970231 /* Position.h */,
 				99433953134C876200970231 /* Position.m */,
 				99433954134C876200970231 /* RessourceManager.h */,
@@ -826,6 +835,7 @@
 				1802057D136E154100E4F8CB /* Menu.m in Sources */,
 				1802057E136E154100E4F8CB /* MenuRect.m in Sources */,
 				184B234C136EABA4008FE541 /* MapMenu.m in Sources */,
+				184B234F136EDEE3008FE541 /* ItemMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

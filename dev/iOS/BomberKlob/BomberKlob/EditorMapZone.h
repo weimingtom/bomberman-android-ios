@@ -1,14 +1,6 @@
-//
-//  EditorMap.h
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 16/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
-#define ALPHA 0.2
+#define ALPHA 0.3
 
 
 @class EditorMapZoneView, EditorViewController, Position, Objects;

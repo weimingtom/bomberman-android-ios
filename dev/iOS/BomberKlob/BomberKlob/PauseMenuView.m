@@ -1,11 +1,3 @@
-//
-//  PauseMenuView.m
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 18/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "PauseMenuView.h"
 #import "PauseMenu.h"
 #import "RessourceManager.h"
@@ -33,6 +25,10 @@
 
 
 - (void)dealloc {
+    [pauseMenu release];
+    [resume release];
+    [save release];
+    [quit release];
     [super dealloc];
 }
 

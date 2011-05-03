@@ -6,10 +6,14 @@
 
 @implementation MapMenu
 
-- (id)initWithFrame:(CGRect)frame imageWidth:(NSInteger)imageWidthValue imageHeight:(NSInteger)imageHeightValue imageMargin:(NSInteger)imageMarginValue reductionPercentage:(NSInteger)reductionPercentageValue items:(NSArray *)itemsValue images:(NSArray *)imagesValue displayNameOwner:(BOOL)isDisplayNameOwner {
+@synthesize controller;
+
+
+- (id)initWithFrame:(CGRect)frame controller:(id<ManageMapMenu>)myController imageWidth:(NSInteger)imageWidthValue imageHeight:(NSInteger)imageHeightValue imageMargin:(NSInteger)imageMarginValue reductionPercentage:(NSInteger)reductionPercentageValue items:(NSArray *)itemsValue images:(NSArray *)imagesValue displayNameOwner:(BOOL)isDisplayNameOwner {
     self = [super initButNotBuild:frame horizontal:YES imageWidth:imageWidthValue imageHeight:imageHeightValue imageMargin:imageMarginValue reductionPercentage:reductionPercentageValue items:itemsValue images:imagesValue];
     
     if (self) {
+        self.controller = myController;
         displayOwnerName = isDisplayNameOwner;
         
         [self buildUserInterface];
@@ -103,6 +107,7 @@
     [super moveImages];
     
     mapName.text = ((DBMap *)[items objectAtIndex:selectedImageIndex]).name;
+    [controller changeMap:mapName.text];
     
     if (displayOwnerName) {
         ownerName.text = ((DBMap *)[items objectAtIndex:selectedImageIndex]).owner.pseudo;

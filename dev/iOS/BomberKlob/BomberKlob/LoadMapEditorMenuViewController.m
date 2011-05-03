@@ -19,7 +19,7 @@
 
 @implementation LoadMapEditorMenuViewController
 
-@synthesize load, mapName, owner, mapsNotOfficial, imageMapsNotOfficial;
+@synthesize load, mapName, owner, mapsNotOfficial, imageMapsNotOfficial, mapNameNew;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -29,7 +29,7 @@
 //        maps = [[NSMutableArray alloc] initWithObjects:map1, map2, map3, nil];
 //        
         [self initMapNotOfficial];
-        MapMenu *menu = [[MapMenu alloc] initWithFrame:CGRectMake(0, 5, 480, 225) imageWidth:375 imageHeight:225 imageMargin:-20 reductionPercentage:20 items:mapsNotOfficial images:imageMapsNotOfficial displayNameOwner:YES];
+        MapMenu *menu = [[MapMenu alloc] initWithFrame:CGRectMake(0, 5, 480, 225) controller:self imageWidth:375 imageHeight:225 imageMargin:-20 reductionPercentage:20 items:mapsNotOfficial images:imageMapsNotOfficial displayNameOwner:YES];
         
         [self.view addSubview:menu];
 
@@ -115,7 +115,7 @@
 
 
 - (void)goToEditor {
-    EditorViewController *editorViewController = [[EditorViewController alloc] initWithMapName:mapName.text];
+    EditorViewController *editorViewController = [[EditorViewController alloc] initWithMapName:mapNameNew];
     self.navigationController.navigationBarHidden = YES;
     [self.navigationController pushViewController:editorViewController animated:NO];
     [editorViewController release];
@@ -125,6 +125,11 @@
 - (IBAction)loadAction:(id)sender {
     NSLog(@"Load");
     [self goToEditor];
+}
+
+
+- (void)changeMap:(NSString *)mapNameValue {
+    self.mapNameNew = mapNameValue;
 }
 
 @end

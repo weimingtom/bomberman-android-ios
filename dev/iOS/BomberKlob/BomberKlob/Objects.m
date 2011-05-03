@@ -14,7 +14,7 @@
 
 @implementation Objects
 
-@synthesize imageName, hit, level, fireWall, position, animations,currentAnimation,currentFrame,waitDelay,delay, damages,idle,destroyAnimations,ressource,destroyable;
+@synthesize imageName, hit, level, fireWall, position, animations,currentAnimation,currentFrame,waitDelay,delay, damage,idle,destroyAnimations,ressource,destroyable, animationFinished;
 
 - (id)init {
 	self = [super init];
@@ -144,13 +144,28 @@
     self = [super init];
     
     if (self) {
+        Objects *object;
         ressource = [RessourceManager sharedRessource];
         
         self.imageName = [aDecoder decodeObjectForKey:@"imageName"];
-        self.hit = [aDecoder decodeBoolForKey:@"hit"];
         self.position = [aDecoder decodeObjectForKey:@"position"];
         
-        animations = [[NSMutableDictionary alloc] initWithDictionary:[ressource.bitmapsInanimates dictionaryWithValuesForKeys:[[NSArray alloc] initWithObjects:imageName, nil]]];
+        object = [[[RessourceManager sharedRessource].bitmapsAnimates objectForKey:imageName] copy]; 
+        
+        self.hit = object.hit;
+        self.level = object.level;
+        self.fireWall = object.fireWall;
+        self.damage = object.damage;
+        self.animations = object.animations;
+        self.destroyAnimations = object.destroyAnimations;
+        self.idle = object.idle;
+        self.currentAnimation = object.currentAnimation;
+        self.waitDelay = object.waitDelay;
+        self.delay = object.delay;
+        self.destroyable = object.destroyable;
+        self.animationFinished = object.animationFinished;
+        
+        [object release];
     }
     
     return self;
@@ -159,7 +174,6 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:imageName forKey:@"imageName"];
-    [aCoder encodeBool:hit forKey:@"hit"];
     [aCoder encodeObject:position forKey:@"position"];
 }
 
@@ -177,7 +191,7 @@
     copy.hit = hit;
     copy.level = level;
     copy.fireWall = fireWall;
-    copy.damages = damages;
+    copy.damage = damage;
     copy.position = positionCopy;
     copy.animations = animationCopy;
     copy.destroyAnimations = destroyAnimationsCopy;
@@ -201,6 +215,12 @@
 - (void) destroy{
 	destroyable = YES;
 	currentFrame = 0;
+}
+
+
+- (NSComparisonResult)compareImageName:(Objects *)object {
+    
+    return [imageName compare:object.imageName];
 }
 
 @end

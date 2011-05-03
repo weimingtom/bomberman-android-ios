@@ -20,9 +20,10 @@
 
 - (id)initWithMapName:(NSString *)mapName;
 
+- (void)addGround:(Objects *)ground position:(Position *)position;
 - (void)addBlock:(Objects *)block position:(Position *)position;
-- (void)addPlayer:(Position *)position;
-- (void)deleteBlockAtPosition:(Position *)position;
+- (void)addPlayer:(Position *)position color:(NSString *)color;
+- (void)deleteObjectAtPosition:(Position *)position;
 - (void)saveMapWithOwner:(DBUser *)owner;
 
 @end
