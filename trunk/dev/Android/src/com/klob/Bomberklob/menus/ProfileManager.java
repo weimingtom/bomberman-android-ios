@@ -50,7 +50,7 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 	
 	private ObjectsGallery objectsGallery;
 	
-    /** Called when the activity is first created. */
+    /** Called when the activity is first created. **/
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +65,7 @@ public class ProfileManager extends Activity implements View.OnClickListener{
         Resources r = getResources();
         /** 
          * premier onglet etc..
-         */
+         **/
 		TabSpec tspec1 = tabs.newTabSpec(String.format(r.getString(R.string.HomeButtonSinglePlayer)));
 		tspec1.setIndicator(String.format(r.getString(R.string.HomeButtonSinglePlayer)));
 		tspec1.setContent(R.id.ProfilLayoutSolo);
@@ -103,7 +103,6 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 		}
 		this.objectsGallery.setBackgroundColor(Color.GRAY);
 		this.objectsGallery.setSelectedItem(Model.getUser().getColor());
-		Log.i("@@@@@@@@@@@@@@@@@@@", Model.getUser().getColor());
 		this.objectsGallery.update();
 		
         FrameLayout f = (FrameLayout) findViewById(R.id.ProfileManagerFrameLayoutObjectsGallery);
@@ -209,7 +208,7 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 	
 			/** 
 			 * pseudo rentré avec ses vérifications 
-			 */
+			 **/
 			if ( null == Model.getSystem().getDatabase().getUser(pseudo.getText().toString()) && !pseudo.getText().toString().equals(Model.getUser().getPseudo() ) ) {
 				Model.getSystem().getDatabase().changePseudo(Model.getUser().getPseudo(), pseudo.getText().toString());
 				Model.getUser().setPseudo(pseudo.getText().toString());
@@ -225,7 +224,7 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 			
 			/** 
 			 * password selected et mot de passe et userName non vides
-			 */
+			 **/
 			if (password.isChecked() && (pwd != null)
 					&& (userName != null)) {
 				Model.getUser().setRememberPassword(true);
@@ -285,7 +284,7 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 			}
 		}    	
 		else if(v == this.changeAccount){
-			//intent = new Intent(ProfileManager.this, ChangerCompteMulti.class);
+			intent = new Intent(ProfileManager.this, ChangerCompteMulti.class);
 		}
 		else if( v == this.edit){
 			intent = new Intent(ProfileManager.this, ChangePasswordMultiplayer.class);

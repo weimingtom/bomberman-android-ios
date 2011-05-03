@@ -223,8 +223,8 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 					}
 					
 					Toast.makeText(NewAccountOnLine.this, "Inscription réalisée avec succès", Toast.LENGTH_SHORT).show();
-						Intent intentMulti = new Intent(NewAccountOnLine.this, HomeMulti.class);
-						startActivity(intentMulti);
+						intent = new Intent(NewAccountOnLine.this, HomeMulti.class);
+						startActivity(intent);
 				}
 			
 		}
