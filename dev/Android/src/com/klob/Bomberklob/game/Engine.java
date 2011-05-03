@@ -84,23 +84,24 @@ public class Engine {
 
 			if ( this.bombs.get(p) == null ) {
 				if ( player.getBombNumber() > 0 ) {
+					ConcurrentHashMap<Point, Integer> zoneDangereuses = this.single.map.getZoneDangereuses();
+					
+					/* On crée une nouvelle bombe */
 					Bomb bomb = new Bomb(player.getBombSelected(), ResourcesManager.getBombsAnimations().get(player.getBombSelected()), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, player);
 					
-					Map map = this.single.getMap();
-					ConcurrentHashMap<Point, Integer> zoneDangereuses = map.getZoneDangereuses();
+					/* AJOUT DES ZONES DANGEREUSES POUR L'IA */
+					
+					/* CENTER */
 					zoneDangereuses.put(p,1);
 					
 					/* UP */
 					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-						if ( this.bombs.get(new Point(p.x, p.y-k)) != null ) {
-							break;
-						}
-						else if ( map.getBlocks()[p.x][p.y-k] == null ) {
-							if ( map.getGrounds()[p.x][p.y-k].isFireWall() ) {
-								break;
+						if ( (this.single.map.getBlocks()[p.x][p.y-k] == null) && (this.bombs.get(new Point(p.x, p.y-k)) != null) ) {
+							if ( !this.single.map.getGrounds()[p.x][p.y-k].isFireWall() ) {
+								zoneDangereuses.put(new Point(p.x, p.y-k),1);
 							}
 							else {
-								zoneDangereuses.put(new Point(p.x, p.y-k),1);
+								break;
 							}
 						}
 						else {
@@ -110,15 +111,12 @@ public class Engine {
 
 					/* DOWN */
 					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-						if ( this.bombs.get(new Point(p.x, p.y+k)) != null ) {
-							break;
-						}
-						else if ( map.getBlocks()[p.x][p.y+k] == null ) {
-							if ( map.getGrounds()[p.x][p.y+k].isFireWall() ) {
-								break;
+						if ( (this.single.map.getBlocks()[p.x][p.y+k] == null) && (this.bombs.get(new Point(p.x, p.y+k)) == null) ) {
+							if ( !this.single.map.getGrounds()[p.x][p.y+k].isFireWall() ) {
+								zoneDangereuses.put(new Point(p.x, p.y+k),1);
 							}
 							else {
-								zoneDangereuses.put(new Point(p.x, p.y+k),1);
+								break;
 							}
 						}
 						else {
@@ -128,15 +126,12 @@ public class Engine {
 
 					/* LEFT */
 					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-						if ( this.bombs.get(new Point(p.x-k, p.y)) != null ) {
-							break;
-						}
-						else if ( map.getBlocks()[p.x-k][p.y] == null ) {
-							if ( map.getGrounds()[p.x-k][p.y].isFireWall() ) {
-								break;
+						if ( (this.single.map.getBlocks()[p.x-k][p.y] == null) && (this.bombs.get(new Point(p.x-k, p.y)) == null) ) {
+							if ( this.single.map.getGrounds()[p.x-k][p.y].isFireWall() ) {
+								zoneDangereuses.put(new Point(p.x-k, p.y),1);
 							}
 							else {
-								zoneDangereuses.put(new Point(p.x-k, p.y),1);
+								break;
 							}
 						}
 						else {
@@ -146,15 +141,12 @@ public class Engine {
 
 					/* RIGHT */
 					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-						if ( this.bombs.get(new Point(p.x+k, p.y)) != null ) {
-							break;
-						}
-						else if ( map.getBlocks()[p.x+k][p.y] == null ) {
-							if ( map.getGrounds()[p.x+k][p.y].isFireWall() ) {
-								break;
+						if ( (this.single.map.getBlocks()[p.x+k][p.y] == null) && (this.bombs.get(new Point(p.x+k, p.y)) == null) ) {
+							if ( !this.single.map.getGrounds()[p.x+k][p.y].isFireWall() ) {
+								zoneDangereuses.put(new Point(p.x+k, p.y),1);
 							}
 							else {
-								zoneDangereuses.put(new Point(p.x+k, p.y),1);
+								break;
 							}
 						}
 						else {
@@ -162,9 +154,18 @@ public class Engine {
 						}
 					}
 					
+					/* FIN DES ZONES DANGEREUSES */
+					
+					/* Coordonnées de la bombe posée */
 					bomb.setPosition(ResourcesManager.tileToCo(p.x, p.y));
+					
+					/* On joue la musique */
 					bomb.playCurrentAnimationSound();
+					
+					/* On l'ajoute dans la hash map de bombes */
 					this.bombs.put(p, bomb);
+					
+					/* On diminue la quantité des bombes que peut poser le joueur */
 					try {
 						player.setBombNumber(player.getBombNumber()-1);
 					} catch (BombPowerException e) {
@@ -186,8 +187,7 @@ public class Engine {
 
 	public void update() {
 		Player[] players = this.single.getPlayers();
-		Map map = this.single.getMap();
-		ConcurrentHashMap<Point, Integer> zoneDangereuses = map.getZoneDangereuses();
+		ConcurrentHashMap<Point, Integer> zoneDangereuses = this.single.map.getZoneDangereuses();
 
 		/* Bombes -------------------------------------------------- */
 
@@ -202,11 +202,10 @@ public class Engine {
 
 					/* Si l'animation courante correspond à KILL et qu'elle est finie on supprime le personnage */
 					if ( players[i].hasAnimationFinished() && players[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
-						/* On met joueur à null ce qui stopera le thread d'écoute */
+						/* On met joueur à null ce qui stopera le thread d'écoute seulement pour le joueur humain */
 						players[i].setPosition(null);
 					}
-					else {			
-						
+					else {
 						/* Si le joueur vient de se faire toucher */
 						if ( players[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) ) {
 							/* Si l'animation est finie */
@@ -230,13 +229,15 @@ public class Engine {
 									/* Defensif (On est dans une zone dangereuse) */
 									if ( (zoneDangereuses.get(point1) == Integer.valueOf(1)) || (zoneDangereuses.get(point2) == Integer.valueOf(1)) || (zoneDangereuses.get(point3) == Integer.valueOf(1)) || (zoneDangereuses.get(point4) == Integer.valueOf(1))) {
 										
+										/* FIXME FAIRE LA FONCTION DE RECHERCHE */
+										
 										int x = 0;
 										int y = 0;
 										
 										do {
 											x = (int)(Math.random() * (20-1)) + 1;
 											y = (int)(Math.random() * (14-1)) + 1;
-										} while ( map.getBlocks()[x][y] != null || (zoneDangereuses.get(new Point(x,y)) == Integer.valueOf(1)) );
+										} while ( this.single.map.getBlocks()[x][y] != null || (zoneDangereuses.get(new Point(x,y)) == Integer.valueOf(1)) );
 
 										
 										((BotPlayer) players[i]).setObjectif(new Point(x,y));
@@ -278,6 +279,7 @@ public class Engine {
 											players[i].setCurrentAnimation(PlayerAnimations.STOP_UP_LEFT);
 										}
 									}
+									
 									
 									if ( point1.x < objectif.x && point1.y < objectif.y ) {
 										if ( !animation.equals(PlayerAnimations.DOWN_RIGHT.getLabel())) {
@@ -322,18 +324,9 @@ public class Engine {
 								}
 							}
 							
-							if ( players[i].isDestructible() ) {							
-								if ( (map.getBlocks()[point1.x][point1.y] != null && map.getBlocks()[point1.x][point1.y].getDamage() != 0) || (map.getBlocks()[point2.x][point2.y] != null && map.getBlocks()[point2.x][point2.y].getDamage() != 0) ||(map.getBlocks()[point3.x][point3.y] != null && map.getBlocks()[point3.x][point3.y].getDamage() != 0) || (map.getBlocks()[point4.x][point4.y] != null && map.getBlocks()[point4.x][point4.y].getDamage() != 0)) {
-									players[i].decreaseLife();
-									if ( players[i].getLife() == 0 ) {
-										players[i].setCurrentAnimation(PlayerAnimations.KILL);
-									}
-									else {
-										players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
-									}
-								}
-								else if ( (map.getGrounds()[point1.x][point1.y].getDamage() != 0) || ( map.getGrounds()[point2.x][point2.y].getDamage() != 0) || (map.getGrounds()[point3.x][point3.y].getDamage() != 0) || (map.getGrounds()[point4.x][point4.y].getDamage() != 0) ) {
-	
+							/* On vérifie que le joueur n'est pas sur une case lui causant des dommages */
+							if ( players[i].isDestructible() ) {
+								if ( (this.single.map.getAnimatedObjects().get(point1) != null && this.single.map.getAnimatedObjects().get(point1).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point2) != null && this.single.map.getAnimatedObjects().get(point2).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point3) != null && this.single.map.getAnimatedObjects().get(point3).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point4) != null && this.single.map.getAnimatedObjects().get(point4).getDamage() != 0) || (this.single.map.getGrounds()[point1.x][point1.y] != null && this.single.map.getGrounds()[point1.x][point1.y].getDamage() != 0) || (this.single.map.getGrounds()[point1.x][point1.y] != null && this.single.map.getGrounds()[point2.x][point2.y].getDamage() != 0) || (this.single.map.getGrounds()[point3.x][point3.y] != null && this.single.map.getGrounds()[point3.x][point3.y].getDamage() != 0) || (this.single.map.getGrounds()[point4.x][point4.y] != null && this.single.map.getGrounds()[point4.x][point4.y].getDamage() != 0) ) {
 									players[i].decreaseLife();
 									if ( players[i].getLife() == 0 ) {
 										players[i].setCurrentAnimation(PlayerAnimations.KILL);
@@ -343,10 +336,10 @@ public class Engine {
 									}
 								}
 							}
-						}
-						
+						}						
 						
 						/*TODO  Vérifier tapis roulant */
+						
 						move(players[i]);
 						players[i].update();
 
@@ -410,12 +403,12 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
-					if ( this.bombs.get(nextTile) == null && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isHit())) {
+					if ( this.bombs.get(nextTile) == null && (this.single.map.getAnimatedObjects().get(this.nextTile) == null) && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isHit() || this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isDestructible()) ) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
 							if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
 								this.y--;
 							}
-							else if ( this.bombs.get(new Point(nextTile.x+1,nextTile.y)) == null && (this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit()) ) {
+							else if ( this.bombs.get(new Point(nextTile.x+1,nextTile.y)) == null && (this.single.map.getAnimatedObjects().get(new Point(nextTile.x+1,nextTile.y)) == null) &&  (this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit() || this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isDestructible()) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 									this.y--;
 								}
@@ -438,7 +431,7 @@ public class Engine {
 							}
 						}
 						else {
-							if ( this.bombs.get(new Point(nextTile.x+1,nextTile.y)) == null && (this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit())) {
+							if ( this.bombs.get(new Point(nextTile.x+1,nextTile.y)) == null && (this.single.map.getAnimatedObjects().get(new Point(nextTile.x+1,nextTile.y)) == null) && (this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit() || this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isDestructible()) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 									if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
 										this.x++;
@@ -457,7 +450,7 @@ public class Engine {
 						}
 					}
 					else {
-						if ( this.bombs.get(new Point(nextTile.x+1,nextTile.y)) == null && (this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit())) {
+						if ( this.bombs.get(new Point(nextTile.x+1,nextTile.y)) == null && (this.single.map.getAnimatedObjects().get(new Point(nextTile.x+1,nextTile.y)) == null) && (this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit() || this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isDestructible()) ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 								if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
 									this.x++;
@@ -498,12 +491,12 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y+this.size-1);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
-					if ( this.bombs.get(nextTile) == null && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isHit())) {
+					if ( this.bombs.get(nextTile) == null && (this.single.map.getAnimatedObjects().get(this.nextTile) == null) && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isHit() || this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isDestructible())) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
 							if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
 								this.y++;
 							}
-							else if ( this.bombs.get(new Point(nextTile.x+1,nextTile.y)) == null && (this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit()) ) {
+							else if ( this.bombs.get(new Point(nextTile.x+1,nextTile.y)) == null && (this.single.map.getAnimatedObjects().get(new Point(nextTile.x+1,nextTile.y)) == null) && (this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit() || this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isDestructible()) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 									this.y++;
 								}
@@ -526,7 +519,7 @@ public class Engine {
 							}
 						}
 						else {
-							if ( this.bombs.get(new Point(nextTile.x+1,nextTile.y)) == null && (this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit())) {
+							if ( this.bombs.get(new Point(nextTile.x+1,nextTile.y)) == null && (this.single.map.getAnimatedObjects().get(new Point(nextTile.x+1,nextTile.y)) == null) && (this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit() || this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isDestructible()) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 									if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
 										this.x++;
@@ -545,7 +538,7 @@ public class Engine {
 						}
 					}
 					else {
-						if ( this.bombs.get(new Point(nextTile.x+1,nextTile.y)) == null && (this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit()) ) {
+						if ( this.bombs.get(new Point(nextTile.x+1,nextTile.y)) == null && (this.single.map.getAnimatedObjects().get(new Point(nextTile.x+1,nextTile.y)) == null) && (this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isHit() || this.single.map.getBlocks()[this.nextTile.x+1][this.nextTile.y].isDestructible()) ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 								if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
 									this.x++;
@@ -586,12 +579,12 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x+this.size-1, this.y);
 
 				if ( this.nextTile.x != this.currentTile.x ) {
-					if ( this.bombs.get(nextTile) == null && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isHit())) {
+					if ( this.bombs.get(nextTile) == null && (this.single.map.getAnimatedObjects().get(this.nextTile) == null) && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isHit() || this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isDestructible())) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
 							if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
 								this.x++;
 							}
-							else if ( this.bombs.get(new Point(nextTile.x,nextTile.y+1)) == null && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit())) {
+							else if ( this.bombs.get(new Point(nextTile.x,nextTile.y+1)) == null && (this.single.map.getAnimatedObjects().get(new Point(nextTile.x,nextTile.y+1)) == null) && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit() || this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isDestructible()) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 									this.x++;
 								}
@@ -614,7 +607,7 @@ public class Engine {
 							}
 						}
 						else {
-							if ( this.bombs.get(new Point(nextTile.x,nextTile.y+1)) == null && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit())) {
+							if ( this.bombs.get(new Point(nextTile.x,nextTile.y+1)) == null && (this.single.map.getAnimatedObjects().get(new Point(nextTile.x,nextTile.y+1)) == null) && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit() || this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isDestructible()) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 									if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
 										this.y++;
@@ -633,7 +626,7 @@ public class Engine {
 						}
 					}
 					else {
-						if ( this.bombs.get(new Point(nextTile.x,nextTile.y+1)) == null && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit())) {
+						if (this.bombs.get(new Point(nextTile.x,nextTile.y+1)) == null && (this.single.map.getAnimatedObjects().get(new Point(nextTile.x,nextTile.y+1)) == null) && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit() || this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isDestructible())) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 								if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
 									this.y++;
@@ -674,12 +667,12 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
 
 				if ( this.nextTile.x != this.currentTile.x ) {
-					if ( this.bombs.get(nextTile) == null && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isHit())) {
+					if ( this.bombs.get(nextTile) == null && (this.single.map.getAnimatedObjects().get(this.nextTile) == null) && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isHit() || this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y].isDestructible()) ) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
 							if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
 								this.x--;
 							}
-							else if ( this.bombs.get(new Point(nextTile.x,nextTile.y+1)) == null && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit())) {
+							else if ( this.bombs.get(new Point(nextTile.x,nextTile.y+1)) == null && (this.single.map.getAnimatedObjects().get(new Point(nextTile.x,nextTile.y+1)) == null) && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit() || this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isDestructible()) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 									this.x--;
 								}
@@ -702,7 +695,7 @@ public class Engine {
 							}
 						}
 						else {
-							if ( this.bombs.get(new Point(nextTile.x,nextTile.y+1)) == null && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit())) {
+							if ( this.bombs.get(new Point(nextTile.x,nextTile.y+1)) == null && (this.single.map.getAnimatedObjects().get(new Point(nextTile.x,nextTile.y+1)) == null) && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit() || this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isDestructible()) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 									if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
 										this.y++;
@@ -721,7 +714,7 @@ public class Engine {
 						}
 					}
 					else {
-						if ( this.bombs.get(new Point(nextTile.x,nextTile.y+1)) == null && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit())) {
+						if ( this.bombs.get(new Point(nextTile.x,nextTile.y+1)) == null && (this.single.map.getAnimatedObjects().get(new Point(nextTile.x,nextTile.y+1)) == null) && (this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1] == null || !this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isHit() || this.single.map.getBlocks()[this.nextTile.x][this.nextTile.y+1].isDestructible()) ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 								if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
 									this.y++;
@@ -774,6 +767,7 @@ public class Engine {
 		Map map = this.single.getMap();
 		ConcurrentHashMap<Point, Objects> animatedObjects = map.getAnimatedObjects();
 		Bomb bomb = null;
+		Objects object;
 
 		for(Entry<Point, Bomb> entry : bombs.entrySet()) {
 
@@ -791,8 +785,9 @@ public class Engine {
 			else if ( bomb.hasAnimationFinished() && bomb.getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel())) {
 
 				Point p = ResourcesManager.coToTile(bomb.getPosition().x, bomb.getPosition().y);
-				map.addBlock(ResourcesManager.getObjects().get("firecenter").copy(), p);
-				animatedObjects.put(new Point(p.x,p.y), map.getBlocks()[p.x][p.y]);
+				object = ResourcesManager.getObjects().get("firecenter").copy();
+				object.setPosition(new Point(p.x*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));				
+				animatedObjects.put(p, object);
 
 				/* UP */
 				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
@@ -801,7 +796,7 @@ public class Engine {
 						this.bombs.get(new Point(p.x, p.y-k)).destroy();
 					}
 					/* Si il n'y a pas de block */
-					else if ( map.getBlocks()[p.x][p.y-k] == null ) {
+					else if ( (map.getBlocks()[p.x][p.y-k] == null || (map.getBlocks()[p.x][p.y-k].isDestructible() && map.getAnimatedObjects().get(new Point(p.x ,p.y-k)) == null )) ) {
 						/* Si le sol ne laisse pas passer le feu */
 						if ( map.getGrounds()[p.x][p.y-k].isFireWall() ) {
 							/* On sort */
@@ -810,37 +805,52 @@ public class Engine {
 						else {
 							/* On affiche le feu */
 							if ( k < bomb.getPower()-1 ) {
-								map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y-k));
-								animatedObjects.put(new Point(p.x,p.y-k), map.getBlocks()[p.x][p.y-k]);
+								object = ResourcesManager.getObjects().get("firevertical").copy();
+								object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
+								animatedObjects.put(new Point(p.x,p.y-k), object);
 							}
 							else {
-								map.addBlock(ResourcesManager.getObjects().get("fireup").copy(), new Point(p.x ,p.y-k));
-								animatedObjects.put(new Point(p.x,p.y-k), map.getBlocks()[p.x][p.y-k]);
+								object = ResourcesManager.getObjects().get("fireup").copy();
+								object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
+								animatedObjects.put(new Point(p.x,p.y-k), object);
 							}
 						}
 					}
 					/* Si il y a un block */
 					else {
-						if ( map.getBlocks()[p.x][p.y-k].getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
-							if ( k < bomb.getPower()-1 ) {
-								map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y-k));
-								animatedObjects.put(new Point(p.x,p.y-k), map.getBlocks()[p.x][p.y-k]);
-							}
-							else {
-								map.addBlock(ResourcesManager.getObjects().get("fireup").copy(), new Point(p.x ,p.y-k));
-								animatedObjects.put(new Point(p.x,p.y-k), map.getBlocks()[p.x][p.y-k]);
-							}
-						}
-						else {
+						/* Si il n'est pas destructible */
+						if ( !map.getBlocks()[p.x][p.y-k].isDestructible() ) {
+							/* Si il ne laisse pas passer le feu */
 							if ( map.getBlocks()[p.x][p.y-k].isFireWall() ) {
-								if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
-									map.getBlocks()[p.x][p.y-k].destroy();
-								}
+								/* On break */
 								break;
 							}
-							else {
-								if ( map.getBlocks()[p.x][p.y-k].isDestructible() ) {
-									map.getBlocks()[p.x][p.y-k].destroy();
+						}
+						/* Si il est destructible */
+						else {
+							/* Si il est présent dans les blocs animé */
+							if ( map.getAnimatedObjects().get(new Point(p.x ,p.y-k)) != null ) {
+								/* Si il est déjà en train d'être détruit */
+								if ( map.getAnimatedObjects().get(new Point(p.x ,p.y-k)).getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
+									if ( k < bomb.getPower()-1 ) {
+										object = ResourcesManager.getObjects().get("firevertical").copy();
+										object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
+										animatedObjects.put(new Point(p.x,p.y-k), object);
+									}
+									else {
+										object = ResourcesManager.getObjects().get("fireup").copy();
+										object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
+										animatedObjects.put(new Point(p.x,p.y-k), object);
+									}
+								}
+								/* Sinon on le detruit */
+								else {
+									map.getAnimatedObjects().get(new Point(p.x ,p.y-k)).destroy();
+									/* Si il ne laisse pas passer le feu */
+									if ( map.getAnimatedObjects().get(new Point(p.x ,p.y-k)).isFireWall() ) {
+										/* On break */
+										break;
+									}
 								}
 							}
 						}
@@ -852,42 +862,58 @@ public class Engine {
 					if ( this.bombs.get(new Point(p.x, p.y+k)) != null ) {
 						this.bombs.get(new Point(p.x, p.y+k)).destroy();
 					}
-					else if ( map.getBlocks()[p.x][p.y+k] == null ) {
+					else if ( map.getBlocks()[p.x][p.y+k] == null || (map.getBlocks()[p.x][p.y+k].isDestructible() && map.getAnimatedObjects().get(new Point(p.x ,p.y+k)) == null ) ) {
 						if ( map.getGrounds()[p.x][p.y+k].isFireWall() ) {
 							break;
 						}
 						else {
 							if ( k < bomb.getPower()-1 ) {
-								map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y+k));
-								animatedObjects.put(new Point(p.x,p.y+k), map.getBlocks()[p.x][p.y+k]);
+								object = ResourcesManager.getObjects().get("firevertical").copy();
+								object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
+								animatedObjects.put(new Point(p.x,p.y+k), object);
 							}
 							else {
-								map.addBlock(ResourcesManager.getObjects().get("firedown").copy(), new Point(p.x ,p.y+k));
-								animatedObjects.put(new Point(p.x,p.y+k), map.getBlocks()[p.x][p.y+k]);
+								object = ResourcesManager.getObjects().get("firedown").copy();
+								object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
+								animatedObjects.put(new Point(p.x,p.y+k), object);
 							}
 						}
 					}
+					/* Si il y a un block */
 					else {
-						if ( map.getBlocks()[p.x][p.y+k].getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
-							if ( k < bomb.getPower()-1 ) {
-								map.addBlock(ResourcesManager.getObjects().get("firevertical").copy(), new Point(p.x ,p.y+k));
-								animatedObjects.put(new Point(p.x,p.y+k), map.getBlocks()[p.x][p.y+k]);
-							}
-							else {
-								map.addBlock(ResourcesManager.getObjects().get("firedown").copy(), new Point(p.x ,p.y+k));
-								animatedObjects.put(new Point(p.x,p.y+k), map.getBlocks()[p.x][p.y+k]);
-							}
-						}
-						else {
+						/* Si il n'est pas destructible */
+						if ( !map.getBlocks()[p.x][p.y+k].isDestructible() ) {
+							/* Si il ne laisse pas passer le feu */
 							if ( map.getBlocks()[p.x][p.y+k].isFireWall() ) {
-								if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
-									map.getBlocks()[p.x][p.y+k].destroy();
-								}
+								/* On break */
 								break;
 							}
-							else {
-								if ( map.getBlocks()[p.x][p.y+k].isDestructible() ) {
-									map.getBlocks()[p.x][p.y+k].destroy();
+						}
+						/* Si il est destructible */
+						else {
+							/* Si il est présent dans les blocs animé */
+							if ( map.getAnimatedObjects().get(new Point(p.x ,p.y+k)) != null ) {
+								/* Si il est déjà en train d'être détruit */
+								if ( map.getAnimatedObjects().get(new Point(p.x ,p.y+k)).getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
+									if ( k < bomb.getPower()-1 ) {
+										object = ResourcesManager.getObjects().get("firevertical").copy();
+										object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
+										animatedObjects.put(new Point(p.x,p.y+k), object);
+									}
+									else {
+										object = ResourcesManager.getObjects().get("firedown").copy();
+										object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
+										animatedObjects.put(new Point(p.x,p.y+k), object);
+									}
+								}
+								/* Sinon on le detruit */
+								else {
+									map.getAnimatedObjects().get(new Point(p.x ,p.y+k)).destroy();
+									/* Si il ne laisse pas passer le feu */
+									if ( map.getAnimatedObjects().get(new Point(p.x ,p.y+k)).isFireWall() ) {
+										/* On break */
+										break;
+									}
 								}
 							}
 						}
@@ -899,42 +925,58 @@ public class Engine {
 					if ( this.bombs.get(new Point(p.x-k, p.y)) != null ) {
 						this.bombs.get(new Point(p.x-k, p.y)).destroy();
 					}
-					else if ( map.getBlocks()[p.x-k][p.y] == null ) {
+					else if ( map.getBlocks()[p.x-k][p.y] == null || (map.getBlocks()[p.x-k][p.y].isDestructible() && map.getAnimatedObjects().get(new Point(p.x-k ,p.y)) == null ) ) {
 						if ( map.getGrounds()[p.x-k][p.y].isFireWall() ) {
 							break;
 						}
 						else {
 							if ( k < bomb.getPower()-1 ) {
-								map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x-k ,p.y));
-								animatedObjects.put(new Point(p.x-k,p.y), map.getBlocks()[p.x-k][p.y]);
+								object = ResourcesManager.getObjects().get("firehorizontal").copy();
+								object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
+								animatedObjects.put(new Point(p.x-k,p.y), object);
 							}
 							else {
-								map.addBlock(ResourcesManager.getObjects().get("fireleft").copy(), new Point(p.x-k ,p.y));
-								animatedObjects.put(new Point(p.x-k,p.y), map.getBlocks()[p.x-k][p.y]);
+								object = ResourcesManager.getObjects().get("fireleft").copy();
+								object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
+								animatedObjects.put(new Point(p.x-k,p.y), object);
 							}
 						}
 					}
+					/* Si il y a un block */
 					else {
-						if ( map.getBlocks()[p.x-k][p.y].getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
-							if ( k < bomb.getPower()-1 ) {
-								map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x-k ,p.y));
-								animatedObjects.put(new Point(p.x-k,p.y), map.getBlocks()[p.x-k][p.y]);
-							}
-							else {
-								map.addBlock(ResourcesManager.getObjects().get("fireleft").copy(), new Point(p.x-k ,p.y));
-								animatedObjects.put(new Point(p.x-k,p.y), map.getBlocks()[p.x-k][p.y]);
-							}
-						}
-						else {							
+						/* Si il n'est pas destructible */
+						if ( !map.getBlocks()[p.x-k][p.y].isDestructible() ) {
+							/* Si il ne laisse pas passer le feu */
 							if ( map.getBlocks()[p.x-k][p.y].isFireWall() ) {
-								if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
-									map.getBlocks()[p.x-k][p.y].destroy();
-								}
+								/* On break */
 								break;
 							}
-							else {
-								if ( map.getBlocks()[p.x-k][p.y].isDestructible() ) {
-									map.getBlocks()[p.x-k][p.y].destroy();
+						}
+						/* Si il est destructible */
+						else {
+							/* Si il est présent dans les blocs animé */
+							if ( map.getAnimatedObjects().get(new Point(p.x-k ,p.y)) != null ) {
+								/* Si il est déjà en train d'être détruit */
+								if ( map.getAnimatedObjects().get(new Point(p.x-k ,p.y)).getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
+									if ( k < bomb.getPower()-1 ) {
+										object = ResourcesManager.getObjects().get("firehorizontal").copy();
+										object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
+										animatedObjects.put(new Point(p.x-k,p.y), object);
+									}
+									else {
+										object = ResourcesManager.getObjects().get("fireleft").copy();
+										object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
+										animatedObjects.put(new Point(p.x-k,p.y), object);
+									}
+								}
+								/* Sinon on le detruit */
+								else {
+									map.getAnimatedObjects().get(new Point(p.x-k ,p.y)).destroy();
+									/* Si il ne laisse pas passer le feu */
+									if ( map.getAnimatedObjects().get(new Point(p.x-k ,p.y)).isFireWall() ) {
+										/* On break */
+										break;
+									}
 								}
 							}
 						}
@@ -946,42 +988,58 @@ public class Engine {
 					if ( this.bombs.get(new Point(p.x+k, p.y)) != null ) {
 						this.bombs.get(new Point(p.x+k, p.y)).destroy();
 					}
-					else if ( map.getBlocks()[p.x+k][p.y] == null ) {
+					else if ( map.getBlocks()[p.x+k][p.y] == null || (map.getBlocks()[p.x+k][p.y].isDestructible() && map.getAnimatedObjects().get(new Point(p.x+k ,p.y)) == null )) {
 						if ( map.getGrounds()[p.x+k][p.y].isFireWall() ) {
 							break;
 						}
 						else {
 							if ( k < bomb.getPower()-1 ) {
-								map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x+k ,p.y));
-								animatedObjects.put(new Point(p.x+k,p.y), map.getBlocks()[p.x+k][p.y]);
+								object = ResourcesManager.getObjects().get("firehorizontal").copy();
+								object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
+								animatedObjects.put(new Point(p.x+k,p.y), object);
 							}
 							else {
-								map.addBlock(ResourcesManager.getObjects().get("fireright").copy(), new Point(p.x+k ,p.y));
-								animatedObjects.put(new Point(p.x+k,p.y), map.getBlocks()[p.x+k][p.y]);
+								object = ResourcesManager.getObjects().get("fireright").copy();
+								object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
+								animatedObjects.put(new Point(p.x+k,p.y), object);
 							}
 						}
 					}
+					/* Si il y a un block */
 					else {
-						if ( map.getBlocks()[p.x+k][p.y].getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
-							if ( k < bomb.getPower()-1 ) {
-								map.addBlock(ResourcesManager.getObjects().get("firehorizontal").copy(), new Point(p.x+k ,p.y));
-								animatedObjects.put(new Point(p.x+k,p.y), map.getBlocks()[p.x+k][p.y]);
-							}
-							else {
-								map.addBlock(ResourcesManager.getObjects().get("fireright").copy(), new Point(p.x+k ,p.y));
-								animatedObjects.put(new Point(p.x+k,p.y), map.getBlocks()[p.x+k][p.y]);
-							}
-						}
-						else {
+						/* Si il n'est pas destructible */
+						if ( !map.getBlocks()[p.x+k][p.y].isDestructible() ) {
+							/* Si il ne laisse pas passer le feu */
 							if ( map.getBlocks()[p.x+k][p.y].isFireWall() ) {
-								if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
-									map.getBlocks()[p.x+k][p.y].destroy();
-								}
+								/* On break */
 								break;
 							}
-							else {
-								if ( map.getBlocks()[p.x+k][p.y].isDestructible() ) {
-									map.getBlocks()[p.x+k][p.y].destroy();
+						}
+						/* Si il est destructible */
+						else {
+							/* Si il est présent dans les blocs animé */
+							if ( map.getAnimatedObjects().get(new Point(p.x+k ,p.y)) != null ) {
+								/* Si il est déjà en train d'être détruit */
+								if ( map.getAnimatedObjects().get(new Point(p.x+k ,p.y)).getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
+									if ( k < bomb.getPower()-1 ) {
+										object = ResourcesManager.getObjects().get("firehorizontal").copy();
+										object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
+										animatedObjects.put(new Point(p.x+k,p.y), object);
+									}
+									else {
+										object = ResourcesManager.getObjects().get("fireright").copy();
+										object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
+										animatedObjects.put(new Point(p.x+k,p.y), object);
+									}
+								}
+								/* Sinon on le detruit */
+								else {
+									map.getAnimatedObjects().get(new Point(p.x+k ,p.y)).destroy();
+									/* Si il ne laisse pas passer le feu */
+									if ( map.getAnimatedObjects().get(new Point(p.x+k ,p.y)).isFireWall() ) {
+										/* On break */
+										break;
+									}
 								}
 							}
 						}

@@ -51,7 +51,7 @@ public class Single extends Game {
 	
 	public void restartGame() {
 
-		this.map.loadMap(this.map.getName());
+		this.map.restart();
 		
 		/* Variables remises a vide */
 		for (int i = 1 ; i < this.players.length ; i++ ) {

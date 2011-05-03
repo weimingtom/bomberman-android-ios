@@ -201,7 +201,7 @@ public abstract class Objects implements Serializable {
 		if ( i != 0 ) {
 			i = (i*ResourcesManager.getSize())/ResourcesManager.getTileSize();
 		}
-		
+
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("objects"), rect, new Rect(this.position.x-i, this.position.y, (this.position.x)+size+i, (this.position.y)+size), this.paint);
 	}
 
