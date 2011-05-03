@@ -97,6 +97,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 						}
 
 						if ( object != null ) {
+							System.out.println("OBJECT : " + object.getImageName());
 							point = ResourcesManager.coToTile((int) arg1.getX(), (int) arg1.getY());
 							editorController.addObjects(object.copy(), point);
 						}
@@ -140,11 +141,9 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 				}
 
 				objectsGallery.setSelectedItem(null);
-				objectsGallery.setRectangles(new Point(-10,-10));
 				objectsGallery.update();
 
 				objectsGallery2.setSelectedItem(null);
-				objectsGallery2.setRectangles(new Point(-10,-10));
 				objectsGallery2.update();
 
 				editorController.update();
@@ -159,7 +158,6 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 
 			public boolean onTouch(View arg0, MotionEvent arg1) {	
 				objectsGallery2.setSelectedItem(null);
-				objectsGallery2.setRectangles(new Point(-1,-1));
 				objectsGallery2.update();
 				return false;
 			}
@@ -178,7 +176,6 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 
 			public boolean onTouch(View arg0, MotionEvent arg1) {
 				objectsGallery.setSelectedItem(null);
-				objectsGallery.setRectangles(new Point(-1,-1));
 				objectsGallery.update();
 				return false;
 			}

@@ -97,29 +97,35 @@ public class ObjectsGallery extends SurfaceView implements SurfaceHolder.Callbac
 
 	public void setSelectedItem(String selectedItem) {
 		
-		if (this.level == 0 ) {
-			for(int i = 0 ; i < this.grounds.size() ; i++) {
-				if ( this.grounds.get(i).getImageName().equals(selectedItem) ) {
-					if ( this.vertical ) {
-						setRectangles(new Point(0, i));
-					}
-					else {
-						setRectangles(new Point(i, 0));
-					}
-					this.selectedItem = selectedItem;
-				}
-			}
+		if ( selectedItem == null ) {
+			setRectangles(new Point(-100, -100));
+			this.selectedItem = selectedItem;
 		}
 		else {
-			for(int i = 0 ; i < this.blocks.size() ; i++) {
-				if ( this.blocks.get(i).getImageName().equals(selectedItem) ) {
-					if ( this.vertical ) {
-						setRectangles(new Point(0, i));
+			if (this.level == 0 ) {
+				for(int i = 0 ; i < this.grounds.size() ; i++) {
+					if ( this.grounds.get(i).getImageName().equals(selectedItem) ) {
+						if ( this.vertical ) {
+							setRectangles(new Point(0, i));
+						}
+						else {
+							setRectangles(new Point(i, 0));
+						}
+						this.selectedItem = selectedItem;
 					}
-					else {
-						setRectangles(new Point(i, 0));
+				}
+			}
+			else {
+				for(int i = 0 ; i < this.blocks.size() ; i++) {
+					if ( this.blocks.get(i).getImageName().equals(selectedItem) ) {
+						if ( this.vertical ) {
+							setRectangles(new Point(0, i));
+						}
+						else {
+							setRectangles(new Point(i, 0));
+						}
+						this.selectedItem = selectedItem;
 					}
-					this.selectedItem = selectedItem;
 				}
 			}
 		}
