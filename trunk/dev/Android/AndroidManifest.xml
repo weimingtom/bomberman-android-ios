@@ -36,17 +36,25 @@
 		<activity android:screenOrientation="landscape" android:name=".menus.ProfileManager"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
-		<activity android:screenOrientation="portrait"
+		<activity android:screenOrientation="landscape"
 			android:name=".menus.CreateAccountOffline" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
-		<activity android:screenOrientation="portrait" android:name=".menus.MultiPlayer"
+
+		<activity android:screenOrientation="landscape" android:name=".menus.MultiPlayer"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
-		<activity android:screenOrientation="portrait" android:name=".menus.NewAccountOnLine"
+
+		<activity android:screenOrientation="landscape" android:name=".menus.NewAccountOnLine"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
-		<activity android:screenOrientation="portrait"
+
+		<activity android:screenOrientation="landscape"
 			android:name=".menus.ChangePasswordMultiplayer" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
-		<activity android:screenOrientation="portrait"
+
+		<activity android:screenOrientation="landscape"
 			android:name=".menus.NewAccountOffline" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
-		<activity android:screenOrientation="portrait" android:name=".menus.Help"
+
+		<activity android:screenOrientation="landscape" android:name=".menus.Help"
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+			
+		<activity android:screenOrientation="landscape" android:name=".menus.HomeMulti"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
 

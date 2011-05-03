@@ -2,6 +2,7 @@ package com.klob.Bomberklob.menus;
 
 
 import com.klob.Bomberklob.R;
+import com.klob.Bomberklob.model.Model;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,11 +23,6 @@ public class HomeMulti extends Activity implements View.OnClickListener{
 	 @Override
 	public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
-	        
-	        // plein ecran, à remettre dans chaque onCreate
-//	        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//	        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
 	        setContentView(R.layout.homemulti);
 
 	        previous = (Button)findViewById(R.id.buttonCancel);
@@ -66,6 +62,7 @@ public class HomeMulti extends Activity implements View.OnClickListener{
 		}
 
 		public void onClick(View v) {
+			Intent intent = null;
 			if(v == refresh){
 				Toast.makeText(HomeMulti.this, "Rafraichissement des parties", Toast.LENGTH_SHORT).show();
 
@@ -82,8 +79,18 @@ public class HomeMulti extends Activity implements View.OnClickListener{
 				//startActivity(intent);
 			}
 			else if(v == previous){
-				finish();
-			}
+				if(Model.getUser().getConnectionAuto()){
+					intent = new Intent(HomeMulti.this, Home.class);
+				}
+				else{
+					intent = new Intent(HomeMulti.this, MultiPlayer.class);
+				}
+				
+			}			
+			if ( intent != null ) {
+				startActivity(intent);
+				this.finish();
+			}	
 		}
 }
 
