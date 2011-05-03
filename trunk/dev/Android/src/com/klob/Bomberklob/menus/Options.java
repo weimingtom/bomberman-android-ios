@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -32,6 +34,7 @@ public class Options extends Activity implements View.OnClickListener{
 
 	private SeekBar soundVolume;
 	private CheckBox mute;
+	private AudioManager mAudioManager;
 
 	private Spinner languages;
 
@@ -41,10 +44,6 @@ public class Options extends Activity implements View.OnClickListener{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
 		setContentView(R.layout.options);
 
 		this.managementProfile = (Button) findViewById(R.id.OptionsButtonProfil);
@@ -54,38 +53,39 @@ public class Options extends Activity implements View.OnClickListener{
 		this.cancel.setOnClickListener(this);   
 
 		this.soundVolume = (SeekBar) findViewById(R.id.OptionsSeekBarVolume);
-		this.soundVolume.setMax(100);
-		this.soundVolume.setProgress(Model.getSystem().getVolume());
-		this.soundVolume.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-
-
-			public void onStopTrackingTouch(SeekBar arg0) {}
-
-	
-			public void onStartTrackingTouch(SeekBar arg0) {}
-
-
-			public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
-				Model.getSystem().setVolume(arg1);
-				Model.getSystem().getDatabase().setVolume(arg1);
-			}
-		});
+//		this.soundVolume.setMax(100);
+		soundVolume.setOnSeekBarChangeListener(OnSeekBarProgress);
+		
+		this.mute = (CheckBox) findViewById(R.id.OptionsCheckBoxVolume);
+		this.mute.setOnClickListener(this);
+	        
+		mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+		
+		/** initialisation de la barre de menu en fonction de la valeur de la bd **/
+		if(Model.getSystem().getVolume() == 0){
+        	mute.setChecked(true);
+        	soundVolume.setEnabled(false);
+        	soundVolume.setProgress(0);
+        	mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, AudioManager.FLAG_SHOW_UI);
+        }
+        else{
+        	mute.setChecked(false);
+        	soundVolume.setEnabled(true);
+        	soundVolume.setProgress(Model.getSystem().getVolume());
+        	mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, Model.getSystem().getVolume()/6, AudioManager.FLAG_SHOW_UI);
+        }
 
 		this.languagesTab = getResources().getStringArray(R.array.languages);
-
 		this.languages = (Spinner) findViewById( R.id.OptionsSpinnerLanguages );
 		ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, this.languagesTab);
 		a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		this.languages.setAdapter(a);
 		this.languages.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				Model.getSystem().setLanguage(languages.getSelectedItem().toString());
 				Model.getSystem().getDatabase().setLanguage(languages.getSelectedItem().toString());
 			}
-
-
 			public void onNothingSelected(AdapterView<?> arg0) {}
 		});
 
@@ -95,19 +95,88 @@ public class Options extends Activity implements View.OnClickListener{
 				break;
 			}
 		}
-
-		this.mute = (CheckBox) findViewById(R.id.OptionsCheckBoxVolume);
+		
+		/** 
+		 * écouteur du Check mute 
+		 **/
 		this.mute.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
-				if (isChecked) {
-					//FIXME On fait quoi ???
-				}
-				else {
-
-				}
-			}
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
+                    if (isChecked) {
+                    	soundVolume.setProgress(0);
+        				soundVolume.setEnabled(false);
+        				mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, AudioManager.FLAG_SHOW_UI);
+                    }
+                    else {
+                    	soundVolume.setProgress(Model.getSystem().getVolume());
+        				soundVolume.setEnabled(true);
+        				mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 1, AudioManager.FLAG_SHOW_UI);
+                    }
+            }
 		});
+	}
+	
+	/** 
+	 * écouteur de changement de valeur de la SeekBar 
+	 **/
+	OnSeekBarChangeListener OnSeekBarProgress =
+    	new OnSeekBarChangeListener() {
+
+	    	public void onProgressChanged(SeekBar s, int progress, boolean touch){
+		    	if(touch){
+		    		mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress/6, AudioManager.FLAG_SHOW_UI);
+		    	}
+	    	}
+	    	public void onStartTrackingTouch(SeekBar s){
+	    	}
+	    	public void onStopTrackingTouch(SeekBar s){
+	
+	    	}
+    	};
+	
+	/** 
+	 * les boutons up and down du son
+	 * TODO a perfectionner notamment avec le mute 
+	 **/
+	public boolean onKeyDown(int keyCode, KeyEvent event){
+		if(!mute.isChecked()){
+			switch( keyCode ){
+	    		case 24:
+	    				this.mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
+	    				soundVolume.setProgress(mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC)-7);
+	    				return true;
+	    				
+	    		case 25:
+	    				this.mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);
+	    				soundVolume.setProgress(mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC)-7);
+	    				return true;
+	    			
+	    		default:
+	    			break;
+			}
+		}
+		return false;
+	}
+	
+	public boolean onKeyUp(int keyCode, KeyEvent event){
+		if(!mute.isChecked()){
+			switch( keyCode ){
+	    		case 24:
+	    			Log.i("","24 up");
+	    			this.mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
+	    			soundVolume.setProgress(mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC)*7);
+	    			return true;
+	    		
+	    		case 25:
+	    			Log.i("","25 up");
+	    			this.mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);
+	    			soundVolume.setProgress(mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC)*7);
+	    			return true;
+	    			
+	    		default:
+	    			break;
+			}
+		}
+			return false;
 	}
 
 	@Override
@@ -150,6 +219,8 @@ public class Options extends Activity implements View.OnClickListener{
 				intent = new Intent(context, ProfileManager.class);
 			}
 			else if( v == cancel)	{
+				Model.getSystem().setVolume(soundVolume.getProgress());
+	    		Model.getSystem().getDatabase().setVolume(soundVolume.getProgress());
 				intent = new Intent(context, Home.class);
 			}
 		}
