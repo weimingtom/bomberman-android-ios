@@ -91,23 +91,7 @@ public class Database extends SQLiteOpenHelper{
 	
 	
 	/** ajout d'une map **/
-	public void newMap(String name, String owner, int i){
-//		Cursor cursor = base.rawQuery("SELECT * FROM Map WHERE name ='"+name+"' ", null);
-//		entree.put("name", name);
-//		entree.put("owner", owner);
-//		entree.put("official", i);
-//		
-//		if(cursor.moveToFirst()){
-//			if(!cursor.isNull(0)){
-//				this.base.update("Map", entree, "name ='"+owner+"'", null);
-//				Log.i("Database", "New map : Map already exists, update");				
-//			}
-//			else{
-//				this.base.insert("Map", null, entree);
-//				Log.i("Database", "New map added : \nName : " + name +"\nOwner : " + owner + "\nOfficial : " + i);
-//			}
-//		}
-		
+	public void newMap(String name, String owner, int i){		
 		this.base = this.getWritableDatabase();
         int res = this.base.rawQuery("SELECT * FROM Map WHERE name ='"+name+"' ", null).getCount();
         
