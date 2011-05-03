@@ -1,5 +1,6 @@
 package com.klob.Bomberklob.menus;
 
+import java.sql.SQLException;
 import java.util.Hashtable;
 import java.util.Map.Entry;
 
@@ -16,11 +17,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +46,8 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 	private EditText pseudo;
 	private TextView userName;
 	
+	private Spinner type;
+	
 	private ObjectsGallery objectsGallery;
 	
     /** Called when the activity is first created. */
@@ -61,14 +63,19 @@ public class ProfileManager extends Activity implements View.OnClickListener{
         tabs.setup();
 
         Resources r = getResources();
+        /** 
+         * premier onglet etc..
+         */
 		TabSpec tspec1 = tabs.newTabSpec(String.format(r.getString(R.string.HomeButtonSinglePlayer)));
 		tspec1.setIndicator(String.format(r.getString(R.string.HomeButtonSinglePlayer)));
 		tspec1.setContent(R.id.ProfilLayoutSolo);
 		tabs.addTab(tspec1);
+		
 		TabSpec tspec2 = tabs.newTabSpec((String.format(r.getString(R.string.HomeButtonMultiPlayer))));
 		tspec2.setIndicator((String.format(r.getString(R.string.HomeButtonMultiPlayer))));
 		tspec2.setContent(R.id.ProfilMultiLayout);
 		tabs.addTab(tspec2);
+		
 		TabSpec tspec3 = tabs.newTabSpec((String.format(r.getString(R.string.ProfileManagerMenuGlobal))));
 		tspec3.setIndicator((String.format(r.getString(R.string.ProfileManagerMenuGlobal))));
 		tspec3.setContent(R.id.ProfilGlobalLayout);
@@ -96,6 +103,7 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 		}
 		this.objectsGallery.setBackgroundColor(Color.GRAY);
 		this.objectsGallery.setSelectedItem(Model.getUser().getColor());
+		Log.i("@@@@@@@@@@@@@@@@@@@", Model.getUser().getColor());
 		this.objectsGallery.update();
 		
         FrameLayout f = (FrameLayout) findViewById(R.id.ProfileManagerFrameLayoutObjectsGallery);
@@ -105,39 +113,51 @@ public class ProfileManager extends Activity implements View.OnClickListener{
         this.userName.setText(Model.getUser().getUserName());
         
         this.connectionAuto = (CheckBox) findViewById(R.id.ProfileManagerCheckBoxConnection);
-		this.connectionAuto.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
-				if (isChecked && !Model.getUser().getUserName().equals("") && !Model.getUser().getPassword().equals("")) {
-					Model.getUser().setConnectionAuto(true);
-				}
-				else {
-					connectionAuto.setChecked(false);
-					Model.getUser().setConnectionAuto(false);
-					Toast.makeText(ProfileManager.this, R.string.MultiPlayerConnectionErrorAutoConnection , Toast.LENGTH_SHORT).show();
-				}
-			}
-		});
+        connectionAuto.setOnClickListener(this);
+		if(Model.getUser().getConnectionAuto()){
+			connectionAuto.setChecked(true);
+		}
+//		this.connectionAuto.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
+//
+//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
+//				if (isChecked && !Model.getUser().getUserName().equals("") && !Model.getUser().getPassword().equals("")) {
+//					Model.getUser().setConnectionAuto(true);
+//				}
+//				else {
+//					connectionAuto.setChecked(false);
+//					Model.getUser().setConnectionAuto(false);
+//					Toast.makeText(ProfileManager.this, R.string.MultiPlayerConnectionErrorAutoConnection , Toast.LENGTH_SHORT).show();
+//				}
+//			}
+//		});
 		
 		
 		this.password = (CheckBox) findViewById(R.id.ProfileManagerCheckBoxPassword);
-		this.password.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
-				if (isChecked) {
-					Model.getUser().setRememberPassword(true);
-				}
-				else {
-					Model.getUser().setRememberPassword(false);
-				}
-			}
-		});
+		password.setOnClickListener(this);
+		if(Model.getUser().getRememberPassword()){
+			password.setChecked(true);
+		}
+//		this.password.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
+//
+//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
+//				if (isChecked) {
+//					Model.getUser().setRememberPassword(true);
+//				}
+//				else {
+//					Model.getUser().setRememberPassword(false);
+//				}
+//			}
+//		});
 		
 		this.edit = (Button) findViewById(R.id.ProfileManagerButtonEdit);
 		this.edit.setOnClickListener(this);
 		
 		this.changeAccount = (Button) findViewById(R.id.ProfileManagerButtonChange);
 		this.changeAccount.setOnClickListener(this);
+		
+		type = (Spinner) findViewById(R.id.spinnerType);
+		int menuPosition = Model.getUser().getMenuPosition();
+		type.setSelection(menuPosition);
 		
 		this.cancel = (Button) findViewById(R.id.ProfileManagerButtonCancel);
 		this.cancel.setOnClickListener(this);
@@ -174,19 +194,22 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 		
 		Intent intent = null;
 		
-		String s = this.objectsGallery.getSelectedItem();
-		
-		if ( s == null ) {
-			Model.getUser().setColor("white");
-		}
-		else {
-			Model.getUser().setColor(s);
-		}
+//		String s = this.objectsGallery.getSelectedItem();
+//		
+//		if ( s == null ) {
+//			Model.getUser().setColor("white");
+//		}
+//		else {
+//			Model.getUser().setColor(s);
+//		}
 		
 		if( v == this.validate ){
 			
 			boolean error = false;
-			
+	
+			/** 
+			 * pseudo rentré avec ses vérifications 
+			 */
 			if ( null == Model.getSystem().getDatabase().getUser(pseudo.getText().toString()) && !pseudo.getText().toString().equals(Model.getUser().getPseudo() ) ) {
 				Model.getSystem().getDatabase().changePseudo(Model.getUser().getPseudo(), pseudo.getText().toString());
 				Model.getUser().setPseudo(pseudo.getText().toString());
@@ -195,6 +218,67 @@ public class ProfileManager extends Activity implements View.OnClickListener{
         		Toast.makeText(ProfileManager.this, R.string.ProfileManagerErrorPseudo, Toast.LENGTH_SHORT).show();
         		error = true;
         	}
+			
+			int userId = Model.getSystem().getDatabase().getLastUserId();
+			String pwd = Model.getUser().getPassword();
+			String userName = Model.getUser().getUserName();
+			
+			/** 
+			 * password selected et mot de passe et userName non vides
+			 */
+			if (password.isChecked() && (pwd != null)
+					&& (userName != null)) {
+				Model.getUser().setRememberPassword(true);
+				Model.getSystem().getDatabase().updateSavePwdUser(userId, 1);
+			} else if (!password.isChecked()) {
+				Model.getUser().setRememberPassword(false);
+				Model.getSystem().getDatabase().updateSavePwdUser(userId, 0);
+
+			} else {
+				Log.i("", "tu selectionne rememberPassword alors que password et username sont nulls !");
+				Toast.makeText(ProfileManager.this,R.string.ProfilManagementErrorUserMissing,Toast.LENGTH_SHORT).show();
+				error=true;
+			}
+
+			if (connectionAuto.isChecked() && (pwd != null)
+					&& (userName != null)) {
+				try {
+					if (Model.getSystem().getDatabase()
+							.isGoodMultiUser(userId, userName, pwd)) {
+						Model.getUser().setConnectionAuto(true);
+						Model.getUser().setRememberPassword(true);
+						Model.getSystem().getDatabase()
+								.updateAutoConnectUser(userId, 1);
+						Model.getSystem().getDatabase()
+								.updateSavePwdUser(userId, 1);
+					} else {
+						Toast.makeText(ProfileManager.this,R.string.ProfilManagementAuthError,Toast.LENGTH_SHORT).show();
+						error=true;
+						
+					}
+				} catch (SQLException e) {
+					Toast.makeText(ProfileManager.this,R.string.ProfilManagementAuthError,Toast.LENGTH_SHORT).show();
+					e.printStackTrace();
+				}
+			} else if (!connectionAuto.isChecked()) {
+				Model.getUser().setConnectionAuto(false);
+				Model.getSystem().getDatabase()
+						.updateAutoConnectUser(userId, 0);
+			} else {
+				Log.i("", "tu selectionne connectionAuto alors que password et username sont nulls !");
+				Toast.makeText(ProfileManager.this,R.string.ProfilManagementErrorUserMissing,Toast.LENGTH_SHORT).show();
+				error=true;
+			}
+
+			/** sauvegarde de la couleur **/
+			Model.getUser().setColor(this.objectsGallery.getSelectedItem());
+			Model.getSystem().getDatabase().updateColorUser(
+						Model.getSystem().getDatabase().getLastUserId(), this.objectsGallery.getSelectedItem());
+			
+			/** ainsi que de la position du menu **/
+			Model.getUser().setMenuPosition(type.getSelectedItemPosition());
+			Model.getSystem().getDatabase().updateMenuUser(
+							Model.getSystem().getDatabase().getLastUserId(),type.getSelectedItemPosition());
 			
 			if (!error) {
 				intent = new Intent(ProfileManager.this, Options.class);
