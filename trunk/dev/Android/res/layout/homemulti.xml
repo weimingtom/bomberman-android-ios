@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/relativeLayout1"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical" >
+	
+	<LinearLayout android:id="@+id/linearLayout1"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<EditText android:layout_height="wrap_content"
+			android:id="@+id/editText1" android:layout_width="250dip" android:layout_marginLeft="5dip"></EditText>
+			
+		<ImageButton android:id="@+id/buttonRefresh"
+			android:layout_width="wrap_content" style="@android:style/Widget.Button.Small"
+			android:background="@drawable/refresh" android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical" android:layout_marginLeft="20dip" />
+
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/linearLayout2"
+		android:layout_width="wrap_content" android:layout_margin="5dip" android:layout_height="240dip">
+
+	</LinearLayout>
+
+	<Button android:id="@+id/buttonCancel" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_gravity="left"
+		android:text="@string/ButtonCancel" android:textSize="13dip"
+		android:padding="13dip" android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true" />
+
+
+	<Button android:id="@+id/buttonCreateGame" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_gravity="left"
+		android:text="@string/ButtonCreate" android:textSize="13dip"
+		android:padding="13dip" android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true" />
+
+
+</RelativeLayout>
