@@ -301,6 +301,8 @@ public class Map implements Serializable {
 	public void restart() {
 		this.bm = Bitmap.createBitmap(ResourcesManager.getSize()*this.grounds.length, ResourcesManager.getSize()*this.grounds[0].length, Bitmap.Config.ARGB_8888);
 
+		this.animatedObjects.clear();
+		
 		Canvas pictureCanvas = new Canvas(this.bm);
 
 		//FIXME prendre le cas où on aurait de l'eau ou un sol animé !
@@ -313,7 +315,7 @@ public class Map implements Serializable {
 						this.blocks[i][j].onDraw(pictureCanvas, ResourcesManager.getSize());
 					}
 					else {
-						animatedObjects.put(new Point(i,j), this.blocks[i][j].copy());
+						this.animatedObjects.put(new Point(i,j), this.blocks[i][j].copy());
 					}
 				}
 			}
