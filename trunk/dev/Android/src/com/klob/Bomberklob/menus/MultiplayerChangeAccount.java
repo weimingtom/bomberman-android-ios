@@ -17,14 +17,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class ChangeAccountMulti extends Activity implements View.OnClickListener {
+public class MultiplayerChangeAccount extends Activity implements View.OnClickListener {
 	private Button cancel,valid;
 	private EditText userName, password;
 	
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        setContentView(R.layout.changeaccountmulti);
+        setContentView(R.layout.multiplayerchangeaccount);
         
         cancel = (Button)findViewById(R.id.buttonCancel);
         cancel.setOnClickListener(this);
@@ -102,21 +102,21 @@ public class ChangeAccountMulti extends Activity implements View.OnClickListener
 				String pwd = md5(password.getText().toString());
 				
 				if( !testerString(userName.getText().toString()) || !testerString(password.getText().toString()) ){
-		 			Toast.makeText(ChangeAccountMulti.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
+		 			Toast.makeText(MultiplayerChangeAccount.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
 		 		}
 				else if (Model.getSystem().getDatabase().isGoodMultiUser(userId, userName.getText().toString(), pwd)){
 					/** FIXME modif et test à faire ici **/
-					intent = new Intent(ChangeAccountMulti.this, ProfileManager.class);
+					intent = new Intent(MultiplayerChangeAccount.this, ProfileManager.class);
 				}
 				else{
-					Toast.makeText(ChangeAccountMulti.this, R.string.ProfilManagementAuthError, Toast.LENGTH_SHORT).show();
+					Toast.makeText(MultiplayerChangeAccount.this, R.string.ProfilManagementAuthError, Toast.LENGTH_SHORT).show();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		else if(view == cancel){
-			intent = new Intent(ChangeAccountMulti.this, ProfileManager.class);
+			intent = new Intent(MultiplayerChangeAccount.this, ProfileManager.class);
 		}
 		if ( intent != null ) {
 			startActivity(intent);

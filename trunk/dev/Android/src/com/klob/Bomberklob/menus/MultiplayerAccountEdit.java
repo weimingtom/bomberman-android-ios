@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.model.Model;
 
-public class ChangePasswordMultiplayer extends Activity implements View.OnClickListener {
+public class MultiplayerAccountEdit extends Activity implements View.OnClickListener {
 	
 	private Button cancel;
 	private Button validate;
@@ -32,7 +32,7 @@ public class ChangePasswordMultiplayer extends Activity implements View.OnClickL
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
                 
-        setContentView(R.layout.changepasswordmultiplayer);
+        setContentView(R.layout.multiplayeraccountedit);
 		
 	    this.userName = (EditText) findViewById(R.id.ChangePasswordMultiplayerEditTextUserName);
 	    this.userName.setText(Model.getUser().getUserName());
@@ -114,7 +114,7 @@ public class ChangePasswordMultiplayer extends Activity implements View.OnClickL
 					!testerString(oldPass.getText().toString()) ||
 					!testerString(newPass.getText().toString()) ||
 					!testerString(confirmPass.getText().toString())){
-	 			Toast.makeText(ChangePasswordMultiplayer.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
+	 			Toast.makeText(MultiplayerAccountEdit.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
 			}
 			/** TODO les deux tests de chaine vide et chaine contenant espace peuvent être fusionnés **/
 			else if(oldPass.getText().toString().compareTo("")!=0 &&
@@ -123,7 +123,7 @@ public class ChangePasswordMultiplayer extends Activity implements View.OnClickL
 						(userName.getText().toString().compareTo("")!=0)){
 					
 					if(!newPass.getText().toString().equals(confirmPass.getText().toString())){
-						Toast.makeText(ChangePasswordMultiplayer.this, R.string.NewAccountOnlineTextPasswordError,Toast.LENGTH_SHORT).show();
+						Toast.makeText(MultiplayerAccountEdit.this, R.string.NewAccountOnlineTextPasswordError,Toast.LENGTH_SHORT).show();
 					} else
 						try {
 							if(Model.getSystem().getDatabase().isGoodMultiUser(userId, userName.getText().toString(), pwd)){
@@ -138,11 +138,11 @@ public class ChangePasswordMultiplayer extends Activity implements View.OnClickL
 								Model.getUser().setUserName(userName.getText().toString());
 								Model.getUser().setPassword(newPwd);
 								
-								Toast.makeText(ChangePasswordMultiplayer.this, R.string.ProfilManagementSavedOk,Toast.LENGTH_SHORT).show();
-								intent = new Intent(ChangePasswordMultiplayer.this, ProfileManager.class);
+								Toast.makeText(MultiplayerAccountEdit.this, R.string.ProfilManagementSavedOk,Toast.LENGTH_SHORT).show();
+								intent = new Intent(MultiplayerAccountEdit.this, ProfileManager.class);
 							}
 							else{
-								Toast.makeText(ChangePasswordMultiplayer.this, R.string.ProfilManagementAuthError,Toast.LENGTH_SHORT).show();
+								Toast.makeText(MultiplayerAccountEdit.this, R.string.ProfilManagementAuthError,Toast.LENGTH_SHORT).show();
 							}
 						} catch (NotFoundException e) {
 							e.printStackTrace();
@@ -155,11 +155,11 @@ public class ChangePasswordMultiplayer extends Activity implements View.OnClickL
 			 * => correspond à un simple changement de username
 			 */
 			else{
-				Toast.makeText(ChangePasswordMultiplayer.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
+				Toast.makeText(MultiplayerAccountEdit.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
 			}
 		}    	
 		else if( v == this.cancel){
-			intent = new Intent(ChangePasswordMultiplayer.this, ProfileManager.class);
+			intent = new Intent(MultiplayerAccountEdit.this, ProfileManager.class);
 		}
 		
 		if (intent != null) {

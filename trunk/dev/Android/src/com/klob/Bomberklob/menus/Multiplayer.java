@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.model.Model;
 
-public class MultiPlayer extends Activity implements View.OnClickListener {
+public class Multiplayer extends Activity implements View.OnClickListener {
 	
 	private Button cancel;
 	private Button connection;
@@ -30,7 +30,9 @@ public class MultiPlayer extends Activity implements View.OnClickListener {
 	private CheckBox password;
 	private CheckBox connectionAuto;
 	
-	@Override
+	/**
+	 * menu de connexion multijoueurs
+	 **/
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         
@@ -101,7 +103,7 @@ public class MultiPlayer extends Activity implements View.OnClickListener {
 			String password = Model.getUser().getPassword();
 			try {
 				if (Model.getSystem().getDatabase().isGoodMultiUser(userId, userName, password)) {
-					Intent intent = new Intent(MultiPlayer.this, HomeMulti.class);
+					Intent intent = new Intent(Multiplayer.this, MultiplayerHome.class);
 					startActivity(intent);				
 				}
 			} catch (SQLException e) {
@@ -238,7 +240,7 @@ public class MultiPlayer extends Activity implements View.OnClickListener {
 				
 				if( !testString(userAccountName.getText().toString()) || !testString(userAccountPassword.getText().toString()) ){
 
-		 			Toast.makeText(MultiPlayer.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
+		 			Toast.makeText(Multiplayer.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
 		 		}
 				else if (Model.getSystem().getDatabase().isGoodMultiUser(userId, userAccountName.getText().toString(), pwd)){
 					/** save password **/
@@ -260,24 +262,24 @@ public class MultiPlayer extends Activity implements View.OnClickListener {
 						Model.getUser().setConnectionAuto(false);
 						Model.getSystem().getDatabase().updateAutoConnectUser(userId, 0);
 					}
-					intent = new Intent(MultiPlayer.this, HomeMulti.class);
+					intent = new Intent(Multiplayer.this, MultiplayerHome.class);
 					startActivity(intent);
 				}
 				else{
 
-					Toast.makeText(MultiPlayer.this, R.string.MultiPlayerConnectionError, Toast.LENGTH_SHORT).show();
+					Toast.makeText(Multiplayer.this, R.string.MultiPlayerConnectionError, Toast.LENGTH_SHORT).show();
 				}
 			} catch (SQLException e) {
 
-				Toast.makeText(MultiPlayer.this, R.string.MultiPlayerConnectionError, Toast.LENGTH_SHORT).show();
+				Toast.makeText(Multiplayer.this, R.string.MultiPlayerConnectionError, Toast.LENGTH_SHORT).show();
 				e.printStackTrace();
 			}
 		}
 		else if(view == this.newAccount){
-			intent = new Intent(MultiPlayer.this, NewAccountOnLine.class);
+			intent = new Intent(Multiplayer.this, MultiplayerNewAccount.class);
 		}
 		else if(view == this.cancel){
-			intent = new Intent(MultiPlayer.this, Home.class);
+			intent = new Intent(Multiplayer.this, Home.class);
 		}
 		
 		if ( intent != null ) {

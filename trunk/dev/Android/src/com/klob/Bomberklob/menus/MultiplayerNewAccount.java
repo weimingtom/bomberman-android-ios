@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.model.Model;
 
-public class NewAccountOnLine  extends Activity implements View.OnClickListener{
+public class MultiplayerNewAccount  extends Activity implements View.OnClickListener{
 
 	private TextView userPseudo;
 	private EditText userAccountName;
@@ -37,7 +37,7 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 		super.onCreate(savedInstanceState);
 
 
-		setContentView(R.layout.newaccountonline);
+		setContentView(R.layout.multiplayernewaccount);
 		
 		InputFilter filter = new InputFilter() {
 
@@ -192,13 +192,13 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 //			}
 			
 			if( !testerString(userAccountName.getText().toString()) || !testerString(userAccountPassword1.getText().toString()) || !testerString(userAccountPassword2.getText().toString())){
-	 			Toast.makeText(NewAccountOnLine.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
+	 			Toast.makeText(MultiplayerNewAccount.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
 	 		}
 			/** TODO factorisation a faire **/
 //	 		else if(password.getText().toString().compareTo("")!=0 
 //			&& (repassword.getText().toString().compareTo("")!=0) && (userName.getText().toString().compareTo("")!=0)){
 			else if(!userAccountPassword1.getText().toString().equals(userAccountPassword2.getText().toString())){
-					Toast.makeText(NewAccountOnLine.this, R.string.NewAccountOnlineTextPasswordError,Toast.LENGTH_SHORT).show();
+					Toast.makeText(MultiplayerNewAccount.this, R.string.NewAccountOnlineTextPasswordError,Toast.LENGTH_SHORT).show();
 				}
 				else{
 					/** test disponibilité sur serveur **/
@@ -222,14 +222,14 @@ public class NewAccountOnLine  extends Activity implements View.OnClickListener{
 							Model.getSystem().getDatabase().updateAutoConnectUser(userId, 1);
 					}
 					
-					Toast.makeText(NewAccountOnLine.this, "Inscription réalisée avec succès", Toast.LENGTH_SHORT).show();
-						intent = new Intent(NewAccountOnLine.this, HomeMulti.class);
+					Toast.makeText(MultiplayerNewAccount.this, "Inscription réalisée avec succès", Toast.LENGTH_SHORT).show();
+						intent = new Intent(MultiplayerNewAccount.this, MultiplayerHome.class);
 						startActivity(intent);
 				}
 			
 		}
 		else if( view == this.cancel ) {
-			intent = new Intent(NewAccountOnLine.this, MultiPlayer.class);
+			intent = new Intent(MultiplayerNewAccount.this, MultiPlayer.class);
 		}
 
 		if ( intent != null ) {
