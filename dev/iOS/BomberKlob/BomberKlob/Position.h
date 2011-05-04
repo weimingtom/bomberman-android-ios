@@ -24,4 +24,5 @@
 - (BOOL)isEqual:(id)object;
 - (NSString *)description;
 
+
 @end

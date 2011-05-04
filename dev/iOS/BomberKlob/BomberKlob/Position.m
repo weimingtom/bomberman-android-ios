@@ -51,7 +51,7 @@
 
 
 - (NSString *)description {
-	NSString * desc = [NSString stringWithFormat:@"X : %d \n Y : %d",x,y];
+	NSString * desc = [NSString stringWithFormat:@"x: %d y: %d",x,y];
 	return desc;
 }
 
@@ -59,6 +59,7 @@
 - (BOOL)isEqual:(id)object {
     return (x == ((Position *) object).x) && (y == ((Position *) object).y);
 }
+
 
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -74,8 +75,22 @@
 
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeInteger:x forKey:@"x"];
+    [aCoder encodeInteger:x forKey:@"x"]; 
     [aCoder encodeInteger:y forKey:@"y"];
 }
+
+
+- (id)copyWithZone:(NSZone *)zone {
+    Position *copy = [[[self class] allocWithZone:zone] initWithX:x y:y];
+    
+    return copy;
+}
+
+
+- (NSUInteger)hash {
+    return [[self description] hash];
+}
+
+
 
 @end

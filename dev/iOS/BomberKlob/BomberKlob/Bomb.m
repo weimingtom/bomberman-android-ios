@@ -10,10 +10,11 @@
 #import "AnimationSequence.h"
 #import "RessourceManager.h"
 #import "Position.h"
+#import "Player.h"
 
 
 @implementation Bomb
-@synthesize power, explode, type;
+@synthesize power, explode, type, owner, time;
 
 - (id) init{
 	self = [super init];
@@ -24,11 +25,12 @@
 		delay = 0;
 		explode = NO;
 		type = @"normal";
+		time = 0;
 	}
 	return self;
 }
 
-- (id) initWithImageName:(NSString *)anImageName position:(Position *)aPosition{
+- (id) initWithImageName:(NSString *)anImageName position:(Position *)aPosition owner:(Player *) aPlayer{
 	self = [super init];
 	if (self) {
 		currentFrame = 0;
@@ -38,6 +40,7 @@
 		explode = NO;
 		position = aPosition;
 		imageName = anImageName;
+		owner = aPlayer;
 	}
 	return self;
 }
@@ -49,14 +52,21 @@
 
 
 - (void) update{
+	if (time <= owner.timeExplosion) {
+		time++;
+	}
+	else {
+		currentFrame = 0;
+		destroyable = YES;
+	}
 	
-	if (!destroyable) {
+	if (!destroyable ) {
+		time++;
 		if ([((AnimationSequence *)[animations objectForKey:imageName]).sequences count] > 2) {
 			if (delay == ((AnimationSequence *)[animations objectForKey:imageName]).delayNextFrame) {
 				delay = 0;
 				if (currentFrame == [((AnimationSequence *)[animations objectForKey:imageName]).sequences count]-1 ) {
 					currentFrame = 0;
-					destroyable= YES;
 				}
 				else
 					currentFrame++;
@@ -67,7 +77,6 @@
 		}
 	}
 	else {
-        
 		if ([((AnimationSequence *)[destroyAnimations objectForKey:imageName]).sequences count] > 2) {
 			if (delay == 10) {
 				delay = 0;
@@ -89,12 +98,13 @@
 }
 
 - (BOOL) hasAnimationFinished{
-	return destroyable;
+	return time >= owner.timeExplosion;
 }
 
-- (void) destroyable{
+- (void) destroy{
 	destroyable = YES;
 	currentFrame = 0;
+	time = owner.timeExplosion;
 }
 
 - (Bomb *)copy{

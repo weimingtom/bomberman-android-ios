@@ -13,10 +13,13 @@
 
 @interface Game : NSObject {
 	NSMutableArray * players;
+	NSMutableDictionary * bombsPlanted;
 	Map * map;
+	
     
 }
 @property (nonatomic, retain) NSMutableArray * players;
+@property (nonatomic, retain) NSMutableDictionary * bombsPlanted;
 @property (nonatomic, retain) Map * map;
 
 - (id) initWithMapName:(NSString *)mapName;
@@ -25,6 +28,7 @@
 - (void) initGame;
 - (void) startGame;
 - (void) endGame;
-- (void) draw;
+- (void) draw:(CGContextRef)context;
+- (void) update;
 
 @end

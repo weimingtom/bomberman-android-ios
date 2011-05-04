@@ -57,10 +57,11 @@
 
 - (void)drawAll: (CGContextRef) context{
 	Game * game = controller.globalController.engine.game;
-	[game.map draw:context];	
+	/*[game.map draw:context];	
 	for (Player * player in game.players) {
 		[player draw:context];
-	}
+	}*/
+	[game draw:context];
 }
 
 -(void) startTimerUpdateMap

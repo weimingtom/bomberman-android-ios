@@ -213,8 +213,10 @@
 
 
 - (void) destroy{
-	destroyable = YES;
-	currentFrame = 0;
+	if ([((AnimationSequence *)[destroyAnimations objectForKey:imageName]).sequences count] > 0) {
+		destroyable = YES;
+		currentFrame = 0;
+	}
 }
 
 

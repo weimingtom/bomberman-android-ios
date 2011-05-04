@@ -57,10 +57,11 @@
 	NSInteger by = (p.position.y+resource.tileSize)/resource.tileSize;
 	Position * bombPosition = [[Position alloc] initWithX:(bx*resource.tileSize) y:(by*resource.tileSize)];
 	Bomb * bomb = [[resource.bitmapsBombs objectForKey:@"normal"] copy];
+	bomb.owner = p;
 	bomb.position = bombPosition;
-	if (![engine isInCollision:bomb :0 :0]) {
+	if (![engine isInCollision:bomb :0 :0] && ![engine isInCollisionWithABomb:bomb :0 :0]) {
 		[p plantingBomb:bomb];
-		[engine.game.map addBlock:bomb position:[[Position alloc] initWithX:bx y:by]];
+		[engine.game.bombsPlanted setObject:bomb forKey:bomb.position];
 	}
 	
 	

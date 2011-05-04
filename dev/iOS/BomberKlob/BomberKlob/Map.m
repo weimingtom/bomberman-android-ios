@@ -19,13 +19,14 @@
 
 @implementation Map
 
-@synthesize name, width, height, grounds, blocks, players;
+@synthesize name, width, height, grounds, blocks, players, animates;
 
 
 - (id)init {
     self = [super init];
     
     if (self) {
+		animates = [[NSMutableDictionary alloc] init];
         [self initBasicMap];
     }
     
@@ -36,7 +37,8 @@
 - (id)initWithMapName:(NSString *)mapName {
     self = [super init];
     
-    if (self) {       
+    if (self) {  
+		animates = [[NSMutableDictionary alloc] init];
         [self load:mapName];
     }
     
@@ -77,8 +79,15 @@
 				blockTmp = [(Undestructible *)[resource.bitmapsAnimates objectForKey:@"block1"] copy];
 				blockTmp.position = positionTmp;
 				[[blocks objectAtIndex:i] addObject:blockTmp];
+				[animates setObject:blockTmp forKey:blockTmp.position];
                 [blockTmp release];
             }
+			else if (i ==10 && j == 7) {
+				blockTmp = [(Undestructible *)[resource.bitmapsAnimates objectForKey:@"column1"] copy];
+				blockTmp.position = positionTmp;
+				[[blocks objectAtIndex:i] addObject:blockTmp];
+				[animates setObject:blockTmp forKey:blockTmp.position];
+			}
             else {
                 [[blocks objectAtIndex:i] addObject:@"empty"];
             }
@@ -90,12 +99,11 @@
         [groundsTmp release];
         [blocksTmp release];
     }
-    
-//	for (int i = 0; i < 4; i++) {
-//        Position *p = [[Position alloc] initWithX:(i * resource.tileSize) y:(2 * resource.tileSize)];
-//        [self addPlayer:p color:@"white"];
-////		[players addObject:[[Position alloc] initWithX:2 y:2+i]];
-//	}
+    NSArray  *colors = [[NSArray alloc] initWithObjects:@"white",@"red",@"blue",@"black", nil];
+	for (int i = 0; i < 4; i++) {
+		[players setObject:[[Position alloc] initWithX:2+i*2 y:2+i*2] forKey:[colors objectAtIndex:i]];
+	}
+	[self makeMapPng];
 }
 
 
@@ -151,6 +159,15 @@
         self.grounds = myMap.grounds;
         self.blocks = myMap.blocks;
         self.players = myMap.players;
+		for (int i = 0; i < width; i++){			
+			for (int j = 0; j < height; j++) {
+				if (![[[blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"]) {
+					Objects * object = [[blocks objectAtIndex:i] objectAtIndex:j];
+					[animates setObject:object forKey:object.position];
+				}
+			}
+		}
+		[self makeMapPng];
     }
     else {
         self.name = mapName;
@@ -167,7 +184,7 @@
     
     UIGraphicsBeginImageContext(CGSizeMake(size.height, size.width));
     
-    [self draw:UIGraphicsGetCurrentContext()];
+    [self drawPerTile:UIGraphicsGetCurrentContext()];
     [self drawPlayers:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     
@@ -179,16 +196,21 @@
 
 
 - (void)addGround:(Objects *)ground position:(Position *)position {
-	
-    if(position.x < width && position.x >= 0 && position.y < height && position.y >= 0)
+	if(position.x < width && position.x >= 0 && position.y < height && position.y >= 0)
         [[grounds objectAtIndex:position.x] replaceObjectAtIndex:position.y withObject:ground];
 }
 
 
 - (void)addBlock:(Objects *)block position:(Position *)position {
-    
-	if(position.x < width && position.x >= 0 && position.y < height && position.y >= 0 && [self isEmpty:position])
-        [[blocks objectAtIndex:position.x] replaceObjectAtIndex:position.y withObject:block];
+	if(position.x < width && position.x >= 0 && position.y < height && position.y >= 0 && [self isEmpty:position]){
+		[[blocks objectAtIndex:position.x] replaceObjectAtIndex:position.y withObject:block];
+	}
+}
+
+- (void)addBlock:(Objects *)block {
+    @synchronized (self) {
+		[animates setObject:block forKey:block.position];
+	}
 }
 
 
@@ -202,6 +224,7 @@
 
 - (void)deleteBlockAtPosition:(Position *)position {
 	[[blocks objectAtIndex:position.x] replaceObjectAtIndex:position.y withObject:@"empty"];
+	[animates removeObjectForKey:position];
 }
 
 
@@ -220,7 +243,7 @@
 }
 
 
-- (void)draw:(CGContextRef)context {
+- (void)drawPerTile:(CGContextRef)context {
 
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
@@ -231,6 +254,37 @@
             }
         }
     }
+}
+
+- (void) drawPerTile:(CGContextRef)context alpha:(CGFloat)alpha {
+	for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            [((Objects *) [[grounds objectAtIndex:i] objectAtIndex:j]) draw:context];
+			
+            if (![[[blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"]) {
+                [((Objects *) [[blocks objectAtIndex:i] objectAtIndex:j]) draw:context alpha:alpha];
+            }
+        }
+    }
+}
+
+- (void)drawGround:(CGContextRef)context {
+	
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            [((Objects *) [[grounds objectAtIndex:i] objectAtIndex:j]) draw:context];
+        }
+    }
+}
+
+- (void)draw:(CGContextRef)context{
+	@synchronized (self) {
+		NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
+		[mapPng drawInRect:CGRectMake(0, 0,width*tileSize, height*tileSize)];
+		for (Position * position in animates) {
+			[[animates objectForKey:position] draw:context];
+		}
+	}
 }
 
 
@@ -285,7 +339,7 @@
 
 
 - (void)drawMapAndPlayers:(CGContextRef)context alpha:(CGFloat)alpha {
-    [self draw:context alpha:alpha];
+    [self drawPerTile:context alpha:alpha];
     [self drawPlayers:context alpha:alpha];
 }
 
@@ -295,23 +349,6 @@
         for (int j = 0; j < height; j++) {
             CGContextFillRect(context, CGRectMake(i * [RessourceManager sharedRessource].tileSize, 0,2 , 15 * [RessourceManager sharedRessource].tileSize));
             CGContextFillRect(context, CGRectMake(0, j * [RessourceManager sharedRessource].tileSize, 21 * [RessourceManager sharedRessource].tileSize , 2));
-        }
-    }
-}
-
-
-- (void) update{
-	for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {	
-			Objects * object = [[blocks objectAtIndex:i] objectAtIndex:j];
-            if (![object isEqual:@"empty"]) {
-				if (![object hasAnimationFinished]) {
-					[object update]; 
-				}
-				else {
-					[[blocks objectAtIndex:i] replaceObjectAtIndex:j withObject:@"empty"];	
-				}
-            }
         }
     }
 }
@@ -365,6 +402,37 @@
     [aCoder encodeObject:grounds forKey:@"grounds"];
     [aCoder encodeObject:blocks forKey:@"blocks"];
     [aCoder encodeObject:players forKey:@"players"];
+}
+
+- (void) update{
+	@synchronized (self) {
+		NSMutableArray * objectsDeleted = [[NSMutableArray alloc] init];
+		for (Position * position in animates) {
+			Objects * object = [animates objectForKey:position];
+			if ([object hasAnimationFinished]) {
+				[objectsDeleted addObject:position];
+				[[blocks objectAtIndex:position.x/[RessourceManager sharedRessource].tileSize ] replaceObjectAtIndex:position.y/[RessourceManager sharedRessource].tileSize withObject:@"empty"];
+			}
+			[object update];
+		}
+		for (Position * position in objectsDeleted) {
+			[animates removeObjectForKey:position];
+		}
+		[objectsDeleted removeAllObjects];
+		[objectsDeleted release];
+	}
+}
+
+- (void) makeMapPng {
+	CGSize size = CGSizeMake([RessourceManager sharedRessource].tileSize * height, [RessourceManager sharedRessource].tileSize * width);
+    
+    UIGraphicsBeginImageContext(CGSizeMake(size.height, size.width));
+    
+    [self drawGround:UIGraphicsGetCurrentContext()];
+	 mapPng = UIGraphicsGetImageFromCurrentImageContext();
+	[mapPng retain];
+    
+    UIGraphicsEndImageContext();
 }
 
 #pragma mark -
