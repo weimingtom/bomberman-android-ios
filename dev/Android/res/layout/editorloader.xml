@@ -11,16 +11,14 @@
 			<TextView android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:id="@+id/textView5"
 				android:textSize="20dip" android:textColor="@color/White"
-				android:layout_centerInParent="true" android:text="@string/EditorLoaderMenu"></TextView>
+				android:layout_centerInParent="true" android:text="@string/LoadAMap"></TextView>
 			<Button android:layout_width="wrap_content"
 				android:layout_alignParentLeft="true" android:layout_height="wrap_content"
-				android:layout_centerInParent="true" android:text="@string/ButtonCancel"
-				android:id="@+id/EditorLoaderButtonCancel"></Button>
+				android:layout_centerInParent="true" android:id="@+id/EditorLoaderButtonCancel" android:text="@string/Back"></Button>
 
 			<Button android:layout_width="wrap_content"
 				android:layout_alignParentRight="true" android:layout_height="wrap_content"
-				android:layout_centerInParent="true" android:text="@string/ButtonValidate"
-				android:id="@+id/EditorLoaderButtonLoad"></Button>
+				android:layout_centerInParent="true" android:id="@+id/EditorLoaderButtonLoad" android:text="@string/Ok"></Button>
 
 
 		</RelativeLayout>

@@ -10,9 +10,9 @@
 			android:layout_width="fill_parent" android:background="@drawable/menutoolbarbackgroundxml"
 			android:layout_height="50dip">
 			<Button android:layout_width="wrap_content" android:id="@+id/ProfileManagerButtonCancel"
-				android:text="@string/ButtonCancel" android:layout_height="wrap_content"
+				android:text="@string/Back" android:layout_height="wrap_content"
 				android:layout_centerVertical="true"></Button>
-			<TextView android:layout_width="wrap_content" android:text="@string/ProfileManagerMenu"
+			<TextView android:layout_width="wrap_content" android:text="@string/ProfileManager"
 				android:layout_height="wrap_content" android:id="@+id/textView5"
 				android:textSize="20dip" android:textColor="@color/White"
 				android:layout_centerInParent="true"></TextView>
@@ -20,7 +20,7 @@
 				android:id="@+id/ProfileManagerButtonValidate"
 				android:layout_height="wrap_content"
 				android:layout_alignParentRight="true"
-				android:layout_centerInParent="true" android:text="@string/ButtonValidate"></Button>
+				android:layout_centerInParent="true" android:text="@string/Ok"></Button>
 		</RelativeLayout>
 	</LinearLayout>
 
@@ -42,7 +42,7 @@
 							android:gravity="center_vertical" android:layout_width="wrap_content"
 							android:id="@+id/tableRow1">
 							<TextView android:layout_width="wrap_content"
-								android:text="@string/TextUserPseudo" android:layout_height="wrap_content"
+								android:text="@string/Pseudo" android:layout_height="wrap_content"
 								android:id="@+id/textView2"></TextView>
 							<EditText android:layout_width="wrap_content"
 								android:text="EditText" android:lines="1" android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
 					<LinearLayout android:layout_width="wrap_content"
 						android:layout_height="wrap_content" android:id="@+id/linearLayout6">
 						
-						<TextView android:text="@string/TextUserName"
+						<TextView android:text="@string/UserName"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
 							android:id="@+id/textView5" android:layout_marginRight="10dip"></TextView>
 							
@@ -75,26 +75,26 @@
 						android:id="@+id/linearLayout5">
 						<Button android:layout_width="wrap_content"
 							android:layout_height="wrap_content" android:id="@+id/ProfileManagerButtonEdit"
-							android:text="@string/ProfileManagerButtonEdit"></Button>
+							android:text="@string/Edit"></Button>
 						<Button android:layout_width="wrap_content"
 							android:layout_height="wrap_content" android:id="@+id/ProfileManagerButtonChange"
-							android:text="@string/ProfileManagerButtonOnlineAccount"></Button>
+							android:text="@string/ChangeAccount"></Button>
 					</LinearLayout>
-					<CheckBox android:text="@string/CheckBoxConnectionAuto"
+					<CheckBox android:text="@string/Autologin"
 						android:layout_width="wrap_content" android:layout_height="wrap_content"
 						android:id="@+id/ProfileManagerCheckBoxConnection"></CheckBox>
-					<CheckBox android:text="@string/CheckBoxRememberPassword"
+					<CheckBox android:text="@string/RememberPassword"
 						android:layout_width="wrap_content" android:layout_height="wrap_content"
 						android:id="@+id/ProfileManagerCheckBoxPassword"></CheckBox>
 				</LinearLayout>
 				<LinearLayout android:layout_height="fill_parent"
 					android:id="@+id/ProfilGlobalLayout" android:layout_width="fill_parent"
 					android:gravity="center_vertical|center_horizontal">
-					<TextView android:text="@string/ProfileManagerType"
+					<TextView android:text="@string/Type"
 						android:layout_width="wrap_content" android:layout_height="wrap_content"
 						android:id="@+id/textView6"></TextView>
 					<Spinner android:layout_width="wrap_content"
-						android:layout_height="wrap_content" android:entries="@array/type"
+						android:layout_height="wrap_content" android:entries="@array/Type"
 						android:id="@+id/spinnerType"></Spinner>
 				</LinearLayout>
 			</FrameLayout>

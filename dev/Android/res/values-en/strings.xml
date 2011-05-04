@@ -1,158 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<!-- STRING -->
+
+	<!-- A -->
 	<string name="app_name">BLOK</string>
+	<string name="Autologin">Autologin</string>
+	<string name="About">About</string>
 	
-	<!-- Global -->
+	<!-- B -->	
+	<string name="Back">Back</string>
+	<string name="Blocks">Blocks</string>
+	<string name="Bonus">Bonus</string>
+
+	<!-- C -->	
+	<string name="ChangeAccount">Change Account</string>
+	<string name="ChooseUserAccount">Please choose an account</string>
+	<string name="Colors">Colors</string>
+	<string name="ConfirmPass">Confirm password</string>
+	<string name="Connection">Connection</string>
+	<string name="Create">Create</string>
+	<string name="CreatingLevels">Creating levels</string>
 	
-	<string name="ButtonCancel">Back</string>
-	<string name="ButtonCreate">Create</string>
-	<string name="ButtonConnection">Connection</string>
-	<string name="ButtonValidate">Ok</string>
-	<string name="ButtonMenu">Menu</string>
+	<!-- D -->
 	
-	<string name="TextUserName">User Name  </string>
-	<string name="TextUserPassword">Password</string>
-	<string name="TextUserPseudo">Pseudo</string>
+	<!-- E -->
+	<string name="Edit">Edit</string>
+	<string name="EnemiesNumber">Number of enemies</string>
+	<string name="EnemiesDifficulty">Difficulty of the enemies</string>
 	
-	<string name="CheckBoxConnectionAuto">Auto login</string>
-	<string name="CheckBoxRememberPassword">Remember password</string>
+	<string name="ErrorAuth">Error during the authentification</string>
+	<string name="ErrorAutoConnection">The username or password is empty</string>
+	<string name="ErrorIdentification">Error during identification</string>
+	<string name="ErrorMapName">Name map is not valid !</string>
+	<string name="ErrorNoMapFound">No map found !</string>
+	<string name="ErrorNumberOfPlayers">The number of players on the map is less than 4</string>
+	<string name="ErrorPassword">The password and verification must be the same</string>
+	<string name="ErrorPseudo">This pseudo is already used</string>
+	<string name="ErrorUserMissing">You must create a multiplayer account</string>
+		
+	<!-- F -->
 	
-	<!-- Home -->
+	<!-- G -->	
+	<string name="GameType">Game Type</string>
+	<string name="Global">Global</string>
+	<string name="Goal">Goal of the game</string>
+	<string name="Grounds">Grounds</string>
+
+	<!-- H -->	
+	<string name="Help">Help</string>	
 	
-	<string name="HomeButtonSinglePlayer">SinglePlayer</string>
-	<string name="HomeButtonMultiPlayer">MultiPlayer</string>
-	<string name="HomeButtonOptions">Options</string>
-	<string name="HomeButtonStatistics">Statistics</string>
-	<string name="HomeButtonCreatingLevel">Creating Level</string>
-	<string name="HomeButtonHelp">Help</string>
+	<!-- I -->
+	<string name="Instructions">Instructions</string>
 	
-	<string name="HommeSpinnerChooseUserText">Please choose an account</string>
+	<!-- J -->
 	
-	<!-- SinglePlayer -->
+	<!-- K -->
 	
-	<string name="SinglePlayerMenu">Single Player</string>
-	<string name="SinglePlayerGameType">Game Type</string>
-	<string name="SinglePlayerGameEnemiesNumber">Number of enemies</string>
-	<string name="SinglePlayerGameEnemiesDifficulty">Difficulty of the enemies</string>
-		<string name="SinglePlayerGameTime">Time</string>
-	<string-array name="SinglePlayerGameType">
+	<!-- L -->
+	<string name="Languages">Languages</string>	
+	<string name="Load">Load</string>
+	<string name="LoadAMap">Load a map</string>
+	
+	<!-- M -->
+	<string name="MapName">Map name</string>	
+	<string name="Menu">Menu</string>
+	<string name="MultiPlayer">MultiPlayer</string>
+
+	<!-- N -->	
+	<string name="NewAccount">New Account</string>
+	<string name="NewPass">New Password</string>
+		
+	<!-- O -->	
+	<string name="Ok">Ok</string>
+	<string name="OldPass">Old Password</string>
+	<string name="Options">Options</string>	
+	
+	<!-- P -->		
+	<string name="Password">Password</string>
+	<string name="ProfileManager">Profile Manager</string>
+	<string name="Pseudo">Pseudo</string>
+	
+	<!-- Q -->	
+	<string name="Quit">Leave</string>
+	
+	<!-- R -->	
+	<string name="RememberPassword">Remember password</string>
+	<string name="Reset">Reset</string>
+	<string name="Restart">Restart</string>
+	<string name="Resume">Resume</string>
+	
+	<!-- S -->	
+	<string name="Save">Save</string>
+	<string name="SinglePlayer">SinglePlayer</string>
+	
+	<!-- T -->	
+	<string name="Time">Time</string>
+	<string name="Type">Type</string>
+	
+	<!-- U -->	
+	<string name="UserName">User Name</string>
+	
+	<!-- V -->
+	<string name="Verification">Verification</string>
+	<string name="Volume">Volume</string>
+	
+	<!-- W -->
+		
+	<!-- X -->
+		
+	<!-- Y -->
+		
+	<!-- Z -->
+
+	
+	
+	<!-- ARRAY -->
+	
+	<string-array name="GameType">
 		<item>FreeForAll</item>
 	</string-array>
-	<string-array name="SinglePlayerEnemiesNumber">
+	
+	<string-array name="EnemiesNumber">
 		<item>1</item>
 		<item>2</item>
 		<item>3</item>
 	</string-array>
-	<string-array name="SinglePlayerDifficulty">
+	
+	<string-array name="EnemiesDifficulty">
 		<item>easy</item>
 		<item>normal</item>
 		<item>hard</item>
 	</string-array>
-		<string-array name="SinglePlayerTime">
+	
+	<string-array name="Languages">
+		<item>English</item>
+		<item>Français</item>
+	</string-array>
+	
+	<string-array name="PlayerColors">
+		<item>White</item>
+		<item>Blue</item>
+		<item>Red</item>
+		<item>Dark</item>
+	</string-array>
+	
+	<string-array name="SinglePlayerTime">
 		<item>1</item>
 		<item>2</item>
 		<item>3</item>
 		<item>5</item>
 	</string-array>
 
-	<string name="SinglePlayerGameErrorLoadingMap">No maps found !</string>
-	
-	<!-- SinglePlayerLayout -->
-	
-	<string name="SinglePlayerMenuResume">Resume</string>
-	<string name="SinglePlayerMenuOptions">Options</string>
-	<string name="SinglePlayerMenuQuit">Leave</string>
-	<string name="SinglePlayerMenuRestart">Restart</string>
-	
-	<!-- Multiplayer -->
-	
-	<string name="MultiplayerButtonNewAccount">New Account</string>
-	<string name="MultiPlayerConnectionErrorAutoConnection">The username or password is empty</string>
-	<string name="MultiPlayerConnectionError">Error during identification</string>
-	
-	<!-- NewAccountOnline -->
-	
-	<string name="NewAccountOnlineTextVerification">Verification</string>
-	<string name="NewAccountOnlineTextPasswordError">The password and verification must be the same</string>
-	
-	<!-- Options -->
-	
-	<string name="OptionsMenu">Options</string>
-	<string name="OptionsVolume">Volume</string>
-	<string name="OptionsLanguages">Languages</string>
-	<string-array name="languages">
-		<item>English</item>
-		<item>Français</item>
-	</string-array>
-	<string name="OptionsProfilManager">Profil Manager</string>
-	
-	
-	<!-- ProfileManager -->
-	
-	<string name="ProfileManagerMenu">Profile Manager</string>
-	<string name="ProfileManagerMenuGlobal">Global</string>
-	<string name="ProfileManagerColors">Colors</string>
-	<string-array name="playerColors">
-		<item>White</item>
-		<item>Blue</item>
-		<item>Red</item>
-		<item>Dark</item>
-	</string-array>
-	<string name="ProfileManagerButtonEdit">Edit</string>
-	<string name="ProfileManagerButtonOnlineAccount">Change Account</string>
-	<string name="ProfileManagerType">Type</string>
-	<string-array name="type">
+	<string-array name="Type">
 		<item>Right-handed</item>
 		<item>Left-handed</item>
 	</string-array>
 	
-	<string name="ProfileManagerErrorPseudo">This pseudo is already used</string>
-	<string name="ProfilManagementAuthError">Error during the authentification</string>
-	<string name="ProfilManagementErrorUserMissing">You must create a multiplayer account</string>
-	
-	
-	<!-- Change Password Multiplayer -->
-	
-	<string name="ChangePasswordMultiplayerTextUserName">User name</string>
-	<string name="ChangePasswordMultiplayerTextOldPass">Old Password</string>
-	<string name="ChangePasswordMultiplayerTextNewPass">New Password</string>
-	<string name="ChangePasswordMultiplayerTextConfirmPass">Confirm password</string>
-
-	<!-- Create Map -->
-	
-	<string name="MapSelectorMenu">Create Map</string>
-	<string name="MapSelectorTextViewName">Map name</string>
-	<string name="MapSelectorButtonLoad">Load</string>
-	<string name="MapSelectorErrorName">Name map is not valid !</string>
-	<string name="MapSelectorErrorLoad">There are no maps available</string>
-
-	<!--  Editor Loader -->
-	
-	<string name="EditorLoaderMenu">Load a map</string>
-		
-	<!-- Help -->
-	
-	<string name="HelpGoal">Goal of the game</string>
-	<string name="HelpInstructions">Instructions</string>
-	<string name="HelpBonus">Bonus</string>
-	<string name="HelpAbout">About</string>
-	
-	<!-- Map Editor -->
-	
-	<string name="MapEditorCheckBox">Level</string>
-	<string name="SaveMapPlayerError">The number of players on the map is less than 4</string>
-	
-	<!-- Map Editor Menu -->
-	
-	<string name="MapEditorMenuResume">Resume</string>
-	<string name="MapEditorMenuSave">Save</string>
-	<string name="MapEditorMenuReset">Reset</string>
-	<string name="MapEditorMenuQuit">Quit</string>
-	<string name="MapEditorToggleButtonOn">Blocks</string>
-	<string name="MapEditorToggleButtonOff">Grounds</string>
-	
-	<!-- Game  -->
-	
-	<string name="GameTextTime">Time</string>
-
 </resources>

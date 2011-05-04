@@ -11,14 +11,14 @@
 			android:layout_height="50dip">
 			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/textView5"
 				android:textSize="20dip" android:textColor="@color/White"
-				android:layout_centerInParent="true" android:text="@string/OptionsMenu"></TextView>
+				android:layout_centerInParent="true" android:text="@string/Options"></TextView>
 			<Button android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_alignParentBottom="true" android:id="@+id/OptionsButtonCancel"
-				android:text="@string/ButtonCancel"></Button>
+				android:text="@string/Back"></Button>
 			<Button android:layout_height="wrap_content"
 				android:layout_width="wrap_content" android:id="@+id/OptionsButtonProfil"
-				android:text="@string/OptionsProfilManager" android:layout_alignParentRight="true" android:layout_centerVertical="true"></Button>
+				android:text="@string/ProfileManager" android:layout_alignParentRight="true" android:layout_centerVertical="true"></Button>
 
 		</RelativeLayout>
 	</LinearLayout>
@@ -31,7 +31,7 @@
 			android:layout_height="wrap_content" android:layout_width="wrap_content"
 			android:gravity="center_vertical|center_horizontal">
 			<TextView android:id="@+id/textView1" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:text="@string/OptionsVolume"></TextView>
+				android:layout_height="wrap_content" android:text="@string/Volume"></TextView>
 			<SeekBar android:layout_height="wrap_content"
 				android:layout_width="100dip" android:id="@+id/OptionsSeekBarVolume"></SeekBar>
 			<CheckBox android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
 			android:layout_height="wrap_content" android:layout_width="fill_parent"
 			android:gravity="center_vertical|center_horizontal">
 			<TextView android:layout_height="wrap_content" android:id="@+id/textView2"
-				android:layout_width="wrap_content" android:text="@string/OptionsLanguages"></TextView>
+				android:layout_width="wrap_content" android:text="@string/Languages"></TextView>
 			<Spinner android:layout_height="wrap_content"
 				android:layout_width="wrap_content" android:id="@+id/OptionsSpinnerLanguages"></Spinner>
 		</LinearLayout>
