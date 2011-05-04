@@ -272,7 +272,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 				this.finish();
 			}
 			else {
-				Toast.makeText(EditorLayout.this, R.string.SaveMapPlayerError, Toast.LENGTH_SHORT).show();
+				Toast.makeText(EditorLayout.this, R.string.ErrorNumberOfPlayers, Toast.LENGTH_SHORT).show();
 			}
 		}
 		else if ( this.reset == arg0 ) {

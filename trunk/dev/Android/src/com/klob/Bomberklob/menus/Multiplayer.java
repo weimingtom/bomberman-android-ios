@@ -240,7 +240,7 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 				
 				if( !testString(userAccountName.getText().toString()) || !testString(userAccountPassword.getText().toString()) ){
 
-		 			Toast.makeText(Multiplayer.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
+		 			Toast.makeText(Multiplayer.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
 		 		}
 				else if (Model.getSystem().getDatabase().isGoodMultiUser(userId, userAccountName.getText().toString(), pwd)){
 					/** save password **/
@@ -267,11 +267,11 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 				}
 				else{
 
-					Toast.makeText(Multiplayer.this, R.string.MultiPlayerConnectionError, Toast.LENGTH_SHORT).show();
+					Toast.makeText(Multiplayer.this, R.string.ErrorAuth, Toast.LENGTH_SHORT).show();
 				}
 			} catch (SQLException e) {
 
-				Toast.makeText(Multiplayer.this, R.string.MultiPlayerConnectionError, Toast.LENGTH_SHORT).show();
+				Toast.makeText(Multiplayer.this, R.string.ErrorAuth, Toast.LENGTH_SHORT).show();
 				e.printStackTrace();
 			}
 		}

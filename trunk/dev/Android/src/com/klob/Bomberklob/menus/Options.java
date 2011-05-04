@@ -75,7 +75,7 @@ public class Options extends Activity implements View.OnClickListener{
         	mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, Model.getSystem().getVolume()/6, AudioManager.FLAG_SHOW_UI);
         }
 
-		this.languagesTab = getResources().getStringArray(R.array.languages);
+		this.languagesTab = getResources().getStringArray(R.array.Languages);
 		this.languages = (Spinner) findViewById( R.id.OptionsSpinnerLanguages );
 		ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, this.languagesTab);
 		a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

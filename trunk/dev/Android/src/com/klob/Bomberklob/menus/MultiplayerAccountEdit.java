@@ -26,8 +26,6 @@ public class MultiplayerAccountEdit extends Activity implements View.OnClickList
 	private EditText newPass;
 	private EditText confirmPass;
 
-	
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +112,7 @@ public class MultiplayerAccountEdit extends Activity implements View.OnClickList
 					!testerString(oldPass.getText().toString()) ||
 					!testerString(newPass.getText().toString()) ||
 					!testerString(confirmPass.getText().toString())){
-	 			Toast.makeText(MultiplayerAccountEdit.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
+	 			Toast.makeText(MultiplayerAccountEdit.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
 			}
 			/** TODO les deux tests de chaine vide et chaine contenant espace peuvent être fusionnés **/
 			else if(oldPass.getText().toString().compareTo("")!=0 &&
@@ -123,26 +121,26 @@ public class MultiplayerAccountEdit extends Activity implements View.OnClickList
 						(userName.getText().toString().compareTo("")!=0)){
 					
 					if(!newPass.getText().toString().equals(confirmPass.getText().toString())){
-						Toast.makeText(MultiplayerAccountEdit.this, R.string.NewAccountOnlineTextPasswordError,Toast.LENGTH_SHORT).show();
+						Toast.makeText(MultiplayerAccountEdit.this, R.string.ErrorPassword,Toast.LENGTH_SHORT).show();
 					} else
 						try {
 							if(Model.getSystem().getDatabase().isGoodMultiUser(userId, userName.getText().toString(), pwd)){
 							
-								/** test de correspondance mot de passe et username avec serveur **/
-								/** TODO test de disponibilité du userName sur le serveur si userId différent sinon mettre à jour**/
-								/** mettre a jour bdd **/
-								/** mettre a jour profil current User **/
-								/** à modifier puisque l'utilisateur ne modifie pas tout à la fois **/
+								/* test de correspondance mot de passe et username avec serveur */
+								/* TODO test de disponibilité du userName sur le serveur si userId différent sinon mettre à jour */
+								/* mettre a jour bdd */
+								/* mettre a jour profil current User */
+								/* à modifier puisque l'utilisateur ne modifie pas tout à la fois */
 								Model.getSystem().getDatabase().updatePassword(userId, pwd, newPwd);
 								Model.getSystem().getDatabase().updateUserName(userId, userName.getText().toString());
 								Model.getUser().setUserName(userName.getText().toString());
 								Model.getUser().setPassword(newPwd);
 								
-								Toast.makeText(MultiplayerAccountEdit.this, R.string.ProfilManagementSavedOk,Toast.LENGTH_SHORT).show();
+						//FIXME		Toast.makeText(MultiplayerAccountEdit.this, R.string.ProfilManagementSavedOk,Toast.LENGTH_SHORT).show();
 								intent = new Intent(MultiplayerAccountEdit.this, ProfileManager.class);
 							}
 							else{
-								Toast.makeText(MultiplayerAccountEdit.this, R.string.ProfilManagementAuthError,Toast.LENGTH_SHORT).show();
+								Toast.makeText(MultiplayerAccountEdit.this, R.string.ErrorIdentification,Toast.LENGTH_SHORT).show();
 							}
 						} catch (NotFoundException e) {
 							e.printStackTrace();
@@ -151,11 +149,11 @@ public class MultiplayerAccountEdit extends Activity implements View.OnClickList
 						}
 					
 				}
-			/** sinon possibilité de tester new password vide et userName différent de l'ancien
+			/* sinon possibilité de tester new password vide et userName différent de l'ancien
 			 * => correspond à un simple changement de username
 			 */
 			else{
-				Toast.makeText(MultiplayerAccountEdit.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
+				Toast.makeText(MultiplayerAccountEdit.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
 			}
 		}    	
 		else if( v == this.cancel){

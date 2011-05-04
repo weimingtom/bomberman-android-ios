@@ -192,13 +192,13 @@ public class MultiplayerNewAccount  extends Activity implements View.OnClickList
 //			}
 			
 			if( !testerString(userAccountName.getText().toString()) || !testerString(userAccountPassword1.getText().toString()) || !testerString(userAccountPassword2.getText().toString())){
-	 			Toast.makeText(MultiplayerNewAccount.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
+	 			Toast.makeText(MultiplayerNewAccount.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
 	 		}
 			/** TODO factorisation a faire **/
 //	 		else if(password.getText().toString().compareTo("")!=0 
 //			&& (repassword.getText().toString().compareTo("")!=0) && (userName.getText().toString().compareTo("")!=0)){
 			else if(!userAccountPassword1.getText().toString().equals(userAccountPassword2.getText().toString())){
-					Toast.makeText(MultiplayerNewAccount.this, R.string.NewAccountOnlineTextPasswordError,Toast.LENGTH_SHORT).show();
+					Toast.makeText(MultiplayerNewAccount.this, R.string.ErrorPassword,Toast.LENGTH_SHORT).show();
 				}
 				else{
 					/** test disponibilité sur serveur **/
@@ -229,7 +229,7 @@ public class MultiplayerNewAccount  extends Activity implements View.OnClickList
 			
 		}
 		else if( view == this.cancel ) {
-			intent = new Intent(MultiplayerNewAccount.this, MultiPlayer.class);
+			intent = new Intent(MultiplayerNewAccount.this, Multiplayer.class);
 		}
 
 		if ( intent != null ) {
