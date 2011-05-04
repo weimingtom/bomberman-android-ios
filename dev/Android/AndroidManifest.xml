@@ -39,26 +39,45 @@
 		<activity android:screenOrientation="landscape"
 			android:name=".menus.CreateAccountOffline" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
-		<activity android:screenOrientation="landscape" android:name=".menus.MultiPlayer"
+
+		<activity android:name=".menus.NewAccountOffline"
+			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
-		<activity android:screenOrientation="landscape" android:name=".menus.NewAccountOnLine"
+		<activity android:name=".menus.Help"
+			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
-		<activity android:screenOrientation="landscape"
-			android:name=".menus.ChangePasswordMultiplayer" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
-		<activity android:screenOrientation="landscape"
-			android:name=".menus.NewAccountOffline" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+		<!-- multi -->
 
-		<activity android:screenOrientation="landscape" android:name=".menus.Help"
+		<activity android:name=".menus.Multiplayer"
+			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
-			
-		<activity android:screenOrientation="landscape" android:name=".menus.HomeMulti"
+
+		<activity android:name=".menus.MultiplayerAccountEdit"
+			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
-			
-		<activity android:screenOrientation="landscape" android:name=".menus.ChangeAccountMulti"
+
+		<activity android:name=".menus.MultiplayerChangeAccount"
+			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+
+		<activity android:name=".menus.MultiplayerHome"
+			android:screenOrientation="landscape"
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+
+		<activity android:name=".menus.MultiplayerNewAccount"
+			android:screenOrientation="landscape"
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+
+
+
+
+
+
+
+
 
 
 	</application>

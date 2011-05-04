@@ -13,17 +13,19 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-public class HomeMulti extends Activity implements View.OnClickListener{
+public class MultiplayerHome extends Activity implements View.OnClickListener{
 	
 	private Button previous;
 	private Button createGame;
 	
 	private ImageButton refresh;
 	
-	 @Override
+	/** 
+	 * menu d'accueil multijoueurs où sont listés les parties en cour
+	 */
 	public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.homemulti);
+	        setContentView(R.layout.multiplayerhome);
 
 	        previous = (Button)findViewById(R.id.buttonCancel);
 			previous.setOnClickListener(this);
@@ -64,7 +66,7 @@ public class HomeMulti extends Activity implements View.OnClickListener{
 		public void onClick(View v) {
 			Intent intent = null;
 			if(v == refresh){
-				Toast.makeText(HomeMulti.this, "Rafraichissement des parties", Toast.LENGTH_SHORT).show();
+				Toast.makeText(MultiplayerHome.this, "Rafraichissement des parties", Toast.LENGTH_SHORT).show();
 
 			}
 			else if (v == createGame) {
@@ -80,10 +82,10 @@ public class HomeMulti extends Activity implements View.OnClickListener{
 			}
 			else if(v == previous){
 				if(Model.getUser().getConnectionAuto()){
-					intent = new Intent(HomeMulti.this, Home.class);
+					intent = new Intent(MultiplayerHome.this, Home.class);
 				}
 				else{
-					intent = new Intent(HomeMulti.this, MultiPlayer.class);
+					intent = new Intent(MultiplayerHome.this, MultiPlayer.class);
 				}
 				
 			}			
