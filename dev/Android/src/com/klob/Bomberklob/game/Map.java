@@ -302,6 +302,7 @@ public class Map implements Serializable {
 		this.bm = Bitmap.createBitmap(ResourcesManager.getSize()*this.grounds.length, ResourcesManager.getSize()*this.grounds[0].length, Bitmap.Config.ARGB_8888);
 
 		this.animatedObjects.clear();
+		this.zoneDangereuses.clear();
 		
 		Canvas pictureCanvas = new Canvas(this.bm);
 
