@@ -85,7 +85,7 @@ public class MultiplayerHome extends Activity implements View.OnClickListener{
 					intent = new Intent(MultiplayerHome.this, Home.class);
 				}
 				else{
-					intent = new Intent(MultiplayerHome.this, MultiPlayer.class);
+					intent = new Intent(MultiplayerHome.this, Multiplayer.class);
 				}
 				
 			}			

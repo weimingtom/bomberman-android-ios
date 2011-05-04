@@ -102,7 +102,7 @@ public class Home extends Activity implements View.OnClickListener{
 			intent = new Intent(Home.this, NewAccountOffline.class);
 		}
 		else if ( this.multiPlayer == v ) {
-			intent = new Intent(Home.this, MultiPlayer.class);
+			intent = new Intent(Home.this, Multiplayer.class);
 		}
 		else if ( this.options == v ) {
 			intent = new Intent(Home.this, Options.class);
@@ -118,7 +118,7 @@ public class Home extends Activity implements View.OnClickListener{
 				intent = new Intent(Home.this, SinglePlayer.class);
 			}
 			else {
-				Toast.makeText(Home.this, R.string.SinglePlayerGameErrorLoadingMap, Toast.LENGTH_SHORT).show();
+				Toast.makeText(Home.this, R.string.ErrorNoMapFound, Toast.LENGTH_SHORT).show();
 			}
 		}
 

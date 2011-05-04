@@ -66,18 +66,18 @@ public class ProfileManager extends Activity implements View.OnClickListener{
         /** 
          * premier onglet etc..
          **/
-		TabSpec tspec1 = tabs.newTabSpec(String.format(r.getString(R.string.HomeButtonSinglePlayer)));
-		tspec1.setIndicator(String.format(r.getString(R.string.HomeButtonSinglePlayer)));
+		TabSpec tspec1 = tabs.newTabSpec(String.format(r.getString(R.string.SinglePlayer)));
+		tspec1.setIndicator(String.format(r.getString(R.string.SinglePlayer)));
 		tspec1.setContent(R.id.ProfilLayoutSolo);
 		tabs.addTab(tspec1);
 		
-		TabSpec tspec2 = tabs.newTabSpec((String.format(r.getString(R.string.HomeButtonMultiPlayer))));
-		tspec2.setIndicator((String.format(r.getString(R.string.HomeButtonMultiPlayer))));
+		TabSpec tspec2 = tabs.newTabSpec((String.format(r.getString(R.string.MultiPlayer))));
+		tspec2.setIndicator((String.format(r.getString(R.string.MultiPlayer))));
 		tspec2.setContent(R.id.ProfilMultiLayout);
 		tabs.addTab(tspec2);
 		
-		TabSpec tspec3 = tabs.newTabSpec((String.format(r.getString(R.string.ProfileManagerMenuGlobal))));
-		tspec3.setIndicator((String.format(r.getString(R.string.ProfileManagerMenuGlobal))));
+		TabSpec tspec3 = tabs.newTabSpec((String.format(r.getString(R.string.Global))));
+		tspec3.setIndicator((String.format(r.getString(R.string.Global))));
 		tspec3.setContent(R.id.ProfilGlobalLayout);
 		tabs.addTab(tspec3);
 		
@@ -214,7 +214,7 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 				Model.getUser().setPseudo(pseudo.getText().toString());
         	}
         	else if (!pseudo.getText().toString().equals(Model.getUser().getPseudo())) {
-        		Toast.makeText(ProfileManager.this, R.string.ProfileManagerErrorPseudo, Toast.LENGTH_SHORT).show();
+        		Toast.makeText(ProfileManager.this, R.string.ErrorPseudo, Toast.LENGTH_SHORT).show();
         		error = true;
         	}
 			
@@ -235,7 +235,7 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 
 			} else {
 				Log.i("", "tu selectionne rememberPassword alors que password et username sont nulls !");
-				Toast.makeText(ProfileManager.this,R.string.ProfilManagementErrorUserMissing,Toast.LENGTH_SHORT).show();
+				Toast.makeText(ProfileManager.this,R.string.ErrorUserMissing,Toast.LENGTH_SHORT).show();
 				error=true;
 			}
 
@@ -251,12 +251,12 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 						Model.getSystem().getDatabase()
 								.updateSavePwdUser(userId, 1);
 					} else {
-						Toast.makeText(ProfileManager.this,R.string.ProfilManagementAuthError,Toast.LENGTH_SHORT).show();
+						Toast.makeText(ProfileManager.this,R.string.ErrorAuth,Toast.LENGTH_SHORT).show();
 						error=true;
 						
 					}
 				} catch (SQLException e) {
-					Toast.makeText(ProfileManager.this,R.string.ProfilManagementAuthError,Toast.LENGTH_SHORT).show();
+					Toast.makeText(ProfileManager.this,R.string.ErrorAuth,Toast.LENGTH_SHORT).show();
 					e.printStackTrace();
 				}
 			} else if (!connectionAuto.isChecked()) {
@@ -265,7 +265,7 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 						.updateAutoConnectUser(userId, 0);
 			} else {
 				Log.i("", "tu selectionne connectionAuto alors que password et username sont nulls !");
-				Toast.makeText(ProfileManager.this,R.string.ProfilManagementErrorUserMissing,Toast.LENGTH_SHORT).show();
+				Toast.makeText(ProfileManager.this,R.string.ErrorUserMissing,Toast.LENGTH_SHORT).show();
 				error=true;
 			}
 
@@ -284,10 +284,10 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 			}
 		}    	
 		else if(v == this.changeAccount){
-			intent = new Intent(ProfileManager.this, ChangerCompteMulti.class);
+			intent = new Intent(ProfileManager.this, MultiplayerChangeAccount.class);
 		}
 		else if( v == this.edit){
-			intent = new Intent(ProfileManager.this, ChangePasswordMultiplayer.class);
+		//	intent = new Intent(ProfileManager.this, ChangePasswordMultiplayer.class);
 		}
 		else if( v == this.cancel){
 			intent = new Intent(ProfileManager.this, Options.class);

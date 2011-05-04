@@ -79,7 +79,7 @@ public class Editor extends Activity implements View.OnClickListener {
 				intent.putExtra("map", name);
 			}
 			else {
-				Toast.makeText(Editor.this, R.string.MapSelectorErrorName, Toast.LENGTH_SHORT).show();
+				Toast.makeText(Editor.this, R.string.ErrorMapName, Toast.LENGTH_SHORT).show();
 			}
 		}
 		else if ( this.cancel == v ) {
@@ -108,7 +108,7 @@ public class Editor extends Activity implements View.OnClickListener {
 			this.finish();
 		}
 		else if ( resultCode == 2001 ){
-			Toast.makeText(Editor.this, R.string.MapSelectorErrorLoad, Toast.LENGTH_SHORT).show();
+			Toast.makeText(Editor.this, R.string.ErrorNoMapFound, Toast.LENGTH_SHORT).show();
 		}
 	}
 }

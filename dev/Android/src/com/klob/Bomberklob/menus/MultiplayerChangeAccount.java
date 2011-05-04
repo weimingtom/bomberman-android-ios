@@ -102,14 +102,14 @@ public class MultiplayerChangeAccount extends Activity implements View.OnClickLi
 				String pwd = md5(password.getText().toString());
 				
 				if( !testerString(userName.getText().toString()) || !testerString(password.getText().toString()) ){
-		 			Toast.makeText(MultiplayerChangeAccount.this, R.string.MultiPlayerConnectionErrorAutoConnection, Toast.LENGTH_SHORT).show();
+		 			Toast.makeText(MultiplayerChangeAccount.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
 		 		}
 				else if (Model.getSystem().getDatabase().isGoodMultiUser(userId, userName.getText().toString(), pwd)){
 					/** FIXME modif et test à faire ici **/
 					intent = new Intent(MultiplayerChangeAccount.this, ProfileManager.class);
 				}
 				else{
-					Toast.makeText(MultiplayerChangeAccount.this, R.string.ProfilManagementAuthError, Toast.LENGTH_SHORT).show();
+					Toast.makeText(MultiplayerChangeAccount.this, R.string.ErrorIdentification, Toast.LENGTH_SHORT).show();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
