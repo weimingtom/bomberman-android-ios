@@ -79,21 +79,23 @@
     NSInteger currentImageIndex = selectedImageIndex;
     UIImageView *currentImage;
 
-    for (int i = 0; i < (([imagesPosition count] - 1) / 2); i++) {
-        currentImageIndex = [self previousImage:currentImageIndex];
-    }
-    
-    for (int i = 0; i < [imagesPosition count]; i++) {
-        currentImage = [[UIImageView alloc] initWithImage:[images objectAtIndex:currentImageIndex]];
-        currentImage.frame = [[imagesPosition objectAtIndex:i] getCGRect];
-        [imagesDisplayed addObject:currentImage];
-        [currentImage release];
-        
-        [self addSubview:[imagesDisplayed objectAtIndex:i]];
-        currentImageIndex = [self nextImage:currentImageIndex];
-    }
-
-    [self replaceImages:0];
+	if ([imagesPosition count] > 0) {
+		for (int i = 0; i < (([imagesPosition count] - 1) / 2); i++) {
+			currentImageIndex = [self previousImage:currentImageIndex];
+		}
+		
+		for (int i = 0; i < [imagesPosition count]; i++) {
+			currentImage = [[UIImageView alloc] initWithImage:[images objectAtIndex:currentImageIndex]];
+			currentImage.frame = [[imagesPosition objectAtIndex:i] getCGRect];
+			[imagesDisplayed addObject:currentImage];
+			[currentImage release];
+			
+			[self addSubview:[imagesDisplayed objectAtIndex:i]];
+			currentImageIndex = [self nextImage:currentImageIndex];
+		}
+		
+		[self replaceImages:0];
+	}
 }
 
 
@@ -340,29 +342,30 @@
 
 
 - (void)replaceImages:(NSInteger)movement {
-
-    for (int i = 0; i < (([imagesDisplayed count] - 1) / 2); i++) {
-        
-        if (movement == 0 || movement > 0) {
-            [self bringSubviewToFront:[imagesDisplayed objectAtIndex:i]];
-            [self bringSubviewToFront:[imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) - i)]];
-        }
-        else {
-            [self bringSubviewToFront:[imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) - i)]];
-            [self bringSubviewToFront:[imagesDisplayed objectAtIndex:i]];
-        }
-        
-        if (i == 0) {
-            ((UIImageView *) [imagesDisplayed objectAtIndex:i]).alpha = 0.0;
-            ((UIImageView *) [imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) - i)]).alpha = 0.0;
-        }
-        else {
-            ((UIImageView *) [imagesDisplayed objectAtIndex:i]).alpha = 1.0;
-            ((UIImageView *) [imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) - i)]).alpha = 1.0;
-        }
-    }
-    
-    [self bringSubviewToFront:[imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) / 2)]];
+	if ([imagesDisplayed count] > 0) {
+		for (int i = 0; i < (([imagesDisplayed count] - 1) / 2); i++) {
+			
+			if (movement == 0 || movement > 0) {
+				[self bringSubviewToFront:[imagesDisplayed objectAtIndex:i]];
+				[self bringSubviewToFront:[imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) - i)]];
+			}
+			else {
+				[self bringSubviewToFront:[imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) - i)]];
+				[self bringSubviewToFront:[imagesDisplayed objectAtIndex:i]];
+			}
+			
+			if (i == 0) {
+				((UIImageView *) [imagesDisplayed objectAtIndex:i]).alpha = 0.0;
+				((UIImageView *) [imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) - i)]).alpha = 0.0;
+			}
+			else {
+				((UIImageView *) [imagesDisplayed objectAtIndex:i]).alpha = 1.0;
+				((UIImageView *) [imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) - i)]).alpha = 1.0;
+			}
+		}
+		
+		[self bringSubviewToFront:[imagesDisplayed objectAtIndex:(([imagesPosition count] - 1) / 2)]];
+	}
 }
 
 @end

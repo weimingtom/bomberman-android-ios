@@ -13,7 +13,7 @@
 
 
 @implementation Player
-@synthesize speed, lifeNumber, bombsPlanted, bombNumber,bombsTypes,powerExplosion,shield,timeExplosion, color, bombPosed;
+@synthesize speed, lifeNumber, bombNumber,bombsTypes,powerExplosion,shield,timeExplosion, color, bombPosed;
 
 - (id) init{
 	self = [super init];
@@ -21,14 +21,13 @@
 		color = @"white";
 		lifeNumber = 0;
 		powerExplosion = 1;
-		timeExplosion = 3;
+		timeExplosion = 10;
 		shield = 1;
 		speed = 1;
 		bombNumber = 1;
 		position.x = 0;
 		position.y = 0;
 		currentAnimation = @"idle";
-		bombsPlanted = [[NSMutableArray alloc] init];
 		bombsTypes = [[NSMutableArray alloc] init];
 
 	}
@@ -41,7 +40,6 @@
 		color = colorValue;
 		lifeNumber = 0;
 		powerExplosion = 1;
-		timeExplosion = 3;
 		shield = 1;
 		speed = 1;
 		bombNumber = 1;
@@ -56,7 +54,6 @@
 
 
 - (void)dealloc {
-    [bombsPlanted release];
     [bombsTypes release];
     [color release];
     [super dealloc];
@@ -279,7 +276,6 @@
 
 
 - (void) plantingBomb:(Bomb *) aBomb{
-	[bombsPlanted addObject:aBomb];
 	bombPosed = YES;
 }
 
@@ -354,7 +350,6 @@
 	playerTmp.waitDelay = waitDelay;
 	playerTmp.delay = delay;
 	
-	playerTmp.bombsPlanted = [[NSMutableArray alloc] initWithArray:bombsPlanted];
 	playerTmp.bombsTypes = [[NSMutableArray alloc] initWithArray:bombsTypes];
 	playerTmp.color = [[NSMutableString alloc] initWithString:color];
 	playerTmp.lifeNumber = lifeNumber;

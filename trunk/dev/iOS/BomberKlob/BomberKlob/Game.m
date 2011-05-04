@@ -10,16 +10,18 @@
 #import "RessourceManager.h"
 #import "Player.h"
 #import "Map.h"
+#import "Bomb.h"
 
 
 @implementation Game
 
-@synthesize players, map;
+@synthesize players, map, bombsPlanted;
 
 - (id) initWithMapName:(NSString *)mapName {
 	self = [super init];
     
 	if (self) {
+		bombsPlanted = [[NSMutableDictionary alloc] init];
 		RessourceManager * resource = [RessourceManager sharedRessource];
         Position *position;
         Player *player;
@@ -28,7 +30,6 @@
         
         players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
         
-        NSLog(@"%@", map.players);
         for (NSString *key in map.players) {
             position = [[Position alloc] initWithX:(((Position *) [map.players objectForKey:key]).x * tileSize) y:(((Position *) [map.players objectForKey:key]).y * tileSize)];
             player = [(Player *)[[RessourceManager sharedRessource].bitmapsPlayer objectForKey:key] copy];
@@ -48,6 +49,7 @@
 	self = [super init];
     
 	if (self) {
+		bombsPlanted = [[NSMutableDictionary alloc] init];
 		RessourceManager * resource = [RessourceManager sharedRessource];
         Position *position;
         Player *player;
@@ -98,10 +100,22 @@
 }
 
 
-- (void) draw{
-	
+- (void) draw:(CGContextRef)context{
+	@synchronized (self) {
+		[map draw:context];	
+		for (Player * player in players) {
+			[player draw:context];
+		}
+		NSMutableDictionary * bombs = [bombsPlanted mutableCopy];
+		for (Position * position in bombs) {
+			[[bombs objectForKey:position] draw:context];
+		}
+	}
 }
 
+- (void) update {
+	[map update];
+}
 
 
 @end

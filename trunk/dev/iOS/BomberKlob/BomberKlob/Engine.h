@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@class Game, RessourceManager, Objects;
+@class Game, RessourceManager, Objects, Bomb;
 
 /** The `Engine` class allows to make all the calculations of the game (collisions, delay bomb explosions ... ). */
 @interface Engine : NSObject {
@@ -34,6 +34,9 @@
 
  */
 - (void) collisionWithPlayer: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue;
+
+- (BOOL) isInCollisionWithABomb: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue;
+
 
 
 
@@ -95,5 +98,10 @@
 
 /** Allows to start a thread wich will permit to update bombs regularly. */
 - (void) startTimerBombsThread;
+
+- (BOOL) thereAreBombToExplode;
+
+- (void) displayFire:(Bomb *) bomb;
+
 
 @end
