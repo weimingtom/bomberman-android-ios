@@ -24,8 +24,8 @@
 			android:id="@+id/linearLayout9" android:layout_height="fill_parent"
 			android:orientation="vertical" android:gravity="center_horizontal">
 
-			<Gallery android:id="@+id/galleryz" android:layout_height="fill_parent"
-				android:layout_width="fill_parent"></Gallery>
+			<Gallery android:layout_height="fill_parent"
+				android:layout_width="fill_parent" android:id="@+id/SinglePlayerGallery"></Gallery>
 			<TextView android:layout_height="wrap_content"
 				android:layout_width="wrap_content" android:text=""
 				android:id="@+id/SinglePlayerGameMapName"></TextView>
@@ -42,8 +42,7 @@
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
 							android:text="@string/GameType"></TextView>
 						<Spinner android:layout_width="wrap_content"
-							android:layout_height="wrap_content" android:entries="@array/GameType"
-							android:id="@+id/SinglePlayerGameSpinnerType"></Spinner>
+							android:layout_height="wrap_content" android:id="@+id/SinglePlayerGameSpinnerType" android:entries="@array/GameType"></Spinner>
 					</LinearLayout>
 
 					<LinearLayout android:layout_width="wrap_content"
@@ -69,8 +68,7 @@
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
 							android:text="@string/EnemiesDifficulty"></TextView>
 						<Spinner android:layout_width="wrap_content"
-							android:layout_height="wrap_content" android:entries="@array/EnemiesDifficulty"
-							android:id="@+id/SinglePlayerGameSpinnerEnemiesDifficulty"></Spinner>
+							android:layout_height="wrap_content" android:id="@+id/SinglePlayerGameSpinnerEnemiesDifficulty" android:entries="@array/EnemiesDifficulty"></Spinner>
 
 					</LinearLayout>
 					

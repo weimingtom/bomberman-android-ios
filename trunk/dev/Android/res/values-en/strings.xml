@@ -145,7 +145,7 @@
 		<item>Dark</item>
 	</string-array>
 	
-	<string-array name="SinglePlayerTime">
+	<string-array name="Time">
 		<item>1</item>
 		<item>2</item>
 		<item>3</item>

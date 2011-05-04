@@ -38,7 +38,7 @@ public class Multiplayer extends Activity implements View.OnClickListener {
         
         setContentView(R.layout.multiplayer);
         
-		this.cancel = (Button)findViewById(R.id.MultiPlayerGameButtonCancel);
+		this.cancel = (Button)findViewById(R.id.MultiPlayerGameButtonBack);
 		this.cancel.setOnClickListener(this);
 		
 		this.connection = (Button)findViewById(R.id.MultiPlayerGameButtonConnection);
