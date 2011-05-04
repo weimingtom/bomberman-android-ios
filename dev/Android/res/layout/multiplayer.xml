@@ -60,7 +60,7 @@
 		android:id="@+id/relativeLayout3">
 		<Button android:layout_height="wrap_content"
 			android:layout_width="wrap_content" android:layout_alignParentLeft="true"
-			android:id="@+id/l" android:text="@string/Back"></Button>
+			android:text="@string/Back" android:id="@+id/MultiPlayerGameButtonBack"></Button>
 		<Button android:layout_height="wrap_content"
 			android:layout_width="wrap_content" android:layout_alignParentRight="true"
 			android:id="@+id/MultiPlayerGameButtonConnection" android:text="@string/Connection"></Button>

@@ -67,7 +67,7 @@ public class SinglePlayer extends Activity implements View.OnClickListener{
 			mapBitmap[i] = this.getFilesDir().getAbsolutePath()+"/maps/"+this.maps.get(i).getName()+"/"+this.maps.get(i).getName()+".png";
 		}
 
-		this.gallery = (Gallery) findViewById(R.id.galleryz);
+		this.gallery = (Gallery) findViewById(R.id.SinglePlayerGallery);
 		this.gallery.setAdapter(new ImageAdapter(getApplicationContext(), mapBitmap));
 		this.gallery.setOnItemClickListener(new OnItemClickListener() {
 
