@@ -2,8 +2,6 @@ package com.klob.Bomberklob.objects;
 
 import java.util.Hashtable;
 
-import com.klob.Bomberklob.resources.Point;
-
 public class BotPlayer extends Player {
 	
 	/**

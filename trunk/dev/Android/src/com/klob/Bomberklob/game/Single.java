@@ -52,11 +52,7 @@ public class Single extends Game {
 	public void restartGame() {
 
 		this.map.restart();
-		
-		/* Variables remises a vide */
-		for (int i = 1 ; i < this.players.length ; i++ ) {
-			this.players[i] = null;
-		}
+		this.players = new Player[this.players.length];
 		
 		/* Nouvelle initialisation de la partie */
 		initGame();
