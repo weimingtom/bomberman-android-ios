@@ -90,15 +90,19 @@ public class Engine {
 					Bomb bomb = new Bomb(player.getBombSelected(), ResourcesManager.getBombsAnimations().get(player.getBombSelected()), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, player);
 					
 					/* AJOUT DES ZONES DANGEREUSES POUR L'IA */
+					System.out.println("POINT : " + p.toString());
 					
 					/* CENTER */
 					zoneDangereuses.put(p,1);
 					
 					/* UP */
+					System.out.println("Haut : ");
 					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-						if ( (this.single.map.getBlocks()[p.x][p.y-k] == null) && (this.bombs.get(new Point(p.x, p.y-k)) != null) ) {
+						if ( (this.single.map.getBlocks()[p.x][p.y-k] == null) && (this.bombs.get(new Point(p.x, p.y-k)) == null) ) {
+							System.out.println("ALLO : " + (!this.single.map.getGrounds()[p.x][p.y-k].isFireWall()));
 							if ( !this.single.map.getGrounds()[p.x][p.y-k].isFireWall() ) {
 								zoneDangereuses.put(new Point(p.x, p.y-k),1);
+								System.out.println(p.toString());
 							}
 							else {
 								break;
@@ -110,10 +114,12 @@ public class Engine {
 					}
 
 					/* DOWN */
+					System.out.println("Bas : ");
 					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
 						if ( (this.single.map.getBlocks()[p.x][p.y+k] == null) && (this.bombs.get(new Point(p.x, p.y+k)) == null) ) {
 							if ( !this.single.map.getGrounds()[p.x][p.y+k].isFireWall() ) {
 								zoneDangereuses.put(new Point(p.x, p.y+k),1);
+								System.out.println(p.toString());
 							}
 							else {
 								break;
@@ -125,10 +131,12 @@ public class Engine {
 					}
 
 					/* LEFT */
+					System.out.println("Gauche : ");
 					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
 						if ( (this.single.map.getBlocks()[p.x-k][p.y] == null) && (this.bombs.get(new Point(p.x-k, p.y)) == null) ) {
-							if ( this.single.map.getGrounds()[p.x-k][p.y].isFireWall() ) {
+							if ( !this.single.map.getGrounds()[p.x-k][p.y].isFireWall() ) {
 								zoneDangereuses.put(new Point(p.x-k, p.y),1);
+								System.out.println(p.toString());
 							}
 							else {
 								break;
@@ -140,10 +148,12 @@ public class Engine {
 					}
 
 					/* RIGHT */
+					System.out.println("Droite : ");
 					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
 						if ( (this.single.map.getBlocks()[p.x+k][p.y] == null) && (this.bombs.get(new Point(p.x+k, p.y)) == null) ) {
 							if ( !this.single.map.getGrounds()[p.x+k][p.y].isFireWall() ) {
 								zoneDangereuses.put(new Point(p.x+k, p.y),1);
+								System.out.println(p.toString());
 							}
 							else {
 								break;
@@ -225,9 +235,11 @@ public class Engine {
 							/* IA */
 							if ( i != 0 && !players[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel()) ) {
 								/*Si le bot n'a pas d'objectif*/
-								if ( ((BotPlayer) players[i]).getObjectif() == null ) {
+								if ( players[i].getObjectif() == null ) {
 									/* Defensif (On est dans une zone dangereuse) */
-									if ( (zoneDangereuses.get(point1) == Integer.valueOf(1)) || (zoneDangereuses.get(point2) == Integer.valueOf(1)) || (zoneDangereuses.get(point3) == Integer.valueOf(1)) || (zoneDangereuses.get(point4) == Integer.valueOf(1))) {
+									System.out.println("Point Bot : " + point1.toString());
+									
+									if ( zoneDangereuses.get(point1) == Integer.valueOf(1) ) {
 										
 										/* FIXME FAIRE LA FONCTION DE RECHERCHE */
 										
@@ -239,8 +251,10 @@ public class Engine {
 											y = (int)(Math.random() * (14-1)) + 1;
 										} while ( this.single.map.getBlocks()[x][y] != null || (zoneDangereuses.get(new Point(x,y)) == Integer.valueOf(1)) );
 
+										x = x*ResourcesManager.getSize();
+										y = y*ResourcesManager.getSize();
 										
-										((BotPlayer) players[i]).setObjectif(new Point(x,y));
+										players[i].setObjectif(new Point(x,y));
 									}
 									/* Offensif */
 									else {
@@ -248,11 +262,11 @@ public class Engine {
 									}
 								}
 								else {
-									Point objectif = ((BotPlayer) players[i]).getObjectif();
+									Point objectif = players[i].getObjectif();
 									String animation = players[i].getCurrentAnimation();
 									
 									/* Si on a atteind l'objectif */
-									if ( point1.x == objectif.x && point1.y == objectif.y ) {
+									if ( point.x == objectif.x && point.y == objectif.y ) {
 										((BotPlayer) players[i]).setObjectif(null);
 										if ( animation.equals(PlayerAnimations.RIGHT.getLabel())) {
 											players[i].setCurrentAnimation(PlayerAnimations.STOP_RIGHT);
@@ -281,42 +295,42 @@ public class Engine {
 									}
 									
 									
-									if ( point1.x < objectif.x && point1.y < objectif.y ) {
+									if ( point.x < objectif.x && point.y < objectif.y ) {
 										if ( !animation.equals(PlayerAnimations.DOWN_RIGHT.getLabel())) {
 											players[i].setCurrentAnimation(PlayerAnimations.DOWN_RIGHT);
 										}										
 									}
-									else if ( point1.x > objectif.x && point1.y < objectif.y ) {
+									else if ( point.x > objectif.x && point.y < objectif.y ) {
 										if ( !animation.equals(PlayerAnimations.DOWN_LEFT.getLabel())) {
 											players[i].setCurrentAnimation(PlayerAnimations.DOWN_LEFT);
 										}										
 									}
-									else if ( point1.x > objectif.x && point1.y > objectif.y ) {
+									else if ( point.x > objectif.x && point.y > objectif.y ) {
 										if ( !animation.equals(PlayerAnimations.UP_LEFT.getLabel())) {
 											players[i].setCurrentAnimation(PlayerAnimations.UP_LEFT);
 										}										
 									}
-									else if ( point1.x < objectif.x && point1.y > objectif.y ) {
+									else if ( point.x < objectif.x && point.y > objectif.y ) {
 										if ( !animation.equals(PlayerAnimations.UP_RIGHT.getLabel())) {
 											players[i].setCurrentAnimation(PlayerAnimations.UP_RIGHT);
 										}										
 									}
-									else if ( point1.x < objectif.x ) {
+									else if ( point.x < objectif.x ) {
 										if ( !animation.equals(PlayerAnimations.RIGHT.getLabel())) {
 											players[i].setCurrentAnimation(PlayerAnimations.RIGHT);
 										}										
 									}
-									else if ( point1.x > objectif.x  ) {
+									else if ( point.x > objectif.x  ) {
 										if ( !animation.equals(PlayerAnimations.LEFT.getLabel())) {
 											players[i].setCurrentAnimation(PlayerAnimations.LEFT);
 										}										
 									}
-									else if ( point1.y > objectif.y ) {
+									else if ( point.y > objectif.y ) {
 										if ( !animation.equals(PlayerAnimations.UP.getLabel())) {
 											players[i].setCurrentAnimation(PlayerAnimations.UP);
 										}										
 									}
-									else if ( point1.y < objectif.y ) {
+									else if ( point.y < objectif.y ) {
 										if ( !animation.equals(PlayerAnimations.DOWN.getLabel())) {
 											players[i].setCurrentAnimation(PlayerAnimations.DOWN);
 										}										
@@ -389,14 +403,21 @@ public class Engine {
 			upRight(player);
 		}
 	}
+	
 
 	private void moveUp(Player player) {
 
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < (ResourcesManager.getSize()/4) ; i++ ) {
+		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
 			if ( this.y > this.size ) {
+				
+				if (player.getObjectif() != null) {
+					if (player.getObjectif().y == this.y) {
+						break;
+					}
+				}
 
 				this.nextTile = ResourcesManager.coToTile(this.x, this.y-1);
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
@@ -477,14 +498,21 @@ public class Engine {
 		}
 		player.setPosition(new Point(this.x, this.y));		
 	}
+	
 
 	private void moveDown(Player player) {
 
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < (ResourcesManager.getSize()/4) ; i++ ) {
+		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
 			if ( this.y < (this.size*(this.single.map.getBlocks()[0].length-1)) ) {
+				
+				if (player.getObjectif() != null) {
+					if (player.getObjectif().y == this.y) {
+						break;
+					}
+				}
 
 				this.nextTile = ResourcesManager.coToTile(this.x, this.y+this.size);
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y+this.size-1);
@@ -565,14 +593,21 @@ public class Engine {
 		}		
 		player.setPosition(new Point(this.x, this.y));		
 	}
+	
 
 	private void moveRight(Player player) {
 
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < (ResourcesManager.getSize()/4) ; i++ ) {
+		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
 			if ( this.x < (this.size*(this.single.map.getBlocks().length-1)) ) {
+				
+				if (player.getObjectif() != null) {
+					if (player.getObjectif().x == this.x) {
+						break;
+					}
+				}
 
 				this.nextTile = ResourcesManager.coToTile(this.x+this.size, this.y);
 				this.currentTile = ResourcesManager.coToTile(this.x+this.size-1, this.y);
@@ -653,14 +688,21 @@ public class Engine {
 		}		
 		player.setPosition(new Point(this.x, this.y));
 	}
+	
 
 	private void moveLeft(Player player) {
 
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
 
-		for (int i = 0 ; i < (ResourcesManager.getSize()/4) ; i++ ) {
+		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
 			if ( this.x > this.size ) {
+				
+				if (player.getObjectif() != null) {
+					if (player.getObjectif().x == this.x) {
+						break;
+					}
+				}
 
 				this.nextTile = ResourcesManager.coToTile(this.x-1, this.y);
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
@@ -741,6 +783,7 @@ public class Engine {
 		}		
 		player.setPosition(new Point(this.x, this.y));			
 	}
+	
 
 	private void upRight(Player player) {		
 		moveRight(player);

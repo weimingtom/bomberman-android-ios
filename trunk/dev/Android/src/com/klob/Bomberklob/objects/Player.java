@@ -9,6 +9,7 @@ import com.klob.Bomberklob.objects.exceptions.BombPowerException;
 import com.klob.Bomberklob.objects.exceptions.PlayersSpeedException;
 import com.klob.Bomberklob.objects.exceptions.ShieldException;
 import com.klob.Bomberklob.objects.exceptions.TimeBombException;
+import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
 public abstract class Player extends Objects {
@@ -30,6 +31,7 @@ public abstract class Player extends Objects {
 	protected int bombNumber;
 	protected int immortal;	
 	
+	protected Point objectif;
 	
 	
 	/* Constructeurs ------------------------------------------------------- */
@@ -43,6 +45,7 @@ public abstract class Player extends Objects {
 		this.life = life;
 		this.bombNumber = bombNumber;
 		this.immortal = immortal;
+		this.objectif = null;
 	}
 	
 	public Player(Player player) {
@@ -54,9 +57,15 @@ public abstract class Player extends Objects {
 		this.shield = player.shield;
 		this.bombNumber = player.bombNumber;
 		this.immortal = player.immortal;
+		this.objectif = player.objectif;
 	}
 	
 	/* Setters ------------------------------------------------------------- */
+
+
+	public void setObjectif(Point objectif) {
+		this.objectif = objectif;
+	}
 	
 	public void setSpeed(int speed) throws PlayersSpeedException {
 		if ( speed > 0 ) {
@@ -128,7 +137,11 @@ public abstract class Player extends Objects {
 	}
 	
 	/* Getters ------------------------------------------------------------- */
-
+	
+	public Point getObjectif() {
+		return objectif;
+	}
+	
 	public int getPowerExplosion() {
 		return this.powerExplosion;
 	}
