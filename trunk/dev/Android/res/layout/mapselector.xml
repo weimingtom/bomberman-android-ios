@@ -11,14 +11,13 @@
 			<TextView android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:id="@+id/textView5"
 				android:textSize="20dip" android:textColor="@color/White"
-				android:layout_centerInParent="true" android:text="@string/MapSelectorMenu"></TextView>
+				android:layout_centerInParent="true" android:text="@string/CreatingLevels"></TextView>
 			<Button android:id="@+id/MapSelectorButtonCancel"
-				android:layout_height="wrap_content" android:text="@string/ButtonCancel"
-				android:layout_alignParentLeft="true" android:layout_width="wrap_content"
-				android:gravity="center_vertical" android:layout_centerVertical="true"></Button>
+				android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_width="wrap_content"
+				android:gravity="center_vertical" android:layout_centerVertical="true" android:text="@string/Back"></Button>
 
 			<Button android:layout_width="wrap_content" android:id="@+id/MapSelectorButtonLoad"
-				android:text="@string/MapSelectorButtonLoad" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_centerVertical="true"></Button>
+				android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_centerVertical="true" android:text="@string/Load"></Button>
 
 		</RelativeLayout>
 	</LinearLayout>
@@ -32,7 +31,7 @@
 			android:singleLine="true"></EditText>
 		<Button android:layout_alignParentRight="true"
 			android:id="@+id/MapSelectorButtonValidate" android:layout_height="wrap_content"
-			android:text="@string/ButtonValidate" android:layout_width="wrap_content"
-			android:layout_centerVertical="true"></Button>
+			android:layout_width="wrap_content"
+			android:layout_centerVertical="true" android:text="@string/Ok"></Button>
 	</LinearLayout>
 </RelativeLayout>

@@ -6,10 +6,10 @@
 	android:background="@color/Gray">
 
 
-	<TextView android:text="@string/TextUserName" android:id="@+id/textUser"
+	<TextView android:id="@+id/textUser"
 		android:layout_width="wrap_content" android:layout_marginTop="80dip"
 		android:layout_height="wrap_content" android:layout_gravity="center_vertical"
-		android:layout_below="@+id/relativeLayout1">
+		android:layout_below="@+id/relativeLayout1" android:text="@string/UserName">
 	</TextView>
 
 
@@ -21,10 +21,10 @@
 
 
 
-	<TextView android:text="@string/TextUserPassword" android:id="@+id/textPassword"
+	<TextView android:id="@+id/textPassword"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
 		android:layout_gravity="center_vertical" android:layout_below="@+id/editUserName"
-		android:layout_centerVertical="true" android:layout_marginTop="50dip">
+		android:layout_centerVertical="true" android:layout_marginTop="50dip" android:text="@string/Password">
 	</TextView>
 
 	<EditText android:id="@+id/editPassword" android:password="true"
@@ -39,16 +39,16 @@
 
 	<Button android:id="@+id/buttonCancel" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:layout_gravity="left"
-		android:text="@string/ButtonCancel" android:textSize="13dip"
+		android:textSize="13dip"
 		android:padding="13dip" android:layout_alignParentBottom="true"
-		android:layout_alignParentLeft="true" />
+		android:layout_alignParentLeft="true" android:text="@string/Back"/>
 
 
 	<Button android:id="@+id/buttonValid" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:layout_gravity="left"
-		android:text="@string/ButtonValidate" android:textSize="13dip"
+		android:textSize="13dip"
 		android:padding="13dip" android:layout_alignParentBottom="true"
-		android:layout_alignParentRight="true" />
+		android:layout_alignParentRight="true" android:text="@string/Ok"/>
 
 
 </RelativeLayout>

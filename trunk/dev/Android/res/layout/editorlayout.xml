@@ -3,9 +3,9 @@
 	xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/MapEditorRelativeLayoutGlobal">
     <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:id="@+id/MapEditorLinearLayoutEditor">
         <RelativeLayout android:background="@color/White" android:gravity="center_vertical" android:id="@+id/MapEditorRelativeLayoutToolsBar" android:layout_width="fill_parent" android:layout_height="wrap_content">
-            <Button android:layout_height="wrap_content" android:id="@+id/MapEditorButtonMenu" android:layout_width="wrap_content" android:text="@string/ButtonMenu"></Button>
+            <Button android:layout_height="wrap_content" android:id="@+id/MapEditorButtonMenu" android:layout_width="wrap_content" android:text="@string/Menu"></Button>
             <FrameLayout android:layout_centerInParent="true" android:id="@+id/MapEditorFrameLayoutPlayersGallery" android:layout_width="wrap_content" android:layout_height="wrap_content"></FrameLayout>
-            <ToggleButton android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="ToggleButton" android:textOff="@string/MapEditorToggleButtonOff" android:textOn="@string/MapEditorToggleButtonOn" android:layout_alignParentRight="true" android:id="@+id/MapEditorToggleButton"></ToggleButton>
+            <ToggleButton android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="ToggleButton" android:textOff="@string/Grounds" android:textOn="@string/Blocks" android:layout_alignParentRight="true" android:id="@+id/MapEditorToggleButton"></ToggleButton>
         </RelativeLayout>
         <LinearLayout android:layout_width="fill_parent" android:id="@+id/linearLayout1" android:layout_height="fill_parent" android:orientation="horizontal">
             <LinearLayout android:layout_width="wrap_content" android:id="@+id/MapEditorLinearLayoutEditorController" android:layout_height="fill_parent" android:background="@color/Gray" android:gravity="center">
@@ -18,10 +18,10 @@
     </LinearLayout>
 	<LinearLayout android:layout_height="fill_parent" android:layout_width="fill_parent" android:gravity="center_vertical|center_horizontal" android:background="@color/Black" android:id="@+id/MapEditorLinearLayoutMenu">
 		<LinearLayout android:id="@+id/linearLayout1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center_vertical|center_horizontal">
-			<Button android:layout_height="wrap_content" android:id="@+id/MapEditorMenuResume" android:layout_width="wrap_content" android:text="@string/MapEditorMenuResume"></Button>
-			<Button android:layout_height="wrap_content" android:id="@+id/MapEditorMenuSave" android:layout_width="wrap_content" android:text="@string/MapEditorMenuSave"></Button>
-			<Button android:layout_height="wrap_content" android:id="@+id/MapEditorMenuReset" android:layout_width="wrap_content" android:text="@string/MapEditorMenuReset"></Button>
-			<Button android:layout_height="wrap_content" android:id="@+id/MapEditorMenuQuit" android:layout_width="wrap_content" android:text="@string/MapEditorMenuQuit"></Button>
+			<Button android:layout_height="wrap_content" android:id="@+id/MapEditorMenuResume" android:layout_width="wrap_content" android:text="@string/Resume"></Button>
+			<Button android:layout_height="wrap_content" android:id="@+id/MapEditorMenuSave" android:layout_width="wrap_content" android:text="@string/Save"></Button>
+			<Button android:layout_height="wrap_content" android:id="@+id/MapEditorMenuReset" android:layout_width="wrap_content" android:text="@string/Reset"></Button>
+			<Button android:layout_height="wrap_content" android:id="@+id/MapEditorMenuQuit" android:layout_width="wrap_content" android:text="@string/Quit"></Button>
 		</LinearLayout>
 	</LinearLayout>
 </RelativeLayout>

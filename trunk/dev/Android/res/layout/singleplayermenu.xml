@@ -8,11 +8,11 @@
 		<RelativeLayout android:id="@+id/relativeLayout3"
 			android:layout_width="fill_parent" android:background="@drawable/menutoolbarbackgroundxml" android:layout_height="50dip">
 			<Button android:layout_width="wrap_content"
-				android:id="@+id/SinglePlayerGameButtonCancel" android:text="@string/ButtonCancel"
+				android:id="@+id/SinglePlayerGameButtonCancel" android:text="@string/Back"
 				android:layout_height="wrap_content" android:layout_centerVertical="true"></Button>
-			<TextView android:layout_width="wrap_content" android:text="@string/SinglePlayerMenu" android:layout_height="wrap_content" android:id="@+id/textView5" android:textSize="20dip" android:textColor="@color/White" android:layout_centerInParent="true"></TextView>
+			<TextView android:layout_width="wrap_content" android:text="@string/SinglePlayer" android:layout_height="wrap_content" android:id="@+id/textView5" android:textSize="20dip" android:textColor="@color/White" android:layout_centerInParent="true"></TextView>
 			<Button android:layout_width="wrap_content" android:id="@+id/SinglePlayerGameButtonGo"
-				android:text="@string/ButtonCreate" android:layout_height="wrap_content"
+				android:text="@string/Create" android:layout_height="wrap_content"
 				android:layout_alignParentRight="true"
 				android:layout_centerInParent="true"></Button>
 		</RelativeLayout>
@@ -40,9 +40,9 @@
 
 						<TextView android:id="@+id/textView2"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
-							android:text="@string/SinglePlayerGameType"></TextView>
+							android:text="@string/GameType"></TextView>
 						<Spinner android:layout_width="wrap_content"
-							android:layout_height="wrap_content" android:entries="@array/SinglePlayerGameType"
+							android:layout_height="wrap_content" android:entries="@array/GameType"
 							android:id="@+id/SinglePlayerGameSpinnerType"></Spinner>
 					</LinearLayout>
 
@@ -52,9 +52,9 @@
 
 						<TextView android:id="@+id/textView3"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
-							android:text="@string/SinglePlayerGameEnemiesNumber"></TextView>
+							android:text="@string/EnemiesNumber"></TextView>
 						<Spinner android:layout_width="wrap_content"
-							android:layout_height="wrap_content" android:entries="@array/SinglePlayerEnemiesNumber"
+							android:layout_height="wrap_content" android:entries="@array/EnemiesNumber"
 							android:id="@+id/SinglePlayerGameSpinnerEnemiesNumber"></Spinner>
 					</LinearLayout>
 
@@ -67,9 +67,9 @@
 
 						<TextView android:id="@+id/textView4"
 							android:layout_width="wrap_content" android:layout_height="wrap_content"
-							android:text="@string/SinglePlayerGameEnemiesDifficulty"></TextView>
+							android:text="@string/EnemiesDifficulty"></TextView>
 						<Spinner android:layout_width="wrap_content"
-							android:layout_height="wrap_content" android:entries="@array/SinglePlayerDifficulty"
+							android:layout_height="wrap_content" android:entries="@array/EnemiesDifficulty"
 							android:id="@+id/SinglePlayerGameSpinnerEnemiesDifficulty"></Spinner>
 
 					</LinearLayout>
@@ -80,9 +80,9 @@
 						
 						<TextView android:layout_width="wrap_content"
 							android:layout_height="wrap_content" android:id="@+id/textView1"
-							android:gravity="center_horizontal" android:text="@string/SinglePlayerGameTime"></TextView>
+							android:gravity="center_horizontal" android:text="@string/Time"></TextView>
 						<Spinner android:layout_width="wrap_content"
-							android:layout_height="wrap_content" android:entries="@array/SinglePlayerTime"
+							android:layout_height="wrap_content" android:entries="@array/Time"
 							android:id="@+id/SinglePlayerGameSpinnerTime"></Spinner>
 							
 					</LinearLayout>

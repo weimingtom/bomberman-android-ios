@@ -6,16 +6,15 @@
 	<LinearLayout android:layout_height="wrap_content"
 		android:layout_width="fill_parent" android:id="@+id/linearLayout6">
 		<RelativeLayout android:id="@+id/relativeLayout3"
-			android:layout_width="fill_parent" android:background="@drawable/menutoolbarbackgroundxml"
-			android:layout_height="50dip">
+			android:layout_width="fill_parent" android:layout_height="50dip" android:background="@drawable/menutoolbarbackgroundxml">
 			
 		<Button android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:id="@+id/HomeButtonOptions"
-			android:text="@string/HomeButtonOptions"
+			android:text="@string/Options"
 			android:layout_alignParentRight="true" android:layout_centerVertical="true"></Button>
 		<Button android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:id="@+id/HomeButtonHelp"
-			android:text="@string/HomeButtonHelp" android:layout_centerVertical="true"></Button>
+			android:text="@string/Help" android:layout_centerVertical="true"></Button>
 		</RelativeLayout>
 	</LinearLayout>
 
@@ -24,13 +23,13 @@
 		android:gravity="center_horizontal" android:layout_centerInParent="true"
 		android:layout_width="wrap_content">
 		<Button android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="@string/HomeButtonSinglePlayer"
+			android:layout_height="wrap_content" android:text="@string/SinglePlayer"
 			android:id="@+id/HomeButtonSolo"></Button>
 		<Button android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="@string/HomeButtonMultiPlayer"
+			android:layout_height="wrap_content" android:text="@string/MultiPlayer"
 			android:id="@+id/HomeButtonMulti"></Button>
 		<Button android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="@string/HomeButtonCreatingLevel"
+			android:layout_height="wrap_content" android:text="@string/CreatingLevels"
 			android:id="@+id/HomeButtonCreatingLevel"></Button>
 	</LinearLayout>
 	<RelativeLayout android:layout_height="wrap_content"
@@ -41,8 +40,8 @@
 			android:layout_centerHorizontal="true">
 			<Spinner android:layout_width="wrap_content"
 				android:layout_weight="1" android:layout_height="wrap_content"
-				android:prompt="@string/HommeSpinnerChooseUserText" android:id="@+id/accounts"
-				android:layout_gravity="center_horizontal"></Spinner>
+				android:id="@+id/accounts"
+				android:layout_gravity="center_horizontal" android:prompt="@string/ChooseUserAccount"></Spinner>
 			<ImageButton android:background="@drawable/plus"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				style="@android:style/Widget.Button.Small" android:id="@+id/addAccount"

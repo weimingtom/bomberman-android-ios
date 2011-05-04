@@ -28,7 +28,7 @@
 				android:gravity="center_vertical|center_horizontal">
 				<TextView android:layout_gravity="center_vertical"
 					android:layout_height="wrap_content" android:id="@+id/textView1"
-					android:layout_width="wrap_content" android:text="@string/TextUserName"></TextView>
+					android:layout_width="wrap_content" android:text="@string/UserName"></TextView>
 					
 				<EditText android:layout_width="140dip" android:maxWidth="140dip"
 					android:id="@+id/NewAccountOnLineEditTextName"
@@ -39,7 +39,7 @@
 				android:gravity="center_vertical|center_horizontal">
 				<TextView android:layout_gravity="center_vertical"
 					android:layout_height="wrap_content" android:id="@+id/textView1"
-					android:layout_width="wrap_content" android:text="@string/TextUserPassword"></TextView>
+					android:layout_width="wrap_content" android:text="@string/Password"></TextView>
 					
 				<EditText android:layout_width="140dip" android:maxWidth="140dip"
 					android:password="true" android:id="@+id/NewAccountOnLineEditTextPassword1"
@@ -51,7 +51,7 @@
 				android:gravity="center_vertical|center_horizontal">
 				<TextView android:layout_gravity="center_vertical"
 					android:layout_height="wrap_content" android:id="@+id/textView1"
-					android:layout_width="wrap_content" android:text="@string/NewAccountOnlineTextVerification"></TextView>
+					android:layout_width="wrap_content" android:text="@string/Verification"></TextView>
 					
 				<EditText android:layout_width="140dip" android:maxWidth="140dip"
 					android:password="true" android:id="@+id/NewAccountOnLineEditTextPassword2"
@@ -59,11 +59,10 @@
 			</TableRow>
 		</TableLayout>
 		<CheckBox android:layout_height="wrap_content"
-			android:layout_width="wrap_content" android:id="@+id/NewAccountOnLineCheckBoxConnection"
-			android:text="@string/CheckBoxConnectionAuto"></CheckBox>
+			android:layout_width="wrap_content" android:id="@+id/NewAccountOnLineCheckBoxConnection" android:text="@string/Autologin"></CheckBox>
 		<CheckBox android:layout_height="wrap_content"
 			android:layout_width="wrap_content" android:id="@+id/NewAccountOnLineCheckBoxPassword"
-			android:text="@string/CheckBoxRememberPassword"></CheckBox>
+			android:text="@string/RememberPassword"></CheckBox>
 
 	</LinearLayout>
 
@@ -72,10 +71,10 @@
 		android:id="@+id/relativeLayout3">
 		<Button android:layout_height="wrap_content"
 			android:layout_width="wrap_content" android:layout_alignParentLeft="true"
-			android:id="@+id/NewAccountOnLineButtonCancel" android:text="@string/ButtonCancel"></Button>
+			android:id="@+id/NewAccountOnLineButtonCancel" android:text="@string/Back"></Button>
 		<Button android:layout_height="wrap_content"
 			android:layout_width="wrap_content" android:layout_alignParentRight="true"
-			android:id="@+id/NewAccountOnLineButtonConnection" android:text="@string/ButtonConnection"></Button>
+			android:id="@+id/NewAccountOnLineButtonConnection" android:text="@string/Connection"></Button>
 	</RelativeLayout>
 
 </RelativeLayout>
