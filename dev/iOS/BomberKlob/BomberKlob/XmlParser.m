@@ -136,6 +136,31 @@
 		else if([elementName isEqualToString:@"animation"]){
 			currentString = [attributeDict valueForKey:@"name"];
 			currentCanLoop = [[attributeDict valueForKey:@"canLoop"] intValue];
+			currentSound = [attributeDict valueForKey:@"sound"];
+			
+			NSError *error;
+			NSString *pathMenuSound = [[NSBundle mainBundle] pathForResource:currentSound ofType:@"wav"];
+			if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSound]) {
+				if ([currentString isEqual:@"animate"]) {
+					AVAudioPlayer * sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:pathMenuSound] error:&error];
+					if (!sound) 
+						NSLog(@"Error: %@", [error localizedDescription]);
+										[sound prepareToPlay];
+					[sound setNumberOfLoops:0];
+					sound.volume = 1;
+					((AnimationSequence *)[((Objects *)[objectsBombs objectForKey:currentProperty]).animations objectForKey:currentProperty]).sound = sound;
+				}
+				else if ([currentString isEqual:@"destroy"]) {
+					AVAudioPlayer * sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:pathMenuSound] error:&error];
+					if (!sound) 
+						NSLog(@"Error: %@", [error localizedDescription]);
+					[sound prepareToPlay];
+					[sound setNumberOfLoops:0];
+					sound.volume = 1;
+					((AnimationSequence *)[((Objects *)[objectsBombs objectForKey:currentProperty]).destroyAnimations objectForKey:currentProperty]).sound = sound;
+				}
+			}
+
 		}
 		else if ([elementName isEqualToString:@"framerect"]) {
 			Bomb * currentObject = [objectsBombs objectForKey:currentProperty];
@@ -205,6 +230,21 @@
 		else if([elementName isEqualToString:@"animation"]) {
 			currentString = [attributeDict valueForKey:@"name"];
 			currentCanLoop = [[attributeDict valueForKey:@"canLoop"] intValue];
+			currentSound = [attributeDict valueForKey:@"sound"];
+			
+			NSError *error;
+			NSString *pathMenuSound = [[NSBundle mainBundle] pathForResource:currentSound ofType:@"wav"];
+			if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSound]) {
+				if ([currentString isEqual:@"destroy"] && ![currentSound isEqualToString:@""]) {
+					AVAudioPlayer * sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:pathMenuSound] error:&error];
+					if (!sound) 
+						NSLog(@"Error: %@", [error localizedDescription]);
+					[sound prepareToPlay];
+					[sound setNumberOfLoops:0];
+					sound.volume = 1;
+					((AnimationSequence *)[((Objects *)[objects objectForKey:currentProperty]).destroyAnimations objectForKey:currentProperty]).sound = sound;
+				}
+			}
 		}
 		else if ([elementName isEqualToString:@"framerect"]) {
 			Objects * currentObject = [objects objectForKey:currentProperty];

@@ -11,7 +11,7 @@
 
 @implementation AnimationSequence
 
-@synthesize sequences, canLoop, name, delayNextFrame;
+@synthesize sequences, canLoop, name, delayNextFrame,sound;
 
 - (id) init{
 	self = [super init];
@@ -46,6 +46,12 @@
 	NSString * desc = [NSString stringWithFormat:@"Sequence Name : %@ \n canLoop : %d  \n Sequence : %@",name, canLoop, sequences];
 	return desc;
 }
+
+- (void) playSound {
+	[sound play];
+}
+
+
 
 
 @end

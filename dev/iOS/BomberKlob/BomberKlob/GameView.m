@@ -94,6 +94,8 @@
 }
 
 -(void) startTimerMovementThread {
+	
+	while (![controller.globalController.engine.game isStartSoundFinished]) {}
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 	[[NSTimer scheduledTimerWithTimeInterval: 0.02 target: self selector: @selector(timerMovement:) userInfo:nil repeats: YES] retain];

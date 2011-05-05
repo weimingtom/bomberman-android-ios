@@ -8,13 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@class Map, Player;
+@class Map, Player, AVAudioPlayer;
 
 
 @interface Game : NSObject {
 	NSMutableArray * players;
 	NSMutableDictionary * bombsPlanted;
 	Map * map;
+	AVAudioPlayer *soundStart;
+	AVAudioPlayer *soundMode;
+
 	
     
 }
@@ -30,5 +33,7 @@
 - (void) endGame;
 - (void) draw:(CGContextRef)context;
 - (void) update;
+- (void) loadSounds;
+- (BOOL) isStartSoundFinished;
 
 @end
