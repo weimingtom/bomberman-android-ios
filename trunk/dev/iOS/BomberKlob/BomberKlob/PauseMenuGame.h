@@ -25,7 +25,6 @@
 - (void)dealloc;
 
 - (void)resumeAction;
-- (void)saveAction;
 - (void)quitAction;
 
 @end

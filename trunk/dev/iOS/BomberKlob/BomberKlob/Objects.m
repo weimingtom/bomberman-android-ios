@@ -31,21 +31,6 @@
 }
 
 
-- (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition animations:(NSDictionary *)anAnimations {
-	self = [super init];
-	
-	if (self) {
-        self.imageName = anImageName;
-        self.position = aPosition;
-		ressource = [RessourceManager sharedRessource];
-		self.animations = anAnimations;
-		self.currentFrame = 0;
-	}
-	
-	return self;
-}
-
-
 - (void)dealloc {
     [imageName release];
     [position release];
@@ -179,7 +164,8 @@
 
 
 - (id)copyWithZone:(NSZone *)zone {
-    Objects *copy = [[Objects alloc] init];
+    Objects *copy = [[[self class] alloc] init];
+    
     NSString *imageNameCopy = [[NSString alloc] initWithString:imageName];
     Position *positionCopy = [[Position alloc] initWithPosition:position];
     NSMutableDictionary *animationCopy = [[NSMutableDictionary alloc] initWithDictionary:animations];

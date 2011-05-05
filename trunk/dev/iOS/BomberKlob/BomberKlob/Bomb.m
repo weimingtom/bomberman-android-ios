@@ -116,30 +116,18 @@
 	[(AnimationSequence *)[destroyAnimations objectForKey:imageName] playSound];
 }
 
-- (Bomb *)copy{
-	Bomb * bombCopy = [[Bomb alloc] init];
-	bombCopy.ressource = ressource;
-    bombCopy.imageName = [[NSString alloc] initWithString:imageName];
-	bombCopy.hit = hit;
-	bombCopy.level = level;
-	bombCopy.fireWall = fireWall;
-	bombCopy.damage = damage;
-	bombCopy.position = [[Position alloc] initWithPosition:position];
-	
-	bombCopy.animations = [[NSMutableDictionary alloc] initWithDictionary:animations];
-	bombCopy.destroyAnimations = [[NSMutableDictionary alloc] initWithDictionary:destroyAnimations];
-	bombCopy.idle = idle;
-	
-	bombCopy.currentAnimation = [[NSString alloc] initWithString:currentAnimation];
-	bombCopy.currentFrame = currentFrame;
-	bombCopy.waitDelay = waitDelay;
-	bombCopy.delay = delay;
-	
-	bombCopy.power = power;
-	bombCopy.type = [[NSMutableString alloc] initWithString:type];
-	bombCopy.explode = explode;
-	
-	return bombCopy;
+- (id)copyWithZone:(NSZone *)zone {
+    Bomb *copy = [super copyWithZone:zone];
+    
+    NSString *typeCopy = [[NSString alloc] initWithString:type];
+    
+    copy.power = power;
+	copy.type = typeCopy;
+	copy.explode = explode;
+    
+    [typeCopy release];
+    
+    return copy;
 }
 
 @end

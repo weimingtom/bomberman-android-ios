@@ -18,7 +18,17 @@
     if (self) {
         
     }
+    
     return self;
+}
+
+
+- (id)copyWithZone:(NSZone *)zone {
+    Destructible *copy = [super copyWithZone:zone];
+    
+    copy.life = life;
+    
+    return copy;
 }
 
 @end

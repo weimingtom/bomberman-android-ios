@@ -19,6 +19,6 @@
 @property (nonatomic,retain) GlobalGameViewControllerSingle * globalController;
 
 
-- (id) initWithFrame:(CGRect)dimensionValue Engine:(Engine *) engineValue;
+- (id) initWithFrame:(CGRect)dimensionValue Controller:(GlobalGameViewControllerSingle *)controllerValue;
 
 @end

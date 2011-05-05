@@ -38,7 +38,7 @@
 }
 
 
-- (void) addImageSequence:(CGImageRef *) imageValue{
+- (void) addImageSequence:(UIImage *) imageValue{
 	[sequences addObject:imageValue];
 }
 
@@ -50,8 +50,5 @@
 - (void) playSound {
 	[sound play];
 }
-
-
-
 
 @end

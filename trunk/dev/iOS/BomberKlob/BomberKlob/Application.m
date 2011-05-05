@@ -169,8 +169,8 @@
 
 
 - (void)playSoundMenu {
-    if (system.volume > 0 && !system.mute)
-        [self.playerMenu play];
+//    if (system.volume > 0 && !system.mute)
+//        [self.playerMenu play];
 }
 
 

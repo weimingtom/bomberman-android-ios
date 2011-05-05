@@ -49,14 +49,6 @@
 		18C839D613410263001D5747 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C839D513410263001D5747 /* main.m */; };
 		18C839D913410263001D5747 /* BomberKlobAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C839D813410263001D5747 /* BomberKlobAppDelegate.m */; };
 		18F03ED5136C3C4D0030496F /* objects.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F03ED4136C3C4D0030496F /* objects.png */; };
-		9915456A1372933B007CE837 /* back.wav in Resources */ = {isa = PBXBuildFile; fileRef = 991545621372933B007CE837 /* back.wav */; };
-		9915456B1372933B007CE837 /* battle_mode.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 991545631372933B007CE837 /* battle_mode.mp3 */; };
-		9915456C1372933B007CE837 /* battle_start.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 991545641372933B007CE837 /* battle_start.mp3 */; };
-		9915456D1372933B007CE837 /* bombplanted.wav in Resources */ = {isa = PBXBuildFile; fileRef = 991545651372933B007CE837 /* bombplanted.wav */; };
-		9915456E1372933B007CE837 /* button.wav in Resources */ = {isa = PBXBuildFile; fileRef = 991545661372933B007CE837 /* button.wav */; };
-		9915456F1372933B007CE837 /* destroy1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 991545671372933B007CE837 /* destroy1.wav */; };
-		991545701372933B007CE837 /* explosion1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 991545681372933B007CE837 /* explosion1.wav */; };
-		991545711372933B007CE837 /* menu.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 991545691372933B007CE837 /* menu.m4a */; };
 		99225ADB135471C7008B95AA /* players.png in Resources */ = {isa = PBXBuildFile; fileRef = 99225ADA135471C7008B95AA /* players.png */; };
 		99225ADD135471EC008B95AA /* space.png in Resources */ = {isa = PBXBuildFile; fileRef = 99225ADC135471EC008B95AA /* space.png */; };
 		99240527135337D700011965 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 99240526135337D700011965 /* Application.m */; };
@@ -212,14 +204,6 @@
 		18C839D513410263001D5747 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18C839D813410263001D5747 /* BomberKlobAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BomberKlobAppDelegate.m; sourceTree = "<group>"; };
 		18F03ED4136C3C4D0030496F /* objects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = objects.png; sourceTree = "<group>"; };
-		991545621372933B007CE837 /* back.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = back.wav; sourceTree = "<group>"; };
-		991545631372933B007CE837 /* battle_mode.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = battle_mode.mp3; sourceTree = "<group>"; };
-		991545641372933B007CE837 /* battle_start.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = battle_start.mp3; sourceTree = "<group>"; };
-		991545651372933B007CE837 /* bombplanted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bombplanted.wav; sourceTree = "<group>"; };
-		991545661372933B007CE837 /* button.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = button.wav; sourceTree = "<group>"; };
-		991545671372933B007CE837 /* destroy1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = destroy1.wav; sourceTree = "<group>"; };
-		991545681372933B007CE837 /* explosion1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion1.wav; sourceTree = "<group>"; };
-		991545691372933B007CE837 /* menu.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = menu.m4a; sourceTree = "<group>"; };
 		99225ADA135471C7008B95AA /* players.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = players.png; sourceTree = "<group>"; };
 		99225ADC135471EC008B95AA /* space.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = space.png; sourceTree = "<group>"; };
 		992405221353379700011965 /* DBMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMap.h; sourceTree = "<group>"; };
@@ -497,7 +481,6 @@
 		18C839CE13410263001D5747 /* BomberKlob */ = {
 			isa = PBXGroup;
 			children = (
-				991545611372933A007CE837 /* Sounds */,
 				18020577136E152500E4F8CB /* GenericMenu */,
 				99433975134C87AE00970231 /* Body */,
 				99433974134C877000970231 /* Object */,
@@ -530,21 +513,6 @@
 				18C839D513410263001D5747 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		991545611372933A007CE837 /* Sounds */ = {
-			isa = PBXGroup;
-			children = (
-				991545621372933B007CE837 /* back.wav */,
-				991545631372933B007CE837 /* battle_mode.mp3 */,
-				991545641372933B007CE837 /* battle_start.mp3 */,
-				991545651372933B007CE837 /* bombplanted.wav */,
-				991545661372933B007CE837 /* button.wav */,
-				991545671372933B007CE837 /* destroy1.wav */,
-				991545681372933B007CE837 /* explosion1.wav */,
-				991545691372933B007CE837 /* menu.m4a */,
-			);
-			path = Sounds;
 			sourceTree = "<group>";
 		};
 		99225AE613547785008B95AA /* Editor */ = {
@@ -600,6 +568,8 @@
 		99433974134C877000970231 /* Object */ = {
 			isa = PBXGroup;
 			children = (
+				99433936134C876200970231 /* FrameInfo.h */,
+				99433937134C876200970231 /* FrameInfo.m */,
 				99433928134C876200970231 /* AnimationSequence.h */,
 				99433929134C876200970231 /* AnimationSequence.m */,
 				9943392A134C876200970231 /* Bomb.h */,
@@ -608,8 +578,6 @@
 				99433951134C876200970231 /* Player.m */,
 				99433930134C876200970231 /* Destructible.h */,
 				99433931134C876200970231 /* Destructible.m */,
-				99433936134C876200970231 /* FrameInfo.h */,
-				99433937134C876200970231 /* FrameInfo.m */,
 				9943394E134C876200970231 /* Objects.h */,
 				9943394F134C876200970231 /* Objects.m */,
 				99433958134C876200970231 /* Undestructible.h */,
@@ -795,14 +763,6 @@
 				996F3386136ED892008204DA /* ready.png in Resources */,
 				996F3387136ED892008204DA /* refresh.png in Resources */,
 				996F3388136ED892008204DA /* winner.png in Resources */,
-				9915456A1372933B007CE837 /* back.wav in Resources */,
-				9915456B1372933B007CE837 /* battle_mode.mp3 in Resources */,
-				9915456C1372933B007CE837 /* battle_start.mp3 in Resources */,
-				9915456D1372933B007CE837 /* bombplanted.wav in Resources */,
-				9915456E1372933B007CE837 /* button.wav in Resources */,
-				9915456F1372933B007CE837 /* destroy1.wav in Resources */,
-				991545701372933B007CE837 /* explosion1.wav in Resources */,
-				991545711372933B007CE837 /* menu.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

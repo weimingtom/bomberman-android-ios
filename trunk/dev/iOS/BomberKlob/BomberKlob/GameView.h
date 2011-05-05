@@ -16,7 +16,7 @@
 	Position * lastPosition;
 	
 	NSDictionary * bitmapsInanimates;
-	NSMutableString * currentDirection;
+	NSString * currentDirection;
 	NSThread * movementThread;
 	NSThread * updateThread;
 	

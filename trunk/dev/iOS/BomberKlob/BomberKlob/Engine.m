@@ -49,10 +49,13 @@
 	for (Position * position in game.bombsPlanted) {
 		CGRect rectBomb = CGRectMake(position.x, position.y, resource.tileSize, resource.tileSize);
 		CGRect rectObj = CGRectMake(object.position.x+xValue, object.position.y+yValue, resource.tileSize, resource.tileSize);
+        
 		if (CGRectIntersectsRect(rectObj, rectBomb)) {
-			return true;
+			return YES;
 		}
 	}
+    
+    return NO;
 }
 
 
@@ -299,7 +302,7 @@
 
 - (BOOL) thereAreBombToExplode {
 	for (Position * position in game.bombsPlanted){
-		if ([[game.bombsPlanted objectForKey:position] hasAnimationFinished]) {
+		if ([((Bomb *)[game.bombsPlanted objectForKey:position]) hasAnimationFinished]) {
 			return true;
 		}
 	}

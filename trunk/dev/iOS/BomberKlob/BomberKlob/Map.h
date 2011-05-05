@@ -65,6 +65,7 @@
 - (BOOL)thereIsPlayer:(Position *)position;
 
 - (void)makePreviewWithView;
-- (void) makeMapPng;
+- (void)makeMapPng;
+- (void)update;
 
 @end

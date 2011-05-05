@@ -28,7 +28,7 @@
 
 - (id) initWithLoop:(BOOL)canLoopValue;
 
-- (void) addImageSequence:(CGImageRef *) imageValue;
+- (void) addImageSequence:(UIImage *) imageValue;
 
 - (NSString *)description;
 - (void) playSound;

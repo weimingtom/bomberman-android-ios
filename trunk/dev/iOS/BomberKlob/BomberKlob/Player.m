@@ -331,35 +331,25 @@
 	}
 }
 
-- (Player *)copy {
-	Player * playerTmp = [[Player alloc] init];
-	playerTmp.ressource = ressource;
-    playerTmp.imageName = [[NSString alloc] initWithString:imageName];
-	playerTmp.hit = hit;
-	playerTmp.level = level;
-	playerTmp.fireWall = fireWall;
-	playerTmp.damage = damage;
-	playerTmp.position = [[Position alloc] initWithPosition:position];
+- (id)copyWithZone:(NSZone *)zone {
+    Player *copy = [super copyWithZone:zone];
+    
+    NSMutableArray *bombsTypeTmp = [[NSMutableArray alloc] initWithArray:bombsTypes];
+    NSString *colorTmp = [[NSString alloc] initWithString:color];
 	
-	playerTmp.animations = [[NSMutableDictionary alloc] initWithDictionary:animations];
-	playerTmp.destroyAnimations = [[NSMutableDictionary alloc] initWithDictionary:destroyAnimations];
-	playerTmp.idle = idle;
-	
-	playerTmp.currentAnimation = [[NSString alloc] initWithString:currentAnimation];
-	playerTmp.currentFrame = currentFrame;
-	playerTmp.waitDelay = waitDelay;
-	playerTmp.delay = delay;
-	
-	playerTmp.bombsTypes = [[NSMutableArray alloc] initWithArray:bombsTypes];
-	playerTmp.color = [[NSMutableString alloc] initWithString:color];
-	playerTmp.lifeNumber = lifeNumber;
-	playerTmp.powerExplosion = powerExplosion;
-	playerTmp.timeExplosion = timeExplosion;
-	playerTmp.shield = shield;
-	playerTmp.speed = speed;
-	playerTmp.bombNumber = bombNumber;
-	
-	return playerTmp;
+	copy.bombsTypes = bombsTypeTmp;
+	copy.color = colorTmp;
+	copy.lifeNumber = lifeNumber;
+	copy.powerExplosion = powerExplosion;
+	copy.timeExplosion = timeExplosion;
+	copy.shield = shield;
+	copy.speed = speed;
+	copy.bombNumber = bombNumber;
+    
+    [bombsTypeTmp release];
+    [colorTmp release];
+    
+	return copy;
 }
 
 - (void) hurt{

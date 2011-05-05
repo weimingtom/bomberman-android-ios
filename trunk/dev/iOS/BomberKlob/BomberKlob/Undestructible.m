@@ -11,9 +11,21 @@
 
 @implementation Undestructible
 
+- (id)init {
+    self = [super init];
+    
+    if (self) {
+        
+    }
+    
+    return self;
+}
 
 
-
-
+- (id)copyWithZone:(NSZone *)zone {
+    Undestructible *copy = [super copyWithZone:zone];
+    
+    return copy;
+}
 
 @end

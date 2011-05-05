@@ -62,8 +62,6 @@
 
 - (void)draw:(CGContextRef)context;
 - (void)draw:(CGContextRef)context alpha:(CGFloat)alpha;
-
-- (id)initWithImageName:(NSString *)anImageName position:(Position *)aPosition animations:(NSDictionary *)anAnimations;
 - (void) update;
 - (BOOL) hasAnimationFinished;
 
