@@ -128,7 +128,6 @@ public class Engine {
 						if ( (this.single.map.getBlocks()[p.x-k][p.y] == null) && (this.bombs.get(new Point(p.x-k, p.y)) == null) ) {
 							if ( !this.single.map.getGrounds()[p.x-k][p.y].isFireWall() ) {
 								zoneDangereuses.put(new Point(p.x-k, p.y),1);
-								System.out.println(p.toString());
 							}
 							else {
 								break;
@@ -144,7 +143,6 @@ public class Engine {
 						if ( (this.single.map.getBlocks()[p.x+k][p.y] == null) && (this.bombs.get(new Point(p.x+k, p.y)) == null) ) {
 							if ( !this.single.map.getGrounds()[p.x+k][p.y].isFireWall() ) {
 								zoneDangereuses.put(new Point(p.x+k, p.y),1);
-								System.out.println(p.toString());
 							}
 							else {
 								break;
@@ -228,7 +226,6 @@ public class Engine {
 								/*Si le bot n'a pas d'objectif*/
 								if ( players[i].getObjectif() == null ) {
 									/* Defensif (On est dans une zone dangereuse) */
-									System.out.println("Point Bot : " + point1.toString());
 
 									if ( zoneDangereuses.get(point1) == Integer.valueOf(1) ) {
 
@@ -241,46 +238,41 @@ public class Engine {
 										/* On regarde les 8 cases nous entourant */
 										for (int h = point1.x-1; h < point1.x+2 ; h++ ) {
 											for (int v = point1.y-1; v < point1.y+2 ; v++ ) {	
-												System.out.println("TEST : (" + h + "," +v + ")" );
-												if ( zoneDangereuses.get(new Point(h,v)) != Integer.valueOf(1) && isSolidBlock(h,v) && !this.single.map.getGrounds()[h][v].isHit()) {
+												if ( zoneDangereuses.get(new Point(h,v)) != Integer.valueOf(1) && isNotSolidBlock(h,v) && !this.single.map.getGrounds()[h][v].isHit()) {
 													/* Diagonales */
 													if ( point1.x != h && point1.y != v ) {
 														if ( h > point1.x ) {
 															if ( v > point1.y ) {
-																if ( isSolidBlock(h-1, v) && !this.single.map.getGrounds()[h-1][v].isHit()) {
-																	if ( isSolidBlock(h, v-1) && !this.single.map.getGrounds()[h][v-1].isHit()) {
+																if ( isNotSolidBlock(h-1, v) && !this.single.map.getGrounds()[h-1][v].isHit()) {
+																	if ( isNotSolidBlock(h, v-1) && !this.single.map.getGrounds()[h][v-1].isHit()) {
 																		x = h;
 																		y = v;
-																		System.out.println("RESULTAT : " + x + "|" + y);
 																	}
 																}															
 															}
 															else {
-																if ( isSolidBlock(h-1, v) && !this.single.map.getGrounds()[h-1][v].isHit() ) {
-																	if ( isSolidBlock(h, v+1) && !this.single.map.getGrounds()[h][v+1].isHit() ) {
+																if ( isNotSolidBlock(h-1, v) && !this.single.map.getGrounds()[h-1][v].isHit() ) {
+																	if ( isNotSolidBlock(h, v+1) && !this.single.map.getGrounds()[h][v+1].isHit() ) {
 																		x = h;
 																		y = v;
-																		System.out.println("RESULTAT : " + x + "|" + y);
 																	}
 																}
 															}
 														}
 														else {
 															if ( v > point1.y ) {
-																if ( isSolidBlock(h+1, v) && !this.single.map.getGrounds()[h+1][v].isHit() ) {
-																	if ( isSolidBlock(h, v-1) && !this.single.map.getGrounds()[h][v-1].isHit() ) {
+																if ( isNotSolidBlock(h+1, v) && !this.single.map.getGrounds()[h+1][v].isHit() ) {
+																	if ( isNotSolidBlock(h, v-1) && !this.single.map.getGrounds()[h][v-1].isHit() ) {
 																		x = h;
 																		y = v;
-																		System.out.println("RESULTAT : " + x + "|" + y);
 																	}
 																}	
 															}
 															else {
-																if ( isSolidBlock(h+1, v) && !this.single.map.getGrounds()[h+1][v].isHit() ) {
-																	if ( isSolidBlock(h, v+1) && !this.single.map.getGrounds()[h][v+1].isHit() ) {
+																if ( isNotSolidBlock(h+1, v) && !this.single.map.getGrounds()[h+1][v].isHit() ) {
+																	if ( isNotSolidBlock(h, v+1) && !this.single.map.getGrounds()[h][v+1].isHit() ) {
 																		x = h;
 																		y = v;
-																		System.out.println("RESULTAT : " + x + "|" + y);
 																	}
 																}
 															}
@@ -289,7 +281,6 @@ public class Engine {
 													else {
 														x = h;
 														y = v;
-														System.out.println("RESULTAT : " + x + "|" + y);
 													}
 												}
 											}
@@ -297,47 +288,102 @@ public class Engine {
 
 										/* FIXME FAIRE LA FONCTION DE RECHERCHE */
 										if ( x == point1.x && y == point1.y ) {
-/*
+
 											int[][] distance = new int[21][15];
+											PlayerAnimations[][] direction = new PlayerAnimations[21][15];
+											PlayerAnimations pa = null;
 
 											distance[x][y] = 1;
-											distance[x+1][y] = 1;
-											distance[x-1][y] = 1;
-											distance[x][y+1] = 1;
-											distance[x][y-1] = 1;
 
-											PlayerAnimations[][] direction = new PlayerAnimations[21][15];
-											int d = 1;
+											if ( isNotSolidBlock(x+1, y) && !this.single.map.getGrounds()[x+1][y].isHit() ) {
+												distance[x+1][y] = 1;
+												direction[x+1][y] = PlayerAnimations.RIGHT;
+											}
+											if ( isNotSolidBlock(x-1, y) && !this.single.map.getGrounds()[x-1][y].isHit() ) {
+												distance[x-1][y] = 1;
+												direction[x-1][y] = PlayerAnimations.LEFT;
+											}
+											if ( isNotSolidBlock(x, y+1) && !this.single.map.getGrounds()[x][y+1].isHit() ) {
+												distance[x][y+1] = 1;
+												direction[x][y+1] = PlayerAnimations.DOWN;
+											}
+											if ( isNotSolidBlock(x, y-1) && !this.single.map.getGrounds()[x][y-1].isHit() ) {
+												distance[x][y-1] = 1;
+												direction[x][y-1] = PlayerAnimations.UP;
+											}
 
-											for (int h=0; h<21 ; h++) {
-												for (int v=0 ; v<15 ; v++) {
+											
 
-													if (distance[h][v] == d) {
+											for (int d = 1; d < 50; d++) {	
 
-														if (!solid[h][v+1] && distance[h][v+1]==0) {
-															direction[h][v+1] = direction[h][v];
-															distance[h][v+1]=d+1;
-														}
+												for (int h=0; h<21 && x == point1.x && y == point1.y ; h++) {
+													for (int v=0 ; v<15 && x == point1.x && y == point1.y ; v++) {
+	
+														if (distance[h][v] == d) {
 
+															if (isNotSolidBlock(h, v+1) && !this.single.map.getGrounds()[h][v+1].isHit() && distance[h][v+1]==0) {
+																if ( zoneDangereuses.get(new Point(h,v+1)) != Integer.valueOf(1) ) {
+																	pa = direction[h][v];
+																	break;
+																}
+																else {
+																	direction[h][v+1] = direction[h][v];
+																	distance[h][v+1]=d+1;
+																}
+															}
+															
+															if (isNotSolidBlock(h, v-1) && !this.single.map.getGrounds()[h][v-1].isHit() && distance[h][v-1]==0) {
+																if ( zoneDangereuses.get(new Point(h,v-1)) != Integer.valueOf(1) ) {
+																	pa = direction[h][v];
+																	break;
+																}
+																else {
+																	direction[h][v-1] = direction[h][v];
+																	distance[h][v-1]=d+1;
+																	break;
+																}
+															}
 
-														if (!solid[h][v-1] && distance[h][v-1]==0) {
-															direction[h][v-1] = direction[h][v];
-															distance[h][v-1]=d+1;
-														}
+															if (isNotSolidBlock(h+1, v) && !this.single.map.getGrounds()[h+1][v].isHit() && distance[h+1][v]==0) {
+																if ( zoneDangereuses.get(new Point(h+1,v)) != Integer.valueOf(1) ) {
+																	pa = direction[h][v];
+																	break;
+																}
+																else {
+																	direction[h+1][v] = direction[h][v];
+																	distance[h+1][v]=d+1;
+																}
+															}
 
-														if (!solid[h+1][v] && distance[h+1][v]==0) {
-															direction[h+1][v] = direction[h][v];
-															distance[h+1][v]=d+1;
-														}
-
-														if (!solid[h-1][v] && distance[h-1][v]==0) {
-															direction[h-1][v] = direction[h][v];
-															distance[h-1][v]=d+1;
+															if (isNotSolidBlock(h-1, v) && !this.single.map.getGrounds()[h-1][v].isHit() && distance[h-1][v]==0) {
+																if ( zoneDangereuses.get(new Point(h-1,v)) != Integer.valueOf(1) ) {
+																	pa = direction[h][v];
+																	break;
+																}
+																else {
+																	direction[h-1][v] = direction[h][v];
+																	distance[h-1][v]=d+1;
+																}
+															}
 														}
 													}
 												}
-											}*/
+											}	
+											
+											if ( pa == PlayerAnimations.RIGHT) {
+												x += 1;										
+											}
+											else if ( pa == PlayerAnimations.LEFT) {
+												x -= 1;								
+											}
+											else if ( pa == PlayerAnimations.UP ) {
+												y -= 1;						
+											}
+											else if ( pa == PlayerAnimations.DOWN ) {
+												y += 1;									
+											}											
 										}
+
 
 										x = x*ResourcesManager.getSize();
 										y = y*ResourcesManager.getSize();
@@ -462,8 +508,8 @@ public class Engine {
 
 		this.single.restartGame();		
 	}
-	
-	public boolean isSolidBlock(int x, int y) {
+
+	public boolean isNotSolidBlock(int x, int y) {
 		return ((this.bombs.get(new Point(x,y)) == null) && ((this.single.map.getBlocks()[x][y] == null) || !this.single.map.getBlocks()[x][y].isHit() || ((this.single.map.getBlocks()[x][y].isDestructible() && ((this.single.map.getAnimatedObjects().get(new Point(x,y)) == null) || !this.single.map.getAnimatedObjects().get(new Point(x,y)).isHit())))));
 	}
 
@@ -515,12 +561,12 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
-					if ( isSolidBlock(this.nextTile.x , this.nextTile.y) ) {
+					if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y) ) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
 							if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
 								this.y--;
 							}
-							else if ( isSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
+							else if ( isNotSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 									this.y--;
 								}
@@ -543,7 +589,7 @@ public class Engine {
 							}
 						}
 						else {
-							if ( isSolidBlock(this.nextTile.x+1, this.nextTile.y) ) {
+							if ( isNotSolidBlock(this.nextTile.x+1, this.nextTile.y) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 									if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
 										this.x++;
@@ -562,7 +608,7 @@ public class Engine {
 						}
 					}
 					else {
-						if ( isSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
+						if ( isNotSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 								if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
 									this.x++;
@@ -610,12 +656,12 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y+this.size-1);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
-					if ( isSolidBlock(this.nextTile.x , this.nextTile.y) ) {
+					if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y) ) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
 							if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
 								this.y++;
 							}
-							else if ( isSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
+							else if ( isNotSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 									this.y++;
 								}
@@ -638,7 +684,7 @@ public class Engine {
 							}
 						}
 						else {
-							if ( isSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
+							if ( isNotSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 									if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
 										this.x++;
@@ -657,7 +703,7 @@ public class Engine {
 						}
 					}
 					else {
-						if ( isSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
+						if ( isNotSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
 								if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
 									this.x++;
@@ -705,12 +751,12 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x+this.size-1, this.y);
 
 				if ( this.nextTile.x != this.currentTile.x ) {
-					if ( isSolidBlock(this.nextTile.x , this.nextTile.y) ) {
+					if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y) ) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
 							if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
 								this.x++;
 							}
-							else if ( isSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
+							else if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 									this.x++;
 								}
@@ -733,7 +779,7 @@ public class Engine {
 							}
 						}
 						else {
-							if ( isSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
+							if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 									if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
 										this.y++;
@@ -752,7 +798,7 @@ public class Engine {
 						}
 					}
 					else {
-						if ( isSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
+						if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 								if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
 									this.y++;
@@ -800,12 +846,12 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
 
 				if ( this.nextTile.x != this.currentTile.x ) {
-					if ( isSolidBlock(this.nextTile.x , this.nextTile.y) ) {
+					if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y) ) {
 						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
 							if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
 								this.x--;
 							}
-							else if ( isSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
+							else if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 									this.x--;
 								}
@@ -828,7 +874,7 @@ public class Engine {
 							}
 						}
 						else {
-							if ( isSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
+							if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
 								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 									if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
 										this.y++;
@@ -847,7 +893,7 @@ public class Engine {
 						}
 					}
 					else {
-						if ( isSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
+						if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
 							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
 								if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
 									this.y++;
