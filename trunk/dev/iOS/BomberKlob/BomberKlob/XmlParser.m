@@ -82,6 +82,9 @@
             [sequences release];
 			[destroySequences release];
 		}
+		else if([elementName isEqualToString:@"bitmaps"]) {
+			currentAnimation = [attributeDict valueForKey:@"name"]; 
+		}
 		else if ([elementName isEqualToString:@"framerect"]) {
 			Player *currentObject = [objectsAnimations objectForKey:currentProperty];
 			NSInteger x = [[attributeDict valueForKey:@"left"] integerValue];
@@ -112,7 +115,17 @@
             [imageRef release];
 
 			return;
-		}        
+		} 
+		else if ([elementName isEqualToString:@"png"]) {
+			Player *currentObject = [objectsAnimations objectForKey:currentProperty];
+			NSInteger x = [[attributeDict valueForKey:@"left"] integerValue];
+			NSInteger y = [[attributeDict valueForKey:@"top"] integerValue];
+			NSInteger width = [[attributeDict valueForKey:@"right"] integerValue] - x;
+			NSInteger height = [[attributeDict valueForKey:@"bottom"] integerValue] - y;
+			imageRef = [[UIImage alloc] initWithCGImage:CGImageCreateWithImageInRect(imageRef.CGImage, CGRectMake(x,y,width , height))];
+			
+			[currentObject.png setObject:imageRef forKey:[attributeDict valueForKey:@"name"]];
+		}
 	}
 	else if(type == @"bombs") {
 		UIImage* imageRef = [UIImage imageNamed:@"bombs.png"];
