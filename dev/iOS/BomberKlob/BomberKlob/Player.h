@@ -22,11 +22,13 @@
 	NSInteger bombNumber;
 	BOOL istouched;
 	BOOL bombPosed;
+	NSMutableDictionary * png;
 
 }
 
 @property (nonatomic,retain)NSMutableArray * bombsTypes;
 @property (nonatomic,retain) NSString * color;
+@property (nonatomic,retain)NSMutableDictionary * png;
 @property (nonatomic) NSInteger powerExplosion;
 @property (nonatomic) NSInteger timeExplosion;
 @property (nonatomic) NSInteger shield;

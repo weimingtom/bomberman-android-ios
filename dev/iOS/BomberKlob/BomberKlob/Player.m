@@ -13,7 +13,7 @@
 
 
 @implementation Player
-@synthesize speed, lifeNumber, bombNumber,bombsTypes,powerExplosion,shield,timeExplosion, color, bombPosed;
+@synthesize speed, lifeNumber, bombNumber,bombsTypes,powerExplosion,shield,timeExplosion, color, bombPosed, png;
 
 - (id) init{
 	self = [super init];
@@ -29,6 +29,7 @@
 		position.y = 0;
 		currentAnimation = @"idle";
 		bombsTypes = [[NSMutableArray alloc] init];
+		png = [[NSMutableDictionary alloc] init];
 
 	}
 	return self;
@@ -48,6 +49,7 @@
 		position.y = positionValue.y;
 		waitDelay = 4;
 		currentAnimation =@"idle";
+		png = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }

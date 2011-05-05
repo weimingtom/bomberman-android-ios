@@ -14,7 +14,7 @@
 #import "Game.h"
 #import "GameInformationViewController.h"
 #import "GlobalGameViewControllerSingle.h"
-
+#import "Single.h"
 
 @implementation GameInformationView
 @synthesize controller;
@@ -25,6 +25,7 @@
 	if (self){
 		self.controller = controllerValue;
 		[self initComponents];
+		[self setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"gametoolbarbackground.png"]]];
 	}
 	
 	return self;
@@ -33,26 +34,37 @@
 - (void)drawRect:(CGRect)rect{
 	RessourceManager * resource = [RessourceManager sharedRessource];
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextSetFillColorWithColor(context, [UIColor blueColor].CGColor);
-	CGContextFillRect(context, rect);
-
-	CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
 	int i = 0;
 	int ecart = resource.screenHeight / 4;
 	for (NSString * key in resource.bitmapsPlayer) {
+		if (i == 2) {
+			if ([[[controller.globalController.engine.game class]description]isEqualToString:@"Single"]) {
+				NSMutableString * temps = @"Temps \n ";
+				if (((Single *)controller.globalController.engine.game).time != NULL) {
+					[temps stringByAppendingString:((Single *)controller.globalController.engine.game).time];
+				}
+				CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+				UIFont * font = [UIFont boldSystemFontOfSize:11.0];
+				CGSize size = [temps sizeWithFont:font];
+				[temps drawInRect:CGRectMake(ecart, 0, size.width , size.height) withFont:font];
+				ecart += size.width;
+			}
+		}
 		
-//		Objects * o = [resource.bitmapsPlayer valueForKey:key];
-		UIImage * image = ((Objects *)[resource.bitmapsPlayer valueForKey:key]).idle;
-		[image drawInRect:CGRectMake(ecart, 0, resource.tileSize , resource.tileSize)];
+		Player * player = [resource.bitmapsPlayer valueForKey:key];
+		UIImage * image = [player.png objectForKey:@"idle"];
+		[image drawInRect:CGRectMake(ecart, 0, image.size.width , image.size.height)];
 		
-//		Player * p = [controller.globalController.engine.game.players objectAtIndex:i];
-//		Game * game = controller.globalController.engine.game;
-//		NSString *score = [NSString stringWithFormat:@"%d", p.lifeNumber];
+		Game * game = controller.globalController.engine.game;
 		
-//		UIFont * font = [UIFont boldSystemFontOfSize:9.0];
-//		[score drawInRect:CGRectMake(ecart+(resource.tileSize/2)-2, resource.tileSize, resource.tileSize, resource.tileSize) withFont:font];
-		ecart+= 50;
+		ecart+= image.size.width;
 		i++;
+	}
+	ecart += 50;
+	for (NSString * imageName in resource.bitmapsInformationGameView) {
+		UIImage * image = [resource.bitmapsInformationGameView objectForKey:imageName];
+		[image drawInRect:CGRectMake(ecart, 0, image.size.width, image.size.height)];
+		ecart += image.size.width;
 	}
 }
 

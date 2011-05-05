@@ -57,15 +57,17 @@
 
 - (void)drawAll: (CGContextRef) context{
 	Game * game = controller.globalController.engine.game;
-	/*[game.map draw:context];	
-	for (Player * player in game.players) {
-		[player draw:context];
-	}*/
 	[game draw:context];
+	if (![controller.globalController.engine.game isStartSoundFinished]){
+		UIImage * image = [controller.globalController.engine.game.bitmaps objectForKey:@"ready"] ;
+		int width = (controller.globalController.engine.game.map.width*ressource.tileSize) * 0.75;
+		int height = (controller.globalController.engine.game.map.height*ressource.tileSize) * 0.75;
+		[image drawInRect:CGRectMake([self center].x-(width/2), [self center].y-(width/2), width, height)];
+	}
+
 }
 
--(void) startTimerUpdateMap
-{
+-(void) startTimerUpdateMap {
 	updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(startTimerUpdateMapThread) object:nil]; //Create a new thread
 	[updateThread start]; //start the thread
 }

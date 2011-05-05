@@ -18,12 +18,15 @@
 	NSMutableDictionary * bitmapsInanimates;
 	NSMutableDictionary * bitmapsPlayer;
 	NSMutableDictionary * bitmapsBombs;
+	NSMutableDictionary * bitmapsInformationGameView;
 
 }
 @property (nonatomic, retain) NSMutableDictionary * bitmapsAnimates;
 @property (nonatomic, retain) NSMutableDictionary * bitmapsInanimates;
 @property (nonatomic, retain) NSMutableDictionary * bitmapsPlayer;
 @property (nonatomic, retain) NSMutableDictionary * bitmapsBombs;
+@property (nonatomic, retain) NSMutableDictionary  * bitmapsInformationGameView;
+
 @property (nonatomic) NSInteger tileSize;
 @property (nonatomic) NSInteger screenHeight;
 @property (nonatomic) NSInteger screenWidth;

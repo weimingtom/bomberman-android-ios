@@ -27,16 +27,14 @@
 	if (self){
 		self.controller = controllerValue;
 		[self initComponents];
+		[self setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"gametoolbarbackground.png"]]];
 	}
 	
 	return self;
 }
 
 - (void)drawRect:(CGRect)rect{
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextSetFillColorWithColor(context, [UIColor purpleColor].CGColor);
-	
-	CGContextFillRect(context, rect);
+
 }
 
 - (void) initComponents{

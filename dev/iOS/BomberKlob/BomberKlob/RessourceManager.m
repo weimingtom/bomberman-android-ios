@@ -16,7 +16,7 @@
 
 @implementation RessourceManager
 
-@synthesize bitmapsAnimates,bitmapsInanimates, bitmapsPlayer,bitmapsBombs, tileSize, screenWidth, screenHeight;
+@synthesize bitmapsAnimates,bitmapsInanimates, bitmapsPlayer,bitmapsBombs, tileSize, screenWidth, screenHeight, bitmapsInformationGameView;
 
 static RessourceManager * ressource = nil;
 
@@ -55,6 +55,7 @@ static RessourceManager * ressource = nil;
 		[self loadPlayer];	
 		[self loadBombs];
 		[self loadObjects];
+		[self loadBitmapInformationGameView];
     }
 	
 	return self;
@@ -144,6 +145,22 @@ static RessourceManager * ressource = nil;
     [content release];
 	[parser release];
 //	[parserDelegate release];
+	
+}
+
+- (void) loadBitmapInformationGameView {
+	bitmapsInformationGameView = [[NSMutableDictionary alloc] init];
+	UIImage * image = [UIImage imageNamed:@"bombpower.png"];
+	[bitmapsInformationGameView setObject:image forKey:@"bombpower"];
+	image = [UIImage imageNamed:@"playerlife.png"];
+	[bitmapsInformationGameView setObject:image forKey:@"playerlife"];
+	image = [UIImage imageNamed:@"playerspeed.png"];
+	[bitmapsInformationGameView setObject:image forKey:@"playerspeed"];
+	image = [UIImage imageNamed:@"bombnumber.png"];
+	[bitmapsInformationGameView setObject:image forKey:@"bombnumber"];
+
+	
+	
 	
 }
 

@@ -17,12 +17,13 @@
 	Map * map;
 	AVAudioPlayer *soundStart;
 	AVAudioPlayer *soundMode;
-
+	NSMutableDictionary * bitmaps;
 	
     
 }
 @property (nonatomic, retain) NSMutableArray * players;
 @property (nonatomic, retain) NSMutableDictionary * bombsPlanted;
+@property (nonatomic, retain) NSMutableDictionary * bitmaps;
 @property (nonatomic, retain) Map * map;
 
 - (id) initWithMapName:(NSString *)mapName;
@@ -34,6 +35,7 @@
 - (void) draw:(CGContextRef)context;
 - (void) update;
 - (void) loadSounds;
+- (void) loadBitmaps;
 - (BOOL) isStartSoundFinished;
 
 @end

@@ -17,7 +17,7 @@
 
 @implementation Game
 
-@synthesize players, map, bombsPlanted;
+@synthesize players, map, bombsPlanted, bitmaps;
 
 - (id) initWithMapName:(NSString *)mapName {
 	self = [super init];
@@ -42,10 +42,44 @@
             [player release];
         }
 		[self loadSounds];
+		[self loadBitmaps];
 		return self;
 	}
 }
 
+- (id) init {
+	self = [super init];
+    
+	if (self) {
+		bombsPlanted = [[NSMutableDictionary alloc] init];
+		RessourceManager * resource = [RessourceManager sharedRessource];
+        Position *position;
+        Player *player;
+        NSInteger tileSize = resource.tileSize;
+        map = [[Map alloc] init];
+        
+        players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
+        
+        // TODO: Changer le tableau des couleurs en fonction de la couleur de joueur
+        NSArray *colorsPlayers = [[NSArray alloc] initWithObjects:@"white", @"blue", @"red", @"black", nil];
+        
+        for (int i = 0; i < [map.players count]; i++) {
+            position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:i]).x * tileSize) y:(((Position *) [map.players objectAtIndex:i]).y * tileSize)];
+			player = [(Player *)[resource.bitmapsPlayer objectForKey:[colorsPlayers objectAtIndex:i]] copy];
+			player.position = position;            
+            [players addObject:player];
+            
+//            [position release];
+            [player release];
+        }
+        
+        [colorsPlayers release];
+		[self loadSounds];
+		[self loadBitmaps];
+	}
+    
+	return self;
+}
 
 // TODO: Elle ne sert plus a rien !
 
@@ -150,6 +184,20 @@
 			soundMode = sound;
 		}
 	}
+}
+
+- (void) loadBitmaps{
+	bitmaps = [[NSMutableDictionary alloc] init];
+	UIImage * image = [UIImage imageNamed:@"draw.png"];
+	[bitmaps setObject:image forKey:@"draw"];
+	image = [UIImage imageNamed:@"go.png"];
+	[bitmaps setObject:image forKey:@"go"];
+	image = [UIImage imageNamed:@"loser.png"];
+	[bitmaps setObject:image forKey:@"loser"];
+	image = [UIImage imageNamed:@"winner.png"];
+	[bitmaps setObject:image forKey:@"winner"];
+	image = [UIImage imageNamed:@"ready.png"];
+	[bitmaps setObject:image forKey:@"ready"];
 }
 
 - (BOOL) isStartSoundFinished {
