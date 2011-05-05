@@ -21,7 +21,6 @@
 	
 	if (self){
 		self.globalController = controllerValue;
-		RessourceManager * resource = [RessourceManager sharedRessource];
 		self.actionView = [[GameActionView alloc] initWithFrame:dimensionValue Controller:self];	
 	}
 	return self;

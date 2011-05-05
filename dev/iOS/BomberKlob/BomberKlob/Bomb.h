@@ -26,13 +26,12 @@
 @property (nonatomic,retain) Player * owner;
 
 
-
-
-
 - (id) initWithImageName:(NSString *)anImageName position:(Position *)aPosition owner:(Player *) aPlayer;
-- (void) draw:(CGContextRef) context;
 - (void) update;
 - (BOOL) hasAnimationFinished;
-- (void) destroyable;
+
+// TODO: Méthode inutiles:
+//- (void) destroyable;
+//- (void) draw:(CGContextRef) context;
 
 @end

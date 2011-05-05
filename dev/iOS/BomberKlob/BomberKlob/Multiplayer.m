@@ -12,10 +12,14 @@
 @implementation Multiplayer
 
 - (id) initWithName:(NSString*) nameValue {
-	if([super init] == self){
+    self = [super init];
+    
+	if(self) {
 		name = nameValue;
 		adressServer = @"http://127.0.0.1/MyServletDeTueur";
 	}
+    
+    return self;
 }
 
 

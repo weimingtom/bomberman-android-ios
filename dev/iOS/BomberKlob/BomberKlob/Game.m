@@ -24,7 +24,6 @@
     
 	if (self) {
 		bombsPlanted = [[NSMutableDictionary alloc] init];
-		RessourceManager * resource = [RessourceManager sharedRessource];
         Position *position;
         Player *player;
         NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
@@ -47,38 +46,40 @@
 	}
 }
 
-- (id) init {
-	self = [super init];
-    
-	if (self) {
-		bombsPlanted = [[NSMutableDictionary alloc] init];
-		RessourceManager * resource = [RessourceManager sharedRessource];
-        Position *position;
-        Player *player;
-        NSInteger tileSize = resource.tileSize;
-        map = [[Map alloc] init];
-        
-        players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
-        
-        // TODO: Changer le tableau des couleurs en fonction de la couleur de joueur
-        NSArray *colorsPlayers = [[NSArray alloc] initWithObjects:@"white", @"blue", @"red", @"black", nil];
-        
-        for (int i = 0; i < [map.players count]; i++) {
-            position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:i]).x * tileSize) y:(((Position *) [map.players objectAtIndex:i]).y * tileSize)];
-			player = [(Player *)[resource.bitmapsPlayer objectForKey:[colorsPlayers objectAtIndex:i]] copy];
-			player.position = position;            
-            [players addObject:player];
-            
-//            [position release];
-            [player release];
-        }
-        
-        [colorsPlayers release];
-		[self loadSounds];
-	}
-    
-	return self;
-}
+
+// TODO: Elle ne sert plus a rien !
+
+//- (id) init {
+//	self = [super init];
+//    
+//	if (self) {
+//		bombsPlanted = [[NSMutableDictionary alloc] init];
+//		RessourceManager * resource = [RessourceManager sharedRessource];
+//        Position *position;
+//        Player *player;
+//        NSInteger tileSize = resource.tileSize;
+//        map = [[Map alloc] init];
+//        
+//        players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
+//        
+//        // TODO: Changer le tableau des couleurs en fonction de la couleur de joueur
+//        NSArray *colorsPlayers = [[NSArray alloc] initWithObjects:@"white", @"blue", @"red", @"black", nil];
+//        
+//        for (int i = 0; i < [map.players count]; i++) {
+//            position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:i]).x * tileSize) y:(((Position *) [map.players objectAtIndex:i]).y * tileSize)];
+//			player = [(Player *)[resource.bitmapsPlayer objectForKey:[colorsPlayers objectAtIndex:i]] copy];
+//			player.position = position;            
+//            [players addObject:player];
+//            
+////            [position release];
+//            [player release];
+//        }
+//        
+//        [colorsPlayers release];
+//	}
+//    
+//	return self;
+//}
 
 
 - (void)dealloc {

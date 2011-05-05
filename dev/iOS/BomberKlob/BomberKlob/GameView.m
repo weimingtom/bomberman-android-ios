@@ -74,7 +74,7 @@
 -(void) startTimerUpdateMapThread {
 	
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-	CGRect dimension = [self bounds];
+
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 
 	[[NSTimer scheduledTimerWithTimeInterval: 0.001 target: self selector: @selector(updateMap) userInfo:self repeats: YES] retain];	

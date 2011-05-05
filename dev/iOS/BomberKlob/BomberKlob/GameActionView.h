@@ -16,7 +16,7 @@
 
 @property (nonatomic,retain) GameActionViewController * controller;
 
-- (id) initWithFrame:(CGRect)frame;
+- (id) initWithFrame:(CGRect)frame Controller:(GameActionViewController *) controllerValue;
 - (void) initComponents;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;

@@ -33,5 +33,6 @@
 
 - (void) pauseAction;
 - (void) resumeAction;
+- (void)quitAction;
 
 @end

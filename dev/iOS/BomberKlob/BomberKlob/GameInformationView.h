@@ -15,7 +15,7 @@
 }
 @property (nonatomic,retain) GameInformationViewController * controller;
 
-- (id) initWithFrame:(CGRect)frame Engine:(Engine *)engineValue;
+- (id) initWithFrame:(CGRect)frame Controller:(GameInformationViewController *) controllerValue;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;

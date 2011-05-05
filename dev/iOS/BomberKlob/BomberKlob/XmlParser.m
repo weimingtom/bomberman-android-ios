@@ -44,7 +44,6 @@
     [objectsInanimates release];
     [objectsIdle release];
     
-    [currentCanLoop release];
     [currentProperty release];
     [super dealloc];
 }

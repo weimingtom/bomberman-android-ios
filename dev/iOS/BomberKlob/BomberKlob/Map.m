@@ -82,12 +82,6 @@
 				[animates setObject:blockTmp forKey:blockTmp.position];
                 [blockTmp release];
             }
-			else if (i ==10 && j == 7) {
-				blockTmp = [(Undestructible *)[resource.bitmapsAnimates objectForKey:@"column1"] copy];
-				blockTmp.position = positionTmp;
-				[[blocks objectAtIndex:i] addObject:blockTmp];
-				[animates setObject:blockTmp forKey:blockTmp.position];
-			}
             else {
                 [[blocks objectAtIndex:i] addObject:@"empty"];
             }
@@ -99,10 +93,13 @@
         [groundsTmp release];
         [blocksTmp release];
     }
-    NSArray  *colors = [[NSArray alloc] initWithObjects:@"white",@"red",@"blue",@"black", nil];
-	for (int i = 0; i < 4; i++) {
-		[players setObject:[[Position alloc] initWithX:2+i*2 y:2+i*2] forKey:[colors objectAtIndex:i]];
-	}
+    
+//    NSArray  *colors = [[NSArray alloc] initWithObjects:@"white", @"red", @"blue", @"black", nil];
+//	for (int i = 0; i < 4; i++) {
+//        [self addPlayer:[[Position alloc] initWithX:2+i*2 y:2+i*2] color:[colors objectAtIndex:i]];
+////		[players setObject:[[Position alloc] initWithX:2+i*2 y:2+i*2] forKey:[colors objectAtIndex:i]];
+//	}
+     
 	[self makeMapPng];
 }
 
@@ -229,12 +226,15 @@
 
 
 - (void)deletePlayerAtPosition:(Position *)position {
+    id playerRemoved = nil;
     
     for (id key in players) {
         if ([[players objectForKey:key] isEqual:position]) {
-            [players removeObjectForKey:key];
+            playerRemoved = key;
         }
     }
+    
+    [players removeObjectForKey:playerRemoved];
 }
 
 
@@ -293,7 +293,7 @@
     Player *player;
     NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
     
-    for (NSString *key in players) {
+    for (id key in players) {
         position = [[Position alloc] initWithX:(((Position *) [players objectForKey:key]).x * tileSize) y:(((Position *) [players objectForKey:key]).y * tileSize)];
         player = [(Player *)[[RessourceManager sharedRessource].bitmapsPlayer objectForKey:key] copy];
         player.position = position;
@@ -325,7 +325,7 @@
     Player *player;
     NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
 
-    for (NSString *key in players) {
+    for (id key in players) {
         position = [[Position alloc] initWithX:(((Position *) [players objectForKey:key]).x * tileSize) y:(((Position *) [players objectForKey:key]).y * tileSize)];
         player = [(Player *)[[RessourceManager sharedRessource].bitmapsPlayer objectForKey:key] copy];
         player.position = position;
@@ -367,7 +367,7 @@
 
 - (BOOL)thereIsPlayer:(Position *)position {
     
-    for (id key in players) {
+    for (NSString *key in players) {
         if ([[players objectForKey:key] isEqual:position]) {
             return YES;
         }
@@ -403,6 +403,7 @@
     [aCoder encodeObject:blocks forKey:@"blocks"];
     [aCoder encodeObject:players forKey:@"players"];
 }
+
 
 - (void) update{
 	@synchronized (self) {
