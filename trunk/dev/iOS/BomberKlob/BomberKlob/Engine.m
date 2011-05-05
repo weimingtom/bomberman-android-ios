@@ -25,6 +25,7 @@
 		resource = [RessourceManager sharedRessource];
 		self.game = gameValue;
 		[self startTimerBombs];
+		[game startGame];
 	}
 	return self;
 }

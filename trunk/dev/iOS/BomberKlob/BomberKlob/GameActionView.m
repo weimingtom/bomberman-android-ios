@@ -16,6 +16,7 @@
 #import "Map.h"
 #import "GameActionViewController.h"
 #import "GlobalGameViewControllerSingle.h"
+#import "AnimationSequence.h"
 
 @implementation GameActionView
 @synthesize controller;
@@ -62,6 +63,7 @@
 	if (![engine isInCollision:bomb :0 :0] && ![engine isInCollisionWithABomb:bomb :0 :0]) {
 		[p plantingBomb:bomb];
 		[engine.game.bombsPlanted setObject:bomb forKey:bomb.position];
+		[(AnimationSequence *)[bomb.animations objectForKey:bomb.imageName] playSound];
 	}
 	
 	

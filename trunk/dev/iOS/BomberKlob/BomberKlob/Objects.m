@@ -216,6 +216,7 @@
 	if ([((AnimationSequence *)[destroyAnimations objectForKey:imageName]).sequences count] > 0) {
 		destroyable = YES;
 		currentFrame = 0;
+		[(AnimationSequence *)[destroyAnimations objectForKey:imageName] playSound];
 	}
 }
 

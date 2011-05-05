@@ -16,6 +16,8 @@
 	NSMutableString *currentString;
 	NSMutableString *currentAnimation;
 	NSMutableString *characters;
+	NSMutableString *currentSound;
+
 	
 	NSMutableDictionary *objectsAnimations;
 	NSMutableDictionary *objectsBombs;

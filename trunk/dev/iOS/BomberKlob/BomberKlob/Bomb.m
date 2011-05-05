@@ -11,6 +11,7 @@
 #import "RessourceManager.h"
 #import "Position.h"
 #import "Player.h"
+#import <AVFoundation/AVFoundation.h>
 
 
 @implementation Bomb
@@ -26,6 +27,7 @@
 		explode = NO;
 		type = @"normal";
 		time = 0;
+		[(AnimationSequence *)[animations objectForKey:imageName] playSound];
 	}
 	return self;
 }
@@ -52,12 +54,13 @@
 
 
 - (void) update{
-	if (time <= owner.timeExplosion) {
+	if (time < owner.timeExplosion) {
 		time++;
 	}
 	else {
 		currentFrame = 0;
 		destroyable = YES;
+		//[(AnimationSequence *)[destroyAnimations objectForKey:imageName] playSound];
 	}
 	
 	if (!destroyable ) {
@@ -98,13 +101,19 @@
 }
 
 - (BOOL) hasAnimationFinished{
-	return time >= owner.timeExplosion;
+	if (time >= owner.timeExplosion) {
+		//[self destroy];
+		return true;
+	}
+	else
+		return false;
 }
 
 - (void) destroy{
 	destroyable = YES;
 	currentFrame = 0;
 	time = owner.timeExplosion;
+	[(AnimationSequence *)[destroyAnimations objectForKey:imageName] playSound];
 }
 
 - (Bomb *)copy{

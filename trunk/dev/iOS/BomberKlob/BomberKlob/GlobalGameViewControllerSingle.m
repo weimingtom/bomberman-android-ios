@@ -52,7 +52,6 @@
 		[informationViewController.informationView release];
 		[actionViewController.actionView release];
 		[gameViewControllerSingle.gameView release];
-
 	}
 	return self;
 }

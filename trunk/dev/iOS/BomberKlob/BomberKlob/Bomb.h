@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Destructible.h"
 
+
 @class Player;
 @interface Bomb : Destructible {
     NSInteger power;
@@ -23,6 +24,9 @@
 @property (nonatomic) BOOL explode;
 @property (nonatomic,retain) NSString * type;
 @property (nonatomic,retain) Player * owner;
+
+
+
 
 
 - (id) initWithImageName:(NSString *)anImageName position:(Position *)aPosition owner:(Player *) aPlayer;

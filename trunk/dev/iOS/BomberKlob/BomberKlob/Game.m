@@ -11,6 +11,8 @@
 #import "Player.h"
 #import "Map.h"
 #import "Bomb.h"
+#import <AVFoundation/AVFoundation.h>
+
 
 
 @implementation Game
@@ -40,9 +42,9 @@
             [position release];
             [player release];
         }
+		[self loadSounds];
+		return self;
 	}
-    
-	return self;
 }
 
 - (id) init {
@@ -72,6 +74,7 @@
         }
         
         [colorsPlayers release];
+		[self loadSounds];
 	}
     
 	return self;
@@ -91,7 +94,7 @@
 
 
 - (void) startGame{
-	
+	[soundStart play];
 }
 
 
@@ -115,6 +118,47 @@
 
 - (void) update {
 	[map update];
+}
+
+- (void) loadSounds {
+	NSError *error;
+	NSString *pathMenuSoundStart = [[NSBundle mainBundle] pathForResource:@"battle_start" ofType:@"mp3"];
+	NSString *pathMenuSoundMode = [[NSBundle mainBundle] pathForResource:@"battle_mode" ofType:@"mp3"];
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSoundStart]) {
+		AVAudioPlayer * sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:pathMenuSoundStart] error:&error];
+		if (!sound) {
+			NSLog(@"Error: %@", [error localizedDescription]);
+		}
+		else {
+			[sound prepareToPlay];
+			[sound setNumberOfLoops:0];
+			sound.volume = 1;
+			soundStart = sound;
+		}
+	}
+	if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSoundMode]) {
+		AVAudioPlayer * sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:pathMenuSoundMode] error:&error];
+		if (!sound) {
+			NSLog(@"Error: %@", [error localizedDescription]);
+		}
+		else {
+			[sound prepareToPlay];
+			[sound setNumberOfLoops:0];
+			sound.volume = -1;
+			soundMode = sound;
+		}
+	}
+}
+
+- (BOOL) isStartSoundFinished {
+	if ([soundStart isPlaying]) {
+		return false;
+	}
+	else{
+		[soundMode play];
+		return true;
+	}
 }
 
 

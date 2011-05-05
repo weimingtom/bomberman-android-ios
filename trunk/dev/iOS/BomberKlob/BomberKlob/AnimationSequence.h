@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 
 @interface AnimationSequence : NSObject {
@@ -14,12 +15,14 @@
 	BOOL canLoop;
 	NSInteger delayNextFrame;
 	NSString * name;
+	AVAudioPlayer *sound;
 }
 
 @property (nonatomic,retain) NSMutableArray* sequences;
 @property (nonatomic) BOOL canLoop;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic) NSInteger delayNextFrame;
+@property (nonatomic, retain) AVAudioPlayer *sound;
 
 - (id) init;
 
@@ -28,6 +31,7 @@
 - (void) addImageSequence:(CGImageRef *) imageValue;
 
 - (NSString *)description;
+- (void) playSound;
 
 
 @end
