@@ -88,68 +88,47 @@ public class Engine {
 					/* On crée une nouvelle bombe */
 					Bomb bomb = new Bomb(player.getBombSelected(), ResourcesManager.getBombsAnimations().get(player.getBombSelected()), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, player);
 
-					/* AJOUT DES ZONES DANGEREUSES POUR L'IA */
+					/* ------- AJOUT DES ZONES DANGEREUSES POUR L'IA ------- */
 
 					/* CENTER */
 					zoneDangereuses.put(p,1);
-
-					/* UP */
+					
 					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-						if ( (this.single.map.getBlocks()[p.x][p.y-k] == null) && (this.bombs.get(new Point(p.x, p.y-k)) == null) ) {
-							if ( !this.single.map.getGrounds()[p.x][p.y-k].isFireWall() ) {
-								zoneDangereuses.put(new Point(p.x, p.y-k),1);
-							}
-							else {
-								break;
-							}
-						}
-						else {
-							break;
-						}
-					}
 
-					/* DOWN */
-					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-						if ( (this.single.map.getBlocks()[p.x][p.y+k] == null) && (this.bombs.get(new Point(p.x, p.y+k)) == null) ) {
-							if ( !this.single.map.getGrounds()[p.x][p.y+k].isFireWall() ) {
-								zoneDangereuses.put(new Point(p.x, p.y+k),1);
-							}
-							else {
-								break;
+						/* UP */
+						if ( zoneDangereuses.get(new Point(p.x, p.y-(k-1))) == Integer.valueOf(1) ) {
+							if ( (this.single.map.getBlocks()[p.x][p.y-k] == null) && (this.bombs.get(new Point(p.x, p.y-k)) == null) ) {
+								if ( !this.single.map.getGrounds()[p.x][p.y-k].isFireWall() ) {
+									zoneDangereuses.put(new Point(p.x, p.y-k),1);
+								}
 							}
 						}
-						else {
-							break;
-						}
-					}
 
-					/* LEFT */
-					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-						if ( (this.single.map.getBlocks()[p.x-k][p.y] == null) && (this.bombs.get(new Point(p.x-k, p.y)) == null) ) {
-							if ( !this.single.map.getGrounds()[p.x-k][p.y].isFireWall() ) {
-								zoneDangereuses.put(new Point(p.x-k, p.y),1);
-							}
-							else {
-								break;
+						/* DOWN */
+						if ( zoneDangereuses.get(new Point(p.x, p.y+(k-1))) == Integer.valueOf(1) ) {
+							if ( (this.single.map.getBlocks()[p.x][p.y+k] == null) && (this.bombs.get(new Point(p.x, p.y+k)) == null) ) {
+								if ( !this.single.map.getGrounds()[p.x][p.y+k].isFireWall() ) {
+									zoneDangereuses.put(new Point(p.x, p.y+k),1);
+								}
 							}
 						}
-						else {
-							break;
-						}
-					}
-
-					/* RIGHT */
-					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-						if ( (this.single.map.getBlocks()[p.x+k][p.y] == null) && (this.bombs.get(new Point(p.x+k, p.y)) == null) ) {
-							if ( !this.single.map.getGrounds()[p.x+k][p.y].isFireWall() ) {
-								zoneDangereuses.put(new Point(p.x+k, p.y),1);
-							}
-							else {
-								break;
+						
+						/* LEFT */
+						if ( zoneDangereuses.get(new Point(p.x-(k-1), p.y)) == Integer.valueOf(1) ) {
+							if ( (this.single.map.getBlocks()[p.x-k][p.y] == null) && (this.bombs.get(new Point(p.x-k, p.y)) == null) ) {
+								if ( !this.single.map.getGrounds()[p.x-k][p.y].isFireWall() ) {
+									zoneDangereuses.put(new Point(p.x-k, p.y),1);
+								}								
 							}
 						}
-						else {
-							break;
+						
+						/* RIGHT */
+						if ( zoneDangereuses.get(new Point(p.x+(k-1), p.y)) == Integer.valueOf(1) ) {
+							if ( (this.single.map.getBlocks()[p.x+k][p.y] == null) && (this.bombs.get(new Point(p.x+k, p.y)) == null) ) {
+								if ( !this.single.map.getGrounds()[p.x+k][p.y].isFireWall() ) {
+									zoneDangereuses.put(new Point(p.x+k, p.y),1);
+								}
+							}
 						}
 					}
 
@@ -286,7 +265,6 @@ public class Engine {
 											}
 										}
 
-										/* FIXME FAIRE LA FONCTION DE RECHERCHE */
 										if ( x == point1.x && y == point1.y ) {
 
 											int[][] distance = new int[21][15];
@@ -310,14 +288,11 @@ public class Engine {
 											if ( isNotSolidBlock(x, y-1) && !this.single.map.getGrounds()[x][y-1].isHit() ) {
 												distance[x][y-1] = 1;
 												direction[x][y-1] = PlayerAnimations.UP;
-											}
+											}											
 
-											
-
-											for (int d = 1; d < 50; d++) {	
-
-												for (int h=0; h<21 && x == point1.x && y == point1.y ; h++) {
-													for (int v=0 ; v<15 && x == point1.x && y == point1.y ; v++) {
+											for (int d = 1; d < 50; d++) {
+												for ( int h = 0; h < 21 ; h++ ) {
+													for ( int v = 0 ; v < 15 ; v++ ) {
 	
 														if (distance[h][v] == d) {
 
@@ -340,7 +315,6 @@ public class Engine {
 																else {
 																	direction[h][v-1] = direction[h][v];
 																	distance[h][v-1]=d+1;
-																	break;
 																}
 															}
 
@@ -367,6 +341,14 @@ public class Engine {
 															}
 														}
 													}
+													
+													if ( pa != null ) {
+														break;
+													}
+												}
+												
+												if ( pa != null ) {
+													break;
 												}
 											}	
 											
