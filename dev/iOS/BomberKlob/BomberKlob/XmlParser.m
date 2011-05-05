@@ -138,7 +138,7 @@
 			currentSound = [attributeDict valueForKey:@"sound"];
 			
 			NSError *error;
-			NSString *pathMenuSound = [[NSBundle mainBundle] pathForResource:currentSound ofType:@"wav"];
+			NSString *pathMenuSound = [[NSBundle mainBundle] pathForResource:currentSound ofType:@"wav" inDirectory:@"Sounds"];
 			if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSound]) {
 				if ([currentString isEqual:@"animate"]) {
 					AVAudioPlayer * sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:pathMenuSound] error:&error];
@@ -232,7 +232,7 @@
 			currentSound = [attributeDict valueForKey:@"sound"];
 			
 			NSError *error;
-			NSString *pathMenuSound = [[NSBundle mainBundle] pathForResource:currentSound ofType:@"wav"];
+			NSString *pathMenuSound = [[NSBundle mainBundle] pathForResource:currentSound ofType:@"wav" inDirectory:@"Sounds"];
 			if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSound]) {
 				if ([currentString isEqual:@"destroy"] && ![currentSound isEqualToString:@""]) {
 					AVAudioPlayer * sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:pathMenuSound] error:&error];

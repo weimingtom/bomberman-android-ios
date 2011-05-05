@@ -123,8 +123,8 @@
 
 - (void) loadSounds {
 	NSError *error;
-	NSString *pathMenuSoundStart = [[NSBundle mainBundle] pathForResource:@"battle_start" ofType:@"mp3"];
-	NSString *pathMenuSoundMode = [[NSBundle mainBundle] pathForResource:@"battle_mode" ofType:@"mp3"];
+	NSString *pathMenuSoundStart = [[NSBundle mainBundle] pathForResource:@"battle_start" ofType:@"mp3" inDirectory:@"Sounds"];
+	NSString *pathMenuSoundMode = [[NSBundle mainBundle] pathForResource:@"battle_mode" ofType:@"mp3" inDirectory:@"Sounds"];
 	
 	if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSoundStart]) {
 		AVAudioPlayer * sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:pathMenuSoundStart] error:&error];

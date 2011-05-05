@@ -120,8 +120,8 @@
 	// Check for the file.
 	NSError *error;
     float volume = system.volume;
-	NSString *pathMenuSound = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"m4a"];
-    NSString *pathButtonSound = [[NSBundle mainBundle] pathForResource:@"button" ofType:@"wav"];    
+	NSString *pathMenuSound = [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"m4a" inDirectory:@"Sounds"];
+    NSString *pathButtonSound = [[NSBundle mainBundle] pathForResource:@"button" ofType:@"wav" inDirectory:@"Sounds"];    
     
 	if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSound]) {
         // Initialize the player
