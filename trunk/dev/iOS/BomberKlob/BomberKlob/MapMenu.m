@@ -38,6 +38,7 @@
     mapName.textAlignment = UITextAlignmentCenter;
     mapName.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];   
     [self addSubview:mapName];
+    [controller changeMap:mapName.text];
     
     if (displayOwnerName) {
         ownerName = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.imageHeight + (NAME_MARGIN + NAME_HEIGHT) + OWNER_MARGIN), self.frame.size.width, OWNER_HEIGHT)];
