@@ -287,7 +287,7 @@ public class ProfileManager extends Activity implements View.OnClickListener{
 			intent = new Intent(ProfileManager.this, MultiplayerChangeAccount.class);
 		}
 		else if( v == this.edit){
-		//	intent = new Intent(ProfileManager.this, ChangePasswordMultiplayer.class);
+		intent = new Intent(ProfileManager.this, MultiplayerAccountEdit.class);
 		}
 		else if( v == this.cancel){
 			intent = new Intent(ProfileManager.this, Options.class);
