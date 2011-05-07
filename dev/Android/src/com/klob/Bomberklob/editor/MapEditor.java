@@ -2,30 +2,30 @@ package com.klob.Bomberklob.editor;
 
 import android.graphics.Canvas;
 
-import com.klob.Bomberklob.game.Map;
 import com.klob.Bomberklob.objects.HumanPlayer;
 import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.PlayerAnimations;
+import com.klob.Bomberklob.resources.EditorMap;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
 public class MapEditor {
 
-	private Map map;
+	private EditorMap map;
 	private Objects[] players;
 
 	/* Constructeur -------------------------------------------------------- */
 
 	public MapEditor (String mapName) {
 		this.players = new Player[4];
-		this.map = new Map();
+		this.map = new EditorMap();
 		loadMap(mapName);
 	}
 
 	/* Getteurs ------------------------------------------------------------ */
 
-	public Map getMap() {
+	public EditorMap getMap() {
 		return map;
 	}
 
@@ -76,7 +76,7 @@ public class MapEditor {
 	public void loadMap(String mapName) {
 
 		if ( !map.loadMap(mapName) ) {
-			map = new Map();
+			map = new EditorMap();
 			map.setName(mapName);
 
 			Objects o = ResourcesManager.getObjects().get("block1").copy();

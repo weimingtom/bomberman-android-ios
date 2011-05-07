@@ -3,10 +3,11 @@ package com.klob.Bomberklob.game;
 import android.graphics.Canvas;
 
 import com.klob.Bomberklob.objects.Player;
+import com.klob.Bomberklob.resources.GameMap;
 
 public abstract class Game {
 
-	protected Map map;
+	protected GameMap map;
 	protected Player[] players;
 	protected GameType gameType;
 
@@ -15,24 +16,28 @@ public abstract class Game {
 	/* Constructeurs  ------------------------------------------------------ */
 
 	public Game(String mapName, int enemies, String gametype, boolean random) {
-		this.map = new Map();
+		this.map = new GameMap();
 		if ( this.map.loadMap(mapName) ) {
 			this.players = new Player[enemies+1];
-			this.random = random;
-		}
+			this.random = random;			
 
-		if ( gametype.equals("FreeForAll") ) {
-			this.gameType = new FreeForAll();
+			if ( gametype.equals("FreeForAll") ) {
+				this.gameType = new FreeForAll();
+			}
+			else {
+				
+			}
 		}
 		else {
 			//FIXME Erreur de chargement de la carte
-		}			
+		}
+			
 	}
 
 
 	/* Getters ------------------------------------------------------------- */
 
-	public Map getMap() {
+	public GameMap getMap() {
 		return map;
 	}
 
@@ -56,7 +61,7 @@ public abstract class Game {
 
 	public void onDraw(Canvas canvas, int size) {
 		
-		this.map.gameOnDraw(canvas, size);
+		this.map.onDraw(canvas, size);
 
 		for (int i = 0 ; i < this.players.length ; i++ ) {
 			if ( this.players[i].getPosition() != null ) {

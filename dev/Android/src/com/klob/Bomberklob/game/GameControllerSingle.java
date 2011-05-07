@@ -35,7 +35,7 @@ public class GameControllerSingle extends GameController {
 	@Override
 	public void surfaceCreated(SurfaceHolder arg0) {
 		super.surfaceCreated(arg0);
-		this.setLayoutParams(new FrameLayout.LayoutParams(this.engine.getSingle().getMap().getBlocks().length*this.objectsSize, this.engine.getSingle().getMap().getBlocks()[0].length*this.objectsSize));
+		this.setLayoutParams(new FrameLayout.LayoutParams(this.engine.getSingle().getMap().getWidth()*this.objectsSize, this.engine.getSingle().getMap().getHeight()*this.objectsSize));
 	}
 
 	@Override
@@ -55,12 +55,12 @@ public class GameControllerSingle extends GameController {
 	}
 
 	@Override
-	public void update() {
-		if ( !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(animation.getLabel() ) ) {
-			engine.getSingle().getPlayers()[0].setCurrentAnimation(animation);
-		}
-		
+	public void update() {		
 		if ( this.isEnabled() ) {
+			if ( !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(animation.getLabel() ) ) {
+				engine.getSingle().getPlayers()[0].setCurrentAnimation(animation);
+			}
+			
 			this.engine.update();
 		}
 	}
@@ -83,8 +83,7 @@ public class GameControllerSingle extends GameController {
 	public void restartGame() {
 		
 		/* Animation du joueur par defaut */
-		this.animation = PlayerAnimations.IDLE;
-		
+		this.animation = PlayerAnimations.IDLE;		
 		this.engine.restartGame();
 	}
 }
