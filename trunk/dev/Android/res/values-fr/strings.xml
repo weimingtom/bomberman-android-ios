@@ -36,6 +36,7 @@
 	<string name="ErrorPassword">Le mot de passe et sa vérification doivent être identiques</string>
 	<string name="ErrorPseudo">Ce pseudonyme est déjà utilisé</string>
 	<string name="ErrorUserMissing">Veuillez créer un compte multijoueurs</string>
+	<string name="ErrorUserName">Le pseudonyme entré n\'est pas valide</string>
 	
 		
 	<!-- F -->

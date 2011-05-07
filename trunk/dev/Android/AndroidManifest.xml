@@ -36,9 +36,6 @@
 		<activity android:screenOrientation="landscape" android:name=".menus.ProfileManager"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
-		<activity android:screenOrientation="landscape"
-			android:name=".menus.CreateAccountOffline" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
-
 
 		<activity android:name=".menus.NewAccountOffline"
 			android:screenOrientation="landscape"

@@ -21,8 +21,8 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.klob.Bomberklob.menus.CreateAccountOffline;
 import com.klob.Bomberklob.menus.Home;
+import com.klob.Bomberklob.menus.NewAccountOffline;
 import com.klob.Bomberklob.model.Model;
 import com.klob.Bomberklob.resources.EditorMap;
 import com.klob.Bomberklob.resources.ResourcesManager;
@@ -160,7 +160,7 @@ public class Main extends Activity {
 							e.printStackTrace();
 						}
 
-						intent = new Intent(context, CreateAccountOffline.class);
+						intent = new Intent(context, NewAccountOffline.class);
 					}
 					else {
 						intent = new Intent(context, Home.class);

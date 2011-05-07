@@ -262,7 +262,7 @@ public class Engine {
 
 														if (distance[h][v] == d) {
 
-															if ( colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.GAPE && distance[h][v+1]==0) {
+															if ( colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.DAMAGE && distance[h][v+1]==0) {
 																System.out.println("BAS");
 																if ( colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.DANGEROUS_AREA ) {
 																	pa = direction[h][v];
@@ -274,7 +274,7 @@ public class Engine {
 																}
 															}
 
-															if ( colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.GAPE && distance[h][v-1]==0) {
+															if ( colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.DAMAGE && distance[h][v-1]==0) {
 																System.out.println("HAUT : " + colisionMap.get(new Point(h, v-1)) + "(" + h +","+ (v-1)+")");
 																if ( colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.DANGEROUS_AREA ) {
 																	pa = direction[h][v];
@@ -286,7 +286,7 @@ public class Engine {
 																}
 															}
 
-															if ( colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.GAPE && distance[h+1][v]==0) {
+															if ( colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.DAMAGE && distance[h+1][v]==0) {
 																System.out.println("DROITE : " + colisionMap.get(new Point(h+1, v)));
 																if ( colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.DANGEROUS_AREA ) {
 																	System.out.println("ON BOUGE VERS LE : " + direction[h][v]);
@@ -299,7 +299,7 @@ public class Engine {
 																}
 															}
 
-															if ( colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.GAPE && distance[h-1][v]==0) {
+															if ( colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.DAMAGE && distance[h-1][v]==0) {
 																System.out.println("GAUCHE");
 																if ( colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.DANGEROUS_AREA ) {
 																	pa = direction[h][v];
@@ -491,7 +491,6 @@ public class Engine {
 		}
 	}
 
-
 	private void moveUp(Player player) {
 
 		this.x = player.getPosition().x;
@@ -555,7 +554,6 @@ public class Engine {
 		player.setPosition(new Point(this.x, this.y));		
 	}
 
-
 	private void moveDown(Player player) {
 
 		this.x = player.getPosition().x;
@@ -617,7 +615,6 @@ public class Engine {
 		}		
 		player.setPosition(new Point(this.x, this.y));		
 	}
-
 
 	private void moveRight(Player player) {
 
@@ -681,7 +678,6 @@ public class Engine {
 		player.setPosition(new Point(this.x, this.y));
 	}
 
-
 	private void moveLeft(Player player) {
 
 		this.x = player.getPosition().x;
@@ -743,7 +739,6 @@ public class Engine {
 		}		
 		player.setPosition(new Point(this.x, this.y));			
 	}
-
 
 	private void upRight(Player player) {		
 		moveRight(player);
@@ -977,7 +972,7 @@ public class Engine {
 							animatedObjects.put(new Point(p.x+k,p.y), object);
 						}
 						else {
-							object = ResourcesManager.getObjects().get("fireleft").copy();
+							object = ResourcesManager.getObjects().get("fireright").copy();
 							object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
 							animatedObjects.put(new Point(p.x+k,p.y), object);
 						}
@@ -1000,7 +995,7 @@ public class Engine {
 								animatedObjects.put(new Point(p.x+k,p.y), object);
 							}
 							else {
-								object = ResourcesManager.getObjects().get("fireleft").copy();
+								object = ResourcesManager.getObjects().get("fireright").copy();
 								object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
 								animatedObjects.put(new Point(p.x+k,p.y), object);
 							}
