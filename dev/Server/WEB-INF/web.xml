@@ -1,0 +1,57 @@
+<web-app>
+	<servlet>
+		<servlet-class>servlet.ServletConnection</servlet-class>
+		<servlet-name>connection</servlet-name>
+	</servlet>
+	
+	<servlet>
+		<servlet-class>servlet.ServletConnectionGame</servlet-class>
+		<servlet-name>connectiongame</servlet-name>
+	</servlet>
+	
+	<servlet>
+		<servlet-class>servlet.ServletCreateGame</servlet-class>
+		<servlet-name>creategame</servlet-name>
+	</servlet>
+	
+	<servlet>
+		<servlet-class>servlet.ServletGamesList</servlet-class>
+		<servlet-name>gameslist</servlet-name>
+	</servlet>
+	
+	<servlet>
+		<servlet-class>servlet.ServletManageGame</servlet-class>
+		<servlet-name>managegame</servlet-name>
+	</servlet>
+	
+	
+	<servlet-mapping>
+		<servlet-name>connection</servlet-name>
+		<url-pattern>/connection</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>connectiongame</servlet-name>
+		<url-pattern>/connectiongame</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>creategame</servlet-name>
+		<url-pattern>/creategame</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>gameslist</servlet-name>
+		<url-pattern>/gameslist</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>managegame</servlet-name>
+		<url-pattern>/managegame</url-pattern>
+	</servlet-mapping>
+	
+	<listener>
+		<listener-class>servlet.ContextListener</listener-class>
+	</listener>
+
+</web-app>
