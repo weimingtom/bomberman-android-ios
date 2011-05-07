@@ -3,39 +3,44 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
 	android:orientation="vertical" android:background="@color/Gray">
-	
+
 	<LinearLayout android:id="@+id/linearLayout1"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
 		android:orientation="horizontal">
 
-		<EditText android:layout_height="wrap_content"
-			android:id="@+id/editText1" android:layout_width="250dip" android:layout_marginLeft="5dip"
+		<EditText android:layout_height="wrap_content" android:id="@+id/editText1"
+			android:layout_width="250dip" android:layout_marginLeft="5dip"
 			android:layout_gravity="center_horizontal"></EditText>
-			
+
 		<ImageButton android:id="@+id/buttonRefresh"
 			android:layout_width="wrap_content" style="@android:style/Widget.Button.Small"
 			android:background="@drawable/refresh" android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical" android:layout_marginLeft="20dip" />
 
+		<ListView android:id="@+id/listGamesView"
+			android:layout_width="fill_parent" android:layout_height="fill_parent">
+		</ListView>
+
 	</LinearLayout>
 
 	<LinearLayout android:id="@+id/linearLayout2"
-		android:layout_width="wrap_content" android:layout_margin="5dip" android:layout_height="240dip">
+		android:layout_width="wrap_content" android:layout_margin="5dip"
+		android:layout_height="240dip">
 
 	</LinearLayout>
 
 	<Button android:id="@+id/buttonCancel" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:layout_gravity="left"
-		android:textSize="13dip"
-		android:padding="13dip" android:layout_alignParentBottom="true"
-		android:layout_alignParentLeft="true" android:text="@string/Back"/>
+		android:textSize="13dip" android:padding="13dip"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true" android:text="@string/Back" />
 
 
 	<Button android:id="@+id/buttonCreateGame" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:layout_gravity="left"
-		android:textSize="13dip"
-		android:padding="13dip" android:layout_alignParentBottom="true"
-		android:layout_alignParentRight="true" android:text="@string/Create"/>
+		android:textSize="13dip" android:padding="13dip"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true" android:text="@string/Create" />
 
 
 </RelativeLayout>
