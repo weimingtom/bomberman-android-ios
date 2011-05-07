@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private GameControllerSingle gameControllerSingle;
 
 	private ObjectsGallery bombsGallery;
-	private LinearLayout singlePlayerControllerLayout, singlePlayerLinearLayoutMenu, singlePlayerLinearLayoutStart, singlePlayerLinearLayoutBonus1, singlePlayerLinearLayoutBonus2, singlePlayerLinearLayoutBonus3, singlePlayerLinearLayoutBonus4, singlePlayerLinearLayoutEnd;
+	private LinearLayout singlePlayerControllerLayout, singlePlayerLinearLayoutMenu, singlePlayerLinearLayoutStart, singlePlayerLinearLayoutBonus1, singlePlayerLinearLayoutBonus2, singlePlayerLinearLayoutBonus3, singlePlayerLinearLayoutBonus4, singlePlayerLinearLayoutEnd, singlePlayerLinearLayoutMultiTouch;
 	private RelativeLayout singlePlayerRelativeLayoutObjectsGallery, singlePlayerRelativeLayoutMenu;
 	private FrameLayout singlePlayerFrameLayoutGame, singlePlayerFrameLayoutBombsGallery;
 
@@ -60,6 +61,9 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private Handler handler;
 	
 	private MediaPlayer mp;
+	
+	private Rect menuRect = new Rect(), bombRect = new Rect(), gameRect = new Rect();
+	private int pointerId = -1, nbPointer = -1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -72,7 +76,57 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);	
+		
+		this.singlePlayerLinearLayoutMultiTouch = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutMultiTouch);
+		this.singlePlayerLinearLayoutMultiTouch.setOnTouchListener(new OnTouchListener() {
 
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+				
+				int[] t = new int[2];
+				menu.getLocationOnScreen(t);
+				menuRect = new Rect(t[0], t[1], t[0]+menu.getWidth(), t[1]+menu.getHeight());
+				bomb.getLocationOnScreen(t);
+				bombRect = new Rect(t[0], t[1], t[0]+bomb.getWidth(), t[1]+bomb.getHeight());
+				singlePlayerControllerLayout.getLocationOnScreen(t);
+				gameRect = new Rect(t[0], t[1], t[0]+singlePlayerControllerLayout.getWidth(), t[1]+singlePlayerControllerLayout.getHeight());
+				
+				if ( nbPointer != arg1.getPointerCount() ) {
+					if ( arg1.findPointerIndex(pointerId) == -1 ) {
+						gameControllerSingle.onTouchEvent(MotionEvent.ACTION_UP, 0, 0);
+						pointerId = -1;	
+						nbPointer = -1;
+					}
+				}
+				
+				if ( arg1.getAction() == MotionEvent.ACTION_DOWN || arg1.getAction() == MotionEvent.ACTION_MOVE) {
+					for (int i = 0 ; i < arg1.getPointerCount() ; i++ ) {
+						
+						if ( menuRect.contains((int) arg1.getX(i),(int) arg1.getY(i)))	{
+							onClick(menu);
+						}
+						else if ( bombRect.contains((int) arg1.getX(i),(int) arg1.getY(i)))	{
+							onClick(bomb);
+						}
+						else if ( gameRect.contains((int) arg1.getX(i),(int) arg1.getY(i)))	{
+							if ( arg1.findPointerIndex(pointerId) == i ) {
+								gameControllerSingle.onTouchEvent(MotionEvent.ACTION_MOVE, (int) arg1.getX(i), (int) arg1.getY(i));
+							}
+							else {
+								pointerId = arg1.getPointerId(i);
+								nbPointer = arg1.getPointerCount();
+								gameControllerSingle.onTouchEvent(MotionEvent.ACTION_DOWN, (int) arg1.getX(i), (int) arg1.getY(i));
+							}
+						}
+					}					
+				}
+				else if ( arg1.getAction() == MotionEvent.ACTION_UP ) {
+					gameControllerSingle.onTouchEvent(MotionEvent.ACTION_UP, 0, 0);
+					pointerId = -1;				
+				}				
+				return true;
+			}
+		});
+		
 		this.singlePlayerRelativeLayoutMenu = (RelativeLayout) findViewById(R.id.SinglePlayerRelativeLayoutMenu);
 		this.singlePlayerRelativeLayoutMenu.setLayoutParams(new LinearLayout.LayoutParams( ResourcesManager.getWidth(), (int) (menuSize*ResourcesManager.getDpiPx())) );
 
@@ -80,24 +134,14 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.singlePlayerRelativeLayoutObjectsGallery.setLayoutParams(new LinearLayout.LayoutParams( (int) (menuSize*ResourcesManager.getDpiPx()), (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())) ) );
 
 		this.singlePlayerFrameLayoutGame = (FrameLayout) findViewById(R.id.SinglePlayerFrameLayoutGame);
-
+	
 		this.singlePlayerControllerLayout = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutEditorController);
 		this.singlePlayerControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())) ) );
-		this.singlePlayerControllerLayout.setOnTouchListener(new OnTouchListener() {
-
-			public boolean onTouch(View arg0, MotionEvent arg1) {
-				gameControllerSingle.onTouchEvent(arg1);
-				return true;
-			}
-		});	
 
 		this.singlePlayerFrameLayoutBombsGallery = (FrameLayout) findViewById(R.id.SinglePlayerFrameLayoutBombsGallery);
 
 		this.menu = (Button) findViewById(R.id.SinglePlayerButtonMenu);
-		this.menu.setOnClickListener(this);
-
 		this.bomb = (ImageButton) findViewById(R.id.SinglePlayerButtonBomb);
-		this.bomb.setOnClickListener(this);
 
 		this.resume = (Button) findViewById(R.id.SinglePlayerMenuResume);
 		this.resume.setOnClickListener(this);
@@ -117,7 +161,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.restart2 = (Button) findViewById(R.id.SinglePlayerLinearLayoutEndButtonRestart);
 		this.restart2.setOnClickListener(this);
 		
-		
 		this.singlePlayerLinearLayoutBonus1 = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutBonus1);
 		this.singlePlayerLinearLayoutBonus1.setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
 		
@@ -129,7 +172,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		
 		this.singlePlayerLinearLayoutBonus4 = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutBonus4);
 		this.singlePlayerLinearLayoutBonus4.setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
-		
 		
 		this.imageView[0] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer0);
 		this.imageView[0].setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
@@ -151,7 +193,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.playerlife.setTextColor(Color.WHITE);
 		this.playerspeed = (TextView) findViewById(R.id.SinglePlayerTextViewPlayerSpeed);
 		this.playerspeed.setTextColor(Color.WHITE);
-
 
 		this.handler = new Handler() {
 			@Override
@@ -211,8 +252,9 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 
 		this.singlePlayerLinearLayoutEnd.setVisibility(View.INVISIBLE);
 		this.singlePlayerLinearLayoutMenu.setVisibility(View.INVISIBLE);
-
-		this.initGame();
+		this.singlePlayerLinearLayoutMultiTouch.setVisibility(View.INVISIBLE);
+		
+		this.initGame();		
 	}
 
 	@Override
@@ -399,17 +441,15 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	public void pauseGame() {
 		this.bombsGallery.setEnabled(false);
 		this.gameControllerSingle.setEnabled(false);
-		this.bomb.setClickable(false);
-		this.menu.setClickable(false);
 		this.setTimeThreadRunning(false);
+		this.singlePlayerLinearLayoutMultiTouch.setVisibility(View.INVISIBLE);
 	}
 
 	public void resumeGame() {
 		this.bombsGallery.setEnabled(true);
 		this.gameControllerSingle.setEnabled(true);
-		this.bomb.setClickable(true);
-		this.menu.setClickable(true);
 		this.setTimeThreadRunning(true);
+		this.singlePlayerLinearLayoutMultiTouch.setVisibility(View.VISIBLE);
 	}
 	
 	public void updatePlayersStats() {

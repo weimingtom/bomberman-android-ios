@@ -40,9 +40,9 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 	public void setGameView(GameView gameView) {
 		this.gameView = gameView;
 	}
-	
+
 	/* Méthodes abstraites ------------------------------------------------- */
-	
+
 	public abstract void onDraw(Canvas canvas, int size);
 
 	public abstract void update();
@@ -79,60 +79,57 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 		Log.i("GameController", "Thread done");         
 	}
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event){
-		if (this.isEnabled()) {
-			switch (event.getAction()) {            
-			case MotionEvent.ACTION_DOWN:
-				this.x = (int) event.getX();
-				this.y = (int) event.getY();
-				break;
-			case MotionEvent.ACTION_MOVE:
-				if ( (int) event.getX() > this.x+(this.objectsSize) && (int) event.getY() > this.y+(this.objectsSize) ) {
-					animation = PlayerAnimations.DOWN_RIGHT;
-					this.x = (int) event.getX();
-					this.y = (int) event.getY();
-				}
-				else if ( (int) event.getX() > this.x+(this.objectsSize) && (int) event.getY() < this.y-(this.objectsSize) ) {
-					animation = PlayerAnimations.UP_RIGHT;
-					this.x = (int) event.getX();
-					this.y = (int) event.getY();
-				}
-				else if ( (int) event.getX() < this.x-(this.objectsSize) && (int) event.getY() < this.y-(this.objectsSize) ) {
-					animation = PlayerAnimations.UP_LEFT;
-					this.x = (int) event.getX();
-					this.y = (int) event.getY();
-				}
-				else if ( (int) event.getX() < this.x-(this.objectsSize) && (int) event.getY() > this.y+(this.objectsSize) ) {
-					animation = PlayerAnimations.DOWN_LEFT;
-					this.x = (int) event.getX();
-					this.y = (int) event.getY();
-				}
-				else if ( (int) event.getY() > this.y+(this.objectsSize) ) {
-					animation = PlayerAnimations.DOWN;
-					this.x = (int) event.getX();
-					this.y = (int) event.getY();
-				}
-				else if ( (int) event.getX() < this.x-(this.objectsSize) ) {
-					animation = PlayerAnimations.LEFT;
-					this.x = (int) event.getX();
-					this.y = (int) event.getY();
-				}
-				else if ( (int) event.getX() > this.x+(this.objectsSize) ) {
-					animation = PlayerAnimations.RIGHT;
-					this.x = (int) event.getX();
-					this.y = (int) event.getY();
-				}
-				else if ( (int) event.getY() < this.y-(this.objectsSize) ) {
-					animation = PlayerAnimations.UP;
-					this.x = (int) event.getX();
-					this.y = (int) event.getY();
-				}
-				break;
-			case MotionEvent.ACTION_UP:
-				stopPlayer();
-				break;
+	public boolean onTouchEvent(int motionEvent, int x, int y){
+		switch (motionEvent) {            
+		case MotionEvent.ACTION_DOWN:
+			this.x = x;
+			this.y = y;
+			break;
+		case MotionEvent.ACTION_MOVE:
+			if ( (int) x > this.x+(this.objectsSize) && (int) y > this.y+(this.objectsSize) ) {
+				animation = PlayerAnimations.DOWN_RIGHT;
+				this.x = (int) x;
+				this.y = (int) y;
 			}
+			else if ( (int) x > this.x+(this.objectsSize) && (int) y < this.y-(this.objectsSize) ) {
+				animation = PlayerAnimations.UP_RIGHT;
+				this.x = (int) x;
+				this.y = (int) y;
+			}
+			else if ( (int) x < this.x-(this.objectsSize) && (int) y < this.y-(this.objectsSize) ) {
+				animation = PlayerAnimations.UP_LEFT;
+				this.x = (int) x;
+				this.y = (int) y;
+			}
+			else if ( (int) x < this.x-(this.objectsSize) && (int) y > this.y+(this.objectsSize) ) {
+				animation = PlayerAnimations.DOWN_LEFT;
+				this.x = (int) x;
+				this.y = (int) y;
+			}
+			else if ( (int) y > this.y+(this.objectsSize) ) {
+				animation = PlayerAnimations.DOWN;
+				this.x = (int) x;
+				this.y = (int) y;
+			}
+			else if ( (int) x < this.x-(this.objectsSize) ) {
+				animation = PlayerAnimations.LEFT;
+				this.x = (int) x;
+				this.y = (int) y;
+			}
+			else if ( (int) x > this.x+(this.objectsSize) ) {
+				animation = PlayerAnimations.RIGHT;
+				this.x = (int) x;
+				this.y = (int) y;
+			}
+			else if ( (int) y < this.y-(this.objectsSize) ) {
+				animation = PlayerAnimations.UP;
+				this.x = (int) x;
+				this.y = (int) y;
+			}
+			break;
+		case MotionEvent.ACTION_UP:
+			stopPlayer();
+			break;
 		}
 		return true;            
 	}

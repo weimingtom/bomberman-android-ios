@@ -11,6 +11,7 @@ import com.klob.Bomberklob.objects.PlayerAnimations;
 public class GameControllerSingle extends GameController {
 	
 	private Engine engine;
+	private boolean isRestart = false;
 	
 	/* Constructeurs  ------------------------------------------------------ */
 	
@@ -45,7 +46,9 @@ public class GameControllerSingle extends GameController {
 
 	@Override
 	public void onDraw(Canvas canvas, int size) {
-		this.engine.onDraw(canvas,size);
+		if ( !isRestart ) {
+			this.engine.onDraw(canvas,size);
+		}
 	}
 
 	@Override
@@ -60,7 +63,6 @@ public class GameControllerSingle extends GameController {
 			if ( !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(animation.getLabel() ) ) {
 				engine.getSingle().getPlayers()[0].setCurrentAnimation(animation);
 			}
-			
 			this.engine.update();
 		}
 	}
@@ -81,9 +83,12 @@ public class GameControllerSingle extends GameController {
 	/* Méthodes publiques -------------------------------------------------- */
 	
 	public void restartGame() {
+		this.isRestart = true;
 		
 		/* Animation du joueur par defaut */
 		this.animation = PlayerAnimations.IDLE;		
 		this.engine.restartGame();
+		
+		this.isRestart = false;
 	}
 }
