@@ -12,6 +12,7 @@ import com.klob.Bomberklob.objects.ObjectsAnimations;
 import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.objects.exceptions.BombPowerException;
+import com.klob.Bomberklob.resources.ColisionMapObjects;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
@@ -83,56 +84,10 @@ public class Engine {
 
 			if ( this.bombs.get(p) == null ) {
 				if ( player.getBombNumber() > 0 ) {
-					ConcurrentHashMap<Point, Integer> zoneDangereuses = this.single.map.getZoneDangereuses();
 
 					/* On crée une nouvelle bombe */
 					Bomb bomb = new Bomb(player.getBombSelected(), ResourcesManager.getBombsAnimations().get(player.getBombSelected()), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, player);
 
-					/* ------- AJOUT DES ZONES DANGEREUSES POUR L'IA ------- */
-
-					/* CENTER */
-					zoneDangereuses.put(p,1);
-					
-					for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-
-						/* UP */
-						if ( zoneDangereuses.get(new Point(p.x, p.y-(k-1))) == Integer.valueOf(1) ) {
-							if ( (this.single.map.getBlocks()[p.x][p.y-k] == null) && (this.bombs.get(new Point(p.x, p.y-k)) == null) ) {
-								if ( !this.single.map.getGrounds()[p.x][p.y-k].isFireWall() ) {
-									zoneDangereuses.put(new Point(p.x, p.y-k),1);
-								}
-							}
-						}
-
-						/* DOWN */
-						if ( zoneDangereuses.get(new Point(p.x, p.y+(k-1))) == Integer.valueOf(1) ) {
-							if ( (this.single.map.getBlocks()[p.x][p.y+k] == null) && (this.bombs.get(new Point(p.x, p.y+k)) == null) ) {
-								if ( !this.single.map.getGrounds()[p.x][p.y+k].isFireWall() ) {
-									zoneDangereuses.put(new Point(p.x, p.y+k),1);
-								}
-							}
-						}
-						
-						/* LEFT */
-						if ( zoneDangereuses.get(new Point(p.x-(k-1), p.y)) == Integer.valueOf(1) ) {
-							if ( (this.single.map.getBlocks()[p.x-k][p.y] == null) && (this.bombs.get(new Point(p.x-k, p.y)) == null) ) {
-								if ( !this.single.map.getGrounds()[p.x-k][p.y].isFireWall() ) {
-									zoneDangereuses.put(new Point(p.x-k, p.y),1);
-								}								
-							}
-						}
-						
-						/* RIGHT */
-						if ( zoneDangereuses.get(new Point(p.x+(k-1), p.y)) == Integer.valueOf(1) ) {
-							if ( (this.single.map.getBlocks()[p.x+k][p.y] == null) && (this.bombs.get(new Point(p.x+k, p.y)) == null) ) {
-								if ( !this.single.map.getGrounds()[p.x+k][p.y].isFireWall() ) {
-									zoneDangereuses.put(new Point(p.x+k, p.y),1);
-								}
-							}
-						}
-					}
-
-					/* FIN DES ZONES DANGEREUSES */
 
 					/* Coordonnées de la bombe posée */
 					bomb.setPosition(ResourcesManager.tileToCo(p.x, p.y));
@@ -142,6 +97,9 @@ public class Engine {
 
 					/* On l'ajoute dans la hash map de bombes */
 					this.bombs.put(p, bomb);
+
+					/* Zone dangereuses */
+					this.single.map.colisionMapUpdate(bomb);
 
 					/* On diminue la quantité des bombes que peut poser le joueur */
 					try {
@@ -165,7 +123,7 @@ public class Engine {
 
 	public void update() {
 		Player[] players = this.single.getPlayers();
-		ConcurrentHashMap<Point, Integer> zoneDangereuses = this.single.map.getZoneDangereuses();
+		ConcurrentHashMap<Point, ColisionMapObjects> colisionMap = this.single.map.getColisionMap();
 
 		/* Bombes -------------------------------------------------- */
 
@@ -206,7 +164,7 @@ public class Engine {
 								if ( players[i].getObjectif() == null ) {
 									/* Defensif (On est dans une zone dangereuse) */
 
-									if ( zoneDangereuses.get(point1) == Integer.valueOf(1) ) {
+									if ( colisionMap.get(point1) == ColisionMapObjects.DANGEROUS_AREA ) {
 
 										int x = point1.x;
 										int y = point1.y;
@@ -217,21 +175,21 @@ public class Engine {
 										/* On regarde les 8 cases nous entourant */
 										for (int h = point1.x-1; h < point1.x+2 ; h++ ) {
 											for (int v = point1.y-1; v < point1.y+2 ; v++ ) {	
-												if ( zoneDangereuses.get(new Point(h,v)) != Integer.valueOf(1) && isNotSolidBlock(h,v) && !this.single.map.getGrounds()[h][v].isHit()) {
+												if ( colisionMap.get(new Point(h,v)) == ColisionMapObjects.EMPTY ) {
 													/* Diagonales */
 													if ( point1.x != h && point1.y != v ) {
 														if ( h > point1.x ) {
 															if ( v > point1.y ) {
-																if ( isNotSolidBlock(h-1, v) && !this.single.map.getGrounds()[h-1][v].isHit()) {
-																	if ( isNotSolidBlock(h, v-1) && !this.single.map.getGrounds()[h][v-1].isHit()) {
+																if ( colisionMap.get(new Point(h-1, v)) == ColisionMapObjects.EMPTY ) {
+																	if ( colisionMap.get(new Point(h, v-1)) == ColisionMapObjects.EMPTY ) {
 																		x = h;
 																		y = v;
 																	}
 																}															
 															}
 															else {
-																if ( isNotSolidBlock(h-1, v) && !this.single.map.getGrounds()[h-1][v].isHit() ) {
-																	if ( isNotSolidBlock(h, v+1) && !this.single.map.getGrounds()[h][v+1].isHit() ) {
+																if ( colisionMap.get(new Point(h-1, v)) == ColisionMapObjects.EMPTY ) {
+																	if ( colisionMap.get(new Point(h, v+1)) == ColisionMapObjects.EMPTY ) {
 																		x = h;
 																		y = v;
 																	}
@@ -240,16 +198,16 @@ public class Engine {
 														}
 														else {
 															if ( v > point1.y ) {
-																if ( isNotSolidBlock(h+1, v) && !this.single.map.getGrounds()[h+1][v].isHit() ) {
-																	if ( isNotSolidBlock(h, v-1) && !this.single.map.getGrounds()[h][v-1].isHit() ) {
+																if ( colisionMap.get(new Point(h+1, v)) == ColisionMapObjects.EMPTY ) {
+																	if ( colisionMap.get(new Point(h, v-1)) == ColisionMapObjects.EMPTY ) {
 																		x = h;
 																		y = v;
 																	}
 																}	
 															}
 															else {
-																if ( isNotSolidBlock(h+1, v) && !this.single.map.getGrounds()[h+1][v].isHit() ) {
-																	if ( isNotSolidBlock(h, v+1) && !this.single.map.getGrounds()[h][v+1].isHit() ) {
+																if ( colisionMap.get(new Point(h+1, v)) == ColisionMapObjects.EMPTY ) {
+																	if ( colisionMap.get(new Point(h, v+1)) == ColisionMapObjects.EMPTY ) {
 																		x = h;
 																		y = v;
 																	}
@@ -267,37 +225,46 @@ public class Engine {
 
 										if ( x == point1.x && y == point1.y ) {
 
-											int[][] distance = new int[21][15];
-											PlayerAnimations[][] direction = new PlayerAnimations[21][15];
+											int[][] distance = new int[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
+											PlayerAnimations[][] direction = new PlayerAnimations[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
 											PlayerAnimations pa = null;
 
 											distance[x][y] = 1;
 
-											if ( isNotSolidBlock(x+1, y) && !this.single.map.getGrounds()[x+1][y].isHit() ) {
+											if ( colisionMap.get(new Point(x+1, y)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(x+1, y)) != ColisionMapObjects.GAPE ) {
 												distance[x+1][y] = 1;
 												direction[x+1][y] = PlayerAnimations.RIGHT;
 											}
-											if ( isNotSolidBlock(x-1, y) && !this.single.map.getGrounds()[x-1][y].isHit() ) {
+											if ( colisionMap.get(new Point(x-1, y)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(x-1, y)) != ColisionMapObjects.GAPE) {
 												distance[x-1][y] = 1;
 												direction[x-1][y] = PlayerAnimations.LEFT;
 											}
-											if ( isNotSolidBlock(x, y+1) && !this.single.map.getGrounds()[x][y+1].isHit() ) {
+											if ( colisionMap.get(new Point(x, y+1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(x, y+1)) != ColisionMapObjects.GAPE ) {
 												distance[x][y+1] = 1;
 												direction[x][y+1] = PlayerAnimations.DOWN;
 											}
-											if ( isNotSolidBlock(x, y-1) && !this.single.map.getGrounds()[x][y-1].isHit() ) {
+											if ( colisionMap.get(new Point(x, y-1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(x, y-1)) != ColisionMapObjects.GAPE ) {
 												distance[x][y-1] = 1;
 												direction[x][y-1] = PlayerAnimations.UP;
-											}											
+											}	
+
+											for ( int v = 0 ; v < 15 ; v++ ) {
+												for ( int h = 0; h < 21 ; h++ ) {
+													System.out.print(colisionMap.get(new Point(h,v)) + "\t");
+												}
+												System.out.println();
+											}
+
 
 											for (int d = 1; d < 50; d++) {
 												for ( int h = 0; h < 21 ; h++ ) {
 													for ( int v = 0 ; v < 15 ; v++ ) {
-	
+
 														if (distance[h][v] == d) {
 
-															if (isNotSolidBlock(h, v+1) && !this.single.map.getGrounds()[h][v+1].isHit() && distance[h][v+1]==0) {
-																if ( zoneDangereuses.get(new Point(h,v+1)) != Integer.valueOf(1) ) {
+															if ( colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.GAPE && distance[h][v+1]==0) {
+																System.out.println("BAS");
+																if ( colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.DANGEROUS_AREA ) {
 																	pa = direction[h][v];
 																	break;
 																}
@@ -306,9 +273,10 @@ public class Engine {
 																	distance[h][v+1]=d+1;
 																}
 															}
-															
-															if (isNotSolidBlock(h, v-1) && !this.single.map.getGrounds()[h][v-1].isHit() && distance[h][v-1]==0) {
-																if ( zoneDangereuses.get(new Point(h,v-1)) != Integer.valueOf(1) ) {
+
+															if ( colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.GAPE && distance[h][v-1]==0) {
+																System.out.println("HAUT : " + colisionMap.get(new Point(h, v-1)) + "(" + h +","+ (v-1)+")");
+																if ( colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.DANGEROUS_AREA ) {
 																	pa = direction[h][v];
 																	break;
 																}
@@ -318,8 +286,10 @@ public class Engine {
 																}
 															}
 
-															if (isNotSolidBlock(h+1, v) && !this.single.map.getGrounds()[h+1][v].isHit() && distance[h+1][v]==0) {
-																if ( zoneDangereuses.get(new Point(h+1,v)) != Integer.valueOf(1) ) {
+															if ( colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.GAPE && distance[h+1][v]==0) {
+																System.out.println("DROITE : " + colisionMap.get(new Point(h+1, v)));
+																if ( colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.DANGEROUS_AREA ) {
+																	System.out.println("ON BOUGE VERS LE : " + direction[h][v]);
 																	pa = direction[h][v];
 																	break;
 																}
@@ -329,8 +299,9 @@ public class Engine {
 																}
 															}
 
-															if (isNotSolidBlock(h-1, v) && !this.single.map.getGrounds()[h-1][v].isHit() && distance[h-1][v]==0) {
-																if ( zoneDangereuses.get(new Point(h-1,v)) != Integer.valueOf(1) ) {
+															if ( colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.GAPE && distance[h-1][v]==0) {
+																System.out.println("GAUCHE");
+																if ( colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.DANGEROUS_AREA ) {
 																	pa = direction[h][v];
 																	break;
 																}
@@ -341,17 +312,17 @@ public class Engine {
 															}
 														}
 													}
-													
+
 													if ( pa != null ) {
 														break;
 													}
 												}
-												
+
 												if ( pa != null ) {
 													break;
 												}
 											}	
-											
+
 											if ( pa == PlayerAnimations.RIGHT) {
 												x += 1;										
 											}
@@ -456,7 +427,7 @@ public class Engine {
 
 							/* On vérifie que le joueur n'est pas sur une case lui causant des dommages */
 							if ( players[i].isDestructible() ) {
-								if ( (this.single.map.getAnimatedObjects().get(point1) != null && this.single.map.getAnimatedObjects().get(point1).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point2) != null && this.single.map.getAnimatedObjects().get(point2).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point3) != null && this.single.map.getAnimatedObjects().get(point3).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point4) != null && this.single.map.getAnimatedObjects().get(point4).getDamage() != 0) || (this.single.map.getGrounds()[point1.x][point1.y] != null && this.single.map.getGrounds()[point1.x][point1.y].getDamage() != 0) || (this.single.map.getGrounds()[point1.x][point1.y] != null && this.single.map.getGrounds()[point2.x][point2.y].getDamage() != 0) || (this.single.map.getGrounds()[point3.x][point3.y] != null && this.single.map.getGrounds()[point3.x][point3.y].getDamage() != 0) || (this.single.map.getGrounds()[point4.x][point4.y] != null && this.single.map.getGrounds()[point4.x][point4.y].getDamage() != 0) ) {
+								if ( (this.single.map.getAnimatedObjects().get(point1) != null && this.single.map.getAnimatedObjects().get(point1).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point2) != null && this.single.map.getAnimatedObjects().get(point2).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point3) != null && this.single.map.getAnimatedObjects().get(point3).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point4) != null && this.single.map.getAnimatedObjects().get(point4).getDamage() != 0)  ) {
 									players[i].decreaseLife();
 									if ( players[i].getLife() == 0 ) {
 										players[i].setCurrentAnimation(PlayerAnimations.KILL);
@@ -489,10 +460,6 @@ public class Engine {
 		this.setBombThreadRunning(false);
 
 		this.single.restartGame();		
-	}
-
-	public boolean isNotSolidBlock(int x, int y) {
-		return ((this.bombs.get(new Point(x,y)) == null) && ((this.single.map.getBlocks()[x][y] == null) || !this.single.map.getBlocks()[x][y].isHit() || ((this.single.map.getBlocks()[x][y].isDestructible() && ((this.single.map.getAnimatedObjects().get(new Point(x,y)) == null) || !this.single.map.getAnimatedObjects().get(new Point(x,y)).isHit())))));
 	}
 
 	/* Méthodes privées ---------------------------------------------------- */
@@ -529,6 +496,8 @@ public class Engine {
 
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
+		ConcurrentHashMap<Point, ColisionMapObjects> colisionMap = this.single.map.getColisionMap();
+
 
 		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
 			if ( this.y > this.size ) {
@@ -543,26 +512,16 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
-					if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y) ) {
-						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
-							if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
-								this.y--;
-							}
-							else if ( isNotSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
-								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-									this.y--;
-								}
-								else {
-									if ( this.x < ((this.currentTile.x*this.size)+(this.size/2)) ) {
-										this.x--;
-									}
-									else {
-										break;
-									}
-								}
+					if ( colisionMap.get(this.nextTile) != ColisionMapObjects.BLOCK && colisionMap.get(this.nextTile) != ColisionMapObjects.GAPE ) {
+						if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
+							this.y--;
+						}
+						else {
+							if ( colisionMap.get(new Point(this.nextTile.x+1 , this.nextTile.y)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(this.nextTile.x+1 , this.nextTile.y)) != ColisionMapObjects.GAPE) {
+								this.y--;								
 							}
 							else {
-								if ( this.x <= ((this.currentTile.x*this.size)+(this.size/2)) ) {
+								if ( this.x < ((this.currentTile.x*this.size)+(this.size/2)) ) {
 									this.x--;
 								}
 								else {
@@ -570,34 +529,11 @@ public class Engine {
 								}
 							}
 						}
-						else {
-							if ( isNotSolidBlock(this.nextTile.x+1, this.nextTile.y) ) {
-								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-									if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
-										this.x++;
-									}
-									else {
-										break;
-									}
-								}
-								else {
-									break;
-								}
-							}
-							else {
-								break;
-							}
-						}
 					}
 					else {
-						if ( isNotSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
-							if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-								if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
-									this.x++;
-								}
-								else {
-									break;
-								}
+						if ( colisionMap.get(new Point(this.nextTile.x+1 , this.nextTile.y)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(this.nextTile.x+1 , this.nextTile.y)) != ColisionMapObjects.GAPE ) {
+							if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
+								this.x++;
 							}
 							else {
 								break;
@@ -624,9 +560,10 @@ public class Engine {
 
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
+		ConcurrentHashMap<Point, ColisionMapObjects> colisionMap = this.single.map.getColisionMap();
 
 		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
-			if ( this.y < (this.size*(this.single.map.getBlocks()[0].length-1)) ) {
+			if ( this.y < (this.size*(this.single.map.getHeight()-1)) ) {
 
 				if (player.getObjectif() != null) {
 					if (player.getObjectif().y == this.y) {
@@ -638,26 +575,16 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y+this.size-1);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
-					if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y) ) {
-						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
-							if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
-								this.y++;
-							}
-							else if ( isNotSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
-								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-									this.y++;
-								}
-								else {
-									if ( this.x < ((this.currentTile.x*this.size)+(this.size/2)) ) {
-										this.x--;
-									}
-									else {
-										break;
-									}
-								}
+					if ( colisionMap.get(this.nextTile) != ColisionMapObjects.BLOCK && colisionMap.get(this.nextTile) != ColisionMapObjects.GAPE ) {
+						if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
+							this.y++;
+						}
+						else {
+							if ( colisionMap.get(new Point(this.nextTile.x+1 , this.nextTile.y)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(this.nextTile.x+1 , this.nextTile.y)) != ColisionMapObjects.GAPE ) {
+								this.y++;								
 							}
 							else {
-								if ( this.x <= ((this.currentTile.x*this.size)+(this.size/2)) ) {
+								if ( this.x < ((this.currentTile.x*this.size)+(this.size/2)) ) {
 									this.x--;
 								}
 								else {
@@ -665,34 +592,11 @@ public class Engine {
 								}
 							}
 						}
-						else {
-							if ( isNotSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
-								if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-									if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
-										this.x++;
-									}
-									else {
-										break;
-									}
-								}
-								else {
-									break;
-								}
-							}
-							else {
-								break;
-							}
-						}
 					}
 					else {
-						if ( isNotSolidBlock(this.nextTile.x+1 , this.nextTile.y) ) {
-							if ( !this.single.map.getGrounds()[this.nextTile.x+1][this.nextTile.y].isHit() ) {
-								if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
-									this.x++;
-								}
-								else {
-									break;
-								}
+						if ( colisionMap.get(new Point(this.nextTile.x+1 , this.nextTile.y)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(this.nextTile.x+1 , this.nextTile.y)) != ColisionMapObjects.GAPE ) {
+							if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
+								this.x++;
 							}
 							else {
 								break;
@@ -705,7 +609,7 @@ public class Engine {
 				}
 				else {
 					this.y++;
-				}
+				}				
 			}
 			else {
 				break;
@@ -719,9 +623,10 @@ public class Engine {
 
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
+		ConcurrentHashMap<Point, ColisionMapObjects> colisionMap = this.single.map.getColisionMap();
 
 		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
-			if ( this.x < (this.size*(this.single.map.getBlocks().length-1)) ) {
+			if ( this.x < (this.size*(this.single.map.getWidth()-1)) ) {
 
 				if (player.getObjectif() != null) {
 					if (player.getObjectif().x == this.x) {
@@ -733,26 +638,16 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x+this.size-1, this.y);
 
 				if ( this.nextTile.x != this.currentTile.x ) {
-					if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y) ) {
-						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
-							if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
-								this.x++;
-							}
-							else if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
-								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-									this.x++;
-								}
-								else {
-									if ( this.y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
-										this.y--;
-									}
-									else {
-										break;
-									}
-								}
+					if ( colisionMap.get(this.nextTile) != ColisionMapObjects.BLOCK && colisionMap.get(this.nextTile) != ColisionMapObjects.GAPE ) {
+						if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
+							this.x++;
+						}
+						else {
+							if ( colisionMap.get(new Point(this.nextTile.x , this.nextTile.y+1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(this.nextTile.x , this.nextTile.y+1)) != ColisionMapObjects.GAPE ) {
+								this.x++;								
 							}
 							else {
-								if ( this.y <= ((this.currentTile.y*this.size)+(this.size/2)) ) {
+								if ( this.y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
 									this.y--;
 								}
 								else {
@@ -760,34 +655,11 @@ public class Engine {
 								}
 							}
 						}
-						else {
-							if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
-								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-									if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
-										this.y++;
-									}
-									else {
-										break;
-									}
-								}
-								else {
-									break;
-								}
-							}
-							else {
-								break;
-							}
-						}
 					}
 					else {
-						if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
-							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-								if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
-									this.y++;
-								}
-								else {
-									break;
-								}
+						if ( colisionMap.get(new Point(this.nextTile.x , this.nextTile.y+1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(this.nextTile.x , this.nextTile.y+1)) != ColisionMapObjects.GAPE) {
+							if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
+								this.y++;
 							}
 							else {
 								break;
@@ -814,6 +686,7 @@ public class Engine {
 
 		this.x = player.getPosition().x;
 		this.y = player.getPosition().y;
+		ConcurrentHashMap<Point, ColisionMapObjects> colisionMap = this.single.map.getColisionMap();
 
 		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
 			if ( this.x > this.size ) {
@@ -828,26 +701,16 @@ public class Engine {
 				this.currentTile = ResourcesManager.coToTile(this.x, this.y);
 
 				if ( this.nextTile.x != this.currentTile.x ) {
-					if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y) ) {
-						if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y].isHit() ) {
-							if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
-								this.x--;
-							}
-							else if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
-								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-									this.x--;
-								}
-								else {
-									if ( this.y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
-										this.y--;
-									}
-									else {
-										break;
-									}
-								}
+					if ( colisionMap.get(this.nextTile) != ColisionMapObjects.BLOCK && colisionMap.get(this.nextTile) != ColisionMapObjects.GAPE ) {
+						if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
+							this.x--;
+						}
+						else {
+							if ( colisionMap.get(new Point(this.nextTile.x , this.nextTile.y+1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(this.nextTile.x , this.nextTile.y+1)) != ColisionMapObjects.GAPE ) {
+								this.x--;								
 							}
 							else {
-								if ( this.y <= ((this.currentTile.y*this.size)+(this.size/2)) ) {
+								if ( this.y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
 									this.y--;
 								}
 								else {
@@ -855,34 +718,11 @@ public class Engine {
 								}
 							}
 						}
-						else {
-							if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
-								if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-									if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
-										this.y++;
-									}
-									else {
-										break;
-									}
-								}
-								else {
-									break;
-								}
-							}
-							else {
-								break;
-							}
-						}
 					}
 					else {
-						if ( isNotSolidBlock(this.nextTile.x , this.nextTile.y+1) ) {
-							if ( !this.single.map.getGrounds()[this.nextTile.x][this.nextTile.y+1].isHit() ) {
-								if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
-									this.y++;
-								}
-								else {
-									break;
-								}
+						if ( colisionMap.get(new Point(this.nextTile.x , this.nextTile.y+1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(this.nextTile.x , this.nextTile.y+1)) != ColisionMapObjects.GAPE ) {
+							if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
+								this.y++;
 							}
 							else {
 								break;
@@ -926,8 +766,9 @@ public class Engine {
 	}
 
 	private void updateBombs() {
-		Map map = this.single.getMap();
-		ConcurrentHashMap<Point, Objects> animatedObjects = map.getAnimatedObjects();
+
+		ConcurrentHashMap<Point, ColisionMapObjects> colisionMap = this.single.map.getColisionMap();
+		ConcurrentHashMap<Point, Objects> animatedObjects = this.single.map.getAnimatedObjects();
 		Bomb bomb = null;
 		Objects object;
 
@@ -950,6 +791,7 @@ public class Engine {
 				object = ResourcesManager.getObjects().get("firecenter").copy();
 				object.setPosition(new Point(p.x*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));				
 				animatedObjects.put(p, object);
+				colisionMap.put(p, ColisionMapObjects.DAMAGE);
 
 				/* UP */
 				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
@@ -958,14 +800,31 @@ public class Engine {
 						this.bombs.get(new Point(p.x, p.y-k)).destroy();
 					}
 					/* Si il n'y a pas de block */
-					else if ( (map.getBlocks()[p.x][p.y-k] == null || (map.getBlocks()[p.x][p.y-k].isDestructible() && map.getAnimatedObjects().get(new Point(p.x ,p.y-k)) == null )) ) {
-						/* Si le sol ne laisse pas passer le feu */
-						if ( map.getGrounds()[p.x][p.y-k].isFireWall() ) {
-							/* On sort */
-							break;
+					else if ( colisionMap.get(new Point (p.x,p.y-k)) != ColisionMapObjects.BLOCK ) {
+						/* On affiche le feu */
+						if ( k < bomb.getPower()-1 ) {
+							object = ResourcesManager.getObjects().get("firevertical").copy();
+							object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
+							animatedObjects.put(new Point(p.x,p.y-k), object);
 						}
 						else {
-							/* On affiche le feu */
+							object = ResourcesManager.getObjects().get("fireup").copy();
+							object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
+							animatedObjects.put(new Point(p.x,p.y-k), object);
+						}
+						if ( colisionMap.get(new Point (p.x,p.y-k)) != ColisionMapObjects.GAPE ) {
+							colisionMap.put(new Point(p.x,p.y-k), ColisionMapObjects.DAMAGE);
+						}
+					}
+					/* Si il y a un block */
+					else {
+						/* Si il n'est pas destructible */
+						if ( animatedObjects.get(new Point(p.x,p.y-k)) == null ) {
+							/* On break */
+							break;
+						}
+						/* Si c'est du feu */
+						else if ( colisionMap.get(new Point(p.x,p.y-k)) == ColisionMapObjects.DAMAGE ) {
 							if ( k < bomb.getPower()-1 ) {
 								object = ResourcesManager.getObjects().get("firevertical").copy();
 								object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
@@ -977,43 +836,14 @@ public class Engine {
 								animatedObjects.put(new Point(p.x,p.y-k), object);
 							}
 						}
-					}
-					/* Si il y a un block */
-					else {
-						/* Si il n'est pas destructible */
-						if ( !map.getBlocks()[p.x][p.y-k].isDestructible() ) {
-							/* Si il ne laisse pas passer le feu */
-							if ( map.getBlocks()[p.x][p.y-k].isFireWall() ) {
-								/* On break */
-								break;
-							}
-						}
 						/* Si il est destructible */
 						else {
-							/* Si il est présent dans les blocs animé */
-							if ( map.getAnimatedObjects().get(new Point(p.x ,p.y-k)) != null ) {
-								/* Si il est déjà en train d'être détruit */
-								if ( map.getAnimatedObjects().get(new Point(p.x ,p.y-k)).getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
-									if ( k < bomb.getPower()-1 ) {
-										object = ResourcesManager.getObjects().get("firevertical").copy();
-										object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
-										animatedObjects.put(new Point(p.x,p.y-k), object);
-									}
-									else {
-										object = ResourcesManager.getObjects().get("fireup").copy();
-										object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
-										animatedObjects.put(new Point(p.x,p.y-k), object);
-									}
-								}
-								/* Sinon on le detruit */
-								else {
-									map.getAnimatedObjects().get(new Point(p.x ,p.y-k)).destroy();
-									/* Si il ne laisse pas passer le feu */
-									if ( map.getAnimatedObjects().get(new Point(p.x ,p.y-k)).isFireWall() ) {
-										/* On break */
-										break;
-									}
-								}
+							/* On le detruit */
+							animatedObjects.get(new Point(p.x ,p.y-k)).destroy();
+							/* Si il ne laisse pas passer le feu */
+							if ( animatedObjects.get(new Point(p.x ,p.y-k)).isFireWall() ) {
+								/* On break */
+								break;
 							}
 						}
 					}
@@ -1021,14 +851,37 @@ public class Engine {
 
 				/* DOWN */
 				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
+					System.out.println("TEST : " + colisionMap.get(new Point(p.x, p.y+k)));
+					/* Si une bombe est présente */
 					if ( this.bombs.get(new Point(p.x, p.y+k)) != null ) {
 						this.bombs.get(new Point(p.x, p.y+k)).destroy();
 					}
-					else if ( map.getBlocks()[p.x][p.y+k] == null || (map.getBlocks()[p.x][p.y+k].isDestructible() && map.getAnimatedObjects().get(new Point(p.x ,p.y+k)) == null ) ) {
-						if ( map.getGrounds()[p.x][p.y+k].isFireWall() ) {
-							break;
+					/* Si il n'y a pas de block */
+					else if ( colisionMap.get(new Point (p.x,p.y+k)) != ColisionMapObjects.BLOCK ) {
+						/* On affiche le feu */
+						if ( k < bomb.getPower()-1 ) {
+							object = ResourcesManager.getObjects().get("firevertical").copy();
+							object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
+							animatedObjects.put(new Point(p.x,p.y+k), object);
 						}
 						else {
+							object = ResourcesManager.getObjects().get("firedown").copy();
+							object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
+							animatedObjects.put(new Point(p.x,p.y+k), object);
+						}
+						if ( colisionMap.get(new Point (p.x,p.y+k)) != ColisionMapObjects.GAPE ) {
+							colisionMap.put(new Point(p.x,p.y+k), ColisionMapObjects.DAMAGE);
+						}
+					}
+					/* Si il y a un block */
+					else {
+						/* Si il n'est pas destructible */
+						if ( animatedObjects.get(new Point(p.x,p.y+k)) == null ) {
+							/* On break */
+							break;
+						}
+						/* Si c'est du feu */
+						else if ( colisionMap.get(new Point(p.x,p.y+k)) == ColisionMapObjects.DAMAGE ) {
 							if ( k < bomb.getPower()-1 ) {
 								object = ResourcesManager.getObjects().get("firevertical").copy();
 								object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
@@ -1040,43 +893,14 @@ public class Engine {
 								animatedObjects.put(new Point(p.x,p.y+k), object);
 							}
 						}
-					}
-					/* Si il y a un block */
-					else {
-						/* Si il n'est pas destructible */
-						if ( !map.getBlocks()[p.x][p.y+k].isDestructible() ) {
-							/* Si il ne laisse pas passer le feu */
-							if ( map.getBlocks()[p.x][p.y+k].isFireWall() ) {
-								/* On break */
-								break;
-							}
-						}
 						/* Si il est destructible */
 						else {
-							/* Si il est présent dans les blocs animé */
-							if ( map.getAnimatedObjects().get(new Point(p.x ,p.y+k)) != null ) {
-								/* Si il est déjà en train d'être détruit */
-								if ( map.getAnimatedObjects().get(new Point(p.x ,p.y+k)).getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
-									if ( k < bomb.getPower()-1 ) {
-										object = ResourcesManager.getObjects().get("firevertical").copy();
-										object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
-										animatedObjects.put(new Point(p.x,p.y+k), object);
-									}
-									else {
-										object = ResourcesManager.getObjects().get("firedown").copy();
-										object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
-										animatedObjects.put(new Point(p.x,p.y+k), object);
-									}
-								}
-								/* Sinon on le detruit */
-								else {
-									map.getAnimatedObjects().get(new Point(p.x ,p.y+k)).destroy();
-									/* Si il ne laisse pas passer le feu */
-									if ( map.getAnimatedObjects().get(new Point(p.x ,p.y+k)).isFireWall() ) {
-										/* On break */
-										break;
-									}
-								}
+							/* On le detruit */
+							animatedObjects.get(new Point(p.x ,p.y+k)).destroy();
+							/* Si il ne laisse pas passer le feu */
+							if ( animatedObjects.get(new Point(p.x ,p.y+k)).isFireWall() ) {
+								/* On break */
+								break;
 							}
 						}
 					}
@@ -1084,14 +908,36 @@ public class Engine {
 
 				/* LEFT */
 				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
+					/* Si une bombe est présente */
 					if ( this.bombs.get(new Point(p.x-k, p.y)) != null ) {
 						this.bombs.get(new Point(p.x-k, p.y)).destroy();
 					}
-					else if ( map.getBlocks()[p.x-k][p.y] == null || (map.getBlocks()[p.x-k][p.y].isDestructible() && map.getAnimatedObjects().get(new Point(p.x-k ,p.y)) == null ) ) {
-						if ( map.getGrounds()[p.x-k][p.y].isFireWall() ) {
-							break;
+					/* Si il n'y a pas de block */
+					else if ( colisionMap.get(new Point (p.x-k,p.y)) != ColisionMapObjects.BLOCK ) {
+						/* On affiche le feu */
+						if ( k < bomb.getPower()-1 ) {
+							object = ResourcesManager.getObjects().get("firehorizontal").copy();
+							object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
+							animatedObjects.put(new Point(p.x-k,p.y), object);
 						}
 						else {
+							object = ResourcesManager.getObjects().get("fireleft").copy();
+							object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
+							animatedObjects.put(new Point(p.x-k,p.y), object);
+						}
+						if ( colisionMap.get(new Point (p.x-k,p.y)) != ColisionMapObjects.GAPE ) {
+							colisionMap.put(new Point(p.x-k,p.y), ColisionMapObjects.DAMAGE);
+						}
+					}
+					/* Si il y a un block */
+					else {
+						/* Si il n'est pas destructible */
+						if ( animatedObjects.get(new Point(p.x-k,p.y)) == null ) {
+							/* On break */
+							break;
+						}
+						/* Si c'est du feu */
+						else if ( colisionMap.get(new Point(p.x-k,p.y)) == ColisionMapObjects.DAMAGE ) {
 							if ( k < bomb.getPower()-1 ) {
 								object = ResourcesManager.getObjects().get("firehorizontal").copy();
 								object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
@@ -1103,43 +949,14 @@ public class Engine {
 								animatedObjects.put(new Point(p.x-k,p.y), object);
 							}
 						}
-					}
-					/* Si il y a un block */
-					else {
-						/* Si il n'est pas destructible */
-						if ( !map.getBlocks()[p.x-k][p.y].isDestructible() ) {
-							/* Si il ne laisse pas passer le feu */
-							if ( map.getBlocks()[p.x-k][p.y].isFireWall() ) {
-								/* On break */
-								break;
-							}
-						}
 						/* Si il est destructible */
 						else {
-							/* Si il est présent dans les blocs animé */
-							if ( map.getAnimatedObjects().get(new Point(p.x-k ,p.y)) != null ) {
-								/* Si il est déjà en train d'être détruit */
-								if ( map.getAnimatedObjects().get(new Point(p.x-k ,p.y)).getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
-									if ( k < bomb.getPower()-1 ) {
-										object = ResourcesManager.getObjects().get("firehorizontal").copy();
-										object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
-										animatedObjects.put(new Point(p.x-k,p.y), object);
-									}
-									else {
-										object = ResourcesManager.getObjects().get("fireleft").copy();
-										object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
-										animatedObjects.put(new Point(p.x-k,p.y), object);
-									}
-								}
-								/* Sinon on le detruit */
-								else {
-									map.getAnimatedObjects().get(new Point(p.x-k ,p.y)).destroy();
-									/* Si il ne laisse pas passer le feu */
-									if ( map.getAnimatedObjects().get(new Point(p.x-k ,p.y)).isFireWall() ) {
-										/* On break */
-										break;
-									}
-								}
+							/* On le detruit */
+							animatedObjects.get(new Point(p.x-k ,p.y)).destroy();
+							/* Si il ne laisse pas passer le feu */
+							if ( animatedObjects.get(new Point(p.x-k ,p.y)).isFireWall() ) {
+								/* On break */
+								break;
 							}
 						}
 					}
@@ -1147,62 +964,55 @@ public class Engine {
 
 				/* RIGHT */
 				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
+					/* Si une bombe est présente */
 					if ( this.bombs.get(new Point(p.x+k, p.y)) != null ) {
 						this.bombs.get(new Point(p.x+k, p.y)).destroy();
 					}
-					else if ( map.getBlocks()[p.x+k][p.y] == null || (map.getBlocks()[p.x+k][p.y].isDestructible() && map.getAnimatedObjects().get(new Point(p.x+k ,p.y)) == null )) {
-						if ( map.getGrounds()[p.x+k][p.y].isFireWall() ) {
-							break;
+					/* Si il n'y a pas de block */
+					else if ( colisionMap.get(new Point (p.x+k,p.y)) != ColisionMapObjects.BLOCK ) {
+						/* On affiche le feu */
+						if ( k < bomb.getPower()-1 ) {
+							object = ResourcesManager.getObjects().get("firehorizontal").copy();
+							object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
+							animatedObjects.put(new Point(p.x+k,p.y), object);
 						}
 						else {
+							object = ResourcesManager.getObjects().get("fireleft").copy();
+							object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
+							animatedObjects.put(new Point(p.x+k,p.y), object);
+						}
+						if ( colisionMap.get(new Point (p.x+k,p.y)) != ColisionMapObjects.GAPE ) {
+							colisionMap.put(new Point(p.x+k,p.y), ColisionMapObjects.DAMAGE );
+						}
+					}
+					/* Si il y a un block */
+					else {
+						/* Si il n'est pas destructible */
+						if ( animatedObjects.get(new Point(p.x+k,p.y)) == null ) {
+							/* On break */
+							break;
+						}
+						/* Si c'est du feu */
+						else if ( colisionMap.get(new Point(p.x+k,p.y)) == ColisionMapObjects.DAMAGE ) {
 							if ( k < bomb.getPower()-1 ) {
 								object = ResourcesManager.getObjects().get("firehorizontal").copy();
 								object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
 								animatedObjects.put(new Point(p.x+k,p.y), object);
 							}
 							else {
-								object = ResourcesManager.getObjects().get("fireright").copy();
+								object = ResourcesManager.getObjects().get("fireleft").copy();
 								object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
 								animatedObjects.put(new Point(p.x+k,p.y), object);
 							}
 						}
-					}
-					/* Si il y a un block */
-					else {
-						/* Si il n'est pas destructible */
-						if ( !map.getBlocks()[p.x+k][p.y].isDestructible() ) {
-							/* Si il ne laisse pas passer le feu */
-							if ( map.getBlocks()[p.x+k][p.y].isFireWall() ) {
-								/* On break */
-								break;
-							}
-						}
 						/* Si il est destructible */
 						else {
-							/* Si il est présent dans les blocs animé */
-							if ( map.getAnimatedObjects().get(new Point(p.x+k ,p.y)) != null ) {
-								/* Si il est déjà en train d'être détruit */
-								if ( map.getAnimatedObjects().get(new Point(p.x+k ,p.y)).getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) ) {
-									if ( k < bomb.getPower()-1 ) {
-										object = ResourcesManager.getObjects().get("firehorizontal").copy();
-										object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
-										animatedObjects.put(new Point(p.x+k,p.y), object);
-									}
-									else {
-										object = ResourcesManager.getObjects().get("fireright").copy();
-										object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
-										animatedObjects.put(new Point(p.x+k,p.y), object);
-									}
-								}
-								/* Sinon on le detruit */
-								else {
-									map.getAnimatedObjects().get(new Point(p.x+k ,p.y)).destroy();
-									/* Si il ne laisse pas passer le feu */
-									if ( map.getAnimatedObjects().get(new Point(p.x+k ,p.y)).isFireWall() ) {
-										/* On break */
-										break;
-									}
-								}
+							/* On le detruit */
+							animatedObjects.get(new Point(p.x+k ,p.y)).destroy();
+							/* Si il ne laisse pas passer le feu */
+							if ( animatedObjects.get(new Point(p.x+k ,p.y)).isFireWall() ) {
+								/* On break */
+								break;
 							}
 						}
 					}

@@ -21,10 +21,10 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.klob.Bomberklob.game.Map;
 import com.klob.Bomberklob.menus.CreateAccountOffline;
 import com.klob.Bomberklob.menus.Home;
 import com.klob.Bomberklob.model.Model;
+import com.klob.Bomberklob.resources.EditorMap;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
 public class Main extends Activity {
@@ -78,7 +78,7 @@ public class Main extends Activity {
 							File ls = getFilesDir();
 							File rep = new File(ls.getAbsolutePath()+"/"+mapsDirectory), rep2, file;
 							rep.mkdir();
-							Map mapMap;
+							EditorMap mapMap;
 							Bitmap bitmap;
 							byte[] buffer;
 
@@ -114,7 +114,7 @@ public class Main extends Activity {
 
 										if ( map[j].indexOf(".klob") != -1) {
 											/* Si on vient de copier la carte on la redimensionne à la résolution de l'écran sur lequel le jeu tournera */
-											mapMap = new Map();
+											mapMap = new EditorMap();
 											mapMap.loadMap(mapName);
 											mapMap.resize();
 											mapMap.saveMap();

@@ -1,6 +1,5 @@
 package com.klob.Bomberklob.game;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -422,6 +421,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		playerlife.setText(String.valueOf(p[0].getLife()));
 		playerspeed.setText(String.valueOf(p[0].getSpeed()));
 		
+		/* FIXME noms des images et test pour ne pas avoir a afficher la même image */
 		for (int i = 0 ; i < p.length ; i++ ) {
 			if (p[i] != null) {
 				if (!p[i].isDestructible() || p[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel())) {
