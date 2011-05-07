@@ -146,7 +146,7 @@ public class GameMap extends Map {
 			Objects o = animatedObjects.get(entry.getKey());
 			/* Si sont animation est DESTROY et qu'elle est finie */
 			if (o.getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) && o.hasAnimationFinished()) {
-				this.colisionMap.put(o.getPosition(), ColisionMapObjects.EMPTY);
+				this.colisionMap.put(ResourcesManager.coToTile(o.getPosition().x, o.getPosition().y), ColisionMapObjects.EMPTY);
 				/* Et du vecteur d'objets animés */
 				animatedObjects.remove(entry.getKey());
 			}

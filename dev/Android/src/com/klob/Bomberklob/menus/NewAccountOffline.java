@@ -47,7 +47,12 @@ public class NewAccountOffline extends Activity implements View.OnClickListener{
 		
 		this.pseudo.setFilters(new InputFilter[]{filter});
 		this.validate.setOnClickListener(this);
-		this.cancel.setOnClickListener(this);
+		if ( Model.getSystem().getLastUser() == -1 ) {
+			this.cancel.setVisibility(View.INVISIBLE);
+		}
+		else {
+			this.cancel.setOnClickListener(this);
+		}		
 	}
 	
 	@Override
@@ -82,7 +87,7 @@ public class NewAccountOffline extends Activity implements View.OnClickListener{
 			String pseudo = this.pseudo.getText().toString();
 			
 			if ( !pseudo.equals("") ) { // FIXME Rajouter une taille min ?
-				if ( Model.getSystem().getDatabase().existingAccount(pseudo)) {
+				if ( !Model.getSystem().getDatabase().existingAccount(pseudo)) {
 					Model.getSystem().getDatabase().newAccount(pseudo);
 					Model.getSystem().getDatabase().setLastUser(pseudo);
 					Model.getSystem().setLastUser();
@@ -90,11 +95,11 @@ public class NewAccountOffline extends Activity implements View.OnClickListener{
 					intent = new Intent(NewAccountOffline.this, Home.class);
 				}
 				else {
-					Toast.makeText(NewAccountOffline.this, "Username already exists", Toast.LENGTH_SHORT).show();
+					Toast.makeText(NewAccountOffline.this, R.string.ErrorPseudo, Toast.LENGTH_SHORT).show();
 				}
 			}
 			else {
-				Toast.makeText(NewAccountOffline.this, "Invalid Username", Toast.LENGTH_SHORT).show();
+				Toast.makeText(NewAccountOffline.this, R.string.UserName, Toast.LENGTH_SHORT).show();
 			}
 		}
 		else if (this.cancel == view) {

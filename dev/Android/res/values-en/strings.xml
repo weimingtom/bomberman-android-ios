@@ -38,7 +38,8 @@
 	<string name="ErrorPassword">The password and verification must be the same</string>
 	<string name="ErrorPseudo">This pseudo is already used</string>
 	<string name="ErrorUserMissing">You must create a multiplayer account</string>
-		
+	<string name="ErrorUserName">The pseudo you entered is not valid</string>
+	
 	<!-- F -->
 	
 	<!-- G -->	

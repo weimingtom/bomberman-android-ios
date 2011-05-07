@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
     <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" >
+        
+        <LinearLayout android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:id="@+id/linearLayout6">
+		<RelativeLayout android:id="@+id/relativeLayout3"
+			android:layout_width="fill_parent" android:layout_height="50dip" android:background="@drawable/menutoolbarbackgroundxml">
+			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/textView5"
+				android:textSize="20dip" android:textColor="@color/White"
+				android:layout_centerInParent="true" android:text="@string/NewAccount"></TextView>
+			<Button android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentBottom="true" android:id="@+id/NewAccountOfflineButtonCancel" android:text="@string/Back"></Button>
+			<Button android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:id="@+id/NewAccountOfflineButtonOk"
+				android:layout_alignParentRight="true" android:layout_centerVertical="true" android:text="@string/Ok"></Button>
+
+		</RelativeLayout>
+	</LinearLayout>
+        
         <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_centerInParent="true" android:orientation="vertical" android:gravity="center_horizontal" android:layout_width="wrap_content">
             <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1" android:gravity="center_vertical">
            	  
@@ -7,12 +25,8 @@
 	            <EditText android:layout_width="140px" android:text="" android:id="@+id/NewAccountOfflineEditText" android:layout_height="wrap_content" android:lines="1" android:singleLine="true"></EditText>
 	                   
             </LinearLayout>
-            <LinearLayout android:id="@+id/linearLayout3" android:layout_height="wrap_content" android:layout_width="fill_parent">
-                <Button android:layout_weight="1" android:layout_height="wrap_content" android:text="Cancel" android:layout_width="wrap_content" android:id="@+id/NewAccountOfflineButtonCancel"></Button>
-                <Button android:layout_weight="1" android:layout_height="wrap_content" android:text="   Ok   " android:layout_width="wrap_content" android:id="@+id/NewAccountOfflineButtonOk"></Button>
-            </LinearLayout>
+            
         
         </LinearLayout>
-        <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_centerInParent="true" android:src="@drawable/gamename"></ImageView>
     </RelativeLayout>
 
