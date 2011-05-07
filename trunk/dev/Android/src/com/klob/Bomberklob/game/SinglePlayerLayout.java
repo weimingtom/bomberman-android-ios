@@ -50,7 +50,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private ImageView singlePlayerLinearLayoutStartImage , singlePlayerLinearLayoutEndImageView;
 
 	private int menuSize = 50;
-	
+
 	private ImageView[] imageView = new ImageView[4];
 
 	private int timeS;
@@ -59,11 +59,12 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private Thread timeThread;	
 	private TextView timeTextView, bombpower, bombnumber, playerspeed, playerlife;
 	private Handler handler;
-	
+
 	private MediaPlayer mp;
-	
+
 	private Rect menuRect = new Rect(), bombRect = new Rect(), gameRect = new Rect();
 	private int pointerId = -1, nbPointer = -1;
+	private int[] t = new int[2];
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,31 +77,30 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);	
-		
+
 		this.singlePlayerLinearLayoutMultiTouch = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutMultiTouch);
 		this.singlePlayerLinearLayoutMultiTouch.setOnTouchListener(new OnTouchListener() {
 
 			public boolean onTouch(View arg0, MotionEvent arg1) {
 				
-				int[] t = new int[2];
-				menu.getLocationOnScreen(t);
-				menuRect = new Rect(t[0], t[1], t[0]+menu.getWidth(), t[1]+menu.getHeight());
-				bomb.getLocationOnScreen(t);
-				bombRect = new Rect(t[0], t[1], t[0]+bomb.getWidth(), t[1]+bomb.getHeight());
-				singlePlayerControllerLayout.getLocationOnScreen(t);
-				gameRect = new Rect(t[0], t[1], t[0]+singlePlayerControllerLayout.getWidth(), t[1]+singlePlayerControllerLayout.getHeight());
-				
 				if ( nbPointer != arg1.getPointerCount() ) {
-					if ( arg1.findPointerIndex(pointerId) == -1 ) {
+					if ( arg1.findPointerIndex(pointerId) == -1 || !gameRect.contains((int) arg1.getX(arg1.findPointerIndex(pointerId)),(int) arg1.getY(arg1.findPointerIndex(pointerId)))) {
 						gameControllerSingle.onTouchEvent(MotionEvent.ACTION_UP, 0, 0);
 						pointerId = -1;	
 						nbPointer = -1;
 					}
+					else {
+						nbPointer = arg1.getPointerCount();
+					}
 				}
-				
-				if ( arg1.getAction() == MotionEvent.ACTION_DOWN || arg1.getAction() == MotionEvent.ACTION_MOVE) {
+
+				if ( arg1.getAction() == MotionEvent.ACTION_UP ) {
+					gameControllerSingle.onTouchEvent(MotionEvent.ACTION_UP, 0, 0);
+					pointerId = -1;				
+				}
+				else {
 					for (int i = 0 ; i < arg1.getPointerCount() ; i++ ) {
-						
+	
 						if ( menuRect.contains((int) arg1.getX(i),(int) arg1.getY(i)))	{
 							onClick(menu);
 						}
@@ -109,6 +109,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 						}
 						else if ( gameRect.contains((int) arg1.getX(i),(int) arg1.getY(i)))	{
 							if ( arg1.findPointerIndex(pointerId) == i ) {
+								System.out.println("DOWN");
 								gameControllerSingle.onTouchEvent(MotionEvent.ACTION_MOVE, (int) arg1.getX(i), (int) arg1.getY(i));
 							}
 							else {
@@ -117,16 +118,12 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 								gameControllerSingle.onTouchEvent(MotionEvent.ACTION_DOWN, (int) arg1.getX(i), (int) arg1.getY(i));
 							}
 						}
-					}					
+					}
 				}
-				else if ( arg1.getAction() == MotionEvent.ACTION_UP ) {
-					gameControllerSingle.onTouchEvent(MotionEvent.ACTION_UP, 0, 0);
-					pointerId = -1;				
-				}				
 				return true;
 			}
 		});
-		
+
 		this.singlePlayerRelativeLayoutMenu = (RelativeLayout) findViewById(R.id.SinglePlayerRelativeLayoutMenu);
 		this.singlePlayerRelativeLayoutMenu.setLayoutParams(new LinearLayout.LayoutParams( ResourcesManager.getWidth(), (int) (menuSize*ResourcesManager.getDpiPx())) );
 
@@ -134,7 +131,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.singlePlayerRelativeLayoutObjectsGallery.setLayoutParams(new LinearLayout.LayoutParams( (int) (menuSize*ResourcesManager.getDpiPx()), (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())) ) );
 
 		this.singlePlayerFrameLayoutGame = (FrameLayout) findViewById(R.id.SinglePlayerFrameLayoutGame);
-	
+
 		this.singlePlayerControllerLayout = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutEditorController);
 		this.singlePlayerControllerLayout.setLayoutParams(new LinearLayout.LayoutParams( (int) (ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx())), (int) (ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx())) ) );
 
@@ -154,34 +151,34 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 
 		this.restart = (Button) findViewById(R.id.SinglePlayerMenuRestart);
 		this.restart.setOnClickListener(this);
-		
+
 		this.quit2 = (Button) findViewById(R.id.SinglePlayerLinearLayoutEndButtonLeave);
 		this.quit2.setOnClickListener(this);
 
 		this.restart2 = (Button) findViewById(R.id.SinglePlayerLinearLayoutEndButtonRestart);
 		this.restart2.setOnClickListener(this);
-		
+
 		this.singlePlayerLinearLayoutBonus1 = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutBonus1);
 		this.singlePlayerLinearLayoutBonus1.setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
-		
+
 		this.singlePlayerLinearLayoutBonus2 = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutBonus2);
 		this.singlePlayerLinearLayoutBonus2.setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
-		
+
 		this.singlePlayerLinearLayoutBonus3 = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutBonus3);
 		this.singlePlayerLinearLayoutBonus3.setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
-		
+
 		this.singlePlayerLinearLayoutBonus4 = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutBonus4);
 		this.singlePlayerLinearLayoutBonus4.setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
-		
+
 		this.imageView[0] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer0);
 		this.imageView[0].setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
-		
+
 		this.imageView[1] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer1);
 		this.imageView[1].setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
-		
+
 		this.imageView[2] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer2);
 		this.imageView[2].setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
-		
+
 		this.imageView[3] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer3);
 		this.imageView[3].setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
 
@@ -229,6 +226,18 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 					mp.setLooping(true);
 					mp.start();
 					resumeGame();
+					
+					menu.getLocationOnScreen(t);
+					menuRect = new Rect(t[0], t[1], t[0]+menu.getWidth(), t[1]+menu.getHeight());
+					System.out.println("MENU : " + t[0] + " " + t[1] +" "+ (t[0]+menu.getWidth()) + " " + (t[1]+menu.getHeight()));
+					bomb.getLocationOnScreen(t);
+					bombRect = new Rect(t[0], t[1], t[0]+bomb.getWidth(), t[1]+bomb.getHeight());
+					System.out.println("BOMB : " + t[0] + " " + t[1] +" "+ (t[0]+bomb.getWidth()) + " " + (t[1]+bomb.getHeight()));
+					singlePlayerControllerLayout.getLocationOnScreen(t);
+					gameRect = new Rect(t[0], t[1],  (int) (t[0]+(ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx()))), (int) (t[1]+(ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx()))) ) ;		
+					System.out.println("Controller : " + t[0] + " " + t[1] + " " +  (int) (t[0]+(ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx()))) + " " + (int) (t[1]+(ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx()))));
+
+				
 				}
 				else if ( msg.what == 4 ) { 
 					updatePlayersStats();					
@@ -247,13 +256,13 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.singlePlayerLinearLayoutStart = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutStart);
 		this.singlePlayerLinearLayoutStartImage = (ImageView) findViewById(R.id.SinglePlayerLinearLayoutStartImage);
 		this.singlePlayerLinearLayoutEndImageView = (ImageView) findViewById(R.id.SinglePlayerLinearLayoutEndImageView);
-		
+
 		this.singlePlayerLinearLayoutEndImageView.setImageBitmap(null);
 
 		this.singlePlayerLinearLayoutEnd.setVisibility(View.INVISIBLE);
 		this.singlePlayerLinearLayoutMenu.setVisibility(View.INVISIBLE);
 		this.singlePlayerLinearLayoutMultiTouch.setVisibility(View.INVISIBLE);
-		
+
 		this.initGame();		
 	}
 
@@ -296,7 +305,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 			this.pauseGame();
 			mp.pause();
 			this.singlePlayerLinearLayoutMenu.setVisibility(View.VISIBLE);
-			}
+		}
 		else if ( arg0 == this.resume) {
 			mp.start();
 			this.singlePlayerLinearLayoutMenu.setVisibility(View.INVISIBLE);
@@ -399,9 +408,9 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 
 			this.timeTextView = (TextView) findViewById(R.id.GameTextTime);
 			this.timeTextView.setText(timeM+":00");
-			
-			updatePlayersStats();
 
+			updatePlayersStats();
+			
 			startGame();
 		}
 		else {
@@ -410,10 +419,10 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	}
 
 	public void startGame() {		
-		
+
 		pauseGame();
 		this.singlePlayerLinearLayoutStart.setVisibility(View.VISIBLE);
-		
+
 		mp = MediaPlayer.create(getApplicationContext(), R.raw.battle_start);
 		mp.start();
 
@@ -422,13 +431,13 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 			@Override
 			public void run() {
 				Log.i("Start Thread","Thread started");
-				
+
 				try {
 					handler.sendMessage(handler.obtainMessage(1));
 					sleep(2000);
 					handler.sendMessage(handler.obtainMessage(2));
 					sleep(2000);
-					
+
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -451,16 +460,16 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.setTimeThreadRunning(true);
 		this.singlePlayerLinearLayoutMultiTouch.setVisibility(View.VISIBLE);
 	}
-	
+
 	public void updatePlayersStats() {
 		Player[] p = gameControllerSingle.getEngine().getSingle().getPlayers();
 		int j = 0;
-		
+
 		bombpower.setText(String.valueOf(p[0].getPowerExplosion()));
 		bombnumber.setText(String.valueOf(p[0].getBombNumber()));
 		playerlife.setText(String.valueOf(p[0].getLife()));
 		playerspeed.setText(String.valueOf(p[0].getSpeed()));
-		
+
 		/* FIXME noms des images et test pour ne pas avoir a afficher la même image */
 		for (int i = 0 ; i < p.length ; i++ ) {
 			if (p[i] != null) {
@@ -481,24 +490,24 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 				}
 			}
 		}
-		
+
 		if ( j == bundle.getInt("enemies") ) {
 			handler.sendMessage(handler.obtainMessage(6));
 		}
 	}
-	
+
 	private void win() {
 		pauseGame();
 		this.singlePlayerLinearLayoutEndImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.winner));
 		this.singlePlayerLinearLayoutEnd.setVisibility(View.VISIBLE);
 	}
-	
+
 	private void lose() {
 		pauseGame();
 		this.singlePlayerLinearLayoutEndImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.loser));
 		this.singlePlayerLinearLayoutEnd.setVisibility(View.VISIBLE);
 	}
-	
+
 	private void draw() {
 		pauseGame();
 		this.singlePlayerLinearLayoutEndImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.draw));
