@@ -116,15 +116,7 @@ public class GameMap extends Map {
 						this.colisionMap.put(new Point(i,j),ColisionMapObjects.EMPTY);
 					}
 				}
-			}
-			
-			for (int i = 0 ; i < 15 ; i++ ) {
-				for (int j = 0 ; j < 21 ; j++ ) {
-					System.out.print(this.colisionMap.get(new Point(j,i)) + "\t");
-				}
-				System.out.println();
-			}
-			
+			}			
 			return true;
 		}
 		return false;
@@ -158,10 +150,13 @@ public class GameMap extends Map {
 	
 	public void restart() {		
 		this.animatedObjects.clear();
+		int i = 1;
 		
 		for(Entry<Point, Objects> entry : this.animatedObjectsBackUp.entrySet()) {
+			System.out.println("CPT : " + i);
 			this.animatedObjects.put(entry.getKey(), entry.getValue().copy());
-			this.colisionMap.put(entry.getValue().getPosition(), ColisionMapObjects.BLOCK);
+			this.colisionMap.put(entry.getKey(), ColisionMapObjects.BLOCK);
+			i++;
 		}
 	}
 	

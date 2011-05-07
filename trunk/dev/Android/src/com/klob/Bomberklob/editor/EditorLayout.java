@@ -103,10 +103,12 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 						}
 						break;
 					case MotionEvent.ACTION_MOVE:
-						Point point2 = ResourcesManager.coToTile((int) arg1.getX(), (int) arg1.getY());
-						if ( point2 != null && (point.x != point2.x || point.y != point2.y) ) {
-							point = point2;
-							editorController.addObjects(object.copy(), point);
+						if ( object != null ) {
+							Point point2 = ResourcesManager.coToTile((int) arg1.getX(), (int) arg1.getY());
+							if ( point2 != null && (point.x != point2.x || point.y != point2.y) ) {
+								point = point2;
+								editorController.addObjects(object.copy(), point);
+							}
 						}
 						break;
 					case MotionEvent.ACTION_UP:

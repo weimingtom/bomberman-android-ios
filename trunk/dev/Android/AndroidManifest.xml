@@ -9,8 +9,7 @@
 
 	<application android:label="@string/app_name"
 		android:theme="@style/textColor" android:icon="@drawable/gamename">
-		<activity android:label="@string/app_name" android:name="Main"
-			android:screenOrientation="landscape">
+		<activity android:label="@string/app_name" android:name="Main" android:screenOrientation="landscape">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />

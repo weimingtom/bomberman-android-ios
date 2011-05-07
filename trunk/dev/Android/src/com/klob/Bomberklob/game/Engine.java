@@ -246,16 +246,8 @@ public class Engine {
 											if ( colisionMap.get(new Point(x, y-1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(x, y-1)) != ColisionMapObjects.GAPE ) {
 												distance[x][y-1] = 1;
 												direction[x][y-1] = PlayerAnimations.UP;
-											}	
-
-											for ( int v = 0 ; v < 15 ; v++ ) {
-												for ( int h = 0; h < 21 ; h++ ) {
-													System.out.print(colisionMap.get(new Point(h,v)) + "\t");
-												}
-												System.out.println();
 											}
-
-
+											
 											for (int d = 1; d < 50; d++) {
 												for ( int h = 0; h < 21 ; h++ ) {
 													for ( int v = 0 ; v < 15 ; v++ ) {
@@ -263,7 +255,6 @@ public class Engine {
 														if (distance[h][v] == d) {
 
 															if ( colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.DAMAGE && distance[h][v+1]==0) {
-																System.out.println("BAS");
 																if ( colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.DANGEROUS_AREA ) {
 																	pa = direction[h][v];
 																	break;
@@ -275,7 +266,6 @@ public class Engine {
 															}
 
 															if ( colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.DAMAGE && distance[h][v-1]==0) {
-																System.out.println("HAUT : " + colisionMap.get(new Point(h, v-1)) + "(" + h +","+ (v-1)+")");
 																if ( colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.DANGEROUS_AREA ) {
 																	pa = direction[h][v];
 																	break;
@@ -287,9 +277,7 @@ public class Engine {
 															}
 
 															if ( colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.DAMAGE && distance[h+1][v]==0) {
-																System.out.println("DROITE : " + colisionMap.get(new Point(h+1, v)));
 																if ( colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.DANGEROUS_AREA ) {
-																	System.out.println("ON BOUGE VERS LE : " + direction[h][v]);
 																	pa = direction[h][v];
 																	break;
 																}
@@ -300,7 +288,6 @@ public class Engine {
 															}
 
 															if ( colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.DAMAGE && distance[h-1][v]==0) {
-																System.out.println("GAUCHE");
 																if ( colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.DANGEROUS_AREA ) {
 																	pa = direction[h][v];
 																	break;
@@ -846,7 +833,6 @@ public class Engine {
 
 				/* DOWN */
 				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-					System.out.println("TEST : " + colisionMap.get(new Point(p.x, p.y+k)));
 					/* Si une bombe est présente */
 					if ( this.bombs.get(new Point(p.x, p.y+k)) != null ) {
 						this.bombs.get(new Point(p.x, p.y+k)).destroy();
