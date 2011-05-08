@@ -60,7 +60,7 @@
 	else {
 		currentFrame = 0;
 		destroyable = YES;
-		//[(AnimationSequence *)[destroyAnimations objectForKey:imageName] playSound];
+		[(AnimationSequence *)[destroyAnimations objectForKey:imageName] playSound];
 	}
 	
 	if (!destroyable ) {
@@ -102,7 +102,6 @@
 
 - (BOOL) hasAnimationFinished{
 	if (time >= owner.timeExplosion) {
-		//[self destroy];
 		return true;
 	}
 	else
@@ -114,6 +113,7 @@
 	currentFrame = 0;
 	time = owner.timeExplosion;
 	[(AnimationSequence *)[destroyAnimations objectForKey:imageName] playSound];
+	AnimationSequence * s = [destroyAnimations objectForKey:imageName];
 }
 
 - (id)copyWithZone:(NSZone *)zone {

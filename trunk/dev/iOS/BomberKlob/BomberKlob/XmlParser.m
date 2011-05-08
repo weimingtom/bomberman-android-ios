@@ -15,6 +15,9 @@
 #import "Destructible.h"
 #import "Player.h"
 #import "Bomb.h"
+#import "Application.h"
+#import "BomberKlobAppDelegate.h"
+#import "DBSystem.h"
 
 @implementation XmlParser
 
@@ -150,6 +153,7 @@
 			currentCanLoop = [[attributeDict valueForKey:@"canLoop"] intValue];
 			currentSound = [attributeDict valueForKey:@"sound"];
 			
+			Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
 			NSError *error;
 			NSString *pathMenuSound = [[NSBundle mainBundle] pathForResource:currentSound ofType:@"wav" inDirectory:@"Sounds"];
 			if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSound]) {
@@ -159,7 +163,11 @@
 						NSLog(@"Error: %@", [error localizedDescription]);
 										[sound prepareToPlay];
 					[sound setNumberOfLoops:0];
-					sound.volume = 1;
+					if (!application.system.mute)
+						sound.volume = application.system.volume/100;
+					else {
+						sound.volume = 0;
+					}
 					((AnimationSequence *)[((Objects *)[objectsBombs objectForKey:currentProperty]).animations objectForKey:currentProperty]).sound = sound;
 				}
 				else if ([currentString isEqual:@"destroy"]) {
@@ -168,7 +176,11 @@
 						NSLog(@"Error: %@", [error localizedDescription]);
 					[sound prepareToPlay];
 					[sound setNumberOfLoops:0];
-					sound.volume = 1;
+					if (!application.system.mute)
+						sound.volume = application.system.volume/100;
+					else {
+						sound.volume = 0;
+					}
 					((AnimationSequence *)[((Objects *)[objectsBombs objectForKey:currentProperty]).destroyAnimations objectForKey:currentProperty]).sound = sound;
 				}
 			}
@@ -244,6 +256,7 @@
 			currentCanLoop = [[attributeDict valueForKey:@"canLoop"] intValue];
 			currentSound = [attributeDict valueForKey:@"sound"];
 			
+			Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
 			NSError *error;
 			NSString *pathMenuSound = [[NSBundle mainBundle] pathForResource:currentSound ofType:@"wav" inDirectory:@"Sounds"];
 			if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSound]) {
@@ -253,7 +266,10 @@
 						NSLog(@"Error: %@", [error localizedDescription]);
 					[sound prepareToPlay];
 					[sound setNumberOfLoops:0];
-					sound.volume = 1;
+					if (!application.system.mute)
+						sound.volume = application.system.volume/100;
+					else
+						sound.volume = 0;
 					((AnimationSequence *)[((Objects *)[objects objectForKey:currentProperty]).destroyAnimations objectForKey:currentProperty]).sound = sound;
 				}
 			}

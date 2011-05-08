@@ -17,6 +17,9 @@
 #import "GameActionViewController.h"
 #import "GlobalGameViewControllerSingle.h"
 #import "AnimationSequence.h"
+#import "ItemMenu.h"
+#import "Objects.h"
+
 
 @implementation GameActionView
 @synthesize controller;
@@ -37,7 +40,27 @@
 
 }
 
+
 - (void) initComponents{
+	RessourceManager * resource = [RessourceManager sharedRessource];
+	NSMutableArray * items = [[NSMutableArray alloc] init];
+	NSMutableArray * images = [[NSMutableArray alloc] init];
+	NSMutableDictionary * bombsTypes = [controller.globalController.engine.game getHumanPlayer].bombsTypes;
+	for (NSString * key in bombsTypes) {
+		Bomb * bomb = [bombsTypes objectForKey:key];
+		[items addObject:bomb];
+		[images addObject:bomb.idle];
+	}
+
+	int x = 0;
+	int y =self.frame.size.height/4;
+	int width = self.frame.size.width ;
+	int height =  self.frame.size.height;
+	ItemMenu * bombsMenu = [[ItemMenu alloc] initWithFrame:CGRectMake(x, y, width,height/4) horizontal:NO imageWidth:self.frame.size.width/2 imageHeight:self.frame.size.width/2 imageMargin:5 reductionPercentage:15 items:items images:images];
+	[self addSubview:bombsMenu];
+	//[bombsMenu moveToNextImage];
+	
+	 
 	
 	UIImage * bombButtonBackground = [UIImage imageNamed:@"bomb_button.png"];
 	UIButton *  bombButton = [UIButton  buttonWithType:UIButtonTypeRoundedRect];
@@ -49,21 +72,6 @@
 }
 
 - (void) bombButtonClicked{
-//	RessourceManager * resource = [RessourceManager sharedRessource];
-//	Engine * engine = controller.globalController.engine;
-//	Player * p = [engine.game.players objectAtIndex:0];
-//	NSInteger bx = (p.position.x)/resource.tileSize;
-//	NSInteger by = (p.position.y+resource.tileSize)/resource.tileSize;
-//	Position * bombPosition = [[Position alloc] initWithX:(bx*resource.tileSize) y:(by*resource.tileSize)];
-//	Bomb * bomb = [[resource.bitmapsBombs objectForKey:@"normal"] copy];
-//	bomb.owner = p;
-//	bomb.position = bombPosition;
-//	if (![engine isInCollision:bomb :0 :0] && ![engine isInCollisionWithABomb:bomb :0 :0]) {
-//		[p plantingBomb:bomb];
-//		[engine.game.bombsPlanted setObject:bomb forKey:bomb.position];
-//		[(AnimationSequence *)[bomb.animations objectForKey:bomb.imageName] playSound];
-//	}
-	
 	[controller plantingBomb];
 }
 

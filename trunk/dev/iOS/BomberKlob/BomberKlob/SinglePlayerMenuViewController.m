@@ -79,7 +79,8 @@
 
 
 - (IBAction)playAction:(id)sender {
-	
+	Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+	[application modifyMute:true];
 	GlobalGameViewControllerSingle * globalGameViewControllerSingle = [[GlobalGameViewControllerSingle alloc] initWithMapName:mapNameNew];
 	[self.navigationController pushViewController:globalGameViewControllerSingle animated:YES];
 

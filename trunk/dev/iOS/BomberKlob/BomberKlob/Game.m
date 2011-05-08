@@ -12,17 +12,23 @@
 #import "GameMap.h"
 #import "Bomb.h"
 #import <AVFoundation/AVFoundation.h>
+#import "Application.h"
+#import "DBSystem.h"
+#import "BomberKlobAppDelegate.h"
 
 
 
 @implementation Game
 
-@synthesize players, map, bombsPlanted, bitmaps;
+@synthesize players, map, bombsPlanted, bitmaps, isStarted;
 
 - (id) initWithMapName:(NSString *)mapName {
 	self = [super init];
     
 	if (self) {
+		application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+		resource = [RessourceManager sharedRessource];
+		[resource init];
 		bombsPlanted = [[NSMutableDictionary alloc] init];
         Position *position;
         Player *player;
@@ -41,8 +47,12 @@
             [position release];
             [player release];
         }
-//		[self loadSounds];
+		[self loadSounds];
 		[self loadBitmaps];
+		isStarted = NO;
+		displayGo = NO;
+		isEnded = NO;
+		return self;
 	}
     
     return self;
@@ -91,31 +101,96 @@
 
 
 - (void) initGame{
-	
+	if (!application.system.mute){
+		soundStart.volume = application.system.volume/100;
+		soundMode.volume = application.system.volume/100;
+	}
+	else {
+		soundStart.volume = 0;
+		soundMode.volume = 0;
+	}
+	[soundStart play];
+	NSThread * startThread = [[[NSThread alloc] initWithTarget:self selector:@selector(timerStartGame) object:nil]autorelease];
+	[startThread start];
 }
 
+- (void) timerStartGame {
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
+	
+	[[NSTimer scheduledTimerWithTimeInterval: 4 target: self selector: @selector(startGame) userInfo:self repeats: NO] retain];	
+	[runLoop run];
+	[pool release];
+}
 
 - (void) startGame{
-	[soundStart play];
+	isStarted = YES;
+	[soundMode play];
+	displayGo = YES;
+	NSThread * goThread = [[[NSThread alloc] initWithTarget:self selector:@selector(timerDisplayGo) object:nil]autorelease];
+	[goThread start];
+}
+
+- (void) timerDisplayGo {
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
+	
+	[[NSTimer scheduledTimerWithTimeInterval: 0.5 target: self selector: @selector(displayGo) userInfo:self repeats: NO] retain];	
+	[runLoop run];
+	[pool release];
+}
+
+- (void) displayGo {
+	displayGo = NO;
 }
 
 
 - (void) endGame{
-	
+	isEnded = YES;
 }
 
 
 - (void) draw:(CGContextRef)context{
 	@synchronized (self) {
-		[map draw:context];	
-        
-		NSMutableDictionary * bombs = [bombsPlanted mutableCopy];
-		for (Position * position in bombs) {
-			[[bombs objectForKey:position] draw:context];
+		if (!isEnded) {
+			[map draw:context];	
+			for (Player * player in players) {
+				[player draw:context];
+			}
+			NSMutableDictionary * bombs = [bombsPlanted mutableCopy];
+			for (Position * position in bombs) {
+				[[bombs objectForKey:position] draw:context];
+			}
 		}
-        
-		for (Player * player in players) {
-			[player draw:context];
+		
+		if (!isStarted){
+			UIImage * image = [bitmaps objectForKey:@"ready"] ;
+			int width = (map.width*resource.tileSize) * 0.75;
+			int height = (map.height*resource.tileSize) * 0.75;
+			[image drawInRect:CGRectMake(((map.width*resource.tileSize)/2)-(width/2), ((map.height*resource.tileSize)/2)-(width/2), width, height)];
+		}
+		if (displayGo) {
+			UIImage * image = [bitmaps objectForKey:@"go"] ;
+			int width = (map.width*resource.tileSize) * 0.75;
+			int height = (map.height*resource.tileSize) * 0.75;
+			[image drawInRect:CGRectMake(((map.width*resource.tileSize)/2)-(width/2), ((map.height*resource.tileSize)/2)-(width/2), width, height)];
+		}
+		if (isEnded) {
+			UIImage * image;
+			int width = (map.width*resource.tileSize) * 0.75;
+			int height = (map.height*resource.tileSize) * 0.75;
+			if (winner == [self getHumanPlayer]) {
+				image = [bitmaps objectForKey:@"winner"] ;
+				[image drawInRect:CGRectMake(((map.width*resource.tileSize)/2)-(width/2), ((map.height*resource.tileSize)/2)-(width/2), width, height)];
+			}
+			else if (winner != nil) {
+				image = [bitmaps objectForKey:@"loser"] ;
+				[image drawInRect:CGRectMake(((map.width*resource.tileSize)/2)-(width/2), ((map.height*resource.tileSize)/2)-(width/2), width, height)];
+			}
+			else {
+				image = [bitmaps objectForKey:@"draw"] ;
+				[image drawInRect:CGRectMake(((map.width*resource.tileSize)/2)-(width/2), ((map.height*resource.tileSize)/2)-(width/2), width, height)];
+			}
 		}
 	}
 }
@@ -169,14 +244,18 @@
 	[bitmaps setObject:image forKey:@"ready"];
 }
 
-- (BOOL) isStartSoundFinished {
-	if ([soundStart isPlaying]) {
-		return false;
+- (void) disableSound {
+	[soundMode stop];
+	[soundStart stop];
+	soundStart = nil;
+	soundMode = nil;
+}
+
+- (Player *) getHumanPlayer {
+	if ([players count] > 0) {
+		return [players objectAtIndex:0];
 	}
-	else{
-		[soundMode play];
-		return true;
-	}
+	else return nil;
 }
 
 
@@ -191,5 +270,22 @@
     [bombsPlanted removeObjectForKey:position];
 }
 
+- (void)quitGameThread {
+	NSThread * quitThread = [[[NSThread alloc] initWithTarget:self selector:@selector(timerQuitGame) object:nil]autorelease];
+	[quitThread start];
+}
+
+- (void) timerQuitGame {
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
+	
+	[[NSTimer scheduledTimerWithTimeInterval: 4 target: self selector: @selector(startGame) userInfo:self repeats: NO] retain];	
+	[runLoop run];
+	[pool release];
+}
+
+- (void) quitGame {
+	
+}
 
 @end

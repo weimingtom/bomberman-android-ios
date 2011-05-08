@@ -58,16 +58,11 @@
 - (void)drawAll: (CGContextRef) context{
 	Game * game = controller.globalController.engine.game;
 	[game draw:context];
-	if (![controller.globalController.engine.game isStartSoundFinished]){
-		UIImage * image = [controller.globalController.engine.game.bitmaps objectForKey:@"ready"] ;
-		int width = (controller.globalController.engine.game.map.width*ressource.tileSize) * 0.75;
-		int height = (controller.globalController.engine.game.map.height*ressource.tileSize) * 0.75;
-		[image drawInRect:CGRectMake([self center].x-(width/2), [self center].y-(width/2), width, height)];
-	}
-
 }
 
 -(void) startTimerUpdateMap {
+	updatePause = YES;
+	updateCondition = [[NSCondition alloc] init];
 	updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(startTimerUpdateMapThread) object:nil]; //Create a new thread
 	[updateThread start]; //start the thread
 }
@@ -85,19 +80,28 @@
 }
 
 - (void) updateMap{
-	[controller.globalController.engine.game.map update];
-	[self setNeedsDisplay];
+	if (![updateThread isCancelled]) {
+		[updateCondition lock];
+		while (!updatePause) {
+			[updateCondition wait];
+		}
+		[controller.globalController.engine.game.map update];
+		[self setNeedsDisplay];
+		[updateCondition unlock];
+	}
 }
 
 -(void) startTimerMovement
 {
+	movementCondition = [[NSCondition alloc] init];
+	movementPause = YES;
 	movementThread = [[NSThread alloc] initWithTarget:self selector:@selector(startTimerMovementThread) object:nil]; //Create a new thread
 	[movementThread start]; //start the thread
 }
 
 -(void) startTimerMovementThread {
 	
-	while (![controller.globalController.engine.game isStartSoundFinished]) {}
+	while (!controller.globalController.engine.game.isStarted) {}
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 	[[NSTimer scheduledTimerWithTimeInterval: 0.02 target: self selector: @selector(timerMovement:) userInfo:nil repeats: YES] retain];
@@ -107,63 +111,69 @@
 }
 
 - (void)timerMovement:(NSTimer *)timer {
-	Engine * engine = controller.globalController.engine;
-    
-	if (run) {  
-		if (currentDirection == @"right") {
-			[engine moveRight];
+	if (![movementThread isCancelled]) {
+		[movementCondition lock];
+		while (!movementPause) {
+			[movementCondition wait];
 		}
-		else if (currentDirection == @"left") {
-			[engine moveLeft];
+		
+		Engine * engine = controller.globalController.engine;
+		if (run) {
+			if (currentDirection == @"right") {
+				[engine moveRight];
+			}
+			else if (currentDirection == @"left") {
+				[engine moveLeft];
+			}
+			else if (currentDirection == @"down") {
+				[engine moveDown];
+			}
+			else if (currentDirection == @"top") {
+				[engine moveTop];
+			}
+			else if (currentDirection == @"rightTop") {
+				[engine moveRightTop];
+			}
+			else if (currentDirection == @"leftTop") {
+				[engine moveLeftTop];
+			}
+			else if (currentDirection == @"rightDown") {
+				[engine moveRightDown];
+			}
+			else if (currentDirection == @"leftDown") {
+				[engine moveLeftDown];
+			}
 		}
-		else if (currentDirection == @"down") {
-			[engine moveDown];
+		else {
+			if ([currentDirection isEqualToString:@"stop_up"]) {
+				[engine stopTop];
+			}
+			else if ([currentDirection isEqualToString:@"stop_down"]) {
+				[engine stopDown];
+			}
+			else if ([currentDirection isEqualToString:@"stop_right"]) {
+				[engine stopRight];
+			}
+			else if ([currentDirection isEqualToString:@"stop_left"]) {
+				[engine stopLeft];
+			}
+			else if ([currentDirection isEqualToString:@"stop_up_right"]) {
+				[engine stopRightTop];
+			}
+			else if ([currentDirection isEqualToString:@"stop_up_left"]) {
+				[engine stopLeftTop];
+			}
+			else if ([currentDirection isEqualToString:@"stop_down_right"]) {
+				[engine stopRightDown];
+			}
+			else if ([currentDirection isEqualToString:@"stop_down_left"]) {
+				[engine stopLeftDown];
+			}
 		}
-		else if (currentDirection == @"top") {
-			[engine moveTop];
+		if ([engine.game.players count] > 0 && ![lastPosition isEqual:currentPosition]) {
+			[[engine.game.players objectAtIndex:0] update];
 		}
-		else if (currentDirection == @"rightTop") {
-			[engine moveRightTop];
-		}
-		else if (currentDirection == @"leftTop") {
-			[engine moveLeftTop];
-		}
-		else if (currentDirection == @"rightDown") {
-			[engine moveRightDown];
-		}
-		else if (currentDirection == @"leftDown") {
-			[engine moveLeftDown];
-		}
-	}
-	else {
-		if ([currentDirection isEqualToString:@"stop_up"]) {
-			[engine stopTop];
-		}
-		else if ([currentDirection isEqualToString:@"stop_down"]) {
-			[engine stopDown];
-		}
-		else if ([currentDirection isEqualToString:@"stop_right"]) {
-			[engine stopRight];
-		}
-		else if ([currentDirection isEqualToString:@"stop_left"]) {
-			[engine stopLeft];
-		}
-		else if ([currentDirection isEqualToString:@"stop_up_right"]) {
-			[engine stopRightTop];
-		}
-		else if ([currentDirection isEqualToString:@"stop_up_left"]) {
-			[engine stopLeftTop];
-		}
-		else if ([currentDirection isEqualToString:@"stop_down_right"]) {
-			[engine stopRightDown];
-		}
-		else if ([currentDirection isEqualToString:@"stop_down_left"]) {
-			[engine stopLeftDown];
-		}
-	}
-    
-	if ([engine.game.players count] > 0 && ![lastPosition isEqual:currentPosition]) {
-		[[engine.game.players objectAtIndex:0] update];
+		[movementCondition unlock];
 	}
 }
 
@@ -256,6 +266,23 @@
 	[updateThread cancel];
 }
 
+-(void) pauseThread:(BOOL) enable{
+	if (enable) {
+		updatePause = NO;
+		movementPause = NO;
+	}
+	else {
+		updatePause = YES;
+		movementPause = YES;
+		[updateCondition lock];
+		[updateCondition signal];
+		[updateCondition unlock];
+		
+		[movementCondition lock];
+		[movementCondition signal];
+		[movementCondition unlock];
+	}
+}
 
 -(void) runThread{
 	[movementThread start];

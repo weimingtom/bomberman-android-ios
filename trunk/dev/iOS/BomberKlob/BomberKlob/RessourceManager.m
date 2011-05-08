@@ -52,10 +52,10 @@ static RessourceManager * ressource = nil;
     
 	if (self != nil) {
 		[self loadProperty];
-		[self loadPlayer];	
 		[self loadBombs];
+		[self loadPlayer];
 		[self loadObjects];
-//		[self loadBitmapInformationGameView];
+		[self loadBitmapInformationGameView];
     }
 	
 	return self;

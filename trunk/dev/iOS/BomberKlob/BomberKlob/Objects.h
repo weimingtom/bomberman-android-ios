@@ -46,7 +46,7 @@
 
 @property (nonatomic, retain) NSMutableDictionary * animations ;
 @property (nonatomic, retain) NSMutableDictionary * destroyAnimations ;
-@property (nonatomic, assign) UIImage *idle;
+@property (nonatomic, retain) UIImage *idle;
 
 @property (nonatomic, retain) NSString * currentAnimation;
 @property (nonatomic) NSInteger currentFrame;

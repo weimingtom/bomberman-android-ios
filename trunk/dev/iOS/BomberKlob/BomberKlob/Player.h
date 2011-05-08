@@ -12,7 +12,7 @@
 
 @class Bomb;
 @interface Player : Destructible {
-	NSMutableArray * bombsTypes;
+	NSMutableDictionary * bombsTypes;
 	NSString * color;
 	NSInteger lifeNumber;
 	NSInteger powerExplosion;
@@ -26,7 +26,7 @@
 
 }
 
-@property (nonatomic,retain)NSMutableArray * bombsTypes;
+@property (nonatomic,retain)NSMutableDictionary * bombsTypes;
 @property (nonatomic,retain) NSString * color;
 @property (nonatomic,retain)NSMutableDictionary * png;
 @property (nonatomic) NSInteger powerExplosion;

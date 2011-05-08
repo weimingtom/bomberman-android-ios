@@ -10,11 +10,14 @@
 #import "Game.h"
 
 @interface Single : Game {
-    
+	NSThread * timerThread;
 	NSMutableString * time;
 }
 @property (nonatomic,retain) NSMutableString * time;
 
 - (void) pauseGame;
+- (void) startTimer;
+- (void) runTimer;
+- (void) updateTime;
 
 @end
