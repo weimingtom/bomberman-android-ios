@@ -109,7 +109,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 						}
 						else if ( gameRect.contains((int) arg1.getX(i),(int) arg1.getY(i)))	{
 							if ( arg1.findPointerIndex(pointerId) == i ) {
-								System.out.println("DOWN");
 								gameControllerSingle.onTouchEvent(MotionEvent.ACTION_MOVE, (int) arg1.getX(i), (int) arg1.getY(i));
 							}
 							else {
