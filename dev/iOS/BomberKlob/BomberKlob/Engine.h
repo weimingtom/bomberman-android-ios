@@ -6,6 +6,9 @@
 @interface Engine : NSObject {
     Game * game;
 	RessourceManager * resource;
+	NSThread * updateBombsThread;
+	NSCondition * updateBombsCondition;
+	BOOL updateBombsPause;
 }
 
 /** The `game` with which the engine will make his calculations.*/
@@ -18,6 +21,9 @@
 
 /** Initializes the `Engine` with a `Game`. */
 - (id) initWithMapName:(NSString *)mapName;
+
+/** Initializes the `Engine` with a `Game`. */
+- (id) initWithGame:(Game *) gameValue;
 
 ///----------------------------------------
 /// @name Managing the Collision of Objects
@@ -33,7 +39,7 @@
 /** Lets see if the object is in collisions with a player. If Yes the player will be destroy.
 
  */
-- (void) collisionWithPlayer: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue;
+- (void) collisionWithPlayer: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue bomb:(Bomb *) aBomb;
 
 - (BOOL) isInCollisionWithABomb: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue;
 
@@ -103,7 +109,9 @@
 
 - (void) displayFire:(Bomb *) bomb;
 
-
+-(void) pauseThread:(BOOL) enable;
+- (void) stopThread;
 - (void)plantingBomb:(Bomb *)bomb;
+
 
 @end

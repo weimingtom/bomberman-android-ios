@@ -12,6 +12,7 @@
 
 @interface GameInformationView : UIView {
 	GameInformationViewController * controller;
+	NSThread * updateThread;
 }
 @property (nonatomic,retain) GameInformationViewController * controller;
 
@@ -24,5 +25,7 @@
 - (void) initComponents;
 
 - (void)pauseAction;
+- (void) initUpdateThread;
+- (void) startTimerUpdate;
 
 @end

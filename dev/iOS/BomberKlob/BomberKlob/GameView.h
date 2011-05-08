@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class RessourceManager, MapOld, Position, GameViewControllerSingle;
+@class RessourceManager, MapOld, Position, GameViewControllerSingle, Map;
 
 @interface GameView : UIView {
 	GameViewControllerSingle * controller;
@@ -19,6 +19,10 @@
 	NSString * currentDirection;
 	NSThread * movementThread;
 	NSThread * updateThread;
+	NSCondition * movementCondition;
+	NSCondition * updateCondition;
+	BOOL movementPause;
+	BOOL updatePause;
 	
 	BOOL run;
 	
@@ -49,6 +53,7 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 
 -(void) stopThread;
+-(void) pauseThread:(BOOL) enable;
 -(void) runThread;
 
 @end

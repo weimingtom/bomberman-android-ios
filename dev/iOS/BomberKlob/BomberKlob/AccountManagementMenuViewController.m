@@ -212,6 +212,7 @@
 
 - (void)loadData {
     Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+	
     
     pseudo.text = application.user.pseudo;
     userName.text = application.user.userName;

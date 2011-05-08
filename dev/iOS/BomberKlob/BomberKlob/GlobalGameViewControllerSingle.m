@@ -28,7 +28,7 @@
 - (id) initWithMapName:(NSString *)mapName {
 	self = [super init];
 	if (self){
-		engine = [[Engine alloc] initWithMapName:mapName];
+		engine = [[Engine alloc] initWithGame:[[Single alloc] initWithMapName:mapName]];
 		resource = [RessourceManager sharedRessource];
 //		engine = [[Engine alloc] initWithGame:[[Game alloc] init]];
 		CGRect dimension ;
@@ -61,16 +61,21 @@
 
 - (void)pauseAction{
 	[self.view addSubview:pauseMenu.pauseMenuView];
-	[gameViewControllerSingle.gameView stopThread];
+	[gameViewControllerSingle.gameView pauseThread:YES];
+	[engine pauseThread:YES];
 }
 
 - (void)resumeAction {
     [pauseMenu.pauseMenuView removeFromSuperview];
-	[gameViewControllerSingle.gameView runThread];
+	[gameViewControllerSingle.gameView pauseThread:NO];
+	[engine pauseThread:NO];
 }
 
 
 - (void)quitAction {
+	[engine.game disableSound];
+	[gameViewControllerSingle.gameView stopThread];
+	[engine stopThread];
     MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     self.navigationController.navigationBarHidden = NO;
     [self.navigationController pushViewController:mainMenuViewController animated:NO];

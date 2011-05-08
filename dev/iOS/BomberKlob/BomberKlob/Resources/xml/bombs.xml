@@ -14,6 +14,47 @@
 			<framerect top="0" left="90"  bottom="30" right="120" delayNextFrame="1" />
 		</animation>
 	</bomb>
+	<bomb name="dangerous">
+		<animation name="idle" canLoop="false" sound="">
+			<framerect top="30" left="30" bottom="60" right="60" delayNextFrame="0" />
+		</animation>
+		<animation name="animate" canLoop="true" sound="bombplanted">
+			<framerect top="30" left="30" bottom="60" right="60" delayNextFrame="1" />
+			<framerect top="30" left="60" bottom="60" right="90" delayNextFrame="1" />
+			<framerect top="30" left="30" bottom="60" right="60" delayNextFrame="1" />
+			<framerect top="30" left="0"  bottom="60" right="30" delayNextFrame="1" />
+		</animation>
+		<animation name="destroy" canLoop="false" sound="explosion1"> 
+			<framerect top="30" left="90"  bottom="60" right="120" delayNextFrame="1" />
+		</animation>
+	</bomb>
+	<bomb name="piercing">
+		<animation name="idle" canLoop="false" sound="">
+			<framerect top="60" left="30" bottom="90" right="60" delayNextFrame="0" />
+		</animation>
+		<animation name="animate" canLoop="true" sound="bombplanted">
+			<framerect top="60" left="30" bottom="90" right="60" delayNextFrame="1" />
+			<framerect top="60" left="60" bottom="90" right="90" delayNextFrame="1" />
+			<framerect top="60" left="30" bottom="90" right="60" delayNextFrame="1" />
+			<framerect top="60" left="0"  bottom="90" right="30" delayNextFrame="1" />
+		</animation>
+		<animation name="destroy" canLoop="false" sound="explosion1"> 
+			<framerect top="60" left="90"  bottom="90" right="120" delayNextFrame="1" />
+		</animation>
+	</bomb>	<bomb name="skull">
+		<animation name="idle" canLoop="false" sound="">
+			<framerect top="90" left="30" bottom="120" right="60" delayNextFrame="0" />
+		</animation>
+		<animation name="animate" canLoop="true" sound="bombplanted">
+			<framerect top="90" left="30" bottom="120" right="60" delayNextFrame="1" />
+			<framerect top="90" left="60" bottom="120" right="90" delayNextFrame="1" />
+			<framerect top="90" left="30" bottom="120" right="60" delayNextFrame="1" />
+			<framerect top="90" left="0"  bottom="120" right="30" delayNextFrame="1" />
+		</animation>
+		<animation name="destroy" canLoop="false" sound="explosion1"> 
+			<framerect top="90" left="90"  bottom="120" right="120" delayNextFrame="1" />
+		</animation>
+	</bomb>
 </bombs>
 
 <!-- dangerous, piercing, skull -->

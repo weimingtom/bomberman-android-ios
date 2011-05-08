@@ -30,6 +30,8 @@
 		currentAnimation = @"idle";
 		bombsTypes = [[NSMutableArray alloc] init];
 		png = [[NSMutableDictionary alloc] init];
+		bombsTypes = [[NSMutableDictionary alloc] init];
+		[bombsTypes setObject:[ressource.bitmapsBombs objectForKey:@"normal"] forKey:@"normal"];
 
 	}
 	return self;
@@ -50,6 +52,8 @@
 		waitDelay = 4;
 		currentAnimation =@"idle";
 		png = [[NSMutableDictionary alloc] init];
+		bombsTypes = [[NSMutableDictionary alloc] init];
+		[bombsTypes setObject:[ressource.bitmapsBombs objectForKey:@"normal"] forKey:@"normal"];
 	}
 	return self;
 }
@@ -336,7 +340,7 @@
 - (id)copyWithZone:(NSZone *)zone {
     Player *copy = [super copyWithZone:zone];
     
-    NSMutableArray *bombsTypeTmp = [[NSMutableArray alloc] initWithArray:bombsTypes];
+    NSMutableDictionary *bombsTypeTmp = [[NSMutableDictionary alloc] initWithDictionary:bombsTypes];
     NSString *colorTmp = [[NSString alloc] initWithString:color];
 	
 	copy.bombsTypes = bombsTypeTmp;

@@ -29,7 +29,18 @@
 		resource = [RessourceManager sharedRessource];
 		game = [[Single alloc] initWithMapName:mapName];
 		[self startTimerBombs];
-		[game startGame];
+		[game initGame];
+	}
+	return self;
+}
+
+- (id) initWithGame:(Game *) gameValue{
+	self = [super init];
+	if (self){
+		resource = [RessourceManager sharedRessource];
+		self.game = gameValue;
+		[self startTimerBombs];
+		[game initGame];
 	}
 	return self;
 }
@@ -39,14 +50,17 @@
     [game release];
     [super dealloc];
 }
-
-
-- (void) collisionWithPlayer: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue{
+- (void) collisionWithPlayer: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue bomb:(Bomb *) aBomb{
 	for (Player * player in game.players) {
 		CGRect rectObject = CGRectMake(object.position.x+xValue, object.position.y+yValue, resource.tileSize,resource.tileSize);
 		CGRect rectPlayer = CGRectMake(player.position.x, player.position.y,resource.tileSize,resource.tileSize);
 		if (CGRectIntersectsRect(rectObject, rectPlayer)) {
 			[player destroy];
+			if (aBomb.owner == player) {
+				player.lifeNumber--;
+			}
+			else
+				aBomb.owner.lifeNumber++;
 		}
 	}
 }
@@ -260,34 +274,11 @@
 	[player stopRightDown];
 }
 
-- (void) updateBombs{
-	NSMutableArray * bombsDeleted = [[NSMutableArray alloc] init];
-	for (Position * position in game.bombsPlanted) {
-		Bomb * bomb = [game.bombsPlanted objectForKey:position];
-		[bomb update];
-	}
-	while ([self thereAreBombToExplode]) {
-		for (Position * position in game.bombsPlanted) {
-			Bomb * bomb = [game.bombsPlanted objectForKey:position];
-			if ([bomb hasAnimationFinished]) {
-				[self displayFire:bomb];
-				[bombsDeleted addObject:position];
-				break;
-			}
-		}
-		for (Position * position in bombsDeleted) {
-            [game bombExplode:position];
-		}
-		
-		[bombsDeleted removeAllObjects];
-	}
-	[bombsDeleted release];
-	
-}
-
 - (void) startTimerBombs{
 	@synchronized (self) {
-		NSThread * updateBombsThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerBombsThread) object:nil]autorelease]; //Create a new thread
+		updateBombsCondition = [[NSCondition alloc] init];
+		updateBombsPause = YES;
+		updateBombsThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerBombsThread) object:nil]autorelease]; //Create a new thread
 		[updateBombsThread start]; //start the thread
 	}
 }
@@ -300,6 +291,40 @@
 	[[NSTimer scheduledTimerWithTimeInterval:2 target: self selector: @selector(updateBombs) userInfo:self repeats: YES] retain];	
 	[runLoop run];
 	[pool release];
+}
+
+
+- (void) updateBombs{
+	if (![updateBombsThread isCancelled]) {
+		[updateBombsCondition lock];
+		while (!updateBombsPause) {
+			[updateBombsCondition wait];
+		}
+		
+		NSMutableArray * bombsDeleted = [[NSMutableArray alloc] init];
+		for (Position * position in game.bombsPlanted) {
+			Bomb * bomb = [game.bombsPlanted objectForKey:position];
+			[bomb update];
+		}
+		while ([self thereAreBombToExplode]) {
+			for (Position * position in game.bombsPlanted) {
+				Bomb * bomb = [game.bombsPlanted objectForKey:position];
+				if ([bomb hasAnimationFinished]) {
+					[bomb destroy];
+					[self displayFire:bomb];
+					[bombsDeleted addObject:position];
+					break;
+				}
+			}
+			for (Position * position in bombsDeleted) {
+				[game.bombsPlanted removeObjectForKey:position];
+			}
+			
+			[bombsDeleted removeAllObjects];
+		}
+		[bombsDeleted release];
+		[updateBombsCondition unlock];
+	}
 }
 
 - (BOOL) thereAreBombToExplode {
@@ -318,7 +343,7 @@
 	BOOL stopFireRight = false;
 	Undestructible * fire = [[resource.bitmapsAnimates objectForKey:@"firecenter"] copy];
 	fire.position = [[Position alloc] initWithPosition:bomb.position];
-	[self collisionWithPlayer:fire :0 :0];
+	[self collisionWithPlayer:fire :0 :0 bomb:bomb];
 	
     [game.map addAnimatedObject:fire];
 	
@@ -340,7 +365,7 @@
 					fire = [[resource.bitmapsAnimates objectForKey:@"firedown"] copy];
 					fire.position = firePosition;
 				}
-				[self collisionWithPlayer:fire :0 :0];
+				[self collisionWithPlayer:fire :0 :0 bomb:bomb];
 				if([self isInCollisionWithABomb:fire :0 :0]){
 					[[game.bombsPlanted objectForKey:firePosition] destroy];
 				}
@@ -373,7 +398,7 @@
 					fire = [[resource.bitmapsAnimates objectForKey:@"fireup"] copy];
 					fire.position = firePosition;
 				}
-				[self collisionWithPlayer:fire :0 :0];
+				[self collisionWithPlayer:fire :0 :0 bomb:bomb];
 				if([self isInCollisionWithABomb:fire :0 :0]){
 					[[game.bombsPlanted objectForKey:firePosition] destroy];
 				}
@@ -406,7 +431,7 @@
 					fire = [[resource.bitmapsAnimates objectForKey:@"fireleft"] copy];
 					fire.position = firePosition;
 				}
-				[self collisionWithPlayer:fire :0 :0];
+				[self collisionWithPlayer:fire :0 :0 bomb:bomb];
 				if([self isInCollisionWithABomb:fire :0 :0]){
 					[[game.bombsPlanted objectForKey:firePosition ] destroy];
 				}
@@ -439,7 +464,7 @@
 					fire = [[resource.bitmapsAnimates objectForKey:@"fireright"] copy];
 					fire.position = firePosition;
 				}
-				[self collisionWithPlayer:fire :0 :0];
+				[self collisionWithPlayer:fire :0 :0 bomb:bomb];
 				if([self isInCollisionWithABomb:fire :0 :0]){
 					[[game.bombsPlanted objectForKey:firePosition ] destroy];
 				}
@@ -462,7 +487,6 @@
 	}
 }
 
-
 - (void)plantingBomb:(Bomb *)bomb {
     Player *owner = [game.players objectAtIndex:0];
     
@@ -482,5 +506,20 @@
     
 }
 
+-(void) pauseThread:(BOOL) enable{
+	if (enable) {
+		updateBombsPause = NO;
+	}
+	else {
+		updateBombsPause = YES;
+		
+		[updateBombsCondition lock];
+		[updateBombsCondition signal];
+		[updateBombsCondition unlock];
+	}
+}
 
+- (void) stopThread {
+	[updateBombsThread cancel];
+}
 @end
