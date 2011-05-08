@@ -30,7 +30,7 @@ public class ResourcesManager {
 	private static ResourcesManager resourcesmanager;
 
 
-	public final static int MAP_HEIGHT = 15;
+	public final static int MAP_HEIGHT = 13;
 	public final static int MAP_WIDTH = 21;
 
 	private static Context context;

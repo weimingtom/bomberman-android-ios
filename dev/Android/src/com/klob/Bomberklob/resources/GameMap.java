@@ -180,7 +180,7 @@ public class GameMap extends Map {
 		for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
 
 			if ( up ) {
-				if ( this.colisionMap.get(new Point(bombPosition.x, bombPosition.y-k)) != ColisionMapObjects.BLOCK ) {
+				if ( this.colisionMap.get(new Point(bombPosition.x, bombPosition.y-k)) != ColisionMapObjects.BLOCK && this.colisionMap.get(new Point(bombPosition.x, bombPosition.y-k)) != ColisionMapObjects.BOMB) {
 					this.colisionMap.put(new Point(bombPosition.x, bombPosition.y-k),ColisionMapObjects.DANGEROUS_AREA);
 				}
 				else {
@@ -189,7 +189,7 @@ public class GameMap extends Map {
 			}
 
 			if ( down ) {
-				if ( this.colisionMap.get(new Point(bombPosition.x, bombPosition.y+k)) != ColisionMapObjects.BLOCK ) {
+				if ( this.colisionMap.get(new Point(bombPosition.x, bombPosition.y+k)) != ColisionMapObjects.BLOCK && this.colisionMap.get(new Point(bombPosition.x, bombPosition.y+k)) != ColisionMapObjects.BOMB) {
 					this.colisionMap.put(new Point(bombPosition.x, bombPosition.y+k),ColisionMapObjects.DANGEROUS_AREA);
 				}
 				else {
@@ -198,7 +198,7 @@ public class GameMap extends Map {
 			}
 			
 			if ( left ) {
-				if ( this.colisionMap.get(new Point(bombPosition.x-k, bombPosition.y)) != ColisionMapObjects.BLOCK ) {
+				if ( this.colisionMap.get(new Point(bombPosition.x-k, bombPosition.y)) != ColisionMapObjects.BLOCK && this.colisionMap.get(new Point(bombPosition.x-k, bombPosition.y)) != ColisionMapObjects.BOMB) {
 					this.colisionMap.put(new Point(bombPosition.x-k, bombPosition.y),ColisionMapObjects.DANGEROUS_AREA);
 				}
 				else {
@@ -207,7 +207,7 @@ public class GameMap extends Map {
 			}
 			
 			if ( right ) {
-				if ( this.colisionMap.get(new Point(bombPosition.x+k, bombPosition.y)) != ColisionMapObjects.BLOCK ) {
+				if ( this.colisionMap.get(new Point(bombPosition.x+k, bombPosition.y)) != ColisionMapObjects.BLOCK && this.colisionMap.get(new Point(bombPosition.x+k, bombPosition.y)) != ColisionMapObjects.BOMB) {
 					this.colisionMap.put(new Point(bombPosition.x+k, bombPosition.y),ColisionMapObjects.DANGEROUS_AREA);
 				}
 				else {
