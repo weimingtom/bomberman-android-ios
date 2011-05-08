@@ -125,7 +125,7 @@ public abstract class Player extends Objects {
 	}
 	
 	public void setCurrentAnimation(PlayerAnimations animation) {
-		if ( animations.get(currentAnimation) != null ) {
+		if ( animations.get(currentAnimation) != null && !currentAnimation.equals(animation.getLabel())) {
 			this.currentAnimation = animation.getLabel();
 			this.currentFrame = 0;
 			this.waitDelay = animations.get(currentAnimation).sequence.get(currentFrame).nextFrameDelay;

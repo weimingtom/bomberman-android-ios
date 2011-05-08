@@ -167,7 +167,7 @@ public class GameMap extends Map {
 		up = down = left = right = true;
 		
 		/* CENTER */
-		this.colisionMap.put(bombPosition,ColisionMapObjects.BLOCK);
+		this.colisionMap.put(bombPosition,ColisionMapObjects.BOMB);
 		
 		for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
 
