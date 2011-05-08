@@ -28,6 +28,8 @@ public class GameMap extends Map {
 	private Bitmap bm;
 	private ConcurrentHashMap<Point, ColisionMapObjects> colisionMap;
 
+
+
 	private ConcurrentHashMap<Point, Objects> animatedObjects;
 	
 	private ConcurrentHashMap<Point, Objects> animatedObjectsBackUp;
@@ -48,6 +50,12 @@ public class GameMap extends Map {
 	
 	public ConcurrentHashMap<Point, ColisionMapObjects> getColisionMap() {
 		return colisionMap;
+	}
+	
+	/* Setteurs ------------------------------------------------------------ */
+	
+	public void setColisionMap(ConcurrentHashMap<Point, ColisionMapObjects> colisionMap) {
+		this.colisionMap = colisionMap;
 	}
 	
 	/* Méthodes publiques -------------------------------------------------- */
