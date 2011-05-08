@@ -7,9 +7,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -19,10 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
+import game.Engines;
 
-public class ServletConnection extends HttpServlet {
+import java.sql.*;
 
-	private Connection co;
+public class ServletInscription extends HttpServlet {
+
+	private Connection co ;
 	private String username, password;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -30,49 +32,46 @@ public class ServletConnection extends HttpServlet {
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println("Bienvenue sur la servlet de Connexion");
 
+		out.println("<h1>Servlet d'inscription des membres</h1>");
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		BufferedReader req = new BufferedReader(new InputStreamReader(
-				request.getInputStream()));
-		OutputStreamWriter writer = new OutputStreamWriter(
-				response.getOutputStream());
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		
+		BufferedReader req = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		OutputStreamWriter writer = new OutputStreamWriter(response.getOutputStream());
 		String message = req.readLine();
+		
 		if (message != null) {
 			System.out.println(message);
 
 			response.setContentType("text/html");
 
 			/**
-			 * désérialisation des infos envoyé par l'utilisateur dans une
-			 * arraylist
+			 * désérialisation des infos envoyé par l'utilisateur dans une arraylist
 			 */
 			JSONDeserializer<ArrayList<String>> jsonDeserializer = new JSONDeserializer<ArrayList<String>>();
 			ArrayList<String> identifiers;
 			identifiers = jsonDeserializer.deserialize(message);
-
+			
 			username = identifiers.get(0);
 			password = identifiers.get(1);
-
+			
 			/**
-			 * récupération de l'objet de connexion à la bdd présent dans le
-			 * contexte
+			 * récupération de l'objet de connexion à la bdd
+			 * présent dans le contexte
 			 */
-			co = (Connection) getServletContext()
-					.getAttribute("connectionData");
-
+			co = (Connection) getServletContext().getAttribute("connectionData");
+			
 			/**
 			 * si la connexion n'est pas valide on la réétablie
 			 */
-			if (!this.isValid(co)) {
+			if( !this.isValid(co)){
 				String dbClassName = "com.mysql.jdbc.Driver";
 				String CONNECTION = "jdbc:mysql://127.0.0.1/Bomberklob";
 				/**
-				 * FIXME moyen le root quand même un user avec simple droits
-				 * serait mieux
+				 * FIXME moyen le root quand même
+				 * un user avec simple droits serait mieux
 				 */
 				try {
 					Class.forName(dbClassName);
@@ -91,10 +90,11 @@ public class ServletConnection extends HttpServlet {
 				}
 			}
 			try {
-				/** TODO ERROR sera pour une erreur système à gérer plus bas **/
-				if (connection()) {
+				/** TODO ERROR sera pour une erreur système à gérer plus bas **/ 
+				if( inscription() ){
 					writer.write("OK");
-				} else {
+				}
+				else{
 					writer.write("BU");
 				}
 			} catch (SQLException e) {
@@ -107,56 +107,51 @@ public class ServletConnection extends HttpServlet {
 			}
 			writer.flush();
 		}
-
 	}
-
+	
+	
 	/**
-	 * méthode permettant d'être sûr que la bd est accessible et la connexion
-	 * valide
-	 * 
+	 * méthode permettant d'être sûr que la bd est accessible et la connexion valide
 	 * @param connection
 	 * @return boolean
 	 */
-	public static boolean isValid(Connection connection) {
-		if (connection == null) {
-			return false;
+	public static boolean isValid(Connection connection){
+		   if(connection==null){
+		      return false;
+		   }
+		   ResultSet ping = null;
+		   try{
+		      if(connection.isClosed()){return false;}
+		      ping = connection.createStatement().executeQuery("SELECT 1");
+		      return ping.next();
+		   }catch(SQLException sqle){
+		      return false;
+		   }
+		   finally{
+		      if(ping!=null){try{ping.close();}catch(Exception e){}}
+		   }  
 		}
-		ResultSet ping = null;
-		try {
-			if (connection.isClosed()) {
-				return false;
-			}
-			ping = connection.createStatement().executeQuery("SELECT 1");
-			return ping.next();
-		} catch (SQLException sqle) {
-			return false;
-		} finally {
-			if (ping != null) {
-				try {
-					ping.close();
-				} catch (Exception e) {
-				}
-			}
-		}
-	}
-
+	
 	/**
-	 * méthode de connection avec vérification de l'existance de l'userName
-	 * 
+	 * méthode d'inscription avec vérification de l'existance de l'userName 
 	 * @return boolean
 	 * @throws SQLException
 	 */
-	public boolean connection() throws SQLException {
+	public boolean inscription() throws SQLException{
 		boolean result = false;
-
+		
 		Statement theStatement = co.createStatement();
 
 		// récupère les entrées avec le même userName
-		ResultSet theResult = theStatement.executeQuery("select userName from Users where username='"+ username + "' AND password = '"+ password + "'");
-		if (theResult.next()) {
-			result = true;
-		}
+		ResultSet theResult = theStatement.executeQuery("select userName from Users where username='"+ username +"'"); 
+		if(!theResult.next()){
+    		boolean insert = theStatement.execute("INSERT into Users VALUES ('"+ username +"','"+ password +"')"); 
+    		System.out.println("INSERTION "+ theStatement.getUpdateCount());
+    		result = true;
+		}		
 		return result;
 	}
+
+
 
 }
