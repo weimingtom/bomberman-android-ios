@@ -9,7 +9,7 @@
 #import "Game.h"
 #import "RessourceManager.h"
 #import "Player.h"
-#import "Map.h"
+#import "GameMap.h"
 #import "Bomb.h"
 #import <AVFoundation/AVFoundation.h>
 
@@ -27,8 +27,8 @@
         Position *position;
         Player *player;
         NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
-        map = [[Map alloc] initWithMapName:mapName];
-        
+        map = [[GameMap alloc] initWithMapName:mapName];
+
         players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
         
         for (NSString *key in map.players) {
@@ -41,47 +41,12 @@
             [position release];
             [player release];
         }
-		[self loadSounds];
-		[self loadBitmaps];
-		return self;
-	}
-}
-
-- (id) init {
-	self = [super init];
-    
-	if (self) {
-		bombsPlanted = [[NSMutableDictionary alloc] init];
-		RessourceManager * resource = [RessourceManager sharedRessource];
-        Position *position;
-        Player *player;
-        NSInteger tileSize = resource.tileSize;
-        map = [[Map alloc] init];
-        
-        players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
-        
-        // TODO: Changer le tableau des couleurs en fonction de la couleur de joueur
-        NSArray *colorsPlayers = [[NSArray alloc] initWithObjects:@"white", @"blue", @"red", @"black", nil];
-        
-        for (int i = 0; i < [map.players count]; i++) {
-            position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:i]).x * tileSize) y:(((Position *) [map.players objectAtIndex:i]).y * tileSize)];
-			player = [(Player *)[resource.bitmapsPlayer objectForKey:[colorsPlayers objectAtIndex:i]] copy];
-			player.position = position;            
-            [players addObject:player];
-            
-//            [position release];
-            [player release];
-        }
-        
-        [colorsPlayers release];
-		[self loadSounds];
+//		[self loadSounds];
 		[self loadBitmaps];
 	}
     
-	return self;
+    return self;
 }
-
-// TODO: Elle ne sert plus a rien !
 
 //- (id) init {
 //	self = [super init];
@@ -92,7 +57,7 @@
 //        Position *position;
 //        Player *player;
 //        NSInteger tileSize = resource.tileSize;
-//        map = [[Map alloc] init];
+//        map = [[GameMap alloc] init];
 //        
 //        players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
 //        
@@ -105,11 +70,13 @@
 //			player.position = position;            
 //            [players addObject:player];
 //            
-////            [position release];
+//            [position release];
 //            [player release];
 //        }
 //        
 //        [colorsPlayers release];
+////		[self loadSounds];
+//		[self loadBitmaps];
 //	}
 //    
 //	return self;
@@ -141,12 +108,14 @@
 - (void) draw:(CGContextRef)context{
 	@synchronized (self) {
 		[map draw:context];	
-		for (Player * player in players) {
-			[player draw:context];
-		}
+        
 		NSMutableDictionary * bombs = [bombsPlanted mutableCopy];
 		for (Position * position in bombs) {
 			[[bombs objectForKey:position] draw:context];
+		}
+        
+		for (Player * player in players) {
+			[player draw:context];
 		}
 	}
 }
@@ -208,6 +177,18 @@
 		[soundMode play];
 		return true;
 	}
+}
+
+
+- (void)plantingBombByPlayer:(Bomb *)bomb {
+    [bombsPlanted setObject:bomb forKey:bomb.position];
+    [map bombPlanted:bomb];
+}
+
+
+- (void)bombExplode:(id)position {
+    [map bombExplode:(Bomb *)[bombsPlanted objectForKey:position]];
+    [bombsPlanted removeObjectForKey:position];
 }
 
 

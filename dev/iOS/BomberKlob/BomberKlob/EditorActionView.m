@@ -76,7 +76,7 @@
     
     shitchTool = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     shitchTool.frame = CGRectMake(SHITCH_TOOL_X, SHITCH_TOOL_Y, SHITCH_TOOL_WIDTH, SHITCH_TOOL_HEIGHT);
-    [shitchTool setTitle:@"Block" forState:UIControlStateNormal];
+    [shitchTool setTitle:@"Shift" forState:UIControlStateNormal];
     [shitchTool addTarget:self action:@selector(shitchToolTypeAction) forControlEvents:UIControlEventTouchDown];
     
     remove = [UIButton buttonWithType:UIButtonTypeRoundedRect];

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class RessourceManager, Map, Position, GameViewControllerSingle;
+@class RessourceManager, MapOld, Position, GameViewControllerSingle;
 
 @interface GameView : UIView {
 	GameViewControllerSingle * controller;

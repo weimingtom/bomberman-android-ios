@@ -17,6 +17,8 @@
 #import "PauseMenuGame.h"
 #import "MainMenuViewController.h"
 #import "Single.h"
+#import "GameMap.h"
+#import "Bomb.h"
 
 
 @implementation GlobalGameViewControllerSingle
@@ -26,7 +28,7 @@
 - (id) initWithMapName:(NSString *)mapName {
 	self = [super init];
 	if (self){
-		engine = [[Engine alloc] initWithGame:[[Single alloc] initWithMapName:mapName]];
+		engine = [[Engine alloc] initWithMapName:mapName];
 		resource = [RessourceManager sharedRessource];
 //		engine = [[Engine alloc] initWithGame:[[Game alloc] init]];
 		CGRect dimension ;
@@ -73,6 +75,13 @@
     self.navigationController.navigationBarHidden = NO;
     [self.navigationController pushViewController:mainMenuViewController animated:NO];
     [mainMenuViewController release];
+}
+
+
+- (void)plantingBomb {
+    Bomb *bomb = [[[resource.bitmapsBombs objectForKey:@"normal"] copy] autorelease];
+    
+    [engine plantingBomb:bomb];
 }
 
 @end

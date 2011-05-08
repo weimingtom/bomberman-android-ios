@@ -11,10 +11,10 @@
 
 
 @interface AnimationSequence : NSObject {
-    NSMutableArray * sequences;
+    NSMutableArray *sequences;
 	BOOL canLoop;
 	NSInteger delayNextFrame;
-	NSString * name;
+	NSString *name;
 	AVAudioPlayer *sound;
 }
 
@@ -32,6 +32,8 @@
 
 - (NSString *)description;
 - (void) playSound;
+
+- (BOOL)isUnanimated;
 
 
 @end

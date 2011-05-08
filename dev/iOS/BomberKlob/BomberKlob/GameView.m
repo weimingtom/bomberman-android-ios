@@ -8,7 +8,6 @@
 
 #import "GameView.h"
 #import "RessourceManager.h"
-#import "Map.h"
 #import "Player.h"
 #import "Bomb.h"
 #import "Position.h"
@@ -16,6 +15,7 @@
 #import "Game.h"
 #import "GlobalGameViewControllerSingle.h"
 #import "Engine.h"
+#import "GameMap.h"
 
 
 @implementation GameView
@@ -79,7 +79,7 @@
 
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 
-	[[NSTimer scheduledTimerWithTimeInterval: 0.001 target: self selector: @selector(updateMap) userInfo:self repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval: 0.03 target: self selector: @selector(updateMap) userInfo:self repeats: YES] retain];	
 	[runLoop run];
 	[pool release];
 }
@@ -108,7 +108,8 @@
 
 - (void)timerMovement:(NSTimer *)timer {
 	Engine * engine = controller.globalController.engine;
-	if (run) {
+    
+	if (run) {  
 		if (currentDirection == @"right") {
 			[engine moveRight];
 		}
@@ -160,6 +161,7 @@
 			[engine stopLeftDown];
 		}
 	}
+    
 	if ([engine.game.players count] > 0 && ![lastPosition isEqual:currentPosition]) {
 		[[engine.game.players objectAtIndex:0] update];
 	}
@@ -175,6 +177,7 @@
 	run = YES;
 	currentDirection = @"";
 }
+
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
 	CGPoint pt = [[touches anyObject] locationInView:self];
@@ -210,12 +213,15 @@
 	}
 	else if (lastPosition.y < currentPosition.y && lastPosition.x < currentPosition.x+marge  && lastPosition.x > currentPosition.x-marge) {
 		currentDirection = @"down";
-	}  
-	
+	}
 }
+
+
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
 	run = NO;
 }
+
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	run = NO;
 	if ([currentDirection isEqualToString:@"top"]) {
@@ -244,15 +250,16 @@
 	}
 }
 
+
 -(void) stopThread{
 	[movementThread cancel];
 	[updateThread cancel];
 }
+
+
 -(void) runThread{
 	[movementThread start];
 	[updateThread start];
 }
-
-
 
 @end

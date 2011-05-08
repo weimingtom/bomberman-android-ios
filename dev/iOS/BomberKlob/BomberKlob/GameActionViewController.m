@@ -27,5 +27,8 @@
 }
 
 
+- (void)plantingBomb {
+    [globalController plantingBomb];
+}
 
 @end

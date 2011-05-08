@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class GameActionViewController, GameInformationViewController, GameViewControllerSingle, Engine, RessourceManager,PauseMenuGame;
+@class GameActionViewController, GameInformationViewController, GameViewControllerSingle, Engine, RessourceManager,PauseMenuGame, Position;
 
 
 @interface GlobalGameViewControllerSingle : UIViewController {
@@ -34,5 +34,7 @@
 - (void) pauseAction;
 - (void) resumeAction;
 - (void)quitAction;
+
+- (void)plantingBomb;
 
 @end
