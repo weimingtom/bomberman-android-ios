@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.Properties;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -66,5 +67,12 @@ public class ContextListener implements ServletContextListener{
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		/**
+		 * HashMap des joueurs en lignes la clé étant leur userKey ou id de session
+		 */
+		HashMap<String, String> usersOnline = new HashMap<String, String>();
+		event.getServletContext().setAttribute("usersOnline", usersOnline);
+		
 	}
 }
