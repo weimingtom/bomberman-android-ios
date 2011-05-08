@@ -158,6 +158,12 @@ public class GameMap extends Map {
 	public void restart() {		
 		this.animatedObjects.clear();
 		
+		for(Entry<Point, ColisionMapObjects> entry : this.colisionMap.entrySet()) {
+			if ( entry.getValue() == ColisionMapObjects.DANGEROUS_AREA || entry.getValue() == ColisionMapObjects.BOMB ) {
+				this.colisionMap.put(entry.getKey(), ColisionMapObjects.EMPTY);
+			}
+		}
+		
 		for(Entry<Point, Objects> entry : this.animatedObjectsBackUp.entrySet()) {
 			this.animatedObjects.put(entry.getKey(), entry.getValue().copy());
 			this.colisionMap.put(entry.getKey(), ColisionMapObjects.BLOCK);
