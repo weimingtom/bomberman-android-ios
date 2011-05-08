@@ -60,7 +60,7 @@ public class GameControllerSingle extends GameController {
 	@Override
 	public void update() {		
 		if ( this.isEnabled() ) {
-			if ( !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(animation.getLabel() ) ) {
+			if ( !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) && !engine.getSingle().getPlayers()[0].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel()) ) {
 				engine.getSingle().getPlayers()[0].setCurrentAnimation(animation);
 			}
 			this.engine.update();

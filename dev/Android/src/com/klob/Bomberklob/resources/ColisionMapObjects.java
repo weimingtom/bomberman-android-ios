@@ -9,7 +9,9 @@ public enum ColisionMapObjects {
 	DAMAGE(3), 
 	   
 	// Objects that are just for ai mannaging
-	DANGEROUS_AREA(4); // It is where, there will be explosions fire
+	DANGEROUS_AREA(4), // It is where, there will be explosions fire
+	
+	BOMB(5);
 	
 	protected int label;
 	
