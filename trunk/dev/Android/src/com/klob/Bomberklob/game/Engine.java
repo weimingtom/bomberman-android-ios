@@ -138,9 +138,11 @@ public class Engine {
 				if ( players[i].getPosition() != null ) {
 
 					/* Si l'animation courante correspond à KILL et qu'elle est finie on supprime le personnage */
-					if ( players[i].hasAnimationFinished() && players[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
-						/* On met joueur à null ce qui stopera le thread d'écoute seulement pour le joueur humain */
-						players[i].setPosition(null);
+					if ( players[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
+						if ( players[i].hasAnimationFinished() ) {
+							/* On met joueur à null ce qui stopera le thread d'écoute seulement pour le joueur humain */
+							players[i].setPosition(null);
+						}
 					}
 					else {
 						/* Si le joueur vient de se faire toucher */
@@ -180,7 +182,7 @@ public class Engine {
 										int difficulty = ((BotPlayer) players[i]).getDifficulty();
 										if ( (int)(Math.random() * (20-(10*difficulty))) == 0) {
 											if ( (int)(Math.random() * (8-(3*difficulty))) == 1) {
-												if ( difficulty == 2) {
+												if ( difficulty != 0) {
 													/* Recuperer le tableau de zones dangeureuses */
 													ConcurrentHashMap<Point, ColisionMapObjects> colisionMap2 = new ConcurrentHashMap<Point, ColisionMapObjects>();
 
@@ -208,7 +210,7 @@ public class Engine {
 															for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
 
 																if ( up ) {
-																	if ( colisionMap2.get(new Point(bombPoint.x, bombPoint.y-k)) != ColisionMapObjects.BLOCK ) {
+																	if ( colisionMap2.get(new Point(bombPoint.x, bombPoint.y-k)) != ColisionMapObjects.BLOCK && colisionMap2.get(new Point(bombPoint.x, bombPoint.y-k)) != ColisionMapObjects.BOMB ) {
 																		colisionMap2.put(new Point(bombPoint.x, bombPoint.y-k),ColisionMapObjects.DANGEROUS_AREA);
 																	}
 																	else {
@@ -217,7 +219,7 @@ public class Engine {
 																}
 
 																if ( down ) {
-																	if ( colisionMap2.get(new Point(bombPoint.x, bombPoint.y+k)) != ColisionMapObjects.BLOCK ) {
+																	if ( colisionMap2.get(new Point(bombPoint.x, bombPoint.y+k)) != ColisionMapObjects.BLOCK && colisionMap2.get(new Point(bombPoint.x, bombPoint.y+k)) != ColisionMapObjects.BOMB ) {
 																		colisionMap2.put(new Point(bombPoint.x, bombPoint.y+k),ColisionMapObjects.DANGEROUS_AREA);
 																	}
 																	else {
@@ -226,7 +228,7 @@ public class Engine {
 																}
 
 																if ( left ) {
-																	if ( colisionMap2.get(new Point(bombPoint.x-k, bombPoint.y)) != ColisionMapObjects.BLOCK ) {
+																	if ( colisionMap2.get(new Point(bombPoint.x-k, bombPoint.y)) != ColisionMapObjects.BLOCK && colisionMap2.get(new Point(bombPoint.x-k, bombPoint.y)) != ColisionMapObjects.BOMB ) {
 																		colisionMap2.put(new Point(bombPoint.x-k, bombPoint.y),ColisionMapObjects.DANGEROUS_AREA);
 																	}
 																	else {
@@ -235,7 +237,7 @@ public class Engine {
 																}
 
 																if ( right ) {
-																	if ( colisionMap2.get(new Point(bombPoint.x+k, bombPoint.y)) != ColisionMapObjects.BLOCK ) {
+																	if ( colisionMap2.get(new Point(bombPoint.x+k, bombPoint.y)) != ColisionMapObjects.BLOCK && colisionMap2.get(new Point(bombPoint.x+k, bombPoint.y)) != ColisionMapObjects.BOMB ) {
 																		colisionMap2.put(new Point(bombPoint.x+k, bombPoint.y),ColisionMapObjects.DANGEROUS_AREA);
 																	}
 																	else {
@@ -466,68 +468,68 @@ public class Engine {
 
 		distance[p.x][p.y] = 1;
 
-		if ( colisionMap.get(new Point(p.x+1, p.y)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(p.x+1, p.y)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(p.x+1, p.y)) != ColisionMapObjects.BOMB ) {
+		if ( colisionMap.get(new Point(p.x+1, p.y)) == ColisionMapObjects.DANGEROUS_AREA ) {
 			distance[p.x+1][p.y] = 1;
 			direction[p.x+1][p.y] = PlayerAnimations.RIGHT;
 		}
-		if ( colisionMap.get(new Point(p.x-1, p.y)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(p.x-1, p.y)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(p.x-1, p.y)) != ColisionMapObjects.BOMB ) {
+		if ( colisionMap.get(new Point(p.x-1, p.y)) == ColisionMapObjects.DANGEROUS_AREA ) {
 			distance[p.x-1][p.y] = 1;
 			direction[p.x-1][p.y] = PlayerAnimations.LEFT;
 		}
-		if ( colisionMap.get(new Point(p.x, p.y+1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(p.x, p.y+1)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(p.x, p.y+1)) != ColisionMapObjects.BOMB ) {
+		if ( colisionMap.get(new Point(p.x, p.y+1)) == ColisionMapObjects.DANGEROUS_AREA ) {
 			distance[p.x][p.y+1] = 1;
 			direction[p.x][p.y+1] = PlayerAnimations.DOWN;
 		}
-		if ( colisionMap.get(new Point(p.x, p.y-1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(p.x, p.y-1)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(p.x, p.y-1)) != ColisionMapObjects.BOMB ) {
+		if ( colisionMap.get(new Point(p.x, p.y-1)) == ColisionMapObjects.DANGEROUS_AREA ) {
 			distance[p.x][p.y-1] = 1;
 			direction[p.x][p.y-1] = PlayerAnimations.UP;
 		}
 
 		for (int d = 1; d < 50; d++) {
-			for ( int h = 0; h < 21 ; h++ ) {
-				for ( int v = 0 ; v < 15 ; v++ ) {
+			for ( int h = 1; h < ResourcesManager.MAP_WIDTH-1 ; h++ ) {
+				for ( int v = 1 ; v < ResourcesManager.MAP_HEIGHT-1 ; v++ ) {
 
 					if (distance[h][v] == d) {
 
-						if ( colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.DAMAGE  && colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.BOMB && distance[h][v+1]==0) {
-							if ( colisionMap.get(new Point(h, v+1)) != ColisionMapObjects.DANGEROUS_AREA ) {
+						if ( distance[h][v+1]==0 ) {
+							if ( colisionMap.get(new Point(h, v+1)) == ColisionMapObjects.EMPTY ) {
 								pa = direction[h][v];
 								break;
 							}
-							else {
+							else if ( colisionMap.get(new Point(h, v+1)) == ColisionMapObjects.DANGEROUS_AREA ){
 								direction[h][v+1] = direction[h][v];
 								distance[h][v+1]=d+1;
 							}
 						}
 
-						if ( colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.DAMAGE && colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.BOMB && distance[h][v-1]==0) {
-							if ( colisionMap.get(new Point(h, v-1)) != ColisionMapObjects.DANGEROUS_AREA ) {
+						if ( distance[h][v-1]==0 ) {
+							if ( colisionMap.get(new Point(h, v-1)) == ColisionMapObjects.EMPTY ) {
 								pa = direction[h][v];
 								break;
 							}
-							else {
+							else if ( colisionMap.get(new Point(h, v-1)) == ColisionMapObjects.DANGEROUS_AREA ) {
 								direction[h][v-1] = direction[h][v];
 								distance[h][v-1]=d+1;
 							}
 						}
 
-						if ( colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.DAMAGE && colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.BOMB && distance[h+1][v]==0) {
-							if ( colisionMap.get(new Point(h+1, v)) != ColisionMapObjects.DANGEROUS_AREA ) {
+						if ( distance[h+1][v]==0 ) {
+							if ( colisionMap.get(new Point(h+1, v)) == ColisionMapObjects.EMPTY ) {
 								pa = direction[h][v];
 								break;
 							}
-							else {
+							else if ( colisionMap.get(new Point(h+1, v)) == ColisionMapObjects.DANGEROUS_AREA ) {
 								direction[h+1][v] = direction[h][v];
 								distance[h+1][v]=d+1;
 							}
 						}
 
-						if ( colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.BLOCK && colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.GAPE && colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.DAMAGE && colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.BOMB && distance[h-1][v]==0) {
-							if ( colisionMap.get(new Point(h-1, v)) != ColisionMapObjects.DANGEROUS_AREA ) {
+						if ( distance[h-1][v]==0 ) {
+							if ( colisionMap.get(new Point(h-1, v)) == ColisionMapObjects.EMPTY ) {
 								pa = direction[h][v];
 								break;
 							}
-							else {
+							else if ( colisionMap.get(new Point(h-1, v)) == ColisionMapObjects.DANGEROUS_AREA ){
 								direction[h-1][v] = direction[h][v];
 								distance[h-1][v]=d+1;
 							}

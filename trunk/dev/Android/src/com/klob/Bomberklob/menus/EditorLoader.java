@@ -110,7 +110,7 @@ public class EditorLoader extends Activity implements View.OnClickListener {
 			ImageView img = new ImageView(m_context);
 			img.setImageBitmap(BitmapFactory.decodeFile(m_images.get(position)));
 			img.setScaleType(ImageView.ScaleType.FIT_XY);
-			img.setLayoutParams(new Gallery.LayoutParams( (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_WIDTH)/1.5) , (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_HEIGHT)/1.5)) );
+			img.setLayoutParams(new Gallery.LayoutParams( (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_WIDTH)/1.3) , (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_HEIGHT)/1.3) ) );
 			img.setBackgroundResource(m_itemBackground);
 			return img;
 		}

@@ -259,7 +259,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 					f.delete();
 					f.createNewFile();
 					FileOutputStream fos = new FileOutputStream(f);
-					bm = Bitmap.createScaledBitmap(bm, (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_HEIGHT)/1.5) , (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_WIDTH)/1.5) , true);
+					bm = Bitmap.createScaledBitmap(bm, (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_WIDTH)/1.5) , (int) ((ResourcesManager.getSize()*ResourcesManager.MAP_HEIGHT)/1.5) , true);
 					bm.compress(Bitmap.CompressFormat.PNG, 100, fos);
 					fos.flush();
 					fos.close();
@@ -268,7 +268,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 					ioe.printStackTrace();
 				}
 
-				Model.getSystem().getDatabase().newMap(bundle.getString("map"), Model.getUser().getPseudo(), 0);
+				Model.getSystem().getDatabase().newMap(bundle.getString("map"), Model.getUser().getPseudo(), 1);
 				Intent intent = new Intent(EditorLayout.this, Home.class);
 				startActivity(intent);
 				this.finish();
