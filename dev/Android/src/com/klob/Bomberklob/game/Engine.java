@@ -323,9 +323,8 @@ public class Engine {
 						/*TODO  Vérifier tapis roulant */
 
 						move(players[i]);
-						players[i].update();
-
 					}
+					players[i].update();
 				}
 
 			}
