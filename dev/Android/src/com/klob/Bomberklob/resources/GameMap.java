@@ -39,7 +39,6 @@ public class GameMap extends Map {
 		this.colisionMap = new ConcurrentHashMap<Point, ColisionMapObjects>();
 		this.animatedObjects = new ConcurrentHashMap<Point, Objects>();		
 		this.animatedObjectsBackUp = new ConcurrentHashMap<Point, Objects>();
-		loadMap(name);
 	}
 	
 	/* Getteurs ------------------------------------------------------------ */
@@ -158,13 +157,10 @@ public class GameMap extends Map {
 	
 	public void restart() {		
 		this.animatedObjects.clear();
-		int i = 1;
 		
 		for(Entry<Point, Objects> entry : this.animatedObjectsBackUp.entrySet()) {
-			System.out.println("CPT : " + i);
 			this.animatedObjects.put(entry.getKey(), entry.getValue().copy());
 			this.colisionMap.put(entry.getKey(), ColisionMapObjects.BLOCK);
-			i++;
 		}
 	}
 	

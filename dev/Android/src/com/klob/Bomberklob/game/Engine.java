@@ -247,11 +247,26 @@ public class Engine {
 															}
 
 															/* Chercher une chemin de sortie */
-															bombPoint = pathFinding(p, colisionMap2);
+															Point res = pathFinding(p, colisionMap2);
 
 															/* Si il existe une sortie */
-															if ( bombPoint.x != point1.x || bombPoint.y != point1.y ) {
-																pushBomb(players[i]);
+															if ( res.x != point1.x || res.y != point1.y ) {
+
+																/* On l'ajoute dans la hash map de bombes */
+																this.bombs.put(bombPoint, bomb);
+
+																/* Zones dangereuses */
+																this.single.map.setColisionMap(colisionMap2);
+
+																/* On diminue la quantité des bombes que peut poser le joueur */
+																try {
+																	players[i].setBombNumber(players[i].getBombNumber()-1);
+																} catch (BombPowerException e) {
+																	e.printStackTrace();
+																}
+																
+																/* On joue la musique */
+																bomb.playCurrentAnimationSound();
 															}
 														}
 													}
@@ -484,7 +499,7 @@ public class Engine {
 			direction[p.x][p.y-1] = PlayerAnimations.UP;
 		}
 
-		for (int d = 1; d < 50; d++) {
+		for (int d = 1; d < 10; d++) {
 			for ( int h = 1; h < ResourcesManager.MAP_WIDTH-1 ; h++ ) {
 				for ( int v = 1 ; v < ResourcesManager.MAP_HEIGHT-1 ; v++ ) {
 
