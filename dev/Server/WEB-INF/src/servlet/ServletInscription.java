@@ -9,12 +9,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
@@ -26,6 +28,7 @@ public class ServletInscription extends HttpServlet {
 
 	private Connection co ;
 	private String username, password;
+	private HttpSession session;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
@@ -46,10 +49,9 @@ public class ServletInscription extends HttpServlet {
 			System.out.println(message);
 
 			response.setContentType("text/html");
-
-			/**
-			 * désérialisation des infos envoyé par l'utilisateur dans une arraylist
-			 */
+			session = request.getSession();
+			
+			 // désérialisation des infos envoyé par l'utilisateur dans une arraylist
 			JSONDeserializer<ArrayList<String>> jsonDeserializer = new JSONDeserializer<ArrayList<String>>();
 			ArrayList<String> identifiers;
 			identifiers = jsonDeserializer.deserialize(message);
@@ -57,22 +59,17 @@ public class ServletInscription extends HttpServlet {
 			username = identifiers.get(0);
 			password = identifiers.get(1);
 			
-			/**
-			 * récupération de l'objet de connexion à la bdd
-			 * présent dans le contexte
-			 */
+			
+			 // récupération de l'objet de connexion à la bdd présent dans le contexte
 			co = (Connection) getServletContext().getAttribute("connectionData");
 			
-			/**
-			 * si la connexion n'est pas valide on la réétablie
-			 */
+			
+			 // si la connexion n'est pas valide on la réétablie
 			if( !this.isValid(co)){
 				String dbClassName = "com.mysql.jdbc.Driver";
 				String CONNECTION = "jdbc:mysql://127.0.0.1/Bomberklob";
-				/**
-				 * FIXME moyen le root quand même
-				 * un user avec simple droits serait mieux
-				 */
+				
+				// FIXME moyen le root quand même un user avec simple droits serait mieux
 				try {
 					Class.forName(dbClassName);
 					Properties p = new Properties();
@@ -147,6 +144,10 @@ public class ServletInscription extends HttpServlet {
 		if(!theResult.next()){
     		boolean insert = theStatement.execute("INSERT into Users VALUES ('"+ username +"','"+ password +"')"); 
     		System.out.println("INSERTION "+ theStatement.getUpdateCount());
+    		
+    		// une fois l'ajoût fait, on ajoute aussi le userKey dans la liste des usersOnline
+    		HashMap<String, String> users = (HashMap<String, String>) getServletContext().getAttribute("usersOnline");
+			users.put(session.getId(), username);
     		result = true;
 		}		
 		return result;
