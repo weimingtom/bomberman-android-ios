@@ -228,15 +228,10 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 					
 					menu.getLocationOnScreen(t);
 					menuRect = new Rect(t[0], t[1], t[0]+menu.getWidth(), t[1]+menu.getHeight());
-					System.out.println("MENU : " + t[0] + " " + t[1] +" "+ (t[0]+menu.getWidth()) + " " + (t[1]+menu.getHeight()));
 					bomb.getLocationOnScreen(t);
 					bombRect = new Rect(t[0], t[1], t[0]+bomb.getWidth(), t[1]+bomb.getHeight());
-					System.out.println("BOMB : " + t[0] + " " + t[1] +" "+ (t[0]+bomb.getWidth()) + " " + (t[1]+bomb.getHeight()));
 					singlePlayerControllerLayout.getLocationOnScreen(t);
 					gameRect = new Rect(t[0], t[1],  (int) (t[0]+(ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx()))), (int) (t[1]+(ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx()))) ) ;		
-					System.out.println("Controller : " + t[0] + " " + t[1] + " " +  (int) (t[0]+(ResourcesManager.getWidth()-(menuSize*ResourcesManager.getDpiPx()))) + " " + (int) (t[1]+(ResourcesManager.getHeight()-(menuSize*ResourcesManager.getDpiPx()))));
-
-				
 				}
 				else if ( msg.what == 4 ) { 
 					updatePlayersStats();					
