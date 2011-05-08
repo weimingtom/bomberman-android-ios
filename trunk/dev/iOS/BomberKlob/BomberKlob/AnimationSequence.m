@@ -51,4 +51,14 @@
 	[sound play];
 }
 
+
+- (BOOL)isUnanimated {
+    
+    if ([sequences count] == 0) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 @end

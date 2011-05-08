@@ -8,17 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@class Map, Position, Objects, DBUser;
+@class EditorMap, Position, Objects, DBUser;
 
 
-@interface MapEditor : NSObject {
+@interface Editor : NSObject {
     
-    Map *map;
+    EditorMap *map;
 }
 
-@property (nonatomic, retain) Map *map;
+@property (nonatomic, retain) EditorMap *map;
 
 - (id)initWithMapName:(NSString *)mapName;
+
+- (void)draw:(CGContextRef)context alpha:(CGFloat)alpha;
 
 - (void)addGround:(Objects *)ground position:(Position *)position;
 - (void)addBlock:(Objects *)block position:(Position *)position;

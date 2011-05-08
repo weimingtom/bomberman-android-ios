@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class Map, Player, AVAudioPlayer;
+@class GameMap, Player, Bomb, Position, AVAudioPlayer;
 
 
 @interface Game : NSObject {
 	NSMutableArray * players;
 	NSMutableDictionary * bombsPlanted;
-	Map * map;
+	GameMap * map;
 	AVAudioPlayer *soundStart;
 	AVAudioPlayer *soundMode;
 	NSMutableDictionary * bitmaps;
@@ -24,7 +24,7 @@
 @property (nonatomic, retain) NSMutableArray * players;
 @property (nonatomic, retain) NSMutableDictionary * bombsPlanted;
 @property (nonatomic, retain) NSMutableDictionary * bitmaps;
-@property (nonatomic, retain) Map * map;
+@property (nonatomic, retain) GameMap * map;
 
 - (id) initWithMapName:(NSString *)mapName;
 - (void)dealloc;
@@ -37,5 +37,8 @@
 - (void) loadSounds;
 - (void) loadBitmaps;
 - (BOOL) isStartSoundFinished;
+
+- (void)plantingBombByPlayer:(Bomb *)bomb;
+- (void)bombExplode:(Position *)position;
 
 @end

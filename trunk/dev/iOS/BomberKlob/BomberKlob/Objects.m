@@ -212,4 +212,21 @@
     return [imageName compare:object.imageName];
 }
 
+
+- (BOOL)isUnanimated {
+    
+    if ([animations count] == 1) {
+        for (id key in destroyAnimations) {
+            if (![[destroyAnimations objectForKey:key] isUnanimated]) {
+                return NO;
+            }
+        }
+    
+        return YES;
+    }
+    
+    return NO;
+}
+
+
 @end

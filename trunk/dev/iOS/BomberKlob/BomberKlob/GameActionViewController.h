@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class GameActionView, GlobalGameViewControllerSingle;
+@class GameActionView, GlobalGameViewControllerSingle, Position;
 
 @interface GameActionViewController : NSObject {
 	GlobalGameViewControllerSingle * globalController;
@@ -20,5 +20,7 @@
 
 
 - (id) initWithFrame:(CGRect)dimensionValue Controller:(GlobalGameViewControllerSingle *)controllerValue;
+
+- (void)plantingBomb;
 
 @end

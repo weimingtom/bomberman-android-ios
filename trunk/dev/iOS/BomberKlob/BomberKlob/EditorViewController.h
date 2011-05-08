@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
 
-@class MapEditor, EditorMapZone, EditorInformation, EditorAction, PauseMenu, Position, Objects;
+@class Editor, EditorMapZone, EditorInformation, EditorAction, PauseMenu, Position, Objects;
 
 
 @interface EditorViewController : UIViewController {
     
-    MapEditor *mapEditor;
+    Editor *mapEditor;
     
     EditorMapZone *editorMapZone;
     EditorInformation *editorInformation;
@@ -15,7 +15,7 @@
     NSString *selectedTool;
 }
 
-@property (nonatomic, retain) MapEditor *mapEditor;
+@property (nonatomic, retain) Editor *mapEditor;
 @property (nonatomic, retain) NSString *selectedTool;
 
 - (id)initWithMapName:(NSString *)mapName;

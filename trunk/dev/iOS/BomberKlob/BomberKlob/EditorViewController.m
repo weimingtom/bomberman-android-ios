@@ -1,5 +1,5 @@
 #import "EditorViewController.h"
-#import "MapEditor.h"
+#import "Editor.h"
 #import "EditorMapZone.h"
 #import "EditorMapZoneView.h"
 #import "EditorInformation.h"
@@ -17,6 +17,7 @@
 #import "Application.h"
 #import "DBMap.h"
 #import "Undestructible.h"
+#import "EditorMap.h"
 
 
 @implementation EditorViewController
@@ -32,7 +33,7 @@
         RessourceManager *resource = [RessourceManager sharedRessource];
         selectedTool = @"blocks";
         
-		mapEditor = [[MapEditor alloc] initWithMapName:mapName];
+		mapEditor = [[Editor alloc] initWithMapName:mapName];
 
         frame = CGRectMake(0, resource.screenWidth - (mapEditor.map.height * resource.tileSize), resource.tileSize * mapEditor.map.width, resource.tileSize * mapEditor.map.height);        
         editorMapZone = [[EditorMapZone alloc] initWithFrame:frame controller:self];

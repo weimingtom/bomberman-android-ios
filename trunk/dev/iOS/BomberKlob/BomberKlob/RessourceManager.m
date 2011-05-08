@@ -55,7 +55,7 @@ static RessourceManager * ressource = nil;
 		[self loadPlayer];	
 		[self loadBombs];
 		[self loadObjects];
-		[self loadBitmapInformationGameView];
+//		[self loadBitmapInformationGameView];
     }
 	
 	return self;

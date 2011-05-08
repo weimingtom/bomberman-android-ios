@@ -6,15 +6,15 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "MapEditor.h"
-#import "Map.h"
+#import "Editor.h"
+#import "EditorMap.h"
 #import "Position.h"
 #import "DBUser.h"
 #import "RessourceManager.h"
 #import "Objects.h"
 
 
-@implementation MapEditor
+@implementation Editor
 
 @synthesize map;
 
@@ -23,7 +23,7 @@
     self = [super init];
     
     if (self) {
-        map = [[Map alloc] initWithMapName:mapName];
+        map = [[EditorMap alloc] initWithMapName:mapName];
     }
 
     return self;
@@ -33,6 +33,11 @@
 - (void)dealloc {
     [map release];
     [super dealloc];
+}
+
+
+- (void)draw:(CGContextRef)context alpha:(CGFloat)alpha {
+    [map drawMapAndPlayers:context alpha:alpha];
 }
 
 
@@ -71,7 +76,7 @@
 
 
 - (void)saveMapWithOwner:(DBUser *)owner {
-    [map saveWithOwner:owner];
+    [map save:owner];
 }
 
 @end

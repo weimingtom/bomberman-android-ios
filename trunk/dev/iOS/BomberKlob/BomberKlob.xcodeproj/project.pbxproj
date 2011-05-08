@@ -24,6 +24,7 @@
 		1885F899136C779300C4A4A1 /* EditorMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1885F89B136C779300C4A4A1 /* EditorMenuViewController.xib */; };
 		18885582134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18885580134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m */; };
 		18885586134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18885588134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib */; };
+		188914EA13748E9900DA732C /* ColisionCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 188914E913748E9900DA732C /* ColisionCase.m */; };
 		1890E74A1359F185002F78B9 /* GameInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992AFC79135641B700D7726C /* GameInformationViewController.m */; };
 		1890E74C1359F197002F78B9 /* GameInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 992AFC761356419E00D7726C /* GameInformationView.m */; };
 		1890E74D1359F1CF002F78B9 /* GameActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992AFC731356417100D7726C /* GameActionViewController.m */; };
@@ -39,6 +40,10 @@
 		1890E76E135C9E36002F78B9 /* EditorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E76C135C9E36002F78B9 /* EditorMenuViewController.m */; };
 		1890E774135CB2EC002F78B9 /* LoadMapEditorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E772135CB2EC002F78B9 /* LoadMapEditorMenuViewController.m */; };
 		1890E778135CB5AF002F78B9 /* LoadMapEditorMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890E777135CB5AF002F78B9 /* LoadMapEditorMenuView.m */; };
+		189C60CA13731C5F005912CC /* EditorMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C60C913731C5F005912CC /* EditorMap.m */; };
+		189C60CD13731D08005912CC /* GameMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C60CC13731D07005912CC /* GameMap.m */; };
+		189C60D313731E16005912CC /* ColisionMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C60D213731E16005912CC /* ColisionMap.m */; };
+		189C60D613731EA8005912CC /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C60D513731EA8005912CC /* Map.m */; };
 		18A63BE6136C7A5B00A78006 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A63BE8136C7A5B00A78006 /* MainWindow.xib */; };
 		18A63BF6136C7AC400A78006 /* BomberKlobAppDelegate.h in Resources */ = {isa = PBXBuildFile; fileRef = 18A63BF5136C7ABF00A78006 /* BomberKlobAppDelegate.h */; };
 		18ADE84F13534575001AF150 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18ADE84E13534575001AF150 /* icon.png */; };
@@ -77,8 +82,7 @@
 		99433967134C876200970231 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433941134C876200970231 /* GameView.m */; };
 		99433968134C876200970231 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433943134C876200970231 /* GameViewController.m */; };
 		99433969134C876200970231 /* HumanPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433945134C876200970231 /* HumanPlayer.m */; };
-		9943396B134C876200970231 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433949134C876200970231 /* Map.m */; };
-		9943396C134C876200970231 /* MapEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943394B134C876200970231 /* MapEditor.m */; };
+		9943396C134C876200970231 /* Editor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943394B134C876200970231 /* Editor.m */; };
 		9943396D134C876200970231 /* Multiplayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943394D134C876200970231 /* Multiplayer.m */; };
 		9943396E134C876200970231 /* Objects.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943394F134C876200970231 /* Objects.m */; };
 		9943396F134C876200970231 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 99433951134C876200970231 /* Player.m */; };
@@ -102,7 +106,6 @@
 		996F337A136ED881008204DA /* gametoolbarbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 996F3370136ED881008204DA /* gametoolbarbackground.png */; };
 		996F337B136ED881008204DA /* go.png in Resources */ = {isa = PBXBuildFile; fileRef = 996F3371136ED881008204DA /* go.png */; };
 		996F337C136ED881008204DA /* loser.png in Resources */ = {isa = PBXBuildFile; fileRef = 996F3372136ED881008204DA /* loser.png */; };
-		996F337D136ED881008204DA /* menutoolbarbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 996F3373136ED881008204DA /* menutoolbarbackground.png */; };
 		996F337E136ED881008204DA /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = 996F3374136ED881008204DA /* player.png */; };
 		996F337F136ED881008204DA /* playerlife.png in Resources */ = {isa = PBXBuildFile; fileRef = 996F3375136ED881008204DA /* playerlife.png */; };
 		996F3380136ED881008204DA /* playerspeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 996F3376136ED881008204DA /* playerspeed.png */; };
@@ -168,6 +171,8 @@
 		1888557F134106E500DA88B9 /* CreateAccountOfflineMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccountOfflineMenuViewController.h; sourceTree = "<group>"; };
 		18885580134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccountOfflineMenuViewController.m; sourceTree = "<group>"; };
 		18885587134107BE00DA88B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CreateAccountOfflineMenuViewController.xib; sourceTree = "<group>"; };
+		188914E813748E9900DA732C /* ColisionCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColisionCase.h; sourceTree = "<group>"; };
+		188914E913748E9900DA732C /* ColisionCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColisionCase.m; sourceTree = "<group>"; };
 		1890E7521359FE02002F78B9 /* EditorInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorInformation.h; sourceTree = "<group>"; };
 		1890E7531359FE02002F78B9 /* EditorInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorInformation.m; sourceTree = "<group>"; };
 		1890E7551359FE1A002F78B9 /* EditorAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorAction.h; sourceTree = "<group>"; };
@@ -191,6 +196,14 @@
 		1890E776135CB5AF002F78B9 /* LoadMapEditorMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMapEditorMenuView.h; sourceTree = "<group>"; };
 		1890E777135CB5AF002F78B9 /* LoadMapEditorMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMapEditorMenuView.m; sourceTree = "<group>"; };
 		1890E779135CB724002F78B9 /* LoadMapEditorMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMapEditorMenuViewController.xib; sourceTree = "<group>"; };
+		189C60C813731C5E005912CC /* EditorMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorMap.h; sourceTree = "<group>"; };
+		189C60C913731C5F005912CC /* EditorMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorMap.m; sourceTree = "<group>"; };
+		189C60CB13731D07005912CC /* GameMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameMap.h; sourceTree = "<group>"; };
+		189C60CC13731D07005912CC /* GameMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameMap.m; sourceTree = "<group>"; };
+		189C60D113731E16005912CC /* ColisionMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColisionMap.h; sourceTree = "<group>"; };
+		189C60D213731E16005912CC /* ColisionMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColisionMap.m; sourceTree = "<group>"; };
+		189C60D413731EA7005912CC /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		189C60D513731EA8005912CC /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		18A63BE7136C7A5B00A78006 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		18A63BF5136C7ABF00A78006 /* BomberKlobAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BomberKlobAppDelegate.h; sourceTree = "<group>"; };
 		18ADE84E13534575001AF150 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -254,10 +267,8 @@
 		99433943134C876200970231 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		99433944134C876200970231 /* HumanPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanPlayer.h; sourceTree = "<group>"; };
 		99433945134C876200970231 /* HumanPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HumanPlayer.m; sourceTree = "<group>"; };
-		99433948134C876200970231 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
-		99433949134C876200970231 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
-		9943394A134C876200970231 /* MapEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapEditor.h; sourceTree = "<group>"; };
-		9943394B134C876200970231 /* MapEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapEditor.m; sourceTree = "<group>"; };
+		9943394A134C876200970231 /* Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Editor.h; sourceTree = "<group>"; };
+		9943394B134C876200970231 /* Editor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Editor.m; sourceTree = "<group>"; };
 		9943394C134C876200970231 /* Multiplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Multiplayer.h; sourceTree = "<group>"; };
 		9943394D134C876200970231 /* Multiplayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Multiplayer.m; sourceTree = "<group>"; };
 		9943394E134C876200970231 /* Objects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Objects.h; sourceTree = "<group>"; };
@@ -290,7 +301,6 @@
 		996F3370136ED881008204DA /* gametoolbarbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gametoolbarbackground.png; sourceTree = "<group>"; };
 		996F3371136ED881008204DA /* go.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = go.png; sourceTree = "<group>"; };
 		996F3372136ED881008204DA /* loser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loser.png; sourceTree = "<group>"; };
-		996F3373136ED881008204DA /* menutoolbarbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menutoolbarbackground.png; sourceTree = "<group>"; };
 		996F3374136ED881008204DA /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
 		996F3375136ED881008204DA /* playerlife.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playerlife.png; sourceTree = "<group>"; };
 		996F3376136ED881008204DA /* playerspeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playerspeed.png; sourceTree = "<group>"; };
@@ -449,6 +459,34 @@
 			name = LoadMapEditorMenu;
 			sourceTree = "<group>";
 		};
+		189C60C113731B01005912CC /* Not used */ = {
+			isa = PBXGroup;
+			children = (
+				9943393E134C876200970231 /* GameType.h */,
+				9943393F134C876200970231 /* GameType.m */,
+				9943393A134C876200970231 /* GameControllerMultiplayer.h */,
+				9943393B134C876200970231 /* GameControllerMultiplayer.m */,
+				9943394C134C876200970231 /* Multiplayer.h */,
+				9943394D134C876200970231 /* Multiplayer.m */,
+				9943392E134C876200970231 /* DeathMatch.h */,
+				9943392F134C876200970231 /* DeathMatch.m */,
+				99433942134C876200970231 /* GameViewController.h */,
+				99433943134C876200970231 /* GameViewController.m */,
+			);
+			name = "Not used";
+			sourceTree = "<group>";
+		};
+		189C60C313731B4A005912CC /* Parser xml */ = {
+			isa = PBXGroup;
+			children = (
+				99433954134C876200970231 /* RessourceManager.h */,
+				99433955134C876200970231 /* RessourceManager.m */,
+				994339A3134C952D00970231 /* XmlParser.h */,
+				994339A4134C952E00970231 /* XmlParser.m */,
+			);
+			name = "Parser xml";
+			sourceTree = "<group>";
+		};
 		18C839B913410263001D5747 = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +519,7 @@
 		18C839CE13410263001D5747 /* BomberKlob */ = {
 			isa = PBXGroup;
 			children = (
+				189C60C313731B4A005912CC /* Parser xml */,
 				18020577136E152500E4F8CB /* GenericMenu */,
 				99433975134C87AE00970231 /* Body */,
 				99433974134C877000970231 /* Object */,
@@ -589,36 +628,31 @@
 		99433975134C87AE00970231 /* Body */ = {
 			isa = PBXGroup;
 			children = (
+				189C60C113731B01005912CC /* Not used */,
 				9943392C134C876200970231 /* BotPlayer.h */,
 				9943392D134C876200970231 /* BotPlayer.m */,
-				9943392E134C876200970231 /* DeathMatch.h */,
-				9943392F134C876200970231 /* DeathMatch.m */,
+				99433944134C876200970231 /* HumanPlayer.h */,
+				99433945134C876200970231 /* HumanPlayer.m */,
 				99433934134C876200970231 /* Engine.h */,
 				99433935134C876200970231 /* Engine.m */,
 				99433938134C876200970231 /* Game.h */,
 				99433939134C876200970231 /* Game.m */,
-				9943393A134C876200970231 /* GameControllerMultiplayer.h */,
-				9943393B134C876200970231 /* GameControllerMultiplayer.m */,
-				9943393E134C876200970231 /* GameType.h */,
-				9943393F134C876200970231 /* GameType.m */,
-				99433942134C876200970231 /* GameViewController.h */,
-				99433943134C876200970231 /* GameViewController.m */,
-				99433944134C876200970231 /* HumanPlayer.h */,
-				99433945134C876200970231 /* HumanPlayer.m */,
-				99433948134C876200970231 /* Map.h */,
-				99433949134C876200970231 /* Map.m */,
-				9943394A134C876200970231 /* MapEditor.h */,
-				9943394B134C876200970231 /* MapEditor.m */,
-				9943394C134C876200970231 /* Multiplayer.h */,
-				9943394D134C876200970231 /* Multiplayer.m */,
-				99433952134C876200970231 /* Position.h */,
-				99433953134C876200970231 /* Position.m */,
-				99433954134C876200970231 /* RessourceManager.h */,
-				99433955134C876200970231 /* RessourceManager.m */,
+				189C60D413731EA7005912CC /* Map.h */,
+				189C60D513731EA8005912CC /* Map.m */,
+				189C60CB13731D07005912CC /* GameMap.h */,
+				189C60CC13731D07005912CC /* GameMap.m */,
+				189C60D113731E16005912CC /* ColisionMap.h */,
+				189C60D213731E16005912CC /* ColisionMap.m */,
+				188914E813748E9900DA732C /* ColisionCase.h */,
+				188914E913748E9900DA732C /* ColisionCase.m */,
+				189C60C813731C5E005912CC /* EditorMap.h */,
+				189C60C913731C5F005912CC /* EditorMap.m */,
 				99433956134C876200970231 /* Single.h */,
 				99433957134C876200970231 /* Single.m */,
-				994339A3134C952D00970231 /* XmlParser.h */,
-				994339A4134C952E00970231 /* XmlParser.m */,
+				9943394A134C876200970231 /* Editor.h */,
+				9943394B134C876200970231 /* Editor.m */,
+				99433952134C876200970231 /* Position.h */,
+				99433953134C876200970231 /* Position.m */,
 			);
 			name = Body;
 			sourceTree = "<group>";
@@ -646,7 +680,6 @@
 				996F3370136ED881008204DA /* gametoolbarbackground.png */,
 				996F3371136ED881008204DA /* go.png */,
 				996F3372136ED881008204DA /* loser.png */,
-				996F3373136ED881008204DA /* menutoolbarbackground.png */,
 				996F3374136ED881008204DA /* player.png */,
 				996F3375136ED881008204DA /* playerlife.png */,
 				996F3376136ED881008204DA /* playerspeed.png */,
@@ -755,7 +788,6 @@
 				996F337A136ED881008204DA /* gametoolbarbackground.png in Resources */,
 				996F337B136ED881008204DA /* go.png in Resources */,
 				996F337C136ED881008204DA /* loser.png in Resources */,
-				996F337D136ED881008204DA /* menutoolbarbackground.png in Resources */,
 				996F337E136ED881008204DA /* player.png in Resources */,
 				996F337F136ED881008204DA /* playerlife.png in Resources */,
 				996F3380136ED881008204DA /* playerspeed.png in Resources */,
@@ -803,8 +835,7 @@
 				99433967134C876200970231 /* GameView.m in Sources */,
 				99433968134C876200970231 /* GameViewController.m in Sources */,
 				99433969134C876200970231 /* HumanPlayer.m in Sources */,
-				9943396B134C876200970231 /* Map.m in Sources */,
-				9943396C134C876200970231 /* MapEditor.m in Sources */,
+				9943396C134C876200970231 /* Editor.m in Sources */,
 				9943396D134C876200970231 /* Multiplayer.m in Sources */,
 				9943396E134C876200970231 /* Objects.m in Sources */,
 				9943396F134C876200970231 /* Player.m in Sources */,
@@ -836,6 +867,11 @@
 				1802057E136E154100E4F8CB /* MenuRect.m in Sources */,
 				184B234C136EABA4008FE541 /* MapMenu.m in Sources */,
 				184B234F136EDEE3008FE541 /* ItemMenu.m in Sources */,
+				189C60CA13731C5F005912CC /* EditorMap.m in Sources */,
+				189C60CD13731D08005912CC /* GameMap.m in Sources */,
+				189C60D313731E16005912CC /* ColisionMap.m in Sources */,
+				189C60D613731EA8005912CC /* Map.m in Sources */,
+				188914EA13748E9900DA732C /* ColisionCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

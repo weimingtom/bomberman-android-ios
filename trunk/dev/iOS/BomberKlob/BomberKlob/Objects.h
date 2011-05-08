@@ -66,5 +66,6 @@
 - (BOOL) hasAnimationFinished;
 
 - (NSComparisonResult)compareImageName:(Objects *)object;
+- (BOOL)isUnanimated;
 
 @end

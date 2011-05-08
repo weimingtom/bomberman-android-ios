@@ -17,7 +17,7 @@
 ///--------------------------
 
 /** Initializes the `Engine` with a `Game`. */
-- (id) initWithGame:(Game *) gameValue;
+- (id) initWithMapName:(NSString *)mapName;
 
 ///----------------------------------------
 /// @name Managing the Collision of Objects
@@ -103,5 +103,7 @@
 
 - (void) displayFire:(Bomb *) bomb;
 
+
+- (void)plantingBomb:(Bomb *)bomb;
 
 @end

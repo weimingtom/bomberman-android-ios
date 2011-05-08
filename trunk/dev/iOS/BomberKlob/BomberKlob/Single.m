@@ -10,16 +10,20 @@
 
 
 @implementation Single
+
 @synthesize time;
 
 - (id)init {
     self = [super init];
+    
     if (self) {
-        time = @"2:30";
-		NSLog(@"hello");
+        
     }
+    
     return self;
 }
+
+
 - (void) pauseGame{
 	
 }

@@ -14,16 +14,20 @@
 #import "Bomb.h"
 #import "AnimationSequence.h"
 #import "Undestructible.h"
+#import "Single.h"
+#import "GameMap.h"
+#import "ColisionMap.h"
 
 @implementation Engine
 
 @synthesize game;
 
-- (id) initWithGame:(Game *) gameValue{
+- (id) initWithMapName:(NSString *)mapName {
 	self = [super init];
+    
 	if (self){
 		resource = [RessourceManager sharedRessource];
-		self.game = gameValue;
+		game = [[Single alloc] initWithMapName:mapName];
 		[self startTimerBombs];
 		[game startGame];
 	}
@@ -35,6 +39,8 @@
     [game release];
     [super dealloc];
 }
+
+
 - (void) collisionWithPlayer: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue{
 	for (Player * player in game.players) {
 		CGRect rectObject = CGRectMake(object.position.x+xValue, object.position.y+yValue, resource.tileSize,resource.tileSize);
@@ -60,18 +66,18 @@
 
 
 - (BOOL) isInCollision: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue{
-	
+
 	// If the object is a player
 	if ([[[object class] description] isEqualToString:@"Player"] ) {
-		
+
 		//We first checks if there is a collision with sides of the screen
 		if (object.position.x+xValue < 0) {
 			return true;
 		}
-		if (object.position.x+xValue + resource.tileSize > game.map.width*resource.tileSize){
+		if (object.position.x+xValue + resource.tileSize > game.map.width * resource.tileSize){
 			return true;
 		}
-		if (object.position.y+yValue + (resource.tileSize) > game.map.height*resource.tileSize){
+		if (object.position.y+yValue + (resource.tileSize) > game.map.height * resource.tileSize){
 				return true;
 		}
 		if (object.position.y+yValue < 0){
@@ -87,31 +93,26 @@
 		int xmax = ceil((object.position.x+xValue + resource.tileSize-marge) / resource.tileSize);
 		int ymax = ceil(((object.position.y+yValue + (resource.tileSize)-marge) / resource.tileSize));
 		
-		
 		//For each cell of the object
 		for (int i=xmin; i <= xmax; i++) {
 			for (int j =ymin; j <= ymax; j++) {
 				if ((xmin >= 0 && ymin >=0) && (xmax < game.map.width && ymax < game.map.height)) {
-					//If it's a bomb
-					if([[[[[game.map.blocks objectAtIndex:i] objectAtIndex:j] class] description] isEqual:@"Bomb"]) {
-						return false;
-					}
-					
-					//If it is another thing nonempty
-					else if (![[[game.map.blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"]){
-						return true;
-					}
+                    //If it's a bomb
+                    if ([game.map.colisionMap isBomb:i j:j]) {
+                        return false;
+                    }
+                    //If it is another thing nonempty
+                    else if (![game.map.colisionMap isTraversableByPlayer:i j:j]) {
+                        return true;
+                    }
 				}
-				else
-					return true;
-				
+				else 
+					return true;				
 			}
 		}
 	}
 	// If it's not a player
-	else {
-
-		
+	else {		
 		//We first checks if there is a collision with sides of the screen
 		if (object.position.x+xValue < 0) {
 			return true;
@@ -126,7 +127,7 @@
 			return true;
 		}
 		
-		for (Position * position in game.map.animates) {
+		for (Position * position in game.map.animatedObjects) {
 			CGRect rect = CGRectMake(position.x, position.y, resource.tileSize, resource.tileSize);
 			CGRect rectObj = CGRectMake(object.position.x+xValue, object.position.y+yValue, resource.tileSize, resource.tileSize);
 			if (CGRectIntersectsRect(rectObj, rect)) {
@@ -147,22 +148,23 @@
 			for (int j =ymin; j <= ymax; j++) {
 				if ((xmin >= 0 && ymin >=0) && (xmax < game.map.width && ymax < game.map.height)) {
 					//If it is something nonempty
-					if (![[[game.map.blocks objectAtIndex:i] objectAtIndex:j] isEqual:@"empty"])
-						return true;
+                    if (![game.map.colisionMap isTraversableByFire:i j:j]) {
+                        return true;
+                    }
 				}
 				else
 					return true;
 			}
 		}
 	}
-	return false;    
+	return false;   
 }
 
 
 - (void) moveTop{
 	Player * player = ((Player *)[game.players objectAtIndex:0]);
 	if (![self isInCollision:player :0 :-player.speed]){
-		player.moveTop;
+		[player moveTop];
 	}
 	
 }
@@ -170,49 +172,49 @@
 - (void) moveDown{
 	Player * player = ((Player *)[game.players objectAtIndex:0]);
 	if (![self isInCollision:player :0 :player.speed]){
-		player.moveDown;
+		[player moveDown];
 	}
 }
 
 - (void) moveLeft{
 	Player * player = ((Player *)[game.players objectAtIndex:0]);
 	if (![self isInCollision:player :-player.speed :0]){
-		player.moveLeft;
+		[player moveLeft];
 	}
 }
 
 - (void) moveRight{
 	Player * player = ((Player *)[game.players objectAtIndex:0]);
 	if (![self isInCollision:player :player.speed :0]){
-		player.moveRight;
+		[player moveRight];
 	}
 }
 
 - (void) moveLeftTop{
 	Player * player = ((Player *)[game.players objectAtIndex:0]);
 	if (![self isInCollision:player :-player.speed :-player.speed]){
-		player.moveLeftTop;
+		[player moveLeftTop];
 	}
 }
 
 - (void) moveLeftDown{
 	Player * player = ((Player *)[game.players objectAtIndex:0]);
 	if (![self isInCollision:player :-player.speed :player.speed]){
-		player.moveLeftDown;
+		[player moveLeftDown];
 	}
 }
 
 - (void) moveRightDown{
 	Player * player = ((Player *)[game.players objectAtIndex:0]);
 	if (![self isInCollision:player :player.speed :player.speed]){
-		player.moveRightDown;
+		[player moveRightDown];
 	}
 }
 
 - (void) moveRightTop{
 	Player * player = ((Player *)[game.players objectAtIndex:0]);
 	if (![self isInCollision:player :player.speed :-player.speed]){
-		player.moveRightTop;
+		[player moveRightTop];
 	}
     
 }
@@ -274,7 +276,7 @@
 			}
 		}
 		for (Position * position in bombsDeleted) {
-			[game.bombsPlanted removeObjectForKey:position];
+            [game bombExplode:position];
 		}
 		
 		[bombsDeleted removeAllObjects];
@@ -295,7 +297,7 @@
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 	
-	[[NSTimer scheduledTimerWithTimeInterval: 2 target: self selector: @selector(updateBombs) userInfo:self repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval:2 target: self selector: @selector(updateBombs) userInfo:self repeats: YES] retain];	
 	[runLoop run];
 	[pool release];
 }
@@ -318,7 +320,7 @@
 	fire.position = [[Position alloc] initWithPosition:bomb.position];
 	[self collisionWithPlayer:fire :0 :0];
 	
-	[game.map addBlock:fire];
+    [game.map addAnimatedObject:fire];
 	
 	[fire release];
 	
@@ -340,20 +342,20 @@
 				}
 				[self collisionWithPlayer:fire :0 :0];
 				if([self isInCollisionWithABomb:fire :0 :0]){
-					[[game.bombsPlanted objectForKey:firePosition ] destroy];
+					[[game.bombsPlanted objectForKey:firePosition] destroy];
 				}
 				else if (![self isInCollision:fire :0 :0]){
-					[game.map addBlock:fire];
+                    [game.map addAnimatedObject:fire];
 					[fire release];
 				}
-				else if([((Objects *)[game.map.animates objectForKey:firePosition]).imageName isEqualToString:@"firedown"]){
+				else if([((Objects *)[game.map.animatedObjects objectForKey:firePosition]).imageName isEqualToString:@"firedown"]){
 					fire = [[resource.bitmapsAnimates objectForKey:@"firevertical"] copy];
 					fire.position = firePosition;
-					[game.map addBlock:fire];
+                    [game.map addAnimatedObject:fire];
 					[fire release];
 				}
 				else {
-					[(Objects *)[game.map.animates objectForKey:firePosition] destroy];
+					[(Objects *)[game.map.animatedObjects objectForKey:firePosition] destroy];
 					stopFireDown = true;
 				}
 			}
@@ -373,20 +375,20 @@
 				}
 				[self collisionWithPlayer:fire :0 :0];
 				if([self isInCollisionWithABomb:fire :0 :0]){
-					[[game.bombsPlanted objectForKey:firePosition ] destroy];
+					[[game.bombsPlanted objectForKey:firePosition] destroy];
 				}
 				else if (![self isInCollision:fire :0 :0]){
-					[game.map addBlock:fire];
+                    [game.map addAnimatedObject:fire];
 					[fire release];
 				}
-				else if([((Objects *)[game.map.animates objectForKey:firePosition]).imageName isEqualToString:@"fireup"]){
+				else if([((Objects *)[game.map.animatedObjects objectForKey:firePosition]).imageName isEqualToString:@"fireup"]){
 					fire = [[resource.bitmapsAnimates objectForKey:@"firevertical"] copy];
 					fire.position = firePosition;
-					[game.map addBlock:fire];
+                    [game.map addAnimatedObject:fire];
 					[fire release];
 				}
 				else {
-					[(Objects *)[game.map.animates objectForKey:firePosition] destroy];
+					[(Objects *)[game.map.animatedObjects objectForKey:firePosition] destroy];
 					stopFireUp = true;	
 				}
 			}
@@ -409,17 +411,17 @@
 					[[game.bombsPlanted objectForKey:firePosition ] destroy];
 				}
 				else if (![self isInCollision:fire :0 :0]){
-					[game.map addBlock:fire];
+                    [game.map addAnimatedObject:fire];
 					[fire release];
 				}
-				else if([((Objects *)[game.map.animates objectForKey:firePosition]).imageName isEqualToString:@"fireleft"]){
+				else if([((Objects *)[game.map.animatedObjects objectForKey:firePosition]).imageName isEqualToString:@"fireleft"]){
 					fire = [[resource.bitmapsAnimates objectForKey:@"firehorizontal"] copy];
 					fire.position = firePosition;
-					[game.map addBlock:fire];
+                    [game.map addAnimatedObject:fire];
 					[fire release];
 				}
 				else {
-					[(Objects *)[game.map.animates objectForKey:firePosition] destroy];
+					[(Objects *)[game.map.animatedObjects objectForKey:firePosition] destroy];
 					stopFireLeft = true;
 				}
 			}
@@ -442,22 +444,42 @@
 					[[game.bombsPlanted objectForKey:firePosition ] destroy];
 				}
 				else if (![self isInCollision:fire :0 :0]){
-					[game.map addBlock:fire];
+                    [game.map addAnimatedObject:fire];
 					[fire release];
 				}
-				else if([((Objects *)[game.map.animates objectForKey:firePosition]).imageName isEqualToString:@"fireright"]){
+				else if([((Objects *)[game.map.animatedObjects objectForKey:firePosition]).imageName isEqualToString:@"fireright"]){
 					fire = [[resource.bitmapsAnimates objectForKey:@"firehorizontal"] copy];
 					fire.position = firePosition;
-					[game.map addBlock:fire];
+                    [game.map addAnimatedObject:fire];
 					[fire release];
 				}
 				else {
-					[(Objects *)[game.map.animates objectForKey:firePosition] destroy];
+					[(Objects *)[game.map.animatedObjects objectForKey:firePosition] destroy];
 					stopFireRight = true;
 				}
 			}
 		}
 	}
+}
+
+
+- (void)plantingBomb:(Bomb *)bomb {
+    Player *owner = [game.players objectAtIndex:0];
+    
+	NSInteger bx = (owner.position.x + (resource.tileSize / 2)) / resource.tileSize;
+	NSInteger by = (owner.position.y + (resource.tileSize / 2)) / resource.tileSize;
+
+	Position *bombPosition = [[Position alloc] initWithX:(bx * resource.tileSize) y:(by * resource.tileSize)];
+	bomb.owner = owner;
+	bomb.position = bombPosition;
+    
+	if (![self isInCollision:bomb :0 :0] && ![self isInCollisionWithABomb:bomb :0 :0]) {
+        [game plantingBombByPlayer:bomb];
+        
+//		[(AnimationSequence *)[bomb.animations objectForKey:bomb.imageName] playSound];
+	}
+    
+    
 }
 
 

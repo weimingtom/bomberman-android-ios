@@ -10,6 +10,7 @@
 #import "Game.h"
 
 @interface Single : Game {
+    
 	NSMutableString * time;
 }
 @property (nonatomic,retain) NSMutableString * time;

@@ -1,7 +1,7 @@
 #import "EditorMapZoneView.h"
 #import "EditorMapZone.h"
 #import "EditorViewController.h"
-#import "MapEditor.h"
+#import "Editor.h"
 #import "Map.h"
 #import "Position.h"
 #import "Undestructible.h"
@@ -27,7 +27,7 @@
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    [editorMapZone.editorViewController.mapEditor.map drawMapAndPlayers:context alpha:editorMapZone.alpha];
+    [editorMapZone.editorViewController.mapEditor draw:context alpha:editorMapZone.alpha];
 }
 
 
