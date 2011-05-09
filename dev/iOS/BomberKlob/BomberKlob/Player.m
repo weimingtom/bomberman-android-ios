@@ -13,7 +13,7 @@
 
 
 @implementation Player
-@synthesize speed, lifeNumber, bombNumber,bombsTypes,powerExplosion,shield,timeExplosion, color, bombPosed, png, istouched;
+@synthesize speed, lifeNumber, bombNumber,bombsTypes,powerExplosion,shield,timeExplosion, color, bombPosed, png, istouched, isKilled,isInvincible;
 
 - (id) init{
 	self = [super init];
@@ -32,7 +32,7 @@
 		png = [[NSMutableDictionary alloc] init];
 		bombsTypes = [[NSMutableDictionary alloc] init];
 		[bombsTypes setObject:[ressource.bitmapsBombs objectForKey:@"normal"] forKey:@"normal"];
-
+		timeInvincible = 80;
 	}
 	return self;
 }
@@ -54,6 +54,7 @@
 		png = [[NSMutableDictionary alloc] init];
 		bombsTypes = [[NSMutableDictionary alloc] init];
 		[bombsTypes setObject:[ressource.bitmapsBombs objectForKey:@"normal"] forKey:@"normal"];
+		timeInvincible = 80;
 	}
 	return self;
 }
@@ -283,6 +284,7 @@
 
 - (void) plantingBomb:(Bomb *) aBomb{
 	bombPosed = YES;
+	NSLog(@"hello");
 }
 
 
@@ -290,17 +292,37 @@
 - (void) draw:(CGContextRef)context{
     
 	NSMutableArray * sequences = ((AnimationSequence *)[animations valueForKey:currentAnimation]).sequences;
-	
-	if (currentFrame < [sequences count]){
-		UIImage * image = [sequences objectAtIndex:currentFrame];
-		[image drawInRect:CGRectMake(position.x, position.y-(ressource.tileSize/2), ressource.tileSize , ressource.tileSize*1.5)];
-	}
-	else{
-		if ([sequences count] == 1) {
-			currentFrame = 0;
+	if (!isInvincible) {
+		if (currentFrame < [sequences count]){
 			UIImage * image = [sequences objectAtIndex:currentFrame];
 			[image drawInRect:CGRectMake(position.x, position.y-(ressource.tileSize/2), ressource.tileSize , ressource.tileSize*1.5)];
 		}
+		else{
+			if ([sequences count] == 1) {
+				currentFrame = 0;
+				UIImage * image = [sequences objectAtIndex:currentFrame];
+				[image drawInRect:CGRectMake(position.x, position.y-(ressource.tileSize/2), ressource.tileSize , ressource.tileSize*1.5)];
+			}
+		}
+	}
+	else if((timeInvincible % 5) == 0) {
+		if (currentFrame < [sequences count]){
+			UIImage * image = [sequences objectAtIndex:currentFrame];
+			[image drawInRect:CGRectMake(position.x, position.y-(ressource.tileSize/2), ressource.tileSize , ressource.tileSize*1.5)];
+		}
+		else{
+			if ([sequences count] == 1) {
+				currentFrame = 0;
+				UIImage * image = [sequences objectAtIndex:currentFrame];
+				[image drawInRect:CGRectMake(position.x, position.y-(ressource.tileSize/2), ressource.tileSize , ressource.tileSize*1.5)];
+			}
+		}
+	}
+	if (timeInvincible < 0) {
+		isInvincible = NO;
+	}
+	else {
+		timeInvincible--;
 	}
 }
 
@@ -327,6 +349,8 @@
 			currentFrame = 0;
 			if (istouched) {
 				istouched = NO;
+				timeInvincible = 80;
+				isInvincible = YES;
 				currentAnimation = @"idle";
 			}
 		}
@@ -352,6 +376,7 @@
 	copy.shield = shield;
 	copy.speed = speed;
 	copy.bombNumber = bombNumber;
+	copy.png = [[NSMutableDictionary alloc] initWithDictionary:png];
     
     [bombsTypeTmp release];
     [colorTmp release];
@@ -360,19 +385,24 @@
 }
 
 - (void) hurt{
-	currentAnimation = @"touched";
-	currentFrame = 0;
-	istouched = YES;
+	if (!isInvincible) {
+		currentAnimation = @"touched";
+		currentFrame = 0;
+		istouched = YES;
+	}
 }
 
 - (void)destroy {
-	currentFrame = 0;
-	istouched = YES;
-	if (lifeNumber <= 0) {
-		currentAnimation = @"kill";
+	if (!isInvincible) {
+		currentFrame = 0;
+		istouched = YES;
+		if (lifeNumber <= 0) {
+			currentAnimation = @"kill";
+			isKilled = YES;
+		}
+		else
+			[self hurt];
 	}
-	else
-		currentAnimation = @"touched";
 }
 
 @end

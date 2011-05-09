@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 
+#define WIDTH  21
+#define HEIGHT 13
 
 @interface Map : NSObject {
     

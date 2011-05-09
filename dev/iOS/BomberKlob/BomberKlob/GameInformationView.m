@@ -35,10 +35,10 @@
 - (void)drawRect:(CGRect)rect{
 	RessourceManager * resource = [RessourceManager sharedRessource];
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	int i = 0;
+//	int i = 0;
 	int ecart = resource.screenHeight / 4;
 	UIFont * font = [UIFont boldSystemFontOfSize:11.0];
-	for (NSString * key in resource.bitmapsPlayer) {
+	for (int i=0; i < [controller.globalController.engine.game.players count]; i++) {
 		if (i == 2) {
 			if ([[[controller.globalController.engine.game class]description]isEqualToString:@"Single"]) {
 				NSMutableString * temps = @"Temps:";
@@ -54,11 +54,20 @@
 			}
 		}
 		
-		Player * player = [resource.bitmapsPlayer valueForKey:key];
-		UIImage * image = [player.png objectForKey:@"idle"];
+		Player * player = [controller.globalController.engine.game.players objectAtIndex:i];
+		UIImage * image;
+		if (player.istouched) {
+			image = [player.png objectForKey:@"touched"];
+		}
+		else if (player.isKilled) {
+			image = [player.png objectForKey:@"kill"];
+		}
+		else {
+			image = [player.png objectForKey:@"idle"];
+		}
+				
 		[image drawInRect:CGRectMake(ecart, 0, image.size.width , image.size.height)];
 		ecart+= image.size.width;
-		i++;
 	}
 	ecart += 50;
 	Player * player = [controller.globalController.engine.game getHumanPlayer];
