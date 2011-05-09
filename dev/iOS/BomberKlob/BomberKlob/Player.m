@@ -13,7 +13,7 @@
 
 
 @implementation Player
-@synthesize speed, lifeNumber, bombNumber,bombsTypes,powerExplosion,shield,timeExplosion, color, bombPosed, png;
+@synthesize speed, lifeNumber, bombNumber,bombsTypes,powerExplosion,shield,timeExplosion, color, bombPosed, png, istouched;
 
 - (id) init{
 	self = [super init];
@@ -21,7 +21,7 @@
 		color = @"white";
 		lifeNumber = 0;
 		powerExplosion = 1;
-		timeExplosion = 10;
+		timeExplosion = 5;
 		shield = 1;
 		speed = 1;
 		bombNumber = 1;
@@ -327,6 +327,7 @@
 			currentFrame = 0;
 			if (istouched) {
 				istouched = NO;
+				currentAnimation = @"idle";
 			}
 		}
 		else
@@ -366,8 +367,12 @@
 
 - (void)destroy {
 	currentFrame = 0;
-	currentAnimation = @"touched";
 	istouched = YES;
+	if (lifeNumber <= 0) {
+		currentAnimation = @"kill";
+	}
+	else
+		currentAnimation = @"touched";
 }
 
 @end

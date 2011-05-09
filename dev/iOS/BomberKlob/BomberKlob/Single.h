@@ -12,6 +12,8 @@
 @interface Single : Game {
 	NSThread * timerThread;
 	NSMutableString * time;
+	NSCondition * timeCondition;
+	BOOL isPaused;
 }
 @property (nonatomic,retain) NSMutableString * time;
 
@@ -19,5 +21,6 @@
 - (void) startTimer;
 - (void) runTimer;
 - (void) updateTime;
+- (void) pauseGame:(BOOL)enable;
 
 @end

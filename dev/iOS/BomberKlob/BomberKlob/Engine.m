@@ -29,6 +29,7 @@
 		resource = [RessourceManager sharedRessource];
 		game = [[Single alloc] initWithMapName:mapName];
 		[self startTimerBombs];
+		[self startTimerPlayers];
 		[game initGame];
 	}
 	return self;
@@ -40,6 +41,7 @@
 		resource = [RessourceManager sharedRessource];
 		self.game = gameValue;
 		[self startTimerBombs];
+		[self startTimerPlayers];
 		[game initGame];
 	}
 	return self;
@@ -51,16 +53,20 @@
     [super dealloc];
 }
 - (void) collisionWithPlayer: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue bomb:(Bomb *) aBomb{
+	int marge = 5;
 	for (Player * player in game.players) {
-		CGRect rectObject = CGRectMake(object.position.x+xValue, object.position.y+yValue, resource.tileSize,resource.tileSize);
-		CGRect rectPlayer = CGRectMake(player.position.x, player.position.y,resource.tileSize,resource.tileSize);
+		CGRect rectObject = CGRectMake(object.position.x+xValue, object.position.y+yValue, resource.tileSize-marge,resource.tileSize-marge);
+		CGRect rectPlayer = CGRectMake(player.position.x, player.position.y,resource.tileSize-marge,resource.tileSize-marge);
 		if (CGRectIntersectsRect(rectObject, rectPlayer)) {
-			[player destroy];
 			if (aBomb.owner == player) {
-				player.lifeNumber--;
+				if (!player.istouched) {
+					player.lifeNumber--;
+				}
 			}
-			else
+			else {
 				aBomb.owner.lifeNumber++;
+			}
+			[player hurt];
 		}
 	}
 }
@@ -97,7 +103,6 @@
 		if (object.position.y+yValue < 0){
 			return true;
 		}
-
 		//We calculates the smallest and largest object's coordinates
 		int marge = 5; //Margin movement
 		
@@ -106,22 +111,19 @@
 		
 		int xmax = ceil((object.position.x+xValue + resource.tileSize-marge) / resource.tileSize);
 		int ymax = ceil(((object.position.y+yValue + (resource.tileSize)-marge) / resource.tileSize));
+
 		
 		//For each cell of the object
 		for (int i=xmin; i <= xmax; i++) {
 			for (int j =ymin; j <= ymax; j++) {
 				if ((xmin >= 0 && ymin >=0) && (xmax < game.map.width && ymax < game.map.height)) {
-                    //If it's a bomb
-                    if ([game.map.colisionMap isBomb:i j:j]) {
-                        return false;
-                    }
-                    //If it is another thing nonempty
-                    else if (![game.map.colisionMap isTraversableByPlayer:i j:j]) {
-                        return true;
-                    }
+					//If it is another thing nonempty
+					if (![game.map.colisionMap isTraversableByPlayer:i j:j]) {
+						return true;
+					}
 				}
 				else 
-					return true;				
+					return true;	
 			}
 		}
 	}
@@ -277,7 +279,7 @@
 - (void) startTimerBombs{
 	@synchronized (self) {
 		updateBombsCondition = [[NSCondition alloc] init];
-		updateBombsPause = YES;
+		updateBombsPause = NO;
 		updateBombsThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerBombsThread) object:nil]autorelease]; //Create a new thread
 		[updateBombsThread start]; //start the thread
 	}
@@ -297,7 +299,7 @@
 - (void) updateBombs{
 	if (![updateBombsThread isCancelled]) {
 		[updateBombsCondition lock];
-		while (!updateBombsPause) {
+		while (updateBombsPause) {
 			[updateBombsCondition wait];
 		}
 		
@@ -317,7 +319,7 @@
 				}
 			}
 			for (Position * position in bombsDeleted) {
-				[game.bombsPlanted removeObjectForKey:position];
+				[game bombExplode:position];
 			}
 			
 			[bombsDeleted removeAllObjects];
@@ -368,6 +370,7 @@
 				[self collisionWithPlayer:fire :0 :0 bomb:bomb];
 				if([self isInCollisionWithABomb:fire :0 :0]){
 					[[game.bombsPlanted objectForKey:firePosition] destroy];
+					stopFireDown = true;
 				}
 				else if (![self isInCollision:fire :0 :0]){
                     [game.map addAnimatedObject:fire];
@@ -401,6 +404,7 @@
 				[self collisionWithPlayer:fire :0 :0 bomb:bomb];
 				if([self isInCollisionWithABomb:fire :0 :0]){
 					[[game.bombsPlanted objectForKey:firePosition] destroy];
+					stopFireUp = true;	
 				}
 				else if (![self isInCollision:fire :0 :0]){
                     [game.map addAnimatedObject:fire];
@@ -434,6 +438,7 @@
 				[self collisionWithPlayer:fire :0 :0 bomb:bomb];
 				if([self isInCollisionWithABomb:fire :0 :0]){
 					[[game.bombsPlanted objectForKey:firePosition ] destroy];
+					stopFireLeft = true;
 				}
 				else if (![self isInCollision:fire :0 :0]){
                     [game.map addAnimatedObject:fire];
@@ -467,6 +472,7 @@
 				[self collisionWithPlayer:fire :0 :0 bomb:bomb];
 				if([self isInCollisionWithABomb:fire :0 :0]){
 					[[game.bombsPlanted objectForKey:firePosition ] destroy];
+					stopFireRight = true;
 				}
 				else if (![self isInCollision:fire :0 :0]){
                     [game.map addAnimatedObject:fire];
@@ -488,31 +494,33 @@
 }
 
 - (void)plantingBomb:(Bomb *)bomb {
-    Player *owner = [game.players objectAtIndex:0];
-    
-	NSInteger bx = (owner.position.x + (resource.tileSize / 2)) / resource.tileSize;
-	NSInteger by = (owner.position.y + (resource.tileSize / 2)) / resource.tileSize;
-
-	Position *bombPosition = [[Position alloc] initWithX:(bx * resource.tileSize) y:(by * resource.tileSize)];
-	bomb.owner = owner;
-	bomb.position = bombPosition;
-    
-	if (![self isInCollision:bomb :0 :0] && ![self isInCollisionWithABomb:bomb :0 :0]) {
-        [game plantingBombByPlayer:bomb];
-        
-//		[(AnimationSequence *)[bomb.animations objectForKey:bomb.imageName] playSound];
+	if (game.isStarted) {
+		Player *owner = [game.players objectAtIndex:0];
+		
+		NSInteger bx = (owner.position.x + (resource.tileSize / 2)) / resource.tileSize;
+		NSInteger by = (owner.position.y + (resource.tileSize / 2)) / resource.tileSize;
+		
+		Position *bombPosition = [[Position alloc] initWithX:(bx * resource.tileSize) y:(by * resource.tileSize)];
+		bomb.owner = owner;
+		bomb.position = bombPosition;
+		
+		if (![self isInCollision:bomb :0 :0] && ![self isInCollisionWithABomb:bomb :0 :0]) {
+			[game plantingBombByPlayer:bomb];
+			[(AnimationSequence *)[bomb.animations objectForKey:bomb.imageName] playSound];
+		}
 	}
-    
-    
 }
 
 -(void) pauseThread:(BOOL) enable{
 	if (enable) {
-		updateBombsPause = NO;
+		updateBombsPause = enable;
+		updatePlayersPause = enable;
+		[game pauseGame:enable];
 	}
 	else {
-		updateBombsPause = YES;
-		
+		[game pauseGame:enable];
+		updateBombsPause = enable;
+		updatePlayersPause = enable;
 		[updateBombsCondition lock];
 		[updateBombsCondition signal];
 		[updateBombsCondition unlock];
@@ -521,5 +529,39 @@
 
 - (void) stopThread {
 	[updateBombsThread cancel];
+	[updatePlayersThread cancel];
 }
+
+- (void) startTimerPlayers{
+	updatePlayersCondition = [[NSCondition alloc] init];
+	updatePlayersPause = NO;
+	updatePlayersThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerPlayersThread) object:nil]autorelease];
+	[updatePlayersThread start];
+}
+
+- (void) startTimerPlayersThread {
+	
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
+	
+	[[NSTimer scheduledTimerWithTimeInterval:0.02 target: self selector: @selector(updatePlayers) userInfo:self repeats: YES] retain];	
+	[runLoop run];
+	[pool release];
+}
+
+
+- (void) updatePlayers{
+	if (![updatePlayersThread isCancelled]) {
+		[updatePlayersCondition lock];
+		while (updatePlayersPause) {
+			[updatePlayersCondition wait];
+		}
+		for (int i = 1; i < [game.players count]; i++) {
+			[(Player *)[game.players objectAtIndex:i] update];
+
+		}
+		[updatePlayersCondition unlock];
+	}
+}
+
 @end

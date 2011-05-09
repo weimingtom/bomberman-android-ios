@@ -36,6 +36,8 @@
 @property (nonatomic) NSInteger speed;
 @property (nonatomic) NSInteger lifeNumber;
 @property (nonatomic) BOOL bombPosed;
+@property (nonatomic) BOOL istouched;
+
 
 - (id) init;
 - (id) initWithColor:(NSString *)colorValue position:(Position *) positionValue;
