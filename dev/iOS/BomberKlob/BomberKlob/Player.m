@@ -284,7 +284,6 @@
 
 - (void) plantingBomb:(Bomb *) aBomb{
 	bombPosed = YES;
-	NSLog(@"hello");
 }
 
 
