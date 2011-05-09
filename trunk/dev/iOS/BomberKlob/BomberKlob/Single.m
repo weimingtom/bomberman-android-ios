@@ -19,6 +19,8 @@
     
     if (self) {
         time = @"2:30";
+		timeCondition = [[NSCondition alloc] init];
+		isPaused = NO;
 		[self startTimer];
     }
     
@@ -28,14 +30,21 @@
 - (id)initWithMapName:(NSString *)mapName{
 	self = [super initWithMapName:mapName];
     if (self) {
-        time = @"1:30";
+        time = @"1:10";
 		[self startTimer];
     }
     return self;
 }
 
-- (void) pauseGame{
-	
+- (void) pauseGame:(BOOL)enable{
+	if (enable) {
+		isPaused = YES;
+	} else {
+		[timeCondition lock];
+		isPaused = NO;
+		[timeCondition signal];
+		[timeCondition unlock];
+	}
 }
 
 - (void) startTimer{
@@ -53,24 +62,33 @@
 	[pool release];
 }
 
+
 - (void) updateTime {
-	int m,s;
-	sscanf([time UTF8String],"%d:%d", &m,&s);
-	s--;
-	if (s < 0) {
-		s = 59;
-		m--;
-		if (m < 0) {
-			m = 0;
-			s = 0;
-			[self endGame];
+	if (![timerThread isCancelled]) {
+		[timeCondition lock];
+		while (isPaused) {
+			[timeCondition wait];
 		}
+		
+		int m,s;
+		sscanf([time UTF8String],"%d:%d", &m,&s);
+		s--;
+		if (s < 0) {
+			s = 59;
+			m--;
+			if (m < 0) {
+				m = 0;
+				s = 0;
+				[self endGame];
+			}
+		}
+		if (s < 10) 
+			self.time = [NSString stringWithFormat:@"%d:0%d",m,s];
+		else
+			self.time = [NSString stringWithFormat:@"%d:%d",m,s];
+//		[time retain];
+		[timeCondition unlock];
 	}
-	if (s < 10) 
-		time = [NSString stringWithFormat:@"%d:0%d",m,s];
-	else
-		time = [NSString stringWithFormat:@"%d:%d",m,s];
-	[time retain];
 }
 
 
@@ -91,4 +109,6 @@
 		}
 	}
 }
+
+
 @end

@@ -32,6 +32,8 @@
 @property (nonatomic, retain) NSMutableDictionary * bitmaps;
 @property (nonatomic, retain) GameMap * map;
 @property (nonatomic) BOOL isStarted;
+@property (nonatomic) BOOL isEnded;
+
 
 - (id) initWithMapName:(NSString *)mapName;
 - (void)dealloc;
@@ -53,5 +55,6 @@
 - (void)bombExplode:(Position *)position;
 
 - (void)quitGame;
+- (void) pauseGame:(BOOL)enable;
 
 @end

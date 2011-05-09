@@ -84,20 +84,20 @@
 			<framerect top="0" left="630" bottom="45" right="660" delayNextFrame="5" />
 		</animation>
 		<animation name="kill" canLoop="false" sound="">
-			<framerect top="0" left="800" bottom="45" right="834" delayNextFrame="1" />
-			<framerect top="0" left="838" bottom="45" right="872" delayNextFrame="1" />
-			<framerect top="0" left="876" bottom="45" right="918" delayNextFrame="1" />
-			<framerect top="0" left="926" bottom="45" right="972" delayNextFrame="1" />
+			<framerect top="0" left="800" bottom="45" right="834" delayNextFrame="2" />
+			<framerect top="0" left="838" bottom="45" right="872" delayNextFrame="2" />
+			<framerect top="0" left="876" bottom="45" right="918" delayNextFrame="2" />
+			<framerect top="0" left="926" bottom="45" right="972" delayNextFrame="2" />
 		</animation>
 		<animation name="touched" canLoop="false" sound="">
-			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="1" />
-			<framerect top="0" left="760" bottom="45" right="798" delayNextFrame="1" />
-			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="1" />
-			<framerect top="0" left="760" bottom="45" right="798" delayNextFrame="1" />
-			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="1" />
-			<framerect top="0" left="760" bottom="45" right="798" delayNextFrame="1" />
-			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="1" />
-			<framerect top="0" left="760" bottom="45" right="798" delayNextFrame="1" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="2" />
+			<framerect top="0" left="760" bottom="45" right="798" delayNextFrame="2" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="2" />
+			<framerect top="0" left="760" bottom="45" right="798" delayNextFrame="2" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="2" />
+			<framerect top="0" left="760" bottom="45" right="798" delayNextFrame="2" />
+			<framerect top="0" left="722" bottom="45" right="758" delayNextFrame="2" />
+			<framerect top="0" left="760" bottom="45" right="798" delayNextFrame="2" />
 		</animation>
 	</player>
 	
@@ -185,20 +185,20 @@
 			<framerect top="45" left="630" bottom="90" right="660" delayNextFrame="5" />
 		</animation>
 		<animation name="kill" canLoop="false" sound="">
-			<framerect top="45" left="800" bottom="90" right="834" delayNextFrame="1" />
-			<framerect top="45" left="838" bottom="90" right="872" delayNextFrame="1" />
-			<framerect top="45" left="876" bottom="90" right="918" delayNextFrame="1" />
-			<framerect top="45" left="926" bottom="90" right="972" delayNextFrame="1" />
+			<framerect top="45" left="800" bottom="90" right="834" delayNextFrame="2" />
+			<framerect top="45" left="838" bottom="90" right="872" delayNextFrame="2" />
+			<framerect top="45" left="876" bottom="90" right="918" delayNextFrame="2" />
+			<framerect top="45" left="926" bottom="90" right="972" delayNextFrame="2" />
 		</animation>
 		<animation name="touched" canLoop="false" sound="">
-			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="1" />
-			<framerect top="45" left="760" bottom="90" right="798" delayNextFrame="1" />
-			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="1" />
-			<framerect top="45" left="760" bottom="90" right="798" delayNextFrame="1" />
-			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="1" />
-			<framerect top="45" left="760" bottom="90" right="798" delayNextFrame="1" />
-			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="1" />
-			<framerect top="45" left="760" bottom="90" right="798" delayNextFrame="1" />
+			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="2" />
+			<framerect top="45" left="760" bottom="90" right="798" delayNextFrame="2" />
+			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="2" />
+			<framerect top="45" left="760" bottom="90" right="798" delayNextFrame="2" />
+			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="2" />
+			<framerect top="45" left="760" bottom="90" right="798" delayNextFrame="2" />
+			<framerect top="45" left="722" bottom="90" right="758" delayNextFrame="2" />
+			<framerect top="45" left="760" bottom="90" right="798" delayNextFrame="2" />
 		</animation>
 	</player>
 	
@@ -286,20 +286,20 @@
 			<framerect top="90" left="630" bottom="135" right="660" delayNextFrame="5" />
 		</animation>
 		<animation name="kill" canLoop="false" sound="">
-			<framerect top="90" left="800" bottom="135" right="834" delayNextFrame="1" />
-			<framerect top="90" left="838" bottom="135" right="872" delayNextFrame="1" />
-			<framerect top="90" left="876" bottom="135" right="918" delayNextFrame="1" />
-			<framerect top="90" left="926" bottom="135" right="972" delayNextFrame="1" />
+			<framerect top="90" left="800" bottom="135" right="834" delayNextFrame="2" />
+			<framerect top="90" left="838" bottom="135" right="872" delayNextFrame="2" />
+			<framerect top="90" left="876" bottom="135" right="918" delayNextFrame="2" />
+			<framerect top="90" left="926" bottom="135" right="972" delayNextFrame="2" />
 		</animation>
 		<animation name="touched" canLoop="false" sound="">
-			<framerect top="90" left="722" bottom="135" right="758" delayNextFrame="1" />
-			<framerect top="90" left="760" bottom="135" right="798" delayNextFrame="1" />
-			<framerect top="90" left="722" bottom="135" right="758" delayNextFrame="1" />
-			<framerect top="90" left="760" bottom="135" right="798" delayNextFrame="1" />
-			<framerect top="90" left="722" bottom="135" right="758" delayNextFrame="1" />
-			<framerect top="90" left="760" bottom="135" right="798" delayNextFrame="1" />
-			<framerect top="90" left="722" bottom="135" right="758" delayNextFrame="1" />
-			<framerect top="90" left="760" bottom="135" right="798" delayNextFrame="1" />
+			<framerect top="90" left="722" bottom="135" right="758" delayNextFrame="2" />
+			<framerect top="90" left="760" bottom="135" right="798" delayNextFrame="2" />
+			<framerect top="90" left="722" bottom="135" right="758" delayNextFrame="2" />
+			<framerect top="90" left="760" bottom="135" right="798" delayNextFrame="2" />
+			<framerect top="90" left="722" bottom="135" right="758" delayNextFrame="2" />
+			<framerect top="90" left="760" bottom="135" right="798" delayNextFrame="2" />
+			<framerect top="90" left="722" bottom="135" right="758" delayNextFrame="2" />
+			<framerect top="90" left="760" bottom="135" right="798" delayNextFrame="2" />
 		</animation>
 	</player>
 	
@@ -387,20 +387,20 @@
 			<framerect top="135" left="630" bottom="180" right="660" delayNextFrame="5" />
 		</animation>
 		<animation name="kill" canLoop="false" sound="">
-			<framerect top="135" left="800" bottom="180" right="834" delayNextFrame="1" />
-			<framerect top="135" left="838" bottom="180" right="872" delayNextFrame="1" />
-			<framerect top="135" left="876" bottom="180" right="918" delayNextFrame="1" />
-			<framerect top="135" left="926" bottom="180" right="972" delayNextFrame="1" />
+			<framerect top="135" left="800" bottom="180" right="834" delayNextFrame="2" />
+			<framerect top="135" left="838" bottom="180" right="872" delayNextFrame="2" />
+			<framerect top="135" left="876" bottom="180" right="918" delayNextFrame="2" />
+			<framerect top="135" left="926" bottom="180" right="972" delayNextFrame="2" />
 		</animation>
 		<animation name="touched" canLoop="false" sound="">
-			<framerect top="135" left="722" bottom="180" right="758" delayNextFrame="1" />
-			<framerect top="135" left="760" bottom="180" right="798" delayNextFrame="1" />
-			<framerect top="135" left="722" bottom="180" right="758" delayNextFrame="1" />
-			<framerect top="135" left="760" bottom="180" right="798" delayNextFrame="1" />
-			<framerect top="135" left="722" bottom="180" right="758" delayNextFrame="1" />
-			<framerect top="135" left="760" bottom="180" right="798" delayNextFrame="1" />
-			<framerect top="135" left="722" bottom="180" right="758" delayNextFrame="1" />
-			<framerect top="135" left="760" bottom="180" right="798" delayNextFrame="1" />
+			<framerect top="135" left="722" bottom="180" right="758" delayNextFrame="2" />
+			<framerect top="135" left="760" bottom="180" right="798" delayNextFrame="2" />
+			<framerect top="135" left="722" bottom="180" right="758" delayNextFrame="2" />
+			<framerect top="135" left="760" bottom="180" right="798" delayNextFrame="2" />
+			<framerect top="135" left="722" bottom="180" right="758" delayNextFrame="2" />
+			<framerect top="135" left="760" bottom="180" right="798" delayNextFrame="2" />
+			<framerect top="135" left="722" bottom="180" right="758" delayNextFrame="2" />
+			<framerect top="135" left="760" bottom="180" right="798" delayNextFrame="2" />
 		</animation>
 	</player>
 	

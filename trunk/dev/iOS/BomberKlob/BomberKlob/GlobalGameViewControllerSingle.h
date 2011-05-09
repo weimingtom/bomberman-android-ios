@@ -37,4 +37,11 @@
 
 - (void)plantingBomb;
 
+
+- (void) startTimerIsGameEnded;
+
+- (void) startTimerIsGameEndedThread;
+
+- (void) isGameEnded;
+
 @end

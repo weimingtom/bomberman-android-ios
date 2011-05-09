@@ -61,7 +61,7 @@
 }
 
 -(void) startTimerUpdateMap {
-	updatePause = YES;
+	updatePause = NO;
 	updateCondition = [[NSCondition alloc] init];
 	updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(startTimerUpdateMapThread) object:nil]; //Create a new thread
 	[updateThread start]; //start the thread
@@ -82,7 +82,7 @@
 - (void) updateMap{
 	if (![updateThread isCancelled]) {
 		[updateCondition lock];
-		while (!updatePause) {
+		while (updatePause) {
 			[updateCondition wait];
 		}
 		[controller.globalController.engine.game.map update];
@@ -94,7 +94,7 @@
 -(void) startTimerMovement
 {
 	movementCondition = [[NSCondition alloc] init];
-	movementPause = YES;
+	movementPause = NO;
 	movementThread = [[NSThread alloc] initWithTarget:self selector:@selector(startTimerMovementThread) object:nil]; //Create a new thread
 	[movementThread start]; //start the thread
 }
@@ -113,7 +113,7 @@
 - (void)timerMovement:(NSTimer *)timer {
 	if (![movementThread isCancelled]) {
 		[movementCondition lock];
-		while (!movementPause) {
+		while (movementPause) {
 			[movementCondition wait];
 		}
 		
@@ -268,12 +268,12 @@
 
 -(void) pauseThread:(BOOL) enable{
 	if (enable) {
-		updatePause = NO;
-		movementPause = NO;
+		updatePause = enable;
+		movementPause = enable;
 	}
 	else {
-		updatePause = YES;
-		movementPause = YES;
+		updatePause = enable;
+		movementPause = enable;
 		[updateCondition lock];
 		[updateCondition signal];
 		[updateCondition unlock];

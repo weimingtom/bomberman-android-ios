@@ -20,7 +20,7 @@
 
 @implementation Game
 
-@synthesize players, map, bombsPlanted, bitmaps, isStarted;
+@synthesize players, map, bombsPlanted, bitmaps, isStarted, isEnded;
 
 - (id) initWithMapName:(NSString *)mapName {
 	self = [super init];
@@ -57,40 +57,6 @@
     
     return self;
 }
-
-//- (id) init {
-//	self = [super init];
-//    
-//	if (self) {
-//		bombsPlanted = [[NSMutableDictionary alloc] init];
-//		RessourceManager * resource = [RessourceManager sharedRessource];
-//        Position *position;
-//        Player *player;
-//        NSInteger tileSize = resource.tileSize;
-//        map = [[GameMap alloc] init];
-//        
-//        players = [[NSMutableArray alloc] initWithCapacity:[map.players count]];
-//        
-//        // TODO: Changer le tableau des couleurs en fonction de la couleur de joueur
-//        NSArray *colorsPlayers = [[NSArray alloc] initWithObjects:@"white", @"blue", @"red", @"black", nil];
-//        
-//        for (int i = 0; i < [map.players count]; i++) {
-//            position = [[Position alloc] initWithX:(((Position *) [map.players objectAtIndex:i]).x * tileSize) y:(((Position *) [map.players objectAtIndex:i]).y * tileSize)];
-//			player = [(Player *)[resource.bitmapsPlayer objectForKey:[colorsPlayers objectAtIndex:i]] copy];
-//			player.position = position;            
-//            [players addObject:player];
-//            
-//            [position release];
-//            [player release];
-//        }
-//        
-//        [colorsPlayers release];
-////		[self loadSounds];
-//		[self loadBitmaps];
-//	}
-//    
-//	return self;
-//}
 
 
 - (void)dealloc {
@@ -152,15 +118,13 @@
 
 - (void) draw:(CGContextRef)context{
 	@synchronized (self) {
-		if (!isEnded) {
-			[map draw:context];	
-			for (Player * player in players) {
-				[player draw:context];
-			}
-			NSMutableDictionary * bombs = [bombsPlanted mutableCopy];
-			for (Position * position in bombs) {
-				[[bombs objectForKey:position] draw:context];
-			}
+		[map draw:context];	
+		for (Player * player in players) {
+			[player draw:context];
+		}
+		NSMutableDictionary * bombs = [bombsPlanted mutableCopy];
+		for (Position * position in bombs) {
+			[[bombs objectForKey:position] draw:context];
 		}
 		
 		if (!isStarted){
@@ -270,22 +234,5 @@
     [bombsPlanted removeObjectForKey:position];
 }
 
-- (void)quitGameThread {
-	NSThread * quitThread = [[[NSThread alloc] initWithTarget:self selector:@selector(timerQuitGame) object:nil]autorelease];
-	[quitThread start];
-}
-
-- (void) timerQuitGame {
-	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
-	
-	[[NSTimer scheduledTimerWithTimeInterval: 4 target: self selector: @selector(startGame) userInfo:self repeats: NO] retain];	
-	[runLoop run];
-	[pool release];
-}
-
-- (void) quitGame {
-	
-}
 
 @end

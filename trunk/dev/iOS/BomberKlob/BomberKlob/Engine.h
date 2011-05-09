@@ -8,7 +8,11 @@
 	RessourceManager * resource;
 	NSThread * updateBombsThread;
 	NSCondition * updateBombsCondition;
+	NSThread * updatePlayersThread;
+	NSCondition * updatePlayersCondition;
 	BOOL updateBombsPause;
+	BOOL updatePlayersPause;
+
 }
 
 /** The `game` with which the engine will make his calculations.*/
@@ -109,9 +113,13 @@
 
 - (void) displayFire:(Bomb *) bomb;
 
--(void) pauseThread:(BOOL) enable;
+- (void) pauseThread:(BOOL) enable;
 - (void) stopThread;
-- (void)plantingBomb:(Bomb *)bomb;
+- (void) plantingBomb:(Bomb *)bomb;
+
+- (void) startTimerPlayers;
+- (void) startTimerPlayersThread;
+- (void) updatePlayers;
 
 
 @end

@@ -55,6 +55,7 @@
 		[informationViewController.informationView release];
 		[actionViewController.actionView release];
 		[gameViewControllerSingle.gameView release];
+		[self startTimerIsGameEnded];
 	}
 	return self;
 }
@@ -87,6 +88,29 @@
     Bomb *bomb = [[[resource.bitmapsBombs objectForKey:@"normal"] copy] autorelease];
     
     [engine plantingBomb:bomb];
+}
+
+- (void) startTimerIsGameEnded{
+	NSThread * isGameEndedThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerIsGameEndedThread) object:nil]autorelease];
+	[isGameEndedThread start];
+}
+
+- (void) startTimerIsGameEndedThread {
+	
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
+	
+	[[NSTimer scheduledTimerWithTimeInterval:1 target: self selector: @selector(isGameEnded) userInfo:self repeats: YES] retain];	
+	[runLoop run];
+	[pool release];
+}
+
+- (void) isGameEnded {
+	if (engine.game.isEnded) {
+		[self pauseAction];
+		sleep(5);
+		[self quitAction];
+	}
 }
 
 @end
