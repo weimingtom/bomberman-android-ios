@@ -119,14 +119,13 @@
 - (void) draw:(CGContextRef)context{
 	@synchronized (self) {
 		[map draw:context];	
-		for (Player * player in players) {
-			[player draw:context];
-		}
 		NSMutableDictionary * bombs = [bombsPlanted mutableCopy];
 		for (Position * position in bombs) {
 			[[bombs objectForKey:position] draw:context];
 		}
-		
+		for (Player * player in players) {
+			[player draw:context];
+		}
 		if (!isStarted){
 			UIImage * image = [bitmaps objectForKey:@"ready"] ;
 			int width = (map.width*resource.tileSize) * 0.75;

@@ -20,6 +20,7 @@
 	GameViewControllerSingle * gameViewControllerSingle;
 	
 	PauseMenuGame *pauseMenu;
+	NSThread * isGameEndedThread;
 
 }
 

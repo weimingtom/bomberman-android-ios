@@ -1,9 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "Map.h"
 
-#define WIDTH  21
-#define HEIGHT 14
-
 @class Objects, Position, Animated, DBUser;
 
 

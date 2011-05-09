@@ -113,7 +113,7 @@
 			[[animatedObjects objectForKey:position] draw:context];
 		}
         
-        [colisionMap draw:context];
+//        [colisionMap draw:context];
 	}
 }
 

@@ -81,6 +81,7 @@
     self.navigationController.navigationBarHidden = NO;
     [self.navigationController pushViewController:mainMenuViewController animated:NO];
     [mainMenuViewController release];
+	[isGameEndedThread cancel];
 }
 
 
@@ -91,7 +92,7 @@
 }
 
 - (void) startTimerIsGameEnded{
-	NSThread * isGameEndedThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerIsGameEndedThread) object:nil]autorelease];
+	isGameEndedThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerIsGameEndedThread) object:nil]autorelease];
 	[isGameEndedThread start];
 }
 

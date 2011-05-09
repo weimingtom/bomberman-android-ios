@@ -21,7 +21,10 @@
 	NSInteger speed;
 	NSInteger bombNumber;
 	BOOL istouched;
+	BOOL isKilled;
 	BOOL bombPosed;
+	BOOL isInvincible;
+	NSInteger timeInvincible;
 	NSMutableDictionary * png;
 
 }
@@ -37,6 +40,9 @@
 @property (nonatomic) NSInteger lifeNumber;
 @property (nonatomic) BOOL bombPosed;
 @property (nonatomic) BOOL istouched;
+@property (nonatomic) BOOL isKilled;
+@property (nonatomic) BOOL isInvincible;
+
 
 
 - (id) init;

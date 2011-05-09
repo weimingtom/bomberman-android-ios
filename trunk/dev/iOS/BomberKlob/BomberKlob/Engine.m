@@ -59,7 +59,7 @@
 		CGRect rectPlayer = CGRectMake(player.position.x, player.position.y,resource.tileSize-marge,resource.tileSize-marge);
 		if (CGRectIntersectsRect(rectObject, rectPlayer)) {
 			if (aBomb.owner == player) {
-				if (!player.istouched) {
+				if (!player.istouched && !player.isInvincible) {
 					player.lifeNumber--;
 				}
 			}
@@ -80,7 +80,11 @@
 			return YES;
 		}
 	}
-    
+	if ([[[object class] description] isEqualToString:@"Player"]) {
+		if (((Player *)object).bombPosed) {
+			((Player *)object).bombPosed = NO;
+		}
+	}
     return NO;
 }
 
@@ -103,6 +107,15 @@
 		if (object.position.y+yValue < 0){
 			return true;
 		}
+		
+		if ([self isInCollisionWithABomb:object :xValue :yValue]) {
+			if (((Player *) object).bombPosed) {
+				return false;
+			}
+			else
+				return true;
+		}
+		
 		//We calculates the smallest and largest object's coordinates
 		int marge = 5; //Margin movement
 		
@@ -290,7 +303,7 @@
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 	
-	[[NSTimer scheduledTimerWithTimeInterval:2 target: self selector: @selector(updateBombs) userInfo:self repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval:1 target: self selector: @selector(updateBombs) userInfo:self repeats: YES] retain];	
 	[runLoop run];
 	[pool release];
 }
@@ -496,6 +509,7 @@
 - (void)plantingBomb:(Bomb *)bomb {
 	if (game.isStarted) {
 		Player *owner = [game.players objectAtIndex:0];
+		[owner plantingBomb:bomb];
 		
 		NSInteger bx = (owner.position.x + (resource.tileSize / 2)) / resource.tileSize;
 		NSInteger by = (owner.position.y + (resource.tileSize / 2)) / resource.tileSize;
@@ -524,6 +538,9 @@
 		[updateBombsCondition lock];
 		[updateBombsCondition signal];
 		[updateBombsCondition unlock];
+		[updatePlayersCondition lock];
+		[updatePlayersCondition signal];
+		[updatePlayersCondition unlock];
 	}
 }
 
@@ -544,7 +561,7 @@
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 	
-	[[NSTimer scheduledTimerWithTimeInterval:0.02 target: self selector: @selector(updatePlayers) userInfo:self repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval:0.2 target: self selector: @selector(updatePlayers) userInfo:self repeats: YES] retain];	
 	[runLoop run];
 	[pool release];
 }
