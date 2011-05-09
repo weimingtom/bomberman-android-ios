@@ -31,20 +31,19 @@
 	self = [super initWithMapName:mapName];
     if (self) {
         time = @"1:10";
+		timeCondition = [[NSCondition alloc] init];
 		[self startTimer];
     }
     return self;
 }
 
 - (void) pauseGame:(BOOL)enable{
-	if (enable) {
-		isPaused = YES;
-	} else {
+	if (!enable) {
 		[timeCondition lock];
-		isPaused = NO;
 		[timeCondition signal];
 		[timeCondition unlock];
 	}
+	enable = !enable;
 }
 
 - (void) startTimer{

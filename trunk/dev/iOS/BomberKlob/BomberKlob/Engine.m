@@ -561,7 +561,7 @@
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 	
-	[[NSTimer scheduledTimerWithTimeInterval:0.2 target: self selector: @selector(updatePlayers) userInfo:self repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval:0.02 target: self selector: @selector(updatePlayers) userInfo:self repeats: YES] retain];	
 	[runLoop run];
 	[pool release];
 }
