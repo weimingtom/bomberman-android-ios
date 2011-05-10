@@ -14,9 +14,9 @@
 		184B234C136EABA4008FE541 /* MapMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 184B234B136EABA4008FE541 /* MapMenu.m */; };
 		184B234F136EDEE3008FE541 /* ItemMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 184B234E136EDEE3008FE541 /* ItemMenu.m */; };
 		18543B121350A2E90038CC61 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18543B111350A2E90038CC61 /* AVFoundation.framework */; };
-		18592AA61359DC7B00A20BB1 /* Maps in Resources */ = {isa = PBXBuildFile; fileRef = 18592AA41359DC7B00A20BB1 /* Maps */; };
 		18592AA71359DC7B00A20BB1 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 18592AA51359DC7B00A20BB1 /* Sounds */; };
 		185EEC971348A98D007A1C67 /* DataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EEC961348A98D007A1C67 /* DataBase.m */; };
+		1867D0BD1378884900C022B8 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = 1867D0BC1378884900C022B8 /* Node.m */; };
 		186E7CD31345313F004B873F /* DBSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 186E7CD11345313F004B873F /* DBSystem.m */; };
 		187A72D9134117800020D828 /* DBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A72D8134117800020D828 /* DBUser.m */; };
 		187A72E81341312D0020D828 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A72E61341312D0020D828 /* MainMenuViewController.m */; };
@@ -25,6 +25,7 @@
 		18885582134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18885580134106E500DA88B9 /* CreateAccountOfflineMenuViewController.m */; };
 		18885586134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18885588134107BE00DA88B9 /* CreateAccountOfflineMenuViewController.xib */; };
 		188914EA13748E9900DA732C /* ColisionCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 188914E913748E9900DA732C /* ColisionCase.m */; };
+		188914FF13769AFE00DA732C /* Maps in Resources */ = {isa = PBXBuildFile; fileRef = 188914FE13769AFE00DA732C /* Maps */; };
 		1890E74A1359F185002F78B9 /* GameInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992AFC79135641B700D7726C /* GameInformationViewController.m */; };
 		1890E74C1359F197002F78B9 /* GameInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 992AFC761356419E00D7726C /* GameInformationView.m */; };
 		1890E74D1359F1CF002F78B9 /* GameActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992AFC731356417100D7726C /* GameActionViewController.m */; };
@@ -149,10 +150,11 @@
 		18543B111350A2E90038CC61 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		18543B2E1350C9350038CC61 /* SettingGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingGameViewController.h; sourceTree = "<group>"; };
 		18543B2F1350C9350038CC61 /* SettingGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingGameViewController.m; sourceTree = "<group>"; };
-		18592AA41359DC7B00A20BB1 /* Maps */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Maps; sourceTree = "<group>"; };
 		18592AA51359DC7B00A20BB1 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
 		185EEC951348A98D007A1C67 /* DataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBase.h; sourceTree = "<group>"; };
 		185EEC961348A98D007A1C67 /* DataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBase.m; sourceTree = "<group>"; };
+		1867D0BB1378884900C022B8 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		1867D0BC1378884900C022B8 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		186E7CD01345313F004B873F /* DBSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBSystem.h; sourceTree = "<group>"; };
 		186E7CD11345313F004B873F /* DBSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSystem.m; sourceTree = "<group>"; };
 		187138CD135204D50011FAC1 /* SinglePlayerMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePlayerMenuView.h; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 		18885587134107BE00DA88B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CreateAccountOfflineMenuViewController.xib; sourceTree = "<group>"; };
 		188914E813748E9900DA732C /* ColisionCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColisionCase.h; sourceTree = "<group>"; };
 		188914E913748E9900DA732C /* ColisionCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColisionCase.m; sourceTree = "<group>"; };
+		188914FE13769AFE00DA732C /* Maps */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Maps; sourceTree = "<group>"; };
 		1890E7521359FE02002F78B9 /* EditorInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorInformation.h; sourceTree = "<group>"; };
 		1890E7531359FE02002F78B9 /* EditorInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorInformation.m; sourceTree = "<group>"; };
 		1890E7551359FE1A002F78B9 /* EditorAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorAction.h; sourceTree = "<group>"; };
@@ -544,7 +547,7 @@
 		18C839CF13410263001D5747 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				18592AA41359DC7B00A20BB1 /* Maps */,
+				188914FE13769AFE00DA732C /* Maps */,
 				18592AA51359DC7B00A20BB1 /* Sounds */,
 				18C839D013410263001D5747 /* BomberKlob-Info.plist */,
 				18C839D113410263001D5747 /* InfoPlist.strings */,
@@ -629,6 +632,8 @@
 			isa = PBXGroup;
 			children = (
 				189C60C113731B01005912CC /* Not used */,
+				1867D0BB1378884900C022B8 /* Node.h */,
+				1867D0BC1378884900C022B8 /* Node.m */,
 				9943392C134C876200970231 /* BotPlayer.h */,
 				9943392D134C876200970231 /* BotPlayer.m */,
 				99433944134C876200970231 /* HumanPlayer.h */,
@@ -772,7 +777,6 @@
 				18ADE84F13534575001AF150 /* icon.png in Resources */,
 				99225ADB135471C7008B95AA /* players.png in Resources */,
 				99225ADD135471EC008B95AA /* space.png in Resources */,
-				18592AA61359DC7B00A20BB1 /* Maps in Resources */,
 				18592AA71359DC7B00A20BB1 /* Sounds in Resources */,
 				995FAC5E135C2E8000FA8557 /* animate.png in Resources */,
 				995FAC5F135C2E8000FA8557 /* bombs.png in Resources */,
@@ -795,6 +799,7 @@
 				996F3386136ED892008204DA /* ready.png in Resources */,
 				996F3387136ED892008204DA /* refresh.png in Resources */,
 				996F3388136ED892008204DA /* winner.png in Resources */,
+				188914FF13769AFE00DA732C /* Maps in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -872,6 +877,7 @@
 				189C60D313731E16005912CC /* ColisionMap.m in Sources */,
 				189C60D613731EA8005912CC /* Map.m in Sources */,
 				188914EA13748E9900DA732C /* ColisionCase.m in Sources */,
+				1867D0BD1378884900C022B8 /* Node.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

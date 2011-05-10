@@ -11,11 +11,11 @@
 
 @interface Single : Game {
 	NSThread * timerThread;
-	NSMutableString * time;
+	NSString * time;
 	NSCondition * timeCondition;
 	BOOL isPaused;
 }
-@property (nonatomic,retain) NSMutableString * time;
+@property (nonatomic,retain) NSString * time;
 
 - (void) pauseGame;
 - (void) startTimer;

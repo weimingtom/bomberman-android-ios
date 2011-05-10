@@ -1,25 +1,18 @@
-//
-//  Player.m
-//  BombermanIOS
-//
-//  Created by Kilian Coubo on 29/03/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "Player.h"
 #import "RessourceManager.h"
 #import "AnimationSequence.h"
 #import "Bomb.h"
+#import "RessourceManager.h"
 
 
 @implementation Player
-@synthesize speed, lifeNumber, bombNumber,bombsTypes,powerExplosion,shield,timeExplosion, color, bombPosed, png, istouched, isKilled,isInvincible;
+@synthesize speed, lifeNumber, bombNumber,bombsTypes,powerExplosion,shield,timeExplosion, color, bombPosed, png, istouched, isKilled,isInvincible, timeInvincible;
 
 - (id) init{
 	self = [super init];
-	if (self){
+    
+	if (self) {
 		color = @"white";
-		lifeNumber = 0;
 		powerExplosion = 1;
 		timeExplosion = 5;
 		shield = 1;
@@ -34,11 +27,13 @@
 		[bombsTypes setObject:[ressource.bitmapsBombs objectForKey:@"normal"] forKey:@"normal"];
 		timeInvincible = INVINCIBILITY_TIME;
 	}
+    
 	return self;
 }
 
 - (id) initWithColor:(NSString *)colorValue position:(Position *) positionValue{
 	self = [super init];
+    
 	if (self){
 		color = colorValue;
 		lifeNumber = 0;
@@ -56,6 +51,50 @@
 		[bombsTypes setObject:[ressource.bitmapsBombs objectForKey:@"normal"] forKey:@"normal"];
 		timeInvincible = INVINCIBILITY_TIME;
 	}
+	return self;
+}
+
+
+- (id)initWithImageName:(NSString *)imageNameValue position:(Position *)positionValue {
+	self = [super init];
+	
+	if (self) {
+        Player *copy = [[ressource.bitmapsPlayer objectForKey:imageNameValue] copy];
+        
+        self.imageName = copy.imageName;
+        self.hit = copy.hit;
+        self.level = copy.level;
+        self.fireWall = copy.fireWall;
+        self.damage = copy.damage;
+        self.position = positionValue;
+        self.animations = copy.animations;
+        self.destroyAnimations = copy.destroyAnimations;
+        self.idle = copy.idle;
+        self.currentAnimation = copy.currentAnimation;
+        self.currentFrame = copy.currentFrame;
+        self.waitDelay = copy.waitDelay;
+        self.delay = copy.delay;
+        self.destroyable = copy.destroyable;
+        self.animationFinished = copy.animationFinished;
+        
+        self.life = copy.life;
+        
+        self.bombsTypes = copy.bombsTypes;
+        self.color = imageNameValue;
+        self.lifeNumber = copy.lifeNumber;
+        self.powerExplosion = copy.powerExplosion;
+        self.timeExplosion = copy.timeExplosion;
+        self.shield = copy.shield;
+        self.speed = copy.speed;
+        self.bombNumber = copy.bombNumber;
+        self.istouched = copy.istouched;
+        self.isKilled = copy.isKilled;
+        self.bombPosed = copy.bombPosed;
+        self.isInvincible = copy.isInvincible;
+        self.timeInvincible = copy.timeInvincible;
+        self.png = copy.png;
+	}
+	
 	return self;
 }
 
@@ -342,7 +381,7 @@
 }
 
 
-- (void)update{
+- (void)update {
 	if (delay >= ((AnimationSequence *)[animations objectForKey:currentAnimation]).delayNextFrame) {
 		delay = 0;
 		if (currentFrame >= [((AnimationSequence *)[animations objectForKey:currentAnimation]).sequences count]-1) {
@@ -357,7 +396,7 @@
 		else
 			currentFrame++;
 	}
-	else{
+	else {
 		delay++;
 	}
 }

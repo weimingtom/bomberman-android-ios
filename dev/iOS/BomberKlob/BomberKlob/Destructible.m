@@ -7,6 +7,7 @@
 //
 
 #import "Destructible.h"
+#import "RessourceManager.h"
 
 @implementation Destructible
 
@@ -20,6 +21,19 @@
     }
     
     return self;
+}
+
+
+- (id)initWithImageName:(NSString *)imageNameValue position:(Position *)positionValue {
+	self = [super initWithImageName:imageNameValue position:positionValue];
+	
+	if (self) {
+        Destructible *copy = [(Destructible *)[ressource.bitmapsAnimates objectForKey:imageNameValue] copy];
+        
+        self.life = copy.life;
+	}
+	
+	return self;
 }
 
 

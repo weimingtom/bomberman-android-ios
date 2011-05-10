@@ -125,54 +125,54 @@
 		Engine * engine = controller.globalController.engine;
 		if (run) {
 			if (currentDirection == @"right") {
-				[engine moveRight];
+				[engine moveRight:nil];
 			}
 			else if (currentDirection == @"left") {
-				[engine moveLeft];
+				[engine moveLeft:nil];
 			}
 			else if (currentDirection == @"down") {
-				[engine moveDown];
+				[engine moveDown:nil];
 			}
 			else if (currentDirection == @"top") {
-				[engine moveTop];
+				[engine moveTop:nil];
 			}
 			else if (currentDirection == @"rightTop") {
-				[engine moveRightTop];
+				[engine moveRightTop:nil];
 			}
 			else if (currentDirection == @"leftTop") {
-				[engine moveLeftTop];
+				[engine moveLeftTop:nil];
 			}
 			else if (currentDirection == @"rightDown") {
-				[engine moveRightDown];
+				[engine moveRightDown:nil];
 			}
 			else if (currentDirection == @"leftDown") {
-				[engine moveLeftDown];
+				[engine moveLeftDown:nil];
 			}
 		}
 		else {
 			if ([currentDirection isEqualToString:@"stop_up"]) {
-				[engine stopTop];
+				[engine stopTop:nil];
 			}
 			else if ([currentDirection isEqualToString:@"stop_down"]) {
-				[engine stopDown];
+				[engine stopDown:nil];
 			}
 			else if ([currentDirection isEqualToString:@"stop_right"]) {
-				[engine stopRight];
+				[engine stopRight:nil];
 			}
 			else if ([currentDirection isEqualToString:@"stop_left"]) {
-				[engine stopLeft];
+				[engine stopLeft:nil];
 			}
 			else if ([currentDirection isEqualToString:@"stop_up_right"]) {
-				[engine stopRightTop];
+				[engine stopRightTop:nil];
 			}
 			else if ([currentDirection isEqualToString:@"stop_up_left"]) {
-				[engine stopLeftTop];
+				[engine stopLeftTop:nil];
 			}
 			else if ([currentDirection isEqualToString:@"stop_down_right"]) {
-				[engine stopRightDown];
+				[engine stopRightDown:nil];
 			}
 			else if ([currentDirection isEqualToString:@"stop_down_left"]) {
-				[engine stopLeftDown];
+				[engine stopLeftDown:nil];
 			}
 		}
 		if ([engine nbPlayers] > 0 && ![lastPosition isEqual:currentPosition]) {

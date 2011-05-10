@@ -1,11 +1,3 @@
-//
-//  Player.h
-//  BombermanIOS
-//
-//  Created by Kilian Coubo on 29/03/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 #import "Position.h"
 #import "Destructible.h"
@@ -15,8 +7,8 @@
 
 @class Bomb;
 @interface Player : Destructible {
+    
 	NSMutableDictionary * bombsTypes;
-	NSMutableDictionary * png;
 	NSString * color;
 	NSInteger lifeNumber;
 	NSInteger powerExplosion;
@@ -24,11 +16,13 @@
 	NSInteger shield;
 	NSInteger speed;
 	NSInteger bombNumber;
-	NSInteger timeInvincible;
 	BOOL istouched;
 	BOOL isKilled;
 	BOOL bombPosed;
 	BOOL isInvincible;
+	NSInteger timeInvincible;
+	NSMutableDictionary *png;
+
 }
 
 @property (nonatomic,retain)NSMutableDictionary * bombsTypes;
@@ -44,11 +38,14 @@
 @property (nonatomic) BOOL istouched;
 @property (nonatomic) BOOL isKilled;
 @property (nonatomic) BOOL isInvincible;
+@property (nonatomic, assign) NSInteger timeInvincible;
 
 
 
 - (id) init;
 - (id) initWithColor:(NSString *)colorValue position:(Position *) positionValue;
+- (id)initWithImageName:(NSString *)imageNameValue position:(Position *)positionValue;
+
 - (void) live;
 - (void) relive;
 - (void) die;

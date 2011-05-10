@@ -43,7 +43,8 @@
 		[timeCondition signal];
 		[timeCondition unlock];
 	}
-	enable = !enable;
+    
+    isPaused = enable;
 }
 
 - (void) startTimer{

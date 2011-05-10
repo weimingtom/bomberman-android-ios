@@ -15,8 +15,9 @@
 #import "Application.h"
 #import "DBSystem.h"
 #import "BomberKlobAppDelegate.h"
+#import "BotPlayer.h"
+#import "HumanPlayer.h"
 #import "AnimationSequence.h"
-
 
 
 @implementation Game
@@ -31,6 +32,7 @@
 		resource = [RessourceManager sharedRessource];
 		[resource init];
 		bombsPlanted = [[NSMutableDictionary alloc] init];
+        BOOL humainPlayer = YES;
         Position *position;
         Player *player;
         NSInteger tileSize = [RessourceManager sharedRessource].tileSize;
@@ -40,14 +42,21 @@
         
         for (NSString *key in map.players) {
             position = [[Position alloc] initWithX:(((Position *) [map.players objectForKey:key]).x * tileSize) y:(((Position *) [map.players objectForKey:key]).y * tileSize)];
-            player = [(Player *)[[RessourceManager sharedRessource].bitmapsPlayer objectForKey:key] copy];
-            player.position = position;
+            
+            if (humainPlayer) {
+                humainPlayer = NO;
+                player = [[HumanPlayer alloc] initWithImageName:key position:position];
+            }
+            else {
+                player = [[BotPlayer alloc] initWithImageName:key position:position colisionMap:map.colisionMap];
+            }
             
             [players addObject:player];
             
+            [player release];   
             [position release];
-            [player release];
         }
+        
 		[self loadSounds];
 		[self loadBitmaps];
 		isStarted = NO;
@@ -239,6 +248,18 @@
 
 - (void) updateMap {
 	[map update];
+}
+
+- (NSArray *)getBotPlayers {
+    NSMutableArray *botPlayers;
+    
+    for (id player in players) {
+        if ([player isKindOfClass:[BotPlayer class]]) {
+            [botPlayers addObject:player];
+        }
+    }
+    
+    return botPlayers;
 }
 
 - (NSInteger) nbPlayers {

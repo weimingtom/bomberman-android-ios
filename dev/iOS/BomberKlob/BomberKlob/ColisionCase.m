@@ -106,8 +106,12 @@
     if ([types count] > 0) {
         NSInteger caseType = [[types lastObject] integerValue];
         
-        if (caseType == BLOCK) {
+        if (caseType == UNDESTRUCTIBLE_BLOCK) {
             CGContextSetRGBFillColor(context, 0, 0, 255, 0.5);
+            CGContextFillRect(context, CGRectMake(x * tileSize, y * tileSize, tileSize, tileSize));
+        }
+        else if (caseType == DESTRUCTIBLE_BLOCK) {
+            CGContextSetRGBFillColor(context, 0, 255, 255, 0.5);
             CGContextFillRect(context, CGRectMake(x * tileSize, y * tileSize, tileSize, tileSize));
         }
         else if (caseType == GAPE) {
@@ -135,7 +139,10 @@
     BOOL result = YES;
     
     while (result && i < [types count]) {
-        if ([[types objectAtIndex:i] intValue] == BLOCK) {
+        if ([[types objectAtIndex:i] intValue] == UNDESTRUCTIBLE_BLOCK) {
+            result = NO;
+        }
+        else if ([[types objectAtIndex:i] intValue] == DESTRUCTIBLE_BLOCK) {
             result = NO;
         }
         else if ([[types objectAtIndex:i] intValue] == GAPE) {
@@ -154,7 +161,10 @@
     BOOL result = YES;
     
     while (result && i < [types count]) {
-        if ([[types objectAtIndex:i] intValue] == BLOCK) {
+        if ([[types objectAtIndex:i] intValue] == UNDESTRUCTIBLE_BLOCK) {
+            result = NO;
+        }
+        else if ([[types objectAtIndex:i] intValue] == DESTRUCTIBLE_BLOCK) {
             result = NO;
         }
         
@@ -165,12 +175,28 @@
 }
 
 
-- (BOOL)isBlock {
+- (BOOL)isUndestructibleBlock {
     NSInteger i = 0;
     BOOL result = NO;
     
     while (!result && i < [types count]) {
-        if ([[types objectAtIndex:i] intValue] == BLOCK) {
+        if ([[types objectAtIndex:i] intValue] == UNDESTRUCTIBLE_BLOCK) {
+            result = YES;
+        }
+        
+        i++;
+    }
+    
+    return result;
+}
+
+
+- (BOOL)isDestructibleBlock {
+    NSInteger i = 0;
+    BOOL result = NO;
+    
+    while (!result && i < [types count]) {
+        if ([[types objectAtIndex:i] intValue] == DESTRUCTIBLE_BLOCK) {
             result = YES;
         }
         

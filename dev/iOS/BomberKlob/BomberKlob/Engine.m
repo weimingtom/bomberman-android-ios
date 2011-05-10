@@ -17,6 +17,7 @@
 #import "Single.h"
 #import "GameMap.h"
 #import "ColisionMap.h"
+#import "BotPlayer.h"
 
 @implementation Engine
 
@@ -196,102 +197,150 @@
 }
 
 
-- (void) moveTop{
-	Player * player = [game getHumanPlayer];
+- (void) moveTop:(Player *)player {
+    if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	if (![self isInCollision:player :0 :-player.speed]){
 		[player moveTop];
 	}
 	
 }
 
-- (void) moveDown{
-	Player * player = [game getHumanPlayer];
+- (void) moveDown:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	if (![self isInCollision:player :0 :player.speed]){
 		[player moveDown];
 	}
 }
 
-- (void) moveLeft{
-	Player * player = [game getHumanPlayer];
+- (void) moveLeft:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	if (![self isInCollision:player :-player.speed :0]){
 		[player moveLeft];
 	}
 }
 
-- (void) moveRight{
-	Player * player = [game getHumanPlayer];
+- (void) moveRight:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	if (![self isInCollision:player :player.speed :0]){
 		[player moveRight];
 	}
 }
 
-- (void) moveLeftTop{
-	Player * player = [game getHumanPlayer];
+- (void) moveLeftTop:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	if (![self isInCollision:player :-player.speed :-player.speed]){
 		[player moveLeftTop];
 	}
 }
 
-- (void) moveLeftDown{
-	Player * player = [game getHumanPlayer];
+- (void) moveLeftDown:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	if (![self isInCollision:player :-player.speed :player.speed]){
 		[player moveLeftDown];
 	}
 }
 
-- (void) moveRightDown{
-	Player * player = [game getHumanPlayer];
+- (void) moveRightDown:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	if (![self isInCollision:player :player.speed :player.speed]){
 		[player moveRightDown];
 	}
 }
 
-- (void) moveRightTop{
-	Player * player = [game getHumanPlayer];
+- (void) moveRightTop:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	if (![self isInCollision:player :player.speed :-player.speed]){
 		[player moveRightTop];
 	}
     
 }
 
-- (void) stopTop{
-	Player * player = [game getHumanPlayer];
+- (void) stopTop:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	[player stopTop];
 }
 
-- (void) stopDown{
-	Player * player = [game getHumanPlayer];
+- (void) stopDown:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	[player stopDown];
 }
 
-- (void) stopLeft{
-	Player * player = [game getHumanPlayer];
+- (void) stopLeft:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	[player stopLeft];
 }
 
-- (void) stopRight{
-	Player * player = [game getHumanPlayer];
+- (void) stopRight:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	[player stopRight];
 }
 
 
-- (void) stopLeftTop{
-	Player * player = [game getHumanPlayer];
+- (void) stopLeftTop:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	[player stopLeftTop];
 }
 
-- (void) stopRightTop{
-	Player * player = [game getHumanPlayer];
+- (void) stopRightTop:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	[player stopRightTop];
 }
 
-- (void) stopLeftDown{
-	Player * player = [game getHumanPlayer];
+- (void) stopLeftDown:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	[player stopLeftDown];
 }
 
-- (void) stopRightDown{
-	Player * player = [game getHumanPlayer];
+- (void) stopRightDown:(Player *)player {
+	if (player == nil) {
+        player = [game getHumanPlayer];
+    }
+    
 	[player stopRightDown];
 }
 
@@ -311,7 +360,7 @@
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 	
-	[[NSTimer scheduledTimerWithTimeInterval:1 target: self selector: @selector(updateBombs) userInfo:self repeats: YES] autorelease];	
+	[[NSTimer scheduledTimerWithTimeInterval:1 target: self selector: @selector(updateBombs) userInfo:self repeats: YES] retain];	
 	[runLoop run];
 	[pool release];
 }
@@ -340,7 +389,8 @@
 				}
 			}
 			for (Position * position in bombsDeleted) {
-				[game bombExplode:position];
+                [game bombExplode:position];
+//				[game.bombsPlanted removeObjectForKey:position];
 			}
 			
 			[bombsDeleted removeAllObjects];
@@ -576,7 +626,8 @@
 	
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
-	[[NSTimer scheduledTimerWithTimeInterval:0.02 target: self selector: @selector(updatePlayers) userInfo:self repeats: YES] autorelease];	
+	
+	[[NSTimer scheduledTimerWithTimeInterval:0.02 target: self selector: @selector(updatePlayers) userInfo:self repeats: YES] retain];	
 	[runLoop run];
 	[pool release];
 }
@@ -585,16 +636,49 @@
 - (void) updatePlayers{
 	if (![updatePlayersThread isCancelled]) {
 		[updatePlayersCondition lock];
+        
 		while (updatePlayersPause) {
 			[updatePlayersCondition wait];
 		}
-		while (!game.isStarted) {}
-		for (int i = 1; i < [game nbPlayers]; i++) {
-			[(Player *)[game.players objectAtIndex:i] update];
-
-		}
+        
+        for (int i = 1; i < [game.players count]; i++) {
+            [[game.players objectAtIndex:i] makeAction];
+            [self makeActionBot:[game.players objectAtIndex:i]];
+            
+			[[game.players objectAtIndex:i] update];
+        }
+        
 		[updatePlayersCondition unlock];
 	}
+}
+
+
+- (void)makeActionBot:(BotPlayer *)botPlayer {
+    
+    if ([botPlayer.action isEqualToString:@"left"]) {
+        [self moveLeft:botPlayer];
+    }
+    else if ([botPlayer.action isEqualToString:@"right"]) {
+        [self moveRight:botPlayer];
+    }
+    else if ([botPlayer.action isEqualToString:@"top"]) {
+        [self moveTop:botPlayer];
+    }
+    else if ([botPlayer.action isEqualToString:@"down"]) {
+        [self moveDown:botPlayer];
+    }
+    else if ([botPlayer.action isEqualToString:@"leftTop"]) {
+        [self moveLeftTop:botPlayer];
+    }
+    else if ([botPlayer.action isEqualToString:@"leftDown"]) {
+        [self moveLeftDown:botPlayer];
+    }
+    else if ([botPlayer.action isEqualToString:@"rightTop"]) {
+        [self moveRightTop:botPlayer];
+    }
+    else if ([botPlayer.action isEqualToString:@"rightDown"]) {
+        [self moveRightDown:botPlayer];
+    }    
 }
 
 - (BOOL) gameIsStarted {
