@@ -661,7 +661,7 @@ public class Engine {
 		HashMap<Point, PathFindingNode> openList = new HashMap<Point, PathFindingNode>();
 		HashMap<Point, PathFindingNode> closeList = new HashMap<Point, PathFindingNode>();
 
-		/* Blocs ignorés pour une case (exemple : Case EMPTY à côté d'un BLOCK) */
+		/* Blocs ignorï¿½s pour une case (exemple : Case EMPTY ï¿½ cï¿½tï¿½ d'un BLOCK) */
 		HashMap<Point, PathFindingNode> ignoredList = new HashMap<Point, PathFindingNode>();
 
 
@@ -692,7 +692,7 @@ public class Engine {
 
 					Point tile = new Point(i,j);
 
-					/* Si la case en cours ne fait pas partie des ignorées ou de la closedList */
+					/* Si la case en cours ne fait pas partie des ignorï¿½es ou de la closedList */
 					if ( ignoredList.get(tile) == null && closeList.get(tile) == null) {
 						/* Si l'objet est un bloc */
 						if ( colisionMap.get(tile) == ColisionMapObjects.BLOCK ) {
@@ -712,21 +712,21 @@ public class Engine {
 									/* On calcule l'heuristique */
 									H = (Math.abs(destinationPoint.x-i) + Math.abs(destinationPoint.y-j))*10;
 
-									/* Le coût du déplacement */
+									/* Le coï¿½t du dï¿½placement */
 									G = 40+closeList.get(currentTile).G;
 
-									/* Et le coût total du chemin */
+									/* Et le coï¿½t total du chemin */
 									F = G+H;									
 
 									//System.out.println(" |G:"+G+"|H:"+H+"|F:"+F+"|");
 
-									/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
+									/* Puis on l'ajoute dans la liste des cases ï¿½ parcourir si elle n'existe pas ou si le nouveau coï¿½t est moindre */
 									if ( openList.get(tile) == null || G < openList.get(tile).G ) {
 										//System.out.print(" RAJOUT : " + tile.toString() );
 										openList.put(tile, new PathFindingNode(F, G, H, currentTile));
 									}
 
-									/* Et on ajoute les cases adjacentes au mur dans la liste des ignorées */
+									/* Et on ajoute les cases adjacentes au mur dans la liste des ignorï¿½es */
 									if ( i != currentTile.x ) {
 										ignoredList.put(new Point(i-1,j), new PathFindingNode(0, 0, 0, currentTile));
 										ignoredList.put(new Point(i+1,j), new PathFindingNode(0, 0, 0, currentTile));
@@ -744,7 +744,7 @@ public class Engine {
 							}
 							else {
 								//System.out.println("INDESTRUCTIBLE : " + i + " " + j);
-								/* On l'ajoute à la closeList */
+								/* On l'ajoute ï¿½ la closeList */
 								closeList.put(tile, new PathFindingNode(0, 0, 0, currentTile));
 							}
 						}
@@ -760,34 +760,34 @@ public class Engine {
 
 								//System.out.print("EN FACE " + i + " " + j);
 
-								/* Le coût du déplacement */
+								/* Le coï¿½t du dï¿½placement */
 								G = 10+closeList.get(currentTile).G;
 
-								/* Et le coût total du chemin */
+								/* Et le coï¿½t total du chemin */
 								F = G+H;
 
 								//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");
 
-								/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
+								/* Puis on l'ajoute dans la liste des cases ï¿½ parcourir si elle n'existe pas ou si le nouveau coï¿½t est moindre */
 								if ( openList.get(tile) == null || G < openList.get(tile).G ) {
 									//System.out.println(" RAJOUT : " + tile.toString() );
 									openList.put(tile, new PathFindingNode(F, G, H, currentTile));
 								}
 							}
 							else {	
-								/* Seulement si elle n'est pas gênée par une autre case càd par une case à droite ou au dessous, diagonale oblige ! */ 
+								/* Seulement si elle n'est pas gï¿½nï¿½e par une autre case cï¿½d par une case ï¿½ droite ou au dessous, diagonale oblige ! */ 
 								if ( i > currentTile.x && colisionMap.get(new Point((currentTile.x+1),currentTile.y)) == ColisionMapObjects.EMPTY) {
 									if ( j > currentTile.y && colisionMap.get(new Point((currentTile.x),currentTile.y+1)) == ColisionMapObjects.EMPTY) {
 										//System.out.print("EN DIAGONALE " + i + " " + j);
 
-										/* Le coût du déplacement */
+										/* Le coï¿½t du dï¿½placement */
 										G = 14+closeList.get(currentTile).G;
 
-										/* Et le coût total du chemin */
+										/* Et le coï¿½t total du chemin */
 										F = G+H;							
 
 										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");								
-										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
+										/* Puis on l'ajoute dans la liste des cases ï¿½ parcourir si elle n'existe pas ou si le nouveau coï¿½t est moindre */
 										if ( openList.get(tile) == null || G < openList.get(tile).G ) {
 											//System.out.println(" RAJOUT : " + tile.toString() );
 											openList.put(tile, new PathFindingNode(F, G, H, currentTile));
@@ -796,14 +796,14 @@ public class Engine {
 									else if ( colisionMap.get(new Point((currentTile.x),currentTile.y-1)) == ColisionMapObjects.EMPTY ){
 										//System.out.print("EN DIAGONALE " + i + " " + j);
 
-										/* Le coût du déplacement */
+										/* Le coï¿½t du dï¿½placement */
 										G = 14+closeList.get(currentTile).G;
 
-										/* Et le coût total du chemin */
+										/* Et le coï¿½t total du chemin */
 										F = G+H;							
 
 										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");								
-										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
+										/* Puis on l'ajoute dans la liste des cases ï¿½ parcourir si elle n'existe pas ou si le nouveau coï¿½t est moindre */
 										if ( openList.get(tile) == null || G < openList.get(tile).G ) {
 											//System.out.println(" RAJOUT : " + tile.toString() );
 											openList.put(tile, new PathFindingNode(F, G, H, currentTile));
@@ -814,14 +814,14 @@ public class Engine {
 									if ( j > currentTile.y && colisionMap.get(new Point((currentTile.x),currentTile.y+1)) == ColisionMapObjects.EMPTY) {
 										//System.out.print("EN DIAGONALE " + i + " " + j);
 
-										/* Le coût du déplacement */
+										/* Le coï¿½t du dï¿½placement */
 										G = 14+closeList.get(currentTile).G;
 
-										/* Et le coût total du chemin */
+										/* Et le coï¿½t total du chemin */
 										F = G+H;							
 
 										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");								
-										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
+										/* Puis on l'ajoute dans la liste des cases ï¿½ parcourir si elle n'existe pas ou si le nouveau coï¿½t est moindre */
 										if ( openList.get(tile) == null || G < openList.get(tile).G ) {
 											//System.out.println(" RAJOUT : " + tile.toString() );
 											openList.put(tile, new PathFindingNode(F, G, H, currentTile));
@@ -830,14 +830,14 @@ public class Engine {
 									else if ( colisionMap.get(new Point((currentTile.x),currentTile.y-1)) == ColisionMapObjects.EMPTY ){
 										//System.out.print("EN DIAGONALE " + i + " " + j);
 
-										/* Le coût du déplacement */
+										/* Le coï¿½t du dï¿½placement */
 										G = 14+closeList.get(currentTile).G;
 
-										/* Et le coût total du chemin */
+										/* Et le coï¿½t total du chemin */
 										F = G+H;							
 
 										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");								
-										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
+										/* Puis on l'ajoute dans la liste des cases ï¿½ parcourir si elle n'existe pas ou si le nouveau coï¿½t est moindre */
 										if ( openList.get(tile) == null || G < openList.get(tile).G ) {
 											//System.out.println(" RAJOUT : " + tile.toString() );
 											openList.put(tile, new PathFindingNode(F, G, H, currentTile));
@@ -863,10 +863,10 @@ public class Engine {
 			}
 		} while ( closeList.get(destinationPoint) == null && !openList.isEmpty() ) ;
 
-		/* Si la case de fin a bien été trouvé */
+		/* Si la case de fin a bien ï¿½tï¿½ trouvï¿½ */
 		if ( closeList.get(destinationPoint) != null )  {
 
-			/* On remonte jusqu'à la case suivant notre point de départ */
+			/* On remonte jusqu'ï¿½ la case suivant notre point de dï¿½part */
 			currentTile = closeList.get(destinationPoint).father;
 			//System.out.println("PERE : " + currentTile.toString());
 
