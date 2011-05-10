@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@class Game, RessourceManager, Objects, Bomb, Player;
+@class Game, RessourceManager, Objects, Bomb, Player, BotPlayer;
 
 /** The `Engine` class allows to make all the calculations of the game (collisions, delay bomb explosions ... ). */
 @interface Engine : NSObject {
@@ -55,52 +55,44 @@
 ///----------------------------------------
 
 /** Allows you to manage the movements to the Top. */
-- (void) moveTop;
+- (void) moveTop:(Player *)player ;
 
 /** Allows you to manage the movements to the Bottom. */
-- (void) moveDown;
+- (void) moveDown:(Player *)player ;
 
 /** Allows you to manage the movements to the Left. */
-- (void) moveLeft;
+- (void) moveLeft:(Player *)player ;
 
 /** Allows you to manage the movements to the Right. */
-- (void) moveRight;
+- (void) moveRight:(Player *)player ;
 
 /** Allows you to manage the movements to the Left-Top corner. */
-- (void) moveLeftTop;
+- (void) moveLeftTop:(Player *)player ;
 
 /** Allows you to manage the movements to the Left-Bottom corner. */
-- (void) moveLeftDown;
+- (void) moveLeftDown:(Player *)player ;
 
 /** Allows you to manage the movements to the Right-Bottom corner. */
-- (void) moveRightDown;
+- (void) moveRightDown:(Player *)player ;
 
 /** Allows you to manage the movements to the Right-Top corner. */
-- (void) moveRightTop;
+- (void) moveRightTop:(Player *)player ;
 
-/** Allows you to stop the movements when the player is up. */
-- (void) stopTop;
+- (void) stopTop:(Player *)player;
 
-/** Allows you to stop the movements when the player is down. */
-- (void) stopDown;
+- (void) stopDown:(Player *)player;
 
-/** Allows you to stop the movements when the player is to the left. */
-- (void) stopLeft;
+- (void) stopLeft:(Player *)player;
 
-/** Allows you to stop the movements when the player is to the left. */
-- (void) stopRight;
+- (void) stopRight:(Player *)player;
 
-/** Allows you to stop the movements when the player is on the Left-Top corner. */
-- (void) stopLeftTop;
+- (void) stopLeftTop:(Player *)player;
 
-/** Allows you to stop the movements when the player is on the Right-Top corner. */
-- (void) stopRightTop;
+- (void) stopRightTop:(Player *)player;
 
-/** Allows you to stop the movements when the player is on the Left-Down corner. */
-- (void) stopLeftDown;
+- (void) stopLeftDown:(Player *)player;
 
-/** Allows you to stop the movements when the player is on the Right-Down corner. */
-- (void) stopRightDown;
+- (void) stopRightDown:(Player *)player;
 
 
 
@@ -138,6 +130,7 @@
 
 /** Allows to cancel all the threads of the Engine and the Game. */
 - (void) stopThread;
+- (void) plantingBomb:(Bomb *)bomb;
 
 
 
@@ -156,6 +149,7 @@
 
 /** Allows to know if the game has been started. */
 - (BOOL) gameIsStarted;
+- (void)makeActionBot:(BotPlayer *)botPlayer;
 
 /**Allows to update the game's map. */
 - (void) updateMap;

@@ -1,11 +1,3 @@
-//
-//  Object.h
-//  BombermanIOS
-//
-//  Created by Kilian Coubo on 06/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
 @class Position;
@@ -55,6 +47,7 @@
 @property (nonatomic) BOOL animationFinished;
 
 - (id)init;
+- (id)initWithImageName:(NSString *)imageNameValue position:(Position *)positionValue;
 - (void)resize;
 - (void)update;
 - (BOOL)hasAnimationFinished;

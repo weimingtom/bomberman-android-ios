@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Map, Player, AVAudioPlayer, RessourceManager,Application, GameMap,Bomb,Position;
+@class Map, Player, AVAudioPlayer, RessourceManager, Application, GameMap, Bomb, Position, BotPlayer;
 
 
 @interface Game : NSObject {
@@ -83,5 +83,7 @@
 - (void) updateMap;
 
 - (NSInteger) nbPlayers;
+
+- (NSArray *)getBotPlayers;
 
 @end

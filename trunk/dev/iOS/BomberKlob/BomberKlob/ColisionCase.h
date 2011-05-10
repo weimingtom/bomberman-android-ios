@@ -6,13 +6,14 @@ enum CaseType
     EMPTY = 0, // Empty
     
     // Objects that are display on the screen
-    BLOCK = 1, // Objects that are not traversable by player and fire
-    GAPE = 2,  // Objects that are just traversable by fire and not by player
-    BOMB = 4,  // Bombs planted
-    FIRE = 5,  // Explosions fire
+    UNDESTRUCTIBLE_BLOCK = 1, // Undestructible objects that are not traversable by player and fire
+    DESTRUCTIBLE_BLOCK = 2, // Destructible objects that are not traversable by player and fire
+    GAPE = 3,  // Objects that are just traversable by fire and not by player
+    BOMB = 5,  // Bombs planted
+    FIRE = 6,  // Explosions fire
     
     // Objects that are just for ai mannaging
-    DANGEROUS_AREA = 3 // It is where, there will be explosions fire
+    DANGEROUS_AREA = 4 // It is where, there will be explosions fire
 };
 // Priorities: EMPTY < BLOCK < GAPE < DANGEROUS_AREA < BOMB < FIRE
 
@@ -31,7 +32,8 @@ enum CaseType
 
 - (BOOL)isTraversableByPlayer;
 - (BOOL)isTraversableByFire;
-- (BOOL)isBlock;
+- (BOOL)isUndestructibleBlock;
+- (BOOL)isDestructibleBlock;
 - (BOOL)isBomb;
 - (BOOL)isFire;
 - (BOOL)isDangerousArea;

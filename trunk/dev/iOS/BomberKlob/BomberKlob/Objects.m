@@ -31,6 +31,34 @@
 }
 
 
+- (id)initWithImageName:(NSString *)imageNameValue position:(Position *)positionValue {
+	self = [super init];
+	
+	if (self) {
+		ressource = [RessourceManager sharedRessource];
+        Objects *copy = [(Objects *)[ressource.bitmapsAnimates objectForKey:imageNameValue] copy];
+        
+        self.imageName = copy.imageName;
+        self.hit = copy.hit;
+        self.level = copy.level;
+        self.fireWall = copy.fireWall;
+        self.damage = copy.damage;
+        self.position = positionValue;
+        self.animations = copy.animations;
+        self.destroyAnimations = copy.destroyAnimations;
+        self.idle = copy.idle;
+        self.currentAnimation = copy.currentAnimation;
+        self.currentFrame = copy.currentFrame;
+        self.waitDelay = copy.waitDelay;
+        self.delay = copy.delay;
+        self.destroyable = copy.destroyable;
+        self.animationFinished = copy.animationFinished;
+	}
+	
+	return self;
+}
+
+
 - (void)dealloc {
     [imageName release];
     [position release];

@@ -1,18 +1,20 @@
-//
-//  HumanPlayer.m
-//  BombermanIOS
-//
-//  Created by Kilian Coubo on 29/03/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "HumanPlayer.h"
 
 
 @implementation HumanPlayer
 
+- (id)initWithImageName:(NSString *)imageNameValue position:(Position *)positionValue {
+	self = [super initWithImageName:imageNameValue position:positionValue];
+	
+	if (self) {
+        
+	}
+	
+	return self;
+}
+
+
 - (void)dealloc {
-    [actions release];
     [super dealloc];
 }
 

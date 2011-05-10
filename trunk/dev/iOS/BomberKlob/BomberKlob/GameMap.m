@@ -6,6 +6,7 @@
 #import "ColisionMap.h"
 #import "Objects.h"
 #import "Undestructible.h"
+#import "BotPlayer.h"
 
 
 @implementation GameMap
@@ -113,7 +114,7 @@
 			[[animatedObjects objectForKey:position] draw:context];
 		}
         
-//        [colisionMap draw:context];
+        [colisionMap draw:context];
 	}
 }
 
