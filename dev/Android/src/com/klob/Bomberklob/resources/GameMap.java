@@ -109,13 +109,14 @@ public class GameMap extends Map {
 						if ( map.getBlocks()[i][j].isHit()) {
 							this.colisionMap.put(new Point(i,j),ColisionMapObjects.BLOCK);
 						}
-						map.getBlocks()[i][j].onDraw(pictureCanvas, ResourcesManager.getSize());
 						if ( map.getBlocks()[i][j].isDestructible()) {
+							map.getGrounds()[i][j].onDraw(pictureCanvas, ResourcesManager.getSize());
 							this.animatedObjectsBackUp.put(new Point(i,j), map.getBlocks()[i][j].copy());
 							this.animatedObjects.put(new Point(i,j), map.getBlocks()[i][j].copy());
 							this.groundObjectsBackUp.put(new Point(i,j), map.getGrounds()[i][j].copy());
 							this.groundObjects.put(new Point(i,j), map.getGrounds()[i][j].copy());
 						}
+						map.getBlocks()[i][j].onDraw(pictureCanvas, ResourcesManager.getSize());
 					}
 					else {
 						map.getGrounds()[i][j].onDraw(pictureCanvas, ResourcesManager.getSize());
@@ -157,7 +158,7 @@ public class GameMap extends Map {
 		/* Pour tous les objets animés */
 		for(Entry<Point, Objects> entry : animatedObjects.entrySet()) {
 			Objects o = animatedObjects.get(entry.getKey());
-			/* Si sont animation est DESTROY et qu'elle est finie */
+			/* Si son animation est DESTROY et qu'elle est finie */
 			if (o.getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) && o.hasAnimationFinished()) {
 				this.colisionMap.put(ResourcesManager.coToTile(o.getPosition().x, o.getPosition().y), ColisionMapObjects.EMPTY);
 				/* Et du vecteur d'objets animés */
