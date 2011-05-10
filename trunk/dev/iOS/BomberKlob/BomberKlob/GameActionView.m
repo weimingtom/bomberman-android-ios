@@ -36,8 +36,9 @@
 	return self;
 }
 
-- (void)drawRect:(CGRect)rect{
-
+- (void)dealloc {
+	[controller release];
+    [super dealloc];
 }
 
 
@@ -45,7 +46,7 @@
 	RessourceManager * resource = [RessourceManager sharedRessource];
 	NSMutableArray * items = [[NSMutableArray alloc] init];
 	NSMutableArray * images = [[NSMutableArray alloc] init];
-	NSMutableDictionary * bombsTypes = [controller.globalController.engine.game getHumanPlayer].bombsTypes;
+	NSMutableDictionary * bombsTypes = [controller getHumanPlayer].bombsTypes;
 	for (NSString * key in bombsTypes) {
 		Bomb * bomb = [bombsTypes objectForKey:key];
 		[items addObject:bomb];
@@ -58,34 +59,21 @@
 	int height =  self.frame.size.height;
 	ItemMenu * bombsMenu = [[ItemMenu alloc] initWithFrame:CGRectMake(x, y, width,height/4) horizontal:NO imageWidth:self.frame.size.width/2 imageHeight:self.frame.size.width/2 imageMargin:5 reductionPercentage:15 items:items images:images];
 	[self addSubview:bombsMenu];
-	//[bombsMenu moveToNextImage];
-	
-	 
-	
+
 	UIImage * bombButtonBackground = [UIImage imageNamed:@"bomb_button.png"];
 	UIButton *  bombButton = [UIButton  buttonWithType:UIButtonTypeRoundedRect];
 	bombButton.frame = CGRectMake(0,self.bounds.size.height-(self.frame.size.width), self.frame.size.width, self.frame.size.width);
 	[bombButton setBackgroundImage:bombButtonBackground forState:UIControlStateNormal];
 	[bombButton addTarget:self action:@selector(bombButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-
 	[self addSubview:bombButton];
+	
+	[bombsMenu release];
+	[items release];
+	[images release];
 }
 
 - (void) bombButtonClicked{
 	[controller plantingBomb];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-	
-}
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-	
-}
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
-	
-}
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-	
 }
 
 @end

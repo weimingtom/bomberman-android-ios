@@ -28,9 +28,8 @@
 - (id) initWithMapName:(NSString *)mapName {
 	self = [super init];
 	if (self){
-		engine = [[Engine alloc] initWithGame:[[Single alloc] initWithMapName:mapName]];
 		resource = [RessourceManager sharedRessource];
-//		engine = [[Engine alloc] initWithGame:[[Game alloc] init]];
+		engine = [[Engine alloc] initWithGame:[[Single alloc] initWithMapName:mapName]];
 		CGRect dimension ;
 		dimension = CGRectMake(0, resource.screenWidth-(engine.game.map.height*resource.tileSize),resource.tileSize*engine.game.map.width,resource.tileSize*engine.game.map.height);
 		self.gameViewControllerSingle = [[GameViewControllerSingle alloc] initWithFrame:dimension Controller:self];
@@ -38,7 +37,6 @@
 		dimension = CGRectMake(0, 0,resource.screenHeight,resource.screenWidth-(engine.game.map.height*resource.tileSize));
 		self.informationViewController = [[GameInformationViewController alloc] initWithFrame:dimension Controller:self];
 
-		
 		dimension = CGRectMake(engine.game.map.width*resource.tileSize, resource.screenWidth-(engine.game.map.height*resource.tileSize),resource.screenHeight-(engine.game.map.width*resource.tileSize),engine.game.map.height*resource.tileSize)
 		;
 		self.actionViewController = [[GameActionViewController alloc] initWithFrame:dimension Controller:self];
@@ -58,6 +56,16 @@
 		[self startTimerIsGameEnded];
 	}
 	return self;
+}
+
+- (void)dealloc {
+	[engine release];
+    [actionViewController release];
+	[informationViewController release];
+	[gameViewControllerSingle release];
+	[pauseMenu release];
+	[isGameEndedThread release];
+    [super dealloc];
 }
 
 - (void)pauseAction{
@@ -86,22 +94,22 @@
 
 
 - (void)plantingBomb {
-    Bomb *bomb = [[[resource.bitmapsBombs objectForKey:@"normal"] copy] autorelease];
-    
+    Bomb *bomb = [[resource.bitmapsBombs objectForKey:@"normal"] copy];
     [engine plantingBomb:bomb];
+	[bomb release];
 }
 
 - (void) startTimerIsGameEnded{
-	isGameEndedThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerIsGameEndedThread) object:nil]autorelease];
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	isGameEndedThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerIsGameEndedThread) object:nil] autorelease];
 	[isGameEndedThread start];
+	[pool release];
 }
 
 - (void) startTimerIsGameEndedThread {
-	
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
-	
-	[[NSTimer scheduledTimerWithTimeInterval:1 target: self selector: @selector(isGameEnded) userInfo:self repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval:1 target: self selector: @selector(isGameEnded) userInfo:self repeats: YES] autorelease];	
 	[runLoop run];
 	[pool release];
 }
@@ -112,6 +120,22 @@
 		sleep(5);
 		[self quitAction];
 	}
+}
+
+- (BOOL) gameIsStarted {
+	return [engine gameIsStarted];
+}
+
+- (void) updateMap {
+	[engine updateMap];
+}
+
+- (Player *) getHumanPlayer{
+	return [engine getHumanPlayer];
+}
+
+- (NSInteger) nbPlayers {
+	return [engine nbPlayers];
 }
 
 @end

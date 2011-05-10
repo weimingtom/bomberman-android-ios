@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class GameInformationView, Engine, GlobalGameViewControllerSingle;
+@class GameInformationView, Engine, GlobalGameViewControllerSingle, Player;
 
 @interface GameInformationViewController : NSObject {
     GameInformationView * informationView;
@@ -20,5 +20,7 @@
 
 
 - (id) initWithFrame:(CGRect)dimensionValue Controller:(GlobalGameViewControllerSingle *)controllerValue;
+- (Player *) getHumanPlayer;
+- (NSInteger) nbPlayers;
 
 @end

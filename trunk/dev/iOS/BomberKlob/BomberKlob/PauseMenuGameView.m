@@ -36,6 +36,7 @@
 
 
 - (void)dealloc {
+	[pauseMenu release];
     [super dealloc];
 }
 

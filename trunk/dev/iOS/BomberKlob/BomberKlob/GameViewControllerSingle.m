@@ -20,12 +20,24 @@
 
 - (id) initWithFrame:(CGRect)dimensionValue Controller:(GlobalGameViewControllerSingle *)controllerValue{
 	self = [super init];
-	
 	if (self){
 		self.globalController = controllerValue;
-		self.gameView = [[GameView alloc] initWithController:self frame:dimensionValue ];
+		self.gameView = [[GameView alloc] initWithController:self frame:dimensionValue];
 	}
 	return self;
+}
+- (void)dealloc {
+	[globalController release];
+	[gameView release];
+    [super dealloc];
+}
+
+-(BOOL) gameIsStarted{
+	return [globalController gameIsStarted];
+}
+
+- (void) updateMap {
+	return [globalController updateMap];
 }
 
 

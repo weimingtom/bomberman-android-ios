@@ -29,7 +29,6 @@
 @property (nonatomic, retain) UIButton *quit;
 
 - (id)initWithFrame:(CGRect)frame controller:(PauseMenu *)myController;
-- (void)dealloc;
 
 - (void)initUserInterface;
 

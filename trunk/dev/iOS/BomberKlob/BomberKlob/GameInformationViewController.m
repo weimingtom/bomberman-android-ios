@@ -26,4 +26,18 @@
 	return self;
 }
 
+- (void)dealloc {
+    [informationView release];
+	[globalController release];
+    [super dealloc];
+}
+
+- (Player *) getHumanPlayer {
+	return [globalController getHumanPlayer];
+}
+
+- (NSInteger) nbPlayers {
+	return [globalController nbPlayers];
+}
+
 @end

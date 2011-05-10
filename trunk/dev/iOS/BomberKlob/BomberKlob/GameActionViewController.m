@@ -26,9 +26,18 @@
 	return self;
 }
 
+- (void)dealloc {
+	[globalController release];
+	[actionView release];
+    [super dealloc];
+}
 
 - (void)plantingBomb {
     [globalController plantingBomb];
+}
+
+- (Player *) getHumanPlayer {
+	return [globalController getHumanPlayer];
 }
 
 @end

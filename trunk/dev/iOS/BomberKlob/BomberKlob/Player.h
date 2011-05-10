@@ -10,9 +10,13 @@
 #import "Position.h"
 #import "Destructible.h"
 
+#define INVINCIBILITY_TIME  80
+#define INVINCIBILITY_TIME_REFRESH  5
+
 @class Bomb;
 @interface Player : Destructible {
 	NSMutableDictionary * bombsTypes;
+	NSMutableDictionary * png;
 	NSString * color;
 	NSInteger lifeNumber;
 	NSInteger powerExplosion;
@@ -20,18 +24,16 @@
 	NSInteger shield;
 	NSInteger speed;
 	NSInteger bombNumber;
+	NSInteger timeInvincible;
 	BOOL istouched;
 	BOOL isKilled;
 	BOOL bombPosed;
 	BOOL isInvincible;
-	NSInteger timeInvincible;
-	NSMutableDictionary * png;
-
 }
 
 @property (nonatomic,retain)NSMutableDictionary * bombsTypes;
-@property (nonatomic,retain) NSString * color;
 @property (nonatomic,retain)NSMutableDictionary * png;
+@property (nonatomic,retain) NSString * color;
 @property (nonatomic) NSInteger powerExplosion;
 @property (nonatomic) NSInteger timeExplosion;
 @property (nonatomic) NSInteger shield;

@@ -28,7 +28,8 @@
 
 
 - (void)dealloc {
-    
+	[pauseMenuView release];
+    [globalViewController release];
     [super dealloc];
 }
 

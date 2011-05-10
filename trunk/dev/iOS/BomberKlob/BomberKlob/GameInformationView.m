@@ -32,13 +32,18 @@
 	return self;
 }
 
+- (void)dealloc {
+	[controller release];
+	[updateThread release];
+    [super dealloc];
+}
+
 - (void)drawRect:(CGRect)rect{
 	RessourceManager * resource = [RessourceManager sharedRessource];
 	CGContextRef context = UIGraphicsGetCurrentContext();
-//	int i = 0;
 	int ecart = resource.screenHeight / 4;
 	UIFont * font = [UIFont boldSystemFontOfSize:11.0];
-	for (int i=0; i < [controller.globalController.engine.game.players count]; i++) {
+	for (int i=0; i < [controller nbPlayers]; i++) {
 		if (i == 2) {
 			if ([[[controller.globalController.engine.game class]description]isEqualToString:@"Single"]) {
 				NSMutableString * temps = @"Temps:";
@@ -70,7 +75,7 @@
 		ecart+= image.size.width;
 	}
 	ecart += 50;
-	Player * player = [controller.globalController.engine.game getHumanPlayer];
+	Player * player = [controller getHumanPlayer];
 	NSString * drawString;
 	for (NSString * imageName in resource.bitmapsInformationGameView) {
 		UIImage * image = [resource.bitmapsInformationGameView objectForKey:imageName];
@@ -98,26 +103,13 @@
 	}
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-	
-}
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-	
-}
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
-	
-}
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-	
-}
 
 - (void) initComponents{	
-	
-	UIButton *  bombButton = [UIButton  buttonWithType:UIButtonTypeRoundedRect];
-	bombButton.frame = CGRectMake(0,0, 50, 20);
-	[bombButton setTitle:@"Menu" forState:UIControlStateNormal];
-	[bombButton addTarget:self action:@selector(pauseAction) forControlEvents:UIControlEventTouchUpInside];	
-	[self addSubview:bombButton];
+	UIButton *  pauseButton = [UIButton  buttonWithType:UIButtonTypeRoundedRect];
+	pauseButton.frame = CGRectMake(0,0, 50, 20);
+	[pauseButton setTitle:@"Menu" forState:UIControlStateNormal];
+	[pauseButton addTarget:self action:@selector(pauseAction) forControlEvents:UIControlEventTouchUpInside];	
+	[self addSubview:pauseButton];
 }
 
 - (void)pauseAction {
@@ -125,16 +117,17 @@
 }
 
 - (void) initUpdateThread {
-	updateThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerUpdate) object:nil]autorelease]; //Create a new thread
-	[updateThread start]; //start the thread
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	updateThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerUpdate) object:nil]autorelease];
+	[updateThread start];
+	[pool release];
 }
 
 
 - (void) startTimerUpdate {
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
-	
-	[[NSTimer scheduledTimerWithTimeInterval: 0.5 target: self selector: @selector(setNeedsDisplay) userInfo:self repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval: 0.5 target: self selector: @selector(setNeedsDisplay) userInfo:self repeats: YES] autorelease];	
 	[runLoop run];
 	[pool release];
 }

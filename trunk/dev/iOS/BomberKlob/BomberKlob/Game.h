@@ -14,7 +14,6 @@
 @interface Game : NSObject {
 	NSMutableArray * players;
 	NSMutableDictionary * bombsPlanted;
-	GameMap * map;
 	AVAudioPlayer *soundStart;
 	AVAudioPlayer *soundMode;
 	NSMutableDictionary * bitmaps;
@@ -24,8 +23,7 @@
 	RessourceManager * resource;
 	Application *application;
 	Player * winner;
-	
-    
+	GameMap * map;
 }
 @property (nonatomic, retain) NSMutableArray * players;
 @property (nonatomic, retain) NSMutableDictionary * bombsPlanted;
@@ -34,27 +32,56 @@
 @property (nonatomic) BOOL isStarted;
 @property (nonatomic) BOOL isEnded;
 
-
-- (id) initWithMapName:(NSString *)mapName;
-- (void)dealloc;
+///------------------------
+/// @name Init the Game
+///------------------------
 
 - (void) initGame;
+- (id) initWithMapName:(NSString *)mapName;
+
+///------------------------
+/// @name Managing the Game
+///------------------------
+
 - (void) timerStartGame;
 - (void) startGame;
+- (void) timerDisplayGo;
+- (void) stopDisplayGo;
 - (void) endGame;
+- (void) quitGame;
+- (void) pauseGame:(BOOL)enable;
+
+
+///------------------------
+/// @name Draw the Game
+///------------------------
+
+
 - (void) draw:(CGContextRef)context;
-- (void) update;
+
+///------------------------
+/// @name Managing the game's sound and bitmaps
+///------------------------
+
 - (void) loadSounds;
 - (void) loadBitmaps;
 - (void) disableSound;
+
+///------------------------
+/// @name Managing the Human player
+///------------------------
+
 - (Player *) getHumanPlayer;
-- (void) timerDisplayGo;
-- (void) displayGo;
+
+///------------------------
+/// @name Managing the Bombs
+///------------------------
 
 - (void)plantingBombByPlayer:(Bomb *)bomb;
 - (void)bombExplode:(Position *)position;
 
-- (void)quitGame;
-- (void) pauseGame:(BOOL)enable;
+- (void) updateMap;
+
+- (NSInteger) nbPlayers;
 
 @end
