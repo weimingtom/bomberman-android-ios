@@ -268,7 +268,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 					ioe.printStackTrace();
 				}
 
-				Model.getSystem().getDatabase().newMap(bundle.getString("map"), Model.getUser().getPseudo(), 1);
+				Model.getSystem().getDatabase().newMap(bundle.getString("map"), Model.getUser().getPseudo(), 0);
 				Intent intent = new Intent(EditorLayout.this, Home.class);
 				startActivity(intent);
 				this.finish();

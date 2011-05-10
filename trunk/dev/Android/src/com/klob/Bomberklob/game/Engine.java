@@ -166,15 +166,16 @@ public class Engine {
 								/*Si le bot n'a pas d'objectif*/
 								if ( players[i].getObjectif() == null ) {
 
-									Point p = point1;
+									Point p = new Point(point1.x, point1.y);
+									int difficulty = ((BotPlayer) players[i]).getDifficulty();
 
 									/* Defensif (On est dans une zone dangereuse) */
 									if ( colisionMap.get(point1) == ColisionMapObjects.DANGEROUS_AREA || colisionMap.get(point1) == ColisionMapObjects.BOMB) {
-
-										p = safeAroundArea(point1);
-
+										
+										p = safeAroundArea(point1, colisionMap);		
+										
 										if ( p.x == point1.x && p.y == point1.y ) {
-											p = pathFinding(point1, colisionMap);									
+											p = pathFinding(point1, colisionMap, difficulty);
 										}
 									}
 									/* Offensif */
@@ -183,14 +184,14 @@ public class Engine {
 										int timeBomb = 10000;
 
 										for(Entry<Point, Bomb> entry : bombs.entrySet()) {
-											timeBomb = Math.min(bombs.get(entry.getKey()).getTime(),timeBomb);
+											if ( players[i].equals(entry.getValue().getPlayer())) {
+												timeBomb = Math.min(bombs.get(entry.getKey()).getTime(),timeBomb);
+											}
 										}
 
-										if ( timeBomb > 15 ) {
-
-											int difficulty = ((BotPlayer) players[i]).getDifficulty();
+										if ( timeBomb > 15 ) {											
 											if ( (int)(Math.random() * (20-(10*difficulty))) == 0) {
-												if ( (int)(Math.random() * (8-(3*difficulty))) == 1) {
+												if ( (int)(Math.random() * (16-(3*difficulty))) == 0) {
 													if ( difficulty != 0) {
 														/* Recuperer le tableau de zones dangeureuses */
 														ConcurrentHashMap<Point, ColisionMapObjects> colisionMap2 = new ConcurrentHashMap<Point, ColisionMapObjects>();
@@ -256,26 +257,11 @@ public class Engine {
 																}
 
 																/* Chercher une chemin de sortie */
-																Point res = pathFinding(p, colisionMap2);
+																p = pathFinding(p, colisionMap2, difficulty);
 
 																/* Si il existe une sortie */
-																if ( res.x != point1.x || res.y != point1.y ) {
-
-																	/* On l'ajoute dans la hash map de bombes */
-																	this.bombs.put(bombPoint, bomb);
-
-																	/* Zones dangereuses */
-																	this.single.map.setColisionMap(colisionMap2);
-
-																	/* On diminue la quantité des bombes que peut poser le joueur */
-																	try {
-																		players[i].setBombNumber(players[i].getBombNumber()-1);
-																	} catch (BombPowerException e) {
-																		e.printStackTrace();
-																	}
-
-																	/* On joue la musique */
-																	bomb.playCurrentAnimationSound();
+																if ( p.x != point1.x || p.y != point1.y ) {
+																	pushBomb(players[i]);
 																}
 															}
 														}
@@ -284,9 +270,91 @@ public class Engine {
 														pushBomb(players[i]);
 													}
 												}
-												else {									
-													/* bouger d'une case */
-													p = safeAroundArea(point1);
+												else {
+													if ( 0 != difficulty && players[0].getPosition() != null) {
+														
+														p = pathFinding(point1, ResourcesManager.coToTile(players[0].getPosition().x, players[0].getPosition().y),colisionMap, difficulty);
+														
+														if ( p.x == point1.x && p.y == point1.y ) {
+															
+															/* Recuperer le tableau de zones dangeureuses */
+															ConcurrentHashMap<Point, ColisionMapObjects> colisionMap2 = new ConcurrentHashMap<Point, ColisionMapObjects>();
+
+															/* Le recopier */
+															colisionMap2.putAll(colisionMap);
+
+															/* Ajouter une bombe */
+															Point bombPoint = ResourcesManager.coToTile(players[i].getPosition().x+(ResourcesManager.getSize()/2), players[i].getPosition().y+(ResourcesManager.getSize()/2));
+
+															if ( this.bombs.get(bombPoint) == null ) {
+																if ( players[i].getBombNumber() > 0 ) {
+
+																	/* On crée une nouvelle bombe */
+																	Bomb bomb = new Bomb(players[i].getBombSelected(), ResourcesManager.getBombsAnimations().get(players[i].getBombSelected()), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, players[i]);
+
+																	/* Coordonnées de la bombe posée */
+																	bomb.setPosition(ResourcesManager.tileToCo(bombPoint.x, bombPoint.y));
+
+																	boolean up, down, left, right;
+																	up = down = left = right = true;
+
+																	/* CENTER */
+																	colisionMap2.put(bombPoint,ColisionMapObjects.BOMB);
+
+																	for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
+
+																		if ( up ) {
+																			if ( colisionMap2.get(new Point(bombPoint.x, bombPoint.y-k)) != ColisionMapObjects.BLOCK && colisionMap2.get(new Point(bombPoint.x, bombPoint.y-k)) != ColisionMapObjects.BOMB && colisionMap2.get(new Point(bombPoint.x, bombPoint.y-k)) != ColisionMapObjects.DAMAGE) {
+																				colisionMap2.put(new Point(bombPoint.x, bombPoint.y-k),ColisionMapObjects.DANGEROUS_AREA);
+																			}
+																			else {
+																				up = false;
+																			}
+																		}
+
+																		if ( down ) {
+																			if ( colisionMap2.get(new Point(bombPoint.x, bombPoint.y+k)) != ColisionMapObjects.BLOCK && colisionMap2.get(new Point(bombPoint.x, bombPoint.y+k)) != ColisionMapObjects.BOMB && colisionMap2.get(new Point(bombPoint.x, bombPoint.y+k)) != ColisionMapObjects.DAMAGE) {
+																				colisionMap2.put(new Point(bombPoint.x, bombPoint.y+k),ColisionMapObjects.DANGEROUS_AREA);
+																			}
+																			else {
+																				down = false;
+																			}
+																		}
+
+																		if ( left ) {
+																			if ( colisionMap2.get(new Point(bombPoint.x-k, bombPoint.y)) != ColisionMapObjects.BLOCK && colisionMap2.get(new Point(bombPoint.x-k, bombPoint.y)) != ColisionMapObjects.BOMB && colisionMap2.get(new Point(bombPoint.x-k, bombPoint.y)) != ColisionMapObjects.DAMAGE) {
+																				colisionMap2.put(new Point(bombPoint.x-k, bombPoint.y),ColisionMapObjects.DANGEROUS_AREA);
+																			}
+																			else {
+																				left = false;
+																			}
+																		}
+
+																		if ( right ) {
+																			if ( colisionMap2.get(new Point(bombPoint.x+k, bombPoint.y)) != ColisionMapObjects.BLOCK && colisionMap2.get(new Point(bombPoint.x+k, bombPoint.y)) != ColisionMapObjects.BOMB && colisionMap2.get(new Point(bombPoint.x+k, bombPoint.y)) != ColisionMapObjects.DAMAGE) {
+																				colisionMap2.put(new Point(bombPoint.x+k, bombPoint.y),ColisionMapObjects.DANGEROUS_AREA);
+																			}
+																			else {
+																				right = false;
+																			}
+																		}
+																	}
+
+																	/* Chercher une chemin de sortie */
+																	p = pathFinding(point1, colisionMap2, difficulty);
+
+																	/* Si il existe une sortie */
+																	if ( p.x != point1.x || p.y != point1.y ) {
+																		pushBomb(players[i]);
+																	}
+																}
+															}
+														}
+													}
+													else {
+														/* bouger d'une case */
+														p = safeAroundArea(point1, colisionMap);
+													}
 												}
 											}
 										}
@@ -397,11 +465,10 @@ public class Engine {
 		}
 	}
 
-	public Point safeAroundArea(Point point1) {
+	public Point safeAroundArea(Point point1, ConcurrentHashMap<Point, ColisionMapObjects> colisionMap) {
 
 		int x = point1.x;
 		int y = point1.y;
-		ConcurrentHashMap<Point, ColisionMapObjects> colisionMap = this.single.map.getColisionMap();
 
 		Vector<Integer> vect = new Vector<Integer>();
 		vect.add(1);
@@ -412,7 +479,6 @@ public class Engine {
 		vect.add(6);
 		vect.add(7);
 		vect.add(8);
-
 
 		do {
 			int i = vect.remove((int)(Math.random() * vect.size()));
@@ -484,7 +550,7 @@ public class Engine {
 		return new Point(x,y);
 	}
 
-	public Point pathFinding(Point p, ConcurrentHashMap<Point, ColisionMapObjects> colisionMap) {
+	public Point pathFinding(Point p, ConcurrentHashMap<Point, ColisionMapObjects> colisionMap, int difficulty) {
 
 		int[][] distance = new int[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
 		PlayerAnimations[][] direction = new PlayerAnimations[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
@@ -585,6 +651,158 @@ public class Engine {
 		}
 		else {
 			return p;
+		}
+	}
+
+	public Point pathFinding(Point sourcePoint, Point destinationPoint, ConcurrentHashMap<Point, ColisionMapObjects> colisionMap, int difficulty) {
+
+		int[][] distance = new int[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
+		PlayerAnimations[][] direction = new PlayerAnimations[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
+		PlayerAnimations pa = null, pa2 = null;
+
+		distance[sourcePoint.x][sourcePoint.y] = 1;
+
+		Vector<Integer> vect = new Vector<Integer>();
+		vect.add(1);
+		vect.add(2);
+		vect.add(3);
+		vect.add(4);
+		
+		do {
+			int i = vect.remove((int)(Math.random() * vect.size()));
+			
+			switch (i) {            
+			case 1:
+				if ( colisionMap.get(new Point(sourcePoint.x+1, sourcePoint.y)) == ColisionMapObjects.EMPTY) {
+					distance[sourcePoint.x+1][sourcePoint.y] = 1;
+					direction[sourcePoint.x+1][sourcePoint.y] = PlayerAnimations.RIGHT;
+					if ( Math.abs((sourcePoint.x+1)-destinationPoint.x) < Math.abs(sourcePoint.x-destinationPoint.x) ){
+						pa2 = PlayerAnimations.RIGHT;
+					}
+				}
+				break;
+			case 2:	
+				if ( colisionMap.get(new Point(sourcePoint.x-1, sourcePoint.y)) == ColisionMapObjects.EMPTY) {
+					distance[sourcePoint.x-1][sourcePoint.y] = 1;			
+					direction[sourcePoint.x-1][sourcePoint.y] = PlayerAnimations.LEFT;
+					if ( Math.abs((sourcePoint.x-1)-destinationPoint.x) < Math.abs(sourcePoint.x-destinationPoint.x) ){
+						pa2 = PlayerAnimations.LEFT;
+					}
+				}
+				break;
+			case 3:	
+				if ( colisionMap.get(new Point(sourcePoint.x, sourcePoint.y+1)) == ColisionMapObjects.EMPTY) {
+					distance[sourcePoint.x][sourcePoint.y+1] = 1;
+					direction[sourcePoint.x][sourcePoint.y+1] = PlayerAnimations.DOWN;
+					if ( Math.abs((sourcePoint.y+1)-destinationPoint.y) < Math.abs(sourcePoint.y-destinationPoint.y) ){
+						pa2 = PlayerAnimations.DOWN;
+					}
+				}
+				break;
+			case 4:	
+				if ( colisionMap.get(new Point(sourcePoint.x, sourcePoint.y-1)) == ColisionMapObjects.EMPTY) {
+					distance[sourcePoint.x][sourcePoint.y-1] = 1;
+					direction[sourcePoint.x][sourcePoint.y-1] = PlayerAnimations.UP;
+					if ( Math.abs((sourcePoint.y-1)-destinationPoint.y) < Math.abs(sourcePoint.y-destinationPoint.y) ){
+						pa2 = PlayerAnimations.UP;	
+					}
+				}
+				break;
+			}
+		} while ( !vect.isEmpty() );
+		
+		
+		for (int d = 1; d < 10*difficulty; d++) {
+			
+			if ( pa != null ) {
+				break;
+			}
+			
+			for ( int h = 1; h < ResourcesManager.MAP_WIDTH-1 ; h++ ) {
+
+				if ( pa != null ) {
+					break;
+				}
+
+				for ( int v = 1 ; v < ResourcesManager.MAP_HEIGHT-1 ; v++ ) {
+
+					if (distance[h][v] == d) {
+
+						if ( distance[h][v+1]==0 ) {
+
+							if ( colisionMap.get(new Point(h, v+1)) == ColisionMapObjects.EMPTY ) {
+								if ( destinationPoint.x == h && destinationPoint.y == v+1 ) {
+									pa = direction[h][v];
+									break;
+								}
+								else {
+									direction[h][v+1] = direction[h][v];
+									distance[h][v+1]=d+1;
+								}
+							}
+						}
+
+						if ( distance[h][v-1]==0 ) {
+							if ( colisionMap.get(new Point(h, v-1)) == ColisionMapObjects.EMPTY ) {
+								if ( destinationPoint.x == h && destinationPoint.y == v-1 ) {
+									pa = direction[h][v];
+									break;
+								}
+								else {
+									direction[h][v-1] = direction[h][v];
+									distance[h][v-1]=d+1;
+								}
+							}
+						}
+
+						if ( distance[h+1][v]==0 ) {
+							if ( colisionMap.get(new Point(h+1, v)) == ColisionMapObjects.EMPTY ) {
+								if ( destinationPoint.x == h+1 && destinationPoint.y == v ) {
+									pa = direction[h][v];
+									break;
+								}
+								else {
+									direction[h+1][v] = direction[h][v];
+									distance[h+1][v]=d+1;
+								}
+							}
+						}
+
+						if ( distance[h-1][v]==0 ) {
+							if ( colisionMap.get(new Point(h-1, v)) == ColisionMapObjects.EMPTY ) {
+								if ( destinationPoint.x == h-1 && destinationPoint.y == v ) {
+									pa = direction[h][v];
+									break;
+								}
+								else {
+									direction[h-1][v] = direction[h][v];
+									distance[h-1][v]=d+1;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		if ( pa == null ) {
+			pa = pa2;
+		}
+		
+		if ( pa == PlayerAnimations.RIGHT) {
+			return new Point(sourcePoint.x+1,sourcePoint.y);										
+		}
+		else if ( pa == PlayerAnimations.LEFT) {
+			return new Point(sourcePoint.x-1,sourcePoint.y);
+		}
+		else if ( pa == PlayerAnimations.UP ) {
+			return new Point(sourcePoint.x,sourcePoint.y-1);					
+		}
+		else if ( pa == PlayerAnimations.DOWN ) {
+			return new Point(sourcePoint.x,sourcePoint.y+1);								
+		}
+		else {
+			return sourcePoint;
 		}
 	}
 
