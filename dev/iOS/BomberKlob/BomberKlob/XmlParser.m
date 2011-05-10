@@ -1,11 +1,3 @@
-//
-//  XmlParser.m
-//  BomberKlob
-//
-//  Created by Kilian Coubo on 06/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "XmlParser.h"
 #import "Objects.h"
 #import "Position.h"
@@ -21,7 +13,7 @@
 
 @implementation XmlParser
 
-@synthesize objectsBombs, objects, objectsAnimations, objectsInanimates, objectsIdle;
+@synthesize objectsBombs, objects, players, objectsIdle;
 
 
 - (XmlParser *) initXMLParser:(NSString *) typeValue {
@@ -30,31 +22,28 @@
 	if (self){
 		type = typeValue;
 	}
-    
 	return self;	
 }
 
 
 - (void)dealloc {
-    [type release];
-    [currentString release];
-    [currentAnimation release];
-    [characters release];
-    
-    [objectsAnimations release];
-    [objectsBombs release];
-    [objects release];
-    [objectsInanimates release];
-    [objectsIdle release];
-    
-    [currentProperty release];
+	
+	[type release];
+	[currentString release];
+	[currentAnimation release];
+	[characters release];
+	[currentSound release];
+	[players release];
+	[objectsBombs release];
+	[objects release];
+	[objectsIdle release];
+	[currentProperty release];
     [super dealloc];
 }
 
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
-    objectsInanimates = [[NSMutableDictionary alloc] init];
-    objectsAnimations = [[NSMutableDictionary alloc] init];
+    players = [[NSMutableDictionary alloc] init];
     objectsBombs = [[NSMutableDictionary alloc] init];
     objects = [[NSMutableDictionary alloc] init];
     currentProperty = [[NSMutableString alloc] init];
@@ -69,7 +58,7 @@
 		if([elementName isEqualToString:@"player"]) {
             Player *player = [[Player alloc] init];
 			currentProperty = [attributeDict valueForKey:@"name"];
-			[objectsAnimations setObject:player forKey:currentProperty];
+			[players setObject:player forKey:currentProperty];
             [player release];
 		}
 		else if([elementName isEqualToString:@"animation"]) {
@@ -79,8 +68,8 @@
 			AnimationSequence *sequences = [[AnimationSequence alloc] initWithLoop:currentCanLoop];
 			AnimationSequence *destroySequences = [[AnimationSequence alloc] initWithLoop:currentCanLoop];
 
-			[((Player *)[objectsAnimations objectForKey:currentProperty]).animations setObject:sequences forKey:currentAnimation];
-			[((Player *)[objectsAnimations objectForKey:currentProperty]).destroyAnimations setObject:destroySequences forKey:currentAnimation];
+			[((Player *)[players objectForKey:currentProperty]).animations setObject:sequences forKey:currentAnimation];
+			[((Player *)[players objectForKey:currentProperty]).destroyAnimations setObject:destroySequences forKey:currentAnimation];
             
             [sequences release];
 			[destroySequences release];
@@ -89,7 +78,7 @@
 			currentAnimation = [attributeDict valueForKey:@"name"]; 
 		}
 		else if ([elementName isEqualToString:@"framerect"]) {
-			Player *currentObject = [objectsAnimations objectForKey:currentProperty];
+			Player *currentObject = [players objectForKey:currentProperty];
 			NSInteger x = [[attributeDict valueForKey:@"left"] integerValue];
 			NSInteger y = [[attributeDict valueForKey:@"top"] integerValue];
 			NSInteger width = [[attributeDict valueForKey:@"right"] integerValue] - x;
@@ -120,7 +109,7 @@
 			return;
 		} 
 		else if ([elementName isEqualToString:@"png"]) {
-			Player *currentObject = [objectsAnimations objectForKey:currentProperty];
+			Player *currentObject = [players objectForKey:currentProperty];
 			NSInteger x = [[attributeDict valueForKey:@"left"] integerValue];
 			NSInteger y = [[attributeDict valueForKey:@"top"] integerValue];
 			NSInteger width = [[attributeDict valueForKey:@"right"] integerValue] - x;

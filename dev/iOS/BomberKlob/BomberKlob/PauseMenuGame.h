@@ -22,7 +22,6 @@
 @property (nonatomic, retain) GlobalGameViewControllerSingle *globalViewController;
 
 - (id)initWithFrame:(CGRect)frame controller:(GlobalGameViewControllerSingle *)myController;
-- (void)dealloc;
 
 - (void)resumeAction;
 - (void)quitAction;

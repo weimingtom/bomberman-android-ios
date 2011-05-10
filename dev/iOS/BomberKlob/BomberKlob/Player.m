@@ -32,7 +32,7 @@
 		png = [[NSMutableDictionary alloc] init];
 		bombsTypes = [[NSMutableDictionary alloc] init];
 		[bombsTypes setObject:[ressource.bitmapsBombs objectForKey:@"normal"] forKey:@"normal"];
-		timeInvincible = 80;
+		timeInvincible = INVINCIBILITY_TIME;
 	}
 	return self;
 }
@@ -54,13 +54,14 @@
 		png = [[NSMutableDictionary alloc] init];
 		bombsTypes = [[NSMutableDictionary alloc] init];
 		[bombsTypes setObject:[ressource.bitmapsBombs objectForKey:@"normal"] forKey:@"normal"];
-		timeInvincible = 80;
+		timeInvincible = INVINCIBILITY_TIME;
 	}
 	return self;
 }
 
 
 - (void)dealloc {
+	[png release];
     [bombsTypes release];
     [color release];
     [super dealloc];
@@ -304,7 +305,7 @@
 			}
 		}
 	}
-	else if((timeInvincible % 5) == 0) {
+	else if((timeInvincible % INVINCIBILITY_TIME_REFRESH) == 0) {
 		if (currentFrame < [sequences count]){
 			UIImage * image = [sequences objectAtIndex:currentFrame];
 			[image drawInRect:CGRectMake(position.x, position.y-(ressource.tileSize/2), ressource.tileSize , ressource.tileSize*1.5)];
@@ -348,7 +349,7 @@
 			currentFrame = 0;
 			if (istouched) {
 				istouched = NO;
-				timeInvincible = 80;
+				timeInvincible = INVINCIBILITY_TIME;
 				isInvincible = YES;
 				currentAnimation = @"idle";
 			}

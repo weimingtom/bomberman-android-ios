@@ -47,8 +47,10 @@
 }
 
 - (void) startTimer{
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	timerThread = [[[NSThread alloc] initWithTarget:self selector:@selector(runTimer) object:nil]autorelease]; 
 	[timerThread start];
+	[pool release];
 }
 
 - (void) runTimer {
@@ -56,7 +58,7 @@
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 	
-	[[NSTimer scheduledTimerWithTimeInterval: 1 target: self selector: @selector(updateTime) userInfo:self repeats: YES] retain];
+	[[NSTimer scheduledTimerWithTimeInterval: 1 target: self selector: @selector(updateTime) userInfo:self repeats: YES] autorelease];
 	[runLoop run];
 	[pool release];
 }

@@ -1,11 +1,3 @@
-//
-//  RessourceManager.h
-//  BombermanIOS
-//
-//  Created by Kilian Coubo on 04/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
 
@@ -15,14 +7,12 @@
 	NSInteger screenWidth;
 
 	NSMutableDictionary * bitmapsAnimates;
-	NSMutableDictionary * bitmapsInanimates;
 	NSMutableDictionary * bitmapsPlayer;
 	NSMutableDictionary * bitmapsBombs;
 	NSMutableDictionary * bitmapsInformationGameView;
 
 }
 @property (nonatomic, retain) NSMutableDictionary * bitmapsAnimates;
-@property (nonatomic, retain) NSMutableDictionary * bitmapsInanimates;
 @property (nonatomic, retain) NSMutableDictionary * bitmapsPlayer;
 @property (nonatomic, retain) NSMutableDictionary * bitmapsBombs;
 @property (nonatomic, retain) NSMutableDictionary  * bitmapsInformationGameView;

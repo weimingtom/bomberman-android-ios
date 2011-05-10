@@ -1,11 +1,3 @@
-//
-//  RessourceManager.m
-//  BombermanIOS
-//
-//  Created by Kilian Coubo on 04/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "RessourceManager.h"
 #import "XmlParser.h"
 #import "Objects.h"
@@ -17,7 +9,7 @@
 
 @implementation RessourceManager
 
-@synthesize bitmapsAnimates,bitmapsInanimates, bitmapsPlayer,bitmapsBombs, tileSize, screenWidth, screenHeight, bitmapsInformationGameView;
+@synthesize bitmapsAnimates, bitmapsPlayer,bitmapsBombs, tileSize, screenWidth, screenHeight, bitmapsInformationGameView;
 
 static RessourceManager * ressource = nil;
 
@@ -65,7 +57,6 @@ static RessourceManager * ressource = nil;
 
 - (void)dealloc {
     [bitmapsAnimates release];
-    [bitmapsInanimates release];
     [bitmapsPlayer release];
     [bitmapsBombs release];
     [super dealloc];
@@ -95,7 +86,7 @@ static RessourceManager * ressource = nil;
 		NSLog(@"XmlParser - Error parsing data: %@", [parseError localizedDescription]);
 	} 
 	
-	self.bitmapsPlayer = parserDelegate.objectsAnimations;
+	self.bitmapsPlayer = parserDelegate.players;
     
     [content release];
 	[parser release];
@@ -145,7 +136,6 @@ static RessourceManager * ressource = nil;
     
     [content release];
 	[parser release];
-//	[parserDelegate release];
 	
 }
 
@@ -159,10 +149,6 @@ static RessourceManager * ressource = nil;
 	[bitmapsInformationGameView setObject:image forKey:@"playerspeed"];
 	image = [UIImage imageNamed:@"bombnumber.png"];
 	[bitmapsInformationGameView setObject:image forKey:@"bombnumber"];
-
-	
-	
-	
 }
 
 

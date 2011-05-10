@@ -20,4 +20,8 @@
 
 - (id) initWithFrame:(CGRect)dimensionValue Controller:(GlobalGameViewControllerSingle *)controllerValue;
 
+-(BOOL) gameIsStarted;
+
+- (void) updateMap;
+
 @end

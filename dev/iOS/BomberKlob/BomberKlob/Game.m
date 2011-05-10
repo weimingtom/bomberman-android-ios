@@ -15,6 +15,7 @@
 #import "Application.h"
 #import "DBSystem.h"
 #import "BomberKlobAppDelegate.h"
+#import "AnimationSequence.h"
 
 
 
@@ -60,6 +61,11 @@
 
 
 - (void)dealloc {
+	[bombsPlanted release];
+	[soundStart release];
+	[soundMode release];
+	[bitmaps release];
+	[winner release];
     [players release];
     [map release];
     [super dealloc];
@@ -76,37 +82,39 @@
 		soundMode.volume = 0;
 	}
 	[soundStart play];
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSThread * startThread = [[[NSThread alloc] initWithTarget:self selector:@selector(timerStartGame) object:nil]autorelease];
 	[startThread start];
+	[pool release];
 }
 
 - (void) timerStartGame {
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
-	
 	[[NSTimer scheduledTimerWithTimeInterval: 4 target: self selector: @selector(startGame) userInfo:self repeats: NO] retain];	
 	[runLoop run];
 	[pool release];
 }
 
 - (void) startGame{
-	isStarted = YES;
 	[soundMode play];
+	isStarted = YES;
 	displayGo = YES;
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSThread * goThread = [[[NSThread alloc] initWithTarget:self selector:@selector(timerDisplayGo) object:nil]autorelease];
 	[goThread start];
+	[pool release];
 }
 
 - (void) timerDisplayGo {
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
-	
-	[[NSTimer scheduledTimerWithTimeInterval: 0.5 target: self selector: @selector(displayGo) userInfo:self repeats: NO] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval: 0.5 target: self selector: @selector(stopDisplayGo) userInfo:self repeats: NO] retain];	
 	[runLoop run];
 	[pool release];
 }
 
-- (void) displayGo {
+- (void) stopDisplayGo {
 	displayGo = NO;
 }
 
@@ -117,50 +125,47 @@
 
 
 - (void) draw:(CGContextRef)context{
-	@synchronized (self) {
-		[map draw:context];	
-		NSMutableDictionary * bombs = [bombsPlanted mutableCopy];
-		for (Position * position in bombs) {
-			[[bombs objectForKey:position] draw:context];
-		}
-		for (Player * player in players) {
-			[player draw:context];
-		}
-		if (!isStarted){
-			UIImage * image = [bitmaps objectForKey:@"ready"] ;
-			int width = (map.width*resource.tileSize) * 0.75;
-			int height = (map.height*resource.tileSize) * 0.75;
+//	@synchronized (self) {
+	[map draw:context];	
+	NSMutableDictionary * bombs = [bombsPlanted mutableCopy];
+	for (Position * position in bombs) {
+		[[bombs objectForKey:position] draw:context];
+	}
+	for (int i = [players count] -1; i >=0; i--) {
+		[[players objectAtIndex:i] draw:context];
+	}
+	if (!isStarted){
+		UIImage * image = [bitmaps objectForKey:@"ready"] ;
+		int width = (map.width*resource.tileSize) * 0.75;
+		int height = (map.height*resource.tileSize) * 0.75;
+		[image drawInRect:CGRectMake(((map.width*resource.tileSize)/2)-(width/2), ((map.height*resource.tileSize)/2)-(width/2), width, height)];
+	}
+	if (displayGo) {
+		UIImage * image = [bitmaps objectForKey:@"go"] ;
+		int width = (map.width*resource.tileSize) * 0.75;
+		int height = (map.height*resource.tileSize) * 0.75;
+		[image drawInRect:CGRectMake(((map.width*resource.tileSize)/2)-(width/2), ((map.height*resource.tileSize)/2)-(width/2), width, height)];
+	}
+	if (isEnded) {
+		UIImage * image;
+		int width = (map.width*resource.tileSize) * 0.75;
+		int height = (map.height*resource.tileSize) * 0.75;
+		if (winner == [self getHumanPlayer]) {
+			image = [bitmaps objectForKey:@"winner"] ;
 			[image drawInRect:CGRectMake(((map.width*resource.tileSize)/2)-(width/2), ((map.height*resource.tileSize)/2)-(width/2), width, height)];
 		}
-		if (displayGo) {
-			UIImage * image = [bitmaps objectForKey:@"go"] ;
-			int width = (map.width*resource.tileSize) * 0.75;
-			int height = (map.height*resource.tileSize) * 0.75;
+		else if (winner != nil) {
+			image = [bitmaps objectForKey:@"loser"] ;
 			[image drawInRect:CGRectMake(((map.width*resource.tileSize)/2)-(width/2), ((map.height*resource.tileSize)/2)-(width/2), width, height)];
 		}
-		if (isEnded) {
-			UIImage * image;
-			int width = (map.width*resource.tileSize) * 0.75;
-			int height = (map.height*resource.tileSize) * 0.75;
-			if (winner == [self getHumanPlayer]) {
-				image = [bitmaps objectForKey:@"winner"] ;
-				[image drawInRect:CGRectMake(((map.width*resource.tileSize)/2)-(width/2), ((map.height*resource.tileSize)/2)-(width/2), width, height)];
-			}
-			else if (winner != nil) {
-				image = [bitmaps objectForKey:@"loser"] ;
-				[image drawInRect:CGRectMake(((map.width*resource.tileSize)/2)-(width/2), ((map.height*resource.tileSize)/2)-(width/2), width, height)];
-			}
-			else {
-				image = [bitmaps objectForKey:@"draw"] ;
-				[image drawInRect:CGRectMake(((map.width*resource.tileSize)/2)-(width/2), ((map.height*resource.tileSize)/2)-(width/2), width, height)];
-			}
+		else {
+			image = [bitmaps objectForKey:@"draw"] ;
+			[image drawInRect:CGRectMake(((map.width*resource.tileSize)/2)-(width/2), ((map.height*resource.tileSize)/2)-(width/2), width, height)];
 		}
 	}
+//	}
 }
 
-- (void) update {
-	[map update];
-}
 
 - (void) loadSounds {
 	NSError *error;
@@ -169,9 +174,8 @@
 	
 	if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSoundStart]) {
 		AVAudioPlayer * sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:pathMenuSoundStart] error:&error];
-		if (!sound) {
+		if (!sound)
 			NSLog(@"Error: %@", [error localizedDescription]);
-		}
 		else {
 			[sound prepareToPlay];
 			[sound setNumberOfLoops:0];
@@ -181,9 +185,8 @@
 	}
 	if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSoundMode]) {
 		AVAudioPlayer * sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:pathMenuSoundMode] error:&error];
-		if (!sound) {
+		if (!sound)
 			NSLog(@"Error: %@", [error localizedDescription]);
-		}
 		else {
 			[sound prepareToPlay];
 			[sound setNumberOfLoops:0];
@@ -225,12 +228,21 @@
 - (void)plantingBombByPlayer:(Bomb *)bomb {
     [bombsPlanted setObject:bomb forKey:bomb.position];
     [map bombPlanted:bomb];
+	[(AnimationSequence *)[bomb.animations objectForKey:bomb.imageName] playSound];
 }
 
 
 - (void)bombExplode:(id)position {
     [map bombExplode:(Bomb *)[bombsPlanted objectForKey:position]];
     [bombsPlanted removeObjectForKey:position];
+}
+
+- (void) updateMap {
+	[map update];
+}
+
+- (NSInteger) nbPlayers {
+	return [players count];
 }
 
 

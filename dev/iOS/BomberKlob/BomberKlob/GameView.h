@@ -7,15 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-@class RessourceManager, MapOld, Position, GameViewControllerSingle, Map;
+@class Position, GameViewControllerSingle, Map;
 
 @interface GameView : UIView {
 	GameViewControllerSingle * controller;
-	RessourceManager* ressource;
 	Position * currentPosition;
 	Position * lastPosition;
 	
-	NSDictionary * bitmapsInanimates;
 	NSString * currentDirection;
 	NSThread * movementThread;
 	NSThread * updateThread;
@@ -23,13 +21,9 @@
 	NSCondition * updateCondition;
 	BOOL movementPause;
 	BOOL updatePause;
-	
 	BOOL run;
-	
 }
 
-@property (nonatomic,retain) NSDictionary * bitmapsInanimates;
-@property (nonatomic,retain) RessourceManager* ressource;
 @property (nonatomic,retain) Position * currentPosition;
 @property (nonatomic, retain) Position * lastPosition;
 @property (nonatomic,retain) GameViewControllerSingle * controller;
@@ -55,5 +49,9 @@
 -(void) stopThread;
 -(void) pauseThread:(BOOL) enable;
 -(void) runThread;
+
+-(BOOL) gameIsStarted;
+
+- (void) updateMap;
 
 @end

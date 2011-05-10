@@ -7,12 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-@class GameActionView, GlobalGameViewControllerSingle, Position;
+@class GameActionView, GlobalGameViewControllerSingle, Position, Player;
 
 @interface GameActionViewController : NSObject {
 	GlobalGameViewControllerSingle * globalController;
 	GameActionView * actionView;
-    
 }
 
 @property (nonatomic,retain) GameActionView * actionView;
@@ -21,6 +20,8 @@
 
 - (id) initWithFrame:(CGRect)dimensionValue Controller:(GlobalGameViewControllerSingle *)controllerValue;
 
-- (void)plantingBomb;
+- (void) plantingBomb;
+
+- (Player *) getHumanPlayer;
 
 @end

@@ -8,17 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@class GameActionViewController, GameInformationViewController, GameViewControllerSingle, Engine, RessourceManager,PauseMenuGame, Position;
+@class GameActionViewController, GameInformationViewController, GameViewControllerSingle, Engine, RessourceManager,PauseMenuGame, Position, Player;
 
 
 @interface GlobalGameViewControllerSingle : UIViewController {
 	Engine * engine;
 	RessourceManager * resource;
-	
     GameActionViewController * actionViewController;
 	GameInformationViewController * informationViewController;
 	GameViewControllerSingle * gameViewControllerSingle;
-	
 	PauseMenuGame *pauseMenu;
 	NSThread * isGameEndedThread;
 
@@ -30,19 +28,22 @@
 @property (nonatomic,retain) PauseMenuGame * pauseMenu;
 @property (nonatomic,retain) Engine * engine;
 
+
 - (id) initWithMapName:(NSString *)mapName;
 
 - (void) pauseAction;
 - (void) resumeAction;
-- (void)quitAction;
+- (void) quitAction;
 
-- (void)plantingBomb;
-
+- (void) plantingBomb;
 
 - (void) startTimerIsGameEnded;
-
 - (void) startTimerIsGameEndedThread;
-
 - (void) isGameEnded;
+
+- (BOOL) gameIsStarted;
+- (void) updateMap;
+- (Player *) getHumanPlayer;
+- (NSInteger) nbPlayers;
 
 @end

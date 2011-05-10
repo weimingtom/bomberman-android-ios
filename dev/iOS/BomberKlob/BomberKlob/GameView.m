@@ -19,22 +19,32 @@
 
 
 @implementation GameView
-@synthesize  bitmapsInanimates, ressource,currentPosition,lastPosition,controller;
+@synthesize currentPosition,lastPosition,controller;
 
 - (id) initWithController:(GameViewControllerSingle *) controllerValue frame:(CGRect) dimensionValue{	
 	self = [self initWithFrame:dimensionValue];
 	
 	if (self){
 		self.controller = controllerValue;
-		ressource = [RessourceManager sharedRessource];
 		lastPosition = [[Position alloc] init];
 		currentPosition = [[Position alloc] init];
 		[self startTimerUpdateMap];
 		[self startTimerMovement];
-
 	}
 	
 	return self;
+}
+
+- (void)dealloc {
+	[controller release];
+	[currentPosition release];
+	[lastPosition release];
+	[currentDirection release];
+	[movementThread release];
+	[updateThread release];
+	[movementCondition release];
+	[updateCondition release];
+    [super dealloc];
 }
 
 
@@ -42,39 +52,32 @@
 	self = [super initWithFrame:frame];
 	
 	if (self){
-		ressource = [RessourceManager sharedRessource];
-		bitmapsInanimates = ressource.bitmapsInanimates;
+		
 	}
-	
 	return self;
 }
 
 - (void)drawRect:(CGRect)rect{
-	CGContextRef context = UIGraphicsGetCurrentContext();
-
-	[self drawAll:context];	
+	[self drawAll:UIGraphicsGetCurrentContext()];	
 }
 
 - (void)drawAll: (CGContextRef) context{
-	Game * game = controller.globalController.engine.game;
-	[game draw:context];
+	[controller.globalController.engine.game draw:context];
 }
 
 -(void) startTimerUpdateMap {
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	updatePause = NO;
 	updateCondition = [[NSCondition alloc] init];
-	updateThread = [[NSThread alloc] initWithTarget:self selector:@selector(startTimerUpdateMapThread) object:nil]; //Create a new thread
-	[updateThread start]; //start the thread
+	updateThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerUpdateMapThread) object:nil] autorelease];
+	[updateThread start];
+	[pool release];
 }
 
-//the thread starts by sending this message
 -(void) startTimerUpdateMapThread {
-	
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
-
-	[[NSTimer scheduledTimerWithTimeInterval: 0.03 target: self selector: @selector(updateMap) userInfo:self repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval: 0.03 target: self selector: @selector(updateMap) userInfo:self repeats: YES] autorelease];
 	[runLoop run];
 	[pool release];
 }
@@ -85,7 +88,7 @@
 		while (updatePause) {
 			[updateCondition wait];
 		}
-		[controller.globalController.engine.game.map update];
+		[controller updateMap];
 		[self setNeedsDisplay];
 		[updateCondition unlock];
 	}
@@ -95,8 +98,10 @@
 {
 	movementCondition = [[NSCondition alloc] init];
 	movementPause = NO;
-	movementThread = [[NSThread alloc] initWithTarget:self selector:@selector(startTimerMovementThread) object:nil]; //Create a new thread
-	[movementThread start]; //start the thread
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	movementThread = [[[NSThread alloc] initWithTarget:self selector:@selector(startTimerMovementThread) object:nil] autorelease];
+	[movementThread start];
+	[pool release];
 }
 
 -(void) startTimerMovementThread {
@@ -104,7 +109,7 @@
 	while (!controller.globalController.engine.game.isStarted) {}
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
-	[[NSTimer scheduledTimerWithTimeInterval: 0.02 target: self selector: @selector(timerMovement:) userInfo:nil repeats: YES] retain];
+	[[NSTimer scheduledTimerWithTimeInterval: 0.02 target: self selector: @selector(timerMovement:) userInfo:nil repeats: YES] autorelease];
 	[runLoop run];	
 	[pool release];
 
@@ -170,7 +175,7 @@
 				[engine stopLeftDown];
 			}
 		}
-		if ([engine.game.players count] > 0 && ![lastPosition isEqual:currentPosition]) {
+		if ([engine nbPlayers] > 0 && ![lastPosition isEqual:currentPosition]) {
 			[[engine.game.players objectAtIndex:0] update];
 		}
 		[movementCondition unlock];
@@ -287,6 +292,10 @@
 -(void) runThread{
 	[movementThread start];
 	[updateThread start];
+}
+
+-(BOOL) gameIsStarted{
+	return [controller gameIsStarted];
 }
 
 @end
