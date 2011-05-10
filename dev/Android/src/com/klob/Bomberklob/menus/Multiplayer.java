@@ -30,9 +30,9 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 	private CheckBox password;
 	private CheckBox connectionAuto;
 	
-	/**
+	/*
 	 * menu de connexion multijoueurs
-	 **/
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -127,4 +128,22 @@ public class Home extends Activity implements View.OnClickListener{
 			this.finish();
 		}
 	}
+	
+	
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		
+		if ( event.getKeyCode() == KeyEvent.KEYCODE_HOME ) {
+			
+		}
+		else if ( event.getKeyCode() == KeyEvent.KEYCODE_MENU ) {
+			this.finish();
+		}
+		else if ( event.getKeyCode() == KeyEvent.KEYCODE_BACK ) {
+			
+		}
+		
+		return false;
+		
+	}
+	
 }

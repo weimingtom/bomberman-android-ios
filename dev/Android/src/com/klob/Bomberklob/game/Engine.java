@@ -1,5 +1,6 @@
 package com.klob.Bomberklob.game;
 
+import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,6 +16,7 @@ import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.objects.exceptions.BombPowerException;
 import com.klob.Bomberklob.resources.ColisionMapObjects;
+import com.klob.Bomberklob.resources.PathFindingNode;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
@@ -171,9 +173,9 @@ public class Engine {
 
 									/* Defensif (On est dans une zone dangereuse) */
 									if ( colisionMap.get(point1) == ColisionMapObjects.DANGEROUS_AREA || colisionMap.get(point1) == ColisionMapObjects.BOMB) {
-										
+
 										p = safeAroundArea(point1, colisionMap);		
-										
+
 										if ( p.x == point1.x && p.y == point1.y ) {
 											p = pathFinding(point1, colisionMap, difficulty);
 										}
@@ -181,7 +183,7 @@ public class Engine {
 									/* Offensif */
 									else {
 
-										int timeBomb = 10000;
+										int timeBomb = Integer.MAX_VALUE;
 
 										for(Entry<Point, Bomb> entry : bombs.entrySet()) {
 											if ( players[i].equals(entry.getValue().getPlayer())) {
@@ -191,7 +193,7 @@ public class Engine {
 
 										if ( timeBomb > 15 ) {											
 											if ( (int)(Math.random() * (20-(10*difficulty))) == 0) {
-												if ( (int)(Math.random() * (16-(3*difficulty))) == 0) {
+												if ( (int)(Math.random() * (16-(3*difficulty))) == 10000000) {
 													if ( difficulty != 0) {
 														/* Recuperer le tableau de zones dangeureuses */
 														ConcurrentHashMap<Point, ColisionMapObjects> colisionMap2 = new ConcurrentHashMap<Point, ColisionMapObjects>();
@@ -271,12 +273,12 @@ public class Engine {
 													}
 												}
 												else {
-													if ( 0 != difficulty && players[0].getPosition() != null) {
+													if ( 0 != difficulty && players[0].getPosition() != null ) {
+
+														p = pathFinding(point1, ResourcesManager.coToTile(players[0].getPosition().x, players[0].getPosition().y),colisionMap);
 														
-														p = pathFinding(point1, ResourcesManager.coToTile(players[0].getPosition().x, players[0].getPosition().y),colisionMap, difficulty);
-														
-														if ( p.x == point1.x && p.y == point1.y ) {
-															
+														if ( colisionMap.get(p) == ColisionMapObjects.BLOCK ) {
+
 															/* Recuperer le tableau de zones dangeureuses */
 															ConcurrentHashMap<Point, ColisionMapObjects> colisionMap2 = new ConcurrentHashMap<Point, ColisionMapObjects>();
 
@@ -654,156 +656,231 @@ public class Engine {
 		}
 	}
 
-	public Point pathFinding(Point sourcePoint, Point destinationPoint, ConcurrentHashMap<Point, ColisionMapObjects> colisionMap, int difficulty) {
+	public Point pathFinding(Point sourcePoint, Point destinationPoint, ConcurrentHashMap<Point, ColisionMapObjects> colisionMap) {
 
-		int[][] distance = new int[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
-		PlayerAnimations[][] direction = new PlayerAnimations[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
-		PlayerAnimations pa = null, pa2 = null;
+		HashMap<Point, PathFindingNode> openList = new HashMap<Point, PathFindingNode>();
+		HashMap<Point, PathFindingNode> closeList = new HashMap<Point, PathFindingNode>();
 
-		distance[sourcePoint.x][sourcePoint.y] = 1;
+		/* Blocs ignorés pour une case (exemple : Case EMPTY à côté d'un BLOCK) */
+		HashMap<Point, PathFindingNode> ignoredList = new HashMap<Point, PathFindingNode>();
 
-		Vector<Integer> vect = new Vector<Integer>();
-		vect.add(1);
-		vect.add(2);
-		vect.add(3);
-		vect.add(4);
-		
+
+		ConcurrentHashMap<Point, Objects> animatedObjects = this.single.map.getAnimatedObjects();
+		int H, F, G, minimumStrok;
+
+		openList.put(sourcePoint, new PathFindingNode(0, 0, 0, sourcePoint));
+		Point currentTile, nextTile = sourcePoint;
+
+		//System.out.println("------------------------------------------------");
+
 		do {
-			int i = vect.remove((int)(Math.random() * vect.size()));
-			
-			switch (i) {            
-			case 1:
-				if ( colisionMap.get(new Point(sourcePoint.x+1, sourcePoint.y)) == ColisionMapObjects.EMPTY) {
-					distance[sourcePoint.x+1][sourcePoint.y] = 1;
-					direction[sourcePoint.x+1][sourcePoint.y] = PlayerAnimations.RIGHT;
-					if ( Math.abs((sourcePoint.x+1)-destinationPoint.x) < Math.abs(sourcePoint.x-destinationPoint.x) ){
-						pa2 = PlayerAnimations.RIGHT;
-					}
-				}
-				break;
-			case 2:	
-				if ( colisionMap.get(new Point(sourcePoint.x-1, sourcePoint.y)) == ColisionMapObjects.EMPTY) {
-					distance[sourcePoint.x-1][sourcePoint.y] = 1;			
-					direction[sourcePoint.x-1][sourcePoint.y] = PlayerAnimations.LEFT;
-					if ( Math.abs((sourcePoint.x-1)-destinationPoint.x) < Math.abs(sourcePoint.x-destinationPoint.x) ){
-						pa2 = PlayerAnimations.LEFT;
-					}
-				}
-				break;
-			case 3:	
-				if ( colisionMap.get(new Point(sourcePoint.x, sourcePoint.y+1)) == ColisionMapObjects.EMPTY) {
-					distance[sourcePoint.x][sourcePoint.y+1] = 1;
-					direction[sourcePoint.x][sourcePoint.y+1] = PlayerAnimations.DOWN;
-					if ( Math.abs((sourcePoint.y+1)-destinationPoint.y) < Math.abs(sourcePoint.y-destinationPoint.y) ){
-						pa2 = PlayerAnimations.DOWN;
-					}
-				}
-				break;
-			case 4:	
-				if ( colisionMap.get(new Point(sourcePoint.x, sourcePoint.y-1)) == ColisionMapObjects.EMPTY) {
-					distance[sourcePoint.x][sourcePoint.y-1] = 1;
-					direction[sourcePoint.x][sourcePoint.y-1] = PlayerAnimations.UP;
-					if ( Math.abs((sourcePoint.y-1)-destinationPoint.y) < Math.abs(sourcePoint.y-destinationPoint.y) ){
-						pa2 = PlayerAnimations.UP;	
-					}
-				}
-				break;
-			}
-		} while ( !vect.isEmpty() );
-		
-		
-		for (int d = 1; d < 10*difficulty; d++) {
-			
-			if ( pa != null ) {
-				break;
-			}
-			
-			for ( int h = 1; h < ResourcesManager.MAP_WIDTH-1 ; h++ ) {
 
-				if ( pa != null ) {
-					break;
-				}
-
-				for ( int v = 1 ; v < ResourcesManager.MAP_HEIGHT-1 ; v++ ) {
-
-					if (distance[h][v] == d) {
-
-						if ( distance[h][v+1]==0 ) {
-
-							if ( colisionMap.get(new Point(h, v+1)) == ColisionMapObjects.EMPTY ) {
-								if ( destinationPoint.x == h && destinationPoint.y == v+1 ) {
-									pa = direction[h][v];
-									break;
-								}
-								else {
-									direction[h][v+1] = direction[h][v];
-									distance[h][v+1]=d+1;
-								}
-							}
-						}
-
-						if ( distance[h][v-1]==0 ) {
-							if ( colisionMap.get(new Point(h, v-1)) == ColisionMapObjects.EMPTY ) {
-								if ( destinationPoint.x == h && destinationPoint.y == v-1 ) {
-									pa = direction[h][v];
-									break;
-								}
-								else {
-									direction[h][v-1] = direction[h][v];
-									distance[h][v-1]=d+1;
-								}
-							}
-						}
-
-						if ( distance[h+1][v]==0 ) {
-							if ( colisionMap.get(new Point(h+1, v)) == ColisionMapObjects.EMPTY ) {
-								if ( destinationPoint.x == h+1 && destinationPoint.y == v ) {
-									pa = direction[h][v];
-									break;
-								}
-								else {
-									direction[h+1][v] = direction[h][v];
-									distance[h+1][v]=d+1;
-								}
-							}
-						}
-
-						if ( distance[h-1][v]==0 ) {
-							if ( colisionMap.get(new Point(h-1, v)) == ColisionMapObjects.EMPTY ) {
-								if ( destinationPoint.x == h-1 && destinationPoint.y == v ) {
-									pa = direction[h][v];
-									break;
-								}
-								else {
-									direction[h-1][v] = direction[h][v];
-									distance[h-1][v]=d+1;
-								}
-							}
-						}
-					}
+			minimumStrok = Integer.MAX_VALUE;
+			for (Entry<Point, PathFindingNode> entry : openList.entrySet()) {
+				if ( entry.getValue().F <= minimumStrok) {
+					minimumStrok = entry.getValue().F;
+					nextTile = entry.getKey();
 				}
 			}
+			//System.out.println("NEXT TILE : " + nextTile.toString());
+			currentTile = nextTile;
+			closeList.put(currentTile, openList.remove(currentTile));
+			ignoredList.clear();
+
+			for (int i = currentTile.x-1 ; i < currentTile.x+2 ; i++ ) {
+				for (int j = currentTile.y-1 ; j < currentTile.y+2 ; j++ ) {
+
+					Point tile = new Point(i,j);
+
+					/* Si la case en cours ne fait pas partie des ignorées ou de la closedList */
+					if ( ignoredList.get(tile) == null && closeList.get(tile) == null) {
+						/* Si l'objet est un bloc */
+						if ( colisionMap.get(tile) == ColisionMapObjects.BLOCK ) {
+
+							//System.out.print("BLOC ");
+
+							/* Si il est destructible */
+							if ( animatedObjects.get(tile) != null ) {
+
+								//System.out.print("DESTRUCTIBLE ");
+
+								/* Si il n'est pas sur une diagonale */
+								if ( i == currentTile.x || j == currentTile.y ) {
+
+									//System.out.println("EN FACE : " + i + " " + j);
+
+									/* On calcule l'heuristique */
+									H = (Math.abs(destinationPoint.x-i) + Math.abs(destinationPoint.y-j))*10;
+
+									/* Le coût du déplacement */
+									G = 40+closeList.get(currentTile).G;
+
+									/* Et le coût total du chemin */
+									F = G+H;									
+
+									//System.out.println(" |G:"+G+"|H:"+H+"|F:"+F+"|");
+
+									/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
+									if ( openList.get(tile) == null || G < openList.get(tile).G ) {
+										//System.out.print(" RAJOUT : " + tile.toString() );
+										openList.put(tile, new PathFindingNode(F, G, H, currentTile));
+									}
+
+									/* Et on ajoute les cases adjacentes au mur dans la liste des ignorées */
+									if ( i != currentTile.x ) {
+										ignoredList.put(new Point(i-1,j), new PathFindingNode(0, 0, 0, currentTile));
+										ignoredList.put(new Point(i+1,j), new PathFindingNode(0, 0, 0, currentTile));
+									}
+									else {
+										ignoredList.put(new Point(i,j+1), new PathFindingNode(0, 0, 0, currentTile));
+										ignoredList.put(new Point(i,j-1), new PathFindingNode(0, 0, 0, currentTile));
+									}
+
+								}
+								else {
+									//System.out.println("EN DIAGONALE : " + i + " " + j);									
+									ignoredList.put(tile, new PathFindingNode(0, 0, 0, currentTile));
+								}
+							}
+							else {
+								//System.out.println("INDESTRUCTIBLE : " + i + " " + j);
+								/* On l'ajoute à la closeList */
+								closeList.put(tile, new PathFindingNode(0, 0, 0, currentTile));
+							}
+						}
+						else if ( colisionMap.get(tile) == ColisionMapObjects.EMPTY ) {
+
+							//System.out.print("EMPTY ");
+
+							/* On calcule l'heuristique */
+							H = (Math.abs(destinationPoint.x-i) + Math.abs(destinationPoint.y-j))*10;
+
+							/* Si il n'est pas sur une diagonale */
+							if ( i == currentTile.x || j == currentTile.y ) {							
+
+								//System.out.print("EN FACE " + i + " " + j);
+
+								/* Le coût du déplacement */
+								G = 10+closeList.get(currentTile).G;
+
+								/* Et le coût total du chemin */
+								F = G+H;
+
+								//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");
+
+								/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
+								if ( openList.get(tile) == null || G < openList.get(tile).G ) {
+									//System.out.println(" RAJOUT : " + tile.toString() );
+									openList.put(tile, new PathFindingNode(F, G, H, currentTile));
+								}
+							}
+							else {	
+								/* Seulement si elle n'est pas gênée par une autre case càd par une case à droite ou au dessous, diagonale oblige ! */ 
+								if ( i > currentTile.x && colisionMap.get(new Point((currentTile.x+1),currentTile.y)) == ColisionMapObjects.EMPTY) {
+									if ( j > currentTile.y && colisionMap.get(new Point((currentTile.x),currentTile.y+1)) == ColisionMapObjects.EMPTY) {
+										//System.out.print("EN DIAGONALE " + i + " " + j);
+
+										/* Le coût du déplacement */
+										G = 14+closeList.get(currentTile).G;
+
+										/* Et le coût total du chemin */
+										F = G+H;							
+
+										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");								
+										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
+										if ( openList.get(tile) == null || G < openList.get(tile).G ) {
+											//System.out.println(" RAJOUT : " + tile.toString() );
+											openList.put(tile, new PathFindingNode(F, G, H, currentTile));
+										}
+									}
+									else if ( colisionMap.get(new Point((currentTile.x),currentTile.y-1)) == ColisionMapObjects.EMPTY ){
+										//System.out.print("EN DIAGONALE " + i + " " + j);
+
+										/* Le coût du déplacement */
+										G = 14+closeList.get(currentTile).G;
+
+										/* Et le coût total du chemin */
+										F = G+H;							
+
+										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");								
+										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
+										if ( openList.get(tile) == null || G < openList.get(tile).G ) {
+											//System.out.println(" RAJOUT : " + tile.toString() );
+											openList.put(tile, new PathFindingNode(F, G, H, currentTile));
+										}
+									}
+								}
+								else if ( i < currentTile.x && colisionMap.get(new Point((currentTile.x-1),currentTile.y)) == ColisionMapObjects.EMPTY) {
+									if ( j > currentTile.y && colisionMap.get(new Point((currentTile.x),currentTile.y+1)) == ColisionMapObjects.EMPTY) {
+										//System.out.print("EN DIAGONALE " + i + " " + j);
+
+										/* Le coût du déplacement */
+										G = 14+closeList.get(currentTile).G;
+
+										/* Et le coût total du chemin */
+										F = G+H;							
+
+										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");								
+										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
+										if ( openList.get(tile) == null || G < openList.get(tile).G ) {
+											//System.out.println(" RAJOUT : " + tile.toString() );
+											openList.put(tile, new PathFindingNode(F, G, H, currentTile));
+										}
+									}
+									else if ( colisionMap.get(new Point((currentTile.x),currentTile.y-1)) == ColisionMapObjects.EMPTY ){
+										//System.out.print("EN DIAGONALE " + i + " " + j);
+
+										/* Le coût du déplacement */
+										G = 14+closeList.get(currentTile).G;
+
+										/* Et le coût total du chemin */
+										F = G+H;							
+
+										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");								
+										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
+										if ( openList.get(tile) == null || G < openList.get(tile).G ) {
+											//System.out.println(" RAJOUT : " + tile.toString() );
+											openList.put(tile, new PathFindingNode(F, G, H, currentTile));
+										}
+									}
+								}
+							}
+						}
+						else {
+							closeList.put(tile, new PathFindingNode(0, 0, 0, currentTile));
+
+							if ( i == currentTile.x ) {
+								ignoredList.put(new Point(i-1,j), new PathFindingNode(0, 0, 0, currentTile));
+								ignoredList.put(new Point(i+1,j), new PathFindingNode(0, 0, 0, currentTile));
+							}
+							else if ( j == currentTile.y ) {
+								ignoredList.put(new Point(i,j+1), new PathFindingNode(0, 0, 0, currentTile));
+								ignoredList.put(new Point(i,j-1), new PathFindingNode(0, 0, 0, currentTile));
+							}
+						}
+					}
+				}
+			}
+		} while ( closeList.get(destinationPoint) == null && !openList.isEmpty() ) ;
+
+		/* Si la case de fin a bien été trouvé */
+		if ( closeList.get(destinationPoint) != null )  {
+
+			/* On remonte jusqu'à la case suivant notre point de départ */
+			currentTile = closeList.get(destinationPoint).father;
+			//System.out.println("PERE : " + currentTile.toString());
+
+			while ( closeList.get(currentTile).father != sourcePoint ) {
+
+				currentTile = closeList.get(currentTile).father;
+				//System.out.println("PERE : " + currentTile.toString());
+			}
+			//System.out.println("RESULTAT OK : " + currentTile + "\n-------------------------------------");
+			return currentTile;		
 		}
-		
-		if ( pa == null ) {
-			pa = pa2;
-		}
-		
-		if ( pa == PlayerAnimations.RIGHT) {
-			return new Point(sourcePoint.x+1,sourcePoint.y);										
-		}
-		else if ( pa == PlayerAnimations.LEFT) {
-			return new Point(sourcePoint.x-1,sourcePoint.y);
-		}
-		else if ( pa == PlayerAnimations.UP ) {
-			return new Point(sourcePoint.x,sourcePoint.y-1);					
-		}
-		else if ( pa == PlayerAnimations.DOWN ) {
-			return new Point(sourcePoint.x,sourcePoint.y+1);								
-		}
-		else {
-			return sourcePoint;
-		}
+
+		//System.out.println("RESULTAT KO : " + currentTile + "\n-------------------------------------");
+		return sourcePoint;
 	}
 
 	/* MÃ©thodes privÃ©es ---------------------------------------------------- */
