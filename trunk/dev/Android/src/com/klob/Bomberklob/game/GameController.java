@@ -86,46 +86,7 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 			this.y = y;
 			break;
 		case MotionEvent.ACTION_MOVE:
-			if ( (int) x > this.x+(this.objectsSize) && (int) y > this.y+(this.objectsSize) ) {
-				animation = PlayerAnimations.DOWN_RIGHT;
-				this.x = (int) x;
-				this.y = (int) y;
-			}
-			else if ( (int) x > this.x+(this.objectsSize) && (int) y < this.y-(this.objectsSize) ) {
-				animation = PlayerAnimations.UP_RIGHT;
-				this.x = (int) x;
-				this.y = (int) y;
-			}
-			else if ( (int) x < this.x-(this.objectsSize) && (int) y < this.y-(this.objectsSize) ) {
-				animation = PlayerAnimations.UP_LEFT;
-				this.x = (int) x;
-				this.y = (int) y;
-			}
-			else if ( (int) x < this.x-(this.objectsSize) && (int) y > this.y+(this.objectsSize) ) {
-				animation = PlayerAnimations.DOWN_LEFT;
-				this.x = (int) x;
-				this.y = (int) y;
-			}
-			else if ( (int) y > this.y+(this.objectsSize) ) {
-				animation = PlayerAnimations.DOWN;
-				this.x = (int) x;
-				this.y = (int) y;
-			}
-			else if ( (int) x < this.x-(this.objectsSize) ) {
-				animation = PlayerAnimations.LEFT;
-				this.x = (int) x;
-				this.y = (int) y;
-			}
-			else if ( (int) x > this.x+(this.objectsSize) ) {
-				animation = PlayerAnimations.RIGHT;
-				this.x = (int) x;
-				this.y = (int) y;
-			}
-			else if ( (int) y < this.y-(this.objectsSize) ) {
-				animation = PlayerAnimations.UP;
-				this.x = (int) x;
-				this.y = (int) y;
-			}
+			movePlayer(x,y);
 			break;
 		case MotionEvent.ACTION_UP:
 			stopPlayer();
@@ -141,6 +102,49 @@ public abstract class GameController extends SurfaceView implements SurfaceHolde
 	}
 
 	/* Méthodes privées ---------------------------------------------------- */
+	
+	private void movePlayer(int x, int y) {
+		if ( (int) x > this.x+(this.objectsSize) && (int) y > this.y+(this.objectsSize) ) {
+			animation = PlayerAnimations.DOWN_RIGHT;
+			this.x = (int) x;
+			this.y = (int) y;
+		}
+		else if ( (int) x > this.x+(this.objectsSize) && (int) y < this.y-(this.objectsSize) ) {
+			animation = PlayerAnimations.UP_RIGHT;
+			this.x = (int) x;
+			this.y = (int) y;
+		}
+		else if ( (int) x < this.x-(this.objectsSize) && (int) y < this.y-(this.objectsSize) ) {
+			animation = PlayerAnimations.UP_LEFT;
+			this.x = (int) x;
+			this.y = (int) y;
+		}
+		else if ( (int) x < this.x-(this.objectsSize) && (int) y > this.y+(this.objectsSize) ) {
+			animation = PlayerAnimations.DOWN_LEFT;
+			this.x = (int) x;
+			this.y = (int) y;
+		}
+		else if ( (int) y > this.y+(this.objectsSize) ) {
+			animation = PlayerAnimations.DOWN;
+			this.x = (int) x;
+			this.y = (int) y;
+		}
+		else if ( (int) x < this.x-(this.objectsSize) ) {
+			animation = PlayerAnimations.LEFT;
+			this.x = (int) x;
+			this.y = (int) y;
+		}
+		else if ( (int) x > this.x+(this.objectsSize) ) {
+			animation = PlayerAnimations.RIGHT;
+			this.x = (int) x;
+			this.y = (int) y;
+		}
+		else if ( (int) y < this.y-(this.objectsSize) ) {
+			animation = PlayerAnimations.UP;
+			this.x = (int) x;
+			this.y = (int) y;
+		}
+	}
 
 	private void stopPlayer() {
 		if ( animation == PlayerAnimations.RIGHT) {
