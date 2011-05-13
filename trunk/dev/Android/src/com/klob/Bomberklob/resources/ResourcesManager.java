@@ -39,21 +39,21 @@ public class ResourcesManager {
 	private static int tileSize;
 	private static int height;
 	private static int width;
-	private static HashMap<String, Bitmap>	bitmaps = new HashMap<String, Bitmap>();
+	private static HashMap<String, Bitmap>  bitmaps = new HashMap<String, Bitmap>();
 	private static HashMap<String, Objects> objects = new HashMap<String, Objects>();
 	private static HashMap<String, Hashtable<String, AnimationSequence>> playersAnimation = new HashMap<String, Hashtable<String, AnimationSequence>>();
 	private static HashMap<String, Hashtable<String, AnimationSequence>> bombsAnimation = new HashMap<String, Hashtable<String, AnimationSequence>>();
-	
+
 	/* Sons */
 	private static HashMap<String, Integer> sounds = new HashMap<String, Integer>();
 	private static SoundPool soundPool;
 
-	
+
 	/* Constructeur -------------------------------------------------------- */
 
 	private ResourcesManager(Context context) {
 		ResourcesManager.context = context;
-		
+
 		/* Ecran */
 		ResourcesManager.dpiPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, context.getResources().getDisplayMetrics());
 		height = context.getResources().getDisplayMetrics().heightPixels;
@@ -65,7 +65,7 @@ public class ResourcesManager {
 		else {
 			size = (int) ((height-(50*dpiPx))/MAP_HEIGHT);
 		}
-		
+
 		/* Son */
 		soundsInitialisation();
 
@@ -157,7 +157,7 @@ public class ResourcesManager {
 						tileSize = xpp.getAttributeIntValue(null, "size", 0);
 					}
 					else if(xpp.getName().toLowerCase().equals("png")) {
-						if ( xpp.getAttributeValue(null, "name").equals("players")) {							
+						if ( xpp.getAttributeValue(null, "name").equals("players")) {                                                   
 							p = BitmapFactory.decodeResource(ResourcesManager.context.getResources(), R.drawable.players);
 						}
 						else if ( xpp.getAttributeValue(null, "name").equals("objects")) {
@@ -181,11 +181,11 @@ public class ResourcesManager {
 		catch (Exception e) {
 			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+e.toString());
 		}
-		
+
 		/* Variables mise à null par sécuritée */
 		xpp = null;
-		p = null;		
-		
+		p = null;               
+
 		Log.i("ResourcesManager","----------      Bitmaps loaded      ----------");
 	}
 
@@ -219,13 +219,13 @@ public class ResourcesManager {
 						}
 						damages = xpp.getAttributeIntValue(null, "damages", 0);
 					}
-					else if(xpp.getName().toLowerCase().equals("animation")) {			
-						animationname=xpp.getAttributeValue(null, "name");	    
+					else if(xpp.getName().toLowerCase().equals("animation")) {                      
+						animationname=xpp.getAttributeValue(null, "name");          
 						animationsequence = new AnimationSequence();
 						animationsequence.name=animationname;
 						animationsequence.sequence=new ArrayList<FrameInfo>();
 						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);
-						animationsequence.sound = xpp.getAttributeValue(null, "sound");	
+						animationsequence.sound = xpp.getAttributeValue(null, "sound"); 
 					}
 					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
@@ -259,7 +259,7 @@ public class ResourcesManager {
 							objects.put(imageName, new Undestructible(imageName, animations, ObjectsAnimations.DESTROY, hit, level, fireWall, damages));
 							Log.i("ResourcesManager","Added Undestructible : " + imageName);
 						}
-						
+
 						/* Variables mise à null par sécuritée */
 						animationname= null;
 						animationsequence = null;
@@ -271,12 +271,12 @@ public class ResourcesManager {
 		catch (Exception e) {
 			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+e.toString());
 		}
-		
+
 		/* Variables mise à null par sécuritée */
 		xpp = null;
 		animations = null;
 		imageName = null;
-		
+
 		Log.i("ResourcesManager","--------------- Objects loaded ---------------");
 	}
 
@@ -311,18 +311,18 @@ public class ResourcesManager {
 
 						Bitmap bm = Bitmap.createBitmap(frame.right-frame.left, frame.bottom-frame.top, Bitmap.Config.ARGB_8888);
 						Canvas c = new Canvas(bm);
-						c.drawBitmap(bitmaps.get("players"), frame, new android.graphics.Rect(0 , 0 , frame.right-frame.left, frame.bottom-frame.top), new Paint());					
+						c.drawBitmap(bitmaps.get("players"), frame, new android.graphics.Rect(0 , 0 , frame.right-frame.left, frame.bottom-frame.top), new Paint());                                    
 
 						bitmaps.put(name+xpp.getAttributeValue(null, "name"), bm);
 						Log.i("ResourcesManager","Added Bitmap : " + name+xpp.getAttributeValue(null, "name"));
 					}
 					else if(xpp.getName().toLowerCase().equals("animation")) {
-						animationname=xpp.getAttributeValue(null, "name");	            	 
+						animationname=xpp.getAttributeValue(null, "name");                       
 						animationsequence = new AnimationSequence();
 						animationsequence.name=animationname;
 						animationsequence.sequence=new ArrayList<FrameInfo>();
-						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);	
-						animationsequence.sound = xpp.getAttributeValue(null, "sound");	
+						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);        
+						animationsequence.sound = xpp.getAttributeValue(null, "sound"); 
 					}
 					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
@@ -354,12 +354,12 @@ public class ResourcesManager {
 		catch (Exception e) {
 			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+e.toString());
 		}
-		
+
 		/* Variables mise à null par sécuritée */
 		xpp = null;
 		playerAnimation = null;
 		name = null;
-		
+
 		System.out.println("--------------- Player Loaded ----------------");
 	}
 
@@ -383,14 +383,14 @@ public class ResourcesManager {
 					if(xpp.getName().toLowerCase().equals("bomb")) {
 						bombAnimation = new Hashtable<String, AnimationSequence>();
 						name = xpp.getAttributeValue(null, "name");
-					}					
-					else if(xpp.getName().toLowerCase().equals("animation")) {	
-						animationname=xpp.getAttributeValue(null, "name");	            	 
+					}                                       
+					else if(xpp.getName().toLowerCase().equals("animation")) {      
+						animationname=xpp.getAttributeValue(null, "name");                       
 						animationsequence = new AnimationSequence();
 						animationsequence.name=animationname;
 						animationsequence.sequence=new ArrayList<FrameInfo>();
 						animationsequence.canLoop = xpp.getAttributeBooleanValue(null,"canLoop", false);
-						animationsequence.sound = xpp.getAttributeValue(null, "sound");	
+						animationsequence.sound = xpp.getAttributeValue(null, "sound"); 
 					}
 					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
@@ -422,17 +422,17 @@ public class ResourcesManager {
 		catch (Exception e) {
 			Log.e("ERROR", "ERROR IN SPRITE TILE  CODE:"+e.toString());
 		}
-		
+
 		/* Variables mise à null par sécuritée */
 		xpp = null;
 		bombAnimation = null;
 		name = null;
-		
+
 		Log.i("ResourcesManager","---------------- Bombs loaded  ---------------");
 	}
 
 	public static void soundsInitialisation() {
-		
+
 		soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 100);
 
 		sounds.put("destroy1", soundPool.load(context, R.raw.destroy1,1));
@@ -440,15 +440,15 @@ public class ResourcesManager {
 		sounds.put("explosion1", soundPool.load(context, R.raw.explosion1,1));
 
 	}
-	
+
 	public static int playSoundPool(String s) {
 		return soundPool.play(sounds.get(s), Model.getSystem().getVolume(), Model.getSystem().getVolume(), 1, 0, 1f);
 	}
-	
+
 	public static void stopSoundPool(String s) {
 		soundPool.stop(sounds.get(s));
 	}
-	
+
 	/**
 	 * Calculates the tile of the coordinate
 	 * 

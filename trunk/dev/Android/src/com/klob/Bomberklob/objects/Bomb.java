@@ -3,7 +3,6 @@ package com.klob.Bomberklob.objects;
 import java.util.Hashtable;
 
 import android.graphics.Canvas;
-import android.graphics.Rect;
 
 import com.klob.Bomberklob.resources.ResourcesManager;
 
@@ -42,7 +41,7 @@ public class Bomb extends Destructible {
 	public int getTime() {
 		return time;
 	}
-	
+
 	public Player getPlayer() {
 		return player;
 	}
@@ -51,12 +50,12 @@ public class Bomb extends Destructible {
 
 	@Override
 	public void onDraw(Canvas canvas,int size) {
-		
+
 		this.rect.left = this.position.x;
 		this.rect.top = this.position.y;
 		this.rect.right = (this.position.x)+size;
 		this.rect.bottom = (this.position.y)+size;
-		
+
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("bombs"), this.getRect(), this.rect, null);
 	}
 
@@ -73,7 +72,7 @@ public class Bomb extends Destructible {
 
 	@Override
 	public void destroy() {
-		time = 0;		
+		time = 0;               
 	}
 
 	public boolean timeElapsed() {

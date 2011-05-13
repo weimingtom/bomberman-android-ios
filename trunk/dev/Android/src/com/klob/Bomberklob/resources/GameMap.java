@@ -20,206 +20,206 @@ import com.klob.Bomberklob.objects.ObjectsAnimations;
 
 public class GameMap extends Map {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+        /**
+         * 
+         */
+        private static final long serialVersionUID = 1L;
 
-	private Bitmap bm;
-	private ColisionMapObjects[][] colisionMap;
+        private Bitmap bm;
+        private ColisionMapObjects[][] colisionMap;
 
-	private ConcurrentHashMap<Point, Objects> animatedObjects;	
-	private ConcurrentHashMap<Point, Objects> animatedObjectsBackUp;
-	private Point objectPosition;
+        private ConcurrentHashMap<Point, Objects> animatedObjects;      
+        private ConcurrentHashMap<Point, Objects> animatedObjectsBackUp;
+        private Point objectPosition;
 
-	public GameMap() {
-		super();
-		this.colisionMap = new ColisionMapObjects[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
-		this.animatedObjects = new ConcurrentHashMap<Point, Objects>();		
-		this.animatedObjectsBackUp = new ConcurrentHashMap<Point, Objects>();
-		this.objectPosition = new Point();
-	}
+        public GameMap() {
+                super();
+                this.colisionMap = new ColisionMapObjects[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
+                this.animatedObjects = new ConcurrentHashMap<Point, Objects>();         
+                this.animatedObjectsBackUp = new ConcurrentHashMap<Point, Objects>();
+                this.objectPosition = new Point();
+        }
 
-	/* Getteurs ------------------------------------------------------------ */
+        /* Getteurs ------------------------------------------------------------ */
 
-	public ConcurrentHashMap<Point, Objects> getAnimatedObjects() {
-		return animatedObjects;
-	}
+        public ConcurrentHashMap<Point, Objects> getAnimatedObjects() {
+                return animatedObjects;
+        }
 
-	public ColisionMapObjects[][] getColisionMap() {
-		return colisionMap;
-	}
+        public ColisionMapObjects[][] getColisionMap() {
+                return colisionMap;
+        }
 
-	/* Setteurs ------------------------------------------------------------ */
+        /* Setteurs ------------------------------------------------------------ */
 
-	public void setColisionMap(ColisionMapObjects[][] colisionMap) {
-		this.colisionMap = colisionMap;
-	}
+        public void setColisionMap(ColisionMapObjects[][] colisionMap) {
+                this.colisionMap = colisionMap;
+        }
 
-	/* Méthodes publiques -------------------------------------------------- */
+        /* Méthodes publiques -------------------------------------------------- */
 
-	public boolean loadMap(String s) {
+        public boolean loadMap(String s) {
 
-		EditorMap map = null;	
-		File f =  new File (ResourcesManager.getContext().getFilesDir().getAbsolutePath()+"/maps/"+s+"/"+s+".klob");
-		Log.i("Map", "File loaded : " + f.getAbsolutePath());	
+                EditorMap map = null;   
+                File f =  new File (ResourcesManager.getContext().getFilesDir().getAbsolutePath()+"/maps/"+s+"/"+s+".klob");
+                Log.i("Map", "File loaded : " + f.getAbsolutePath());   
 
-		try {
-			FileInputStream fis = new FileInputStream(f);
-			ObjectInputStream ois = new ObjectInputStream(fis);
+                try {
+                        FileInputStream fis = new FileInputStream(f);
+                        ObjectInputStream ois = new ObjectInputStream(fis);
 
-			try {
-				map  = (EditorMap) ois.readObject(); 
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					ois.close();
-				} finally {
-					fis.close();
-				}
-			}
-		} catch (FileNotFoundException e) {
-			return false;
-		} catch (StreamCorruptedException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}		
+                        try {
+                                map  = (EditorMap) ois.readObject(); 
+                        } catch (ClassNotFoundException e) {
+                                e.printStackTrace();
+                        } finally {
+                                try {
+                                        ois.close();
+                                } finally {
+                                        fis.close();
+                                }
+                        }
+                } catch (FileNotFoundException e) {
+                        return false;
+                } catch (StreamCorruptedException e) {
+                        e.printStackTrace();
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }               
 
-		if ( map != null ) {
+                if ( map != null ) {
 
-			this.players = map.getPlayers();
-			this.name = map.getName();
-			this.width = map.getGrounds().length;
-			this.height = map.getGrounds()[0].length;
+                        this.players = map.getPlayers();
+                        this.name = map.getName();
+                        this.width = map.getGrounds().length;
+                        this.height = map.getGrounds()[0].length;
 
-			this.bm = Bitmap.createBitmap(ResourcesManager.getSize()*this.width, ResourcesManager.getSize()*this.height, Bitmap.Config.ARGB_8888);
+                        this.bm = Bitmap.createBitmap(ResourcesManager.getSize()*this.width, ResourcesManager.getSize()*this.height, Bitmap.Config.ARGB_8888);
 
 
-			Canvas pictureCanvas = new Canvas(this.bm);
+                        Canvas pictureCanvas = new Canvas(this.bm);
 
-			for (int i = 0; i < map.getGrounds().length ; i++) {
-				for (int j = 0; j < map.getGrounds()[0].length ; j++) {
+                        for (int i = 0; i < map.getGrounds().length ; i++) {
+                                for (int j = 0; j < map.getGrounds()[0].length ; j++) {
 
-					if ( map.getGrounds()[i][j] != null) {
-						map.getGrounds()[i][j].onDraw(pictureCanvas, ResourcesManager.getSize());
-						if ( map.getGrounds()[i][j].isHit() ) {
-							this.colisionMap[i][j] = ColisionMapObjects.GAPE;
-						}
-					}
+                                        if ( map.getGrounds()[i][j] != null) {
+                                                map.getGrounds()[i][j].onDraw(pictureCanvas, ResourcesManager.getSize());
+                                                if ( map.getGrounds()[i][j].isHit() ) {
+                                                        this.colisionMap[i][j] = ColisionMapObjects.GAPE;
+                                                }
+                                        }
 
-					if ( map.getBlocks()[i][j] != null) {   
-						this.colisionMap[i][j] = ColisionMapObjects.BLOCK;
-						if ( !map.getBlocks()[i][j].isDestructible()) {
-							map.getBlocks()[i][j].onDraw(pictureCanvas, ResourcesManager.getSize());
-						}
-						else {
-							this.animatedObjectsBackUp.put(new Point(i,j), map.getBlocks()[i][j].copy());
-							this.animatedObjects.put(new Point(i,j), map.getBlocks()[i][j].copy());
-						}
-					}
-					else {
-						this.colisionMap[i][j] = ColisionMapObjects.EMPTY;
-					}
-				}
-			}			
-			return true;
-		}
-		return false;
-	}
+                                        if ( map.getBlocks()[i][j] != null) {   
+                                                this.colisionMap[i][j] = ColisionMapObjects.BLOCK;
+                                                if ( !map.getBlocks()[i][j].isDestructible()) {
+                                                        map.getBlocks()[i][j].onDraw(pictureCanvas, ResourcesManager.getSize());
+                                                }
+                                                else {
+                                                        this.animatedObjectsBackUp.put(new Point(i,j), map.getBlocks()[i][j].copy());
+                                                        this.animatedObjects.put(new Point(i,j), map.getBlocks()[i][j].copy());
+                                                }
+                                        }
+                                        else {
+                                                this.colisionMap[i][j] = ColisionMapObjects.EMPTY;
+                                        }
+                                }
+                        }                       
+                        return true;
+                }
+                return false;
+        }
 
-	/* Méthodes publiques -------------------------------------------------- */
+        /* Méthodes publiques -------------------------------------------------- */
 
-	public void onDraw(Canvas canvas, int size) {
+        public void onDraw(Canvas canvas, int size) {
 
-		canvas.drawBitmap(bm, 0, 0, null);
+                canvas.drawBitmap(bm, 0, 0, null);
 
-		for(Entry<Point, Objects> entry : animatedObjects.entrySet()) {
-			this.animatedObjects.get(entry.getKey()).onDraw(canvas, size);
-		}
-	}
+                for(Entry<Point, Objects> entry : animatedObjects.entrySet()) {
+                        this.animatedObjects.get(entry.getKey()).onDraw(canvas, size);
+                }
+        }
 
-	public void update() {
-		/* Pour tous les objets animés */
-		for(Entry<Point, Objects> entry : animatedObjects.entrySet()) {
-			Objects o = animatedObjects.get(entry.getKey());
-			/* Si son animation est DESTROY et qu'elle est finie */
-			if (o.getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) && o.hasAnimationFinished()) {
-				this.objectPosition = ResourcesManager.coToTile(o.getPosition().x, o.getPosition().y);
-				this.colisionMap[this.objectPosition.x][this.objectPosition.y] = ColisionMapObjects.EMPTY;
-				/* Et du vecteur d'objets animés */
-				this.animatedObjects.remove(entry.getKey());
-			}
-			else {
-				o.update();
-			}
-		}
-	}
+        public void update() {
+                /* Pour tous les objets animés */
+                for(Entry<Point, Objects> entry : animatedObjects.entrySet()) {
+                        Objects o = animatedObjects.get(entry.getKey());
+                        /* Si son animation est DESTROY et qu'elle est finie */
+                        if (o.getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) && o.hasAnimationFinished()) {
+                                this.objectPosition = ResourcesManager.coToTile(o.getPosition().x, o.getPosition().y);
+                                this.colisionMap[this.objectPosition.x][this.objectPosition.y] = ColisionMapObjects.EMPTY;
+                                /* Et du vecteur d'objets animés */
+                                this.animatedObjects.remove(entry.getKey());
+                        }
+                        else {
+                                o.update();
+                        }
+                }
+        }
 
-	public void restart() {		
-		this.animatedObjects.clear();
-		
-		for (int i = 0 ; i < ResourcesManager.MAP_WIDTH ; i++ ) {
-			for (int j = 0 ; j < ResourcesManager.MAP_HEIGHT ; j++ ) {
-				if ( this.colisionMap[i][j] == ColisionMapObjects.DANGEROUS_AREA || this.colisionMap[i][j] == ColisionMapObjects.BOMB ) {
-					this.colisionMap[i][j] = ColisionMapObjects.EMPTY;
-				}
-			}
-		}
+        public void restart() {         
+                this.animatedObjects.clear();
+                
+                for (int i = 0 ; i < ResourcesManager.MAP_WIDTH ; i++ ) {
+                        for (int j = 0 ; j < ResourcesManager.MAP_HEIGHT ; j++ ) {
+                                if ( this.colisionMap[i][j] == ColisionMapObjects.DANGEROUS_AREA || this.colisionMap[i][j] == ColisionMapObjects.BOMB ) {
+                                        this.colisionMap[i][j] = ColisionMapObjects.EMPTY;
+                                }
+                        }
+                }
 
-		for(Entry<Point, Objects> entry : this.animatedObjectsBackUp.entrySet()) {
-			this.animatedObjects.put(entry.getKey(), entry.getValue().copy());
-			this.colisionMap[entry.getKey().x][entry.getKey().y] = ColisionMapObjects.BLOCK;
-		}
-	}
+                for(Entry<Point, Objects> entry : this.animatedObjectsBackUp.entrySet()) {
+                        this.animatedObjects.put(entry.getKey(), entry.getValue().copy());
+                        this.colisionMap[entry.getKey().x][entry.getKey().y] = ColisionMapObjects.BLOCK;
+                }
+        }
 
-	public void colisionMapUpdate(Bomb bomb) {
+        public void colisionMapUpdate(Bomb bomb) {
 
-		Point bombPosition = ResourcesManager.coToTile(bomb.getPosition().x, bomb.getPosition().y);
-		boolean up, down, left, right;
-		up = down = left = right = true;
+                Point bombPosition = ResourcesManager.coToTile(bomb.getPosition().x, bomb.getPosition().y);
+                boolean up, down, left, right;
+                up = down = left = right = true;
 
-		/* CENTER */
-		this.colisionMap[bombPosition.x][bombPosition.y] = ColisionMapObjects.BOMB;
+                /* CENTER */
+                this.colisionMap[bombPosition.x][bombPosition.y] = ColisionMapObjects.BOMB;
 
-		for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
+                for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
 
-			if ( up ) {
-				if ( this.colisionMap[bombPosition.x][bombPosition.y-k] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x][bombPosition.y-k] != ColisionMapObjects.BOMB && this.colisionMap[bombPosition.x][bombPosition.y-k] != ColisionMapObjects.DAMAGE) {
-					this.colisionMap[bombPosition.x][bombPosition.y-k] = ColisionMapObjects.DANGEROUS_AREA;
-				}
-				else {
-					up = false;
-				}
-			}
+                        if ( up ) {
+                                if ( this.colisionMap[bombPosition.x][bombPosition.y-k] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x][bombPosition.y-k] != ColisionMapObjects.BOMB && this.colisionMap[bombPosition.x][bombPosition.y-k] != ColisionMapObjects.DAMAGE) {
+                                        this.colisionMap[bombPosition.x][bombPosition.y-k] = ColisionMapObjects.DANGEROUS_AREA;
+                                }
+                                else {
+                                        up = false;
+                                }
+                        }
 
-			if ( down ) {
-				if ( this.colisionMap[bombPosition.x][bombPosition.y+k] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x][bombPosition.y+k] != ColisionMapObjects.BOMB && this.colisionMap[bombPosition.x][bombPosition.y+k] != ColisionMapObjects.DAMAGE) {
-					this.colisionMap[bombPosition.x][bombPosition.y+k] = ColisionMapObjects.DANGEROUS_AREA;
-				}
-				else {
-					down = false;
-				}
-			}
+                        if ( down ) {
+                                if ( this.colisionMap[bombPosition.x][bombPosition.y+k] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x][bombPosition.y+k] != ColisionMapObjects.BOMB && this.colisionMap[bombPosition.x][bombPosition.y+k] != ColisionMapObjects.DAMAGE) {
+                                        this.colisionMap[bombPosition.x][bombPosition.y+k] = ColisionMapObjects.DANGEROUS_AREA;
+                                }
+                                else {
+                                        down = false;
+                                }
+                        }
 
-			if ( left ) {
-				if ( this.colisionMap[bombPosition.x-k][bombPosition.y] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x-k][bombPosition.y] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x-k][bombPosition.y] != ColisionMapObjects.DAMAGE) {
-					this.colisionMap[bombPosition.x-k][bombPosition.y] = ColisionMapObjects.DANGEROUS_AREA;
-				}
-				else {
-					left = false;
-				}
-			}
+                        if ( left ) {
+                                if ( this.colisionMap[bombPosition.x-k][bombPosition.y] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x-k][bombPosition.y] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x-k][bombPosition.y] != ColisionMapObjects.DAMAGE) {
+                                        this.colisionMap[bombPosition.x-k][bombPosition.y] = ColisionMapObjects.DANGEROUS_AREA;
+                                }
+                                else {
+                                        left = false;
+                                }
+                        }
 
-			if ( right ) {
-				if ( this.colisionMap[bombPosition.x+k][bombPosition.y] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x+k][bombPosition.y] != ColisionMapObjects.BOMB && this.colisionMap[bombPosition.x+k][bombPosition.y] != ColisionMapObjects.DAMAGE) {
-					this.colisionMap[bombPosition.x+k][bombPosition.y] = ColisionMapObjects.DANGEROUS_AREA;
-				}
-				else {
-					right = false;
-				}
-			}
-		}
-	}
+                        if ( right ) {
+                                if ( this.colisionMap[bombPosition.x+k][bombPosition.y] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x+k][bombPosition.y] != ColisionMapObjects.BOMB && this.colisionMap[bombPosition.x+k][bombPosition.y] != ColisionMapObjects.DAMAGE) {
+                                        this.colisionMap[bombPosition.x+k][bombPosition.y] = ColisionMapObjects.DANGEROUS_AREA;
+                                }
+                                else {
+                                        right = false;
+                                }
+                        }
+                }
+        }
 }
