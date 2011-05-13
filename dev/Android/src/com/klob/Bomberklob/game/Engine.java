@@ -396,8 +396,6 @@ public class Engine {
 
 	public Point pathFinding(Point p, ColisionMapObjects[][] colisionMap) {
 
-		System.out.println("-------------------------------------------");
-
 		this.distance.clear();
 		this.direction.clear();
 
