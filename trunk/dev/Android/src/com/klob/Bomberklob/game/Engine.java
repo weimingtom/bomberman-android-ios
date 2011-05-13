@@ -1,6 +1,7 @@
 package com.klob.Bomberklob.game;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,6 +32,14 @@ public class Engine {
 	private Thread bombThread;	
 	private ConcurrentHashMap<Point, Bomb> bombs;
 
+
+	/* Pathfinding */
+	Map<Point, PathFindingNode> openList;
+	Map<Point, PathFindingNode> closeList;
+
+	Map<Point, Integer> distance;
+	Map<Point, PlayerAnimations> direction;
+
 	/* Constructeur -------------------------------------------------------- */
 
 	public Engine(String mapName, int enemies, String gametype, boolean random, int difficulty) {
@@ -39,6 +48,10 @@ public class Engine {
 		this.bombs = new ConcurrentHashMap<Point, Bomb>();
 		this.x = 0;
 		this.y = 0;
+		this.openList = new HashMap<Point, PathFindingNode>();
+		this.closeList = new HashMap<Point, PathFindingNode>();
+		this.distance = new HashMap<Point, Integer>();
+		this.direction = new HashMap<Point, PlayerAnimations>();
 	}
 
 	/* Getters ------------------------------------------------------------- */
@@ -113,7 +126,7 @@ public class Engine {
 		}
 	}
 
-	
+
 	public void onDraw(Canvas canvas, int size) {
 		this.single.onDraw(canvas,size);
 
@@ -215,7 +228,7 @@ public class Engine {
 													}
 													else {
 														if ( 0 != difficulty && players[0].getPosition() != null ) {
-															
+
 															p = pathFinding(point1, ResourcesManager.coToTile(players[0].getPosition().x, players[0].getPosition().y),colisionMap);
 
 															if ( colisionMap.get(p) == ColisionMapObjects.BLOCK && players[i].getBombNumber() > 0) {
@@ -380,76 +393,136 @@ public class Engine {
 
 	public Point pathFinding(Point p, ConcurrentHashMap<Point, ColisionMapObjects> colisionMap) {
 
-		int[][] distance = new int[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
-		PlayerAnimations[][] direction = new PlayerAnimations[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
+		System.out.println("-------------------------------------------");
+
+		this.distance.clear();
+		this.direction.clear();
+
 		PlayerAnimations pa = null;
+		Point point = new Point(), position;
 
-		distance[p.x][p.y] = 1;
+		this.distance.put(new Point(p.x, p.y), 1);
 
-		if ( colisionMap.get(new Point(p.x+1, p.y)) == ColisionMapObjects.DANGEROUS_AREA ) {
-			distance[p.x+1][p.y] = 1;
-			direction[p.x+1][p.y] = PlayerAnimations.RIGHT;
+		point.x = p.x+1;
+		point.y = p.y;
+
+		if ( colisionMap.get(point) == ColisionMapObjects.DANGEROUS_AREA ) {
+			position = new Point(point.x, point.y);
+			this.distance.put(position, 1);
+			this.direction.put(position, PlayerAnimations.RIGHT);
+			System.out.println("DANGER DROITE " + position.toString());
 		}
-		if ( colisionMap.get(new Point(p.x-1, p.y)) == ColisionMapObjects.DANGEROUS_AREA ) {
-			distance[p.x-1][p.y] = 1;
-			direction[p.x-1][p.y] = PlayerAnimations.LEFT;
+
+		point.x = p.x-1;
+
+		if ( colisionMap.get(point) == ColisionMapObjects.DANGEROUS_AREA ) {
+			position = new Point(point.x, point.y);
+			this.distance.put(position, 1);
+			this.direction.put(position, PlayerAnimations.LEFT);
+			System.out.println("DANGER GAUCHE " + position.toString());
 		}
-		if ( colisionMap.get(new Point(p.x, p.y+1)) == ColisionMapObjects.DANGEROUS_AREA ) {
-			distance[p.x][p.y+1] = 1;
-			direction[p.x][p.y+1] = PlayerAnimations.DOWN;
+
+		point.x = p.x;
+		point.y = p.y+1;
+
+		if ( colisionMap.get(point) == ColisionMapObjects.DANGEROUS_AREA ) {
+			position = new Point(point.x, point.y);
+			this.distance.put(position, 1);
+			this.direction.put(position, PlayerAnimations.DOWN);
 		}
-		if ( colisionMap.get(new Point(p.x, p.y-1)) == ColisionMapObjects.DANGEROUS_AREA ) {
-			distance[p.x][p.y-1] = 1;
-			direction[p.x][p.y-1] = PlayerAnimations.UP;
+
+		point.y = p.y-1;
+
+		if ( colisionMap.get(point) == ColisionMapObjects.DANGEROUS_AREA ) {
+			position = new Point(point.x, point.y);
+			this.distance.put(position, 1);
+			this.direction.put(position, PlayerAnimations.UP);
 		}
 
 		for (int d = 1; d < 20; d++) {
 			for ( int h = 1; h < ResourcesManager.MAP_WIDTH-1 ; h++ ) {
+				
 				for ( int v = 1 ; v < ResourcesManager.MAP_HEIGHT-1 ; v++ ) {
 
-					if (distance[h][v] == d) {
+					point.x = h;
+					point.y = v;
 
-						if ( distance[h][v+1]==0 ) {
-							if ( colisionMap.get(new Point(h, v+1)) == ColisionMapObjects.EMPTY ) {
-								pa = direction[h][v];
-								break;
-							}
-							else if ( colisionMap.get(new Point(h, v+1)) == ColisionMapObjects.DANGEROUS_AREA ){
-								direction[h][v+1] = direction[h][v];
-								distance[h][v+1]=d+1;
-							}
+					if ( this.distance.get(point) == Integer.valueOf(d) ) {
+						
+						point.y = v+1;
+						if ( this.distance.get(point) == null ) {
+							this.distance.put(point, 0);
 						}
 
-						if ( distance[h][v-1]==0 ) {
-							if ( colisionMap.get(new Point(h, v-1)) == ColisionMapObjects.EMPTY ) {
-								pa = direction[h][v];
+						if ( this.distance.get(point) == Integer.valueOf(0) ) {
+							if ( colisionMap.get(point) == ColisionMapObjects.EMPTY ) {
+								point.y = v;
+								pa = this.direction.get(point);
 								break;
 							}
-							else if ( colisionMap.get(new Point(h, v-1)) == ColisionMapObjects.DANGEROUS_AREA ) {
-								direction[h][v-1] = direction[h][v];
-								distance[h][v-1]=d+1;
+							else if ( colisionMap.get(point) == ColisionMapObjects.DANGEROUS_AREA ){
+								point.y = v;
+								position = new Point(h, v+1);
+								this.direction.put(position, this.direction.get(point));
+								this.distance.put(position, d+1);
 							}
 						}
-
-						if ( distance[h+1][v]==0 ) {
-							if ( colisionMap.get(new Point(h+1, v)) == ColisionMapObjects.EMPTY ) {
-								pa = direction[h][v];
-								break;
-							}
-							else if ( colisionMap.get(new Point(h+1, v)) == ColisionMapObjects.DANGEROUS_AREA ) {
-								direction[h+1][v] = direction[h][v];
-								distance[h+1][v]=d+1;
-							}
+						
+						point.y = v-1;
+						if ( this.distance.get(point) == null ) {
+							this.distance.put(point, 0);
 						}
 
-						if ( distance[h-1][v]==0 ) {
-							if ( colisionMap.get(new Point(h-1, v)) == ColisionMapObjects.EMPTY ) {
-								pa = direction[h][v];
+						if ( this.distance.get(point) == Integer.valueOf(0) ) {
+							if ( colisionMap.get(point) == ColisionMapObjects.EMPTY ) {
+								point.y = v;
+								pa = this.direction.get(point);
 								break;
 							}
-							else if ( colisionMap.get(new Point(h-1, v)) == ColisionMapObjects.DANGEROUS_AREA ){
-								direction[h-1][v] = direction[h][v];
-								distance[h-1][v]=d+1;
+							else if ( colisionMap.get(point) == ColisionMapObjects.DANGEROUS_AREA ) {
+								point.y = v;
+								position = new Point(h, v-1);
+								this.direction.put(position, this.direction.get(point));
+								this.distance.put(position, d+1);
+							}
+						}
+						
+						point.x = h+1;
+						point.y = v;
+						if ( this.distance.get(point) == null ) {
+							this.distance.put(point, 0);
+						}
+
+						if ( this.distance.get(point) == Integer.valueOf(0) ) {
+							if ( colisionMap.get(point) == ColisionMapObjects.EMPTY ) {
+								point.x = h;
+								pa = this.direction.get(point);
+								break;
+							}
+							else if ( colisionMap.get(point) == ColisionMapObjects.DANGEROUS_AREA ) {
+								point.x = h;
+								position = new Point(h+1, v);
+								this.direction.put(position, this.direction.get(point));
+								this.distance.put(position, d+1);
+							}
+						}
+						
+						point.x = h-1;
+						if ( this.distance.get(point) == null ) {
+							this.distance.put(point, 0);
+						}
+						
+						if ( this.distance.get(point) == Integer.valueOf(0) ) {
+							if ( colisionMap.get(point) == ColisionMapObjects.EMPTY ) {
+								point.x = h;
+								pa = this.direction.get(point);
+								break;
+							}
+							else if ( colisionMap.get(point) == ColisionMapObjects.DANGEROUS_AREA ){
+								point.x = h;
+								position = new Point(h-1, v);
+								this.direction.put(position, this.direction.get(point));
+								this.distance.put(position, d+1);
 							}
 						}
 					}
@@ -466,16 +539,24 @@ public class Engine {
 		}
 
 		if ( pa == PlayerAnimations.RIGHT) {
-			return new Point(p.x+1,p.y);										
+			point.x = p.x+1;
+			point.y = p.y;
+			return point;										
 		}
 		else if ( pa == PlayerAnimations.LEFT) {
-			return new Point(p.x-1,p.y);
+			point.x = p.x-1;
+			point.y = p.y;
+			return point;	
 		}
 		else if ( pa == PlayerAnimations.UP ) {
-			return new Point(p.x,p.y-1);					
+			point.x = p.x;
+			point.y = p.y-1;
+			return point;					
 		}
 		else if ( pa == PlayerAnimations.DOWN ) {
-			return new Point(p.x,p.y+1);								
+			point.x = p.x;
+			point.y = p.y+1;
+			return point;								
 		}
 		else {
 			return p;
@@ -484,18 +565,14 @@ public class Engine {
 
 	public Point pathFinding(Point sourcePoint, Point destinationPoint, ConcurrentHashMap<Point, ColisionMapObjects> colisionMap) {
 
-		HashMap<Point, PathFindingNode> openList = new HashMap<Point, PathFindingNode>();
-		HashMap<Point, PathFindingNode> closeList = new HashMap<Point, PathFindingNode>();
-
-		/* Blocs ignorés pour une case (exemple : Case EMPTY à côté d'un BLOCK) */
-		HashMap<Point, PathFindingNode> ignoredList = new HashMap<Point, PathFindingNode>();
-
+		openList.clear();
+		closeList.clear();
 
 		ConcurrentHashMap<Point, Objects> animatedObjects = this.single.map.getAnimatedObjects();
 		int H, F, G, minimumStrok;
 
 		openList.put(sourcePoint, new PathFindingNode(0, 0, 0, sourcePoint));
-		Point currentTile, nextTile = sourcePoint;
+		Point currentTile = sourcePoint;
 
 		//System.out.println("------------------------------------------------");
 
@@ -505,13 +582,11 @@ public class Engine {
 			for (Entry<Point, PathFindingNode> entry : openList.entrySet()) {
 				if ( entry.getValue().F <= minimumStrok) {
 					minimumStrok = entry.getValue().F;
-					nextTile = entry.getKey();
+					currentTile = entry.getKey();
 				}
 			}
 			//System.out.println("NEXT TILE : " + nextTile.toString());
-			currentTile = nextTile;
 			closeList.put(currentTile, openList.remove(currentTile));
-			ignoredList.clear();
 
 			for (int i = currentTile.x-1 ; i < currentTile.x+2 ; i++ ) {
 				for (int j = currentTile.y-1 ; j < currentTile.y+2 ; j++ ) {
@@ -519,7 +594,7 @@ public class Engine {
 					Point tile = new Point(i,j);
 
 					/* Si la case en cours ne fait pas partie des ignorées ou de la closedList */
-					if ( ignoredList.get(tile) == null && closeList.get(tile) == null) {
+					if ( closeList.get(tile) == null) {
 						/* Si l'objet est un bloc */
 						if ( colisionMap.get(tile) == ColisionMapObjects.BLOCK ) {
 
@@ -551,21 +626,6 @@ public class Engine {
 										//System.out.print(" RAJOUT : " + tile.toString() );
 										openList.put(tile, new PathFindingNode(F, G, H, currentTile));
 									}
-
-									/* Et on ajoute les cases adjacentes au mur dans la liste des ignorées */
-									if ( i != currentTile.x ) {
-										ignoredList.put(new Point(i-1,j), new PathFindingNode(0, 0, 0, currentTile));
-										ignoredList.put(new Point(i+1,j), new PathFindingNode(0, 0, 0, currentTile));
-									}
-									else {
-										ignoredList.put(new Point(i,j+1), new PathFindingNode(0, 0, 0, currentTile));
-										ignoredList.put(new Point(i,j-1), new PathFindingNode(0, 0, 0, currentTile));
-									}
-
-								}
-								else {
-									//System.out.println("EN DIAGONALE : " + i + " " + j);									
-									ignoredList.put(tile, new PathFindingNode(0, 0, 0, currentTile));
 								}
 							}
 							else {
@@ -674,15 +734,6 @@ public class Engine {
 						}
 						else {
 							closeList.put(tile, new PathFindingNode(0, 0, 0, currentTile));
-
-							if ( i == currentTile.x ) {
-								ignoredList.put(new Point(i-1,j), new PathFindingNode(0, 0, 0, currentTile));
-								ignoredList.put(new Point(i+1,j), new PathFindingNode(0, 0, 0, currentTile));
-							}
-							else if ( j == currentTile.y ) {
-								ignoredList.put(new Point(i,j+1), new PathFindingNode(0, 0, 0, currentTile));
-								ignoredList.put(new Point(i,j-1), new PathFindingNode(0, 0, 0, currentTile));
-							}
 						}
 					}
 				}
@@ -1297,12 +1348,12 @@ public class Engine {
 			}
 		}
 	}
-	
+
 	private Point iaPushBomb(Player player, ConcurrentHashMap<Point, ColisionMapObjects> colisionMap) {
-		
+
 		Point point1 = player.getPosition(), p;
 		p = point1 = ResourcesManager.coToTile(point1.x, point1.y);
-		
+
 		/* Recuperer le tableau de zones dangeureuses */
 		ConcurrentHashMap<Point, ColisionMapObjects> colisionMap2 = new ConcurrentHashMap<Point, ColisionMapObjects>();
 
@@ -1391,7 +1442,7 @@ public class Engine {
 				}
 			}
 		}
-		
+
 		return p;
 	}
 }
