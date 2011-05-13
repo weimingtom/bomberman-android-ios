@@ -221,11 +221,11 @@ public abstract class Objects implements Serializable {
 	public String toString() {
 		return "Name : " +imageName+ "| Position (" + position.x + "," + position.y + ")";
 	}
-	
+
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
 		// appel des mécanismes de désérialisation par défaut
 		in.defaultReadObject();
-		
+
 		this.rect = new Rect();
 	}
 }

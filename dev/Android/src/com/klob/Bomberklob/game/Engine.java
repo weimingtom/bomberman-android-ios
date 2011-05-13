@@ -29,10 +29,10 @@ public class Engine {
 	private Point nextTile = null, currentTile = null;
 	private int size,x, y;
 
+
 	private boolean bombBoolean = true;
 	private Thread bombThread;	
-	private ConcurrentHashMap<Point, Bomb> bombs;
-
+	private ConcurrentHashMap<Point, Bomb> bombs;	
 
 	/* Pathfinding */
 	Map<Point, PathFindingNode> openList;
@@ -56,6 +56,8 @@ public class Engine {
 		this.direction = new HashMap<Point, PlayerAnimations>();
 		this.vect = new ArrayList<Integer>();
 	}
+
+
 
 	/* Getters ------------------------------------------------------------- */
 
@@ -129,7 +131,6 @@ public class Engine {
 		}
 	}
 
-
 	public void onDraw(Canvas canvas, int size) {
 		this.single.onDraw(canvas,size);
 
@@ -180,115 +181,107 @@ public class Engine {
 							Point point3 = ResourcesManager.coToTile(point.x+ResourcesManager.getSize()-1,point.y+ResourcesManager.getSize()-1);
 							Point point4 = ResourcesManager.coToTile(point.x,point.y+ResourcesManager.getSize()-1);
 
-							/* On vérifie que le joueur n'est pas sur une case lui causant des dommages */
-							if ( players[i].isDestructible() && (this.single.map.getAnimatedObjects().get(point1) != null && this.single.map.getAnimatedObjects().get(point1).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point2) != null && this.single.map.getAnimatedObjects().get(point2).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point3) != null && this.single.map.getAnimatedObjects().get(point3).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point4) != null && this.single.map.getAnimatedObjects().get(point4).getDamage() != 0)  ) {
-								players[i].decreaseLife();
-								if ( players[i].getLife() == 0 ) {
-									players[i].setCurrentAnimation(PlayerAnimations.KILL);
+							/* IA */
+							if ( i != 0 && players[i].getPosition() != null ) {
+								/*Si le bot n'a pas d'objectif*/
+								if ( p == null || (point.x == p.x && point.y == p.y)) {
+
+									int difficulty = ((BotPlayer) players[i]).getDifficulty();
+
+									/* Defensif (On est dans une zone dangereuse) */
+									if ( colisionMap[point1.x][point1.y] == ColisionMapObjects.DANGEROUS_AREA || colisionMap[point1.x][point1.y] == ColisionMapObjects.BOMB) {
+
+										p = safeAroundArea(point1, colisionMap);                
+
+										if ( p.x == point1.x && p.y == point1.y ) {
+											p = pathFinding(point1, colisionMap);
+										}
+									}
+									/* Offensif */
+									else {
+
+										int timeBomb = Integer.MAX_VALUE;
+										p = new Point(point1.x, point1.y);
+
+										for(Entry<Point, Bomb> entry : bombs.entrySet()) {
+											if ( players[i].equals(entry.getValue().getPlayer())) {
+												timeBomb = Math.min(bombs.get(entry.getKey()).getTime(),timeBomb);
+											}
+										}
+
+										if ( timeBomb > 15 ) {                                                                                  
+											if ( (int)(Math.random() * (20-(10*difficulty))) == 0) {
+												if ( 0 != difficulty && players[0].getPosition() != null ) {
+
+													p = pathFinding(point1, ResourcesManager.coToTile(players[0].getPosition().x, players[0].getPosition().y),colisionMap);
+
+													if ( colisionMap[p.x][p.y] == ColisionMapObjects.BLOCK && players[i].getBombNumber() > 0) {
+														p = iaPushBomb(players[i], colisionMap.clone());
+													}
+													else if ( colisionMap[p.x][p.y] != ColisionMapObjects.EMPTY ) {
+														p = point1;
+													}
+												}
+												else {
+													p = safeAroundArea(point1, colisionMap);
+												}
+											}
+										}
+									}
+									p.x = p.x*ResourcesManager.getSize();
+									p.y = p.y*ResourcesManager.getSize();
+								}
+
+								if ( p == null || point.x != p.x || point.y != p.y ) {
+
+									if ( point.x < p.x && point.y < p.y ) {
+										players[i].setCurrentAnimation(PlayerAnimations.DOWN_RIGHT);
+									}
+									else if ( point.x > p.x && point.y < p.y ) {
+										players[i].setCurrentAnimation(PlayerAnimations.DOWN_LEFT);
+									}
+									else if ( point.x > p.x && point.y > p.y ) {
+										players[i].setCurrentAnimation(PlayerAnimations.UP_LEFT);
+									}
+									else if ( point.x < p.x && point.y > p.y ) {
+										players[i].setCurrentAnimation(PlayerAnimations.UP_RIGHT);
+									}
+									else if ( point.x < p.x ) {
+										players[i].setCurrentAnimation(PlayerAnimations.RIGHT);
+									}
+									else if ( point.x > p.x  ) {
+										players[i].setCurrentAnimation(PlayerAnimations.LEFT);
+									}
+									else if ( point.y > p.y ) {
+										players[i].setCurrentAnimation(PlayerAnimations.UP);
+									}
+									else if ( point.y < p.y ) {
+										players[i].setCurrentAnimation(PlayerAnimations.DOWN);
+									}
+									players[i].setObjectif(p);
+									move(players[i]);
 								}
 								else {
-									players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
+									stopPlayer(players[i]);
 								}
 							}
 							else {
-								/* IA */
-								if ( i != 0 && players[i].getPosition() != null ) {
-									/*Si le bot n'a pas d'objectif*/
-									if ( p == null || (point.x == p.x && point.y == p.y)) {
+								move(players[i]);
+							}
 
-										int difficulty = ((BotPlayer) players[i]).getDifficulty();
 
-										/* Defensif (On est dans une zone dangereuse) */
-										if ( colisionMap[point1.x][point1.y] == ColisionMapObjects.DANGEROUS_AREA || colisionMap[point1.x][point1.y] == ColisionMapObjects.BOMB) {
-
-											p = safeAroundArea(point1, colisionMap);		
-
-											if ( p.x == point1.x && p.y == point1.y ) {
-												p = pathFinding(point1, colisionMap);
-											}
-										}
-										/* Offensif */
-										else {
-
-											int timeBomb = Integer.MAX_VALUE;
-											p = new Point(point1.x, point1.y);
-
-											for(Entry<Point, Bomb> entry : bombs.entrySet()) {
-												if ( players[i].equals(entry.getValue().getPlayer())) {
-													timeBomb = Math.min(bombs.get(entry.getKey()).getTime(),timeBomb);
-												}
-											}
-
-											if ( timeBomb > 15 ) {											
-												if ( (int)(Math.random() * (20-(10*difficulty))) == 0) {
-													if ( (int)(Math.random() * (16-(3*difficulty))) == 10000000) {
-														if ( difficulty != 0) {
-															p = iaPushBomb(players[i], colisionMap.clone());
-														}
-														else {
-															pushBomb(players[i]);
-														}
-													}
-													else {
-														if ( 0 != difficulty && players[0].getPosition() != null ) {
-
-															p = pathFinding(point1, ResourcesManager.coToTile(players[0].getPosition().x, players[0].getPosition().y),colisionMap);
-
-															if ( colisionMap[p.x][p.y] == ColisionMapObjects.BLOCK && players[i].getBombNumber() > 0) {
-																p = iaPushBomb(players[i], colisionMap.clone());
-															}
-															else if ( colisionMap[p.x][p.y] != ColisionMapObjects.EMPTY ) {
-																p = point1;
-															}
-														}
-														else {
-															p = safeAroundArea(point1, colisionMap);
-														}
-													}
-												}
-											}
-										}
-										p.x = p.x*ResourcesManager.getSize();
-										p.y = p.y*ResourcesManager.getSize();
-									}
-
-									if ( p == null || point.x != p.x || point.y != p.y ) {
-
-										if ( point.x < p.x && point.y < p.y ) {
-											players[i].setCurrentAnimation(PlayerAnimations.DOWN_RIGHT);
-										}
-										else if ( point.x > p.x && point.y < p.y ) {
-											players[i].setCurrentAnimation(PlayerAnimations.DOWN_LEFT);
-										}
-										else if ( point.x > p.x && point.y > p.y ) {
-											players[i].setCurrentAnimation(PlayerAnimations.UP_LEFT);
-										}
-										else if ( point.x < p.x && point.y > p.y ) {
-											players[i].setCurrentAnimation(PlayerAnimations.UP_RIGHT);
-										}
-										else if ( point.x < p.x ) {
-											players[i].setCurrentAnimation(PlayerAnimations.RIGHT);
-										}
-										else if ( point.x > p.x  ) {
-											players[i].setCurrentAnimation(PlayerAnimations.LEFT);
-										}
-										else if ( point.y > p.y ) {
-											players[i].setCurrentAnimation(PlayerAnimations.UP);
-										}
-										else if ( point.y < p.y ) {
-											players[i].setCurrentAnimation(PlayerAnimations.DOWN);
-										}
-										players[i].setObjectif(p);
-										move(players[i]);
+							/* On vérifie que le joueur n'est pas sur une case lui causant des dommages */
+							if ( players[i].isDestructible() ) {
+								if ( (this.single.map.getAnimatedObjects().get(point1) != null && this.single.map.getAnimatedObjects().get(point1).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point2) != null && this.single.map.getAnimatedObjects().get(point2).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point3) != null && this.single.map.getAnimatedObjects().get(point3).getDamage() != 0) || (this.single.map.getAnimatedObjects().get(point4) != null && this.single.map.getAnimatedObjects().get(point4).getDamage() != 0)  ) {
+									players[i].decreaseLife();
+									if ( players[i].getLife() == 0 ) {
+										players[i].setCurrentAnimation(PlayerAnimations.KILL);
 									}
 									else {
-										stopPlayer(players[i]);
+										players[i].setCurrentAnimation(PlayerAnimations.TOUCHED);
 									}
 								}
-								else {
-									move(players[i]);
-								}
-							}	
+							}
 						}
 					}
 					players[i].update();
@@ -430,14 +423,16 @@ public class Engine {
 
 		for (int d = 1; d < 20; d++) {
 			for ( int h = 1; h < ResourcesManager.MAP_WIDTH-1 ; h++ ) {
-				
+
 				for ( int v = 1 ; v < ResourcesManager.MAP_HEIGHT-1 ; v++ ) {
 
 					point.x = h;
 					point.y = v;
+					/* FIXME */
+					point = new Point(h,v);
 
 					if ( this.distance.get(point) == Integer.valueOf(d) ) {
-						
+
 						point.y = v+1;
 						if ( this.distance.get(point) == null ) {
 							this.distance.put(point, 0);
@@ -456,7 +451,7 @@ public class Engine {
 								this.distance.put(position, d+1);
 							}
 						}
-						
+
 						point.y = v-1;
 						if ( this.distance.get(point) == null ) {
 							this.distance.put(point, 0);
@@ -475,7 +470,7 @@ public class Engine {
 								this.distance.put(position, d+1);
 							}
 						}
-						
+
 						point.x = h+1;
 						point.y = v;
 						if ( this.distance.get(point) == null ) {
@@ -495,12 +490,12 @@ public class Engine {
 								this.distance.put(position, d+1);
 							}
 						}
-						
+
 						point.x = h-1;
 						if ( this.distance.get(point) == null ) {
 							this.distance.put(point, 0);
 						}
-						
+
 						if ( this.distance.get(point) == Integer.valueOf(0) ) {
 							if ( colisionMap[point.x][point.y] == ColisionMapObjects.EMPTY ) {
 								point.x = h;
@@ -530,22 +525,22 @@ public class Engine {
 		if ( pa == PlayerAnimations.RIGHT) {
 			point.x = p.x+1;
 			point.y = p.y;
-			return point;										
+			return point;                                                                           
 		}
 		else if ( pa == PlayerAnimations.LEFT) {
 			point.x = p.x-1;
 			point.y = p.y;
-			return point;	
+			return point;   
 		}
 		else if ( pa == PlayerAnimations.UP ) {
 			point.x = p.x;
 			point.y = p.y-1;
-			return point;					
+			return point;                                   
 		}
 		else if ( pa == PlayerAnimations.DOWN ) {
 			point.x = p.x;
 			point.y = p.y+1;
-			return point;								
+			return point;                                                           
 		}
 		else {
 			return p;
@@ -606,7 +601,7 @@ public class Engine {
 									G = 40+closeList.get(currentTile).G;
 
 									/* Et le coût total du chemin */
-									F = G+H;									
+									F = G+H;                                                                        
 
 									//System.out.println(" |G:"+G+"|H:"+H+"|F:"+F+"|");
 
@@ -631,7 +626,7 @@ public class Engine {
 							H = (Math.abs(destinationPoint.x-i) + Math.abs(destinationPoint.y-j))*10;
 
 							/* Si il n'est pas sur une diagonale */
-							if ( i == currentTile.x || j == currentTile.y ) {							
+							if ( i == currentTile.x || j == currentTile.y ) {                                                       
 
 								//System.out.print("EN FACE " + i + " " + j);
 
@@ -649,7 +644,7 @@ public class Engine {
 									openList.put(tile, new PathFindingNode(F, G, H, currentTile));
 								}
 							}
-							else {	
+							else {  
 								/* Seulement si elle n'est pas gênée par une autre case càd par une case à droite ou au dessous, diagonale oblige ! */ 
 								if ( i > currentTile.x && colisionMap[currentTile.x+1][currentTile.y] == ColisionMapObjects.EMPTY) {
 									if ( j > currentTile.y && colisionMap[currentTile.x][currentTile.y+1] == ColisionMapObjects.EMPTY) {
@@ -659,9 +654,9 @@ public class Engine {
 										G = 14+closeList.get(currentTile).G;
 
 										/* Et le coût total du chemin */
-										F = G+H;							
+										F = G+H;                                                        
 
-										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");								
+										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");                                                              
 										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
 										if ( openList.get(tile) == null || G < openList.get(tile).G ) {
 											//System.out.println(" RAJOUT : " + tile.toString() );
@@ -675,9 +670,9 @@ public class Engine {
 										G = 14+closeList.get(currentTile).G;
 
 										/* Et le coût total du chemin */
-										F = G+H;							
+										F = G+H;                                                        
 
-										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");								
+										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");                                                              
 										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
 										if ( openList.get(tile) == null || G < openList.get(tile).G ) {
 											//System.out.println(" RAJOUT : " + tile.toString() );
@@ -693,9 +688,9 @@ public class Engine {
 										G = 14+closeList.get(currentTile).G;
 
 										/* Et le coût total du chemin */
-										F = G+H;							
+										F = G+H;                                                        
 
-										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");								
+										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");                                                              
 										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
 										if ( openList.get(tile) == null || G < openList.get(tile).G ) {
 											//System.out.println(" RAJOUT : " + tile.toString() );
@@ -709,9 +704,9 @@ public class Engine {
 										G = 14+closeList.get(currentTile).G;
 
 										/* Et le coût total du chemin */
-										F = G+H;							
+										F = G+H;                                                        
 
-										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");								
+										//System.out.println("|G:"+G+"|H:"+H+"|F:"+F+"|");                                                              
 										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
 										if ( openList.get(tile) == null || G < openList.get(tile).G ) {
 											//System.out.println(" RAJOUT : " + tile.toString() );
@@ -742,12 +737,13 @@ public class Engine {
 				//System.out.println("PERE : " + currentTile.toString());
 			}
 			//System.out.println("RESULTAT OK : " + currentTile + "\n-------------------------------------");
-			return currentTile;		
+			return currentTile;             
 		}
 
 		//System.out.println("RESULTAT KO : " + currentTile + "\n-------------------------------------");
 		return sourcePoint;
 	}
+
 
 	/* Méthodes privées ---------------------------------------------------- */
 
@@ -1028,22 +1024,22 @@ public class Engine {
 	}
 
 
-	private void upRight(Player player) {		
+	private void upRight(Player player) {           
 		moveRight(player);
 		moveUp(player);
 	}
 
-	private void upLeft(Player player) {		
+	private void upLeft(Player player) {            
 		moveLeft(player);
 		moveUp(player);
 	}
 
-	private void downLeft(Player player) {		
+	private void downLeft(Player player) {          
 		moveLeft(player);
 		moveDown(player);
 	}
 
-	private void downRight(Player player) {		
+	private void downRight(Player player) {         
 		moveRight(player);
 		moveDown(player);
 	}
@@ -1103,7 +1099,7 @@ public class Engine {
 
 				Point p = ResourcesManager.coToTile(bomb.getPosition().x, bomb.getPosition().y);
 				object = ResourcesManager.getObjects().get("firecenter").copy();
-				object.setPosition(new Point(p.x*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));				
+				object.setPosition(new Point(p.x*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));                          
 				animatedObjects.put(p, object);
 				colisionMap[p.x][p.y] = ColisionMapObjects.DAMAGE;
 
@@ -1338,11 +1334,12 @@ public class Engine {
 		}
 	}
 
+
 	private Point iaPushBomb(Player player, ColisionMapObjects[][] colisionMap) {
 
 		Point point1 = player.getPosition(), p;
 		p = point1 = ResourcesManager.coToTile(point1.x, point1.y);
-		
+
 		/* Ajouter une bombe */
 		Point bombPoint = ResourcesManager.coToTile(player.getPosition().x+(ResourcesManager.getSize()/2), player.getPosition().y+(ResourcesManager.getSize()/2));
 
@@ -1428,4 +1425,5 @@ public class Engine {
 
 		return p;
 	}
+
 }
