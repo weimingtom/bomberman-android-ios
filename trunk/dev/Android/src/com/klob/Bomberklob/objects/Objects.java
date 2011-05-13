@@ -1,5 +1,7 @@
 package com.klob.Bomberklob.objects;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.Hashtable;
 
@@ -30,11 +32,12 @@ public abstract class Objects implements Serializable {
 	protected int currentFrame;
 	protected int waitDelay;
 	protected String sound = "";
+	protected transient Rect rect;
 
 	//TODO
 	protected ColorFilter cf;
 	protected Paint paint;
-	
+
 
 	/* Contructeur --------------------------------------------------------- */
 
@@ -51,8 +54,9 @@ public abstract class Objects implements Serializable {
 		this.currentFrame = 0;
 		this.waitDelay = animations.get(this.currentAnimation).sequence.get(this.currentFrame).nextFrameDelay;
 		this.sound = animations.get(this.currentAnimation).sound;
-		
+
 		this.paint = new Paint();
+		this.rect = new Rect();
 	}
 
 	public Objects(Objects objects) {
@@ -70,6 +74,7 @@ public abstract class Objects implements Serializable {
 		this.sound = this.animations.get(this.currentAnimation).sound;
 
 		this.paint = objects.paint;
+		this.rect = objects.rect;
 	}
 
 	/* Getters ------------------------------------------------------------- */
@@ -109,11 +114,11 @@ public abstract class Objects implements Serializable {
 	public int getWaitDelay() {
 		return this.waitDelay;
 	}
-	
+
 	public Paint getPaint() {
 		return this.paint;
 	}
-	
+
 	public ColorFilter getColorFilter() {
 		return this.cf;
 	}
@@ -123,8 +128,7 @@ public abstract class Objects implements Serializable {
 	}
 
 	public Rect getRect() {
-		com.klob.Bomberklob.resources.Rect r = this.animations.get(this.currentAnimation).sequence.get(this.currentFrame).rect;
-		return new Rect(r.left, r.top, r.right, r.bottom);
+		return this.animations.get(this.currentAnimation).sequence.get(this.currentFrame).rect;
 	}
 
 	/* Setteurs ------------------------------------------------------------ */
@@ -191,18 +195,20 @@ public abstract class Objects implements Serializable {
 	}
 
 	public void onDraw(Canvas canvas,int size) {
-		if(cf!=null) {
-			//color filter code here
-		}
-		
+
 		Rect rect = this.getRect();
 		int i = (rect.right - rect.left) - ResourcesManager.getTileSize();
-		
+
 		if ( i != 0 ) {
 			i = (i*ResourcesManager.getSize())/ResourcesManager.getTileSize();
 		}
 
-		canvas.drawBitmap(ResourcesManager.getBitmaps().get("objects"), rect, new Rect(this.position.x-i, this.position.y, (this.position.x)+size+i, (this.position.y)+size), this.paint);
+		this.rect.left = this.position.x-i;
+		this.rect.top = this.position.y;
+		this.rect.right = (this.position.x)+size+i;
+		this.rect.bottom = (this.position.y)+size;
+
+		canvas.drawBitmap(ResourcesManager.getBitmaps().get("objects"), rect, this.rect, this.paint);
 	}
 
 	public void playCurrentAnimationSound() {
@@ -214,5 +220,12 @@ public abstract class Objects implements Serializable {
 	@Override
 	public String toString() {
 		return "Name : " +imageName+ "| Position (" + position.x + "," + position.y + ")";
+	}
+	
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+		// appel des mécanismes de désérialisation par défaut
+		in.defaultReadObject();
+		
+		this.rect = new Rect();
 	}
 }

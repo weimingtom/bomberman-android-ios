@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,6 +51,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private int menuSize = 50;
 
 	private ImageView[] imageView = new ImageView[4];
+	private String[] imageName = new String[4];
 
 	private int timeS;
 	private int timeM = -1;
@@ -181,6 +181,11 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.imageView[3] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer3);
 		this.imageView[3].setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
 
+		this.imageName[0] = "";
+		this.imageName[1] = "";
+		this.imageName[2] = "";
+		this.imageName[3] = "";
+		
 		this.bombpower = (TextView) findViewById(R.id.SinglePlayerTextViewBombPower);
 		this.bombpower.setTextColor(Color.WHITE);
 		this.bombnumber = (TextView) findViewById(R.id.SinglePlayerTextViewBombNumber);
@@ -467,26 +472,30 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		/* FIXME noms des images et test pour ne pas avoir a afficher la même image */
 		for (int i = 0 ; i < p.length ; i++ ) {
 			if (p[i] != null) {
-				if (!p[i].isDestructible() || p[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel())) {
-					this.imageView[i].setBackgroundDrawable(new BitmapDrawable(ResourcesManager.getBitmaps().get(p[i].getImageName()+"touched")));
+				if (!p[i].isDestructible() || p[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel()) && !this.imageName[i].equals(p[i].getImageName()+PlayerAnimations.TOUCHED.getLabel())  ) {
+					this.imageName[i] = p[i].getImageName()+PlayerAnimations.TOUCHED .getLabel();
+					this.imageView[i].setImageBitmap(ResourcesManager.getBitmaps().get(this.imageName[i]));
 				}
-				else if (p[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
-					this.imageView[i].setBackgroundDrawable(new BitmapDrawable(ResourcesManager.getBitmaps().get(p[i].getImageName()+p[i].getCurrentAnimation())));
+				else if (p[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel()) && !this.imageName[i].equals(p[i].getImageName()+PlayerAnimations.KILL.getLabel())) {
+					this.imageName[i] = p[i].getImageName()+PlayerAnimations.KILL .getLabel();					
+					this.imageView[i].setImageBitmap(ResourcesManager.getBitmaps().get(this.imageName[i]));
 					if ( i == 0 ) {
 						handler.sendMessage(handler.obtainMessage(5));
 					}
 					else {
 						j++;
+						if ( j == bundle.getInt("enemies") ) {
+							handler.sendMessage(handler.obtainMessage(6));
+						}
 					}
 				}
 				else {
-					this.imageView[i].setBackgroundDrawable(new BitmapDrawable(ResourcesManager.getBitmaps().get(p[i].getImageName()+"idle")));
+					if ( !this.imageName[i].equals(p[i].getImageName()+PlayerAnimations.IDLE .getLabel()) ){
+						this.imageName[i] = p[i].getImageName()+PlayerAnimations.IDLE .getLabel();
+						this.imageView[i].setImageBitmap(ResourcesManager.getBitmaps().get(this.imageName[i]));
+					}
 				}
 			}
-		}
-
-		if ( j == bundle.getInt("enemies") ) {
-			handler.sendMessage(handler.obtainMessage(6));
 		}
 	}
 

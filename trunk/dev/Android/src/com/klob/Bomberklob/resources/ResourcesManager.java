@@ -229,13 +229,10 @@ public class ResourcesManager {
 					}
 					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
-						Rect frame = new Rect();
-						frame.top = xpp.getAttributeIntValue(null, "top", 0);
-						frame.bottom = xpp.getAttributeIntValue(null, "bottom", 0);
-						frame.left = xpp.getAttributeIntValue(null, "left", 0);
-						frame.right = xpp.getAttributeIntValue(null, "right", 0);
-						frameinfo.rect = frame;
-						frame = null;
+						frameinfo.rect.top = xpp.getAttributeIntValue(null, "top", 0);
+						frameinfo.rect.bottom = xpp.getAttributeIntValue(null, "bottom", 0);
+						frameinfo.rect.left = xpp.getAttributeIntValue(null, "left", 0);
+						frameinfo.rect.right = xpp.getAttributeIntValue(null, "right", 0);
 						frameinfo.nextFrameDelay = xpp.getAttributeIntValue(null,"delayNextFrame", 0);
 						animationsequence.sequence.add(frameinfo);
 					}
@@ -329,12 +326,10 @@ public class ResourcesManager {
 					}
 					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
-						Rect frame = new Rect();
-						frame.top = xpp.getAttributeIntValue(null, "top", 0);
-						frame.bottom = xpp.getAttributeIntValue(null, "bottom", 0);
-						frame.left = xpp.getAttributeIntValue(null, "left", 0);
-						frame.right = xpp.getAttributeIntValue(null, "right", 0);
-						frameinfo.rect = frame;				
+						frameinfo.rect.top = xpp.getAttributeIntValue(null, "top", 0);
+						frameinfo.rect.bottom = xpp.getAttributeIntValue(null, "bottom", 0);
+						frameinfo.rect.left = xpp.getAttributeIntValue(null, "left", 0);
+						frameinfo.rect.right = xpp.getAttributeIntValue(null, "right", 0);
 						frameinfo.nextFrameDelay = xpp.getAttributeIntValue(null,"delayNextFrame", 0);
 						animationsequence.sequence.add(frameinfo);
 					}
@@ -399,12 +394,10 @@ public class ResourcesManager {
 					}
 					else if(xpp.getName().toLowerCase().equals("framerect")) {
 						FrameInfo frameinfo = new FrameInfo();
-						Rect frame = new Rect();
-						frame.top = xpp.getAttributeIntValue(null, "top", 0);
-						frame.bottom = xpp.getAttributeIntValue(null, "bottom", 0);
-						frame.left = xpp.getAttributeIntValue(null, "left", 0);
-						frame.right = xpp.getAttributeIntValue(null, "right", 0);
-						frameinfo.rect = frame;	
+						frameinfo.rect.top = xpp.getAttributeIntValue(null, "top", 0);
+						frameinfo.rect.bottom = xpp.getAttributeIntValue(null, "bottom", 0);
+						frameinfo.rect.left = xpp.getAttributeIntValue(null, "left", 0);
+						frameinfo.rect.right = xpp.getAttributeIntValue(null, "right", 0);
 						frameinfo.nextFrameDelay = xpp.getAttributeIntValue(null,"delayNextFrame", 0);
 						animationsequence.sequence.add(frameinfo);
 					}
