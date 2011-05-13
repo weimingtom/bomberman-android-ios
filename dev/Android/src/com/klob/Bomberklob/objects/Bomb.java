@@ -51,7 +51,13 @@ public class Bomb extends Destructible {
 
 	@Override
 	public void onDraw(Canvas canvas,int size) {
-		canvas.drawBitmap(ResourcesManager.getBitmaps().get("bombs"), this.getRect(), new Rect(this.position.x, this.position.y, (this.position.x)+size, (this.position.y)+size), null);
+		
+		this.rect.left = this.position.x;
+		this.rect.top = this.position.y;
+		this.rect.right = (this.position.x)+size;
+		this.rect.bottom = (this.position.y)+size;
+		
+		canvas.drawBitmap(ResourcesManager.getBitmaps().get("bombs"), this.getRect(), this.rect, null);
 	}
 
 	// FIXME Pour les mines

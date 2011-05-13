@@ -178,7 +178,12 @@ public abstract class Player extends Objects {
 			i = ((i*ResourcesManager.getSize())/ResourcesManager.getTileSize())/2;
 		}
 		
-		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), rect, new Rect(this.position.x-i, this.position.y-(size/2), this.position.x+size+i, this.position.y+size), this.paint);
+		this.rect.left = this.position.x-i;
+		this.rect.top = this.position.y-(size/2);
+		this.rect.right = this.position.x+size+i;
+		this.rect.bottom = this.position.y+size;
+		
+		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), rect, this.rect, this.paint);
 	}
 
 	@Override
