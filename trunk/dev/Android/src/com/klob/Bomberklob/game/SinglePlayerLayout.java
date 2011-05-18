@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,6 +51,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	private int menuSize = 50;
 
 	private ImageView[] imageView = new ImageView[4];
+	private String[] imageName = new String[4];
 
 	private int timeS;
 	private int timeM = -1;
@@ -181,6 +181,11 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.imageView[3] = (ImageView) findViewById(R.id.SinglePlayerLayoutImageViewPlayer3);
 		this.imageView[3].setLayoutParams(new LinearLayout.LayoutParams( (int) ((menuSize-20)*ResourcesManager.getDpiPx()) , (int) ((menuSize-20)*ResourcesManager.getDpiPx()) ) );
 
+		this.imageName[0] = "";
+		this.imageName[1] = "";
+		this.imageName[2] = "";
+		this.imageName[3] = "";
+		
 		this.bombpower = (TextView) findViewById(R.id.SinglePlayerTextViewBombPower);
 		this.bombpower.setTextColor(Color.WHITE);
 		this.bombnumber = (TextView) findViewById(R.id.SinglePlayerTextViewBombNumber);
@@ -458,6 +463,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 	public void updatePlayersStats() {
 		Player[] p = gameControllerSingle.getEngine().getSingle().getPlayers();
 		int j = 0;
+		String s;
 
 		bombpower.setText(String.valueOf(p[0].getPowerExplosion()));
 		bombnumber.setText(String.valueOf(p[0].getBombNumber()));
@@ -468,19 +474,33 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		for (int i = 0 ; i < p.length ; i++ ) {
 			if (p[i] != null) {
 				if (!p[i].isDestructible() || p[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel())) {
-					this.imageView[i].setImageBitmap(ResourcesManager.getBitmaps().get(p[i].getImageName()+PlayerAnimations.TOUCHED.getLabel()));
+					s = p[i].getImageName()+PlayerAnimations.TOUCHED.getLabel();
+					if ( !this.imageName[i].equals(s) ) {
+						this.imageView[i].setImageBitmap(ResourcesManager.getBitmaps().get(s));
+						this.imageName[i] = s;
+					}
 				}
 				else if (p[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
-					this.imageView[i].setImageBitmap(ResourcesManager.getBitmaps().get(p[i].getImageName()+PlayerAnimations.KILL.getLabel()));
-					if ( i == 0 ) {
-						handler.sendMessage(handler.obtainMessage(5));
-					}
-					else {
-						j++;
+					s = p[i].getImageName()+PlayerAnimations.KILL.getLabel();
+					if ( !this.imageName[i].equals(s) ) {
+											
+						this.imageView[i].setImageBitmap(ResourcesManager.getBitmaps().get(s));
+						this.imageName[i] = s;
+						
+						if ( i == 0 ) {
+							handler.sendMessage(handler.obtainMessage(5));
+						}
+						else {
+							j++;
+						}
 					}
 				}
 				else {
-					this.imageView[i].setImageBitmap(ResourcesManager.getBitmaps().get(p[i].getImageName()+PlayerAnimations.IDLE.getLabel()));
+					s = p[i].getImageName()+PlayerAnimations.IDLE.getLabel();
+					if ( !this.imageName[i].equals(s) ) {						
+						this.imageView[i].setImageBitmap(ResourcesManager.getBitmaps().get(s));
+						this.imageName[i] = s;
+					}
 				}
 			}
 		}
