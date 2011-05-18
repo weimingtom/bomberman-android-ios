@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>BomberklobServer</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- Inscription -->
+	<servlet>
+		<description>Create a new Multiplayer account</description>
+		<display-name>inscription</display-name>
+		<servlet-name>inscription</servlet-name>
+		<servlet-class>servlet.ServletInscription</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>inscription</servlet-name>
+		<url-pattern>/inscription</url-pattern>
+	</servlet-mapping>
+
+	<!-- Games List -->
+	<servlet>
+		<description>Returns the list of games</description>
+		<display-name>gameslist</display-name>
+		<servlet-name>gameslist</servlet-name>
+		<servlet-class>servlet.ServletGamesList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>gameslist</servlet-name>
+		<url-pattern>/gameslist</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Connection -->
+	<servlet>
+		<description>Connection Multiplayer account</description>
+		<display-name>connection</display-name>
+		<servlet-name>connection</servlet-name>
+		<servlet-class>servlet.ServletConnection</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>connection</servlet-name>
+		<url-pattern>/connection</url-pattern>
+	</servlet-mapping>
+
+
+	<!--Connection to Games -->
+	<servlet>
+		<description>Connect to Multiplayer game</description>
+		<display-name>connectiongame</display-name>
+		<servlet-name>connectiongame</servlet-name>
+		<servlet-class>servlet.ServletConnectionGame</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>connectiongame</servlet-name>
+		<url-pattern>/connectiongame</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Manage Game -->
+	<servlet>
+		<description>Managing Games</description>
+		<display-name>managegame</display-name>
+		<servlet-name>managegame</servlet-name>
+		<servlet-class>servlet.ServletManageGame</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>managegame</servlet-name>
+		<url-pattern>/managegame</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Create Game -->
+	<servlet>
+		<description>Creates Multiplayer Games</description>
+		<display-name>creategame</display-name>
+		<servlet-name>creategame</servlet-name>
+		<servlet-class>servlet.ServletCreateGame</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>creategame</servlet-name>
+		<url-pattern>/creategame</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Context Listener -->
+	<listener>
+		<listener-class>servlet.ContextListener</listener-class>
+	</listener>
+
+</web-app>
