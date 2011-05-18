@@ -136,6 +136,11 @@ public abstract class Objects implements Serializable {
 	public void setPosition(Point position) {
 		this.position = position;
 	}
+	
+	public void setPosition(int x, int y) {
+		this.position.x = x;
+		this.position.y = y;
+	}
 
 	public void setAnimations(Hashtable<String, AnimationSequence> animations) {
 		this.animations = animations;

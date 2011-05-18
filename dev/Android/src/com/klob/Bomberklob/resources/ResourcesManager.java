@@ -43,6 +43,8 @@ public class ResourcesManager {
 	private static HashMap<String, Objects> objects = new HashMap<String, Objects>();
 	private static HashMap<String, Hashtable<String, AnimationSequence>> playersAnimation = new HashMap<String, Hashtable<String, AnimationSequence>>();
 	private static HashMap<String, Hashtable<String, AnimationSequence>> bombsAnimation = new HashMap<String, Hashtable<String, AnimationSequence>>();
+	
+	private static Point[][] matrixPoint;
 
 	/* Sons */
 	private static HashMap<String, Integer> sounds = new HashMap<String, Integer>();
@@ -80,6 +82,15 @@ public class ResourcesManager {
 		Log.i("ResourcesManager","size : " + size);
 		Log.i("ResourcesManager","height : " + height);
 		Log.i("ResourcesManager","width : " + width);
+		
+		/* Jeu */
+		matrixPoint = new Point[MAP_WIDTH][MAP_HEIGHT];
+		
+		for (int i = 0; i < MAP_WIDTH; i++) {
+			for (int j = 0; j < MAP_HEIGHT; j++) {
+				matrixPoint[i][j] = new Point(i,j);
+			}
+		}
 	}
 
 	/* Getters ------------------------------------------------------------- */
@@ -109,6 +120,15 @@ public class ResourcesManager {
 
 	public static float getDpiPx() {
 		return dpiPx;
+	}
+	
+	public static Point getPoint(int i, int j) {
+		if ( i < MAP_WIDTH && i > -1 ) {
+			if ( j < MAP_HEIGHT && j > -1 ) {
+				return matrixPoint[i][j];
+			}
+		}
+		return null;
 	}
 
 	public static Context getContext() {
@@ -462,9 +482,12 @@ public class ResourcesManager {
 			return null;
 		}
 		else {
-			return new Point(x/size, y/size);
+			x = x/size;
+			y = y/size;
+			return matrixPoint[x][y];
 		}
 	}
+
 
 	/**
 	 * Calculates the coordinate of the tile
@@ -474,7 +497,6 @@ public class ResourcesManager {
 	 * @return coordinate of the tile
 	 */
 	public static Point tileToCo(int x, int y) {
-
 		if ( x < 0 || y < 0) {
 			return null;
 		}
