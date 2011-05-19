@@ -42,17 +42,18 @@ public class ContextListener implements ServletContextListener{
 		 * Pas de système de pooling pour le moment
 		 */
 		String dbClassName = "com.mysql.jdbc.Driver";
-		String CONNECTION = "jdbc:mysql://127.0.0.1/Bomberklob";
+		String CONNECTIONBD = "jdbc:mysql://127.0.0.1/Bomberklob";
+//		String CONNECTIONBD = "jdbc:mysql://127.0.0.1:8889/Bomberklob";
 		
 		try {
 			Class.forName(dbClassName);
 			Properties p = new Properties();
 			p.put("user", "root");
-			p.put("password", "ludo");
+			p.put("password", "root");
 
 			Connection connection;
 			try {
-				connection = DriverManager.getConnection(CONNECTION, p);
+				connection = DriverManager.getConnection(CONNECTIONBD, p);
 				System.out.println("Connexion BDD Succeeded");
 				
 				/**
@@ -62,9 +63,9 @@ public class ContextListener implements ServletContextListener{
 				boolean insert = theStatement.execute("Create Table IF NOT EXISTS Users(userName VARCHAR(20) PRIMARY KEY UNIQUE NOT NULL, password VARCHAR(50) DEFAULT NULL)");
 				System.out.println("Creation table "+ insert);
 				
-				
 				connection.close();
 				event.getServletContext().setAttribute("connectionData", connection);
+				event.getServletContext().setAttribute("bdLink", CONNECTIONBD);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

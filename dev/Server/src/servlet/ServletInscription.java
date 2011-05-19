@@ -29,9 +29,12 @@ import flexjson.JSONDeserializer;
  */
 public class ServletInscription extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 1L;
-	private Connection co ;
 	private String username, password;
+	
 	private HttpSession session;
+	private Connection co ;
+	private String bdLink;
+	
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -74,20 +77,20 @@ public class ServletInscription extends HttpServlet implements Servlet {
 			
 			 // récupération de l'objet de connexion à la bdd présent dans le contexte
 			co = (Connection) getServletContext().getAttribute("connectionData");
+			bdLink = (String) getServletContext().getAttribute("bdLink");
 			
 			
 			 // si la connexion n'est pas valide on la réétablie
 			if( !this.isValid(co)){
 				String dbClassName = "com.mysql.jdbc.Driver";
-				String CONNECTION = "jdbc:mysql://127.0.0.1/Bomberklob";
 				
 				// FIXME moyen le root quand même un user avec simple droits serait mieux
 				try {
 					Class.forName(dbClassName);
 					Properties p = new Properties();
 					p.put("user", "root");
-					p.put("password", "ludo");
-					co = DriverManager.getConnection(CONNECTION, p);
+					p.put("password", "root");
+					co = DriverManager.getConnection(bdLink, p);
 				} catch (ClassNotFoundException e) {
 					writer.write("ERROR");
 					System.out.println("Connection is not valid to bdd");
@@ -161,6 +164,8 @@ public class ServletInscription extends HttpServlet implements Servlet {
     		HashMap<String, String> users = (HashMap<String, String>) getServletContext().getAttribute("usersOnline");
 			users.put(session.getId(), username);
     		result = true;
+    		
+    		System.out.println("Users online: "+users.toString());
 		}		
 		return result;
 	}
