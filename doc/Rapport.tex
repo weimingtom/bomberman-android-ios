@@ -11,6 +11,10 @@
 \date{Today}
 \maketitle
 
+\tableofcontents
+
+\chapter{Introduction}
+
 \chapter{Présentation}
 	\begin{itemize}
 		\item{Nous + Tuteur}
@@ -80,15 +84,17 @@
 			\begin{itemize}
 				\item{Diagramme classe}
 				\item{Gameplay}
+				\item{Gestion images / tile mapping}
 				\item{Images}
 				\item{Sons}
 			\end{itemize}
 			
-		\subsection{Serveur}
+		\subsection{Réseau}
 			\begin{itemize}
+				\item{J2E --> Servlets}
 				\item{Diagramme classe}
 				\item{BDD (SQL-Lites)}
-				\item{Protocoles du serveur}
+				\item{Protocoles du serveur (Json)}
 			\end{itemize}
 			
 	\section{Différences entre Android et iOS}
@@ -96,50 +102,66 @@
 
 
 \chapter{Développement}
+	\section{Mobile}
+		\subsection{Menus}
+			\subsubsection{Première utilisation}
+			\subsubsection{Création utilisateur}
+			\subsubsection{Gestion utilisateur}
+			\subsubsection{Gestion des préférences système}
+			\subsubsection{Création de carte (charger)}
+			\subsubsection{Création partie solo (tout)}
+			\subsubsection{Création partie multi (officielle)}
+		\subsection{Editeur de carte}
+			\subsubsection{Rendu}
+			\subsubsection{Interface utilisateur}
+			\subsubsection{Sauvegarde}
+		\subsection{Jeu}
+			\subsubsection{Moteurs}
+				\paragraph{Rendu}
+					\subparagraph{Structure utilisée}
+					\begin{itemize}
+						\item{Pourquoi}
+						\item{Avantages}
+					\end{itemize}
+				\paragraph{Physique}
+					\subparagraph{Structure utilisée}
+					\subparagraph{Mouvements (collisions)}
+					\subparagraph{Gestion des bombes}
+						\begin{itemize}
+							\item{Threads}
+						\end{itemize}
+			\subsubsection{IA}
+				\paragraph{Pathfinding}
+					\subparagraph{A*}
+					\subparagraph{Aléatoire}
+				\paragraph{Prise de décision}
+			\subsubsection{Interface utilisaeur}
+				\paragraph{Android}
+				\paragraph{iOS}
+		
+	\section{Serveur}
+		\subsection{Json}
+		\subsection{Servlet}
+		\subsection{BDD}
+		
+		
+\chapter{Manuel d'utilisation}
 	\section{Menus}
-		\begin{itemize}
-			\item{Création Partie / Editeur carte}
-			\item{Gestion preferences / utilisateurs}
-			\item{Utilisateurs}
-		\end{itemize}
 	\section{Jeu}
-		\subsection{Moteurs}
-			\subsection{Rendu}
-				\begin{itemize}
-					\item{Gestion images}
-					\item{Title / Sprites / Tilemapping}
-					\item{Ancien jeux: Mario, Pacman, etc...}
-					\item{Plus: Mémoire, instancie une image}
-					\item{Moins}
-					\item{Editeur Carte différent avec le jeu}
-				\end{itemize}
-		\subsection{Physique}
-			\begin{itemize}
-				\item{Colision (murs, bombes, ....)}
-				\item{2 méthodes de movements}
-			\end{itemize}
-	\section{IA}
-		\begin{itemize}
-			\item{A*(Dijstra), Pathfinding, Aléatoire}
-		\end{itemize}
-		
-	\section{Différences entre Android et iOS}
-		
-			
-\chapter{Réseau}
-	\section{Principes}
+	\section{Editeur}
+	
+
+\chapter{Discussion}
+	\section{Problèmes}
+		\subsection{Android}
+		\subsection{iOS}
+	\section{Améliorations}
+		\subsection{Jeu}
 		\subsection{Serveur}
 			\begin{itemize}
-				\item{I2E --> Servlets}
-				\item{BDD --> Mysql (Pooling)}
-				\item{Android, iOS --> Communication --> Json (Protocole)}
+				\item{Pooling}
 			\end{itemize}
-		\subsection{Fonctionnement}
-			\begin{itemize}
-				\item{Inscription}
-				\item{Connexion}
-				\item{Listage des parties en cours}
-				\item{Evolutions possibles}
-			\end{itemize}
+			
+\chapter{Conclusion}
 
 \end{document}
