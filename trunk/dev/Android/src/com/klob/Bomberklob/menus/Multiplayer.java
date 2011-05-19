@@ -1,8 +1,16 @@
 package com.klob.Bomberklob.menus;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.StringTokenizer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +27,8 @@ import android.widget.Toast;
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.model.Model;
 
+import flexjson.JSONSerializer;
+
 public class Multiplayer extends Activity implements View.OnClickListener {
 	
 	private Button cancel;
@@ -29,6 +39,8 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 	private EditText userAccountPassword;
 	private CheckBox password;
 	private CheckBox connectionAuto;
+	
+	private HttpURLConnection connectionServ;
 	
 	/*
 	 * menu de connexion multijoueurs
@@ -178,6 +190,90 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 		super.onPause();
 	}
 	
+	
+	
+	
+	public boolean connection() {
+		URL url;
+		boolean response = false;
+		String password = md5(userAccountPassword.getText().toString());
+		String userName = userAccountName.getText().toString();
+		
+		try {
+
+			url = new URL("http://10.0.2.2:8181/BomberklobServer/connection");
+			System.out.println(url.toString());
+			try {
+				connectionServ = (HttpURLConnection) url.openConnection();
+				connectionServ.setDoOutput(true);
+				connectionServ.connect();
+				
+				/**
+				 * on commence deja par tester l'envoi d'idents TODO une fois la
+				 * bd faites sur le serveur faire un test de disponibilité
+				 * 
+				 */
+				String[] identifier = { userName, password };
+
+				// message à envoyer à la servlet
+				OutputStreamWriter writer = new OutputStreamWriter(
+						connectionServ.getOutputStream());
+				
+				JSONSerializer jsonSerializer = new JSONSerializer();
+				jsonSerializer.serialize(identifier, writer);
+				writer.flush();
+
+				if (connectionServ.getResponseCode() != HttpURLConnection.HTTP_OK) {
+					Log.e("connectionError",
+							"Message retour connexion invalide");
+					throw new IOException("Response not OK Version"
+							+ connectionServ.getResponseCode());
+				}
+
+				// message reçu provenant de la servlet
+				InputStreamReader in = new InputStreamReader(
+						connectionServ.getInputStream());
+				BufferedReader reader = new BufferedReader(in);
+				StringBuffer sbf = new StringBuffer();
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					sbf.append(line);
+				}
+				Log.i("@@@@@", "==> " + sbf);
+				
+				/**
+				 * récupération de l'identification de Session
+				 */
+				String cookies = connectionServ.getHeaderField("Set-Cookie");
+				String userKey = null;
+				if (cookies!=null){
+					StringTokenizer st = new StringTokenizer(cookies, ";");
+					if (st.hasMoreTokens()){
+						String token = st.nextToken();					
+						userKey = token.substring(token.indexOf("=") + 1, token.length()).trim();						
+					}
+				}
+				Log.i("COOKIE", "** "+userKey);
+				
+				
+				if(sbf.toString().equals("OK")){
+					response = true;
+				}
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		connectionServ.disconnect();
+		return response;
+	}
+	
+	
+	
+	
+	
 	public void onClick(View view) {
 		
 		Intent intent = null;
@@ -230,7 +326,7 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 //			}
 //		}
 		if( view == connection){
-			try {
+//			try {
 				int userId = Model.getSystem().getDatabase().getLastUserId();
 				String pwd = md5(userAccountPassword.getText().toString());
 				
@@ -242,38 +338,49 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 
 		 			Toast.makeText(Multiplayer.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
 		 		}
-				else if (Model.getSystem().getDatabase().isGoodMultiUser(userId, userAccountName.getText().toString(), pwd)){
-					/** save password **/
-					if(password.isChecked()){
-							Model.getUser().setRememberPassword(true);
-							Model.getSystem().getDatabase().updateSavePwdUser(userId, 1);
-					}
-					else if (!password.isChecked()) {
-						Model.getUser().setRememberPassword(false);
-						Model.getSystem().getDatabase().updateSavePwdUser(userId, 0);
-					}
-					/** auto connect **/
-					if(connectionAuto.isChecked()){
-							Model.getUser().setConnectionAuto(true);
-							Model.getUser().setRememberPassword(true);
-							Model.getSystem().getDatabase().updateAutoConnectUser(userId, 1);
-					}
-					else if (!connectionAuto.isChecked()) {
-						Model.getUser().setConnectionAuto(false);
-						Model.getSystem().getDatabase().updateAutoConnectUser(userId, 0);
-					}
-					intent = new Intent(Multiplayer.this, MultiplayerHome.class);
-					startActivity(intent);
-				}
 				else{
-
-					Toast.makeText(Multiplayer.this, R.string.ErrorAuth, Toast.LENGTH_SHORT).show();
+					if(connection()){
+						Toast.makeText(Multiplayer.this, "Authentifié", Toast.LENGTH_SHORT).show();
+						intent = new Intent(Multiplayer.this,MultiplayerHome.class);
+						startActivity(intent);
+					}
+					else{
+						Toast.makeText(Multiplayer.this, "ErrorAuth", Toast.LENGTH_SHORT).show();
+					}
+					
 				}
-			} catch (SQLException e) {
-
-				Toast.makeText(Multiplayer.this, R.string.ErrorAuth, Toast.LENGTH_SHORT).show();
-				e.printStackTrace();
-			}
+//				else if (Model.getSystem().getDatabase().isGoodMultiUser(userId, userAccountName.getText().toString(), pwd)){
+//					/** save password **/
+//					if(password.isChecked()){
+//							Model.getUser().setRememberPassword(true);
+//							Model.getSystem().getDatabase().updateSavePwdUser(userId, 1);
+//					}
+//					else if (!password.isChecked()) {
+//						Model.getUser().setRememberPassword(false);
+//						Model.getSystem().getDatabase().updateSavePwdUser(userId, 0);
+//					}
+//					/** auto connect **/
+//					if(connectionAuto.isChecked()){
+//							Model.getUser().setConnectionAuto(true);
+//							Model.getUser().setRememberPassword(true);
+//							Model.getSystem().getDatabase().updateAutoConnectUser(userId, 1);
+//					}
+//					else if (!connectionAuto.isChecked()) {
+//						Model.getUser().setConnectionAuto(false);
+//						Model.getSystem().getDatabase().updateAutoConnectUser(userId, 0);
+//					}
+//					intent = new Intent(Multiplayer.this, MultiplayerHome.class);
+//					startActivity(intent);
+//				}
+//				else{
+//
+//					Toast.makeText(Multiplayer.this, R.string.ErrorAuth, Toast.LENGTH_SHORT).show();
+//				}
+//			} catch (SQLException e) {
+//
+//				Toast.makeText(Multiplayer.this, "ErrorAuth", Toast.LENGTH_SHORT).show();
+//				e.printStackTrace();
+//			}
 		}
 		else if(view == this.newAccount){
 			intent = new Intent(Multiplayer.this, MultiplayerNewAccount.class);

@@ -1,7 +1,15 @@
 package com.klob.Bomberklob.menus;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.StringTokenizer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,9 +23,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.model.Model;
+
+import flexjson.JSONSerializer;
 
 public class MultiplayerNewAccount  extends Activity implements View.OnClickListener{
 
@@ -31,6 +40,8 @@ public class MultiplayerNewAccount  extends Activity implements View.OnClickList
 
 	private Button validate;
 	private Button cancel;
+	
+	private HttpURLConnection connection;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -164,6 +175,83 @@ public class MultiplayerNewAccount  extends Activity implements View.OnClickList
 	    return "";
 	}
 
+	
+	
+	public String inscription() {
+		URL url;
+		String password = md5(userAccountPassword1.getText().toString());
+		String userName = userAccountName.getText().toString();
+		String response = null;
+		try {
+//			"http://klob.s20.eatj.com/BomberklobServer/inscription"
+			url = new URL("http://10.0.2.2:8181/BomberklobServer/inscription");
+			System.out.println(url.toString());
+			try {
+				connection = (HttpURLConnection) url.openConnection();
+				connection.setDoOutput(true);
+				connection.connect();
+				
+				/**
+				 * on commence deja par tester l'envoi d'idents TODO une fois la
+				 * bd faites sur le serveur faire un test de disponibilité
+				 * 
+				 */
+				String[] identifier = { userName, password };
+
+				// message à envoyer à la servlet
+				OutputStreamWriter writer = new OutputStreamWriter(
+						connection.getOutputStream());
+				
+				JSONSerializer jsonSerializer = new JSONSerializer();
+				jsonSerializer.serialize(identifier, writer);
+				writer.flush();
+
+				if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+					Log.e("connectionError",
+							"Message retour connexion invalide");
+					throw new IOException("Response not OK Version"
+							+ connection.getResponseCode());
+				}
+
+				// message reçu provenant de la servlet
+				InputStreamReader in = new InputStreamReader(
+						connection.getInputStream());
+				BufferedReader reader = new BufferedReader(in);
+				StringBuffer sbf = new StringBuffer();
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					sbf.append(line);
+				}
+				Log.i("@@@@@", "==> " + sbf);	
+				response = sbf.toString();
+				
+				/**
+				 * récupération de l'identification de Session
+				 */
+				String cookies = connection.getHeaderField("Set-Cookie");
+				String userKey = null;
+				if (cookies!=null){
+					StringTokenizer st = new StringTokenizer(cookies, ";");
+					if (st.hasMoreTokens()){
+						String token = st.nextToken();					
+						userKey = token.substring(token.indexOf("=") + 1, token.length()).trim();						
+					}
+				}
+				Log.i("COOKIE", "** "+userKey);
+
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		connection.disconnect();
+		return response;
+	}
+	
+	
+	
 
 	public void onClick(View view) {
 
@@ -171,62 +259,62 @@ public class MultiplayerNewAccount  extends Activity implements View.OnClickList
 		
 
 		if( view == this.validate ) {
-//			if ( !this.userAccountName.getText().toString().equals("") && !this.userAccountPassword1.getText().toString().equals("")) {
-//				if ( !this.userAccountPassword1.getText().toString().equals(this.userAccountPassword2.getText().toString()) ) {
-//					Model.getUser().setUserName(this.userAccountName.getText().toString());
-//					
-//					if (Model.getUser().getRememberPassword()) {
-//						// FIXME Encoder le mdp
-//						Model.getUser().setPassword(this.userAccountPassword1.getText().toString());
-//					}
-//					
-//					Model.getSystem().getDatabase().updateUser(Model.getUser());
-//					//FIXME Connexion avec le serveur
-//				}
-//				else {
-//					//FIXME
-//				}
-//			}
-//			else {
-//				Toast.makeText(NewAccountOnLine.this, R.string.MultiPlayerConnectionErrorAutoConnection , Toast.LENGTH_SHORT).show();
-//			}
-			
-			if( !testerString(userAccountName.getText().toString()) || !testerString(userAccountPassword1.getText().toString()) || !testerString(userAccountPassword2.getText().toString())){
-	 			Toast.makeText(MultiplayerNewAccount.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
-	 		}
+			if (!testerString(userAccountName.getText().toString())
+					|| !testerString(userAccountPassword1.getText().toString())
+					|| !testerString(userAccountPassword2.getText().toString())) {
+				Toast.makeText(MultiplayerNewAccount.this,
+						"ErrorAutoConnection", Toast.LENGTH_SHORT).show();
+			}
 			/** TODO factorisation a faire **/
-//	 		else if(password.getText().toString().compareTo("")!=0 
-//			&& (repassword.getText().toString().compareTo("")!=0) && (userName.getText().toString().compareTo("")!=0)){
-			else if(!userAccountPassword1.getText().toString().equals(userAccountPassword2.getText().toString())){
-					Toast.makeText(MultiplayerNewAccount.this, R.string.ErrorPassword,Toast.LENGTH_SHORT).show();
-				}
-				else{
-					/** test disponibilité sur serveur **/
-					/** TODO insertion compte sur serveur	**/
-					int userId = Model.getSystem().getDatabase().getLastUserId();
-					String pwd =  md5(userAccountPassword1.getText().toString());
+			else if (!userAccountPassword1.getText().toString()
+					.equals(userAccountPassword2.getText().toString())) {
+				Toast.makeText(MultiplayerNewAccount.this, "ErrorPassword",
+						Toast.LENGTH_SHORT).show();
+			} else {
+				/** test disponibilité sur serveur **/
+				/** TODO insertion compte sur serveur **/
 
-					Model.getSystem().getDatabase().addAccountMulti(userId, userAccountName.getText().toString(), pwd);
-					Model.getUser().setUserName(userAccountName.getText().toString());
-					Model.getUser().setPassword(pwd);
+				String retour = this.inscription();
+				if( retour.equals("OK")){
+					Toast.makeText(MultiplayerNewAccount.this, "Inscrit", Toast.LENGTH_SHORT).show();
+					//intent = new Intent(MultiplayerNewAccount.this,GetGamesList.class);
+					//startActivity(intent);
+					
+					// int userId = Model.getSystem().getDatabase().getLastUserId();
+					// String pwd = md5(userAccountPassword1.getText().toString());
+					//
+					// Model.getSystem().getDatabase().addAccountMulti(userId,
+					// userAccountName.getText().toString(), pwd);
+					// Model.getUser().setUserName(userAccountName.getText().toString());
+					// Model.getUser().setPassword(pwd);
 					
 					/** save password **/
-					if(password.isChecked()){
-							Model.getUser().setRememberPassword(true);
-							Model.getSystem().getDatabase().updateSavePwdUser(userId, 1);
+					if (password.isChecked()) {
+						// Model.getUser().setRememberPassword(true);
+						// Model.getSystem().getDatabase().updateSavePwdUser(userId,
+						// 1);
 					}
 					/** auto connect **/
-					if(connectionAuto.isChecked()){
-							Model.getUser().setConnectionAuto(true);
-							Model.getUser().setRememberPassword(true);
-							Model.getSystem().getDatabase().updateAutoConnectUser(userId, 1);
+					if (connectionAuto.isChecked()) {
+						// Model.getUser().setConnectionAuto(true);
+						// Model.getUser().setRememberPassword(true);
+						// Model.getSystem().getDatabase().updateAutoConnectUser(userId,
+						// 1);
 					}
-					
-					Toast.makeText(MultiplayerNewAccount.this, "Inscription réalisée avec succès", Toast.LENGTH_SHORT).show();
-						intent = new Intent(MultiplayerNewAccount.this, MultiplayerHome.class);
-						startActivity(intent);
+	
+					Toast.makeText(MultiplayerNewAccount.this,
+							"Inscription réalisée avec succès", Toast.LENGTH_SHORT)
+							.show();
+					 intent = new Intent(MultiplayerNewAccount.this,MultiplayerHome.class);
+					startActivity(intent);
 				}
-			
+				else if(retour.equals("BU") ){
+					Toast.makeText(MultiplayerNewAccount.this,"Ce pseudo est déjà utilisé", Toast.LENGTH_SHORT).show();
+				}
+				else{
+					Toast.makeText(MultiplayerNewAccount.this,"Une erreur s'est produite", Toast.LENGTH_SHORT).show();
+				}
+			}
 		}
 		else if( view == this.cancel ) {
 			intent = new Intent(MultiplayerNewAccount.this, Multiplayer.class);
