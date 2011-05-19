@@ -1,0 +1,145 @@
+\documentclass[]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+
+\begin{document}
+
+\title{Title}
+\author{Author}
+\date{Today}
+\maketitle
+
+\chapter{Présentation}
+	\begin{itemize}
+		\item{Nous + Tuteur}
+	\end{itemize}
+	
+	\section{Projet}
+		\begin{itemize}
+			\item{On l'a proposé}
+			\item{Principe du projet et description}
+			\item{Rapprochement avec nos cours (I2A, Casar, Diwed)}
+			\item{Buts / Attentes recherchés}
+		\end{itemize}
+		
+	\section{Plate-formes de développement}
+		\subsection{Android}
+			\begin{itemize}
+				\item{De qui ?}
+				\item{Langage}
+				\item{PC}
+				\item{SDK - (le contenu)}
+			\end{itemize}
+		\subsection{iOS}
+			\begin{itemize}
+				\item{De qui ?}
+				\item{Langage}
+				\item{Mac}
+				\item{SDK - (le contenu)}
+			\end{itemize}
+			
+	\section{Organisation}
+		\begin{itemize}
+			\item{SVN}
+			\item{Réunions}
+			\item{Répartition du travail}
+			\item{Diagramme de Gant}
+		\end{itemize}
+	
+	
+\chapter{Analyse}
+	\begin{itemize}
+		\item{Introduction}
+	\end{itemize}
+	
+	\section{Cahier des charges}
+		\subsection{Menus}
+		\subsection{Jeu}
+		\subsection{Serveur}
+	
+	\section{Modélisation}
+		\subsection{Général}
+			\begin{itemize}
+				\item{Langage utilisé}
+				\item{Tout en anglais}
+				\item{Modèle Vue Controleur}
+				\item{Documentation - (Javadoc / appledoc)}
+			\end{itemize}
+			
+		\subsection{Menus}
+			\begin{itemize}
+				\item{Diagramme classe}
+				\item{BDD (SQL-Lites)}
+				\item{Scénarios}
+				\item{utilisation des widgets des API}
+			\end{itemize}
+			
+		\subsection{Jeu}
+			\begin{itemize}
+				\item{Diagramme classe}
+				\item{Gameplay}
+				\item{Images}
+				\item{Sons}
+			\end{itemize}
+			
+		\subsection{Serveur}
+			\begin{itemize}
+				\item{Diagramme classe}
+				\item{BDD (SQL-Lites)}
+				\item{Protocoles du serveur}
+			\end{itemize}
+			
+	\section{Différences entre Android et iOS}
+	
+
+
+\chapter{Développement}
+	\section{Menus}
+		\begin{itemize}
+			\item{Création Partie / Editeur carte}
+			\item{Gestion preferences / utilisateurs}
+			\item{Utilisateurs}
+		\end{itemize}
+	\section{Jeu}
+		\subsection{Moteurs}
+			\subsection{Rendu}
+				\begin{itemize}
+					\item{Gestion images}
+					\item{Title / Sprites / Tilemapping}
+					\item{Ancien jeux: Mario, Pacman, etc...}
+					\item{Plus: Mémoire, instancie une image}
+					\item{Moins}
+					\item{Editeur Carte différent avec le jeu}
+				\end{itemize}
+		\subsection{Physique}
+			\begin{itemize}
+				\item{Colision (murs, bombes, ....)}
+				\item{2 méthodes de movements}
+			\end{itemize}
+	\section{IA}
+		\begin{itemize}
+			\item{A*(Dijstra), Pathfinding, Aléatoire}
+		\end{itemize}
+		
+	\section{Différences entre Android et iOS}
+		
+			
+\chapter{Réseau}
+	\section{Principes}
+		\subsection{Serveur}
+			\begin{itemize}
+				\item{I2E --> Servlets}
+				\item{BDD --> Mysql (Pooling)}
+				\item{Android, iOS --> Communication --> Json (Protocole)}
+			\end{itemize}
+		\subsection{Fonctionnement}
+			\begin{itemize}
+				\item{Inscription}
+				\item{Connexion}
+				\item{Listage des parties en cours}
+				\item{Evolutions possibles}
+			\end{itemize}
+
+\end{document}
