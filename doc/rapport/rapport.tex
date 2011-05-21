@@ -1,0 +1,119 @@
+\documentclass[a4paper,11pt]{report}
+\usepackage{a4wide}
+\usepackage[frenchb]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{fancybox}
+\usepackage[pdftex]{hyperref} %Liens dans table de matieres
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{url}
+\usepackage{multicol}
+
+\usepackage{pstricks}
+
+%\geometry{scale=0.75, nohead}
+
+
+\newcommand*{\enConstruction}[1]{
+	\vspace*{.1cm}
+	\doublebox{
+	    \begin{minipage}{.9\linewidth}
+	      --- #1 \\ 
+	    \end{minipage}
+	}
+}
+
+\newcommand*{\precision}[1]{
+	\vspace*{.1cm}
+	\fbox{
+		\begin{minipage}{.9\linewidth}
+			#1 
+		\end{minipage}
+  	}\\
+}
+
+% Title Page
+\title{
+	\includegraphics[scale=.2]{logofds.eps}\\
+	\vspace*{1cm}
+	TER FMIN200 \\ 
+	-- \\
+	Développement d'un jeu de type Bomberman en réseau sous Android et iOS
+}
+
+\author{BONVILA Olivier \and COUSEIN Kilian \and PITIOT Ludovic \and TARDIEU Benjamin}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\thanks{
+
+  Nous tenons à remercier M. Giroudeau qui a toléré notre fâcheuse
+  tendance à arriver en retard dans ses cours.
+  
+  Nous remercions encore une fois M. Giroudeau pour les points bonus
+  qu'il va nous rajouter sur ce projet en échange de tous les journaux
+  que nous lui apportions les jeudis matin.
+  
+  Enfin, nous remercions nos parents, frères, soeurs, proches, et plus
+  particulièrement le monsieur avec les lunettes bizarres de la
+  pizzeria du RU.\\ 
+
+}
+
+
+\tableofcontents
+
+\chapter{Introduction}
+
+
+\chapter{Présentation de l'application}
+
+	\section{Moteurs}
+		
+		\subsection{Moteur de rendu}
+		
+			\subsubsection{Principes}
+		
+				\paragraph{Tiles}
+			
+				\paragraph{Sprites}
+		
+			\subsubsection{Objets}
+			
+			\subsubsection{Personnages}
+			
+		\subsection{Moteur physique}
+		
+			\subsubsection{Description}
+		
+			\subsubsection{Collisions}
+			
+			\subsubsection{Intéractions avec l'environnement}
+			
+		\subsection{Intelligence artificielle}
+
+			\subsubsection{Méthode utilisée}
+			
+			\subsubsection{Facile}
+			
+			\subsubsection{Moyenne}
+			
+			\subsubsection{Difficile}
+
+\chapter{Problèmes et solutions}
+
+	Portage 
+		 Opengl
+		 Sérialisation/iOS
+		 Adapter à toutes les résolutions d'écrans
+
+\chapter{Résultats}
+
+
+\end{document}      
