@@ -17,6 +17,8 @@
 #import "SinglePlayerMenuViewController.h"
 #import "EditorViewController.h"
 #import "EditorMenuViewController.h"
+#import "MultiplayerRegisterMenuViewController.h"
+#import "MultiplayerConnectionMenuViewController.h"
 
 
 @implementation MainMenuViewController
@@ -90,7 +92,9 @@
 
 
 - (void)goToMultiPlayerMenu {
-    NSLog(@"Multiplayer");
+	MultiplayerConnectionMenuViewController * multiplayerConnectionMenuViewController = [[MultiplayerConnectionMenuViewController alloc] initWithNibName:@"MultiplayerConnectionMenuViewController" bundle:nil];
+    [self.navigationController pushViewController:multiplayerConnectionMenuViewController animated:YES];
+    [multiplayerConnectionMenuViewController release];
 }
 
 
