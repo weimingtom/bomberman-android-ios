@@ -1,0 +1,98 @@
+\subsection{Menus}
+	\subsubsection{API et widget}
+
+			TODO ludo
+		
+	\subsubsection{BDD}
+
+		Après avoir effectué divers recherches, il s'est avéré que le gestionnaire
+		de bases de données utilisé sur les deux plateformes est SQLite 3. 
+			
+		\paragraph{Android\\}
+			
+			Pour manipuler aisément les bases de données depuis l'application,
+			nous avons crée une classe héritant de \textit{SQLiteOpenHelper}. Cette
+			dernière fournit des outils de manipulations. Un attribut y est
+			instancié, il s'agit de la base de données elle même, de type
+			\textit{SQLiteDatabase}.
+			
+			Nous y avons crée 3 Tables, \textit{PlayerAccount} sauvegardant toutes les
+			informations sur les utilisateurs locaux, \textit{System} concervant les
+			propriétés du système, et enfin \textit{Map} décrivant les informations
+			relatives au cartes de jeu crées par l'utilisateur.
+			
+			Ainsi de nombreuses	fonctions ont été implémenté dans le but de simplifier les interactions
+			avec cette base de données depuis l'application. Il est par exemple possible de créer un nouvel 
+			utilisateur local, modifier ses préférences, gérer les configurations systèmes comme la langue ou le volume
+			du son, ajoûter de nouvelles maps ou même récupérer toutes les informations
+			concernant un utilisateur.\\
+			
+			Voici un exemple d'insertion d'un nouveau compte local dans la base de
+			donnée. Rappelons que les tests d'existance du compte ont été fait depuis
+			l'application même. Dans cet exemple vous verrez ainsi que nous commençons
+			par récupérer les droits en écritures sur la base de données locale, puis
+			nous créons un container qui servira à l'insertion de valeur dans la base. Et
+			enfin l'insertion est faite. Nous terminons tout de même en fermant l'accès à
+			cette base.
+			
+			Il s'agit la d'un schéma classique de fonction d'interaction avec notre
+			base.
+						
+			\begin{verbatim}
+			/** ajout compte hors ligne **/
+				public long newAccount(String nomCompte){
+					base = getWritableDatabase();
+			
+					ContentValues entree = new ContentValues();
+					
+					entree.put("pseudo", nomCompte);
+					long var = base.insert("PlayerAccount", null, entree);
+					
+					base.close();
+					return var;
+				}
+			\end{verbatim}
+
+			
+		\paragraph{iOS}
+				
+	\subsubsection{Première utilisation}
+	\subsubsection{Création utilisateur}
+	\subsubsection{Gestion utilisateur}
+	\subsubsection{Gestion des préférences système}
+	\subsubsection{Création de carte (charger)}
+	\subsubsection{Création partie solo (tout)}
+	\subsubsection{Création partie multi (officielle)}
+			
+
+\subsection{Editeur de carte}
+	\subsubsection{Rendu}
+		\subsubsection{Interface utilisateur}
+		\subsubsection{Sauvegarde}
+
+
+\subsection{Jeu}
+	\subsubsection{Moteurs}
+		\paragraph{Rendu}
+			\subparagraph{Structure utilisée}
+				\begin{itemize}
+					\item{Pourquoi}
+					\item{Avantages}
+				\end{itemize}
+		\paragraph{Physique}
+			\subparagraph{Structure utilisée}
+			\subparagraph{Mouvements (collisions)}
+			\subparagraph{Gestion des bombes}
+				\begin{itemize}
+					\item{Threads}
+				\end{itemize}
+	
+	\subsubsection{IA}
+		\paragraph{Pathfinding}
+			\subparagraph{A*}
+			\subparagraph{Aléatoire}
+			\paragraph{Prise de décision}
+	
+	\subsubsection{Interface utilisaeur}
+		\paragraph{Android}
+		\paragraph{iOS}
