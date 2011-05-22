@@ -1,0 +1,56 @@
+\subsection{Menus}
+		
+	Les menus se doivent d'être clairs et de rendre l'utilisation de
+	l'application aisée. Il s'agit d'un jeu ne demandant aucune compétence
+	particulière. Il va donc toucher un public large et doit pouvoir convenir à
+	tout utilisateur. Cela passe d'abord par une navigation intuitive dans les
+	menus.
+	
+	Nous avons pour ce faire établi un diagramme d'activité reflettant les
+	différents parcours possibles par un utilisateur lors de sa navigation dans
+	l'application (voir section modélisation p\pageref{activité}).
+		
+\subsection{Jeu}
+		
+	Le jeu est la partie la plus importante du projet. 
+	Il se decompose en trois parties : Le model, la vue et le controlleur. 
+	Le modèle est composé du moteur physique, du moteur de rendu ainsi que de la
+	hierarchie de classe permettant de representer l'ensemble des objets du jeu. 
+	La vue quant à elle est composée d'objets graphiques simples (Bouttons, images, ... ) 
+	et d'une partie reprèsentant le jeu. Elle se doit d'être ergonomique et de permettre
+	à l'utilisateur de pouvoir jouer très simplement. Le controlleur permettra de faire 
+	le lien entre les actions de l'utilisateur sur le modèle. Cette décomposition permettra dans 
+	le futur de pouvoir modifier facilement le modèle et/ou la vue.
+		
+	L'application se doit de pouvoir changer de langue, avec comme langues initiales le francais et l'anglais.
+	Elle doit permettre à l'utilisateur de jouer à des parties solitaires ou multijoueurs. 
+	Ce dernier possèdera un compte hors ligne et en ligne.		
+	Le premier permetta de personnaliser son profil comme par exemple pour modifier
+	la couleur du joueur ou encore changer son pseudo... Il servira aussi à enregistrer les informations
+	et les preferences de connexion sur une base de donnée locale,
+	mais aussi les scores du joueurs (nombre de parties gagnées ou perdus). 
+	Le jeu devra permettre à l'utilisateur de pouvoir créer différents comptes hors lignes en cas de partage de télephone
+	avec un ami ou un membre de famille, pour pouvoir garder en mémoire ses scores et ses préferences.		
+	Le compte en ligne quand à lui servira seulement à établir une connexion avec le serveur distant pour pouvoir jouer en multijoueur.		
+	Un menu d'aide doit apparaitre pour pouvoir aider le joueur à comprendre le but du jeu et comment jouer. 
+	Ce dernier doit être simple et très explicite étant donné la large tranche d'age d'utilisateur que vise cette application.		
+	Ensuite un éditeur de carte permettra aux utilisateurs de créer un large choix de cartes, 
+	grâce à une multitude de différents objets qui composeront les cartes. Ces dernieres pourront être seulement utilisé en mode solitaire.
+	Pour les parties solitaires une inteligence artificielle avec trois niveaux de difficulté 
+	devra permettre à un joueur debutant, intermédiaire ou confirmé de jouer comme bon lui semble pour pouvoir améliorer sa maniere de jouer.
+	
+\subsection{Serveur}
+	
+	Le serveur représente la partie réseau de notre projet. Il doit pouvoir
+	rendre fonctionnel le jeu entre plusieurs téléphones (qu'ils soient de type
+	iOS ou Android). Autrement dit il servira d'hebergeur pour les parties et
+	il se chargera de faire s'interagir les joueurs, via leur mobile, entre eux.
+	Nous parlons donc ici des parties multijoueurs.\\ 
+	Il devra être capable d'enregistrer des inscriptions de nouveaux joueurs, avec
+	vérification qu'il n'y ait pas de doublons. Ces derniers seront inscrits dans 
+	la base de données du serveur. Les joueurs devraient ainsi
+	pouvoir se connecter en utilisant le couple username / mot de passe,
+	préalablement choisi. Suite à cela les utilisateurs seront à même de lister
+	les parties en cours, ils pourront choisir de créer des parties ou de les rejoindres.\\
+	Voilà concernant les fonctionnalités qui ont été demandé pour la partie
+	serveur.
