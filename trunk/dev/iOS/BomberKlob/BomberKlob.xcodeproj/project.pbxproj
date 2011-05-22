@@ -114,6 +114,15 @@
 		996F3386136ED892008204DA /* ready.png in Resources */ = {isa = PBXBuildFile; fileRef = 996F3382136ED892008204DA /* ready.png */; };
 		996F3387136ED892008204DA /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 996F3383136ED892008204DA /* refresh.png */; };
 		996F3388136ED892008204DA /* winner.png in Resources */ = {isa = PBXBuildFile; fileRef = 996F3384136ED892008204DA /* winner.png */; };
+		998BD4AF1384613E00415E37 /* MultiplayerRegisterMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 998BD4AD1384613E00415E37 /* MultiplayerRegisterMenuViewController.m */; };
+		998BD4B01384613E00415E37 /* MultiPlayerMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 998BD4AE1384613E00415E37 /* MultiPlayerMenuViewController.xib */; };
+		998BD4BD13846CF100415E37 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 998BD4B413846CF100415E37 /* NSObject+SBJSON.m */; };
+		998BD4BE13846CF100415E37 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 998BD4B613846CF100415E37 /* NSString+SBJSON.m */; };
+		998BD4BF13846CF100415E37 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 998BD4B813846CF100415E37 /* SBJsonBase.m */; };
+		998BD4C013846CF100415E37 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 998BD4BA13846CF100415E37 /* SBJsonParser.m */; };
+		998BD4C113846CF100415E37 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 998BD4BC13846CF100415E37 /* SBJsonWriter.m */; };
+		998BD4D3138533CD00415E37 /* MultiplayerConnectionMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 998BD4D1138533CD00415E37 /* MultiplayerConnectionMenuViewController.m */; };
+		998BD4D4138533CD00415E37 /* MultiplayerConnectionMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 998BD4D2138533CD00415E37 /* MultiplayerConnectionMenuViewController.xib */; };
 		99ABA0D7135334970052E45F /* OptionsMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846A7E5134C631900D35626 /* OptionsMenuViewController.m */; };
 		99ABA0D8135334CE0052E45F /* SinglePlayerMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18412F1D13519CE6002C49D7 /* SinglePlayerMenuViewController.m */; };
 		99ABA0D9135334D80052E45F /* SelectMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18412F1A13519834002C49D7 /* SelectMapViewController.m */; };
@@ -311,6 +320,23 @@
 		996F3382136ED892008204DA /* ready.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ready.png; sourceTree = "<group>"; };
 		996F3383136ED892008204DA /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		996F3384136ED892008204DA /* winner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = winner.png; sourceTree = "<group>"; };
+		998BD4AC1384613E00415E37 /* MultiplayerRegisterMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplayerRegisterMenuViewController.h; sourceTree = "<group>"; };
+		998BD4AD1384613E00415E37 /* MultiplayerRegisterMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplayerRegisterMenuViewController.m; sourceTree = "<group>"; };
+		998BD4AE1384613E00415E37 /* MultiPlayerMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiPlayerMenuViewController.xib; sourceTree = "<group>"; };
+		998BD4B213846CF100415E37 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		998BD4B313846CF100415E37 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		998BD4B413846CF100415E37 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		998BD4B513846CF100415E37 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		998BD4B613846CF100415E37 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		998BD4B713846CF100415E37 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		998BD4B813846CF100415E37 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		998BD4B913846CF100415E37 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		998BD4BA13846CF100415E37 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		998BD4BB13846CF100415E37 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		998BD4BC13846CF100415E37 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		998BD4D0138533CD00415E37 /* MultiplayerConnectionMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplayerConnectionMenuViewController.h; sourceTree = "<group>"; };
+		998BD4D1138533CD00415E37 /* MultiplayerConnectionMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplayerConnectionMenuViewController.m; sourceTree = "<group>"; };
+		998BD4D2138533CD00415E37 /* MultiplayerConnectionMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiplayerConnectionMenuViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -522,6 +548,8 @@
 		18C839CE13410263001D5747 /* BomberKlob */ = {
 			isa = PBXGroup;
 			children = (
+				998BD4B113846CF100415E37 /* Classes JSON */,
+				998BD4AA138460BF00415E37 /* MultiPlayerMenu */,
 				189C60C313731B4A005912CC /* Parser xml */,
 				18020577136E152500E4F8CB /* GenericMenu */,
 				99433975134C87AE00970231 /* Body */,
@@ -712,6 +740,38 @@
 			path = xml;
 			sourceTree = "<group>";
 		};
+		998BD4AA138460BF00415E37 /* MultiPlayerMenu */ = {
+			isa = PBXGroup;
+			children = (
+				998BD4AC1384613E00415E37 /* MultiplayerRegisterMenuViewController.h */,
+				998BD4AD1384613E00415E37 /* MultiplayerRegisterMenuViewController.m */,
+				998BD4AE1384613E00415E37 /* MultiPlayerMenuViewController.xib */,
+				998BD4D0138533CD00415E37 /* MultiplayerConnectionMenuViewController.h */,
+				998BD4D1138533CD00415E37 /* MultiplayerConnectionMenuViewController.m */,
+				998BD4D2138533CD00415E37 /* MultiplayerConnectionMenuViewController.xib */,
+			);
+			name = MultiPlayerMenu;
+			sourceTree = "<group>";
+		};
+		998BD4B113846CF100415E37 /* Classes JSON */ = {
+			isa = PBXGroup;
+			children = (
+				998BD4B213846CF100415E37 /* JSON.h */,
+				998BD4B313846CF100415E37 /* NSObject+SBJSON.h */,
+				998BD4B413846CF100415E37 /* NSObject+SBJSON.m */,
+				998BD4B513846CF100415E37 /* NSString+SBJSON.h */,
+				998BD4B613846CF100415E37 /* NSString+SBJSON.m */,
+				998BD4B713846CF100415E37 /* SBJsonBase.h */,
+				998BD4B813846CF100415E37 /* SBJsonBase.m */,
+				998BD4B913846CF100415E37 /* SBJsonParser.h */,
+				998BD4BA13846CF100415E37 /* SBJsonParser.m */,
+				998BD4BB13846CF100415E37 /* SBJsonWriter.h */,
+				998BD4BC13846CF100415E37 /* SBJsonWriter.m */,
+			);
+			name = "Classes JSON";
+			path = Classes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -800,6 +860,8 @@
 				996F3387136ED892008204DA /* refresh.png in Resources */,
 				996F3388136ED892008204DA /* winner.png in Resources */,
 				188914FF13769AFE00DA732C /* Maps in Resources */,
+				998BD4B01384613E00415E37 /* MultiPlayerMenuViewController.xib in Resources */,
+				998BD4D4138533CD00415E37 /* MultiplayerConnectionMenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,6 +940,13 @@
 				189C60D613731EA8005912CC /* Map.m in Sources */,
 				188914EA13748E9900DA732C /* ColisionCase.m in Sources */,
 				1867D0BD1378884900C022B8 /* Node.m in Sources */,
+				998BD4AF1384613E00415E37 /* MultiplayerRegisterMenuViewController.m in Sources */,
+				998BD4BD13846CF100415E37 /* NSObject+SBJSON.m in Sources */,
+				998BD4BE13846CF100415E37 /* NSString+SBJSON.m in Sources */,
+				998BD4BF13846CF100415E37 /* SBJsonBase.m in Sources */,
+				998BD4C013846CF100415E37 /* SBJsonParser.m in Sources */,
+				998BD4C113846CF100415E37 /* SBJsonWriter.m in Sources */,
+				998BD4D3138533CD00415E37 /* MultiplayerConnectionMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

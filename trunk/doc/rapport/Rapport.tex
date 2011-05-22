@@ -75,6 +75,21 @@
 		l'application.
 		
 		\subsection{Jeu}
+		
+		Le jeu est la partie la plus importante du projet. Il se decompose en trois parties : Le model, la vue et le controlleur. Le modèle est composé du moteur physique, du moteur de rendu ainsi que de la hierarchie de classe permettant de representer l'ensemble des objets du jeu. La vue quant à elle est composée d'objets graphiques simples (Bouttons, images, ... ) et d'une partie reprèsentant le jeu. Elle se doit d'être ergonomique et de permettre à l'utilisateur de pouvoir jouer très simplement. Le controlleur permettra de faire le lien entre les actions de l'utilisateur sur le modèle. Cette décomposition permettra dans le futur de pouvoir modifier facilement le modèle et/ou la vue.
+		
+		L'application se doit de pouvoir changer de langue, avec comme langues initiales le francais et l'anglais. Elle doit permettre à l'utilisateur de jouer à des parties solitaires ou multijoueurs. Ce dernier possèdera un compte hors ligne et en ligne.
+		
+		Le premier permetta de personnaliser son profil comme par exemple pour modifier la couleur du joueur ou encore changer son pseudo... Il servira aussi à enregistrer les informations et les preferences de connexion sur une base de donnée locale, mais aussi les scores du joueurs (nombre de parties gagnées ou perdus). Le jeu devra permettre à l'utilisateur de pouvoir créer différents comptes hors lignes en cas de partage de télephone avec un ami ou un membre de famille, pour pouvoir garder en mémoire ses scores et ses préferences.
+		
+		Le compte en ligne quand à lui servira seulement à établir une connexion avec le serveur distant pour pouvoir jouer en multijoueur.
+		
+		Un menu d'aide doit apparaitre pour pouvoir aider le joueur à comprendre le but du jeu et comment jouer. Ce dernier doit être simple et très explicite étant donné la large tranche d'age d'utilisateur que vise cette application.
+		
+		Ensuite un éditeur de carte permettra aux utilisateurs de créer un large choix de cartes, grâce à une multitude de différents objets qui composeront les cartes. Ces dernieres pourront être seulement utilisé en mode solitaire.
+		
+		Pour les parties solitaires une inteligence artificielle avec trois niveaux de difficulté devra permettre à un joueur debutant, intermédiaire ou confirmé de jouer comme bon lui semble pour pouvoir améliorer sa maniere de jouer.
+		
 		\subsection{Serveur}
 		
 		Ce serveur représente la partie réseau de notre projet. Il doit pouvoir
