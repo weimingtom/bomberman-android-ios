@@ -5,8 +5,13 @@
 		
 	\subsubsection{BDD}
 
-		Après avoir effectué divers recherches, il s'est avéré que le gestionnaire
-		de bases de données utilisé sur les deux plateformes est SQLite 3. 
+		Après avoir effectué divers recherches, il s'est avéré que les mobiles
+		utilisent un moteur de base de données relationnelles, accessible par le
+		langage SQL. Dans notre cas il s'agit de SQLite 3. Sa particularité est de ne
+		pas reproduire le schéma habituel client-serveur mais d'être directement intégrée au programme.
+		L'accès à la base de données SQLite se fait par l'ouverture du fichier
+		correspondant à celle-ci : chaque base de données est enregistrée dans un fichier qui lui est propre,
+		 avec ses déclarations, ses tables, ses index mais aussi ses données.
 			
 		\paragraph{Android\\}
 			
@@ -16,7 +21,7 @@
 			instancié, il s'agit de la base de données elle même, de type
 			\textit{SQLiteDatabase}.
 			
-			Nous y avons crée 3 Tables, \textit{PlayerAccount} sauvegardant toutes les
+			Nous y avons crée 3 tables, \textit{PlayerAccount} sauvegardant toutes les
 			informations sur les utilisateurs locaux, \textit{System} concervant les
 			propriétés du système, et enfin \textit{Map} décrivant les informations
 			relatives au cartes de jeu crées par l'utilisateur.

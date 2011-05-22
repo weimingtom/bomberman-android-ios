@@ -2,6 +2,7 @@ Nous avons choisi de créer notre serveur sur une base de servlet. Ce fût ici
 aussi un point nouveau pour nous, réiterant les phases d'analyse, de
 découverte, de test et de mise en place. Le fonctionnement est basé sur les
 échanges de requêtes type HTTP, où à chaque demande correspond une réponse. 
+
 		
 \subsection{Json}
 	Soucieux des performances et de la rapidité des échanges entre applications et
@@ -77,6 +78,16 @@ découverte, de test et de mise en place. Le fonctionnement est basé sur les
 	au sein d'un serveur HTTP. Une servlet s'exécute dynamiquement sur le serveur
 	web et permet l'extension des fonctions de ce dernier, typiquement : accès à
 	des bases de données.
+	
+	Lors du développement nous avons eu simplement à remplacer les
+	classes(diagramme partie Modélisation) représentant les tâches par des classes
+	Java de type Servlet. 
+	Quant à la classe Context elle est devenue ContextListener.
+	Cette dernière est
+	invoquée lorsque l'objet ServletContext	est crée. Sa méthode contextInitialized(ServletContextEvent event) sera
+	alors appelée, permettant ainsi de définir des objets communs à toutes les
+	servlets, tels qu'un accesseur à la base de données, ou le tableau qui va
+	contenir les utilisateurs connectés.
 		
 
 	\subsubsection{Schéma de fonctionnement }
@@ -183,7 +194,17 @@ découverte, de test et de mise en place. Le fonctionnement est basé sur les
 	transmettre des instructions à la base. Exemple d'insertion: 
 		
 	\begin{verbatim}
-		Statement theStatement = connection.createStatement();
-		theStatement.execute(
+	Connection connection = 
+	  DriverManager.getConnection("jdbc:mysql://127.0.0.1/Bomberklob", "user","user");
+	Statement theStatement = connection.createStatement();
+	theStatement.execute(
 		     "INSERT into Users VALUES ('"+ username +"','"+password+"')");
 	\end{verbatim}
+	
+	Bien evidemment cette adresse est remplacée par une variable, elle aussi
+	présente dans le ContextListener, contenant la véritable adresse de la base de
+	données.
+	
+	
+	
+	

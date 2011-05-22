@@ -65,7 +65,7 @@
 		clé étrangère vers l'id de son créateur(owner). \\
 				
 		\begin{center}
-			\includegraphics[width=11cm]{Analyse/Img/menu_bdd.eps}
+			\includegraphics[width=11cm]{./Analyse/Img/menu_bdd.eps}
 		\end{center}
 						
 	\paragraph{Scénarios}
@@ -95,11 +95,9 @@
 		Elles sont reliées à une classe nommée contexte, qui leur permettra d'accéder
 		aux mêmes données sans qu'il y ait de conflits. La partie basse représente les
 		objets qui seront utilisés pour les parties en multijoueurs. Bien évidemment
-		ces objets sont très proches de ceux utilisés dans les parties locales.
-		
-		\begin{center}
-			\includegraphics[scale = 0.5]{Analyse/Img/serveur.eps}
-		\end{center}
+		ces objets sont très proches de ceux utilisés dans les parties
+		locales.
+		(Schéma 3.1)
 		
 	\paragraph{Base de données\\}
 		Afin de pouvoir conserver les utilisateurs en lignes ainsi que leurs infos
@@ -110,3 +108,12 @@
 		en lecture(connexion).
 			
 		Elle ne comportera que deux champs, userName et password.
+			
+		\begin{figure}
+			\includegraphics[scale = 0.5]{Analyse/Img/serveur.eps}
+			 \caption {Serveur}
+		\end{figure}
+		
+		\newpage
+		
+	
