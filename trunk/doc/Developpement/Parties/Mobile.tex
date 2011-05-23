@@ -267,16 +267,18 @@
 			$\,$
 			
 			Voici un exemple concret de la methode décrite au dessus :
-			
+				
 
-			\begin{figure}[h]			
+			\begin{figure}[!h]			
 				\begin{center}			
 					\includegraphics[width=229px, height=142px]{Developpement/Img/map.eps}
 					\caption{L'image représentant la totalité des objets non animés}
 				\end{center}
 			\end{figure}
+			
+			$\,$			
 
-			\begin{figure}[h]			
+			\begin{figure}[!h]			
 				\begin{center}						
 					\includegraphics[width=250px, height=250px]{Developpement/Img/hashmap.eps}
 					\caption{La hashmap des objets animés}
@@ -285,7 +287,7 @@
 
 			$\,$
 			
-			$\,$
+			\newpage
 
 			Les avantages d'avoir utilisé une telle structure est qu'ici au lieu de
 			parcourir les 21*13*2 cases des deux matrices à chaque rafraichissement
@@ -368,21 +370,123 @@
 				\begin{tabular}{|c|c|} \hline
 				Objet  & Description \\\hline
 				EMPTY  & Zone vide représentant un sol quelconque\\\hline
-				BLOCK  & Un bloc indestructible\\\hline
+				BLOCK  & Un bloc \\\hline
 				GAPE   & Un trou \\\hline
-				DAMAGE & Une zone de domages (piques, lasers, etc \ldots) \\\hline
+				DAMAGE & Une zone de dommages (piques, lasers, etc \ldots) \\\hline
 				DANGEROUS\_AREA & Une zone dangereuse\\\hline
 				BOMB & Une bombe\\\hline
-				FIRE & Du feu resultant de l'explosion d'une bombe\\\hline
+				FIRE & Feu resultant de l'explosion d'une bombe\\\hline
 				\end{tabular}
 			\end{center}
 			
 			Les zones dangereuses sont les zones qui seront touchées lors de l'explosion
 			d'une bombe, ces zones sont spécifique à l'intelligence artificielle et leur
 			permettent de savoir si elles sont en danger ou non.
+			
+			
+			$\,$
+			
+			Cette matrice est mise à jour lors de la pose et de l'explosion d'une bombe
+			
+			De cette façon il est rapide de savoir si un joueur rentre en collision avec
+			un objet quelconque ou si celui-ci subit des dommages.
 		
-			\subparagraph{Structure utilisée}
-			\subparagraph{Mouvements (collisions)}
+
+			\subparagraph{Deplacements\\}
+			
+				$\,$
+			
+				Globalement la gestion des mouvements est identique sur Android comme sur
+				iOS.
+				Elle consiste à poser le doigt sur l'écran et à le faire glisser dans la
+				direction souhaitée ainsi le personnage avancera jusqu'à que le doigt soit
+				relevé.				
+				
+				Quant à la gestion des colisions bien que chaque équipe utilise la matrice
+				décrite ci dessus, les façons de concevoir la chose ont divergé proposant au
+				final deux méthodes de rendu.
+				Dans chacune le joueur se deplace verticalement, horizontalement ainsi qu'en
+				diagonales.
+				
+				\begin{enumerate}
+				  \item Colisions sous Android
+				  
+				  		Le principe de colisions sous Android a été de façon à faire ``glisser''
+				  		ou non le joueur lorsqu'il rencontre des obstacles.
+				  		
+				  		
+				  		Pour cela nous allons étudier un mouvement qui sera celui vers le haut
+				  		afin de mieux comprendre ce terme.
+				  		Nous aurions pu prendre n'importe quel aute mouvement cela serait revenu
+				  		au même.
+				  		
+				  		Il faut juste retenir qu'au mieux le joueur est dans une case et au pire
+				  		dans deux et non dans quatre car lors d'un déplacement nous n'allons
+				  		regarder que la face correspondant à cette direction comme le montre
+				  		l'image ci-dessous
+				  		
+				  		$\,$
+				  		
+						\begin{center}						
+							\includegraphics[width=336px,height=168px]{Developpement/Img/ex2.eps}
+						\end{center}
+						
+				  		$\,$				  		
+				  		
+				  		Le trait vert représente le côté que nous étudierons lors d'un
+				  		déplacement vers le haut.
+				  		
+				  		
+				  		Nous partons du principe qu'il n'y a pas de vérification à faire tant
+				  		que le joueur ne change pas de case car du moment où il y est entré
+				  		c'est qu'elle est entierement traversable.
+				  		
+				  		Il existe donc quatres types de colisions possibles :
+				  		
+				  		\begin{enumerate}
+
+				  		  \item Le premier cas correspond à celui où les cases sont
+				  		  traversables, il n'y a donc qu'à déplacer le joueur vers le haut.
+
+							\begin{center}						
+								\includegraphics[width=336px,height=168px]{Developpement/Img/ok2.eps}
+							\end{center}
+
+				  		  \item Le second est celui où la ou les cases en face sont des murs, il
+				  		  n'y a alors rien à faire, le personnage ne bouge pas.
+				  		  				  		  
+				  		  	\begin{center}						
+								\includegraphics[width=336px,height=168px]{Developpement/Img/ko2.eps}
+							\end{center}
+							
+				  		  \item C'est à partir de ce cas que l'on rencontre le glissement cité
+				  		  plus haut.
+				  		  Ici nous essayons de monter mais la case de gauche correspond à un
+				  		  mur, étant donné la petitesse des écrans et la rapidité à laquelle le
+				  		  jeu se déroule il serait embetant pour l'utilisateur de devoir se
+				  		  decaler à droite de façon à être bien en face de la case libre.
+				  		  Nous avons donc pris en compte le cas où le joueur aurait dépassé la
+				  		  moitié du bloc intraversable, dans ce cas là nous le faisons glisser
+				  		  sur la droite de façon a ce que celui-ci se place convenablement en
+				  		  face de la case et monte normalement.
+				  		  
+				  		  	\begin{center}						
+								\includegraphics[width=168px,height=168px]{Developpement/Img/ko3.eps}
+							\end{center}
+				  		  
+				  		  \item Le dernier cas et l'opposé du précédent et marche de la même
+				  		  manière.
+				  		  
+				  		  	\begin{center}						
+								\includegraphics[width=168px,height=168px]{Developpement/Img/ko4.eps}
+							\end{center}
+				  		  
+				  		\end{enumerate}
+
+				  
+				  \item Colisions sous iOS
+				\end{enumerate}
+			
 			\subparagraph{Gestion des bombes}
 				\begin{itemize}
 					\item{Threads}
