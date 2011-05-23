@@ -4,13 +4,32 @@ découverte, de test et de mise en place. Le fonctionnement est basé sur les
 échanges de requêtes type HTTP, où à chaque demande correspond une réponse. 
 
 		
-\subsection{Json}
+\subsection{JSON}
 	Soucieux des performances et de la rapidité des échanges entre applications et
 	serveur, nous avons mis en place un protocole de communication client/serveur
-	où les messages transitant sont des flux JSON. Ce dernier semblait être un
-	format de données d'échanges optimal pour véhiculer le plus d'informations
-	avec une taille moindre. De plus étant beaucoup utilisé, nos deux langages
-	mettent à disposition des outils de sérialisation de leurs objets en JSON.
+	où les messages transitant sont des flux JSON\footnote{JavaScript Object
+	Notation :  format de données textuel issu du JavaScript (ECMAScript pour plus
+	exact) où il était employé comme une syntaxe pour décrire les valeurs des
+	instances d’objets}. 	
+	Contrairement au XML qui peut représenter des données orientées document,
+	JSON se focalise sur la description d’objets.
+	Un autre avantage reconnu de JSON par rapport à XML est qu’il est nettement
+	moins verbeux que ce dernier.
+	Quoi qu’il en soit JSON reconnait la philosophie des services web exposant
+	une interface d’échange : il s’agit
+	d’envoyer et de recevoir des informations dans un format facilement manipulable par
+	le protocole de transport HTTP.
+	
+	
+	Voilà pourquoi le JSON semblait être un format de données d'échanges optimal
+	pour véhiculer le plus d'informations avec une taille moindre. Il est aussi en
+	adéquation avec notre politique d'utilisation web pour un serveur.
+	De plus étant beaucoup utilisé, nos deux
+	langages mettent à disposition des outils de sérialisation de leurs objets en JSON.
+	
+	Ci-dessous un exemple concret de notre protocole de communication JSON entre
+	serveur et application cliente.
+	
 		
 	\begin{verbatim}
 		ServletInscription
@@ -140,9 +159,9 @@ découverte, de test et de mise en place. Le fonctionnement est basé sur les
 		
 		\begin{verbatim}
 			BufferedReader req = 
-				  new BufferedReader(new InputStreamReader(request.getInputStream()));
+				    new BufferedReader(new InputStreamReader(request.getInputStream()));
 			OutputStreamWriter writer = 
-				  new OutputStreamWriter(response.getOutputStream());
+				    new OutputStreamWriter(response.getOutputStream());
 			String message = req.readLine();
 			
 			if (message != null) {
@@ -150,7 +169,7 @@ découverte, de test et de mise en place. Le fonctionnement est basé sur les
 				
 				   // désérialisation des infos de l'utilisateur dans une arraylist 
 				  JSONDeserializer<ArrayList<String>> jsonDeserializer = 
-					  new JSONDeserializer<ArrayList<String>>();
+					    new JSONDeserializer<ArrayList<String>>();
 				  ArrayList<String> identifiers;
 				  identifiers = jsonDeserializer.deserialize(message);
 				
@@ -173,8 +192,8 @@ découverte, de test et de mise en place. Le fonctionnement est basé sur les
 		ainsi la chaine de caractères extraite de l'objet déserialisé. De cette
 		manière à aucun moment les données confidentielles ne transiteront en clair.
 		
-		De plus un mécanisme de session est en place. Dans la confirmation de
-		connexion ou d'inscription, une userKey est générée. Elle correspond en
+		De plus un mécanisme semblable aux sessions est en place. Dans la
+		confirmation de connexion ou d'inscription, une userKey est générée. Elle correspond en
 		réalité à l'identifiant de session envoyé par le serveur. Une fois associée
 		à l'username correspondant, le tout est ajoûté dans le tableau d'utilisateurs
 		connectés.
