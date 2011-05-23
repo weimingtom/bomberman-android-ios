@@ -102,7 +102,7 @@
 
 	\subsubsection{Moteurs}
 	
-		Au seins d'un jeu vidéo plusieurs types de moteurs sont mis en place.
+		Au sein d'un jeu vidéo plusieurs types de moteurs sont mis en place.
 		Chacun a un travail bien précis.
 		Ici nous en retrouvons trois au total à savoir un pour le rendu graphique, un
 		pour s'occuper de la physique et un dernier gerant les actions de
@@ -163,6 +163,7 @@
 			Si l'on avait eu un sol animé représentant de l'eau, il aurait été composé de
 			plusieurs images et aurait donc necessité un rafraichissement constant.
 
+			$\,$
 			
 			Concrètement ce que nous faisons ici à chaque début de partie est de créer
 			une image vierge qui aura la taille de la carte affichée sur l'écran dans
@@ -171,16 +172,21 @@
 			$\,$
 			
 			Pour cela nous allons parcourir les deux matrices définies dans l'éditeur de
-			cartes\footnotemark[2] et de regarder s'il existe un bloc, si oui est-ce
-			qu'il est destructible ? Si ce bloc est destructible alors il nous est
-			obligatoire de savoir ce qui se trouve en dessous on va donc stocker ce bloc
-			dans une hashmap dont les cléfs sont les coordonnées de l'objet et dont la
-			valeur est l'objet lui même et dessiner le sol sur l'image citée au dessus.
-			Si ce bloc est indestructible alors inutile de savoir si un sol existe.
+			cartes\footnotemark[2] et regarder s'il existe un bloc, si oui est-ce
+			qu'il est destructible ?
 			
-			Sinon si il n'existe pas de bloc nous allons regarder si le sol est animé, si
-			oui alors on le stok dans la hashmap comme un bloc destructible sinon nous le
-			dessinons dans l'image comme un objet inanimé.
+			Si ce bloc est destructible alors il nous est obligatoire de savoir ce qui se
+			trouve en dessous.
+			Nous allons donc stocker ce bloc dans une hashmap dont les cléfs sont les
+			coordonnées de l'objet et dont la valeur est l'objet lui même et dessiner le
+			sol sur l'image citée au dessus.
+			
+			Si ce bloc est indestructible alors inutile de mémorisé le sol se trouvant
+			au dessous.
+			
+			Sinon s'il n'existe pas de bloc nous allons regarder si le sol est animé, si
+			oui alors nous le stockons dans la hashmap comme un bloc destructible sinon
+			nous le dessinons dans l'image comme un objet inanimé.
 			
 			$\,$
 			
@@ -225,9 +231,12 @@
 			moteur de rendu une seule et unique image contrairement à l'ancien où chaque
 			objet étant affiché indépendament cela equivaut à 337 objets.
 			
+			$\,$
+			
 			Le pire des cas est une carte remplie au maximum de bloc destructibles,
 			obligeant dans les deux cas à connaitre le type de sol se trouvant dessous.
 			
+			$\,$
 			
 			Nous voyons très clairement les différences de coûts entre les deux methodes
 			de rendu et l'optimisation qu'engendre la deuxième.
