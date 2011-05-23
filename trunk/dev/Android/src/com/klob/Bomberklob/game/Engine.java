@@ -91,7 +91,7 @@ public class Engine {
 						}						
 						for(Entry<Point, Bomb> entry : bombs.entrySet()) {
 							entry.getValue().updateTime();
-							single.getMap().colisionMapUpdate(entry.getValue());
+							single.map.colisionMapUpdate(entry.getValue());
 						}
 					}
 					Log.i("Bombs Thread","Thread done");

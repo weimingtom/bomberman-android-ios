@@ -144,14 +144,11 @@ public class GameMap extends Map {
 	}
 
 	public void update() {
-		/* Pour tous les objets animés */
 		for(Point entry : animatedObjects.keySet()) {
 			Objects o = animatedObjects.get(entry);
-			/* Si son animation est DESTROY et qu'elle est finie */
 			if (o.getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel()) && o.hasAnimationFinished()) {
 				this.objectPosition = ResourcesManager.coToTile(o.getPosition().x, o.getPosition().y);
 				this.colisionMap[this.objectPosition.x][this.objectPosition.y] = ColisionMapObjects.EMPTY;
-				/* Et du vecteur d'objets animés */
 				this.animatedObjects.remove(entry);
 			}
 			else {
