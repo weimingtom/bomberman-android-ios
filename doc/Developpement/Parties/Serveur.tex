@@ -1,156 +1,20 @@
-Nous avons choisi de créer notre serveur sur une base de servlet. Ce fût ici
-aussi un point nouveau pour nous, réiterant les phases d'analyse, de
-découverte, de test et de mise en place. Le fonctionnement est basé sur les
-échanges de requêtes type HTTP, où à chaque demande correspond une réponse. 
 
 		
-\subsection{JSON}
-	Soucieux des performances et de la rapidité des échanges entre applications et
-	serveur, nous avons mis en place un protocole de communication client/serveur
-	où les messages transitant sont des flux JSON\footnote{JavaScript Object
-	Notation :  format de données textuel issu du JavaScript (ECMAScript pour plus
-	exact) où il était employé comme une syntaxe pour décrire les valeurs des
-	instances d’objets}. 	
-	Contrairement au XML qui peut représenter des données orientées document,
-	JSON se focalise sur la description d’objets.
-	Un autre avantage reconnu de JSON par rapport à XML est qu’il est nettement
-	moins verbeux que ce dernier.
-	Quoi qu’il en soit JSON reconnait la philosophie des services web exposant
-	une interface d’échange : il s’agit
-	d’envoyer et de recevoir des informations dans un format facilement manipulable par
-	le protocole de transport HTTP.
+%\subsection{JSON}
 	
-	
-	Voilà pourquoi le JSON semblait être un format de données d'échanges optimal
-	pour véhiculer le plus d'informations avec une taille moindre. Il est aussi en
-	adéquation avec notre politique d'utilisation web pour un serveur.
-	De plus étant beaucoup utilisé, nos deux
-	langages mettent à disposition des outils de sérialisation de leurs objets en JSON.
-	
-	Ci-dessous un exemple concret de notre protocole de communication JSON entre
-	serveur et application cliente.
-	
-		
-	\begin{verbatim}
-		ServletInscription
-			Player => Serveur
-			{["username","password"]}
-			
-			Serveur => Player
-			{"OK"} ou {"BU"}
-			
-		ServletConnexion 	
-			Player => Serveur
-			{["username","password"]}
-			
-			Serveur => Player
-			{"OK"} ou {"BU"}
-			
-		ServletGameList
-			Player => Serveur
-			{"userKey"}
-		
-			Serveur => Player
-			{[{"class":"Game","map":"mapName","name":"gameName",
-			 "playerNumberConnected":nbConnected,"type":"gameType"},{..},{..}]}
-			 
-		ServletCreateGame:
-			Player => Server:
-				{"userKey": <userKey>, "game": {"name":<name>, "type":<type>, "map":<map>, "ennemiesNumber": <ennemiesNumber>}}
-				
-			Server => Player:
-				{"OK"} ou {"errorType"}
-			 
-		ServletConnectionGame:
-			Player => Server:
-				{["userKey", "gameName"]}
-				
-			Server => Player:
-				{[<1/2/3/4>, "play<true/false>", "map", "time<mm:ss>"]} 
-				ou 
-				{"errorType"}
-				
-		ServletManageGame:
-			Player => Server: 
-				{"userKey", "gameName", "action"}	
-				
-			Server => Players: (Player, bombs, blocs, score, time)
-				{[
-				 [ ["x", "y", "direction", "dead <true/false>"],[...] ],
-				 [ ["x", "y", "type", "explode <true/false>" ], [...] ],
-				 [ ["position": {"x", "y"}, "bonus": <bonus>], [..] ],
-				 [1,2,3,4],
-				 "time <mm:ss>"]} 
-				 ou 
-				{"errorType"}
-			 
-			 
-	\end{verbatim}
 		
 \subsection{Servlet}
-	Comme il a été dit précédement, notre serveur est accessible via des requêtes
-	HTTP contactant des servlets. Ces servlets sont stockées dans un serveur
-	d'application nommé Apache Tomcat. Il s'agit d'un conteneur libre de
-	servlets Java 2 Enterprise Edition, mais il fait aussi office de serveur Web.
-		
-	Une servlet est une classe Java qui permet de créer dynamiquement des données
-	au sein d'un serveur HTTP. Une servlet s'exécute dynamiquement sur le serveur
-	web et permet l'extension des fonctions de ce dernier, typiquement : accès à
-	des bases de données.
 	
-	Lors du développement nous avons eu simplement à remplacer les
-	classes(diagramme partie Modélisation) représentant les tâches par des classes
-	Java de type Servlet. 
-	Quant à la classe Context elle est devenue ContextListener.
-	Cette dernière est
-	invoquée lorsque l'objet ServletContext	est crée. Sa méthode contextInitialized(ServletContextEvent event) sera
-	alors appelée, permettant ainsi de définir des objets communs à toutes les
-	servlets, tels qu'un accesseur à la base de données, ou le tableau qui va
-	contenir les utilisateurs connectés.
-		
-
-	\subsubsection{Schéma de fonctionnement }
-		
-		\begin{center}
-			\includegraphics[width=16cm]{Analyse/Img/serveurappli.eps}
-		\end{center}
-		
-		\begin{enumerate}
-
-			\item 
-					Le client émet une requête pour demander une
-					ressource au serveur. Par exemple la création de son compte multijoueur,
-					qui pourrait se situer \url{http://Bomberklob.com/inscription}
-			\item
-					Côté serveur, c'est le serveur web qui traite les
-					requêtes HTTP entrantes. Il traite donc toutes les requêtes, qu'elles
-					demandent une ressource statique ou dynamique. Seulement, un serveur HTTP
-					ne sait répondre qu'aux requêtes visant des ressources statiques.
-
-			\item 
-					Ainsi, si le serveur HTTP s'aperçoit que la requête reçue est destinée
-					au serveur d'applications, il la lui transmet. Les deux serveurs sont
-					reliés par un canal, nommé connecteur.
-		
-			\item
-					Le serveur d'applications (dans notre cas Tomcat) reçoit la requête à
-					son tour. Lui est en mesure de la traiter. Il exécute donc la servlet
-					correspondante à la requête, en fonction de l'URL, en récupérant les
-					valeurs dans le flux JSON entrant. Cette opération est effectuée à partir
-					de la configuration du serveur, grâce un fichier web.xml faisant le mapping
-					entre URL et servlet associée.
-		
-					La servlet est donc invoquée, et le serveur lui fournit notamment deux
-					objets Java exploitables: un représentant la requête, l'autre représentant
-					la réponse. La servlet execute sa fonction et génère la réponse à la
-					demande, sous forme de flux JSON. Cela peut passer par la consultation de
-					sources de données, comme des bases de données (4' sur le schéma).		
-		
-		\end{enumerate}
-		
+		Comme expliqué précédement notre serveur est conçu grâce aux servlets. Après
+		avoir décrit leur fonctionnement, nous allons montrer dans cette partie
+		comment elles ont été utilisé.
 		
 	\subsubsection{En pratique}
-		
+		Au lancement du serveur la classe ContextListener est invoquée lorsque l'objet
+		ServletContext est crée. Sa méthode contextInitialized(ServletContextEvent event) sera alors appelée, 
+		permettant ainsi de définir des objets communs à toutes les
+		servlets, tels qu'un accesseur à la base de données, ou le tableau qui va
+		contenir les utilisateurs connectés.	
 		Le requetes font appel à la fonction post des servlet. Le flux entrant étant
 		de type JSON, il faut déserialiser le flux dans un objet correspondant. Exemple
 		l'utilisateur envoie son userName et son mot de passe crypté dans un tableau,
