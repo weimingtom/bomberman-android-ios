@@ -111,6 +111,9 @@
 	
 		\paragraph{Moteur de rendu\\}
 		
+			\hypertarget{Moteur de rendu}{}
+			\label{Moteur de rendu}
+		
 			Contrairement à celui que nous avons vu dans la section précédente pour
 			l'éditeur de carte
 			\footnote{
@@ -247,10 +250,63 @@
 			car au fur et à mesure de la partie il existera de moins en moins d'objets
 			donc garder une structure aussi grosse qu'une matrice n'est pas optimal.
 		
-		\paragraph{Moteur physique}
+		\paragraph{Moteur physique\\}
 		
 			\hypertarget{Moteur physique}{}
 			\label{Moteur physique}
+			
+			Un moteur physique est, en informatique, une bibliothèque logicielle 
+			indépendante appliquée à la résolution de problèmes de la mécanique
+			classique.  Les résolutions typiques sont les collisions, la chute des corps,
+			les forces, la cinétique, etc.
+			Les moteurs physiques sont principalement utilisés dans des simulations 
+			scientifiques et dans les jeux vidéos.
+			
+			
+			Ici notre moteur physique se contentera simplement de s'occuper des diverses
+			colisions qu'auront les joueurs avec l'environnement les entourant ansi que
+			les intéractions qu'auront les divers objets du décors entre eux ainsi qu'avec les joueurs.
+
+			$\,$		
+			
+			Tout comme le moteur de rendu
+			\footnote{
+				\hyperlink{Moteur de rendu}{Moteur de rendu}
+				\og voir section \ref{Moteur de rendu}, page \pageref{Moteur de rendu}.\fg
+			}
+			le moteur physique d'un jeu doit être optimal dans les traitements qu'il a à
+			effectuer vu que son utilisation est permanente au cour du jeu.
+			
+			
+			Afin d'optimiser ces traitements lors des collisions nous avons fusionné les
+			deux matrices présentent dans l'éditeur de cartes
+			\footnote{
+				\hyperlink{Editeur de carte}{Editeur de carte}
+				\og voir section \ref{Editeur de carte}, page \pageref{Editeur de carte}.\fg
+			}
+			afin de n'en obtenir qu'une seule reprenant le principe décrit dans le moteur
+			de rendu\footnotemark[2].
+			
+			$\,$
+			
+			Cette matrice est composée de sept types d'objets différents à savoir :
+			
+			\begin{center}
+				\begin{tabular}{|c|c|} \hline
+				Objet  & Description \\\hline
+				EMPTY  & Zone vide représentant un sol quelconque\\\hline
+				BLOCK  & Un bloc indestructible\\\hline
+				GAPE   & Un trou \\\hline
+				DAMAGE & Une zone de domages (piques, lasers, etc \ldots) \\\hline
+				DANGEROUS\_AREA & Une zone dangereuse\\\hline
+				BOMB & Une bombe\\\hline
+				FIRE & Du feu resultant de l'explosion d'une bombe\\\hline
+				\end{tabular}
+			\end{center}
+			
+			Les zones dangereuses sont les zones qui seront touchées lors de l'explosion
+			d'une bombe, ces zones sont spécifique à l'intelligence artificielle et leur
+			permettent de savoir si elles sont en danger ou non.
 		
 			\subparagraph{Structure utilisée}
 			\subparagraph{Mouvements (collisions)}
