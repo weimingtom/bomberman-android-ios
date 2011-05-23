@@ -106,8 +106,14 @@
 
 \subsection{Jeu}
 	\subsubsection{Intelligence artificielle}
-		La principale action que l'intélligence artificielle doit savoir effectuer, c'est de pouvoir se déplacer dans son environement. C'est pour cela que nous avons regardé comment déplacer un object dans un graphe, et nous avons trouvé plusieurs algorithmes, mais nous on avons retenu deux en particulé.
+		Comme nous avons vu dans le cahier des charges, nous avons mis en place une integellence artificielle permettant à un joueur de jouer en solotaire.
 	
+		Tout d'abord nous avons du réfléchir à toutes les actions que les bots pourraient effectuer, lors d'une partie. Premièrement l'action la plus importante que l'intelligence artificielle doit savoir faire c'est de pouvoir se déplacer librement sur la carte en fonction des différents élements de la carte et des actions effectuées par les autres joueurs. Elles sont notamment capable de suivre le joueur le plus proche pour l'attaquer, fuire en cas de danger.  Ensuite les bots sont capables de détruire des murs pour pouvoir atteindre un point de la carte et  de poser une bombe pour essayer de tuer un ennimi.
+	
+		Comme nous veunos de le voir, la principale action que l'intélligence artificielle doit être capable effectuer, c'est de pouvoir se déplacer dans son environement. C'est pour cela que nous avons regardé comment déplacer un object dans un graphe, et nous avons trouvé plusieurs algorithmes étant capable de rechercher un chemin dans un graphe, mais parmi tous ces algorithmes, nous en avons retenu deux en particulé.
+		
+		\paragraph{Pathfinding\\}
+		
 		Tout d'abord l'algorithme de recherche A* a pour but de rechercher un chemin dans un graphe entre un nœud initial et un nœud final tous deux préalablement définis. A* permet de trouver l'un des meilleurs (mais pas forcément le meilleur) chemins existant entre un point A et un point B (il retourne le premier chemin trouvé). La force de cette algorithme est le temps de calcul et l'exactitude des résultats, contrairement à Dijkstra qui est le deusième algorithme que nous avons retenu qui lui fournit toujours le meilleur résultat (le plus court chemin entre deux points) mais dans un temps d'exécution beaucoup plus long que l'algorithme de A*. Et comme il peut y avoir jusqu'à trois bots \footnote{Bot (diminutif de robot) désigne un personnage contrôlé par l'ordinateur.} et que l'intéligence artificielle doit réguliairement recalculer son chemin en fonction des actions effectuées par les autres joueurs, nous avons donc choisi l'algorithme de A*. 
 	
 		Maintenant que l'on sait quel algorithme utiliser pour rechercher un chemin dans un graphe, nous allons voir en détail comment marche l'algorithme de A*.
