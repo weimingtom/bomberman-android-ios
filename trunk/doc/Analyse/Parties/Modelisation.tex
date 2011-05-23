@@ -105,13 +105,63 @@
 			
 
 \subsection{Jeu}
-	\begin{itemize}
-		\item{Diagramme classe}
-		\item{Gameplay}
-		\item{Gestion images / tile mapping}
-		\item{Images}
-		\item{Sons}
-	\end{itemize}
+	\subsubsection{Intelligence artificielle}
+		La principale action que l'intélligence artificielle doit savoir effectuer, c'est de pouvoir se déplacer dans son environement. C'est pour cela que nous avons regardé comment déplacer un object dans un graphe, et nous avons trouvé plusieurs algorithmes, mais nous on avons retenu deux en particulé.
+	
+		Tout d'abord l'algorithme de recherche A* a pour but de rechercher un chemin dans un graphe entre un nœud initial et un nœud final tous deux préalablement définis. A* permet de trouver l'un des meilleurs (mais pas forcément le meilleur) chemins existant entre un point A et un point B (il retourne le premier chemin trouvé). La force de cette algorithme est le temps de calcul et l'exactitude des résultats, contrairement à Dijkstra qui est le deusième algorithme que nous avons retenu qui lui fournit toujours le meilleur résultat (le plus court chemin entre deux points) mais dans un temps d'exécution beaucoup plus long que l'algorithme de A*. Et comme il peut y avoir jusqu'à trois bots \footnote{Bot (diminutif de robot) désigne un personnage contrôlé par l'ordinateur.} et que l'intéligence artificielle doit réguliairement recalculer son chemin en fonction des actions effectuées par les autres joueurs, nous avons donc choisi l'algorithme de A*. 
+	
+		Maintenant que l'on sait quel algorithme utiliser pour rechercher un chemin dans un graphe, nous allons voir en détail comment marche l'algorithme de A*.
+	
+		Pour comprendre comment l'algorithme, nous allons nous aider d'un dessin représentent une carte avec un point A (départ) est affiché en vert, le point B (arrivée) est en rouge, et où les cases en bleu représentent le mur.
+	
+		\begin{center}
+			\includegraphics[width=8cm]{./Analyse/Img/Grille.eps}
+		\end{center}
+	
+		La premier chose que l'on peut observer, c'est que la carte est divisée en cases. Chaque case de la matrice représente un node qui peut être soit traversable, soit non traversable. Dans l'application, il y que les murs ou les bombes que l'on ne peut pas traverser sinon tous les autres objets les joueurs peuvent les traverser. Donc le but de l'algorithme est de trouver un chemin entre A et B en évitant les murs. 
+	
+		Durant le déroulement de l'algorithme, nous avons utilisé deux listes qui contiennent des cases de la carte. Il y a une liste dite \og listeOuverte \fg \, et l'autre \og listeFermée \fg. La listeOuvrete contient une liste de cases qui pourraient éventuellement faire partie du chemin, mais pas forcément, pour le moment elle sera vide. Plus précisément c'est une liste de cases que nous devons vérifier. Ensuite, au niveau de la listeFermée, elle contient toutes les cases que nous aurons déjà vérifiées, au début de l'excution, elle contient que le point de départ (B3).
+	
+		Commencons les explication du déroulement de l'algorithme. Tout d'abord, il faut savoir qu'un joueur peut se déplacer dans toutes les directs, donc nous allons ajouter toutes les cases adjacentes à la listeOuvert qui sont traversable, il y en a huite (A2, B2, C2, A3, C3, A4, B4, C4). Donc pour le moment nous devons avoir ça :
+	
+		\begin{center}
+			\includegraphics[width=8cm]{./Analyse/Img/Grille2.eps}
+		\end{center}
+	
+		Les carrés avec un contour rouge sont les carrés qui sont dans la listeOuverte et les carrés qui on une couleur un peut plus foncé que les autre sont les carrés qui se trouvent dans la listeFermée.
+	
+		Maintenant pour choisir la case par laquelle on doit passer, nous devons rajouter trois données \og F \fg , \og G \fg \, et \og H \fg:
+		\begin{description}
+			\item[G : ]{c'est le coût de mouvement pour aller de la case A à une case donnée sur la grille, en suivant le chemin généré jusqu'à cette dernière.}
+			\item[H :]{c'est l'heuristique, c'est à dire le coût estimé pour allé du point courant à l'arrivé. Comme nous ne connaissons pas vraiment la distance qu'il nous reste à parcourir, car toutes sortes d'obstacle peuvent se trouver sur notre chemin (objet non traversable). Donc nous allons devoir l'approximer grâce à une fonction, pour la calculer nous avons choisi d'utiliser l'heuristique de Manhattan, qui consiste à compter le nombre de bloc (à vol d'oiseau et sans prendre les diagonales) qui lui reste à parcourir.}
+			\item[F :]{c'est G + H}
+		\end{description} 
+	
+		Chaque case de la listeOuverte ou de la listeFermée vont devoir possèder toutes ces données, plus les coordonnées de leur père, c'est à dire les coordonnées de la case qui vient de les ajouter dans la la listeOuverte. Pour calculer G, nous allons assigner un coût de 10 pour chaque déplacement horizontal ou vertical, et un coût de 14 pour un mouvement en diagonale. Nous utilisons ces données car la distance nécessaire pour se déplacer est la racine carrée de 2, ou approximativement 1.41 fois le coût d'un déplacement vertical ou horizontal. Nous utiliserons donc 10 et 14 pour des raisons de simplification. Par conséquent, nous allons multiplier par 10 le coût H pour qu'il soit cohérent par rapport à G.
+
+		Donc maintenant, nous devons avoir cette matrice :
+		\begin{center}
+			\includegraphics[width=8cm]{./Analyse/Img/Grille3.eps}
+		\end{center}
+	
+		Après avoir ajouté toutes les cases adjacentes à la case courant, il suffit de prendre la case qui a le plus petit coût F et ensuite de la rajouter dans la listeFermée et de la supprimer de la listeOuverte. Nous obtenons donc :
+		\begin{center}
+			\includegraphics[width=8cm]{./Analyse/Img/Grille4.eps}
+		\end{center}
+	
+		Ensuite on regarde toutes les cases adjacentes à la dernière case ajoutée dans la listeFermée. Si elles se trouvent déjà dans la listeOuverte, on vérifit que leurs coût soient inférieur au coût de la case correspondante déjà dans la listeOuverte, si oui alors on la remplace sinon on ne fait rien.
+	
+		Pour finir on répète cette opération jusqu'on arrive à la case d'arrivée, nous obtenons ça :
+		\begin{center}
+			\includegraphics[width=8cm]{./Analyse/Img/Grille5.eps}
+		\end{center}
+	
+		Pour finir, il nous suffit juste de récupérer la case d'arrivée et de regarder son père, puis de repéter cette opération avec la case obtenu jusqu'à arriver à la case de dépard. Grâce à ça nous obtenons cette dernière étape de l'algorithme :
+		\begin{center}
+			\includegraphics[width=8cm]{./Analyse/Img/Grille6.eps}
+		\end{center}
+	
+		Comme on peut le voir sur le schéma prèdédent, le chemin qu'à trouvé l'algorithme de A* est le suivant : $ B3 \rightarrow C4 \rightarrow C5 \rightarrow D5 \rightarrow E5 \rightarrow F4 \rightarrow F3 $. L'algorithme aurait pu d'autre chemin équivalent à celui-ci mais le principe de cette algorithme c'est de renvoyer le permier chemin qu'il trouve.
 			
 
 \subsection{Réseau}
