@@ -1,10 +1,20 @@
 \subsection{Général}
-	\begin{itemize}
-		\item{Langage utilisé}
-		\item{Tout en anglais}
-		\item{Modèle Vue Contrôleur}
-		\item{Documentation - (Javadoc / appledoc)}
-	\end{itemize}
+	Le fait de developper des applications IOS et Android nous a imposé le choix du language. En effet pour developper des applications IPhone, il faut utiliser le language Objective-C, puis  pour les applications Android c'est le language JAVA qui est utilisé. C'est deux languages ont une syntaxe complétement différente mais sont quand meme tres proche car ce sont des languages orientés objets. Grâce à cela nous avons pu mettre au point une modélisation général de l'application que nous avons ensuite adapté à chaque language.\\
+			
+	Nous avons décidé de développer en anglais car premierement c'est la langue la plus utilisé dans le monde de la programmation et deuxiement car la syntaxe des languages est toujours en anglais. Cela permettra à n'importe quel utilisateur de n'importe quelle nationalités de comprendre le code de l'application.\\
+			
+	La documentation des deux applications est également en anglais. Cette documentation permettra à tout utilisateur de comprendre le fonctionnement de l'application.
+	Nous avons créé une AppleDoc pour l'application IPhone et une JavaDoc pour l'application Android. Chacune de ces documentations est au format HTML et sera donc directement visible grâce à un navigateur Web.\\
+			
+	Pour ce qui est de la modélisation globale du projet, nous avons choisi de developper les deux applications selon le modèle MVC \footnote{Modèle-Vue-Contrôleur}. Ce dernier est une architecture et une méthode de conception qui organise l'interface homme-machine (IHM) d'une application logicielle. 
+			
+	Le modèle représente le comportement de l'application : traitements des données, interactions avec la base de données, etc. Il décrit et contient les données manipulées par l'application. Il assure la gestion de ces données et garantit leur intégrité.
+			
+	La vue correspond à l'interface avec laquelle l'utilisateur interagit. Sa première tâche est de présenter les résultats renvoyés par le modèle. Sa seconde tâche est de recevoir toutes les actions de l'utilisateur (clic de souris, sélection d'une entrée, boutons, etc).
+			
+	Le contrôleur prend en charge la gestion des événements de synchronisation pour mettre à jour la vue ou le modèle et les synchroniser. Il reçoit tous les événements de l'utilisateur et enclenche les actions à effectuer.
+			
+	Grâce à cette méthode de conception le code est décomposé en trois parties bien distinctes qui permettent la maintenance et l'amélioration du projet. Cela permet aussi de modifier chacune des trois parties sans avoir à modifier les deux autres. Cela permet par exemple de changer de vue et avoir des interfaces graphiques différentes.
 			
 \subsection{Menus}
 
@@ -168,7 +178,119 @@
 		\end{center}
 	
 		Comme on peut le voir sur le schéma prèdédent, le chemin qu'à trouvé l'algorithme de A* est le suivant : $ B3 \rightarrow C4 \rightarrow C5 \rightarrow D5 \rightarrow E5 \rightarrow F4 \rightarrow F3 $. L'algorithme aurait pu d'autre chemin équivalent à celui-ci mais le principe de cette algorithme c'est de renvoyer le permier chemin qu'il trouve.
+	
+	
 			
+	\begin{itemize}
+		\item{Diagramme classe}
+	\end{itemize}
+	
+	Comme vue dans le cahier des charges l'application est divisé en trois grandes parties: Le modèle, la vue et le controlleur.
+	
+	\subsubsection{Modèle}
+	
+	Le modèle constitue la \textit{base} de notre projet. C'est sur celui-ci que nous avons construit le reste de l'application. Nous avons modélisé celui-ci de manière à ce qu'il soit clair et simple. Ce dernier ce décompose en trois sous-partie: la partie hierarchie des objets, la partie moteur puis la partie éditeur de carte.\\
+	
+	\paragraph{Hierarchie des objets \\}
+	
+	Pour concevoir la hierarchie des objets, il a fallu tout d'abord dinstinguer la totalité des objets qui seraient disponible dans le jeu ainsi que leurs différences et leur point communs.  Nous avons donc distingué quatre grands types d'objets: les objets destructibles, les objets indestructibles, les objet animés ainsi que les objets inanimés. En sachant que les objets pouvaient être destructibles-animés, destructible-inanimés, indestructible-animés ou indestructible-inanimés. Nous avons choisi que tout objet serait considéré comme un objet animé pour éviter des soucis de modélisation. Ainsi les objets possèderont tous une sequence d'animation d'images qui sera dessiné a l'écran. Cette derniere sera répété dans le cas d'une animation qui se répété et qui comporte plusieurs images, sinon si elle possède simplement qu'une seule image, seule cette image sera dessiné a l'écran. Nous avons ensuite dinstingué une multitude de point communs entre les différents objets dont voici le nom de l'attribut et leur utilité : 
+	
+	\begin{description}
+		\item [\textit{position}]{indique la position en pixel de l'objet sur l'écran}
+		\item [\textit{nom}]{indique le nom de l'objet}
+		\item [\textit{hit}]{est à 1 si l'objet peut être touché par une explosion (0, sinon)}
+		\item [\textit{level}]{est à 1 si l'objet est animés (0,sinon)}
+		\item [\textit{fireWall}]{est à 1 si l'objet ne laisse pas passer les flammes des explosions (0,sinon)}
+		\item [\textit{damages}]{indique si l'objet peut infliger des domages}
+		\item [\textit{idle}]{est une image qui représente l'objet en général}
+		\item [\textit{animates}]{est une table de hachage contenant l'ensemble des images composant la sequence d'animation de l'objet (vide si inanimés)}
+		\item [\textit{destroy}]{est une table de hachage contenant l'ensemble des images composant la sequence d'animation de destruction de l'objet (vide si indestructible)}
+		\item [\textit{currentFrame}]{permet de connaitre le numéro de l'image courante de la sequence d'animation en cours d'affichage}
+	\end{description}
+
+	Nous avons donc décider de concevoir une classe "Object"  pour modéliser toutes ces propriétés que les objets ont en commun. Cette classe sera abstraite car tout objet est destructible ou indestructible et cela sera décris dans des classes plus spécialisés.
+	
+	 Ensuite nous avons pensé a créer deux autres classes: "Destructible" et "Undestructible" pour les objets destructible et indestructible. Ces deux classes héritent de "Object" car elles sont des objets. Ce qui différencie ces deux classes est le champ \textit{life} qui permet de savoir combien de fois l'objet doit etre touché par une bombe avant d'être detruit.
+	
+	Nous avons ensuite dinstingué deux autres types d"objets encore plus spécifique: Les joueurs et les bombes. Ces derniers sont des objets destructibles puisqu'il ne dure pas toute la partie selon le mode de jeu.
+	
+	Les bombes possèdent deuxnouveaux attributs qui les différentie des autres objets: 
+	\begin{description}
+		\item [\textit{type}]{permet de connaitre le type de bombe}
+		\item [\textit{owner}]{permet de connaitre le joueur qui a posé la bombe}
+	\end{description}
+	
+	Quand à la classe joueur celle-ci possède encore d'autres attributs: 
+	\begin{description}
+		\item [\textit{color}]{permet d'afficher à l'écran le joueur avec sa bonne couleur}
+		\item [\textit{bombsTypes}]{permet de connaitre le type de bombe qu'il peut poser}
+		\item [\textit{powerExplosion}]{permet de connaitre la porté d'explosion de ses bombes}
+		\item [\textit{timeExplosion}]{permet de connaitre le temps d'explosion des bombes}
+		\item [\textit{speed}]{permet de connaitre la vitesse du joueur}
+		\item [\textit{shield}]{permet de connaitre la valeur du bouclier}
+		\item [\textit{bombNumbers}]{permet de connaitre le nombre maximum de bombes que le joueur peut poser}
+		\item [\textit{isTouched}]{permet de savoir si le joueur viens d'être touché}
+		\item [\textit{isKilled}]{permet de savoir si le joueur est mort}
+		\item [\textit{isInvincible}]{permet de savoir si le joueur est invincible}
+	\end{description}
+	
+	Cette hierarchie de classe nous permettra donc de modéliser l'ensemble des objets que le jeu pourra afficher.
+	
+	
+	
+	\paragraph{Moteur\\}
+	
+	Pour ce qui est du moteur. Celui-ci est représenté par une classe "Engine". Cette classe va contenir l'ensemble des methodes qui vont permettre de d'établir les collisions. C'est aussi cette classe qui s'occuppe de mettre à jour les bombes ainsi que l'IA du jeu. 
+	Une instance d'un moteur est associé à une partie dont le nom de classe est "Game". Cette classe "Game" est abstraite et représente une partie avec toutes les options qu'elle contient. C'est à dire qu'elle possède des attributs permettant de décrire le type de partie, un tableau avec chaque joueur de la partie, ainsi que le carte du jeu. La classe possède toutes les méthodes d'initialisation, de mise à jour, de dessins et de fin de la partie. Enfin pour différencier les différents types de parties nous avons utiliser le pattern \footnote{Un pattern est un modèle de conception en informatique} décorateur. Ainsi il y aura deux grands types de parties: les parties solitaires et les parties multijoueurs. Puis ces parties sont décorés par le type de partie: survivor \footnote{Le mode survivor est un mode où chaque joueur à un nombre de vie limité et dont le gagnant est celui qui sera le dernier a être en vie} ou death match\footnote{Le mode death match est un mode où il y a un temps limité et dont le joueur gagnant est celui qui a tué le plus d'ennemis}.
+	
+	Ensuite pour ce qui est des cartes, une classe abstraite nommé "Map" contient le nom et la taille de la carte ainsi qu'un tableau contenant la position initial de chaque joueur sur la carte. Puis une classe "GameMap" qui hérite de map permet de dessiner la carte a l'écran, elle se compose d'une image représentant le sol puis d'un tableau d'objets animés qui permet de représenter l'ensemble du reste des objets. Ensuite nous utilisons un autre type de carte qui va permettre de faciliter les collisions, que ce soit pour un joueur humain ou pour une intelligence artificielle. Cette classe est appelé "CollisionMap" et contient une matrice d'objet "CollisionCase" ainsi qu'un tableau qui contient l'ensemble des bombes posés sur la carte. Les "CollisionCase" sont composé de deux tableaux. Chaque valeur d'un des tableau est associé à une valeur de l'autre talbeau. Un tableau \textit{types} contient les différents types de danger ou d'objet  qu'il existe sur cette case et un tableau \textit{counters} permettra en fonction de chaque type de compter le nombre de fois que ce danger ou objet est présent sur cette case. Par exemple on peut très bien avoir une case qui est dans le champ d'explosion de quatres bombes et qui contient un bloc de type destructible. Ainsi le tableau \textit{type} contiendra deux champs , un pour le type zone dangereuse et un autre pour le type bloc destructible puis le tableau \textit{counters} contiendra donc dans sa case associé à la case zone dangereuse une valeur égale à quatre et et une valeur de un pour l'autre. 
+		
+	
+	\subsubsection{Vue}
+	
+	L'interface graphique du jeu est décomposé en trois partie. Une partie qui représente le menu d'information de la partie, une autre qui réprésente le menu des actions possibles du joueurs et une dernière qui représente la partie en cours. 
+	Le menu d'information se situe en haut de l'écran. Il permet d'afficher le score des joueurs, le temps lors d'une partie death match ainsi que les bonus du joueurs (le nombre de bombes qu'il peut poser, la portée de l'explosion des bombes, la vitesse du joueur et les bonus de vie) et de mettre le jeu en pause.
+	Le menu d'action se situe à droite de l'écran. Il permet à l'utilisateur de poser les bombes grâce à un bouton et aussi de changer de type de bombes grâce à une liste déroulante.
+	Quand à la partie, elle est afficher au centre de l'écran et prend le maximum de place possible pour que le jeu soit le plus visible possible. Elle permet d'afficher la carte ainsi que les joueurs et les bombes. Mais elle sert aussi à écouter les mouvements du doigt de l'utilisateur pour modifier les coordonnées du joueur dans le modèle pour pouvoir ensuite rafraichir l'écran et voir le joueur se deplacer.
+	
+	
+	
+	\subsubsection{Controlleur}
+	
+	Le controlleur va permettre de faire la liaison entre la vue et le modèle. La majorité de ces méthodes sont appelé lorsque l'utilisateur interagie avec la vue. Ces méthodes vont par la suite modifier le modèle qui va permettre de mettre à jour la vue. Le controlleur est divisé en quatre sous-controlleur. Chacun des trois premiers est respectivement associé à l'une des trois vues cité ci-dessus. Puis le quatrième est plus général, il permet de faire la liaison entre les trois autres controlleurs. Car en effet chacune des actions effectués sur l'une des  vue peut modifier l'une des deux autres.
+	
+	\subsubsection{GamePlay}
+	Nous avons choisi d'établir un gameplay immersif. C'est à dire que notre interface graphique sera utilisée de manière souple et intuitive. Notre gameplay est divisé en trois parties: les déplacements, la pose des bombes et la gestion des différents types de bombes.
+		
+		Pour ce qui est des déplacements du joueurs. Nous avons décidé que l'utilisateur utiliserais toute la surface de l'écran pour se déplacer. Ainsi si il veut se déplacer vers la droite, il fait glisser sont doigt de la gauche vers la droite, puis tant qu'il restera appuyer sur l'écran, le joueur continura de se déplacer. Cette manière de se déplacer est précise et très intuitive contrairement à l'utilisation d'un joystick virtuel ou de l'accéléromètre.
+		
+		Pour la pause des bombes un simple boutton est mis en évidence en bas à droite de l'écran. Celui-ci est assez gros pour que l'utilisateur n'est pas à appuyer sur une zone trop précise en cas de manipulation rapide.
+		
+		Puis pour le choix des différentes bombes, une simple liste déroulante est mise en évidence à droite du jeu, pour pouvoir changer de bombe rapidement.\\
+		
+		\subsubsection{Tile Mapping}
+
+		La gestion des images a été une partie très importante de l'analyse. Car le développement mobile impose plusieurs contraintes, notament la gestion de la mémoire et la vitesse de calcul. Nous nous sommes donc inspiré des premiers jeux consoles comme Super Mario Bros ou Zelda qui ont été développé sur les premieres consoles comme la NES\footnote{La Nintendo Entertainment System, ou NES, est une console de jeux vidéo 8 bits} ou la GameBoy\footnote{La Game Boy  est une console de jeux vidéo portable à la puissance comparable à celle de la NES}. Nous avons donc conçu le moteur du jeu selon le principe du Tile Mapping\footnote{Le Tile Mapping est une technique de modélisation graphique} pour minimiser l'utilisation des ressources des téléphones.
+		
+		Le principe du Tile Mapping est d'utiliser des petites images que nous appelerons \textit{tiles}. Ces tiles sont contenu dans une image appelé sprite (cf ci-dessous).
+		Ensuite une matrice de nombre entier est utilisé pour représenter l'environnement du jeu. Chaque nombre entier représente un tile. Puis grâce à cette association, la carte sera dessiné à l'écran selon la matrice. Voici un exemple :
+		
+		\includegraphics[width=15cm]{./Analyse/Img/tileMapping.eps}
+		
+		
+		Nous avons donc repris ce principe et nous l'avons amélioré. En effet grâce à la programmation objet, les entiers sont réprésenté directement par des objets contenant le tile qui le représente. Ainsi, nous stockons dans une matrice tous les objets inanimés (les objets dont le tile restera le meme tout le long de la partie) et nous parcourons cette matrice pour dessiner chaque objet à sa position pour obtenir une nouvelle image au format png. Ainsi à chaque rafraichissement de l'écran, seule la nouvelle image est dessiné et non pas chaque tile. Cette méthode permet d'éviter un parcours intempestif de la matrice.
+		Ensuite pour le reste des objets (les objets animés composés d'une sequence de tiles) nous avons décidé de les stocker dans une table de hachage dont la clé est la position de l'objet (pour y accéder plus rapidement). Ainsi à chaque rafraichissement de l'écran on va dessiner l'image des objets inanimés puis parcourir entierement la table de hachage et dessiner le tile courant de la sequence d'animation de chaque objet.
+		
+		\subsubsection{La gestion des images et du son}
+		
+		Chaque image, tile et chaque son dont est composé le jeu sont chargé au lancement de l'application. Tous les tiles sont stocké dans des images appelés sprites. Un sprite est donc un ensemble d'image. L'ensemble des tiles sont stockés dans différents sprites. Il y a un sprite pour les bombes, un pour les joueurs et un autre pour le reste des objets. Chaque sprite contient l'ensemble des images des objets qu'il représente. Chaque sprite est associé à un fichier XML \footnote{ Extensible Markup Language, (langage de balisage extensible) est un langage informatique de balisage générique}. Le fichier XML peut être réprésenté sous forme d'un arbre. Les fichiers XML ressemble tous plus au moins a ce genre d'arborescence: 
+		
+		\includegraphics[width=15cm]{./Analyse/Img/exampleXmlBomberklob.eps}
+		
+		Chaque fichier XML commence par une balise racine permettant de lister les objets qu'elle contient (\textit{<objects>}). Ensuite chaque objet est décris par une balise  qui contient le type, le nom de l'objet ainsi que l'ensemble de ses propriétés. La propriété \textit{hit} est à 1 si l'objet peut être touché par une explosion (0, sinon), le champ \textit{level} est à 1 si l'objet est animés (0,sinon), le champ \textit{fireWall} est à 1 si l'objet ne laisse pas passer les flammes des explosions, le champ \textit{life} indique le nombre de fois que l'objet doit etre touché par des flammes pour qu'il soit entierement détruit, et enfin le champ \textit{damages} indique si l'objet peut infliger des domages. Par exemple \textit{<destructible name="herb" hit="1" level="1" fireWall="1" life="1" damages="0">} décris un objet de type \textit{destructible}, qui peut-etre touché par des flammes, qui est animé, ne laisse pas passer les flammes des bombes, possede une vie,  n'inflige pas de domage et dont le nom est \textit{herb} . Ensuite chaque objet possède au plus trois balises animations (sauf pour les joueurs). Tout objet possède au moins la premiere balise:  <animation name="idle" canLoop="false" sound="sound\_path"> qui est celle dont le nom est \textit{idle}. Elle représente l'image standard de l'objet. Par exemple pour un objet bombe, ce sera l'image qui sera affiché dans la liste des bombes pour pouvoir selectionner ses bombes. Le champs \textit{canLoop} permet de savoir si l'image doit être répété en boucle et le champ \textit{sound} contient le chemin d'acces au fichier de son de l'animation si elle en possede un. Il y a ensuite la même balise mais dont le nom est \textit{animate}, celle-ci contiendra toutes les sequences d'images d'un objet qui est animés. Puis la dernière est celle dont le nom est \textit{destroy}. Cette derniere contiendra l'ensemble des images composant la sequences d'animation de destruction de l'objet. Enfin chaque balise de type animation contient des balises de type \textit{framerect}. Ces balises permettent de donner la position de chaque image de la séquence d'animation dans le sprite ainsi que le delay de rafraichissement entre chaque image. Par exemple \textit{<framerect top="60" left="30" bottom="90" right="60" delayNextFrame="1" />} représente une image dont le bord du haut est situé à 30pixels, le bord du bas à 90pixels, le bord de gauche à 30pixels et le bord de droite à 60pixels en partant du coin en haut à gauche du sprite. Puis pour le champ \textit{delayNextFrame} celui-ci informe que l'image suivante sera déclenché apres un delay de 1s.\\
+		
+		Grâce à cette modélisation, l'application va parcourir au démarrage l'ensemble des fichiers XML et va créer une table de hachage pour chaque ensemble d'objet du fichier. Lors de ce parcours, l'application va instancier chaque objet avec toutes propriétés que lui indique le document XML, ainsi que ses sequences d'animation. Ensuite lorsqu'un objet devra être utilisé dans le jeu, il suffira d'utiliser une copie de l'objet déja chargé en mémoire pour éviter de devoir reparcourir le fichier.
+
 
 \subsection{Réseau}
 		
