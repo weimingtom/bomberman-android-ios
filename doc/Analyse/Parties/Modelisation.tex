@@ -39,10 +39,11 @@
 	vos paramètres de jeu comme la position du menu, sont modifiable depuis ce
 	menu à onglets.
 	
-	\begin{center}
+	\begin{figure}
 		\label{activité}
 		\includegraphics[width=23cm, angle=90]{Analyse/Img/diag_activity.eps}
-	\end{center}
+		\caption{Diagramme d'activité}
+	\end{figure}
 
 	\paragraph{Base de données\\}
 			
@@ -63,10 +64,16 @@
 		l'utilisateur aura libre droit de créer ses propres cartes de jeu via un
 		éditeur. Elles seront alors stockées dans la table Map avec toujours une
 		clé étrangère vers l'id de son créateur(owner). \\
+		
+		\newpage
 				
-		\begin{center}
+		\begin{figure}
 			\includegraphics[width=11cm]{./Analyse/Img/menu_bdd.eps}
-		\end{center}
+			\caption{Diagramme de classe Base de données}
+		\end{figure}
+		
+		
+		
 						
 	\paragraph{Scénarios}
 	
@@ -122,18 +129,33 @@
 		aux mêmes données sans qu'il y ait de conflits. La partie basse représente les
 		objets qui seront utilisés pour les parties en multijoueurs. Bien évidemment
 		ces objets sont très proches de ceux utilisés dans les parties
-		locales.
-		(Schéma 3.1)
+		locales(Schéma 3.1).
+		
+		Le scénarios le plus probable serait le suivant. Un utilisateur désire jouer
+		en ligne contre de vrais joueurs. 
+		Il va alors passer par l'inscription et créer son compte sur le
+		serveur(Inscription). Une fois cette étape obligatoire faite, il pourra choisir entre rejoindre une partie en ligne
+		en cour(ConnectionGame), ou en créer un nouvelle(CreateGame). Dès lors qu'il
+		aura accès à une partie en ligne, un contact régulier avec le serveur sera
+		obligatoire afin de réaliser les interactions entre les différents
+		joueurs(ManageGame). Tout ceci devra se réaliser bien sûr dans une durée
+		infime afin de ne pas pénaliser les joueurs.
 		
 	\paragraph{Base de données\\}
-		Afin de pouvoir conserver les utilisateurs en lignes ainsi que leurs infos
-		personnels pour permettre une authentification, nous avons dû établir une
+		Afin de pouvoir conserver les utilisateurs en ligne ainsi que leurs infos
+		personnels et permettre une authentification, nous avons dû établir une
 		base de données sur le serveur. Cette dernière à été pensé comme demandé pour 
 		l'enregistrement de comptes. Une unique table nommée Users remplie donc cette
 		fonction. Le serveur devra pouvoir y accéder en écriture(inscription) comme
 		en lecture(connexion).
 			
-		Elle ne comportera que deux champs, userName et password.
+		Elle ne comportera que deux champs, userName et password. Dès lors que
+		l'utilisateur désirera créer un compte multijoueur, il renseignera dans
+		l'application son userName souhaité ainsi que son mot de passe. 
+		Ce couple sera 	alors envoyé au serveur qui vérifiera dans cette base de
+		données, que le userName(unique) n'est pas déjà utilisé. Auquel cas un nouveau n-uplet sera
+		inséré et permettra l'authentification de l'utilisateur par la suite. Les mots
+		de passe seront bien évidement crypté pour des raisons de sécurité.
 			
 		\begin{figure}
 			\includegraphics[scale = 0.5]{Analyse/Img/serveur.eps}

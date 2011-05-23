@@ -5,20 +5,93 @@
 		disposition des developpeurs une API\footnote{API : Application Programming
 		Interface, c'est un ensemble de classes mis à disposition par une
 		bibliothèque logicielle.} très bien fournie. Parmis celle-ci le package Widget
-		nous a été très utile. Grâce à ce dernier de nombreux objets ont été utilisé
+		nous a été très utile. 
+		
+		Grâce à ce dernier de nombreux objets ont été utilisé
 		afin de mettre en oeuvre et rendre pleinement fonctionnel nos menus.
 		Parmi les plus utilisés il y a eu bien sûr Button, TextView, CheckBox et
 		EditText pour les plus explicites. Les objets comme Spinner, SeekBar et
 		Gallery étant respectivement utilisés pour les menus déroulants, les barres de
 		progression et les galeries d'images pour la sélection de cartes de jeu.
 		
-		Concernant leur positionnement, un système de layout est utilisé. Une syntaxe
-		de balises xml est là aussi à disposition afin de mettre en forme tout objet
-		présent sous forme de vue. Ils sont accessibles via des id uniques par
-		fichiers xml, qui permettent de les identifiers. Les listeners présents dans
-		les classes java permettent à leur tour d'écouter les évènements utilisateurs
+		Les composants graphiques sont créés ici au travers du fichier déclaratif
+		XML via une synthaxe bien particulière. Cette méthode est vraisemblablement
+		préférable, du moins lorsque l’interface graphique est figée, connue à l’avance. 
+		Exemple :
+		\begin{verbatim}
+		
+		<Spinner android:layout_width="wrap_content"
+				 android:layout_height="wrap_content"
+				 android:id="@+id/accounts"
+				 android:layout_gravity="center_horizontal"
+				 android:prompt="@string/ChooseUserAccount"></Spinner>
+				
+		\end{verbatim}		
+		
+		
+		Pour récupérer la référence d’un widget créé depuis le
+		fichier xml de layout, il convient d’utiliser la méthode findViewById de la
+		classe Activity dans nos classes Java.
+		
+		Exemple :
+		\begin{verbatim}
+			Spinner sp = (Spinner)findViewById(R.id.accounts);
+		\end{verbatim}
+		
+		On peut remarquer que cette méthode accepte en paramètre un int et non un
+		String comme on pourrait s’y attendre. En effet, l’id est exprimé sous forme de constante int, on
+		ne passe pas à la méthode la chaîne de caractères proprement dite. Grâce à cela, la
+		méthode est sûre et on évite ainsi les erreurs à l’exécution qu’on pourrait avoir si on
+		spécifiait un id ne correspondant à aucun widget.
+		
+		Concernant leur positionnement, un système de layout est utilisé. Les layouts sont des ViewGroup responsables
+		du dimensionnement et du positionnement des widgets à l’écran. Il en existe plusieurs, 
+		chacun adoptant une stratégie bien spécifique. 
+		
+		En ce qui nous concerne nous avons principalement utilisé les
+		\textit{ListView, LinearLayout, TableLayout} et enfin les \textit{RelativeLayout}. Ce dernier nous a été très utile. En
+		effet les widgets contenus dans un RelativeLayout peuvent déclarer leur position relativement
+		par rapport à leur parent ou par rapport aux autres widgets. De ce fait nos
+		menus et autres interfaces graphiques conservent leur proportion et leur
+		agencement originel.		
+		
+		
+		Les listeners présents dans	les classes java permettent à leur tour d'écouter les évènements utilisateurs
 		ou system et réagir en fonction comme l'accès au menu suivant ou le lancement
-		d'un partie.
+		d'un partie. 
+		
+		
+		Les activités sont des composants centraux des applications. Ce sont également les
+		composants qui portent les éléments visuels de l’interface utilisateur agencés
+		sur l’écran. La navigation entre les écrans se fait dans notre cas de façon
+		explicite. L’ordre de changement d’activité est véhiculé par un objet de type Intent (intention en anglais).
+		Les activités s’enchaînent les unes aux autres par invocation directe.
+		C’est-à-dire qu’une activité donnée déclenche l’affichage d’une autre activité 
+		en appelant la méthode startActivity avec un Intent mentionnant clairement le nom
+		de l’activité. 
+		
+		Voici un exemple représentant la cohabitation listener Activity:
+		
+		\begin{verbatim}
+		private Button create;
+		this.create = (Button)findViewById(R.id.SinglePlayerGame);
+		this.create.setOnClickListener(this);
+			
+		public void onClick(View view) {
+		       Intent intent = null;
+		       if( view == create ){
+		             intent = new Intent(SinglePlayer.this, SinglePlayerLayout.class);
+		             startActivity(intent);
+		             this.finish();
+		       }
+		}
+		\end{verbatim}
+		
+		
+		
+		
+		
+		
 	\paragraph{iOS\\}
 		
 	\subsubsection{BDD}
