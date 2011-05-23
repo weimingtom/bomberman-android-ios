@@ -200,8 +200,8 @@ public class MultiplayerNewAccount  extends Activity implements View.OnClickList
 				OutputStreamWriter writer = new OutputStreamWriter(
 						connection.getOutputStream());
 				
-			//	JSONSerializer jsonSerializer = new JSONSerializer();
-			//	jsonSerializer.serialize(identifier, writer);
+//				JSONSerializer jsonSerializer = new JSONSerializer();
+//				jsonSerializer.serialize(identifier, writer);
 				writer.flush();
 
 				if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {

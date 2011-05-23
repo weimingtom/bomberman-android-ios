@@ -217,8 +217,8 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 				OutputStreamWriter writer = new OutputStreamWriter(
 						connectionServ.getOutputStream());
 				
-				//JSONSerializer jsonSerializer = new JSONSerializer();
-				//jsonSerializer.serialize(identifier, writer);
+//				JSONSerializer jsonSerializer = new JSONSerializer();
+//				jsonSerializer.serialize(identifier, writer);
 				writer.flush();
 
 				if (connectionServ.getResponseCode() != HttpURLConnection.HTTP_OK) {
