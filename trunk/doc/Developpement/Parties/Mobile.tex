@@ -89,20 +89,160 @@
 			
 
 \subsection{Editeur de carte}
+
+	\hypertarget{Editeur de carte}{}
+	\label{Editeur de carte}
+
 	\subsubsection{Rendu}
 		\subsubsection{Interface utilisateur}
 		\subsubsection{Sauvegarde}
 
 
 \subsection{Jeu}
+
 	\subsubsection{Moteurs}
-		\paragraph{Rendu}
-			\subparagraph{Structure utilisée}
-				\begin{itemize}
-					\item{Pourquoi}
-					\item{Avantages}
-				\end{itemize}
-		\paragraph{Physique}
+	
+		Au seins d'un jeu vidéo plusieurs types de moteurs sont mis en place.
+		Chacun a un travail bien précis.
+		Ici nous en retrouvons trois au total à savoir un pour le rendu graphique, un
+		pour s'occuper de la physique et un dernier gerant les actions de
+		l'intelligence artificielle.
+		Commencons par le moteur de rendu.
+	
+		\paragraph{Moteur de rendu\\}
+		
+			Contrairement à celui que nous avons vu dans la section précédente pour
+			l'éditeur de carte
+			\footnote{
+				\hyperlink{Editeur de carte}{Editeur de carte}
+				\og voir section \ref{Editeur de carte}, page \pageref{Editeur de carte}.\fg
+			}
+			le moteur de rendu se doit être beaucoup plus léger car le jeu doit dans son
+			ensemble rester le plus fluide afin d'offrir à l'utilisateur une meilleure
+			experience vu qu'ici il faut en plus de gérer le rendu, s'occuper du
+			physique
+			\footnote{
+				\hyperlink{Moteur physique}{Moteur physique}
+				\og voir section \ref{Moteur physique}, page \pageref{Moteur physique}.\fg
+			}.
+			, de l'intelligence artificielle
+			\footnote{
+				\hyperlink{IA}{IA}
+				\og voir section \ref{IA}, page \pageref{IA}.\fg
+			}.
+			et des divers sons
+			\footnote{
+				\hyperlink{Sons}{Sons}
+				\og voir section \ref{Sons}, page \pageref{Sons}.\fg
+			}.
+			qui seront joués au cours de la partie.		
+			
+			$\,$	
+			
+			L'utilisateur ne pourra plus modifier la carte à sa guise et sera
+			entièrement dépendant du moteur physique\footnotemark[3] c'est à dire par
+			exemple qu'ici un bloc indestructible sera présent tout au long de la
+			partie et ne pourra pas être supprimé, il n'est donc plus necessaire de
+			savoir quel type de sol se trouve dessous, de plus comme celui-ci ne peut pas
+			être détruit et qu'il n'est pas animé son état sera toujours le même et ne
+			correspondra qu'à une seule et unique image.
+			
+			$\,$			
+			
+			Un autre exemple est celui d'un sol inanimé tel que l'herbe où si il n'y a
+			aucun bloc (destructible) au dessus en début de partie il en sera de même à
+			la fin donc il ne nous est pas necessaire à chaque rafraichissement de
+			regarder si un bloc existe dessus, ce test se fait en début de partie est
+			sera valide jusqu'à la fin de celle-ci.
+			
+			
+			Cette remarque s'applique sur tous les objets dits \emph{non animés} dont
+			l'état ne changera jamais au cours du jeu et seulement eux.
+			
+			
+			Si l'on avait eu un sol animé représentant de l'eau, il aurait été composé de
+			plusieurs images et aurait donc necessité un rafraichissement constant.
+
+			
+			Concrètement ce que nous faisons ici à chaque début de partie est de créer
+			une image vierge qui aura la taille de la carte affichée sur l'écran dans
+			laquelle nous dessinerons tous les objets \emph{non animés}.
+			
+			$\,$
+			
+			Pour cela nous allons parcourir les deux matrices définies dans l'éditeur de
+			cartes\footnotemark[2] et de regarder s'il existe un bloc, si oui est-ce
+			qu'il est destructible ? Si ce bloc est destructible alors il nous est
+			obligatoire de savoir ce qui se trouve en dessous on va donc stocker ce bloc
+			dans une hashmap dont les cléfs sont les coordonnées de l'objet et dont la
+			valeur est l'objet lui même et dessiner le sol sur l'image citée au dessus.
+			Si ce bloc est indestructible alors inutile de savoir si un sol existe.
+			
+			Sinon si il n'existe pas de bloc nous allons regarder si le sol est animé, si
+			oui alors on le stok dans la hashmap comme un bloc destructible sinon nous le
+			dessinons dans l'image comme un objet inanimé.
+			
+			$\,$
+			
+			Voici un exemple concret de la methode décrite au dessus :
+			
+
+			\begin{figure}[h]			
+				\begin{center}			
+					\includegraphics[width=229px, height=142px]{Developpement/Img/map.eps}
+					\caption{L'image représentant la totalité des objets non animés}
+				\end{center}
+			\end{figure}
+
+			\begin{figure}[h]			
+				\begin{center}						
+					\includegraphics[width=250px, height=250px]{Developpement/Img/hashmap.eps}
+					\caption{La hashmap des objets animés}
+				\end{center}
+			\end{figure}
+
+			$\,$
+			
+			$\,$
+
+			Les avantages d'avoir utilisé une telle structure est qu'ici au lieu de
+			parcourir les 21*13*2 cases des deux matrices à chaque rafraichissement
+			(c'est à dire toutes les 50 millisecondes environ) et d'afficher au minimum
+			21*13 objets pour le sol et 64 objets pour les bordures si la carte est vide
+			donc énormement plus si il existe d'autres objets, nous n'affichons qu'une
+			image plus au maximum 197 objets.
+			
+			\begin{center}
+				\begin{tabular}{|c|c|c|} \hline
+				  & Editeur de carte & Jeu    \\\hline 
+				Meilleur des cas & 337 & 1    \\\hline
+				Pire des cas     & 534 & 198  \\\hline		
+				\end{tabular}
+			\end{center}
+			
+			Le meilleur des cas ici décrit une carte vide donc composée que de sol non
+			animé ansi que des bordures de la carte, ce qui représente dans le nouveau
+			moteur de rendu une seule et unique image contrairement à l'ancien où chaque
+			objet étant affiché indépendament cela equivaut à 337 objets.
+			
+			Le pire des cas est une carte remplie au maximum de bloc destructibles,
+			obligeant dans les deux cas à connaitre le type de sol se trouvant dessous.
+			
+			
+			Nous voyons très clairement les différences de coûts entre les deux methodes
+			de rendu et l'optimisation qu'engendre la deuxième.
+			
+			De plus ici l'utilisation de la hashmap permet dans un premier temps de
+			retrouver directement un objet de par ses coordonnées mais aussi de ne pas
+			avoir à parcourir $n$ cases vides comme lors de l'utilisation des matrices
+			car au fur et à mesure de la partie il existera de moins en moins d'objets
+			donc garder une structure aussi grosse qu'une matrice n'est pas optimal.
+		
+		\paragraph{Moteur physique}
+		
+			\hypertarget{Moteur physique}{}
+			\label{Moteur physique}
+		
 			\subparagraph{Structure utilisée}
 			\subparagraph{Mouvements (collisions)}
 			\subparagraph{Gestion des bombes}
@@ -111,10 +251,20 @@
 				\end{itemize}
 	
 	\subsubsection{IA}
+	
+		\hypertarget{IA}{}
+		\label{IA}
+		
 		\paragraph{Pathfinding}
 			\subparagraph{A*}
 			\subparagraph{Aléatoire}
 			\paragraph{Prise de décision}
+			
+
+	\subsubsection{Sons}
+	
+		\hypertarget{Sons}{}
+		\label{Sons}
 	
 	\subsubsection{Interface utilisaeur}
 		\paragraph{Android}
