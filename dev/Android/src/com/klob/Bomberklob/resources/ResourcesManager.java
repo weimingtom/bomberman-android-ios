@@ -476,14 +476,17 @@ public class ResourcesManager {
 	 * @param y y coordinate
 	 * @return the tile position
 	 */
+	
+	
+	// FIXME
 	public static Point coToTile(int x, int y) {
 
 		if ( x < 0 || y < 0) {
 			return null;
 		}
 		else {
-			x = x/size;
-			y = y/size;
+			x /= size;
+			y /= size;
 			return matrixPoint[x][y];
 		}
 	}

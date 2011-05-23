@@ -470,7 +470,6 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		playerlife.setText(String.valueOf(p[0].getLife()));
 		playerspeed.setText(String.valueOf(p[0].getSpeed()));
 
-		/* FIXME noms des images et test pour ne pas avoir a afficher la même image */
 		for (int i = 0 ; i < p.length ; i++ ) {
 			if (p[i] != null) {
 				if (!p[i].isDestructible() || p[i].getCurrentAnimation().equals(PlayerAnimations.TOUCHED.getLabel())) {
@@ -482,17 +481,16 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 				}
 				else if (p[i].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel())) {
 					s = p[i].getImageName()+PlayerAnimations.KILL.getLabel();
-					if ( !this.imageName[i].equals(s) ) {
-											
+					if ( !this.imageName[i].equals(s) ) {											
 						this.imageView[i].setImageBitmap(ResourcesManager.getBitmaps().get(s));
 						this.imageName[i] = s;
-						
-						if ( i == 0 ) {
-							handler.sendMessage(handler.obtainMessage(5));
-						}
-						else {
-							j++;
-						}
+					}
+					
+					if ( i == 0 ) {
+						handler.sendMessage(handler.obtainMessage(5));
+					}
+					else {
+						j++;
 					}
 				}
 				else {

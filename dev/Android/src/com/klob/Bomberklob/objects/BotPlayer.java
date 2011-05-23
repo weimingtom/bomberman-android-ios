@@ -15,7 +15,6 @@ public class BotPlayer extends Player {
 	public BotPlayer(String imageName, Hashtable<String, AnimationSequence> animations, PlayerAnimations currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber, int immortal, int difficulty) {
 		super(imageName, animations, currentAnimation, hit, level, fireWall, damages, life, powerExplosion, timeExplosion, speed, shield, bombNumber, immortal);
 		this.difficulty = difficulty;
-		this.objectif = null;
 	}
 
 	public BotPlayer(BotPlayer botPlayer) {
