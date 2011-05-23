@@ -94,63 +94,34 @@
 		
 	\paragraph{iOS\\}
 		
-	\subsubsection{BDD}
-
-		Après avoir effectué divers recherches, il s'est avéré que les mobiles
-		utilisent un moteur de base de données relationnelles, accessible par le
-		langage SQL. Dans notre cas il s'agit de SQLite 3. Sa particularité est de ne
-		pas reproduire le schéma habituel client-serveur mais d'être directement intégrée au programme.
-		L'accès à la base de données SQLite se fait par l'ouverture du fichier
-		correspondant à celle-ci : chaque base de données est enregistrée dans un fichier qui lui est propre,
-		 avec ses déclarations, ses tables, ses index mais aussi ses données.
-			
-		\paragraph{Android\\}
-			
-			Pour manipuler aisément les bases de données depuis l'application,
-			nous avons crée une classe héritant de \textit{SQLiteOpenHelper}. Cette
-			dernière fournit des outils de manipulations. Un attribut y est
-			instancié, il s'agit de la base de données elle même, de type
-			\textit{SQLiteDatabase}.
-			
-			Nous y avons crée 3 tables, \textit{PlayerAccount} sauvegardant toutes les
-			informations sur les utilisateurs locaux, \textit{System} concervant les
-			propriétés du système, et enfin \textit{Map} décrivant les informations
-			relatives au cartes de jeu crées par l'utilisateur.
-			
-			Ainsi de nombreuses	fonctions ont été implémenté dans le but de simplifier les interactions
-			avec cette base de données depuis l'application. Il est par exemple possible de créer un nouvel 
-			utilisateur local, modifier ses préférences, gérer les configurations systèmes comme la langue ou le volume
-			du son, ajoûter de nouvelles maps ou même récupérer toutes les informations
-			concernant un utilisateur.\\
-			
-			Voici un exemple d'insertion d'un nouveau compte local dans la base de
-			donnée. Rappelons que les tests d'existance du compte ont été fait depuis
-			l'application même. Dans cet exemple vous verrez ainsi que nous commençons
-			par récupérer les droits en écritures sur la base de données locale, puis
-			nous créons un container qui servira à l'insertion de valeur dans la base. Et
-			enfin l'insertion est faite. Nous terminons tout de même en fermant l'accès à
-			cette base.
-			
-			Il s'agit la d'un schéma classique de fonction d'interaction avec notre
-			base.
-						
-			\begin{verbatim}
-			/** ajout compte hors ligne **/
-				public long newAccount(String nomCompte){
-					base = getWritableDatabase();
-			
-					ContentValues entree = new ContentValues();
-					
-					entree.put("pseudo", nomCompte);
-					long var = base.insert("PlayerAccount", null, entree);
-					
-					base.close();
-					return var;
-				}
-			\end{verbatim}
-
-			
-		\paragraph{iOS}
+		Comme Android, nous avons utilisé les widgets \footnote{Widget est un élément de base d'une interface graphique  avec lequel un utilisateur peut interagir  (par exemple : une fenêtre, une zone de texte, un bouton, etc).} pour réaliser notre interface graphique. iOS fournit lui aussi une API couplet à une documentation très complète facilitant la réalisation d'une interface utilisateur ergonomique. Parmi les widgets les plus utile, nous retrouvons les UIView, UITableView, UITableViewCell, UILabel, UITextField, UIButton qui permettent respectivement de créer une vue, un tableau, une cellule du tableau, des labels, des champs de texte et des boutons.
+	
+	Pour manipuler ces différentes composant graphique, il est possible et beaucoup plus pratique d'uliser Interface Builder pour réaliser des menus. Interface builder permet de gagner du temps lors de la réalisation d'une interface graphique standard (de type menu). Cette réalisation est possible via un outil visuel et non des lignes de code,  Interface Builder va créer des fichiers xib \footnote{xib est l'acronyme de Xml Interface Buillder.} qui vont générer à la compilation des fichiers nib \footnote{nib es l'acronyme de NeXT Interface Builder.}. Ce dernier stock les informations relative à l'interface sous forme d'un fichier xml, mais nous avons pas besion de savoir réellemet comme ça fonctionne car il est inutile de modifier directement le fichier xml.
+	
+	Ensuite pour controller les différents l'élements de l'interface préalablement créées avec Interface Builder, il suiffit de les lier au code de la vue via ce dernier. Grâce a ces liaisons, il nous sera possible de les modifiers ou les controllers avec du code et donc de pouvoir les accorder avec les données du modèle.
+	
+	La gestion des écouteurs se fait grâce au même procédé qui est utilisé pour lier les éléments de l'interface avec la vue sauf que ça créra une métohde au lieu de créer un champs. Voilà un exemple d'écouteur :
+	
+	\begin{verbatim}
+		- (void)playerAction:(id)sender {
+		    if (sender == playerWhite) {
+		        self.editorInformation.colorPlayer = @"white";
+		    }
+		    else if (sender == playerBlue) {
+		        self.editorInformation.colorPlayer = @"blue";
+		    }
+		    else if (sender == playerRed) {
+		        self.editorInformation.colorPlayer = @"red";
+		    }
+		    else if (sender == playerBlack) {
+		        self.editorInformation.colorPlayer = @"black";
+		    }
+    
+		    [editorInformation changeTool:@"player"];
+		}
+	\end{verbatim}
+	
+	Pour finir, l'un des principaux point de la gestion de l'interface graphique repose sur le modèle MVC et donc chaque vue doit être associée à un controlleur.
 				
 	\subsubsection{Première utilisation}
 	\subsubsection{Création utilisateur}
