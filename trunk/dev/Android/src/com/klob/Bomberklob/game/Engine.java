@@ -34,13 +34,14 @@ public class Engine {
 	private boolean bombBoolean = true;
 	private Thread bombThread;	
 	private ConcurrentHashMap<Point, Bomb> bombs;	
-	
+
 	private Iterator<Bomb> bombsIterator;
 
 	/* Pathfinding */
 	private Map<Point, PathFindingNode> openList;
 	private Map<Point, PathFindingNode> closeList;
-	private PathFindingNode wall = new PathFindingNode(0, 0, 0, null);
+	private int H, F, G, minimumStrok;
+	private Point tile = new Point();
 
 	private Map<Point, Integer> distance;
 	private Map<Point, PlayerAnimations> direction;
@@ -89,7 +90,8 @@ public class Engine {
 							e.printStackTrace();
 						}						
 						for(Entry<Point, Bomb> entry : bombs.entrySet()) {
-							bombs.get(entry.getKey()).updateTime();							
+							entry.getValue().updateTime();
+							single.getMap().colisionMapUpdate(entry.getValue());
 						}
 					}
 					Log.i("Bombs Thread","Thread done");
@@ -155,7 +157,7 @@ public class Engine {
 		/* Joueurs ------------------------------------------------- */
 
 		for (int i = 0 ; i < players.length ; i++ ) {
-			
+
 			if ( players[i] != null ) {
 
 				if ( players[i].getPosition() != null ) {
@@ -189,7 +191,7 @@ public class Engine {
 							/* IA */
 							if ( i != 0 && players[i].getPosition() != null ) {
 								/*Si le bot n'a pas d'objectif*/
-								if ( this.playerObjectif == null || (this.playerPosition.x == this.playerObjectif.x && this.playerPosition.y == this.playerObjectif.y)) {
+								if ( this.playerPosition.x == this.playerObjectif.x && this.playerPosition.y == this.playerObjectif.y ) {
 
 									int difficulty = ((BotPlayer) players[i]).getDifficulty();
 
@@ -239,7 +241,7 @@ public class Engine {
 									this.playerObjectif.y = this.playerObjectif.y*ResourcesManager.getSize();									
 								}
 
-								if ( this.playerObjectif == null || this.playerPosition.x != this.playerObjectif.x || this.playerPosition.y != this.playerObjectif.y ) {
+								if ( this.playerPosition.x != this.playerObjectif.x || this.playerPosition.y != this.playerObjectif.y ) {
 
 									if ( this.playerPosition.x < this.playerObjectif.x && this.playerPosition.y < this.playerObjectif.y ) {
 										players[i].setCurrentAnimation(PlayerAnimations.DOWN_RIGHT);
@@ -426,12 +428,11 @@ public class Engine {
 
 				for ( int v = 1 ; v < ResourcesManager.MAP_HEIGHT-1 ; v++ ) {
 
-					point.x = h;
-					point.y = v;
-					/* FIXME */
-					point = new Point(h,v);
+					position = ResourcesManager.getPoint(h, v);
+					point.x = position.x;
+					point.y = position.y;
 
-					if ( this.distance.get(point) == Integer.valueOf(d) ) {
+					if ( this.distance.get(ResourcesManager.getPoint(h, v)) == Integer.valueOf(d) ) {
 
 						point.y = v+1;
 						if ( this.distance.get(point) == null ) {
@@ -440,15 +441,12 @@ public class Engine {
 
 						if ( this.distance.get(point) == Integer.valueOf(0) ) {
 							if ( colisionMap[point.x][point.y] == ColisionMapObjects.EMPTY ) {
-								point.y = v;
-								pa = this.direction.get(point);
+								pa = this.direction.get(ResourcesManager.getPoint(h, v));
 								break;
 							}
 							else if ( colisionMap[point.x][point.y] == ColisionMapObjects.DANGEROUS_AREA ){
-								point.y = v;
-								position = new Point(h, v+1);
-								this.direction.put(position, this.direction.get(point));
-								this.distance.put(position, d+1);
+								this.direction.put(ResourcesManager.getPoint(h, v+1), this.direction.get(ResourcesManager.getPoint(h, v)));
+								this.distance.put(ResourcesManager.getPoint(h, v+1), d+1);
 							}
 						}
 
@@ -459,15 +457,12 @@ public class Engine {
 
 						if ( this.distance.get(point) == Integer.valueOf(0) ) {
 							if ( colisionMap[point.x][point.y] == ColisionMapObjects.EMPTY ) {
-								point.y = v;
-								pa = this.direction.get(point);
+								pa = this.direction.get(ResourcesManager.getPoint(h, v));
 								break;
 							}
 							else if ( colisionMap[point.x][point.y] == ColisionMapObjects.DANGEROUS_AREA ) {
-								point.y = v;
-								position = new Point(h, v-1);
-								this.direction.put(position, this.direction.get(point));
-								this.distance.put(position, d+1);
+								this.direction.put(ResourcesManager.getPoint(h, v-1), this.direction.get(ResourcesManager.getPoint(h, v)));
+								this.distance.put(ResourcesManager.getPoint(h, v-1), d+1);
 							}
 						}
 
@@ -479,15 +474,12 @@ public class Engine {
 
 						if ( this.distance.get(point) == Integer.valueOf(0) ) {
 							if ( colisionMap[point.x][point.y] == ColisionMapObjects.EMPTY ) {
-								point.x = h;
-								pa = this.direction.get(point);
+								pa = this.direction.get(ResourcesManager.getPoint(h, v));
 								break;
 							}
 							else if ( colisionMap[point.x][point.y] == ColisionMapObjects.DANGEROUS_AREA ) {
-								point.x = h;
-								position = new Point(h+1, v);
-								this.direction.put(position, this.direction.get(point));
-								this.distance.put(position, d+1);
+								this.direction.put(ResourcesManager.getPoint(h+1, v), this.direction.get(ResourcesManager.getPoint(h, v)));
+								this.distance.put(ResourcesManager.getPoint(h+1, v), d+1);
 							}
 						}
 
@@ -498,15 +490,12 @@ public class Engine {
 
 						if ( this.distance.get(point) == Integer.valueOf(0) ) {
 							if ( colisionMap[point.x][point.y] == ColisionMapObjects.EMPTY ) {
-								point.x = h;
-								pa = this.direction.get(point);
+								pa = this.direction.get(ResourcesManager.getPoint(h, v));
 								break;
 							}
 							else if ( colisionMap[point.x][point.y] == ColisionMapObjects.DANGEROUS_AREA ){
-								point.x = h;
-								position = new Point(h-1, v);
-								this.direction.put(position, this.direction.get(point));
-								this.distance.put(position, d+1);
+								this.direction.put(ResourcesManager.getPoint(h-1, v), this.direction.get(ResourcesManager.getPoint(h, v)));
+								this.distance.put(ResourcesManager.getPoint(h-1, v), d+1);
 							}
 						}
 					}
@@ -521,59 +510,56 @@ public class Engine {
 				break;
 			}
 		}
-		
+
 		this.distance.clear();
 		this.direction.clear();
 
 		if ( pa == PlayerAnimations.RIGHT) {
 			point.x = playerTile.x+1;
 			point.y = playerTile.y;
-			return point;                                                                           
 		}
 		else if ( pa == PlayerAnimations.LEFT) {
 			point.x = playerTile.x-1;
 			point.y = playerTile.y;
-			return point;   
 		}
 		else if ( pa == PlayerAnimations.UP ) {
 			point.x = playerTile.x;
 			point.y = playerTile.y-1;
-			return point;                                   
 		}
 		else if ( pa == PlayerAnimations.DOWN ) {
 			point.x = playerTile.x;
 			point.y = playerTile.y+1;
-			return point;                                                           
 		}
 		else {
 			point.x = playerTile.x;
 			point.y = playerTile.y;
-			return point;
 		}
+		
+		return point;
 	}
 
 	public Point pathFinding(Point sourcePoint, Point destinationPoint, ColisionMapObjects[][] colisionMap) {
 
+		openList.clear();
+		closeList.clear();
+
 		ConcurrentHashMap<Point, Objects> animatedObjects = this.single.map.getAnimatedObjects();
-		int H, F, G, minimumStrok;
-		
-		Point tile = new Point();
-		Point source = new Point();
-		Point currentTile = new Point();
-		source.x = currentTile.x = sourcePoint.x;
-		source.y = currentTile.y = sourcePoint.y;
+
+		Point currentTile = new Point(), source = new Point();
+		source.x = sourcePoint.x;
+		source.y = sourcePoint.y;
 		openList.put(source, new PathFindingNode(0, 0, 0, source));
 
 		do {
 
 			minimumStrok = Integer.MAX_VALUE;
-			for (Point entry : openList.keySet()) {
-				if ( openList.get(entry).F <= minimumStrok) {
-					minimumStrok = openList.get(entry).F;
-					currentTile = entry;
+			for (Entry<Point, PathFindingNode> entry : openList.entrySet()) {
+				if ( entry.getValue().F <= minimumStrok) {
+					minimumStrok = entry.getValue().F;
+					currentTile = entry.getKey();
 				}
 			}
-			
+
 			closeList.put(currentTile, openList.remove(currentTile));
 
 			for (int i = currentTile.x-1 ; i < currentTile.x+2 ; i++ ) {
@@ -581,165 +567,59 @@ public class Engine {
 
 					tile.set(i, j);
 
-					/* Si la case en cours ne fait pas partie des ignorées ou de la closedList */
 					if ( closeList.get(tile) == null) {
-						
-						/* Si l'objet est un bloc */
+
 						if ( colisionMap[i][j] == ColisionMapObjects.BLOCK ) {
 
-							/* Si il est destructible */
 							if ( animatedObjects.get(tile) != null ) {
 
-								/* Si il n'est pas sur une diagonale */
 								if ( i == currentTile.x || j == currentTile.y ) {
 
-									/* On calcule l'heuristique */
 									H = (Math.abs(destinationPoint.x-i) + Math.abs(destinationPoint.y-j))*10;
 
-									/* Le coût du déplacement */
-									G = 40+closeList.get(currentTile).G;
-
-									/* Et le coût total du chemin */
-									F = G+H;
-
-									/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
-									if ( openList.get(tile) == null ) {
-										openList.put(new Point(i,j), new PathFindingNode(F, G, H, currentTile));
-									}
-									else if ( G < openList.get(tile).G ) {
-										openList.get(tile).F = F;
-										openList.get(tile).G = G;
-										openList.get(tile).father = currentTile;
-									}
+									addInOpenList(40, i, j, currentTile);
 								}
 							}
 							else {
-								/* On l'ajoute à la closeList */
-								closeList.put(new Point(i,j), this.wall);
+								closeList.put(new Point(i,j), new PathFindingNode(0, 0, 0, currentTile));
 							}
 						}
 						else if ( colisionMap[i][j] == ColisionMapObjects.EMPTY ) {
 
-							/* On calcule l'heuristique */
 							H = (Math.abs(destinationPoint.x-i) + Math.abs(destinationPoint.y-j))*10;
 
-							/* Si il n'est pas sur une diagonale */
-							if ( i == currentTile.x || j == currentTile.y ) {
-
-								/* Le coût du déplacement */
-								G = 10+closeList.get(currentTile).G;
-
-								/* Et le coût total du chemin */
-								F = G+H;
-
-								/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
-								if ( openList.get(tile) == null ) {										
-									//System.out.print(" RAJOUT : " + tile.toString() );
-									openList.put(new Point(i,j), new PathFindingNode(F, G, H, currentTile));
-								}
-								else if ( G < openList.get(tile).G ) {
-									openList.get(tile).F = F;
-									openList.get(tile).G = G;
-									openList.get(tile).father = currentTile;
-								}
+							if ( i == currentTile.x || j == currentTile.y ) {                                                       
+								addInOpenList(10, i, j, currentTile);
 							}
-							else {  
-								/* Seulement si elle n'est pas gênée par une autre case càd par une case à droite ou au dessous, diagonale oblige ! */ 
+							else {
 								if ( i > currentTile.x && colisionMap[currentTile.x+1][currentTile.y] == ColisionMapObjects.EMPTY) {
 									if ( j > currentTile.y && colisionMap[currentTile.x][currentTile.y+1] == ColisionMapObjects.EMPTY) {
-
-										/* Le coût du déplacement */
-										G = 14+closeList.get(currentTile).G;
-
-										/* Et le coût total du chemin */
-										F = G+H;                                                        
-                                                           
-										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
-										if ( openList.get(tile) == null ) {										
-											//System.out.print(" RAJOUT : " + tile.toString() );
-											openList.put(new Point(i,j), new PathFindingNode(F, G, H, currentTile));
-										}
-										else if ( G < openList.get(tile).G ) {
-											openList.get(tile).F = F;
-											openList.get(tile).G = G;
-											openList.get(tile).father = currentTile;
-										}
+										addInOpenList(14, i, j, currentTile);
 									}
 									else if ( colisionMap[currentTile.x][currentTile.y-1] == ColisionMapObjects.EMPTY ){
-
-										/* Le coût du déplacement */
-										G = 14+closeList.get(currentTile).G;
-
-										/* Et le coût total du chemin */
-										F = G+H;                                                        
-                                                           
-										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
-										if ( openList.get(tile) == null ) {										
-											//System.out.print(" RAJOUT : " + tile.toString() );
-											openList.put(new Point(i,j), new PathFindingNode(F, G, H, currentTile));
-										}
-										else if ( G < openList.get(tile).G ) {
-											openList.get(tile).F = F;
-											openList.get(tile).G = G;
-											openList.get(tile).father = currentTile;
-										}
+										addInOpenList(14, i, j, currentTile);
 									}
 								}
 								else if ( i < currentTile.x && colisionMap[currentTile.x-1][currentTile.y] == ColisionMapObjects.EMPTY) {
 									if ( j > currentTile.y && colisionMap[currentTile.x][currentTile.y+1] == ColisionMapObjects.EMPTY) {
-
-										/* Le coût du déplacement */
-										G = 14+closeList.get(currentTile).G;
-
-										/* Et le coût total du chemin */
-										F = G+H;                                                        
-                                                          
-										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
-										if ( openList.get(tile) == null ) {										
-											//System.out.print(" RAJOUT : " + tile.toString() );
-											openList.put(new Point(i,j), new PathFindingNode(F, G, H, currentTile));
-										}
-										else if ( G < openList.get(tile).G ) {
-											openList.get(tile).F = F;
-											openList.get(tile).G = G;
-											openList.get(tile).father = currentTile;
-										}
+										addInOpenList(14, i, j, currentTile);
 									}
 									else if ( colisionMap[currentTile.x][currentTile.y-1] == ColisionMapObjects.EMPTY ){
-
-										/* Le coût du déplacement */
-										G = 14+closeList.get(currentTile).G;
-
-										/* Et le coût total du chemin */
-										F = G+H;
-										
-										/* Puis on l'ajoute dans la liste des cases à parcourir si elle n'existe pas ou si le nouveau coût est moindre */
-										if ( openList.get(tile) == null ) {										
-											//System.out.print(" RAJOUT : " + tile.toString() );
-											openList.put(new Point(i,j), new PathFindingNode(F, G, H, currentTile));
-										}
-										else if ( G < openList.get(tile).G ) {
-											openList.get(tile).F = F;
-											openList.get(tile).G = G;
-											openList.get(tile).father = currentTile;
-										}
+										addInOpenList(14, i, j, currentTile);
 									}
 								}
 							}
 						}
 						else {
-							closeList.put(new Point(i,j), this.wall);
+							closeList.put(new Point(i,j), new PathFindingNode(0, 0, 0, currentTile));
 						}
 					}
 				}
 			}
 		} while ( closeList.get(destinationPoint) == null && !openList.isEmpty() ) ;
 
-		
-		/* Si la case de fin a bien été trouvé */
 		if ( closeList.get(destinationPoint) != null )  {
 
-			/* On remonte jusqu'à la case suivant notre point de départ */
 			currentTile = closeList.get(destinationPoint).father;
 
 			while ( closeList.get(currentTile).father != source ) {
@@ -747,13 +627,27 @@ public class Engine {
 			}
 		}
 		else {
-			currentTile = source;
+			currentTile.x = sourcePoint.x;
+			currentTile.y = sourcePoint.y;
 		}
-		
-		openList.clear();
-		closeList.clear();
-		
+
 		return currentTile;
+	}
+
+	private void addInOpenList(int value, int i, int j, Point currentTile) {
+
+		G = value+closeList.get(currentTile).G;
+
+		F = G+H;
+
+		if ( openList.get(tile) == null ) {
+			openList.put(new Point(i,j), new PathFindingNode(F, G, H, currentTile));
+		}
+		else if ( G < openList.get(tile).G ) {
+			openList.get(tile).F = F;
+			openList.get(tile).G = G;
+			openList.get(tile).father = currentTile;
+		}
 	}
 
 
@@ -925,7 +819,7 @@ public class Engine {
 						break;
 					}
 				}
-				
+
 				this.nextTile = ResourcesManager.coToTile(this.x+this.size,this.y);
 				this.currentTile = ResourcesManager.coToTile(this.x+this.size-1,this.y);
 
@@ -987,7 +881,7 @@ public class Engine {
 						break;
 					}
 				}
-				
+
 				this.nextTile = ResourcesManager.coToTile(this.x-1,this.y);
 				this.currentTile = ResourcesManager.coToTile(this.x,this.y);
 
@@ -1349,8 +1243,8 @@ public class Engine {
 
 	private Point iaPushBomb(Player player, ColisionMapObjects[][] colisionMap) {
 
-		Point point1 = player.getPosition(), p;
-		p = point1 = ResourcesManager.coToTile(point1.x, point1.y);
+		Point point1 = player.getPosition(), p = new Point();
+		point1 = ResourcesManager.coToTile(point1.x, point1.y);
 
 		/* Ajouter une bombe */
 		Point bombPoint = ResourcesManager.coToTile(player.getPosition().x+(ResourcesManager.getSize()/2), player.getPosition().y+(ResourcesManager.getSize()/2));
@@ -1410,6 +1304,8 @@ public class Engine {
 				}
 
 				/* Chercher une chemin de sortie */
+				p.x = point1.x;
+				p.y = point1.y;
 				p = pathFinding(point1, colisionMap);
 
 				/* Si il existe une sortie */

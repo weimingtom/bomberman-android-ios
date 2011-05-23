@@ -45,7 +45,7 @@ public abstract class Player extends Objects {
 		this.life = life;
 		this.bombNumber = bombNumber;
 		this.immortal = immortal;
-		this.objectif = null;
+		this.objectif = new Point();
 	}
 
 	public Player(Player player) {
@@ -64,7 +64,8 @@ public abstract class Player extends Objects {
 
 
 	public void setObjectif(Point objectif) {
-		this.objectif = objectif;
+		this.objectif.x = objectif.x;
+		this.objectif.y = objectif.y;
 	}
 
 	public void setSpeed(int speed) throws PlayersSpeedException {

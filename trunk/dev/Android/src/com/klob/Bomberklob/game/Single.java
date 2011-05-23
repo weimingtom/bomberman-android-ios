@@ -44,6 +44,7 @@ public class Single extends Game {
 				this.players[i] = new BotPlayer(colors.get(j), ResourcesManager.getPlayersAnimations().get(colors.get(j)), PlayerAnimations.IDLE,gameType.hit, 1, gameType.fireWall, gameType.damages, gameType.life, gameType.powerExplosion, gameType.timeExplosion, gameType.speed, gameType.shield, gameType.bombNumber, gameType.immortal, this.difficulty);
 				position = this.map.getPlayers()[i];
 				this.players[i].setPosition(new Point(position.x*size, position.y*size));
+				this.players[i].setObjectif(new Point(position.x*size, position.y*size));
 				colors.remove(j);
 			}
 		}
