@@ -68,6 +68,7 @@
 	<string name="MapName">Nom de la carte</string>
 	<string name="Menu">Menu</string>
 	<string name="MultiPlayer">Multijoueurs</string>
+	<string name="Mute">Muet</string>
 	
 	<!-- N -->
 	<string name="NewAccount">Nouveau Compte</string>

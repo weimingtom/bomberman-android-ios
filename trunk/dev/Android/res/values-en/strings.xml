@@ -69,6 +69,7 @@
 	<string name="MapName">Map name</string>	
 	<string name="Menu">Menu</string>
 	<string name="MultiPlayer">MultiPlayer</string>
+	<string name="Mute">Mute</string>
 
 	<!-- N -->	
 	<string name="NewAccount">New Account</string>

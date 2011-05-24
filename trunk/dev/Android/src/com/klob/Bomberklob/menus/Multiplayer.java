@@ -27,6 +27,8 @@ import android.widget.Toast;
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.model.Model;
 
+import flexjson.JSONSerializer;
+
 public class Multiplayer extends Activity implements View.OnClickListener {
 	
 	private Button cancel;
@@ -217,8 +219,8 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 				OutputStreamWriter writer = new OutputStreamWriter(
 						connectionServ.getOutputStream());
 				
-//				JSONSerializer jsonSerializer = new JSONSerializer();
-//				jsonSerializer.serialize(identifier, writer);
+				JSONSerializer jsonSerializer = new JSONSerializer();
+				jsonSerializer.serialize(identifier, writer);
 				writer.flush();
 
 				if (connectionServ.getResponseCode() != HttpURLConnection.HTTP_OK) {
@@ -332,21 +334,21 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 //				Log.i("lastUserIdSystemPassword", ">>> " + Model.getSystem().getDatabase().getUser(userId).getPassword() );
 //				Log.i("pwd lol ", md5("lol"));
 				
-				if( !testString(userAccountName.getText().toString()) || !testString(userAccountPassword.getText().toString()) ){
-
-		 			Toast.makeText(Multiplayer.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
-		 		}
-				else{
-					if(connection()){
-						Toast.makeText(Multiplayer.this, "Authentifié", Toast.LENGTH_SHORT).show();
+//				if( !testString(userAccountName.getText().toString()) || !testString(userAccountPassword.getText().toString()) ){
+//
+//		 			Toast.makeText(Multiplayer.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
+//		 		}
+//				else{
+//					if(connection()){
+//						Toast.makeText(Multiplayer.this, "Authentifié", Toast.LENGTH_SHORT).show();
 						intent = new Intent(Multiplayer.this,MultiplayerHome.class);
 						startActivity(intent);
-					}
-					else{
-						Toast.makeText(Multiplayer.this, "ErrorAuth", Toast.LENGTH_SHORT).show();
-					}
-					
-				}
+//					}
+//					else{
+//						Toast.makeText(Multiplayer.this, "ErrorAuth", Toast.LENGTH_SHORT).show();
+//					}
+//					
+//				}
 //				else if (Model.getSystem().getDatabase().isGoodMultiUser(userId, userAccountName.getText().toString(), pwd)){
 //					/** save password **/
 //					if(password.isChecked()){
