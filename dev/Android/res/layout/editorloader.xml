@@ -1,40 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@+id/relativeLayout1"
-	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	xmlns:android="http://schemas.android.com/apk/res/android" android:background="@color/Gray">
-
-	<LinearLayout android:layout_height="wrap_content"
-		android:layout_width="fill_parent" android:id="@+id/linearLayout6">
-		<RelativeLayout android:id="@+id/relativeLayout3"
-			android:layout_width="fill_parent" android:background="@drawable/menutoolbarbackgroundxml"
-			android:layout_height="50dip">
-			<TextView android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:id="@+id/textView5"
-				android:textSize="20dip" android:textColor="@color/White"
-				android:layout_centerInParent="true" android:text="@string/LoadAMap"></TextView>
-			<Button android:layout_width="wrap_content"
-				android:layout_alignParentLeft="true" android:layout_height="wrap_content"
-				android:layout_centerInParent="true" android:id="@+id/EditorLoaderButtonCancel" android:text="@string/Back"></Button>
-
-			<Button android:layout_width="wrap_content"
-				android:layout_alignParentRight="true" android:layout_height="wrap_content"
-				android:layout_centerInParent="true" android:id="@+id/EditorLoaderButtonLoad" android:text="@string/Ok"></Button>
-
-
-		</RelativeLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent" android:layout_width="fill_parent"
+	android:id="@+id/linearLayout1" android:orientation="vertical" android:background="@color/Gray">
+    <RelativeLayout android:layout_width="fill_parent" android:id="@+id/relativeLayout3" android:background="@drawable/menutoolbarbackgroundxml" android:layout_height="50dip">
+        <TextView android:layout_centerInParent="true" android:textColor="@color/White" android:textSize="20dip" android:text="@string/LoadAMap" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/textView5"></TextView>
+        <Button android:layout_centerInParent="true" android:layout_alignParentLeft="true" android:id="@+id/EditorLoaderButtonCancel" android:text="@string/Back" android:layout_height="wrap_content" android:layout_width="wrap_content"></Button>
+        <Button android:layout_centerInParent="true" android:layout_alignParentRight="true" android:id="@+id/EditorLoaderButtonLoad" android:text="@string/Ok" android:layout_height="wrap_content" android:layout_width="wrap_content"></Button>
+    </RelativeLayout>
+	<LinearLayout android:layout_width="fill_parent" android:id="@+id/linearLayout2" android:orientation="vertical" android:layout_height="wrap_content" android:gravity="center_horizontal">
+		<Gallery android:layout_width="fill_parent" android:id="@+id/galleryz" android:layout_height="fill_parent"></Gallery>
+		<TextView android:layout_width="wrap_content" android:textColor="@color/White" android:textSize="25dip" android:text="TextView" android:id="@+id/EditorLoaderTextViewMapName" android:layout_height="wrap_content"></TextView>
+		<TextView android:layout_width="wrap_content" android:textColor="@color/White" android:textSize="20dip" android:text="TextView" android:id="@+id/EditorLoaderTextViewMapOwner" android:layout_height="wrap_content"></TextView>
 	</LinearLayout>
 
-	<LinearLayout android:id="@+id/linearLayout1"
-		android:layout_height="wrap_content" android:layout_centerInParent="true"
-		android:layout_alignParentLeft="false" android:orientation="vertical"
-		android:gravity="center_horizontal" android:layout_width="fill_parent">
+</LinearLayout>
 
-		<Gallery android:id="@+id/galleryz" android:layout_height="fill_parent"
-			android:layout_width="fill_parent"></Gallery>
-		<TextView android:text="TextView" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/EditorLoaderTextViewMapName"></TextView>
-		<TextView android:text="TextView" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/EditorLoaderTextViewMapOwner"></TextView>
-
-	</LinearLayout>
-</RelativeLayout>
