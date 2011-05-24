@@ -122,64 +122,237 @@
 	
 		Comme nous veunos de le voir, la principale action que l'intélligence artificielle doit être capable effectuer, c'est de pouvoir se déplacer dans son environement. C'est pour cela que nous avons regardé comment déplacer un object dans un graphe, et nous avons trouvé plusieurs algorithmes étant capable de rechercher un chemin dans un graphe, mais parmi tous ces algorithmes, nous en avons retenu deux en particulé.
 		
-		\paragraph{Pathfinding\\}
+		\paragraph{Pathfinding}
 		
-		Tout d'abord l'algorithme de recherche A* a pour but de rechercher un chemin dans un graphe entre un nœud initial et un nœud final tous deux préalablement définis. A* permet de trouver l'un des meilleurs (mais pas forcément le meilleur) chemins existant entre un point A et un point B (il retourne le premier chemin trouvé). La force de cette algorithme est le temps de calcul et l'exactitude des résultats, contrairement à Dijkstra qui est le deusième algorithme que nous avons retenu qui lui fournit toujours le meilleur résultat (le plus court chemin entre deux points) mais dans un temps d'exécution beaucoup plus long que l'algorithme de A*. Et comme il peut y avoir jusqu'à trois bots \footnote{Bot (diminutif de robot) désigne un personnage contrôlé par l'ordinateur.} et que l'intéligence artificielle doit réguliairement recalculer son chemin en fonction des actions effectuées par les autres joueurs, nous avons donc choisi l'algorithme de A*. 
+		\subparagraph{A*\\}
+		
+			Tout d'abord l'algorithme de recherche A* a pour but de rechercher un chemin
+			dans un graphe entre un nœud initial et un nœud final tous deux préalablement
+			définis. A* permet de trouver l'un des meilleurs (mais pas forcément le
+			meilleur) chemins existant entre un point A et un point B (il retourne le premier chemin trouvé). La force de cette algorithme est le temps de calcul et l'exactitude des résultats, contrairement à Dijkstra qui est le deuxième algorithme que nous avons retenu qui lui fournit toujours le meilleur résultat (le plus court chemin entre deux points) mais dans un temps d'exécution beaucoup plus long que l'algorithme de A*. Et comme il peut y avoir jusqu'à trois bots \footnote{Bot (diminutif de robot) désigne un personnage contrôlé par l'ordinateur.} et que l'intelligence artificielle doit régulièrement recalculer son chemin en fonction des actions effectuées par les autres joueurs, nous avons donc choisi l'algorithme de A*.
+		
+			Maintenant que l'on sait quel algorithme utiliser pour rechercher un chemin dans un graphe, nous allons voir en détail comment marche l'algorithme de A*.
+		
+			Pour comprendre comment l'algorithme marche, nous allons nous aider d'un
+			dessin représentent une carte avec un point A (départ) affiché en vert, un
+			point B (arrivée) en rouge, et où les cases en bleu représentent les murs.
+		
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/Grille.eps}
+			\end{center}
+		
+			La premier chose que l'on peut observer, c'est que la carte est divisée en
+			cases. Chaque case de la matrice représente un node qui peut être soit
+			traversable, soit non traversable. Dans l'application, il n'y a que les murs
+			ou les bombes que l'on ne peut pas traverser sinon tous les autres objets
+			ou joueurs sont traversables. Le but de l'algorithme est donc de
+			trouver un chemin entre A et B en évitant les murs.
+			
+		
+			Durant le déroulement de l'algorithme, nous avons utilisé deux listes qui contiennent des cases de la carte.
+			Il y a une liste dite \og listeOuverte \fg \, et l'autre \og listeFermée \fg.
+			La listeOuvrete contient une liste de cases qui pourraient éventuellement faire partie du chemin, mais pas forcément, pour le moment elle sera vide.
+			Plus précisément c'est une liste de cases que nous devons vérifier.
+			Ensuite, au niveau de la listeFermée, elle contient toutes les cases que nous
+			aurons déjà vérifiées, au début de l'excution, elle contient que le point de départ (B3).
+			
+		
+			Commencons les explications du déroulement de l'algorithme.
+			Tout d'abord, il faut savoir qu'un joueur peut se déplacer dans toutes les
+			directions, donc nous allons ajouter toutes les cases adjacentes à la
+			listeOuvert qui sont traversables, il y en a huit (A2, B2, C2, A3, C3, A4, B4, C4).
+			
+			
+			Ce qui nous donne :
+		
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/Grille2.eps}
+			\end{center}
+		
+			Les carrés avec un contour rouge sont les carrés présents dans la
+			listeOuverte et les carrés qui ont une couleur un peu plus foncée que les
+			autres sont ceux qui se trouvent dans la listeFermée.
+		
+			Maintenant pour choisir la case par laquelle on doit passer, nous devons rajouter trois données \og F \fg , \og G \fg \, et \og H \fg:
+			\begin{description}
+				\item[G : ]{c'est le coût de mouvement pour aller de la case A à une case donnée sur la grille, en suivant le chemin généré jusqu'à cette dernière.}
+				\item[H :]{c'est l'heuristique, c'est à dire le coût estimé pour allé du point courant à l'arrivé. Comme nous ne connaissons pas vraiment la distance qu'il nous reste à parcourir, car toutes sortes d'obstacle peuvent se trouver sur notre chemin (objet non traversable). Donc nous allons devoir l'approximer grâce à une fonction, pour la calculer nous avons choisi d'utiliser l'heuristique de Manhattan, qui consiste à compter le nombre de bloc (à vol d'oiseau et sans prendre les diagonales) qui lui reste à parcourir.}
+				\item[F :]{c'est G + H}
+			\end{description} 
+		
+			Chaque case de la listeOuverte ou de la listeFermée vont devoir possèder toutes ces données, plus les coordonnées de leur père, c'est à dire les coordonnées de la case qui vient de les ajouter dans la la listeOuverte. Pour calculer G, nous allons assigner un coût de 10 pour chaque déplacement horizontal ou vertical, et un coût de 14 pour un mouvement en diagonale. Nous utilisons ces données car la distance nécessaire pour se déplacer est la racine carrée de 2, ou approximativement 1.41 fois le coût d'un déplacement vertical ou horizontal. Nous utiliserons donc 10 et 14 pour des raisons de simplification. Par conséquent, nous allons multiplier par 10 le coût H pour qu'il soit cohérent par rapport à G.
 	
-		Maintenant que l'on sait quel algorithme utiliser pour rechercher un chemin dans un graphe, nous allons voir en détail comment marche l'algorithme de A*.
-	
-		Pour comprendre comment l'algorithme, nous allons nous aider d'un dessin représentent une carte avec un point A (départ) est affiché en vert, le point B (arrivée) est en rouge, et où les cases en bleu représentent le mur.
-	
-		\begin{center}
-			\includegraphics[width=8cm]{./Analyse/Img/Grille.eps}
-		\end{center}
-	
-		La premier chose que l'on peut observer, c'est que la carte est divisée en cases. Chaque case de la matrice représente un node qui peut être soit traversable, soit non traversable. Dans l'application, il y que les murs ou les bombes que l'on ne peut pas traverser sinon tous les autres objets les joueurs peuvent les traverser. Donc le but de l'algorithme est de trouver un chemin entre A et B en évitant les murs. 
-	
-		Durant le déroulement de l'algorithme, nous avons utilisé deux listes qui contiennent des cases de la carte. Il y a une liste dite \og listeOuverte \fg \, et l'autre \og listeFermée \fg. La listeOuvrete contient une liste de cases qui pourraient éventuellement faire partie du chemin, mais pas forcément, pour le moment elle sera vide. Plus précisément c'est une liste de cases que nous devons vérifier. Ensuite, au niveau de la listeFermée, elle contient toutes les cases que nous aurons déjà vérifiées, au début de l'excution, elle contient que le point de départ (B3).
-	
-		Commencons les explication du déroulement de l'algorithme. Tout d'abord, il faut savoir qu'un joueur peut se déplacer dans toutes les directs, donc nous allons ajouter toutes les cases adjacentes à la listeOuvert qui sont traversable, il y en a huite (A2, B2, C2, A3, C3, A4, B4, C4). Donc pour le moment nous devons avoir ça :
-	
-		\begin{center}
-			\includegraphics[width=8cm]{./Analyse/Img/Grille2.eps}
-		\end{center}
-	
-		Les carrés avec un contour rouge sont les carrés qui sont dans la listeOuverte et les carrés qui on une couleur un peut plus foncé que les autre sont les carrés qui se trouvent dans la listeFermée.
-	
-		Maintenant pour choisir la case par laquelle on doit passer, nous devons rajouter trois données \og F \fg , \og G \fg \, et \og H \fg:
-		\begin{description}
-			\item[G : ]{c'est le coût de mouvement pour aller de la case A à une case donnée sur la grille, en suivant le chemin généré jusqu'à cette dernière.}
-			\item[H :]{c'est l'heuristique, c'est à dire le coût estimé pour allé du point courant à l'arrivé. Comme nous ne connaissons pas vraiment la distance qu'il nous reste à parcourir, car toutes sortes d'obstacle peuvent se trouver sur notre chemin (objet non traversable). Donc nous allons devoir l'approximer grâce à une fonction, pour la calculer nous avons choisi d'utiliser l'heuristique de Manhattan, qui consiste à compter le nombre de bloc (à vol d'oiseau et sans prendre les diagonales) qui lui reste à parcourir.}
-			\item[F :]{c'est G + H}
-		\end{description} 
-	
-		Chaque case de la listeOuverte ou de la listeFermée vont devoir possèder toutes ces données, plus les coordonnées de leur père, c'est à dire les coordonnées de la case qui vient de les ajouter dans la la listeOuverte. Pour calculer G, nous allons assigner un coût de 10 pour chaque déplacement horizontal ou vertical, et un coût de 14 pour un mouvement en diagonale. Nous utilisons ces données car la distance nécessaire pour se déplacer est la racine carrée de 2, ou approximativement 1.41 fois le coût d'un déplacement vertical ou horizontal. Nous utiliserons donc 10 et 14 pour des raisons de simplification. Par conséquent, nous allons multiplier par 10 le coût H pour qu'il soit cohérent par rapport à G.
-
-		Donc maintenant, nous devons avoir cette matrice :
-		\begin{center}
-			\includegraphics[width=8cm]{./Analyse/Img/Grille3.eps}
-		\end{center}
-	
-		Après avoir ajouté toutes les cases adjacentes à la case courant, il suffit de prendre la case qui a le plus petit coût F et ensuite de la rajouter dans la listeFermée et de la supprimer de la listeOuverte. Nous obtenons donc :
-		\begin{center}
-			\includegraphics[width=8cm]{./Analyse/Img/Grille4.eps}
-		\end{center}
-	
-		Ensuite on regarde toutes les cases adjacentes à la dernière case ajoutée dans la listeFermée. Si elles se trouvent déjà dans la listeOuverte, on vérifit que leurs coût soient inférieur au coût de la case correspondante déjà dans la listeOuverte, si oui alors on la remplace sinon on ne fait rien.
-	
-		Pour finir on répète cette opération jusqu'on arrive à la case d'arrivée, nous obtenons ça :
-		\begin{center}
-			\includegraphics[width=8cm]{./Analyse/Img/Grille5.eps}
-		\end{center}
-	
-		Pour finir, il nous suffit juste de récupérer la case d'arrivée et de regarder son père, puis de repéter cette opération avec la case obtenu jusqu'à arriver à la case de dépard. Grâce à ça nous obtenons cette dernière étape de l'algorithme :
-		\begin{center}
-			\includegraphics[width=8cm]{./Analyse/Img/Grille6.eps}
-		\end{center}
-	
-		Comme on peut le voir sur le schéma prèdédent, le chemin qu'à trouvé l'algorithme de A* est le suivant : $ B3 \rightarrow C4 \rightarrow C5 \rightarrow D5 \rightarrow E5 \rightarrow F4 \rightarrow F3 $. L'algorithme aurait pu d'autre chemin équivalent à celui-ci mais le principe de cette algorithme c'est de renvoyer le permier chemin qu'il trouve.
-	
-	
+			Donc maintenant, nous devons avoir cette matrice :
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/Grille3.eps}
+			\end{center}
+		
+			Après avoir ajouté toutes les cases adjacentes à la case courant, il suffit de prendre la case qui a le plus petit coût F et ensuite de la rajouter dans la listeFermée et de la supprimer de la listeOuverte. Nous obtenons donc :
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/Grille4.eps}
+			\end{center}
+		
+			Ensuite on regarde toutes les cases adjacentes à la dernière case ajoutée dans la listeFermée. Si elles se trouvent déjà dans la listeOuverte, on vérifit que leurs coût soient inférieur au coût de la case correspondante déjà dans la listeOuverte, si oui alors on la remplace sinon on ne fait rien.
+		
+			Pour finir on répète cette opération jusqu'on arrive à la case d'arrivée, nous obtenons ça :
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/Grille5.eps}
+			\end{center}
+		
+			Pour finir, il nous suffit juste de récupérer la case d'arrivée et de regarder son père, puis de repéter cette opération avec la case obtenu jusqu'à arriver à la case de dépard. Grâce à ça nous obtenons cette dernière étape de l'algorithme :
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/Grille6.eps}
+			\end{center}
+		
+			Comme on peut le voir sur le schéma prèdédent, le chemin qu'à trouvé l'algorithme de A* est le suivant : $ B3 \rightarrow C4 \rightarrow C5 \rightarrow D5 \rightarrow E5 \rightarrow F4 \rightarrow F3 $. L'algorithme aurait pu d'autre chemin équivalent à celui-ci mais le principe de cette algorithme c'est de renvoyer le permier chemin qu'il trouve.
+		
+		\subparagraph{Parcours en largeur\\}
+		
+			Contrairement à l'algorithme A*, le parcours en largeur se contente d'un
+			nœud initial mais ne necessite pas un nœud final.
+			En effet ici nous allons partir d'un point et chercher le premier point
+			correspondant à nos attentes, pour cela nous effectuerons donc un parcours un
+			largeur.
+			
+			
+			Le parcours en largeur consiste à partir d'un sommet S, lister d'abord
+			tous les voisins de S pour ensuite les explorer un par un.
+			Ici nous allons donc regarder toutes les cases autour de nous puis regarder
+			tous leurs voisins et cela ainsi de suite jusqu'à trouver un point
+			correspondant à nos attentes.
+			
+			
+			Le contexte est le suivant, un bot découvre qu'il est sur la trajectoire
+			d'explosion d'une bombe est va donc fuir vers la case sûr la plus proche or
+			il n'a aucune idée d'où elle se trouve.
+			
+			
+			L'image suivante représentera la situation initiale :
+			
+			\begin{center}
+				\includegraphics[width=115mm,height=71mm]{./Analyse/Img/fuite1.eps}
+			\end{center}
+			
+			
+			Comme dit précédemment il n'y a que les murs ou les bombes que l'on ne peut
+			pas traverser sinon tous les autres objets ou joueurs sont traversables.
+			Nous considerons que les bombes ont ici un champs d'explosion en nombre de
+			cases de 5.
+			
+			
+			Représentons la carte ci-dessus d'une façon plus parlante en remplacant les
+			divers objets mis à par le joueur par des numéros leur correspondant, à
+			savoir :
+			
+			\begin{enumerate}
+			  \item Les zones dites dangeureuses donc ici le champs d'explosion de la
+			  bombe.
+			  \item Toutes les cases infranchissables telles que les murs ou encore les
+			  bombes
+			\end{enumerate}
+			
+			Ce qui nous donne :
+			
+			\begin{center}
+				\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|} \hline
+				\rowcolor{cyan} 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 \\\hline
+				\cellcolor{cyan}2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}2 \\\hline
+				\cellcolor{cyan}2 & 0 & \cellcolor{cyan}\cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 &
+				0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 \\\hline \cellcolor{cyan}2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}2 \\\hline
+				\cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & \cellcolor{cyan}2 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 \\\hline
+				\cellcolor{cyan}2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{red}1 & \cellcolor{cyan}2 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}2 \\\hline
+				\cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & \cellcolor{cyan}2 & \cellcolor{cyan}2 & \cellcolor{red}1 & \cellcolor{cyan}2 & \cellcolor{cyan}2 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 \\\hline
+				\cellcolor{cyan}2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{red}1 & \cellcolor{red}1 & \cellcolor{red}1 & \cellcolor{red}1 &	\cellcolor{gray}2 & \cellcolor{red}1 & \cellcolor{red}1 & \cellcolor{red}1 & \cellcolor{red}1 & 0 & \cellcolor{cyan}2 \\\hline
+				\cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & \cellcolor{cyan}2 & \cellcolor{cyan}2 & \cellcolor{red}1 & \cellcolor{cyan}2 & \cellcolor{cyan}2 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 \\\hline
+				\cellcolor{cyan}2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}2 & \cellcolor{gray}2 & \cellcolor{red}1 & \cellcolor{red}1 & \cellcolor{red}1 & \cellcolor{red}1 & 0 &
+				0 & \cellcolor{cyan}2 \\\hline \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & \cellcolor{cyan}2 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}2 \\\hline \cellcolor{cyan}2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}2 \\\hline
+				\rowcolor{cyan}2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 \\\hline
+				\end{tabular}
+			\end{center}
+			
+			
+			Mettons nous à present à la place du bot.
+			
+			Nous allons à donner un poid aux cases que nous allons parcourir
+			correspondant à la distance par rapport à la case initiale, ainsi qu'une
+			direction qui correspondra à la direction initiale que le bot devra empruter
+			pour utiliser ce chemin, c'est à dire par exemple que tout chemin découvert
+			dont l'origine est la case à droite de la notre aura comme direction droite.
+			
+			
+			A partir d'une case donné nous ne regarderons que les voisines ayant un poids de 0
+			car si leur poids est différent cela voudra dire que nous les avons déjà vu precedemment et bien évidemment,
+			nous ignorerons les murs ainsi que les bombes.
+			
+			Nous avons changé la valeur des cases intraversables pour ne pas confondre avec le poids des cases visitées.			
+			
+			
+			Appliquons l'algorithme de parcours en largeur aux cases voisines de la notre.
+			
+			
+			\begin{center}
+				\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|} \hline
+				\rowcolor{cyan} X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X &0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{orange}1 $\uparrow$ & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{orange}1 $\leftarrow$ & \cellcolor{orange}1 & \cellcolor{gray}X & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{orange}1 $\downarrow$ & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X & \cellcolor{gray}X & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 &
+				\cellcolor{cyan}X \\\hline \rowcolor{cyan}X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X \\\hline
+				\end{tabular}
+			\end{center}
+			
+			
+			Toutes les cases découvertes étant considérées comme dangereuses (voir le schéma précédent) nous continuons à appliquer l'algorithme jusqu'à arriver à notre but.
+			
+			\begin{center}
+				\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|} \hline
+				\rowcolor{cyan} X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X &	0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{orange}2 $\uparrow$ & \cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}2 & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{orange}1 $\uparrow$ & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{orange}2 $\leftarrow$ & \cellcolor{orange}1 $\leftarrow$ & \cellcolor{orange}1 & \cellcolor{gray}X & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{orange}1 $\downarrow$ & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X & \cellcolor{gray}X & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 &
+				\cellcolor{cyan}X \\\hline \rowcolor{cyan}X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X \\\hline
+				\end{tabular}
+			\end{center}
+			
+			
+			\begin{center}
+				\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|} \hline
+				\rowcolor{cyan} X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X &	0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{green}3 $\uparrow$ & \cellcolor{orange}2 $\uparrow$ & \cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{orange}1 $\uparrow$ & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{orange}3 $\leftarrow$ & \cellcolor{orange}2 $\leftarrow$ & \cellcolor{orange}1 $\leftarrow$ & \cellcolor{orange}1 & \cellcolor{gray}X & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{orange}1 $\downarrow$ & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X & \cellcolor{gray}X & 0 & 0 & 0 & 0 & 0 & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & \cellcolor{cyan}X & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X & 0 & \cellcolor{cyan}X \\\hline
+				\cellcolor{cyan}X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 &
+				\cellcolor{cyan}X \\\hline \rowcolor{cyan}X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X & X \\\hline
+				\end{tabular}
+			\end{center}
+			
+			Ici nous avons découvert une case non dangeureuse en $(13,6)$ !
+			Nous récupérons donc la direction enregistrée dans cette case et bougeons en fonction de celle-ci.
+			Si plusieurs cases avaient été découvertes le choix aurait été arbitraire car elles auraient toutes été à la même distance.
+			
+			$\,$
 			
 	\begin{itemize}
 		\item{Diagramme classe}
@@ -479,7 +652,7 @@
 		l'enregistrement de comptes. Une unique table nommée Users remplie donc cette
 		fonction. Le serveur devra pouvoir y accéder en écriture(inscription) comme
 		en lecture(connexion).
-			
+			Aléatoire
 		Elle ne comportera que deux champs, userName et password. Dès lors que
 		l'utilisateur désirera créer un compte multijoueur, il renseignera dans
 		l'application son userName souhaité ainsi que son mot de passe. 
