@@ -219,8 +219,12 @@ public class Engine {
 										if ( timeBomb > 15 ) {
 											if ( (int)(Math.random() * (20-(10*difficulty))) == 0) {
 												if ( 0 != difficulty && players[0].getPosition() != null ) {
-													this.playerObjectif = pathFinding(this.tileUpLeft, ResourcesManager.coToTile(players[0].getPosition().x, players[0].getPosition().y),colisionMap);
+													Point prout = ResourcesManager.coToTile(players[0].getPosition().x, players[0].getPosition().y);
+													this.playerObjectif = pathFinding(this.tileUpLeft, prout,colisionMap);
 													if ( colisionMap[this.playerObjectif.x][this.playerObjectif.y] == ColisionMapObjects.BLOCK && players[i].getBombNumber() > 0) {
+														this.playerObjectif = iaPushBomb(players[i], colisionMap.clone());
+													}
+													else if ( colisionMap[this.playerObjectif.x][this.playerObjectif.y] == ColisionMapObjects.EMPTY && players[i].getBombNumber() > 0 && this.playerObjectif.x == prout.x && this.playerObjectif.y == prout.y) {
 														this.playerObjectif = iaPushBomb(players[i], colisionMap.clone());
 													}
 													else if ( colisionMap[this.playerObjectif.x][this.playerObjectif.y] != ColisionMapObjects.EMPTY ) {
@@ -659,7 +663,7 @@ public class Engine {
 
 		if ( closeList.get(destinationPoint) != null )  {
 
-			res.set(closeList.get(destinationPoint).father.x,closeList.get(destinationPoint).father.y);
+			res.set(destinationPoint.x,destinationPoint.y);
 
 			while ( closeList.get(res).father != source ) {
 				res.set(closeList.get(res).father.x, closeList.get(res).father.y);
