@@ -6,7 +6,7 @@
 
 @implementation BotPlayer
 
-@synthesize colisionMap, action;
+@synthesize colisionMap, movement, plantingBomb, enemies, path;
 
 
 - (id)initWithImageName:(NSString *)imageNameValue position:(Position *)positionValue colisionMap:(ColisionMap *)colisionMapValue {
@@ -14,13 +14,13 @@
     
     if (self) {
         difficulty = [[NSString alloc] initWithString:@"Hard"];
-        openList = [[NSMutableDictionary alloc] init];
-        closedList = [[NSMutableDictionary alloc] init];
         path = [[NSMutableArray alloc] init];
         self.colisionMap = colisionMapValue;
-        self.action = [NSString stringWithString:@"left"];
-        
-        [self pathFinding:[[Position alloc] initWithX:5 y:5]];
+        self.movement = [NSString stringWithString:@"left"];
+        self.plantingBomb = NO;
+        beInDanger = NO;
+
+        self.path = [self pathFinding:[[Position alloc] initWithX:5 y:5]];
         [self computeDicrection];
     }
     
@@ -30,41 +30,45 @@
 
 - (void)dealloc {
     [difficulty release];
-    [openList release];
-    [closedList release];
     [super dealloc];
 }
 
 
-- (void)pathFinding:(Position *)arrivedPosition {
-    BOOL find = NO;
-    BOOL unattainable = NO;
+- (NSArray *)pathFinding:(Position *)arrivedPosition {
     Position *currentPosition = [[Position alloc] initWithX:(position.x / ressource.tileSize) y:(position.y / ressource.tileSize)];
-    Node *currentNode = [[Node alloc] initWithPosition:currentPosition parent:nil costSinceStart:0 costUntilArrived:[colisionMap heuristicManhattan:currentPosition arrived:arrivedPosition]];
     
-    [openList removeAllObjects];
-    [closedList removeAllObjects];
-    [closedList setObject:currentNode forKey:currentNode.position];
-    
-    while (!find && !unattainable) {
-        [self updateOpenList:[colisionMap adjacentCases:currentNode arrived:arrivedPosition]];
-        currentNode = [self findBestNode];
-        [closedList setObject:currentNode forKey:currentNode.position];
-        [openList removeObjectForKey:currentNode.position];
+    if (![currentPosition isEqual:arrivedPosition]) {
+        BOOL find = NO;
+        BOOL unattainable = NO;
+        Node *currentNode = [[Node alloc] initWithPosition:currentPosition parent:nil costSinceStart:0 costUntilArrived:[colisionMap heuristicManhattan:currentPosition arrived:arrivedPosition]];
+        NSMutableDictionary *openList = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *closedList = [[NSMutableDictionary alloc] init];
         
-        if ([currentNode.position isEqual:arrivedPosition]) {
-            find = YES;
+        [closedList setObject:currentNode forKey:currentNode.position];
+        
+        while (!find && !unattainable) {
+            [self updateOpenList:openList closedList:closedList newNodes:[colisionMap adjacentCases:currentNode arrived:arrivedPosition]];
+            currentNode = [self findBestNode:openList];
+            [closedList setObject:currentNode forKey:currentNode.position];
+            [openList removeObjectForKey:currentNode.position];
+            
+            if ([currentNode.position isEqual:arrivedPosition]) {
+                find = YES;
+            }
+            else if ([closedList count] == [colisionMap nbCase]) {
+                unattainable = YES;
+            }
         }
-        else if ([closedList count] == [colisionMap nbCase]) {
-            unattainable = YES;
-        }
+        
+        return [self computePath:closedList arrived:arrivedPosition];
     }
-    
-    [self computePath:arrivedPosition];
+    else {
+        return nil;
+    }
 }
 
 
-- (void)updateOpenList:(NSArray *)newNodes {
+- (void)updateOpenList:(NSMutableDictionary *)openList closedList:(NSMutableDictionary *)closedList newNodes:(NSArray *)newNodes {
     
     for (Node *node in newNodes) {
         if ([closedList objectForKey:node.position] == nil) {
@@ -81,7 +85,7 @@
 }
 
 
-- (Node *)findBestNode {
+- (Node *)findBestNode:(NSDictionary *)openList {
     NSEnumerator *enumerator = [openList objectEnumerator];
     Node *bestNode = [enumerator nextObject];
     
@@ -95,76 +99,149 @@
 }
 
 
-- (void)computePath:(Position *)arrived {
+- (NSArray *)computePath:(NSDictionary *)closedList arrived:(Position *)arrived {
     BOOL find = NO;
     Node *currentNode = [closedList objectForKey:arrived];
     Node *parent;
+    NSMutableArray *computePath = [[NSMutableArray alloc] init];
     
-    [path addObject:currentNode];
+    [computePath addObject:currentNode];
     parent = currentNode.parent;
     
     while (!find) {
         currentNode = [closedList objectForKey:((Node *)[closedList objectForKey:parent.position]).position];
-        [path insertObject:currentNode atIndex:0];
+        [computePath insertObject:currentNode atIndex:0];
         parent = currentNode.parent;
         
         if (parent == nil) {
             find = YES;
         }
     }
+    
+    return [computePath autorelease];
 }
 
 
 - (void)computeDicrection {
     Node *nextNode = [path objectAtIndex:1];
     Position *nextPosition = [[Position alloc] initWithX:(nextNode.position.x * ressource.tileSize) y:(nextNode.position.y * ressource.tileSize)];
-    
-//    NSLog(@"%@: %@", color, nextNode);
-    
-    if (nextPosition.x < position.x) {
-        if (nextPosition.y < position.y) {
-            action = [NSString stringWithString:@"leftTop"];
+
+    if (nextNode != nil) {
+        if (nextPosition.x < position.x) {
+            if (nextPosition.y < position.y) {
+                movement = [NSString stringWithString:@"leftTop"];
+            }
+            else if (nextPosition.y > position.y) {
+                movement = [NSString stringWithString:@"leftDown"];
+            }
+            else {
+                movement = [NSString stringWithString:@"left"];
+            }
         }
-        else if (nextPosition.y > position.y) {
-            action = [NSString stringWithString:@"leftDown"];
+        else if (nextPosition.x > position.x) {
+            if (nextPosition.y < position.y) {
+                movement = [NSString stringWithString:@"rightTop"];
+            }
+            else if (nextPosition.y > position.y) {
+                movement = [NSString stringWithString:@"rightDown"];
+            }
+            else {
+                movement = [NSString stringWithString:@"right"];
+            }
         }
         else {
-            action = [NSString stringWithString:@"left"];
-        }
-    }
-    else if (nextPosition.x > position.x) {
-        if (nextPosition.y < position.y) {
-            action = [NSString stringWithString:@"rightTop"];
-        }
-        else if (nextPosition.y > position.y) {
-            action = [NSString stringWithString:@"rightDown"];
-        }
-        else {
-            action = [NSString stringWithString:@"right"];
+            if (nextPosition.y < position.y) {
+                movement = [NSString stringWithString:@"top"];
+            }
+            else if (nextPosition.y > position.y) {
+                movement = [NSString stringWithString:@"down"];
+            }
         }
     }
     else {
-        if (nextPosition.y < position.y) {
-            action = [NSString stringWithString:@"top"];
+        if ([movement isEqualToString:@"leftTop"]) {
+            movement = [NSString stringWithString:@"stopLeftTop"];
         }
-        else if (nextPosition.y > position.y) {
-            action = [NSString stringWithString:@"down"];
+        else if ([movement isEqualToString:@"leftDown"]) {
+            movement = [NSString stringWithString:@"stopLeftDown"];
         }
-        else {
-            action = [NSString stringWithString:@"stop"];
+        else if ([movement isEqualToString:@"left"]) {
+            movement = [NSString stringWithString:@"stopLeft"];
+        }
+        else if ([movement isEqualToString:@"rightTop"]) {
+            movement = [NSString stringWithString:@"stopRightTop"];
+        }
+        else if ([movement isEqualToString:@"rightDown"]) {
+            movement = [NSString stringWithString:@"stopRightDown"];
+        }
+        else if ([movement isEqualToString:@"right"]) {
+            movement = [NSString stringWithString:@"stopRight"];
+        }
+        else if ([movement isEqualToString:@"top"]) {
+            movement = [NSString stringWithString:@"stopTop"];
+        }
+        else if ([movement isEqualToString:@"down"]) {
+            movement = [NSString stringWithString:@"stopDown"];
         }
     }
+}
+
+
+- (void)makeDecision {
+    // Escape
+    
+    
+    // Attack
+        // Choisir joueur le plus proche
+        // Suivre joueur
 }
 
 
 - (void)makeAction {
     Node *nextNode = [path objectAtIndex:1];
     Position *nextPosition = [[Position alloc] initWithX:(nextNode.position.x * ressource.tileSize) y:(nextNode.position.y * ressource.tileSize)];
-    
+
     if ([position isEqual:nextPosition]) {
-        [self pathFinding:[[Position alloc] initWithX:5 y:5]];
+        self.path = [self pathFinding:[[Position alloc] initWithX:([self findNearestEnemy].position.x / ressource.tileSize) y:([self findNearestEnemy].position.y / ressource.tileSize)]];
+        [self computeDicrection];
+        
+        if ([colisionMap isDestructibleBlock:((Node *)[path objectAtIndex:1]).position.x j:((Node *)[path objectAtIndex:1]).position.y]) {
+            plantingBomb = YES;
+        }
+    } 
+    else if (nextNode == nil) {
         [self computeDicrection];
     }
+}
+
+
+- (Player *)findNearestEnemy {
+    Player *currentEnemy;
+    Player *nearestEnemy = [enemies objectAtIndex:0];
+    Position *enemyPosition = [[Position alloc] initWithX:(nearestEnemy.position.x / ressource.tileSize) y:(nearestEnemy.position.y / ressource.tileSize)];
+    NSArray *pathUntilEnemy = [self pathFinding:enemyPosition];
+    NSInteger nearestEnemyCost = [self computeLenghtPath:pathUntilEnemy];
+    [enemyPosition release];
+    
+    for (int i = 1; i < [enemies count]; i++) {
+        currentEnemy = [enemies objectAtIndex:i];
+        enemyPosition = [[Position alloc] initWithX:(currentEnemy.position.x / ressource.tileSize) y:(currentEnemy.position.y / ressource.tileSize)];
+        pathUntilEnemy = [self pathFinding:enemyPosition];
+        
+        if ([self computeLenghtPath:pathUntilEnemy] < nearestEnemyCost) {
+            nearestEnemyCost = [self computeLenghtPath:pathUntilEnemy];
+            nearestEnemy = currentEnemy;
+        }
+        
+        [enemyPosition release];
+    }
+    
+    return nearestEnemy;
+}
+
+
+- (NSInteger)computeLenghtPath:(NSArray *)pathValue {
+    return [pathValue count];
 }
 
 
@@ -172,8 +249,6 @@
     BotPlayer *copy = [super copyWithZone:zone];
 
     difficulty = @"Hard";
-    openList = [[NSMutableDictionary alloc] init];
-    closedList = [[NSMutableDictionary alloc] init];
     path = [[NSMutableArray alloc] init];
     
 	return copy;

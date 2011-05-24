@@ -26,7 +26,7 @@
 @property (nonatomic,retain) Player * owner;
 
 
-- (id) initWithImageName:(NSString *)anImageName position:(Position *)aPosition owner:(Player *) aPlayer;
+- (id)initWithImageName:(NSString *)imageNameValue position:(Position *)positionValue;
 - (void) update;
 - (BOOL) hasAnimationFinished;
 

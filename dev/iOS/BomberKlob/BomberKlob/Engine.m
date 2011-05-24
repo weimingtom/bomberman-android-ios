@@ -57,6 +57,8 @@
     [game release];
     [super dealloc];
 }
+
+
 - (void) collisionWithPlayer: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue bomb:(Bomb *) aBomb{
 	int marge = 5;
 	for (Player * player in game.players) {
@@ -572,10 +574,12 @@
 	}
 }
 
-- (void)plantingBomb:(Bomb *)bomb {
+- (void)plantingBomb:(Bomb *)bomb owner:(Player *)owner {
 	if (game.isStarted) {
-		Player *owner = [game getHumanPlayer];
-		[owner plantingBomb:bomb];
+		if (owner == nil) {
+            owner = [game getHumanPlayer];
+        }
+		[owner plantingBomb];
 		
 		NSInteger bx = (owner.position.x + (resource.tileSize / 2)) / resource.tileSize;
 		NSInteger by = (owner.position.y + (resource.tileSize / 2)) / resource.tileSize;
@@ -627,7 +631,7 @@
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	NSRunLoop* runLoop = [NSRunLoop currentRunLoop];
 	
-	[[NSTimer scheduledTimerWithTimeInterval:0.02 target: self selector: @selector(updatePlayers) userInfo:self repeats: YES] retain];	
+	[[NSTimer scheduledTimerWithTimeInterval:0.03 target: self selector: @selector(updatePlayers) userInfo:self repeats: YES] retain];	
 	[runLoop run];
 	[pool release];
 }
@@ -655,30 +659,62 @@
 
 - (void)makeActionBot:(BotPlayer *)botPlayer {
     
-    if ([botPlayer.action isEqualToString:@"left"]) {
+    if ([botPlayer.movement isEqualToString:@"left"]) {
         [self moveLeft:botPlayer];
     }
-    else if ([botPlayer.action isEqualToString:@"right"]) {
+    else if ([botPlayer.movement isEqualToString:@"right"]) {
         [self moveRight:botPlayer];
     }
-    else if ([botPlayer.action isEqualToString:@"top"]) {
+    else if ([botPlayer.movement isEqualToString:@"top"]) {
         [self moveTop:botPlayer];
     }
-    else if ([botPlayer.action isEqualToString:@"down"]) {
+    else if ([botPlayer.movement isEqualToString:@"down"]) {
         [self moveDown:botPlayer];
     }
-    else if ([botPlayer.action isEqualToString:@"leftTop"]) {
+    else if ([botPlayer.movement isEqualToString:@"leftTop"]) {
         [self moveLeftTop:botPlayer];
     }
-    else if ([botPlayer.action isEqualToString:@"leftDown"]) {
+    else if ([botPlayer.movement isEqualToString:@"leftDown"]) {
         [self moveLeftDown:botPlayer];
     }
-    else if ([botPlayer.action isEqualToString:@"rightTop"]) {
+    else if ([botPlayer.movement isEqualToString:@"rightTop"]) {
         [self moveRightTop:botPlayer];
     }
-    else if ([botPlayer.action isEqualToString:@"rightDown"]) {
+    else if ([botPlayer.movement isEqualToString:@"rightDown"]) {
         [self moveRightDown:botPlayer];
-    }    
+    }   
+    else if ([botPlayer.movement isEqualToString:@"stopLeft"]) {
+        [self stopLeft:botPlayer];
+    }
+    else if ([botPlayer.movement isEqualToString:@"stopRight"]) {
+        [self stopRight:botPlayer];
+    }
+    else if ([botPlayer.movement isEqualToString:@"stopTop"]) {
+        [self stopTop:botPlayer];
+    }
+    else if ([botPlayer.movement isEqualToString:@"stopDown"]) {
+        [self stopDown:botPlayer];
+    }
+    else if ([botPlayer.movement isEqualToString:@"stopLeftTop"]) {
+        [self stopLeftTop:botPlayer];
+    }
+    else if ([botPlayer.movement isEqualToString:@"stopLeftDown"]) {
+        [self stopLeftDown:botPlayer];
+    }
+    else if ([botPlayer.movement isEqualToString:@"stopRightTop"]) {
+        [self stopRightTop:botPlayer];
+    }
+    else if ([botPlayer.movement isEqualToString:@"stopRightDown"]) {
+        [self stopRightDown:botPlayer];
+    }  
+    
+    
+    if (botPlayer.plantingBomb) {
+        Position *position = [[Position alloc] initWithX:(botPlayer.position.x / resource.tileSize) y:(botPlayer.position.y / resource.tileSize)];
+        Bomb *bomb = [[Bomb alloc] initWithImageName:@"normal" position:position];
+        [self plantingBomb:bomb owner:botPlayer];
+        botPlayer.plantingBomb = NO;
+    }  
 }
 
 - (BOOL) gameIsStarted {

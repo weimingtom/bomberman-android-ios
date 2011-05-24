@@ -32,18 +32,37 @@
 	return self;
 }
 
-- (id) initWithImageName:(NSString *)anImageName position:(Position *)aPosition owner:(Player *) aPlayer{
+- (id)initWithImageName:(NSString *)imageNameValue position:(Position *)positionValue {
 	self = [super init];
+	
 	if (self) {
-		currentFrame = 0;
-		power = 3;
-		waitDelay = 5;
-		delay = 0;
-		explode = NO;
-		position = aPosition;
-		imageName = anImageName;
-		owner = aPlayer;
+        Bomb *copy = [[ressource.bitmapsBombs objectForKey:imageNameValue] copy];
+        
+        self.imageName = copy.imageName;
+        self.hit = copy.hit;
+        self.level = copy.level;
+        self.fireWall = copy.fireWall;
+        self.damage = copy.damage;
+        self.position = positionValue;
+        self.animations = copy.animations;
+        self.destroyAnimations = copy.destroyAnimations;
+        self.idle = copy.idle;
+        self.currentAnimation = copy.currentAnimation;
+        self.currentFrame = copy.currentFrame;
+        self.waitDelay = copy.waitDelay;
+        self.delay = copy.delay;
+        self.destroyable = copy.destroyable;
+        self.animationFinished = copy.animationFinished;
+        
+        self.life = copy.life;
+        
+        self.power = copy.power;
+        self.type = copy.type;
+        self.explode = copy.explode;
+        self.owner = copy.owner;
+        self.time = copy.time;
 	}
+	
 	return self;
 }
 

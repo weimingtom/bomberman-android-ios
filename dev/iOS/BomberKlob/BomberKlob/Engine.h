@@ -116,7 +116,7 @@
 - (void) displayFire:(Bomb *) bomb;
 
 /** Allows to plant a Bomb on the game. */
-- (void) plantingBomb:(Bomb *)bomb;
+- (void)plantingBomb:(Bomb *)bomb owner:(Player *)owner;
 
 
 
@@ -130,7 +130,6 @@
 
 /** Allows to cancel all the threads of the Engine and the Game. */
 - (void) stopThread;
-- (void) plantingBomb:(Bomb *)bomb;
 
 
 

@@ -57,6 +57,20 @@
             [position release];
         }
         
+        for (int i = 0; i < [players count]; i++) {
+            if ([[players objectAtIndex:i] isKindOfClass:[BotPlayer class]]) {
+                NSMutableArray *enemies = [[NSMutableArray alloc] init];
+                
+                for (int j = 0; j < [players count]; j++) {
+                    if (j != i) {
+                        [enemies addObject:[players objectAtIndex:j]];
+                    }
+                }
+                
+                ((BotPlayer *)[players objectAtIndex:i]).enemies = enemies;
+            }
+        }
+        
 		[self loadSounds];
 		[self loadBitmaps];
 		isStarted = NO;

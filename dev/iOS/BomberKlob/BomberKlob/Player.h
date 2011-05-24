@@ -69,7 +69,7 @@
 - (void) stopLeftDown;
 - (void) stopRightDown;
 
-- (void) plantingBomb:(Bomb *) aBomb;
+- (void) plantingBomb;
 - (void) hurt;
 - (void) draw:(CGContextRef)context;
 - (void) draw:(CGContextRef)context alpha:(CGFloat)alpha;
