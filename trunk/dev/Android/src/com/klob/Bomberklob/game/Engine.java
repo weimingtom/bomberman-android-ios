@@ -1045,7 +1045,7 @@ public class Engine {
 
 				Point p = ResourcesManager.coToTile(bomb.getPosition().x, bomb.getPosition().y);
 				object = ResourcesManager.getObjects().get("firecenter").copy();
-				object.setPosition(new Point(p.x*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));                          
+				object.setPosition(new Point(p.x*size, p.y*size));                          
 				animatedObjects.put(p, object);
 				colisionMap[p.x][p.y] = ColisionMapObjects.FIRE;
 
@@ -1060,17 +1060,13 @@ public class Engine {
 						/* On affiche le feu */
 						if ( k < bomb.getPower()-1 ) {
 							object = ResourcesManager.getObjects().get("firevertical").copy();
-							object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
-							animatedObjects.put(new Point(p.x,p.y-k), object);
 						}
 						else {
 							object = ResourcesManager.getObjects().get("fireup").copy();
-							object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
-							animatedObjects.put(new Point(p.x,p.y-k), object);
 						}
-						if ( colisionMap[p.x][p.y-k] != ColisionMapObjects.GAPE ) {
-							colisionMap[p.x][p.y-k] = ColisionMapObjects.FIRE;
-						}
+						object.setPosition(new Point(p.x*size, (p.y-k)*size));
+						animatedObjects.put(new Point(p.x,p.y-k), object);
+						colisionMap[p.x][p.y-k] = ColisionMapObjects.FIRE;
 					}
 					/* Si il y a un block */
 					else {
@@ -1083,14 +1079,12 @@ public class Engine {
 						else if ( colisionMap[p.x][p.y-k] == ColisionMapObjects.FIRE ) {
 							if ( k < bomb.getPower()-1 ) {
 								object = ResourcesManager.getObjects().get("firevertical").copy();
-								object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
-								animatedObjects.put(new Point(p.x,p.y-k), object);
 							}
 							else {
 								object = ResourcesManager.getObjects().get("fireup").copy();
-								object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
-								animatedObjects.put(new Point(p.x,p.y-k), object);
 							}
+							object.setPosition(new Point(p.x*size, (p.y-k)*size));
+							animatedObjects.put(new Point(p.x,p.y-k), object);
 						}
 						/* Si il est destructible */
 						else {
@@ -1116,17 +1110,13 @@ public class Engine {
 						/* On affiche le feu */
 						if ( k < bomb.getPower()-1 ) {
 							object = ResourcesManager.getObjects().get("firevertical").copy();
-							object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
-							animatedObjects.put(new Point(p.x,p.y+k), object);
 						}
 						else {
 							object = ResourcesManager.getObjects().get("firedown").copy();
-							object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
-							animatedObjects.put(new Point(p.x,p.y+k), object);
 						}
-						if ( colisionMap[p.x][p.y+k] != ColisionMapObjects.GAPE ) {
-							colisionMap[p.x][p.y+k] = ColisionMapObjects.FIRE;
-						}
+						object.setPosition(new Point(p.x*size, (p.y+k)*size));
+						animatedObjects.put(new Point(p.x,p.y+k), object);
+						colisionMap[p.x][p.y+k] = ColisionMapObjects.FIRE;
 					}
 					/* Si il y a un block */
 					else {
@@ -1139,14 +1129,12 @@ public class Engine {
 						else if ( colisionMap[p.x][p.y+k] == ColisionMapObjects.FIRE ) {
 							if ( k < bomb.getPower()-1 ) {
 								object = ResourcesManager.getObjects().get("firevertical").copy();
-								object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
-								animatedObjects.put(new Point(p.x,p.y+k), object);
 							}
 							else {
 								object = ResourcesManager.getObjects().get("firedown").copy();
-								object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
-								animatedObjects.put(new Point(p.x,p.y+k), object);
 							}
+							object.setPosition(new Point(p.x*size, (p.y+k)*size));
+							animatedObjects.put(new Point(p.x,p.y+k), object);
 						}
 						/* Si il est destructible */
 						else {
@@ -1172,17 +1160,13 @@ public class Engine {
 						/* On affiche le feu */
 						if ( k < bomb.getPower()-1 ) {
 							object = ResourcesManager.getObjects().get("firehorizontal").copy();
-							object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
-							animatedObjects.put(new Point(p.x-k,p.y), object);
 						}
 						else {
 							object = ResourcesManager.getObjects().get("fireleft").copy();
-							object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
-							animatedObjects.put(new Point(p.x-k,p.y), object);
 						}
-						if ( colisionMap[p.x-k][p.y] != ColisionMapObjects.GAPE ) {
-							colisionMap[p.x-k][p.y] = ColisionMapObjects.FIRE;
-						}
+						object.setPosition(new Point((p.x-k)*size, p.y*size));
+						animatedObjects.put(new Point(p.x-k,p.y), object);
+						colisionMap[p.x-k][p.y] = ColisionMapObjects.FIRE;
 					}
 					/* Si il y a un block */
 					else {
@@ -1195,14 +1179,12 @@ public class Engine {
 						else if ( colisionMap[p.x-k][p.y] == ColisionMapObjects.FIRE ) {
 							if ( k < bomb.getPower()-1 ) {
 								object = ResourcesManager.getObjects().get("firehorizontal").copy();
-								object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
-								animatedObjects.put(new Point(p.x-k,p.y), object);
 							}
 							else {
 								object = ResourcesManager.getObjects().get("fireleft").copy();
-								object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
-								animatedObjects.put(new Point(p.x-k,p.y), object);
 							}
+							object.setPosition(new Point((p.x-k)*size, p.y*size));
+							animatedObjects.put(new Point(p.x-k,p.y), object);
 						}
 						/* Si il est destructible */
 						else {
@@ -1228,17 +1210,13 @@ public class Engine {
 						/* On affiche le feu */
 						if ( k < bomb.getPower()-1 ) {
 							object = ResourcesManager.getObjects().get("firehorizontal").copy();
-							object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
-							animatedObjects.put(new Point(p.x+k,p.y), object);
 						}
 						else {
 							object = ResourcesManager.getObjects().get("fireright").copy();
-							object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
-							animatedObjects.put(new Point(p.x+k,p.y), object);
 						}
-						if ( colisionMap[p.x+k][p.y] != ColisionMapObjects.GAPE ) {
-							colisionMap[p.x+k][p.y] = ColisionMapObjects.FIRE;
-						}
+						object.setPosition(new Point((p.x+k)*size, p.y*size));
+						animatedObjects.put(new Point(p.x+k,p.y), object);
+						colisionMap[p.x+k][p.y] = ColisionMapObjects.FIRE;
 					}
 					/* Si il y a un block */
 					else {
@@ -1251,14 +1229,12 @@ public class Engine {
 						else if ( colisionMap[p.x+k][p.y] == ColisionMapObjects.FIRE ) {
 							if ( k < bomb.getPower()-1 ) {
 								object = ResourcesManager.getObjects().get("firehorizontal").copy();
-								object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
-								animatedObjects.put(new Point(p.x+k,p.y), object);
 							}
 							else {
 								object = ResourcesManager.getObjects().get("fireright").copy();
-								object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
-								animatedObjects.put(new Point(p.x+k,p.y), object);
 							}
+							object.setPosition(new Point((p.x+k)*size, p.y*size));
+							animatedObjects.put(new Point(p.x+k,p.y), object);
 						}
 						/* Si il est destructible */
 						else {
@@ -1286,7 +1262,7 @@ public class Engine {
 		point1 = ResourcesManager.coToTile(point1.x, point1.y);
 
 		/* Ajouter une bombe */
-		Point bombPoint = ResourcesManager.coToTile(player.getPosition().x+(ResourcesManager.getSize()/2), player.getPosition().y+(ResourcesManager.getSize()/2));
+		Point bombPoint = ResourcesManager.coToTile(player.getPosition().x+(size/2), player.getPosition().y+(size/2));
 
 		if ( this.bombs.get(bombPoint) == null ) {
 			if ( player.getBombNumber() > 0 ) {
