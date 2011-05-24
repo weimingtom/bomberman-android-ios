@@ -40,8 +40,8 @@ public class Engine {
 	/* Pathfinding */
 	private Map<Point, PathFindingNode> openList;
 	private Map<Point, PathFindingNode> closeList;
+	//private ArrayList<Point> openListArray;
 	private int H, F, G, minimumStrok;
-	private Point tile = new Point();
 
 	private Map<Point, Integer> distance;
 	private Map<Point, PlayerAnimations> direction;
@@ -56,6 +56,7 @@ public class Engine {
 		this.x = 0;
 		this.y = 0;
 		this.openList = new HashMap<Point, PathFindingNode>();
+		//this.openListArray = new ArrayList<Point>();
 		this.closeList = new HashMap<Point, PathFindingNode>();
 		this.distance = new HashMap<Point, Integer>();
 		this.direction = new HashMap<Point, PlayerAnimations>();
@@ -542,76 +543,114 @@ public class Engine {
 
 		openList.clear();
 		closeList.clear();
+		//openListArray.clear();
 
 		ConcurrentHashMap<Point, Objects> animatedObjects = this.single.map.getAnimatedObjects();
 
-		Point currentTile = new Point(), source = new Point();
-		source.x = sourcePoint.x;
-		source.y = sourcePoint.y;
+		Point tile = new Point(), source = new Point(sourcePoint.x, sourcePoint.y), res = new Point();
 		openList.put(source, new PathFindingNode(0, 0, 0, source));
+		//openListArray.add(source);
+		int i, j;
 
 		do {
 
 			minimumStrok = Integer.MAX_VALUE;
-			for (Entry<Point, PathFindingNode> entry : openList.entrySet()) {
-				if ( entry.getValue().F <= minimumStrok) {
-					minimumStrok = entry.getValue().F;
-					currentTile = entry.getKey();
+			/*
+			i = 0;
+			j = 0;
+			for ( ; i < this.openListArray.size() ; i++ ) {
+				if ( openList.get(openListArray.get(i)).F <= minimumStrok) {
+					minimumStrok = openList.get(openListArray.get(i)).F;
+					tile = openListArray.get(i);
+					j = i;
 				}
 			}
+			openListArray.remove(j);
+			*/
+			
+			for (Entry<Point, PathFindingNode> entry : openList.entrySet()) {
+                if ( entry.getValue().F <= minimumStrok) {
+                        minimumStrok = entry.getValue().F;
+                        tile = entry.getKey();
+                }
+			}
+			
+			closeList.put(tile, openList.remove(tile));
 
-			closeList.put(currentTile, openList.remove(currentTile));
+			for (i = tile.x-1 ; i < tile.x+2 ; i++ ) {
+				for (j = tile.y-1 ; j < tile.y+2 ; j++ ) {
 
-			for (int i = currentTile.x-1 ; i < currentTile.x+2 ; i++ ) {
-				for (int j = currentTile.y-1 ; j < currentTile.y+2 ; j++ ) {
-
-					tile.set(i, j);
-
-					if ( closeList.get(tile) == null) {
+					if ( closeList.get(ResourcesManager.getPoint(i, j)) == null) {
 
 						if ( colisionMap[i][j] == ColisionMapObjects.BLOCK ) {
 
-							if ( animatedObjects.get(tile) != null ) {
+							if ( animatedObjects.get(ResourcesManager.getPoint(i, j)) != null ) {
 
-								if ( i == currentTile.x || j == currentTile.y ) {
+								if ( i == tile.x || j == tile.y ) {
 
 									H = (Math.abs(destinationPoint.x-i) + Math.abs(destinationPoint.y-j))*10;
 
-									addInOpenList(40, i, j, currentTile);
+									addInOpenList(40, i, j, tile);
 								}
 							}
 							else {
-								closeList.put(new Point(i,j), new PathFindingNode(0, 0, 0, currentTile));
+								closeList.put(ResourcesManager.getPoint(i, j), new PathFindingNode(0, 0, 0, tile));
 							}
 						}
 						else if ( colisionMap[i][j] == ColisionMapObjects.EMPTY ) {
 
 							H = (Math.abs(destinationPoint.x-i) + Math.abs(destinationPoint.y-j))*10;
 
-							if ( i == currentTile.x || j == currentTile.y ) {                                                       
-								addInOpenList(10, i, j, currentTile);
+							if ( i == tile.x || j == tile.y ) {                                                       
+								addInOpenList(10, i, j, tile);
 							}
 							else {
-								if ( i > currentTile.x && colisionMap[currentTile.x+1][currentTile.y] == ColisionMapObjects.EMPTY) {
-									if ( j > currentTile.y && colisionMap[currentTile.x][currentTile.y+1] == ColisionMapObjects.EMPTY) {
-										addInOpenList(14, i, j, currentTile);
+								if ( i > tile.x && colisionMap[tile.x+1][tile.y] == ColisionMapObjects.EMPTY) {
+									if ( j > tile.y && colisionMap[tile.x][tile.y+1] == ColisionMapObjects.EMPTY) {
+										addInOpenList(14, i, j, tile);
 									}
-									else if ( colisionMap[currentTile.x][currentTile.y-1] == ColisionMapObjects.EMPTY ){
-										addInOpenList(14, i, j, currentTile);
+									else if ( colisionMap[tile.x][tile.y-1] == ColisionMapObjects.EMPTY ){
+										addInOpenList(14, i, j, tile);
 									}
 								}
-								else if ( i < currentTile.x && colisionMap[currentTile.x-1][currentTile.y] == ColisionMapObjects.EMPTY) {
-									if ( j > currentTile.y && colisionMap[currentTile.x][currentTile.y+1] == ColisionMapObjects.EMPTY) {
-										addInOpenList(14, i, j, currentTile);
+								else if ( i < tile.x && colisionMap[tile.x-1][tile.y] == ColisionMapObjects.EMPTY) {
+									if ( j > tile.y && colisionMap[tile.x][tile.y+1] == ColisionMapObjects.EMPTY) {
+										addInOpenList(14, i, j, tile);
 									}
-									else if ( colisionMap[currentTile.x][currentTile.y-1] == ColisionMapObjects.EMPTY ){
-										addInOpenList(14, i, j, currentTile);
+									else if ( colisionMap[tile.x][tile.y-1] == ColisionMapObjects.EMPTY ){
+										addInOpenList(14, i, j, tile);
+									}
+								}
+							}
+						}
+						else if ( colisionMap[i][j] == ColisionMapObjects.FIRE ) {
+
+							H = (Math.abs(destinationPoint.x-i) + Math.abs(destinationPoint.y-j))*10;
+
+							if ( i == tile.x || j == tile.y ) {                                                       
+								addInOpenList(15, i, j, tile);
+							}
+							else {
+								if ( i > tile.x && colisionMap[tile.x+1][tile.y] == ColisionMapObjects.EMPTY) {
+									if ( j > tile.y && colisionMap[tile.x][tile.y+1] == ColisionMapObjects.EMPTY) {
+										addInOpenList(14, i, j, tile);
+									}
+									else if ( colisionMap[tile.x][tile.y-1] == ColisionMapObjects.EMPTY ){
+										addInOpenList(14, i, j, tile);
+									}
+								}
+								else if ( i < tile.x && colisionMap[tile.x-1][tile.y] == ColisionMapObjects.EMPTY) {
+									if ( j > tile.y && colisionMap[tile.x][tile.y+1] == ColisionMapObjects.EMPTY) {
+										addInOpenList(14, i, j, tile);
+									}
+									else if ( colisionMap[tile.x][tile.y-1] == ColisionMapObjects.EMPTY ){
+										addInOpenList(14, i, j, tile);
 									}
 								}
 							}
 						}
 						else {
-							closeList.put(new Point(i,j), new PathFindingNode(0, 0, 0, currentTile));
+							closeList.put(ResourcesManager.getPoint(i, j), new PathFindingNode(0, 0, 0, tile));
 						}
 					}
 				}
@@ -620,28 +659,30 @@ public class Engine {
 
 		if ( closeList.get(destinationPoint) != null )  {
 
-			currentTile = closeList.get(destinationPoint).father;
+			res.set(closeList.get(destinationPoint).father.x,closeList.get(destinationPoint).father.y);
 
-			while ( closeList.get(currentTile).father != source ) {
-				currentTile = closeList.get(currentTile).father;
-			}
+			while ( closeList.get(res).father != source ) {
+				res.set(closeList.get(res).father.x, closeList.get(res).father.y);
+			}	
 		}
 		else {
-			currentTile.x = sourcePoint.x;
-			currentTile.y = sourcePoint.y;
+			res.set(source.x,source.y);
 		}
 
-		return currentTile;
+		return res;
 	}
 
 	private void addInOpenList(int value, int i, int j, Point currentTile) {
+		
+		Point tile = ResourcesManager.getPoint(i, j);
 
 		G = value+closeList.get(currentTile).G;
 
 		F = G+H;
 
 		if ( openList.get(tile) == null ) {
-			openList.put(new Point(i,j), new PathFindingNode(F, G, H, currentTile));
+			openList.put(tile, new PathFindingNode(F, G, H, currentTile));
+			//this.openListArray.add(tile);
 		}
 		else if ( G < openList.get(tile).G ) {
 			openList.get(tile).F = F;
@@ -980,7 +1021,6 @@ public class Engine {
 		}
 	}
 
-
 	private void updateBombs() {
 
 		ColisionMapObjects[][] colisionMap = this.single.map.getColisionMap();
@@ -1007,13 +1047,13 @@ public class Engine {
 				object = ResourcesManager.getObjects().get("firecenter").copy();
 				object.setPosition(new Point(p.x*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));                          
 				animatedObjects.put(p, object);
-				colisionMap[p.x][p.y] = ColisionMapObjects.DAMAGE;
+				colisionMap[p.x][p.y] = ColisionMapObjects.FIRE;
 
 				/* UP */
 				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
 					/* Si une bombe est présente */
-					if ( this.bombs.get(new Point(p.x, p.y-k)) != null ) {
-						this.bombs.get(new Point(p.x, p.y-k)).destroy();
+					if ( this.bombs.get(ResourcesManager.getPoint(p.x, p.y-k)) != null ) {
+						this.bombs.get(ResourcesManager.getPoint(p.x, p.y-k)).destroy();
 					}
 					/* Si il n'y a pas de block */
 					else if ( colisionMap[p.x][p.y-k] != ColisionMapObjects.BLOCK) {
@@ -1029,18 +1069,18 @@ public class Engine {
 							animatedObjects.put(new Point(p.x,p.y-k), object);
 						}
 						if ( colisionMap[p.x][p.y-k] != ColisionMapObjects.GAPE ) {
-							colisionMap[p.x][p.y-k] = ColisionMapObjects.DAMAGE;
+							colisionMap[p.x][p.y-k] = ColisionMapObjects.FIRE;
 						}
 					}
 					/* Si il y a un block */
 					else {
 						/* Si il n'est pas destructible */
-						if ( animatedObjects.get(new Point(p.x,p.y-k)) == null ) {
+						if ( animatedObjects.get(ResourcesManager.getPoint(p.x, p.y-k)) == null ) {
 							/* On break */
 							break;
 						}
 						/* Si c'est du feu */
-						else if ( colisionMap[p.x][p.y-k] == ColisionMapObjects.DAMAGE ) {
+						else if ( colisionMap[p.x][p.y-k] == ColisionMapObjects.FIRE ) {
 							if ( k < bomb.getPower()-1 ) {
 								object = ResourcesManager.getObjects().get("firevertical").copy();
 								object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y-k)*ResourcesManager.getSize()));
@@ -1055,9 +1095,9 @@ public class Engine {
 						/* Si il est destructible */
 						else {
 							/* On le detruit */
-							animatedObjects.get(new Point(p.x ,p.y-k)).destroy();
+							animatedObjects.get(ResourcesManager.getPoint(p.x, p.y-k)).destroy();
 							/* Si il ne laisse pas passer le feu */
-							if ( animatedObjects.get(new Point(p.x ,p.y-k)).isFireWall() ) {
+							if ( animatedObjects.get(ResourcesManager.getPoint(p.x, p.y-k)).isFireWall() ) {
 								/* On break */
 								break;
 							}
@@ -1068,8 +1108,8 @@ public class Engine {
 				/* DOWN */
 				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
 					/* Si une bombe est présente */
-					if ( this.bombs.get(new Point(p.x, p.y+k)) != null ) {
-						this.bombs.get(new Point(p.x, p.y+k)).destroy();
+					if ( this.bombs.get(ResourcesManager.getPoint(p.x, p.y+k)) != null ) {
+						this.bombs.get(ResourcesManager.getPoint(p.x, p.y+k)).destroy();
 					}
 					/* Si il n'y a pas de block */
 					else if ( colisionMap[p.x][p.y+k] != ColisionMapObjects.BLOCK ) {
@@ -1085,18 +1125,18 @@ public class Engine {
 							animatedObjects.put(new Point(p.x,p.y+k), object);
 						}
 						if ( colisionMap[p.x][p.y+k] != ColisionMapObjects.GAPE ) {
-							colisionMap[p.x][p.y+k] = ColisionMapObjects.DAMAGE;
+							colisionMap[p.x][p.y+k] = ColisionMapObjects.FIRE;
 						}
 					}
 					/* Si il y a un block */
 					else {
 						/* Si il n'est pas destructible */
-						if ( animatedObjects.get(new Point(p.x,p.y+k)) == null ) {
+						if ( animatedObjects.get(ResourcesManager.getPoint(p.x, p.y+k)) == null ) {
 							/* On break */
 							break;
 						}
 						/* Si c'est du feu */
-						else if ( colisionMap[p.x][p.y+k] == ColisionMapObjects.DAMAGE ) {
+						else if ( colisionMap[p.x][p.y+k] == ColisionMapObjects.FIRE ) {
 							if ( k < bomb.getPower()-1 ) {
 								object = ResourcesManager.getObjects().get("firevertical").copy();
 								object.setPosition(new Point(p.x*ResourcesManager.getSize(), (p.y+k)*ResourcesManager.getSize()));
@@ -1111,9 +1151,9 @@ public class Engine {
 						/* Si il est destructible */
 						else {
 							/* On le detruit */
-							animatedObjects.get(new Point(p.x ,p.y+k)).destroy();
+							animatedObjects.get(ResourcesManager.getPoint(p.x, p.y+k)).destroy();
 							/* Si il ne laisse pas passer le feu */
-							if ( animatedObjects.get(new Point(p.x ,p.y+k)).isFireWall() ) {
+							if ( animatedObjects.get(ResourcesManager.getPoint(p.x, p.y+k)).isFireWall() ) {
 								/* On break */
 								break;
 							}
@@ -1124,8 +1164,8 @@ public class Engine {
 				/* LEFT */
 				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
 					/* Si une bombe est présente */
-					if ( this.bombs.get(new Point(p.x-k, p.y)) != null ) {
-						this.bombs.get(new Point(p.x-k, p.y)).destroy();
+					if ( this.bombs.get(ResourcesManager.getPoint(p.x-k, p.y)) != null ) {
+						this.bombs.get(ResourcesManager.getPoint(p.x-k, p.y)).destroy();
 					}
 					/* Si il n'y a pas de block */
 					else if ( colisionMap[p.x-k][p.y] != ColisionMapObjects.BLOCK ) {
@@ -1141,18 +1181,18 @@ public class Engine {
 							animatedObjects.put(new Point(p.x-k,p.y), object);
 						}
 						if ( colisionMap[p.x-k][p.y] != ColisionMapObjects.GAPE ) {
-							colisionMap[p.x-k][p.y] = ColisionMapObjects.DAMAGE;
+							colisionMap[p.x-k][p.y] = ColisionMapObjects.FIRE;
 						}
 					}
 					/* Si il y a un block */
 					else {
 						/* Si il n'est pas destructible */
-						if ( animatedObjects.get(new Point(p.x-k,p.y)) == null ) {
+						if ( animatedObjects.get(ResourcesManager.getPoint(p.x-k, p.y)) == null ) {
 							/* On break */
 							break;
 						}
 						/* Si c'est du feu */
-						else if ( colisionMap[p.x-k][p.y] == ColisionMapObjects.DAMAGE ) {
+						else if ( colisionMap[p.x-k][p.y] == ColisionMapObjects.FIRE ) {
 							if ( k < bomb.getPower()-1 ) {
 								object = ResourcesManager.getObjects().get("firehorizontal").copy();
 								object.setPosition(new Point((p.x-k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
@@ -1167,9 +1207,9 @@ public class Engine {
 						/* Si il est destructible */
 						else {
 							/* On le detruit */
-							animatedObjects.get(new Point(p.x-k ,p.y)).destroy();
+							animatedObjects.get(ResourcesManager.getPoint(p.x-k, p.y)).destroy();
 							/* Si il ne laisse pas passer le feu */
-							if ( animatedObjects.get(new Point(p.x-k ,p.y)).isFireWall() ) {
+							if ( animatedObjects.get(ResourcesManager.getPoint(p.x-k, p.y)).isFireWall() ) {
 								/* On break */
 								break;
 							}
@@ -1180,8 +1220,8 @@ public class Engine {
 				/* RIGHT */
 				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
 					/* Si une bombe est présente */
-					if ( this.bombs.get(new Point(p.x+k, p.y)) != null ) {
-						this.bombs.get(new Point(p.x+k, p.y)).destroy();
+					if ( this.bombs.get(ResourcesManager.getPoint(p.x+k, p.y)) != null ) {
+						this.bombs.get(ResourcesManager.getPoint(p.x+k, p.y)).destroy();
 					}
 					/* Si il n'y a pas de block */
 					else if ( colisionMap[p.x+k][p.y] != ColisionMapObjects.BLOCK ) {
@@ -1197,18 +1237,18 @@ public class Engine {
 							animatedObjects.put(new Point(p.x+k,p.y), object);
 						}
 						if ( colisionMap[p.x+k][p.y] != ColisionMapObjects.GAPE ) {
-							colisionMap[p.x+k][p.y] = ColisionMapObjects.DAMAGE;
+							colisionMap[p.x+k][p.y] = ColisionMapObjects.FIRE;
 						}
 					}
 					/* Si il y a un block */
 					else {
 						/* Si il n'est pas destructible */
-						if ( animatedObjects.get(new Point(p.x+k,p.y)) == null ) {
+						if ( animatedObjects.get(ResourcesManager.getPoint(p.x+k, p.y)) == null ) {
 							/* On break */
 							break;
 						}
 						/* Si c'est du feu */
-						else if ( colisionMap[p.x+k][p.y] == ColisionMapObjects.DAMAGE ) {
+						else if ( colisionMap[p.x+k][p.y] == ColisionMapObjects.FIRE ) {
 							if ( k < bomb.getPower()-1 ) {
 								object = ResourcesManager.getObjects().get("firehorizontal").copy();
 								object.setPosition(new Point((p.x+k)*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
@@ -1223,9 +1263,9 @@ public class Engine {
 						/* Si il est destructible */
 						else {
 							/* On le detruit */
-							animatedObjects.get(new Point(p.x+k ,p.y)).destroy();
+							animatedObjects.get(ResourcesManager.getPoint(p.x+k, p.y)).destroy();
 							/* Si il ne laisse pas passer le feu */
-							if ( animatedObjects.get(new Point(p.x+k ,p.y)).isFireWall() ) {
+							if ( animatedObjects.get(ResourcesManager.getPoint(p.x+k, p.y)).isFireWall() ) {
 								/* On break */
 								break;
 							}
@@ -1239,7 +1279,6 @@ public class Engine {
 			}
 		}
 	}
-
 
 	private Point iaPushBomb(Player player, ColisionMapObjects[][] colisionMap) {
 
@@ -1267,7 +1306,7 @@ public class Engine {
 				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
 
 					if ( up ) {
-						if ( colisionMap[bombPoint.x][bombPoint.y-k] != ColisionMapObjects.BLOCK && colisionMap[bombPoint.x][bombPoint.y-k] != ColisionMapObjects.BOMB && colisionMap[bombPoint.x][bombPoint.y-k] != ColisionMapObjects.DAMAGE) {
+						if ( colisionMap[bombPoint.x][bombPoint.y-k] != ColisionMapObjects.BLOCK && colisionMap[bombPoint.x][bombPoint.y-k] != ColisionMapObjects.BOMB && colisionMap[bombPoint.x][bombPoint.y-k] != ColisionMapObjects.DAMAGE && colisionMap[bombPoint.x][bombPoint.y-k] != ColisionMapObjects.FIRE) {
 							colisionMap[bombPoint.x][bombPoint.y-k] = ColisionMapObjects.DANGEROUS_AREA;
 						}
 						else {
@@ -1276,7 +1315,7 @@ public class Engine {
 					}
 
 					if ( down ) {
-						if ( colisionMap[bombPoint.x][bombPoint.y+k] != ColisionMapObjects.BLOCK && colisionMap[bombPoint.x][bombPoint.y+k] != ColisionMapObjects.BOMB && colisionMap[bombPoint.x][bombPoint.y+k] != ColisionMapObjects.DAMAGE) {
+						if ( colisionMap[bombPoint.x][bombPoint.y+k] != ColisionMapObjects.BLOCK && colisionMap[bombPoint.x][bombPoint.y+k] != ColisionMapObjects.BOMB && colisionMap[bombPoint.x][bombPoint.y+k] != ColisionMapObjects.DAMAGE && colisionMap[bombPoint.x][bombPoint.y+k] != ColisionMapObjects.FIRE) {
 							colisionMap[bombPoint.x][bombPoint.y+k] = ColisionMapObjects.DANGEROUS_AREA;
 						}
 						else {
@@ -1285,7 +1324,7 @@ public class Engine {
 					}
 
 					if ( left ) {
-						if ( colisionMap[bombPoint.x-k][bombPoint.y] != ColisionMapObjects.BLOCK && colisionMap[bombPoint.x-k][bombPoint.y] != ColisionMapObjects.BOMB && colisionMap[bombPoint.x-k][bombPoint.y] != ColisionMapObjects.DAMAGE) {
+						if ( colisionMap[bombPoint.x-k][bombPoint.y] != ColisionMapObjects.BLOCK && colisionMap[bombPoint.x-k][bombPoint.y] != ColisionMapObjects.BOMB && colisionMap[bombPoint.x-k][bombPoint.y] != ColisionMapObjects.DAMAGE && colisionMap[bombPoint.x-k][bombPoint.y] != ColisionMapObjects.FIRE) {
 							colisionMap[bombPoint.x-k][bombPoint.y] = ColisionMapObjects.DANGEROUS_AREA;
 						}
 						else {
@@ -1294,7 +1333,7 @@ public class Engine {
 					}
 
 					if ( right ) {
-						if ( colisionMap[bombPoint.x+k][bombPoint.y] != ColisionMapObjects.BLOCK && colisionMap[bombPoint.x+k][bombPoint.y] != ColisionMapObjects.BOMB && colisionMap[bombPoint.x+k][bombPoint.y] != ColisionMapObjects.DAMAGE) {
+						if ( colisionMap[bombPoint.x+k][bombPoint.y] != ColisionMapObjects.BLOCK && colisionMap[bombPoint.x+k][bombPoint.y] != ColisionMapObjects.BOMB && colisionMap[bombPoint.x+k][bombPoint.y] != ColisionMapObjects.DAMAGE && colisionMap[bombPoint.x+k][bombPoint.y] != ColisionMapObjects.FIRE) {
 							colisionMap[bombPoint.x+k][bombPoint.y] = ColisionMapObjects.DANGEROUS_AREA;
 						}
 						else {
@@ -1330,8 +1369,6 @@ public class Engine {
 				}
 			}
 		}
-
 		return p;
 	}
-
 }
