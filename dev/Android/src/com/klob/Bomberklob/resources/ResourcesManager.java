@@ -480,13 +480,14 @@ public class ResourcesManager {
 	
 	// FIXME
 	public static Point coToTile(int x, int y) {
-
-		if ( x < 0 || y < 0) {
+		
+		x /= size;
+		y /= size;
+		
+		if ( x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT ) {
 			return null;
 		}
 		else {
-			x /= size;
-			y /= size;
 			return matrixPoint[x][y];
 		}
 	}
