@@ -186,8 +186,8 @@ public class GameMap extends Map {
 		for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
 
 			if ( up ) {
-				if ( this.colisionMap[bombPosition.x][bombPosition.y-k] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x][bombPosition.y-k] != ColisionMapObjects.BOMB && this.colisionMap[bombPosition.x][bombPosition.y-k] != ColisionMapObjects.DAMAGE) {
-					this.colisionMap[bombPosition.x][bombPosition.y-k] = ColisionMapObjects.DANGEROUS_AREA;
+				if ( colisionMap[bombPosition.x][bombPosition.y-k] != ColisionMapObjects.BLOCK && colisionMap[bombPosition.x][bombPosition.y-k] != ColisionMapObjects.BOMB && colisionMap[bombPosition.x][bombPosition.y-k] != ColisionMapObjects.DAMAGE && colisionMap[bombPosition.x][bombPosition.y-k] != ColisionMapObjects.FIRE) {
+					colisionMap[bombPosition.x][bombPosition.y-k] = ColisionMapObjects.DANGEROUS_AREA;
 				}
 				else {
 					up = false;
@@ -195,8 +195,8 @@ public class GameMap extends Map {
 			}
 
 			if ( down ) {
-				if ( this.colisionMap[bombPosition.x][bombPosition.y+k] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x][bombPosition.y+k] != ColisionMapObjects.BOMB && this.colisionMap[bombPosition.x][bombPosition.y+k] != ColisionMapObjects.DAMAGE) {
-					this.colisionMap[bombPosition.x][bombPosition.y+k] = ColisionMapObjects.DANGEROUS_AREA;
+				if ( colisionMap[bombPosition.x][bombPosition.y+k] != ColisionMapObjects.BLOCK && colisionMap[bombPosition.x][bombPosition.y+k] != ColisionMapObjects.BOMB && colisionMap[bombPosition.x][bombPosition.y+k] != ColisionMapObjects.DAMAGE && colisionMap[bombPosition.x][bombPosition.y+k] != ColisionMapObjects.FIRE) {
+					colisionMap[bombPosition.x][bombPosition.y+k] = ColisionMapObjects.DANGEROUS_AREA;
 				}
 				else {
 					down = false;
@@ -204,8 +204,8 @@ public class GameMap extends Map {
 			}
 
 			if ( left ) {
-				if ( this.colisionMap[bombPosition.x-k][bombPosition.y] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x-k][bombPosition.y] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x-k][bombPosition.y] != ColisionMapObjects.DAMAGE) {
-					this.colisionMap[bombPosition.x-k][bombPosition.y] = ColisionMapObjects.DANGEROUS_AREA;
+				if ( colisionMap[bombPosition.x-k][bombPosition.y] != ColisionMapObjects.BLOCK && colisionMap[bombPosition.x-k][bombPosition.y] != ColisionMapObjects.BOMB && colisionMap[bombPosition.x-k][bombPosition.y] != ColisionMapObjects.DAMAGE && colisionMap[bombPosition.x-k][bombPosition.y] != ColisionMapObjects.FIRE) {
+					colisionMap[bombPosition.x-k][bombPosition.y] = ColisionMapObjects.DANGEROUS_AREA;
 				}
 				else {
 					left = false;
@@ -213,8 +213,8 @@ public class GameMap extends Map {
 			}
 
 			if ( right ) {
-				if ( this.colisionMap[bombPosition.x+k][bombPosition.y] != ColisionMapObjects.BLOCK && this.colisionMap[bombPosition.x+k][bombPosition.y] != ColisionMapObjects.BOMB && this.colisionMap[bombPosition.x+k][bombPosition.y] != ColisionMapObjects.DAMAGE) {
-					this.colisionMap[bombPosition.x+k][bombPosition.y] = ColisionMapObjects.DANGEROUS_AREA;
+				if ( colisionMap[bombPosition.x+k][bombPosition.y] != ColisionMapObjects.BLOCK && colisionMap[bombPosition.x+k][bombPosition.y] != ColisionMapObjects.BOMB && colisionMap[bombPosition.x+k][bombPosition.y] != ColisionMapObjects.DAMAGE && colisionMap[bombPosition.x+k][bombPosition.y] != ColisionMapObjects.FIRE) {
+					colisionMap[bombPosition.x+k][bombPosition.y] = ColisionMapObjects.DANGEROUS_AREA;
 				}
 				else {
 					right = false;
