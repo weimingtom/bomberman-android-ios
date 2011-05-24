@@ -12,12 +12,15 @@
 
 @implementation ColisionMap
 
-- (id)initWithMap:(EditorMap *)mapValue {
+- (id)initWithMap:(EditorMap *)mapValue players:(NSArray *)playersValue {
     self = [super init];
     
     if (self) {
         bombs = [[NSMutableArray alloc] init];
         [self initMap:mapValue];
+        
+        [playersValue retain];
+        players = playersValue;
     }
     
     return self;
@@ -330,6 +333,11 @@
 }
 
 
+- (BOOL)isDestructibleBlock:(NSInteger)i j:(NSInteger)j {
+    return [[[map objectAtIndex:i] objectAtIndex:j] isDestructibleBlock];
+}
+
+
 - (void)addFire:(Position *)position {
     RessourceManager *resource = [RessourceManager sharedRessource];
     Position *p = [[Position alloc] initWithX:(position.x / resource.tileSize) y:(position.y / resource.tileSize)];
@@ -353,51 +361,27 @@
                     colitionCase = [[map objectAtIndex:currentPosition.x] objectAtIndex:currentPosition.y];
                     
                     if (![colitionCase isUndestructibleBlock]) {
-                        if (x == 0 || y == 0) { // Horizontal, Vertical
-                            currentNode = [[Node alloc] initWithPosition:currentPosition parent:node costSinceStart:(node.costSinceStart + 10) costUntilArrived:[self heuristicManhattan:currentPosition arrived:arrived]];
-                            [adjacentCases addObject:currentNode];
-                            [currentNode release];
+                        if (![colitionCase isDestructibleBlock]) {
+                            if (x == 0 || y == 0) { // Horizontal, Vertical
+                                currentNode = [[Node alloc] initWithPosition:currentPosition parent:node costSinceStart:(node.costSinceStart + 10) costUntilArrived:[self heuristicManhattan:currentPosition arrived:arrived]];
+                                [adjacentCases addObject:currentNode];
+                                [currentNode release];
+                            }
+                            else {
+                                if (![[[map objectAtIndex:(node.position.x + x)] objectAtIndex:node.position.y] isUndestructibleBlock] && ![[[map objectAtIndex:node.position.x] objectAtIndex:(node.position.y + y)] isUndestructibleBlock]) {
+                                    currentNode = [[Node alloc] initWithPosition:currentPosition parent:node costSinceStart:(node.costSinceStart + 14) costUntilArrived:[self heuristicManhattan:currentPosition arrived:arrived]];
+                                    [adjacentCases addObject:currentNode];
+                                    [currentNode release];
+                                }
+                            }
                         }
-                        else if (x == -1 && y == -1) {
-                            if (![[[map objectAtIndex:(node.position.x - 1)] objectAtIndex:node.position.y] isUndestructibleBlock] && ![[[map objectAtIndex:node.position.x] objectAtIndex:(node.position.y - 1)] isUndestructibleBlock]) {
-                                currentNode = [[Node alloc] initWithPosition:currentPosition parent:node costSinceStart:(node.costSinceStart + 14) costUntilArrived:[self heuristicManhattan:currentPosition arrived:arrived]];
+                        else {
+                            if (x == 0 || y == 0) { // Horizontal, Vertical
+                                currentNode = [[Node alloc] initWithPosition:currentPosition parent:node costSinceStart:(node.costSinceStart + 30) costUntilArrived:[self heuristicManhattan:currentPosition arrived:arrived]];
                                 [adjacentCases addObject:currentNode];
                                 [currentNode release];
                             }
                         }
-                        else if (x == -1 && y == 1) {
-                            if (![[[map objectAtIndex:(node.position.x - 1)] objectAtIndex:node.position.y] isUndestructibleBlock] && ![[[map objectAtIndex:node.position.x] objectAtIndex:(node.position.y + 1)] isUndestructibleBlock]) {
-                                currentNode = [[Node alloc] initWithPosition:currentPosition parent:node costSinceStart:(node.costSinceStart + 14) costUntilArrived:[self heuristicManhattan:currentPosition arrived:arrived]];
-                                [adjacentCases addObject:currentNode];
-                                [currentNode release];
-                            }
-                        }
-                        else if (x == 1 && y == -1) {
-                            if (![[[map objectAtIndex:(node.position.x + 1)] objectAtIndex:node.position.y] isUndestructibleBlock] && ![[[map objectAtIndex:node.position.x] objectAtIndex:(node.position.y - 1)] isUndestructibleBlock]) {
-                                currentNode = [[Node alloc] initWithPosition:currentPosition parent:node costSinceStart:(node.costSinceStart + 14) costUntilArrived:[self heuristicManhattan:currentPosition arrived:arrived]];
-                                [adjacentCases addObject:currentNode];
-                                [currentNode release];
-                            }
-                        }
-                        else if (x == 1 && y == 1) {
-                            if (![[[map objectAtIndex:(node.position.x + 1)] objectAtIndex:node.position.y] isUndestructibleBlock] && ![[[map objectAtIndex:node.position.x] objectAtIndex:(node.position.y + 1)] isUndestructibleBlock]) {
-                                currentNode = [[Node alloc] initWithPosition:currentPosition parent:node costSinceStart:(node.costSinceStart + 14) costUntilArrived:[self heuristicManhattan:currentPosition arrived:arrived]];
-                                [adjacentCases addObject:currentNode];
-                                [currentNode release];
-                            }
-                        }
-                        
-                        
-//                        if (x == 0 || y == 0) { // Horizontal, Vertical
-//                            currentNode = [[Node alloc] initWithPosition:currentPosition parent:node costSinceStart:(node.costSinceStart + 10) costUntilArrived:[self heuristicManhattan:currentPosition arrived:arrived]];
-//                            [adjacentCases addObject:currentNode];
-//                            [currentNode release];
-//                        }
-//                        else { // Diagonal
-//                            currentNode = [[Node alloc] initWithPosition:currentPosition parent:node costSinceStart:(node.costSinceStart + 14) costUntilArrived:[self heuristicManhattan:currentPosition arrived:arrived]];
-//                            [adjacentCases addObject:currentNode];
-//                            [currentNode release];
-//                        }
                     }  
                 }
             }

@@ -95,7 +95,7 @@
 
 - (void)plantingBomb {
     Bomb *bomb = [[resource.bitmapsBombs objectForKey:@"normal"] copy];
-    [engine plantingBomb:bomb];
+    [engine plantingBomb:bomb owner:nil];
 	[bomb release];
 }
 

@@ -82,7 +82,7 @@
         
 		[self makeBitmap:grounds blocks:blocks];
         
-        colisionMap = [[ColisionMap alloc] initWithMap:myMap];
+        colisionMap = [[ColisionMap alloc] initWithMap:myMap players:players];
     }
 
     [mapPath release];

@@ -7,9 +7,10 @@
     
     NSMutableArray *map;
     NSMutableArray *bombs;
+    NSArray *players;
 }
 
-- (id)initWithMap:(EditorMap *)mapValue;
+- (id)initWithMap:(EditorMap *)mapValue players:(NSArray *)playersValue;
 
 - (void)initMap:(EditorMap *)mapValue;
 - (void)draw:(CGContextRef)context;
@@ -29,6 +30,7 @@
 - (BOOL)isBomb:(NSInteger)i j:(NSInteger)j;
 - (BOOL)isFire:(NSInteger)i j:(NSInteger)j;
 - (BOOL)isDangerousArea:(NSInteger)i j:(NSInteger)j;
+- (BOOL)isDestructibleBlock:(NSInteger)i j:(NSInteger)j;
 
 - (NSArray *)adjacentCases:(Node *)node arrived:(Position *)arrived;
 - (NSInteger)heuristicManhattan:(Position *)start arrived:(Position *)arrived;

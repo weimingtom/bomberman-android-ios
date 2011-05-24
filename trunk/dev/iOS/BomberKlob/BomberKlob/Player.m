@@ -322,7 +322,7 @@
 
 
 
-- (void) plantingBomb:(Bomb *) aBomb{
+- (void) plantingBomb{
 	bombPosed = YES;
 }
 
