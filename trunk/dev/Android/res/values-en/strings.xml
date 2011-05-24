@@ -4,6 +4,7 @@
 	<!-- STRING -->
 
 	<!-- A -->
+	<string name="AccountEdit">Account edit</string>
 	<string name="app_name">BLOK</string>
 	<string name="Autologin">Autologin</string>
 	<string name="About">About</string>
@@ -11,6 +12,7 @@
 	<!-- B -->	
 	<string name="Back">Back</string>
 	<string name="Blocks">Blocks</string>
+	<string name="BLOK">BLOK</string>
 	<string name="Bonus">Bonus</string>
 
 	<!-- C -->	
@@ -27,7 +29,7 @@
 	<!-- E -->
 	<string name="Edit">Edit</string>
 	<string name="EnemiesNumber">Number of enemies</string>
-	<string name="EnemiesDifficulty">Difficulty of the enemies</string>
+	<string name="EnemiesDifficulty">Difficulty</string>
 	
 	<string name="ErrorAuth">Error during the authentification</string>
 	<string name="ErrorAutoConnection">The username or password is empty</string>

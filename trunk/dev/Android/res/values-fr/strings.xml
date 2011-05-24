@@ -2,13 +2,15 @@
 <resources>
 
 	<!-- A -->
+	<string name="AccountEdit">Modifier le compte</string>
 	<string name="app_name">BLOK</string>
 	<string name="Autologin">Connexion auto</string>
 	<string name="About">A propos</string>
 	
 	<!-- B -->
 	<string name="Back">Retour</string>
-	<string name="Blocks">Blocks</string>
+	<string name="Blocks">Blocks</string>	
+	<string name="BLOK">BLOK</string>
 	<string name="Bonus">Bonus</string>
 
 	<!-- C -->
@@ -25,7 +27,7 @@
 	<!-- E -->
 	<string name="Edit">Modifier</string>
 	<string name="EnemiesNumber">Nombre d\'ennemis</string>
-	<string name="EnemiesDifficulty">Difficulté des ennemis</string>
+	<string name="EnemiesDifficulty">Difficulté</string>
 	
 	<string name="ErrorAuth">Erreur lors de l\'authentification</string>
 	<string name="ErrorAutoConnection">Le nom d\'utilisateur ou le mot de passe sont vides</string>
