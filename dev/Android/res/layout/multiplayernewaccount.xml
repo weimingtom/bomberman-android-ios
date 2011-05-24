@@ -36,7 +36,7 @@
 				android:gravity="center_vertical|center_horizontal">
 				<TextView android:layout_gravity="center_vertical"
 					android:layout_height="wrap_content" android:id="@+id/textView1"
-					android:layout_width="wrap_content" android:text="@string/UserName"></TextView>
+					android:layout_width="wrap_content" android:text="@string/UserName" android:textColor="@color/White"></TextView>
 
 				<EditText android:layout_width="140dip" android:maxWidth="140dip"
 					android:id="@+id/NewAccountOnLineEditTextName"
@@ -47,7 +47,7 @@
 				android:gravity="center_vertical|center_horizontal">
 				<TextView android:layout_gravity="center_vertical"
 					android:layout_height="wrap_content" android:id="@+id/textView1"
-					android:layout_width="wrap_content" android:text="@string/Password"></TextView>
+					android:layout_width="wrap_content" android:text="@string/Password" android:textColor="@color/White"></TextView>
 
 				<EditText android:layout_width="140dip" android:maxWidth="140dip"
 					android:password="true" android:id="@+id/NewAccountOnLineEditTextPassword1"
@@ -59,7 +59,7 @@
 				android:gravity="center_vertical|center_horizontal">
 				<TextView android:layout_gravity="center_vertical"
 					android:layout_height="wrap_content" android:id="@+id/textView1"
-					android:layout_width="wrap_content" android:text="@string/Verification"></TextView>
+					android:layout_width="wrap_content" android:text="@string/Verification" android:textColor="@color/White"></TextView>
 
 				<EditText android:layout_width="140dip" android:maxWidth="140dip"
 					android:password="true" android:id="@+id/NewAccountOnLineEditTextPassword2"

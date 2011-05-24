@@ -17,6 +17,7 @@
 			android:text="@string/Help" android:layout_centerVertical="true"></Button>
 		<TextView android:textColor="@color/White" android:textSize="20dip" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/textView5" android:layout_centerInParent="true" android:text="@string/BLOK"></TextView>
 		</RelativeLayout>
+		<ImageView android:src="@drawable/gamename" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/imageView1"></ImageView>
 	</LinearLayout>
 
 	<LinearLayout android:id="@+id/linearLayout1"
