@@ -231,10 +231,10 @@ public class Engine {
 														this.playerObjectif.x = this.tileUpLeft.x;
 														this.playerObjectif.y = this.tileUpLeft.y;
 													}
-												}
+												}/*
 												else {
 													this.playerObjectif = safeAroundArea(this.tileUpLeft, colisionMap);
-												}
+												}*/
 											}
 										}
 										else {
