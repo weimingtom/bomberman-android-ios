@@ -199,7 +199,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 			@Override
 			public void handleMessage(Message msg) {
 				if ( msg.what == 0 ) {
-					if ( timeM > 0 ) {
+					if ( timeM >= 0 ) {
 						timeS--;
 						if ( timeS == -1 ) {
 							timeM--;
@@ -211,10 +211,11 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 						else {
 							timeTextView.setText(timeM+":0"+timeS);
 						}
-					}
-					if ( timeM == 0 && timeS == 0 ) {
-						setTimeThreadRunning(false);
-						draw();
+						
+						if ( timeM == 0 && timeS == 0 ) {
+							setTimeThreadRunning(false);
+							draw();
+						}
 					}
 				}
 				else if ( msg.what == 1 ) {
