@@ -12,6 +12,9 @@
 \usepackage{url}
 \usepackage{multicol}
 \usepackage[table]{xcolor}
+\usepackage[colorlinks]{hyperref}
+\usepackage[acronym]{glossaries} % make a separate list of acronyms
+
 
 
 \usepackage{pstricks}
@@ -50,6 +53,7 @@
 
 \date{}
 
+\makeglossaries
 
 \begin{document}
 \maketitle
@@ -108,5 +112,10 @@
 \chapter{Conclusion}
 
 	\input{Conclusion/Conclusion.tex}
+   
+\input{glossaire.tex}
+
+\printglossaries
+
 
 \end{document}
