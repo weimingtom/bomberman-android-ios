@@ -1,12 +1,12 @@
 \subsection{Général}
-	Le fait de developper des applications IOS et Android nous a imposé le choix du language. En effet pour developper des applications IPhone, il faut utiliser le language Objective-C, puis  pour les applications Android c'est le language JAVA qui est utilisé. C'est deux languages ont une syntaxe complétement différente mais sont quand meme tres proche car ce sont des languages orientés objets. Grâce à cela nous avons pu mettre au point une modélisation général de l'application que nous avons ensuite adapté à chaque language.\\
+	Le fait de développer des applications \gls{ios} et \gls{android} nous a imposé le choix du langage. En effet pour développer des applications \gls{iphone}, il faut utiliser le langage \gls{objective-c}, puis  pour les applications \gls{android} c'est le langage \gls{java} qui est utilisé. C'est deux langages ont une syntaxe complétement différente mais sont quand même très proche car ce sont des langages orientés objets. Grâce à cela nous avons pu mettre au point une modélisation générale de l'application que nous avons ensuite adapté à chaque langage.\\
 			
-	Nous avons décidé de développer en anglais car premierement c'est la langue la plus utilisé dans le monde de la programmation et deuxiement car la syntaxe des languages est toujours en anglais. Cela permettra à n'importe quel utilisateur de n'importe quelle nationalités de comprendre le code de l'application.\\
+	Nous avons décidé de développer en anglais car premièrement c'est la langue la plus utilisé dans le monde de la programmation et deuxièmement car la syntaxe des langages est toujours en anglais. Cela permettra à n'importe quel utilisateur de n'importe quelle nationalité de comprendre le code de l'application.\\
 			
 	La documentation des deux applications est également en anglais. Cette documentation permettra à tout utilisateur de comprendre le fonctionnement de l'application.
-	Nous avons créé une AppleDoc pour l'application IPhone et une JavaDoc pour l'application Android. Chacune de ces documentations est au format HTML et sera donc directement visible grâce à un navigateur Web.\\
+	Nous avons créé une documentation pour l'application \gls{iphone} et pour l'application \gls{android}. Chacune de ces documentations est au format \gls{html} et sera donc directement visible grâce à un navigateur Web.\\
 			
-	Pour ce qui est de la modélisation globale du projet, nous avons choisi de developper les deux applications selon le modèle MVC \footnote{Modèle-Vue-Contrôleur}. Ce dernier est une architecture et une méthode de conception qui organise l'interface homme-machine (IHM) d'une application logicielle. 
+	Pour ce qui est de la modélisation globale du projet, nous avons choisi de développer les deux applications selon le modèle \gls{mvc}. Ce dernier est une architecture et une méthode de conception qui organise l'\gls{ihm} d'une application logicielle. 
 			
 	Le modèle représente le comportement de l'application : traitements des données, interactions avec la base de données, etc. Il décrit et contient les données manipulées par l'application. Il assure la gestion de ces données et garantit leur intégrité.
 			
@@ -20,32 +20,29 @@
 
 	Au démarrage de l'application vous arrivez sur un menu d'accueil. Depuis
 	celui-ci vous pourrez accéder à l'aide, à la liste des comptes locaux ou à la
-	création d'un nouveau.
-	Les menus de l'application ont été réalisé pour que l'utilisateur ait
-	une utilisation intuitive de l'application. Ils se divisent en 4 grandes sections.
+	création d'un nouveau compte local.
+	Les menus de l'application ont été réalisés pour que l'utilisateur puisse les utiliser de manière intuitive. Ils se divisent en quatre grandes sections.
 		
 	Vous avez tout d'abord la section de création de parties locales. Vous aurez
-	accès à une liste de cartes ainsi qu'au réglage de difficulté des bots, leur
+	accès à une liste de cartes ainsi qu'au réglage de difficulté des \glspl{bot}, leur
 	nombre et le temps de jeu. Le type de partie sera une fonctionnalité à venir.
 	Vous n'aurez plus qu'à créer la partie configurée.
 		
 	Dans la même catégorie se trouve la section des parties multijoueurs. En
 	accédant à celle-ci vous allez pouvoir vous connecter à votre compte
-	multijoueur, ou le créer si ne déjà fait. Vous accèderez ensuite à la liste
+	multijoueur, ou le créer s'il n'est pas déjà fait. Vous accèderez ensuite à la liste
 	des parties multijoueurs, que vous pourrez rejoindre, ou choisir de créer la
 	votre. Dans le menu création le principe est proche des parties locales.
 		
 	Suite à ces deux sections vient ensuite l'éditeur de cartes. C'est depuis ce
-	menu que vous déciderez la création d'une nouvelle map de jeu local ou à
-	l'édition d'une d'entre elles. Choisisez votre nom de carte et l'éditeur
-	s'ouvrira ensuite à vous. Il vous sera possible à la fin d'enregistrer votre
+	menu que vous créerez une nouvelle map de jeu local ou éditerez l'une d'entre elles. Choisisez votre nom de carte et l'éditeur
+	s'ouvrira ensuite à vous. Il vous sera possible, à la fin, d'enregistrer votre
 	carte si vous désirez la conserver et l'utiliser comme carte de jeu.
 		
 	Et enfin vient le menu des options. Depuis ce dernier vous pourrez gérer vos
 	préférences sytèmes telles que le volume ou la langue de
 	l'application(anglais, français).
-	Une sous-section de gestionnaire de profil
-	est aussi présente. Une édition de vos comptes locaux, multijoueurs ou même
+	Une sous-section de gestionnaire de profil est aussi présente. Une édition de vos comptes locaux, multijoueurs ou même
 	vos paramètres de jeu comme la position du menu, sont modifiable depuis ce
 	menu à onglets.
 	
@@ -60,15 +57,15 @@
 		Une base de données locale a elle aussi été conçue. Cette dernière a pour
 		but de stocker plusieurs types de données.
 				
-		En effet dès lors qu'un compte local est crée sur le téléphone dans la
+		En effet dès lors qu'un compte local est créé sur le téléphone dans la
 		table PlayerAccount, il est possible de conserver ses préférences de joueur
 		tel que la couleur du joueur, le pseudonyme ou même ses paramètres de connexion multijoueur. 
-		Vous pourrez créer autant de comptes locaux que vous le désirez, et il
+		Vous pourrez créer autant de comptes locaux que vous désirez, et il
 		sera possible possible d'éditer ou choisir son compte.
 				
 		L'application est par ailleur en mesure de conserver
 		les valeurs sonores, la langue et même le dernier utilisateur de
-		l'application, grâce à un son id qui est clé étrangère dans la table System(lastUser).
+		l'application, grâce à un son id qui est clé étrangère dans la table System(attribut lastUser).
 				
 		De plus l'application sera délivrée avec quelques cartes officielles, mais
 		l'utilisateur aura libre droit de créer ses propres cartes de jeu via un
