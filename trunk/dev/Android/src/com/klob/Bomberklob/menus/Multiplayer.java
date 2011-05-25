@@ -27,8 +27,6 @@ import android.widget.Toast;
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.model.Model;
 
-import flexjson.JSONSerializer;
-
 public class Multiplayer extends Activity implements View.OnClickListener {
 	
 	private Button cancel;
@@ -219,8 +217,8 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 				OutputStreamWriter writer = new OutputStreamWriter(
 						connectionServ.getOutputStream());
 				
-				JSONSerializer jsonSerializer = new JSONSerializer();
-				jsonSerializer.serialize(identifier, writer);
+//				JSONSerializer jsonSerializer = new JSONSerializer();
+//				jsonSerializer.serialize(identifier, writer);
 				writer.flush();
 
 				if (connectionServ.getResponseCode() != HttpURLConnection.HTTP_OK) {

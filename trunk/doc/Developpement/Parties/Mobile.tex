@@ -150,7 +150,7 @@
 			\includegraphics[width=11cm]{./Developpement/Img/carte.pdf}
 		\end{center}
 		Tout d'abord, la vue la plus important que nous avons créé, c'est la vue affichant la carte permettant au joueur d'intéragir avec celle-ci et de pouvoir créer des cartes selon ses envies. Pour réaliser cette intéraction, nous avons dû surcharger trois methodes de la classe \textit{UIResponder} : \textit{touchesBegan}, \textit{touchesMoved} et \textit{touchesEnded} permettant de gérer tous les évènement générés lorsque l'utilisateur appuiera sur la vue. La methode \textit{touchesBegan} permet de récupérer l'évènement lorsque l'utilisateur va appuyer sur la vue, grâce à cette évènement, on peut savoir à quelle position l'utilisateur à pressé la vue. Ensuite pour réccupérer l'évènement lorsque l'utilisateur continu d'appuyer sur l'écran, il nous suffit d'utiliser \textit{touchesMoved}. Et pour finir lorsque l'utilisateur retire son doigt de la vue, nous utilisons la méthode \textit{touchesEnded} qui nous permettra par exemple de savoir où l'utilisateur à retiré son doigt de la vue. A l'aide de ces trois methodes, nous avons implémenté les différents gestes que l'ulisateur peut effectuer pour créer une carte. Pour dessiner la carte, nous avons dû surcharger la methode \textit{- (void)draw:(CGContextRef)context}, celle-ci permet de modifier le comportement de l'affichage de la vue et notamme elle donne la possibilité de dessiner n'import quel objet dans la vue.
-			
+		
 		\begin{center}
 			\includegraphics{./Developpement/Img/menu_droite.pdf}
 		\end{center}

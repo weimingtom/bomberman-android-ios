@@ -5,11 +5,11 @@
 	Il est majoritairement utilisé sur smartphones, PDA et autres terminaux
 	mobiles mais aussi sur tablettes graphiques et même sur certains téléviseurs.
 	
-	Disponible via une \gls{licen_apache} version 2, \gls{android} est fondé sur un noyau \gls{linux}, il comporte une interface
-	spécifique, développée en Java, les programmes sont exécutés via un
-	interpréteur JIT, toutefois il est possible de passer outre cette interface en
-	programmant ses applications en C ou C++, mais le travail de portabilité en
-	sera plus important.
+	Disponible via une \gls{licence_apache} version 2, \gls{android} est fondé  sur
+	un noyau \gls{linux}, il comporte une interface spécifique, développée en Java,
+	les programmes sont exécutés via un interpréteur JIT, toutefois il est possible
+	de passer outre cette interface en programmant ses applications en \gls{c_ansi} ou \gls{cplusplus},
+	mais le travail de portabilité en sera plus important.
 	
 	Il nous est aussi permit d'utiliser du XML principalement pour les interfaces
 	graphiques ou encore pour la portabilité des données entre chaque type
@@ -24,10 +24,8 @@
 	dispotition un kit de développement (SDK) ainsi qu'un greffon pour Eclipse
 	(ADT) afin de simplifier l'utilisation de celui-ci.
 	
-	Le kit de développement d'Android comporte les outils de base pour developper une application en
-	Java, le developpement en C et C++ necessitant d'utiliser le NDK \footnote{NDK
-	ou Native Developpement Kit permet d'utiliser du code dit natif tel que le C
-	ou C++ au sein des application \gls{android}}.
+	Le kit de développement d'\gls{android} comporte les outils de base pour developper une application en
+	Java, le developpement en C et C++ necessitant d'utiliser le \gls{ndk}.
 	Il se compose des librairies principales d'Android, de divers exemples
 	d'applications et surtout d'un emulateur de terminal Android qui permet de
 	pouvoir tester directement ses applications directement sur Linux, Mac ou
@@ -38,18 +36,49 @@
 	ordinateur ou en récupérant l'archive de l'application au format APK.
 	
 	Le format APK ou Android Pakage est une variante du format
-	JAR \footnote{JAR (Java ARchive) est un fichier ZIP utilisé pour distribuer un
-	ensemble de classes Java. Ce format est utilisé pour stocker les définitions
-	des  classes, ainsi que des métadonnées, constituant l'ensemble d'un
-	programme.},  est utilisé pour la distribution et l'installation de composants
-	regroupés sur le système d'exploitation Android.
+	\gls{jar} qui est utilisée pour la distribution et l'installation de composants
+	regroupés sur le système d'exploitation \gls{android}.
 
 
 \subsection{iOS}
-	Apple est une entreprise multinationale américaine qui a été crée le 1\up{er} avril 1976 à Cupertino (Californie) par Steve Jobs et Steve Wozniak. Elle a pour but de conçoir et vendre des produits électroniques grand public, des ordinateurs personnels et des logiciels informatiques. Parmi les produits les plus répendus de l'entreprise se trouvent les ordinateurs Macintosh (1984), l'iPod \footnote{L'iPod est un baladeur numérique conçu et commercialisé par Apple} (2001), l'iPhone \footnote{L'iPhone est une famille de smartphones conçue et commercialisée par Apple}  (2007) et l'iPad \footnote{L'iPad est une tablette électronique conçue et commercialisée par Apple.} (2010). Apple a développé deux systèmes d'exploitation (Mac OS X \footnote{Mac OS X est une série de systèmes d’exploitation propriétaires développés et commercialisés par Apple, dont la version la plus récente est Mac OS X v10.6, dit Snow Léopard.} et iOS) permettant de contrôler ses différents produits, notamment les ordinateurs Macintosh, l'iPhone et l'iPod touch \footnote{L’iPod touch est un baladeur numérique à écran tactile capacitif multi-touch, conçu et commercialisé par Apple.}.
+	Apple est une entreprise multinationale américaine qui a été crée le 1\up{er}
+	avril 1976 à Cupertino (Californie) par Steve Jobs et Steve Wozniak. Elle a
+	pour but de conçoir et vendre des produits électroniques grand public, des
+	ordinateurs personnels et des logiciels informatiques. Parmi les produits les
+	plus répendus de l'entreprise se trouvent les ordinateurs Macintosh (1984),
+	l'\gls{ipod} (2001), l'\gls{iphone} (2007) et l'\gls{ipad} (2010). Apple a
+	développé deux \glspl{système d'exploitation} (\gls{macosx} et \gls{ios})
+	permettant de contrôler ses différents produits, notamment les ordinateur 
+	Macintosh, l'\gls{ipod} et l'\gls{ipod_touch}.
 			
-	iOS, connu sous le nom de iPhone OS avant Juin 2010, est le système d'exploitation mobile d'Apple. Ce dernier a été développé originellement pour l'iPhone, puis a été étendu pour l'iPod touch, iPad  et Apple TV \footnote{Apple TV est un appareil conçu et commercialisé par Apple permet la communication sans fil entre un ordinateur et un téléviseur.} (2007). C'est dérivé de Mac OS X  dont il partage les fondations. Comme celui-ci, iOS comporte quatre couches d'abstraction : une couche \og Core OS \fg \footnote{La couche \og Core OS \fg \,  contient les fonctionalitées bas niveau.}, une couche \og Core Services \fg \footnote{La couche \og Core Services \fg contient les services fondamental du système.}, une couche \og Media \fg \, et pour finir une couche \og Cocoa \fg \footnote{\og Cocoa \fg \,est une API native d'Apple pour le développement objet sur son système d'exploitation Mac OS X.}. Pour dévélopper une application Cocoa, il est imposé d'utiliser l'Objective-C comme langage de programmation.
+	\gls{ios}, connu sous le nom de iPhone OS avant Juin 2010, est le \gls{système
+	d'exploitation}  mobile d'Apple. Ce dernier a été développé originellement 
+	pour l'\gls{iphone}, puis a été étendu pour l'\gls{ipod_touch}, \gls{ipad} et
+	\gls{apple_tv} (2007). C'est dérivé de \gls{macosx}  dont il partage les 
+	fondations. Comme celui-ci, iOS comporte quatre couches d'abstraction : une
+	couche \og \gls{core_os} \fg, une couche \og \gls{core_services} \fg, une
+	couche \og Media \fg \, et pour finir une couche \og \gls{cocoa} \fg. Pour
+	dévélopper une application Cocoa, il est imposé d'utiliser l'Objective-C comme
+	langage de programmation.
 			
-	L'Objective-C est le langage de programmation orientés objet. Il a été inventé au début des années 1980 par Brad Cox, créateur de la société Stepstone. Son objectif était de combiner la richesse du langage Smalltalk\,\footnote{Smalltalk est l'un des premiers langages orientés objets créé en 1972.} et la rapidité du C.  C'est une extension du C ANSI \footnote{Le C est un langage de programmation impératif conçu pour la programmation système. Inventé au début des années 1970 avec UNIX.} qui ne permet pas l'héritage multiple contrairement au C++ \footnote{Le C++ est un langage de programmation permettant la programmation sous de multiples paradigmes comme la programmation procédurale, la programmation orientée objet et la programmation générique.}. Aujourd'hui, il est principalement utilisé pour développer des applications sur Mac OS X et iPhone. Une nouvelle version Objective-C 2.0 à été indrotuite avec Mac OS X 10.5 (Léopard) en octobre 2007.
+	L'Objective-C est le langage de programmation orientés objet. Il a été inventé
+	au début des années 1980 par Brad Cox, créateur de la société Stepstone. Son
+	objectif était de combiner la richesse du langage \gls{smalltalk}\, et la
+	rapidité du C. 
+	C'est une extension du \gls{c_ansi} qui ne permet pas l'héritage multiple
+	contrairement au \gls{cplusplus}. Aujourd'hui, il est principalement utilisé
+	pour développer des applications sur \gls{macosx} et \gls{iphone}. Une nouvelle version
+	Objective-C 2.0 à été indrotuite avec \gls{macosx} 10.5 (Léopard) en octobre 2007.
 			
-	Le kit de développement d'iOS fournit les principaux outils nécessaire pour réaliser une application sur iPhone. Il est composé notamment de Xcode, Interface Builder, iPhone Simulator et Instruments. Xcode est l'outil de développement Apple, il permet la création de projets iPhone, l’édition du code source Objective-C, la compilation et le débogage des applications. Interface Builder quant à lui permet de construire des interfaces graphiques. L'iPhone Simulator est un logiciel simulant le comportement d'un iPhone, ce qui permet de pouvoir tester les applications directement sur l'ordinateur. Grâce à Instruments on peut analyser un programme pour surveiller l’état de la mémoire, l’utilisation du réseau, du CPU, etc. Pour utiliser tous ces outils, il est obligatoire de possèder un ordinateur Macintosh sous Mac OS X et de s'enregistrer sur iPhone Dev Center pour pouvoir télécharger et installer le SDK d'iOS.
+	Le kit de développement d'iOS fournit les principaux outils nécessaire pour
+	réaliser une application sur \gls{iphone}. Il est composé notamment de Xcode,
+	Interface Builder, \gls{iphone} Simulator et Instruments. Xcode est l'outil de
+	développement Apple, il permet la création de projets \gls{iphone}, l’édition du code
+	source Objective-C, la compilation et le débogage des applications. Interface
+	Builder quant à lui permet de construire des interfaces graphiques. L'\gls{iphone}
+	Simulator est un logiciel simulant le comportement d'un \gls{iphone}, ce qui 
+	permet de pouvoir tester les applications directement sur l'ordinateur. Grâce
+	à Instruments on peut analyser un programme pour surveiller l’état de la
+	mémoire, l’utilisation du réseau, du CPU, etc. Pour utiliser tous ces outils,
+	il est obligatoire de possèder un ordinateur Macintosh sous \gls{macosx} et de
+	s'enregistrer sur iPhone Dev Center pour pouvoir télécharger et installer le SDK d'iOS.
