@@ -103,24 +103,20 @@
 	if (!conn) {
 		NSLog(@"Connection error");
 	}
-/*	// Create the request.
-	 NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:8080/BomberklobServer/inscription"]
-	 cachePolicy:NSURLRequestUseProtocolCachePolicy
-	 timeoutInterval:60.0];
-	 // create the connection with the request
-	 // and start loading the data
-	 NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
-	 if (theConnection) {
-	 // Create the NSMutableData to hold the received data.
-	 // receivedData is an instance variable declared elsewhere.
-	 NSMutableData * receivedData = [[NSMutableData data] retain];
-	 } else {
-	 // Inform the user that the connection failed.
-	 }*/
 }
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)theData{
     NSLog(@"String sent from server %@",[[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding]);
 }
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{	
+	NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
+    NSDictionary *fields = [HTTPResponse allHeaderFields];
+	NSString *cookie = [fields valueForKey:@"Set-Cookie"]; // It is your cookie
+	NSString * idCookie = [cookie substringWithRange:NSMakeRange(11, 32)];
+	NSLog(@"IdCookie : %@",idCookie);
+
+}
+
+
 
 + (NSString *) md5:(NSString *)str {
 	const char *cStr = [str UTF8String];
