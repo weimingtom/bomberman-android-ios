@@ -1,0 +1,77 @@
+\section{Démarche}
+\subsection{Besoin de l'application}
+
+\begin{frame}
+\frametitle{Démarche}
+\framesubtitle{Besoin de l'application}
+Des coordonnées GPS :
+\begin{itemize}
+	\item Pour situer les bâtiments
+	\item Pour placer les entrées des salles
+	\item Pour repérer des points d'intérêts
+	\item Pour placer des chemins
+\end{itemize}
+\end{frame}
+
+\subsection{Récolte des données}
+
+\begin{frame}
+\frametitle{Démarche}
+\framesubtitle{Récolte des données}
+\begin{itemize}
+	\item Tri de données GPS d'Open Street Map
+	\item Comparaison avec Google Map
+	\item Application de récupération de coordonnées GPS
+\end{itemize}
+\end{frame}
+
+\subsection{Positionnement et orientation du téléphone}
+
+\begin{frame}
+\frametitle{Démarche}
+\framesubtitle{Positionnement et orientation du téléphone}
+Le téléphone est géolocalisé grâce aux coordonnées GPS.\\
+Il faut savoir où il filme.\\
+$\Rightarrow$ azimut au nord\\
+$\Rightarrow$ angle vertical par rapport à l'horizontale\\
+Utilisation de deux capteurs:
+\begin{itemize}
+	\item boussole
+	\item capteur d'orientation
+\end{itemize}
+Les informations géolocalisées sont positionnées de façon relative au téléphone.
+Réalisé avec deux angles par rapport à l'axe où filme la caméra.
+\end{frame}
+
+\subsection{Positionnement des points d'intérêt}
+
+\begin{frame}
+\frametitle{Démarche}
+\framesubtitle{Positionnement des points d'intérêt}
+\begin{center}
+\begin{tabular}{l|r}
+vue de dessus & vue de profile \\
+\includegraphics[height=4.5cm]{img/zazimuth.png} & \includegraphics[height=4.5cm]{img/zangle.png} \\
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Démarche}
+\framesubtitle{Positionnement des points d'intérêt}
+\begin{center}
+\includegraphics[height=4.5cm]{img/poi.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Démarche}
+\framesubtitle{Formes géométriques}
+\begin{center}\includegraphics[height=3.7cm]{img/Visibilite.png}\end{center}
+Utilités:\\
+\begin{itemize}
+	\item Faire ressortir des objets de la réalité
+	\item Mise en valeur de large zone
+\end{itemize}
+\end{frame}
+

@@ -1,0 +1,50 @@
+%pdflatex --shell-escape --synctex=1 Diapo.tex
+
+\documentclass[11pt, sans]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{default}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{Warsaw}
+
+\title{Développement d'un jeu de type Bomberman en réseau sous Android et iOS}
+\author{KLOB}
+\institute{Université Montpellier II}
+\subtitle{TER}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}{Sommaire}
+\setcounter{tocdepth}{1}
+\tableofcontents
+\end{frame}
+
+\include{intro}
+
+\include{etude}
+
+\include{android}
+
+\include{demarche}
+
+\include{application}
+
+\include{probleme}
+
+
+
+\include{conclusion}
+
+\begin{frame}
+\frametitle{Application}
+\framesubtitle{Téléchargez la  !}
+\begin{center}\textbf{Adresse:} http://www.sotosalinas.com/RA/RA\_UM2.apk\end{center}
+\begin{center}\includegraphics[height=4cm]{img/qr.png}\end{center}
+\end{frame}
+
+\end{document}
