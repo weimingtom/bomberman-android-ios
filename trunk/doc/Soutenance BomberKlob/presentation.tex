@@ -1,88 +1,161 @@
-\section{Android}
+\section{Présentation}
 
-\subsection{Le système d'exploitation}
-
-\begin{frame}
-\frametitle{Android}
-\framesubtitle{Le système d'exploitation}
-Android est un système basé sur un noyau Linux, développé par Google.
-\begin{itemize}
-	\item collaboration avec les membres de l'Open Handset Alliance (OHA)
-\end{itemize}
-\setbeamertemplate{blocks}[rounded,shadow=true]
-\begin{block}{OHA}
-consortium de compagnie rassemblant leurs compétences pour l'innovation dans le domaine de la mobilité.
-\begin{itemize}
-	\item Initié par Google en 2007
-	\item Opérateur téléphonique, fabricants électroniques, sociétés commerciales
-\end{itemize}
-\end{block}
-\end{frame}
+\subsection{Les jeux sur smartphone}
 
 \begin{frame}
-\frametitle{Android}
-\framesubtitle{Le système d'exploitation}
-Structure:
-\begin{itemize}
-	\item Noyaux linux pour exploiter le matériel
-	\item Librairies connues et open source (OpenGL ES, SQLite,...)
-	\item Machine virtuelle Java (Dalvik virtual machine)
-	\item API Java riche (package de Java SE, open source ou spécifique au système)
+\frametitle{Présentation}
+\framesubtitle{Les jeux sur smartphone}
+Le marché des jeux vidéos sur console portable connait une réel expansion: \\ \includegraphics[scale=0.4]{img/marche_console_portable.eps} 
+
+\begin{itemize} 
+		\item{Coût peu couteux.}
+		\item{Grand nombre de mini-jeux et de jeux.}
+		\item{Public visé plus large.}
 \end{itemize}
 \end{frame}
 
-\subsection{Développement}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Les sytèmes d'exploitations}
+
 
 \begin{frame}
-\frametitle{Android}
-\framesubtitle{Développement}
-\begin{itemize}
-	\item Langage principale Java, développement en C/C++ possible
-	\item Kit de développement multiplateforme
-	\item Développement sur téléphone ou sur émulateur
-	\item Déploiement des applications peu coûteux
-\end{itemize}
+\frametitle{Présentation}
+\framesubtitle{Android}
+
+	\begin{minipage}{8cm}
+		Le système d'exploitation possède : \\ 
+
+	\begin{itemize} 
+		\item Noyaux linux pour exploiter le matériel
+		\item Librairies connues et open source (OpenGL ES, SQLite,...)
+		\item Machine virtuelle Java (Dalvik virtual machine)
+		\item API Java riche (package de Java SE, open source ou spécifique au système)
+	\end{itemize}
+	\end{minipage} & \includegraphics[scale=0.2]{img/android.eps} 
+
 \end{frame}
 
-\subsection{Les téléphones mobiles}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{frame}
-\frametitle{Android}
-\framesubtitle{Les téléphones mobiles}
-Les téléphones ont tous l'équipement nécessaire pour la réalité augmentée depuis le premier modèle.\\
-\begin{block}{Inconvénient}
-\begin{itemize}
-	\item Fragmentation des téléphones et des versions du système.
-\end{itemize}
-\end{block}
-%Support des angles de vue de la caméra depuis Android 2.2.\\
-%$\Rightarrow$ 70\% des téléphones sous cette version
+\frametitle{Présentation}
+\framesubtitle{Android}
+	\begin{minipage}{8cm}
+	Les possibilités de développement sont: \\ 
+
+	\begin{itemize}
+		\item Langage principale Java, développement en C/C++ possible
+		\item Kit de développement multiplateforme
+		\item Développement sur téléphone ou sur émulateur
+		\item Déploiement des applications peu coûteux
+	\end{itemize}
+	\end{minipage} & \includegraphics[scale=0.2]{img/android.eps} 
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{frame}
-\frametitle{Android}
-\framesubtitle{Les téléphones mobiles}
-\begin{block}{Fragmentation}
-\begin{itemize}
-	\item 7 versions du système en circulation
-	\item Différentes dimensions et densités d'écran
-	\item Smartphone, tablette (et télévision)
-\end{itemize}
-\end{block}
-\textbf{Besoin:} applications compatibles sur tout les appareils.\\
-\textbf{Solution:} compatibilité descendante des applications, système de ressource évolué.
+\frametitle{Présentation}
+\framesubtitle{iOS}
+	\begin{minipage}{8cm}
+Le système d'exploitation possède : \\
+
+	\begin{itemize} 
+		\item Noyau hybride XNU dérivé de Mac OS X
+		\item Librairies connues et open source (OpenGL ES, SQLite,...)
+		\item Pas de machine virtuelle. Code compilé en C.
+		\item API Objective-C riche (Core OS, Cocoa Touch,...)
+	\end{itemize}
+	\end{minipage} & \includegraphics[scale=0.2]{img/apple.eps} 
 \end{frame}
 
-%\subsection{Structure des applications}
 
-%\begin{frame}
-%\frametitle{Android}
-%\framesubtitle{Structure des applications}
-%\begin{itemize}
-%	\item AndroidManifest.xml: déclaration des composant de l'application, des permissions, de la compatibilité, ...
-%	\item Ressources: images, descriptions d'interface, texte (multilingue), ...
-%	\item Code exécutable: classe Java (package)
-%\end{itemize}
-%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{Présentation}
+\framesubtitle{iOS}
+	\begin{minipage}{8cm}
+	Les possibilités de développement sont: \\ 
+
+	\begin{itemize}
+		\item Langage principale Objective-C, développement en C possible
+		\item Kit de développement disponilbe sur Mac OS seulement
+		\item Développement sur téléphone ou sur émulateur (nécessite un compte payant pour tester sur téléphone)
+		\item Déploiement des applications coûteux
+	\end{itemize}
+	\end{minipage} & \includegraphics[scale=0.2]{img/apple.eps} 
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Le jeu Bomberman}
+
+
+\begin{frame}
+\frametitle{Présentation}
+\framesubtitle{Le Bomberman}
+\begin{minipage}{7cm}
+Histoire
+	\begin{itemize}
+		\item Jeu d'action.
+		\item Première sortie en 1987.
+		\item Développé sur plusieurs consoles.
+		\item Succès grâce au mode multijoueur sur certaines consoles.
+	\end{itemize} \\
+\end{minipage} & \includegraphics[scale=0.3]{img/bomberman1.eps} 
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{Présentation}
+\framesubtitle{Le Bomberman}
+Principe : \\ \\
+
+\begin{minipage}{5cm}
+	\begin{itemize}
+		\item Le joueur incarne un poseur de bombes.
+		\item But du jeu: détruire ses ennemis.
+	\end{itemize} \\
+\end{minipage} &  \begin{minipage}{5.5cm}
+	\begin{itemize}
+		\item Multiple bonus (Bonus de vie, de bombes, de vitesse,...).
+		\item Multiple malus (Obligation de poser des bombes,...).
+	\end{itemize} \\
+\end{minipage} 
+
+\begin{center} \includegraphics[scale=0.35]{img/bomberman2.eps} \end{center}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Rapport avec l'enseignement}
+
+
+\begin{frame}
+\frametitle{Présentation}
+\framesubtitle{Rapport avec l'enseignement}
+Ce TER nous a permis de mettre en application les connaissances acquises dans nos parcours d'enseignements  pour: \\
+
+	\begin{itemize}
+		\item L'intelligence artificielle (parcours I2A).
+		\item Les communications avec le serveur (parcours CASAR).
+		\item L'utilisation de servlet (parcours DIWEB).
+	\end{itemize} \\
+	
+\end{frame}
+
 
 
