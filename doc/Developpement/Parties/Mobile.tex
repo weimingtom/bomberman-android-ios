@@ -485,9 +485,7 @@
 				  \item Collisions sous iOS
 				
 				Le principe des collisions sous IOS a été réflechie de maniere a ce que les déplacements soit fluides et que les collisions avec des blocs ne freinnent pas la fluidité du jeu. Car en effet lors des collisions, si le joueur doit passer entre deux blocs, celui-ci doit passer au pixel pret. Cela implique que l'utilisateur doit être très minutieu dans ses déplacements et cela rend le jeu casiment injouable lors de passage entre deux blocs. Donc pour remédier à ce problème nous avons décidé d'établir un système de marge sous IOS . C'est à dire que lors de la collision avec un bloc. On va vérifier si au moin un pixel du joueur touche au moins un pixel du bloc moins une marge. Voici le tout en image:
-					\begin{center}						
-						\includegraphics[width=180px,height=168px]{Developpement/Img/mouvementCollision.pdf}
-					\end{center}
+
 				Il faut donc que le rectangle rouge entourant le joueur ne touche aucun autre rectangle rouge entourant les blocs pour que le joueur puisse se déplacer. Les rectangles entourant les blocs sont réduit grâce à la marge (fleche jaune) pour permettre à l'utilisateur de passer facilement.
 				
 				

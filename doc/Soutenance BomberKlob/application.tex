@@ -1,269 +1,125 @@
 \section{Application}
-\subsection{Les différentes fenêtres}
+\subsection{Lancement de l'application}
+
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Ecran de chargement de l'application}
+	
+	\end{frame}
+	
+	
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Ecran d'accueil}
+	
+	\end{frame}
+	
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Les menus}
+	
+	\end{frame}
+	
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Gestion des ressources}
+	
+	
+	\end{frame}
+
+
+\subsection{Editeur de cartes}
+
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Création ou chargement d'une carte}
+	
+	\end{frame}
+	
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Moteur de rendu cartes}
+	
+	\end{frame}
+	
+	
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Editeur de cartes}
+	
+	\end{frame}
+	
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Outils}
+	
+	\end{frame}
+	
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Exemple de carte}
+	
+	\end{frame}
+	
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Possibilités finales}
+	
+	\end{frame}
+
+\subsection{Jeu}
 
 \begin{frame}
 \frametitle{Application}
-\framesubtitle{Les différentes fenêtres}
-
-\begin{tabular}{cc}
-	\begin{minipage}{6cm}
-		Lancement de l'application
-		\begin{itemize}
-			\item Fenêtre de lancement
-			\item Fenêtre de réalité augmentée
-			\item Fenêtre de la carte 2D
-			\item Fenêtre de préférences
-		\end{itemize}
-	\end{minipage} &
-	\begin{minipage}{6cm}
-		\includegraphics[width=3cm]{ScreenShot/v3-hd.png} 
-	\end{minipage}\\
-\end{tabular}
-\end{frame}
-
-\begin{frame}
-\frametitle{Application}
-\framesubtitle{Réalité augmentée et Carte}
-Les fenêtres de RA et de la carte 
-\begin{center}
-	\begin{tabular}{c}
-		\includegraphics[width=5cm]{ScreenShot/RA_Activity.png} \\
-		\includegraphics[width=5cm]{ScreenShot/Map_Activity.png}
-	\end{tabular}
-\end{center}
-\end{frame}
-
-%\begin{frame}
-%\frametitle{Application}
-%\framesubtitle{Activité de lancement}
-%Vue de lancement \\
-%\begin{center}\includegraphics[width=8cm]{ScreenShot/Start_Activity.png}\end{center}
-%\end{frame}
-
-%\begin{frame}
-%\frametitle{Application}
-%\framesubtitle{Préférences}
-%Ecran des préférences \\
-%\begin{center}\includegraphics[height=6cm]{ScreenShot/Preference_Activity.png}\end{center}
-%\end{frame}
-
-%\begin{frame}
-%\frametitle{Application}
-%\framesubtitle{Carte 2D}
-%Ecran de la carte\\
-%
-%\begin{center}
-%	\includegraphics[width=10cm]{ScreenShot/Map_retouche.png}
-%\end{center}
-%\end{frame}
-
-%
-%\begin{frame}
-%\frametitle{Application}
-%\framesubtitle{Réalité augmentée}
-%Ecran de la réalité augmentée\\
-%\begin{center}
-%   	\includegraphics[width=8cm]{ScreenShot/RA_Activity.png}
-%\end{center}
-%\end{frame}
-
-
-
-\subsection{Informations}
-
-
-\begin{frame}
-\frametitle{Application}
-\framesubtitle{Menu choix des informations}
-Ecran choix des informations\\
-
-	\begin{tabular}{lll}
-	\begin{minipage}{4.5cm}
-		\begin{itemize}
-			\item Les bâtiments 
-			\item Les salles de cours, de TP
-			\item Événements
-			\item Lieux clés
-		\end{itemize}
-	\end{minipage} &
-		\begin{minipage}{3cm}
-	   		\includegraphics[width=3cm]{ScreenShot/Provider_Activity.png}
-   		\end{minipage} &
-   		\begin{minipage}{3cm}	
-			\includegraphics[width=3cm]{ScreenShot/Provider_cle.jpeg}
-		\end{minipage}	\\
-	\end{tabular}
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Application}
-\framesubtitle{Choix des informations}
-
-Vous avez choisi ? Vous pouvez voir :
-
-\begin{itemize}
-	\item L'information qui s'y trouve
-	\item Les contours des bâtiments
-	\item Le chemin pour s'y rendre
-\end{itemize}
-
- \textit{Valable pour la carte et la RA via le menu Préférences}
-\end{frame}
-
-\subsection{Accès aux informations}
-
-\begin{frame}
-\frametitle{Application}
-\framesubtitle{Base de données SQLite}
-
-\begin{center}
-\begin{tabular}{cc}
-	\begin{minipage}{6cm}
-		Base de données SQLite
-		\begin{itemize}
-			\item Toutes informations relatives aux positions
-			\item Données de Open Street Map
-			\item Données récupérées à la main
-		\end{itemize}
-	\end{minipage}  &		
-	\begin{minipage}{6cm}
-		\includegraphics[width=3cm]{img/sqlite.jpeg} 
-	\end{minipage}\\
-\end{tabular}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Application}
-\framesubtitle{Service Web}
-
-\begin{center}
-\begin{tabular}{ll}
-	\begin{minipage}{5cm}
-
-		Service Web
-		\begin{itemize}
-			\item Utilise une petite base de données: mySQL
-			\item Permet l'ajout de points d'intérêts
-		\end{itemize}
-	\end{minipage}  &		
-	\begin{minipage}{7cm}
-		\includegraphics[width=6.5cm]{img/WebService.png} 
-	\end{minipage}\\
-\end{tabular}
-\end{center}
-
-\end{frame}
-
-\subsection{Affichage des informations}
-
-\begin{frame}
-\frametitle{Application}
-\framesubtitle{Graphismes}
-
-\begin{center}
-\begin{tabular}{cc}
-	\begin{minipage}{6cm}
-
-		Points d'intérêts
-		\begin{itemize}
-			\item Indicateur 
-		\end{itemize}
-		Dessins correspondants
-		\begin{itemize}
-			\item Dessins des contours
-			\item Dessins des chemins 
-		\end{itemize}
-	\end{minipage}  &		
-	\begin{minipage}{4cm}
-		\includegraphics[width=2cm]{img/indicateur.png} 
-		\includegraphics[width=3cm]{img/drawable.png} 
-	\end{minipage}\\
-\end{tabular}
-\end{center}
-\begin{center}
-\begin{tabular}{cc}
-	\begin{minipage}{6cm}
-
-		Open GL ES
-		\begin{itemize}
-			\item Conception d'objet 3D
-			\item Flèche directionnelle
-		\end{itemize}
-	\end{minipage}  &		
-	\begin{minipage}{4cm}
-		\includegraphics[width=2.5cm]{img/opengles.png} \\
-		\includegraphics[width=1.2cm]{img/fleche_lumiere.png}
-	\end{minipage}\\
-\end{tabular}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Application}
-\framesubtitle{Les capteurs}
-
-Les capteurs
-\begin{itemize}
-	\item Rappel : caméra, boussole, accéléromètre, GPS
-	\item Pour le calcul des angles de vue
-	\item Faire bouger les éléments graphiques
-	\item Se positionner et positionner les éléments
-\end{itemize}
+\framesubtitle{Menu de création d'une partie solitaire}
 
 \end{frame}
 
 \begin{frame}
 \frametitle{Application}
-\framesubtitle{Calcul du plus court chemin}
+\framesubtitle{Intelligence artificielle}
 
-\begin{center}
-\begin{tabular}{cc}
-	\begin{minipage}{6cm}
-		Calcul du plus court chemin
-		\begin{itemize}
-			\item Djikstra
-			\item Noeuds stockés dans la base de données SQLite
-		\end{itemize}
-	\end{minipage}  &		
-	\begin{minipage}{6cm}
-		\includegraphics[width=4cm]{img/mapPath.png} 
-	\end{minipage}\\
-\end{tabular}
-\end{center}
 \end{frame}
-
-\subsection{Evolution}
 
 \begin{frame}
 \frametitle{Application}
-\framesubtitle{Evolution - Réutisabilité}
+\framesubtitle{A*}
 
-Evolution:
-\begin{itemize}
-	\item Affichage des emplois du temps
-	\item Affichage de l'emploi du temps personnel d'un étudiant 
-	\item Jeux
-\end{itemize}
-
-Réutisabilité:
-\begin{itemize}
-	\item Au sein d'une autre université
-	\item N'importe quelle zone géographique
-\end{itemize}
-En ajoutant ou remplaçant les implémentations.
 \end{frame}
-
-
 
 \begin{frame}
 \frametitle{Application}
-\framesubtitle{Evolution - Réutisabilité}
+\framesubtitle{Parcours en largeur}
 
-\includegraphics[width=11cm]{img/UML.png} 
 \end{frame}
+
+\begin{frame}
+\frametitle{Application}
+\framesubtitle{Moteur de rendu}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Application}
+\framesubtitle{Moteur Physique}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Application}
+\framesubtitle{Multitouch}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Application}
+\framesubtitle{Menu du jeu solitaire}
+
+\end{frame}
+
+
+\subsection{Reseau}
+
 
 
 
