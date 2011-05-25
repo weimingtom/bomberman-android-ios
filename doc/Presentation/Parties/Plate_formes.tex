@@ -6,12 +6,12 @@
 	mobiles mais aussi sur tablettes graphiques et même sur certains téléviseurs.
 	
 	Disponible via une \gls{licence_apache} version 2, \gls{android} est fondé  sur
-	un noyau \gls{linux}, il comporte une interface spécifique, développée en Java,
-	les programmes sont exécutés via un interpréteur JIT, toutefois il est possible
+	un noyau \gls{linux}, il comporte une interface spécifique, développée en \gls{java},
+	les programmes sont exécutés via un interpréteur \gls{jit}, toutefois il est possible
 	de passer outre cette interface en programmant ses applications en \gls{c_ansi} ou \gls{cplusplus},
 	mais le travail de portabilité en sera plus important.
 	
-	Il nous est aussi permit d'utiliser du XML principalement pour les interfaces
+	Il nous est aussi permit d'utiliser du \gls{xml} principalement pour les interfaces
 	graphiques ou encore pour la portabilité des données entre chaque type
 	d'architecture.
 	
@@ -21,23 +21,23 @@
 	périphériques.
 	
 	Afin de pouvoir développer nos propres applications, \gls{android} met à
-	dispotition un kit de développement (SDK) ainsi qu'un greffon pour Eclipse
+	dispotition un \gls{sdk} ainsi qu'un greffon pour Eclipse
 	(ADT) afin de simplifier l'utilisation de celui-ci.
 	
-	Le kit de développement d'\gls{android} comporte les outils de base pour developper une application en
-	Java, le developpement en C et C++ necessitant d'utiliser le \gls{ndk}.
-	Il se compose des librairies principales d'Android, de divers exemples
-	d'applications et surtout d'un emulateur de terminal Android qui permet de
-	pouvoir tester directement ses applications directement sur Linux, Mac ou
+	Le \gls{sdk} d'\gls{android} comporte les outils de base pour developper une application en
+	\gls{java}, le developpement en \gls{c_ansi} et \gls{cplusplus} necessitant d'utiliser le \gls{ndk}.
+	Il se compose des librairies principales d'\gls{android}, de divers exemples
+	d'applications et surtout d'un emulateur de terminal \gls{android} qui permet de
+	pouvoir tester directement ses applications directement sur \gls{linux}, Mac ou
 	Windows sans necessairrement avoir besoin d'un terminal mis à part pour
-	OPENGL-ES 2 qui n'est pas encore prit en charge par celui-ci, sinon le kit de développement
+	\gls{opengl_es} 2.0 qui n'est pas encore prit en charge par celui-ci, sinon le \gls{sdk}
 	permet très bien de tester ses applications en temps réel sur tout
-	peripheriques tournant sur Android que ce soit en liaison directe avec un
-	ordinateur ou en récupérant l'archive de l'application au format APK.
+	peripheriques tournant sur \gls{android} que ce soit en liaison directe avec un
+	ordinateur ou en récupérant l'archive de l'application au format \gls{apk}.
 	
-	Le format APK ou Android Pakage est une variante du format
+	Le format \gls{apk} est une variante du format
 	\gls{jar} qui est utilisée pour la distribution et l'installation de composants
-	regroupés sur le système d'exploitation \gls{android}.
+	regroupés sur le \gls{os} \gls{android}.
 
 
 \subsection{iOS}
@@ -47,7 +47,7 @@
 	ordinateurs personnels et des logiciels informatiques. Parmi les produits les
 	plus répendus de l'entreprise se trouvent les ordinateurs Macintosh (1984),
 	l'\gls{ipod} (2001), l'\gls{iphone} (2007) et l'\gls{ipad} (2010). Apple a
-	développé deux \glspl{système d'exploitation} (\gls{macosx} et \gls{ios})
+	développé deux \glspl{os} (\gls{macosx} et \gls{ios})
 	permettant de contrôler ses différents produits, notamment les ordinateur 
 	Macintosh, l'\gls{ipod} et l'\gls{ipod_touch}.
 			
@@ -55,30 +55,30 @@
 	d'exploitation}  mobile d'Apple. Ce dernier a été développé originellement 
 	pour l'\gls{iphone}, puis a été étendu pour l'\gls{ipod_touch}, \gls{ipad} et
 	\gls{apple_tv} (2007). C'est dérivé de \gls{macosx}  dont il partage les 
-	fondations. Comme celui-ci, iOS comporte quatre couches d'abstraction : une
+	fondations. Comme celui-ci, \gls{ios} comporte quatre couches d'abstraction : une
 	couche \og \gls{core_os} \fg, une couche \og \gls{core_services} \fg, une
 	couche \og Media \fg \, et pour finir une couche \og \gls{cocoa} \fg. Pour
-	dévélopper une application Cocoa, il est imposé d'utiliser l'Objective-C comme
+	dévélopper une application Cocoa, il est imposé d'utiliser l'\gls{objective-c} comme
 	langage de programmation.
 			
-	L'Objective-C est le langage de programmation orientés objet. Il a été inventé
+	L'\gls{objective-c} est le langage de programmation orientés objet. Il a été inventé
 	au début des années 1980 par Brad Cox, créateur de la société Stepstone. Son
 	objectif était de combiner la richesse du langage \gls{smalltalk}\, et la
-	rapidité du C. 
+	rapidité du \gls{c_ansi}. 
 	C'est une extension du \gls{c_ansi} qui ne permet pas l'héritage multiple
 	contrairement au \gls{cplusplus}. Aujourd'hui, il est principalement utilisé
 	pour développer des applications sur \gls{macosx} et \gls{iphone}. Une nouvelle version
-	Objective-C 2.0 à été indrotuite avec \gls{macosx} 10.5 (Léopard) en octobre 2007.
+	\gls{objective-c} 2.0 à été indrotuite avec \gls{macosx} 10.5 (Léopard) en octobre 2007.
 			
-	Le kit de développement d'iOS fournit les principaux outils nécessaire pour
+	Le \gls{sdk} d'\gls{ios} fournit les principaux outils nécessaire pour
 	réaliser une application sur \gls{iphone}. Il est composé notamment de Xcode,
 	Interface Builder, \gls{iphone} Simulator et Instruments. Xcode est l'outil de
 	développement Apple, il permet la création de projets \gls{iphone}, l’édition du code
-	source Objective-C, la compilation et le débogage des applications. Interface
+	source \gls{objective-c}, la compilation et le débogage des applications. Interface
 	Builder quant à lui permet de construire des interfaces graphiques. L'\gls{iphone}
 	Simulator est un logiciel simulant le comportement d'un \gls{iphone}, ce qui 
 	permet de pouvoir tester les applications directement sur l'ordinateur. Grâce
-	à Instruments on peut analyser un programme pour surveiller l’état de la
-	mémoire, l’utilisation du réseau, du CPU, etc. Pour utiliser tous ces outils,
+	à Instruments, il est possible analyser un programme pour surveiller l’état de la
+	mémoire, l’utilisation du réseau, du \gls{cpu}, etc. Pour utiliser tous ces outils,
 	il est obligatoire de possèder un ordinateur Macintosh sous \gls{macosx} et de
-	s'enregistrer sur iPhone Dev Center pour pouvoir télécharger et installer le SDK d'iOS.
+	s'enregistrer sur iPhone Dev Center pour pouvoir télécharger et installer le \gls{sdk} d'\sdk{ios}.
