@@ -1,5 +1,5 @@
 \subsection{Général}
-	Le fait de développer des applications \gls{ios} et \gls{android} nous a imposé le choix du langage. En effet pour développer des applications \gls{iphone}, il faut utiliser le langage \gls{objective-c}, puis  pour les applications \gls{android} c'est le langage \gls{java} qui est utilisé. C'est deux langages ont une syntaxe complétement différente mais sont quand même très proche car ce sont des langages orientés objets. Grâce à cela nous avons pu mettre au point une modélisation générale de l'application que nous avons ensuite adapté à chaque langage.\\
+	Le fait de développer des applications \gls{ios} et \gls{android}, nous a imposé le choix du langage. En effet pour développer des applications \gls{iphone}, il faut utiliser le langage \gls{objective-c}, puis  pour les applications \gls{android} c'est le langage \gls{java} qui est utilisé. C'est deux langages ont une syntaxe complétement différente mais sont quand même très proche car ce sont des langages orientés objets. Grâce à cela nous avons pu mettre au point une modélisation générale de l'application que nous avons ensuite adapté à chaque langage.\\
 			
 	Nous avons décidé de développer en anglais car premièrement c'est la langue la plus utilisé dans le monde de la programmation et deuxièmement car la syntaxe des langages est toujours en anglais. Cela permettra à n'importe quel utilisateur de n'importe quelle nationalité de comprendre le code de l'application.\\
 			
@@ -205,12 +205,11 @@
 		
 		\subparagraph{Parcours en largeur\\}
 		
-			Contrairement à l'algorithme A*, le parcours en largeur se contente d'un
-			nœud initial mais ne necessite pas un nœud final.
+			Contrairement à l'\gls{algorithme} A*, le parcours en largeur se contente d'un
+			nœud initial mais ne nécessite pas un nœud final.
 			En effet ici nous allons partir d'un point et chercher le premier point
 			correspondant à nos attentes, pour cela nous effectuerons donc un parcours un
 			largeur.
-			
 			
 			Le parcours en largeur consiste à partir d'un sommet S, lister d'abord
 			tous les voisins de S pour ensuite les explorer un par un.
@@ -218,11 +217,9 @@
 			tous leurs voisins et cela ainsi de suite jusqu'à trouver un point
 			correspondant à nos attentes.
 			
-			
-			Le contexte est le suivant, un bot découvre qu'il est sur la trajectoire
+			Le contexte est le suivant, un \gls{bot} découvre qu'il est sur la trajectoire
 			d'explosion d'une bombe est va donc fuir vers la case sûr la plus proche or
 			il n'a aucune idée d'où elle se trouve.
-			
 			
 			L'image suivante représentera la situation initiale :
 			
@@ -230,12 +227,10 @@
 				\includegraphics[width=115mm,height=71mm]{./Analyse/Img/fuite1.eps}
 			\end{center}
 			
-			
 			Comme dit précédemment il n'y a que les murs ou les bombes que l'on ne peut
 			pas traverser sinon tous les autres objets ou joueurs sont traversables.
 			Nous considerons que les bombes ont ici un champs d'explosion en nombre de
-			cases de 5.
-			
+			cases de 5.			
 			
 			Représentons la carte ci-dessus d'une façon plus parlante en remplacant les
 			divers objets mis à par le joueur par des numéros leur correspondant, à
@@ -267,22 +262,19 @@
 				\end{tabular}
 			\end{center}
 			
+			Mettons nous à present à la place du \gls{bot}.
 			
-			Mettons nous à present à la place du bot.
-			
-			Nous allons à donner un poid aux cases que nous allons parcourir
+			Nous allons donner un poid aux cases que nous allons parcourir
 			correspondant à la distance par rapport à la case initiale, ainsi qu'une
-			direction qui correspondra à la direction initiale que le bot devra empruter
+			direction qui correspondra à la direction initiale que le \gls{bot} devra empruter
 			pour utiliser ce chemin, c'est à dire par exemple que tout chemin découvert
-			dont l'origine est la case à droite de la notre aura comme direction droite.
+			dont l'origine est une case à droite de la notre aura comme direction droite.
 			
-			
-			A partir d'une case donné nous ne regarderons que les voisines ayant un poids de 0
+			A partir d'une case donnée, nous ne regarderons que les voisines ayant un poids de 0
 			car si leur poids est différent cela voudra dire que nous les avons déjà vu precedemment et bien évidemment,
 			nous ignorerons les murs ainsi que les bombes.
 			
 			Nous avons changé la valeur des cases intraversables pour ne pas confondre avec le poids des cases visitées.			
-			
 			
 			Appliquons l'algorithme de parcours en largeur aux cases voisines de la notre.
 			
@@ -306,7 +298,7 @@
 			\end{center}
 			
 			
-			Toutes les cases découvertes étant considérées comme dangereuses (voir le schéma précédent) nous continuons à appliquer l'algorithme jusqu'à arriver à notre but.
+			Toutes les cases découvertes étant considérées comme dangereuses (voir le schéma précédent) nous continuons à appliquer l'\gls{algorithme} jusqu'à arriver à notre but.
 			
 			\begin{center}
 				\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|} \hline
@@ -355,7 +347,7 @@
 		\item{Diagramme classe}
 	\end{itemize}
 	
-	Comme vue dans le cahier des charges l'application est divisé en trois grandes parties: Le modèle, la vue et le controlleur.
+	Comme vue dans le cahier des charges, l'application est divisée en trois grandes parties: le modèle, la vue et le contr�lleur.
 	
 	\subsubsection{Modèle}
 	
