@@ -5,7 +5,7 @@
 		
 \subsection{Servlet}
 	
-		Comme expliqué précédement notre serveur est conçu grâce aux \qlspl{servlet}.
+		Comme expliqué précédement notre serveur est conçu grâce aux \glspl{servlet}.
 		Après avoir décrit leur fonctionnement, nous allons montrer dans cette partie
 		comment elles ont été utilisé.
 		
@@ -13,12 +13,12 @@
 		Au lancement du serveur la classe ContextListener est invoquée lorsque l'objet
 		ServletContext est crée. Sa méthode contextInitialized(ServletContextEvent event) sera alors appelée, 
 		permettant ainsi de définir des objets communs à toutes les
-		\qlspl{servlet}, tels qu'un accesseur à la base de données, ou le tableau qui va
+		\glspl{servlet}, tels qu'un accesseur à la base de données, ou le tableau qui va
 		contenir les utilisateurs connectés.	
-		Les requêtes font appel à la fonction post des \qlspl{servlet}. Le flux entrant étant
-		de type \qls{json}, il faut déserialiser le flux dans un objet correspondant. Exemple
+		Les requêtes font appel à la fonction post des \glspl{servlet}. Le flux entrant étant
+		de type \gls{json}, il faut déserialiser le flux dans un objet correspondant. Exemple
 		l'utilisateur envoie son nom d'utilisateur ansi que son mot de passe crypté
-		dans un tableau, sérialisé en \qls{json}.
+		dans un tableau, sérialisé en \gls{json}.
 		Pour pouvoir récupérer les informations nous procédons comme suit: 
 		
 		\begin{verbatim}
@@ -52,7 +52,7 @@
 		
 		En effet lors des inscriptions ou connexion au serveur pour le mode
 		multijoueur, les mots de passes sont tout d'abord cryptés côté client et
-		ensuite encapsulés dans un flux \qls{json}, pour être envoyés au serveur. Il
+		ensuite encapsulés dans un flux \gls{json}, pour être envoyés au serveur. Il
 		stockera ainsi la chaine de caractères extraite de l'objet déserialisé. De cette
 		manière à aucun moment les données confidentielles ne transiteront en clair.
 		
@@ -61,7 +61,7 @@
 		réalité à l'identifiant de session envoyé par le serveur. Une fois associée
 		au nom d'utilisateur correspondant, le tout est ajoûté dans le tableau
 		d'utilisateurs connectés.
-		Cette userKey est ensuite nécessaire pour contacter les \qlspl{servlet}
+		Cette userKey est ensuite nécessaire pour contacter les \glspl{servlet}
 		suivantes. Si cet identifiant n'est pas envoyé ou n'est pas présent dans le tableau des
 		utilisateurs connectés, il sera alors impossible d'accéder aux ressources du
 		serveur.
@@ -71,7 +71,7 @@
 	La base de données du serveur n'est pas très complexe. En effet elle ne fait
 	qu'accueillir les couples (nom d'utilisateur,password) des utilisateurs dans la
 	table Users. 
-	Pour son accès, chaque \qls{servlet} peut récupérer un objet de type
+	Pour son accès, chaque \gls{servlet} peut récupérer un objet de type
 	Connection, instancié à l'initialisation du serveur. Il permettra à son tour
 	de récuperer un objet de type Statement. L'application va l'employer pour
 	transmettre des instructions à la base de données.
