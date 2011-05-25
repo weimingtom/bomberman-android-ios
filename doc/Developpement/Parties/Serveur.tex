@@ -5,21 +5,21 @@
 		
 \subsection{Servlet}
 	
-		Comme expliqué précédement notre serveur est conçu grâce aux servlets. Après
-		avoir décrit leur fonctionnement, nous allons montrer dans cette partie
+		Comme expliqué précédement notre serveur est conçu grâce aux \qlspl{servlet}.
+		Après avoir décrit leur fonctionnement, nous allons montrer dans cette partie
 		comment elles ont été utilisé.
 		
 	\subsubsection{En pratique}
 		Au lancement du serveur la classe ContextListener est invoquée lorsque l'objet
 		ServletContext est crée. Sa méthode contextInitialized(ServletContextEvent event) sera alors appelée, 
 		permettant ainsi de définir des objets communs à toutes les
-		servlets, tels qu'un accesseur à la base de données, ou le tableau qui va
+		\qlspl{servlet}, tels qu'un accesseur à la base de données, ou le tableau qui va
 		contenir les utilisateurs connectés.	
-		Le requetes font appel à la fonction post des servlet. Le flux entrant étant
-		de type JSON, il faut déserialiser le flux dans un objet correspondant. Exemple
-		l'utilisateur envoie son userName et son mot de passe crypté dans un tableau,
-		sérialisé en JSON, pour pouvoir récupérer les informations nous procédons
-		comme suit: 
+		Les requêtes font appel à la fonction post des \qlspl{servlet}. Le flux entrant étant
+		de type \qls{json}, il faut déserialiser le flux dans un objet correspondant. Exemple
+		l'utilisateur envoie son nom d'utilisateur ansi que son mot de passe crypté
+		dans un tableau, sérialisé en \qls{json}.
+		Pour pouvoir récupérer les informations nous procédons comme suit: 
 		
 		\begin{verbatim}
 			BufferedReader req = 
@@ -52,29 +52,30 @@
 		
 		En effet lors des inscriptions ou connexion au serveur pour le mode
 		multijoueur, les mots de passes sont tout d'abord cryptés côté client et
-		ensuite encapsulé dans un flux JSON, pour être envoyé au serveur. Il stockera
-		ainsi la chaine de caractères extraite de l'objet déserialisé. De cette
+		ensuite encapsulés dans un flux \qls{json}, pour être envoyés au serveur. Il
+		stockera ainsi la chaine de caractères extraite de l'objet déserialisé. De cette
 		manière à aucun moment les données confidentielles ne transiteront en clair.
 		
 		De plus un mécanisme semblable aux sessions est en place. Dans la
 		confirmation de connexion ou d'inscription, une userKey est générée. Elle correspond en
 		réalité à l'identifiant de session envoyé par le serveur. Une fois associée
-		à l'username correspondant, le tout est ajoûté dans le tableau d'utilisateurs
-		connectés.
-		Cet userKey est ensuite nécessaire pour contacter les servlets suivantes. Si
-		cet identifiant n'est pas envoyé ou n'est pas présent dans le tableaux des
+		au nom d'utilisateur correspondant, le tout est ajoûté dans le tableau
+		d'utilisateurs connectés.
+		Cette userKey est ensuite nécessaire pour contacter les \qlspl{servlet}
+		suivantes. Si cet identifiant n'est pas envoyé ou n'est pas présent dans le tableau des
 		utilisateurs connectés, il sera alors impossible d'accéder aux ressources du
 		serveur.
 		
 \subsection{BDD}
 
 	La base de données du serveur n'est pas très complexe. En effet elle ne fait
-	qu'accueillir les couples userName/password des utilisateurs dans la
+	qu'accueillir les couples (nom d'utilisateur,password) des utilisateurs dans la
 	table Users. 
-	Pour son accès, chaque servlet peut récupérer un objet de type Connection,
+	Pour son accès, chaque \qls{servlet} peut récupérer un objet de type Connection,
 	instancié à l'initialisation du serveur. Il permettra à son tour
 	de récuperer un objet de type Statement. L'application va l'employer pour
-	transmettre des instructions à la base. Exemple d'insertion: 
+	transmettre des instructions à la base de données.
+	Exemple d'insertion: 
 		
 	\begin{verbatim}
 	Connection connection = 
