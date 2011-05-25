@@ -3,7 +3,46 @@
 
 	\begin{frame}
 	\frametitle{Application}
-	\framesubtitle{Ecran de chargement de l'application}
+	\framesubtitle{Chargement de l'application}
+	
+	\begin{center}
+		\begin{tabular}{cc}
+			\begin{minipage}{5cm}
+				\begin{block}{Lancement}
+					\begin{itemize}
+				 		\item Initialisation des données systèmes
+			 		\end{itemize}
+				\end{block}
+			\end{minipage} &
+			\begin{minipage}{8cm}
+				 \includegraphics[scale=0.3]{img/1.png} \\
+			\end{minipage}\\
+		\end{tabular}
+		\end{center}
+
+		
+	
+	\end{frame}
+	
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Chargement de l'application}
+		\begin{block}{Premier lancement}
+			\begin{itemize}
+			 	\item copie des cartes officielles dans le repertoire téléphone 
+				\item création de la base de données SQLite
+				\item ajouts des cartes dans la base de données
+				\item initialisation des tables	systèmes
+				\item création compte local et ajoût à la base de données
+			\end{itemize}
+		\end{block}
+				
+		\begin{block}{Lancement normal}
+			\begin{itemize}
+				\item chargement de la base de données 
+				\item instantiation dernier utilisateur
+			\end{itemize}
+		\end{block}
 	
 	\end{frame}
 	
@@ -11,6 +50,26 @@
 	\begin{frame}
 	\frametitle{Application}
 	\framesubtitle{Ecran d'accueil}
+		\begin{center}
+		\begin{tabular}{cc}
+			\begin{minipage}{4cm}
+		
+				Menu d'accueil
+				\begin{itemize}
+					\item Partie locale
+					\item Partie multijoueur
+					\item Editeur de carte
+					\item Options
+					\item Choix compte local
+					\item Ajout compte local
+					\item Aide
+				\end{itemize}
+			\end{minipage}  &		
+			\begin{minipage}{8cm}
+				\includegraphics[width=6.5cm]{img/2.png} 
+			\end{minipage}\\
+		\end{tabular}
+		\end{center}
 	
 	\end{frame}
 	
@@ -18,6 +77,15 @@
 	\frametitle{Application}
 	\framesubtitle{Les menus}
 	
+		\begin{block}{Leurs objectifs:}
+			\begin{itemize}
+			  \item interface claire et simple
+			  \item cohérent
+			  \item facile d'utilisation
+			  \item navigation intuitive
+			  \item ergonomique
+			\end{itemize}
+		\end{block}
 	\end{frame}
 	
 \subsection{Editeur de cartes}
@@ -251,5 +319,69 @@
 	
 	\end{frame}
 
-
 \subsection{Reseau}
+
+\begin{frame}
+\frametitle{Application}
+\framesubtitle{Fonctionnalités}
+
+	\begin{center}
+		\begin{tabular}{cc}
+			\begin{minipage}{4cm}
+				Les joueurs ont accès à:
+				\begin{itemize}
+				  \item création compte multijoueur
+				  \item connexion compte
+				  \item listage de parties en lignes
+				\end{itemize}
+				\end{minipage}&		
+				
+			\begin{minipage}{8cm}
+				\includegraphics[width=7cm]{img/3.png} 
+			\end{minipage}\\
+			
+			
+			\end{tabular}
+	\end{center}
+	
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Application}
+\framesubtitle{Outils}
+	\begin{center}
+		\begin{tabular}{cc}
+			\begin{minipage}{7cm}
+			
+			\begin{block}{Outils utilisés: }
+				\begin{itemize}
+				  \item servlet
+				  \item serveur d'application
+				  \item JSON
+				  \item SQLite
+				\end{itemize}
+			\end{block}
+			
+			\end{minipage}&
+			
+			\begin{minipage}{4cm}
+				\includegraphics[scale=0.5]{img/serveur.png} 
+			\end{minipage}\\
+				
+			\end{tabular}
+	\end{center}
+			
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Application}
+\framesubtitle{Principes}
+
+	\begin{center}
+		\includegraphics[width=9.4cm]{img/4.png} 
+	\end{center}
+	
+
+\end{frame}
