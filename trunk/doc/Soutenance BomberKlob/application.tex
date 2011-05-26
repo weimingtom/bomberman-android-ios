@@ -31,8 +31,8 @@
 		\item Instanciation du dernier utilisateur
 	\end{enumerate}
 	
-	
 	\end{frame}
+
 
 	\begin{frame}
 	\frametitle{Application}
@@ -152,7 +152,12 @@
 			\item Ajout/suppression d'éléments facile
 		\end{itemize}
 		
-		Exemple de code
+		\begin{tiny}
+				\lstset{tabsize=1, frame=shadowbox, rulesepcolor=\color{blue}}
+		\lstinputlisting{code/objects.xml}
+		\end{tiny}
+
+
 		
 	\end{frame}
 	
@@ -165,14 +170,6 @@
                 \includegraphics[width=7cm]{./img/img8.png}
             \end{center}
 		\end{frame}
-		
-	\begin{frame}
-		\frametitle{Application}
-		\framesubtitle{Editeur de cartes}
-		
-		
-	\end{frame}
-	
 
 	\begin{frame}
 		\frametitle{Application}
@@ -287,6 +284,16 @@
 %	
 %	\end{frame}
 
+\subsection{Jeu}
+
+	\begin{frame}
+		\frametitle{Application}
+		\framesubtitle{Jeu}
+			\begin{center}
+                \includegraphics[width=7cm]{./img/game.png}
+            \end{center}
+		\end{frame}
+
 	\begin{frame}
 	\frametitle{Application}
 	\framesubtitle{Moteur de rendu (Jeu)}
@@ -316,7 +323,7 @@
 		&
 		+
 		&		
-		\animategraphics[autoplay,loop,height=1cm]{8}{img/block_}{1}{12}
+		\animategraphics[autoplay,loop,height=1cm]{8}{img/block_}{1}{15}
 		&
 		=
 		&
@@ -331,7 +338,15 @@
 	\frametitle{Application}
 	\framesubtitle{Moteurs de rendu}
 
-		Comparaison de la complexité des deux moteurs
+		Complexité en nombre d'objets à afficher \\
+		
+		\begin{center}
+				\begin{tabular}{|c|c|c|} \hline
+				  & Editeur de carte & Jeu    \\\hline 
+				Meilleur des cas & 337 & 1    \\\hline
+				Pire des cas     & 534 & 198  \\\hline		
+				\end{tabular}
+			\end{center}
 
 	\end{frame}
 	
@@ -339,7 +354,10 @@
 	\begin{frame}
 	\frametitle{Application}
 	\framesubtitle{Moteur Physique}
-		\includegraphics[width=7cm]{./img/img5.png}
+	Carte des colisions :
+	\begin{center}
+		\animategraphics[controls, autoplay,loop,scale=0.3]{0.5}{img/mapcolision_}{1}{2}
+	\end{center}
 	\end{frame}
 
 	\begin{frame}
