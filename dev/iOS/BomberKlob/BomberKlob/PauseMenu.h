@@ -17,6 +17,7 @@
 
 - (void)resumeAction;
 - (void)saveAction;
+- (void)reset;
 - (void)quitAction;
 
 @end

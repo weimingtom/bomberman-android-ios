@@ -16,7 +16,7 @@
         resource = [RessourceManager sharedRessource];
         
         self.editorInformation = myController;
-        self.backgroundColor = [UIColor blueColor];
+        self.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
         [self initUserInterface];
     }
     

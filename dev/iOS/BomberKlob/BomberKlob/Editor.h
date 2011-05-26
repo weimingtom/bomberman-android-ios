@@ -27,5 +27,6 @@
 - (void)addPlayer:(Position *)position color:(NSString *)color;
 - (void)deleteObjectAtPosition:(Position *)position;
 - (void)saveMapWithOwner:(DBUser *)owner;
+- (void)reset;
 
 @end

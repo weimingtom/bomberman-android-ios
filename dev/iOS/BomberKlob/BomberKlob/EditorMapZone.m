@@ -45,4 +45,11 @@
     [editorMapZoneView setNeedsDisplay];
 }
 
+
+- (void)needDisplay {
+    [editorMapZoneView setNeedsDisplay];
+}
+
+
+
 @end
