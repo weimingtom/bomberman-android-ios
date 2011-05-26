@@ -1,12 +1,46 @@
 \section{Réutilisabilité}
-\subsection{Nouveaux types de parties}
+
+	\begin{frame}
+	\frametitle{Réutilisabilité}
+	
+		\begin{itemize}
+			\item multilangue
+			\item doc en anglais
+			\item code en anglais
+		\end{itemize}
+	
+	\end{frame}
+
+\subsection{Mobile}
+
+	\begin{frame}
+	\frametitle{Réutilisabilité}
+	
+		\begin{itemize}
+			\item MVC (gameplay, interface graphique)
+			\item Design pattern décorateur (type de parties)
+			\item XML (objets(bonus,malus,bloc,bombes, etc ...) , images(theme), sons)
+		\end{itemize}
+	
+	\end{frame}
 
 	\begin{frame}
 	\frametitle{Réutilisabilité}
 	\framesubtitle{Nouveaux types de parties}
+
 	
-		Patern décorateur ! \\
-		\begin{center} \includegraphics[scale=0.4]{img/decorateur.png} \end{center}
+	\begin{tabular}{cc}
+	\begin{minipage}{5cm}
+		\includegraphics[scale=0.4]{img/decorateur.png} 
+	\end{minipage}
+	&
+	\begin{minipage}{5cm}
+	\begin{itemize} 
+		\item Design pattern décorateur
+		\item Permet l'extension du modèle
+	\end{itemize} 
+	\end{minipage}
+	\end{tabular}
 	
 	\end{frame}
 	
@@ -15,13 +49,19 @@
 	\frametitle{Réutilisabilité}
 	\framesubtitle{Personalisation}
 	
-		\begin{block}{XML}
+		XML
 			L'utilisation du XML permet d'ajouter ou de personnaliser facilement :
 			\begin{itemize}
 				\item Les objets
 				\item Les images
 				\item Les sons
 			\end{itemize}
-		\end{block}
-	
 	\end{frame}
+	
+
+\subsection{Serveur}
+
+		\begin{itemize}
+			\item Nouvelles servlets = nouvelles fonctionnalitées
+			\item même hierarchie de classes que le mobile = decorateur => tt le monde doit l'avoir 
+		\end{itemize}
