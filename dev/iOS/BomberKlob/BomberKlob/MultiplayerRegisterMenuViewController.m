@@ -17,6 +17,7 @@
 @synthesize secondPassword;
 @synthesize autoLogin;
 @synthesize rememberPassword;
+@synthesize idCookie;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -80,14 +81,13 @@
 
 	NSMutableArray * array = [[NSMutableArray alloc] init];
 	[array addObject:[userName text]];
-	[array addObject:[password text]];
+	[array addObject:[MultiplayerRegisterMenuViewController md5:[password text]]];
 
 	
 
 	NSMutableString * requete = [[NSMutableString alloc] init];
 	SBJsonWriter *writer = [[SBJsonWriter alloc] init];
 	[writer appendValue:array into:requete];
-	NSLog(@"test : %@",[MultiplayerRegisterMenuViewController md5:[password text]]);
 	
 	NSString *post = requete;
 		
@@ -105,13 +105,18 @@
 	}
 }
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)theData{
+	NSString * response = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
     NSLog(@"String sent from server %@",[[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding]);
+	if ([response isEqualToString:@"OK"]) {
+		[self.navigationController popViewControllerAnimated:YES];
+	}
 }
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{	
 	NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
     NSDictionary *fields = [HTTPResponse allHeaderFields];
 	NSString *cookie = [fields valueForKey:@"Set-Cookie"]; // It is your cookie
-	NSString * idCookie = [cookie substringWithRange:NSMakeRange(11, 32)];
+	idCookie = [cookie substringWithRange:NSMakeRange(11, 32)];
+	[idCookie retain];
 	NSLog(@"IdCookie : %@",idCookie);
 
 }
@@ -130,4 +135,5 @@
 			result[12], result[13], result[14], result[15]
 			]; 
 }
+
 @end

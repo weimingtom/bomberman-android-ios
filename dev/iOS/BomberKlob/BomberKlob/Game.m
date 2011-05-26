@@ -30,7 +30,7 @@
 	if (self) {
 		application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
 		resource = [RessourceManager sharedRessource];
-		[resource init];
+//		[resource init];
 		bombsPlanted = [[NSMutableDictionary alloc] init];
         BOOL humainPlayer = YES;
         Position *position;
@@ -195,6 +195,8 @@
 	NSString *pathMenuSoundStart = [[NSBundle mainBundle] pathForResource:@"battle_start" ofType:@"mp3" inDirectory:@"Sounds"];
 	NSString *pathMenuSoundMode = [[NSBundle mainBundle] pathForResource:@"battle_mode" ofType:@"mp3" inDirectory:@"Sounds"];
 	
+	Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+	
 	if ([[NSFileManager defaultManager] fileExistsAtPath:pathMenuSoundStart]) {
 		AVAudioPlayer * sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:pathMenuSoundStart] error:&error];
 		if (!sound)
@@ -202,7 +204,11 @@
 		else {
 			[sound prepareToPlay];
 			[sound setNumberOfLoops:0];
-			sound.volume = 1;
+			if (!application.system.mute)
+				sound.volume = application.system.volume/100;
+			else {
+				sound.volume = 0;
+			}
 			soundStart = sound;
 		}
 	}
@@ -213,7 +219,11 @@
 		else {
 			[sound prepareToPlay];
 			[sound setNumberOfLoops:0];
-			sound.volume = -1;
+			if (!application.system.mute)
+				sound.volume = application.system.volume/100;
+			else {
+				sound.volume = 0;
+			}
 			soundMode = sound;
 		}
 	}
