@@ -2,137 +2,142 @@
 
 \subsection{Lancement de l'application}
 
-	\begin{frame}
-	\frametitle{Application}
-	\framesubtitle{Chargement de l'application}
-	
-	\begin{center}
-		\begin{tabular}{cc}
-			\begin{minipage}{5cm}
-				\begin{block}{Lancement}
-					\begin{itemize}
-				 		\item Initialisation des données systèmes
-			 		\end{itemize}
-				\end{block}
-			\end{minipage} &
-			\begin{minipage}{8cm}
-				 \includegraphics[scale=0.3]{img/1.png}
-			\end{minipage}\\
-		\end{tabular}
-	\end{center}
 
-		
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Chargement de l'application}
+	Premier chargement:
+	\begin{enumerate}
+		\item Création de la base de données
+		\item Récupération de toutes les ressources dans le fichier XML
+		\item Instanciation des objets grâce aux ressources récupérées
+		\item Copie des cartes dans le répertoire d'installation du téléphone
+		\item Initialisation  de la base de données
+		\item Affichage de la page de création de compte local
+	\end{enumerate}
+	
 	
 	\end{frame}
+	
 	
 	\begin{frame}
 	\frametitle{Application}
 	\framesubtitle{Chargement de l'application}
-		\begin{block}{Premier lancement}
-			\begin{itemize}
-			 	\item Copie des cartes officielles dans le repertoire du téléphone 
-				\item Création et initialisation de la base de données SQLite
-				\item Création d'un nouveau compte local
-			\end{itemize}
-		\end{block}
-				
-		\begin{block}{Lancement normal}
-			\begin{itemize}
-				\item Chargement de la base de données 
-				\item Chargement du dernier utilisateur
-			\end{itemize}
-		\end{block}
+	Chargement standard:
+	\begin{enumerate}
+		\item Chargement de la base de données
+		\item Récupération de toutes les ressources dans le fichier XML
+		\item Instanciation des objets grâce aux ressources récupérées
+		\item Instanciation du dernier utilisateur
+	\end{enumerate}
+	
 	
 	\end{frame}
-	
-	
+
 	\begin{frame}
 	\frametitle{Application}
-	\framesubtitle{Ecran d'accueil}
-		\begin{center}
-		\begin{tabular}{cc}
-			\begin{minipage}{4cm}
-		
-				Menu d'accueil
-				\begin{itemize}
-					\item Partie locale
-					\item Section multijoueur
-					\item Editeur de carte
-					\item Options
-					\item Choix compte local
-					\item Ajout compte local
-					\item Aide
-				\end{itemize}
-			\end{minipage}  &		
-			\begin{minipage}{8cm}
-				\includegraphics[width=6.5cm]{img/2.png} 
-			\end{minipage}\\
-		\end{tabular}
-		\end{center}
-	
+	\framesubtitle{Menus}
+
+		Diagramme d'activité des menus
+
 	\end{frame}
+
+
+%	\begin{frame}
+%	\frametitle{Application}
+%	\framesubtitle{Chargement de l'application}
+%	
+%	\begin{center}
+%		\begin{tabular}{cc}
+%			\begin{minipage}{5cm}
+%				\begin{block}{Lancement}
+%					\begin{itemize}
+%				 		\item Initialisation des données systèmes
+%			 		\end{itemize}
+%				\end{block}
+%			\end{minipage} &
+%			\begin{minipage}{8cm}
+%				 \includegraphics[scale=0.3]{img/1.png}
+%			\end{minipage}\\
+%		\end{tabular}
+%	\end{center}
+%
+%		
+%	
+%	\end{frame}
 	
-	\begin{frame}
-	\frametitle{Application}
-	\framesubtitle{Les menus}
+
 	
-		\begin{block}{Objectifs de conception:}
-			\begin{itemize}
-			  \item Interface claire
-			  \item Facile d'utilisation
-			  \item Navigation intuitive
-			  \item Ergonomique
-			\end{itemize}
-		\end{block}
-	\end{frame}
+%	\begin{frame}
+%	\frametitle{Application}
+%	\framesubtitle{Les menus}
+%	
+%		\begin{block}{Objectifs de conception:}
+%			\begin{itemize}
+%			  \item Interface claire
+%			  \item Facile d'utilisation
+%			  \item Navigation intuitive
+%			  \item Ergonomique
+%			\end{itemize}
+%		\end{block}
+%	\end{frame}
 	
 \subsection{Gestion des ressources}
-
-	\begin{frame}
-		\frametitle{Application}
-		\framesubtitle{Gestion des ressources}
-		
-		\begin{block}{XML}
-			L'utilisation du XML permet de stocker facilement les divers objets ainsi que
-			les images et sons qui leur sont associés
-		\end{block}
-		
-	\end{frame}
 	
 	\begin{frame}
 		\frametitle{Application}
 		\framesubtitle{Types d'objets}
-			Il existe deux types d'objets :
+			Deux types d'objets :
 			
-			\begin{center}
-				Les non animés qui sont composés d'une seule et unique image appelée tile \\
-				\includegraphics[scale=0.75]{img/bloc.png}
-				
-				$\,$
-				
-				\item Les animés qui quant à eux sont aussi composés d'une image mais qui cette fois représente une animation, on appelle cela un sprite \\
-				\includegraphics[scale=0.40]{img/player.png}
-			\end{center}		
+			\begin{itemize}
+				\item Non animés (tile) : une seule et unique image
+					\begin{center}
+						\includegraphics[scale=0.75]{img/bloc.png}
+					\end{center}
+									
+				\item Animés (sprite) : une sequence d'images (animation)
+					\includegraphics[scale=0.40]{img/player.png}
+			\end{itemize}
 	\end{frame}
+	
+	
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Tile mapping}
+
+	Pourquoi ?
+
+	\begin{enumerate}
+		\item Tire ses origines des jeux des années 80
+		\item Faible consommation des ressources 
+		\item Performances des smartphones limitées
+	\end{enumerate}
+	\end{frame}
+
 	
 	\begin{frame}
 		\frametitle{Application}
 		\framesubtitle{Tile Mapping}		
-			
-		\begin{center}
-			\begin{tabular}{cc}
-				\begin{minipage}{5cm}
-					Avantages :
-					\begin{itemize}
-				 		\item Une image pour tous les objets
-				 		\item Allocation mémoire
-			 		\end{itemize}
-				\end{minipage} &
-				\begin{minipage}{8cm}
-					 \includegraphics[scale=0.45]{img/objects.png}
-				\end{minipage}\\
-			\end{tabular}
-		\end{center}
+		
+		Principe :
+		
+		 \includegraphics[scale=0.45]{img/objects.png}
+
+	\end{frame}
+	
+		\begin{frame}
+		\frametitle{Application}
+		\framesubtitle{Gestion des ressources}
+		
+		XML
+		\begin{itemize}
+			\item Code portable
+			\item Syntaxe extensible (Générique)
+			\item Ajout/suppression d'éléments facile
+		\end{itemize}
+		
+		Exemple de code
+		
 	\end{frame}
 	
 \subsection{Editeur de cartes}
@@ -141,14 +146,21 @@
 		\frametitle{Application}
 		\framesubtitle{Editeur de cartes}
 			\begin{center}
-                \includegraphics[width=7cm]{./img/img1.png}
+                \includegraphics[width=7cm]{./img/img8.png}
             \end{center}
 		\end{frame}
+		
+	\begin{frame}
+		\frametitle{Application}
+		\framesubtitle{Editeur de cartes}
+		
+		
+	\end{frame}
 	
 
 	\begin{frame}
 		\frametitle{Application}
-		\framesubtitle{Moteur de rendu}		
+		\framesubtitle{Moteur de rendu (Editeur de cartes)}		
 		
 		Deux matrices:
 		\begin{center}
@@ -160,105 +172,159 @@
 	\end{frame}
 	
 	
-	\begin{frame}
-		\frametitle{Application}
-		\framesubtitle{Interface Utilisateur}
-		
-		\begin{center}
-        	\begin{tabular}{ll}
-                       		\begin{minipage}{4cm}
-					Différentes zones:
-                                       	\begin{itemize}
-                                   	 		\item Menu du haut
-						\item La carte
-						\item Menu droite
-                                    		\end{itemize}
-                       		\end{minipage}  &                
-                       		\begin{minipage}{5.5cm}
-                                		\includegraphics[width=5.5cm]{./img/img8.png}
-                       		\end{minipage}\\
-               		\end{tabular}
-               	\end{center}
-	\end{frame}
+%	\begin{frame}
+%		\frametitle{Application}
+%		\framesubtitle{Interface Utilisateur}
+%		
+%		\begin{center}
+%        	\begin{tabular}{ll}
+%                       		\begin{minipage}{4cm}
+%					Différentes zones:
+%                                       	\begin{itemize}
+%                                   	 		\item Menu du haut
+%						\item La carte
+%						\item Menu droite
+%                                    		\end{itemize}
+%                       		\end{minipage}  &                
+%                       		\begin{minipage}{5.5cm}
+%                                		\includegraphics[width=5.5cm]{./img/img8.png}
+%                       		\end{minipage}\\
+%               		\end{tabular}
+%               	\end{center}
+%	\end{frame}
 	
 	
-	\begin{frame}
-		\frametitle{Application}
-		\framesubtitle{Outils}
-		
-		Deux types de listes :
-		
-		\begin{center}
-               		\begin{tabular}{p{3cm}p{3cm}}
-				Sol & Blocs \\    
-				\begin{minipage}{1cm}
-                                		\includegraphics[scale=0.7]{./img/img4.png} \\
-				\end{minipage}
-				&
-				\begin{minipage}{1cm}
-                                		\includegraphics[scale=0.7]{./img/img3.png} \\
-				\end{minipage}
-               		\end{tabular}
-               	\end{center}
-	\end{frame}
+%	\begin{frame}
+%		\frametitle{Application}
+%		\framesubtitle{Outils}
+%		
+%		Deux types de listes :
+%		
+%		\begin{center}
+%               		\begin{tabular}{p{3cm}p{3cm}}
+%				Sol & Blocs \\    
+%				\begin{minipage}{1cm}
+%                                		\includegraphics[scale=0.7]{./img/img4.png} \\
+%				\end{minipage}
+%				&
+%				\begin{minipage}{1cm}
+%                                		\includegraphics[scale=0.7]{./img/img3.png} \\
+%				\end{minipage}
+%               		\end{tabular}
+%               	\end{center}
+%	\end{frame}
 	
 	
-	\begin{frame}
-		\frametitle{Application}
-		\framesubtitle{Possibilités finales}
-			\begin{center}
-                             	\includegraphics[width=7cm]{./img/img5.png}
-               	\end{center}
-	\end{frame}
+%	\begin{frame}
+%		\frametitle{Application}
+%		\framesubtitle{Possibilités finales}
+%			\begin{center}
+%                             	\includegraphics[width=7cm]{./img/img5.png}
+%               	\end{center}
+%	\end{frame}
 	
-	\begin{frame}
-		\frametitle{Application}
-		\framesubtitle{Menu}
-		
-		\begin{center}
-               		\begin{tabular}{cc}
-				\begin{minipage}{3cm}
-                                       	\begin{itemize}
-                                   	 		\item Reprendre
-						\item Sauvegarder
-						\item Réinitialiser
-						\item Quitter
-                                    		\end{itemize}
-                       		\end{minipage}
-				&
-				\begin{minipage}{6cm}
-					\includegraphics[width=6cm]{./img/img11.png}
-				\end{minipage}
-               		\end{tabular}
-               	\end{center}
-	\end{frame}
+%	\begin{frame}
+%		\frametitle{Application}
+%		\framesubtitle{Menu}
+%		
+%		\begin{center}
+%               		\begin{tabular}{cc}
+%				\begin{minipage}{3cm}
+%                                       	\begin{itemize}
+%                                   	 		\item Reprendre
+%						\item Sauvegarder
+%						\item Réinitialiser
+%						\item Quitter
+%                                    		\end{itemize}
+%                       		\end{minipage}
+%				&
+%				\begin{minipage}{6cm}
+%					\includegraphics[width=6cm]{./img/img11.png}
+%				\end{minipage}
+%               		\end{tabular}
+%               	\end{center}
+%	\end{frame}
+%
+%\subsection{Jeu}
+%	
+%	\begin{frame}
+%	\frametitle{Application}
+%	\framesubtitle{Création d'une partie solitaire}
+%	
+%		\begin{tabular}{cc}
+%			\begin{minipage}{5cm}
+%				Création d'une partie solitaire
+%				\begin{enumerate}
+%					\item Choix de la carte
+%					\item Type de la partie
+%					\item Difficulté des ennemis
+%					\item Nombre d'ennemis
+%					\item Temps de la partie
+%					\item Retourner à l'écran d'accueil
+%					\item Créer la partie
+%				\end{enumerate}
+%			\end{minipage} &
+%			\begin{minipage}{7cm}
+%				\includegraphics[width=6cm]{img/singleplayerbis.png} 
+%			\end{minipage}\\
+%		\end{tabular}
+%	
+%	\end{frame}
 
-\subsection{Jeu}
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Moteur de rendu (Jeu)}
+	
+	\begin{tabular}{ccccc}
+		Bitmap d'objets
+		&
+		&
+		Table de hashage
+		&
+		&
+		Resultat
+		\\
+		inanimés
+		&
+		&
+		d'objets animés
+		&
+		&
+		\\
+		&
+		&
+		&
+		&
+		\\
+		\includegraphics[width=25mm]{img/bitmap.png}
+		&
+		+
+		&		
+		\animategraphics[autoplay,loop,height=1cm]{8}{img/block_}{1}{12}
+		&
+		=
+		&
+		\includegraphics[width=25mm]{img/map.png}
+	\end{tabular}
+	
+	\end{frame}
+	
+	
 	
 	\begin{frame}
 	\frametitle{Application}
-	\framesubtitle{Création d'une partie solitaire}
-	
-		\begin{tabular}{cc}
-			\begin{minipage}{5cm}
-				Création d'une partie solitaire
-				\begin{enumerate}
-					\item Choix de la carte
-					\item Type de la partie
-					\item Difficulté des ennemis
-					\item Nombre d'ennemis
-					\item Temps de la partie
-					\item Retourner à l'écran d'accueil
-					\item Créer la partie
-				\end{enumerate}
-			\end{minipage} &
-			\begin{minipage}{7cm}
-				\includegraphics[width=6cm]{img/singleplayerbis.png} 
-			\end{minipage}\\
-		\end{tabular}
-	
+	\framesubtitle{Moteurs de rendu}
+
+		Comparaison de la complexité des deux moteurs
+
 	\end{frame}
 	
+	
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Moteur Physique}
+		\includegraphics[width=7cm]{./img/img5.png}
+	\end{frame}
 
 	\begin{frame}
 	\frametitle{Application}
@@ -324,79 +390,6 @@
 	
 	\end{frame}
 	
-	\begin{frame}
-	\frametitle{Application}
-	\framesubtitle{Moteur de rendu}
-	
-		Principe : 
-	
-		\begin{tabular}{cc}
-		
-			Une Bitmap des objets inanimés
-			&
-			\begin{minipage}{3cm}
-				\includegraphics[width=3cm]{img/bitmap.png}
-			\end{minipage}\\
-			&
-			\\
-			Une table de hashage d'objets animés
-			&			
-			\begin{minipage}{1.5cm}
-				\animategraphics[autoplay,loop,height=1cm]{8}{img/block_}{1}{12}
-			\end{minipage}
-		\end{tabular}
-	
-	\end{frame}
-	
-		\begin{frame}
-	\frametitle{Application}
-	\framesubtitle{Moteur de rendu}
-	
-		Resultat : \\
-		\begin{center}
-			\includegraphics[width=3cm]{img/map.png}
-		\end{center}
-	
-		Au lieu de parcourir la totalité des deux matrices de l'éditeur de carte nous ne parcourons qu'une petite table de hashage. \\
-		Le nombre d'objets à afficher est ainsi énormément réduit.
-	\end{frame}
-	
-	\begin{frame}
-	\frametitle{Application}
-	\framesubtitle{Moteur Physique}
-		\includegraphics[width=7cm]{./img/img5.png}
-	\end{frame}
-	
-	\begin{frame}
-	\frametitle{Application}
-	\framesubtitle{Le jeu}	
-		\begin{center}
-			\includegraphics[width=8cm]{img/game.png}
-		\end{center}		
-	
-	\end{frame}
-	
-	\begin{frame}
-	\frametitle{Application}
-	\framesubtitle{Menu}
-	
-			\begin{tabular}{cc}
-			\begin{minipage}{3cm}
-				Menu
-				\begin{enumerate}
-					\item Reprendre
-					\item Options
-					\item Redémarrer
-					\item Quitter
-				\end{enumerate}
-			\end{minipage} &
-			\begin{minipage}{8cm}
-				\includegraphics[width=8cm]{img/menusolo.png} 
-			\end{minipage}\\
-		\end{tabular}
-	
-	\end{frame}
-
 \subsection{Reseau}
 
 \begin{frame}
