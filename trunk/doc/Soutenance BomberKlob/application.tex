@@ -39,7 +39,7 @@
 		\begin{block}{Lancement normal}
 			\begin{itemize}
 				\item Chargement de la base de données 
-				\item Instantiation du dernier utilisateur
+				\item Chargement du dernier utilisateur
 			\end{itemize}
 		\end{block}
 	
@@ -56,7 +56,7 @@
 				Menu d'accueil
 				\begin{itemize}
 					\item Partie locale
-					\item Partie multijoueur
+					\item Section multijoueur
 					\item Editeur de carte
 					\item Options
 					\item Choix compte local
@@ -76,7 +76,7 @@
 	\frametitle{Application}
 	\framesubtitle{Les menus}
 	
-		\begin{block}{Objectifs:}
+		\begin{block}{Objectifs de conception:}
 			\begin{itemize}
 			  \item Interface claire
 			  \item Facile d'utilisation
@@ -317,7 +317,17 @@
 			\end{minipage} &
 			\begin{minipage}{5cm}
 							\begin{center}
-				\animategraphics[autoplay,loop,scale=0.5]{1}{img/largeur_}{1}{4}
+				\begin{tabular}{|c|c|c|c|c|c|c|} \hline
+				\rowcolor{gray}  &  &                    &  &                  &  &                   \\\hline
+				\cellcolor{gray} & \cellcolor{orange}1 $\leftarrow$ & \cellcolor{green}1 $\leftarrow$                   &&                && \cellcolor{gray} \\\hline
+				\cellcolor{gray} & \cellcolor{orange}1 $\leftarrow$ & \cellcolor{gray}   & \cellcolor{gray} & \cellcolor{gray} &&	\cellcolor{gray} \\\hline
+				\cellcolor{gray} & \cellcolor{orange}1 $\leftarrow$ & \cellcolor{orange}1 & \cellcolor{orange}1 $\rightarrow$ & \cellcolor{red}O                 && \cellcolor{gray} \\\hline
+				\cellcolor{gray} & \cellcolor{orange}1 $\leftarrow$ & \cellcolor{gray}   & \cellcolor{gray} & \cellcolor{gray} && \cellcolor{gray} \\\hline
+				\cellcolor{gray} & \cellcolor{red}O &                  &  &                && \cellcolor{gray} \\\hline
+				\cellcolor{gray} && \cellcolor{gray}   && \cellcolor{gray} &&	\cellcolor{gray} \\\hline
+				\cellcolor{gray} &&                  &&                && \cellcolor{gray} \\\hline
+				\rowcolor{gray}  &  &                    &  &                  &  & \\\hline
+				\end{tabular}
 			\end{center}
 			\end{minipage}\\
 		\end{tabular}	
@@ -367,7 +377,7 @@
 
 	\end{frame}
 	
-		\begin{frame}
+	\begin{frame}
 	\frametitle{Application}
 	\framesubtitle{Le jeu}	
 		\begin{center}
@@ -437,7 +447,7 @@
 				  \item Servlets
 				  \item Serveur d'application
 				  \item JSON
-				  \item SQLite
+				  \item MySQL
 				\end{itemize}
 			\end{block}
 			
