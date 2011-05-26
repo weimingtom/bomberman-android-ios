@@ -25,6 +25,7 @@
 - (void)displayBlocks:(BOOL)display;
 - (void)pauseAction;
 - (void)resumeAction;
+- (void)reset;
 - (void)saveAction;
 - (void)quitAction;
 

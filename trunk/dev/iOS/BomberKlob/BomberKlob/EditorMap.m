@@ -150,6 +150,11 @@
 }
 
 
+- (void)reset {
+    [self load];
+}
+
+
 
 #pragma mark - Managing Map
 

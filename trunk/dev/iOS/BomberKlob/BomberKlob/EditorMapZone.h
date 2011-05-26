@@ -22,5 +22,6 @@
 
 - (void)clickOnPosition:(Position *)position;
 - (void)displayBlocks:(BOOL)display;
+- (void)needDisplay;
 
 @end

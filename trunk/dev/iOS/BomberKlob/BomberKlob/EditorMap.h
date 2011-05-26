@@ -19,6 +19,7 @@
 - (void)save:(DBUser *)owner;
 - (void)load;
 - (void)makePreview;
+- (void)reset;
 
 - (void)addGround:(Objects *)ground position:(Position *)position;
 - (void)addBlock:(Objects *)block position:(Position *)position;

@@ -79,4 +79,9 @@
     [map save:owner];
 }
 
+
+- (void)reset {
+    [map reset];
+}
+
 @end

@@ -124,6 +124,12 @@
 }
 
 
+- (void)reset {
+    [mapEditor reset];
+    [editorMapZone needDisplay];
+}
+
+
 - (void)quitAction {
     MainMenuViewController *mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     self.navigationController.navigationBarHidden = NO;

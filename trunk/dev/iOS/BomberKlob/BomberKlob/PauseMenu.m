@@ -38,6 +38,12 @@
 }
 
 
+- (void)reset {
+    [editorViewController reset];
+    [editorViewController resumeAction];
+}
+
+
 - (void)quitAction {
     [editorViewController quitAction];
 }
