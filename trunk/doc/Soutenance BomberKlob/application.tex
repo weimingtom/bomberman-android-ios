@@ -1,4 +1,5 @@
 \section{Application}
+
 \subsection{Lancement de l'application}
 
 	\begin{frame}
@@ -15,10 +16,10 @@
 				\end{block}
 			\end{minipage} &
 			\begin{minipage}{8cm}
-				 \includegraphics[scale=0.3]{img/1.png} \\
+				 \includegraphics[scale=0.3]{img/1.png}
 			\end{minipage}\\
 		\end{tabular}
-		\end{center}
+	\end{center}
 
 		
 	
@@ -85,29 +86,76 @@
 		\end{block}
 	\end{frame}
 	
+\subsection{Gestion des ressources}
+
+	\begin{frame}
+		\frametitle{Application}
+		\framesubtitle{Gestion des ressources}
+		
+		\begin{block}{XML}
+			L'utilisation du XML permet de stocker facilement les divers objets ansi que les images et sons qui leur sont associés
+		\end{block}
+		
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Application}
+		\framesubtitle{Types d'objets}
+			Il existe deux types d'objets :
+			
+			\begin{center}
+				Les non animés qui sont composés d'une seule et unique image appelée tile \\
+				\includegraphics[scale=0.75]{img/bloc.png}
+				
+				$\,$
+				
+				\item Les animés qui quant à eux sont aussi composés d'une image mais qui cette fois représente une animation, on appelle cela un sprite \\
+				\includegraphics[scale=0.40]{img/player.png}
+			\end{center}		
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Application}
+		\framesubtitle{Tile Mapping}		
+			
+		\begin{center}
+			\begin{tabular}{cc}
+				\begin{minipage}{5cm}
+					Avantages :
+					\begin{itemize}
+				 		\item Une image pour tous les objets
+				 		\item Allocation mémoire
+			 		\end{itemize}
+				\end{minipage} &
+				\begin{minipage}{8cm}
+					 \includegraphics[scale=0.45]{img/objects.png}
+				\end{minipage}\\
+			\end{tabular}
+		\end{center}
+	\end{frame}
+	
 \subsection{Editeur de cartes}
 
 	\begin{frame}
 		\frametitle{Application}
 		\framesubtitle{Editeur de cartes}
 			\begin{center}
-                             	\includegraphics[width=7cm]{./img/img1.png}
-               	\end{center}
-	\end{frame}
+                \includegraphics[width=7cm]{./img/img1.png}
+            \end{center}
+		\end{frame}
 	
 
 	\begin{frame}
 		\frametitle{Application}
-		\framesubtitle{Moteur de rendu}
-		
+		\framesubtitle{Moteur de rendu}		
 		
 		Deux matrices:
 		\begin{center}
-               		\begin{tabular}{cc}
+			\begin{tabular}{cc}
 				\includegraphics[width=4cm]{./img/img10.png} & 1er niveau \\
-                                	\includegraphics[width=4cm]{./img/img9.png} & 2ème niveau \\
-               		\end{tabular}
-               	\end{center}
+				\includegraphics[width=4cm]{./img/img9.png} & 2ème niveau \\
+			\end{tabular}
+		\end{center}
 	\end{frame}
 	
 	
@@ -116,7 +164,7 @@
 		\framesubtitle{Interface Utilisateur}
 		
 		\begin{center}
-               		\begin{tabular}{ll}
+        	\begin{tabular}{ll}
                        		\begin{minipage}{4cm}
 					Différentes zones:
                                        	\begin{itemize}
@@ -289,56 +337,51 @@
 	\frametitle{Application}
 	\framesubtitle{Moteur de rendu}
 	
-		\begin{tabular}{ccccc}
-			\begin{minipage}{3cm}
-				\begin{center}
-					Image
-				\end{center}		
-			\end{minipage} & &
-			\begin{minipage}{2cm}
-				\begin{center}
-					Hashmap
-				\end{center}
-			\end{minipage} & &
-			\begin{minipage}{3cm}
-				\begin{center}
-					Resultat
-				\end{center}
-			\end{minipage}\\
+		Principe : 
+	
+		\begin{tabular}{cc}
+		
+			Une Bitmap des objets inanimés
+			&
 			\begin{minipage}{3cm}
 				\includegraphics[width=3cm]{img/bitmap.png}
-			\end{minipage} & + &
-			\begin{minipage}{2cm}
-				\includegraphics[width=3cm]{img/hashmap.png} 
-			\end{minipage} & = &
-			\begin{minipage}{3cm}
-				\includegraphics[width=3cm]{img/map.png} 
 			\end{minipage}\\
+			&
+			\\
+			Une table de hashage d'objets animés
+			&			
+			\begin{minipage}{1.5cm}
+				\animategraphics[autoplay,loop,height=1cm]{8}{img/block_}{1}{12}
+			\end{minipage}
 		\end{tabular}
-	
-	\end{frame}
-	
-	\begin{frame}
-	\frametitle{Application}
-	\framesubtitle{Moteur Physique}
 	
 	\end{frame}
 	
 		\begin{frame}
 	\frametitle{Application}
-	\framesubtitle{Le jeu}
+	\framesubtitle{Moteur de rendu}
 	
-		\begin{tabular}{cc}
-			\begin{minipage}{3cm}
-				Ecran de jeu
-				\begin{enumerate}
-					\item 
-				\end{enumerate}
-			\end{minipage} &
-			\begin{minipage}{7cm}
-				\includegraphics[width=8cm]{img/game.png} 
-			\end{minipage}\\
-		\end{tabular}
+		Resultat : \\
+		\begin{center}
+			\includegraphics[width=3cm]{img/map.png}
+		\end{center}
+	
+		Au lieu de parcourir la totalité des deux matrices de l'éditeur de carte nous ne parcourons qu'une petite table de hashage. \\
+		Le nombre d'objets à afficher est ainsi énormement réduit.
+	\end{frame}
+	
+	\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Moteur Physique}
+
+	\end{frame}
+	
+		\begin{frame}
+	\frametitle{Application}
+	\framesubtitle{Le jeu}	
+		\begin{center}
+			\includegraphics[width=8cm]{img/game.png}
+		\end{center}		
 	
 	\end{frame}
 	
