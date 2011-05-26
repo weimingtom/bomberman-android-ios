@@ -17,6 +17,8 @@
 	UITextField *secondPassword;
 	UISwitch *autoLogin;
 	UISwitch *rememberPassword;
+	
+	NSString * idCookie;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *done;
@@ -25,6 +27,8 @@
 @property (nonatomic, retain) IBOutlet UITextField *secondPassword;
 @property (nonatomic, retain) IBOutlet UISwitch *autoLogin;
 @property (nonatomic, retain) IBOutlet UISwitch *rememberPassword;
+@property (nonatomic, retain) NSString * idCookie;
+
 
 - (IBAction)doneAction:(id)sender;
 

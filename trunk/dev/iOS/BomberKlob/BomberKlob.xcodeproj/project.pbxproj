@@ -129,6 +129,8 @@
 		99ABA0DA135334E00052E45F /* SinglePlayerMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187138CE135204D50011FAC1 /* SinglePlayerMenuView.m */; };
 		99ABA0DB135334E70052E45F /* AccountManagementMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846A7F1134C6C4E00D35626 /* AccountManagementMenuViewController.m */; };
 		99ABA0DC135334EF0052E45F /* SettingGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18543B2F1350C9350038CC61 /* SettingGameViewController.m */; };
+		99B04740138DABC000D8C681 /* MultiplayerGameListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B0473E138DABC000D8C681 /* MultiplayerGameListController.m */; };
+		99B04741138DABC000D8C681 /* MultiplayerGameListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B0473F138DABC000D8C681 /* MultiplayerGameListController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -337,6 +339,9 @@
 		998BD4D0138533CD00415E37 /* MultiplayerConnectionMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplayerConnectionMenuViewController.h; sourceTree = "<group>"; };
 		998BD4D1138533CD00415E37 /* MultiplayerConnectionMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplayerConnectionMenuViewController.m; sourceTree = "<group>"; };
 		998BD4D2138533CD00415E37 /* MultiplayerConnectionMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiplayerConnectionMenuViewController.xib; sourceTree = "<group>"; };
+		99B0473D138DABC000D8C681 /* MultiplayerGameListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplayerGameListController.h; sourceTree = "<group>"; };
+		99B0473E138DABC000D8C681 /* MultiplayerGameListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplayerGameListController.m; sourceTree = "<group>"; };
+		99B0473F138DABC000D8C681 /* MultiplayerGameListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiplayerGameListController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -508,8 +513,8 @@
 		189C60C313731B4A005912CC /* Parser xml */ = {
 			isa = PBXGroup;
 			children = (
-				99433954134C876200970231 /* RessourceManager.h */,
 				99433955134C876200970231 /* RessourceManager.m */,
+				99433954134C876200970231 /* RessourceManager.h */,
 				994339A3134C952D00970231 /* XmlParser.h */,
 				994339A4134C952E00970231 /* XmlParser.m */,
 			);
@@ -743,6 +748,9 @@
 		998BD4AA138460BF00415E37 /* MultiPlayerMenu */ = {
 			isa = PBXGroup;
 			children = (
+				99B0473D138DABC000D8C681 /* MultiplayerGameListController.h */,
+				99B0473E138DABC000D8C681 /* MultiplayerGameListController.m */,
+				99B0473F138DABC000D8C681 /* MultiplayerGameListController.xib */,
 				998BD4AC1384613E00415E37 /* MultiplayerRegisterMenuViewController.h */,
 				998BD4AD1384613E00415E37 /* MultiplayerRegisterMenuViewController.m */,
 				998BD4AE1384613E00415E37 /* MultiPlayerMenuViewController.xib */,
@@ -862,6 +870,7 @@
 				188914FF13769AFE00DA732C /* Maps in Resources */,
 				998BD4B01384613E00415E37 /* MultiPlayerMenuViewController.xib in Resources */,
 				998BD4D4138533CD00415E37 /* MultiplayerConnectionMenuViewController.xib in Resources */,
+				99B04741138DABC000D8C681 /* MultiplayerGameListController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -947,6 +956,7 @@
 				998BD4C013846CF100415E37 /* SBJsonParser.m in Sources */,
 				998BD4C113846CF100415E37 /* SBJsonWriter.m in Sources */,
 				998BD4D3138533CD00415E37 /* MultiplayerConnectionMenuViewController.m in Sources */,
+				99B04740138DABC000D8C681 /* MultiplayerGameListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

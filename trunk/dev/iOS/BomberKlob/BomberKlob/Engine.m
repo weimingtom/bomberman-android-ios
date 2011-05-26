@@ -638,21 +638,23 @@
 
 
 - (void) updatePlayers{
-	if (![updatePlayersThread isCancelled]) {
-		[updatePlayersCondition lock];
-        
-		while (updatePlayersPause) {
-			[updatePlayersCondition wait];
+	if (game.isStarted) {
+		if (![updatePlayersThread isCancelled]) {
+			[updatePlayersCondition lock];
+			
+			while (updatePlayersPause) {
+				[updatePlayersCondition wait];
+			}
+			
+			for (int i = 1; i < [game.players count]; i++) {
+				[[game.players objectAtIndex:i] makeAction];
+				[self makeActionBot:[game.players objectAtIndex:i]];
+				
+				[[game.players objectAtIndex:i] update];
+			}
+			
+			[updatePlayersCondition unlock];
 		}
-        
-        for (int i = 1; i < [game.players count]; i++) {
-            [[game.players objectAtIndex:i] makeAction];
-            [self makeActionBot:[game.players objectAtIndex:i]];
-            
-			[[game.players objectAtIndex:i] update];
-        }
-        
-		[updatePlayersCondition unlock];
 	}
 }
 

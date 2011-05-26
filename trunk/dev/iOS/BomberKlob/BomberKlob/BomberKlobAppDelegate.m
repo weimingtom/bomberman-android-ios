@@ -43,7 +43,7 @@
     self.window.rootViewController = self.navigationController;
 	
 
-	
+	[RessourceManager sharedRessource];
     [self.window makeKeyAndVisible];
     
     [navigationControllerTmp release];

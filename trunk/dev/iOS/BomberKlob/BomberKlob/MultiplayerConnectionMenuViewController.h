@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-
+@class MultiplayerRegisterMenuViewController;
 @interface MultiplayerConnectionMenuViewController : UIViewController {
     
 	UIButton *registerButton;
@@ -19,6 +19,10 @@
 	UISwitch *rememberPassword;
 	UINavigationItem *returnButton;
 	UIBarButtonItem *done;
+	
+	NSString * idCookie;
+	MultiplayerRegisterMenuViewController * registerController;
+
 }
 @property (nonatomic, retain) IBOutlet UIButton *registerButton;
 

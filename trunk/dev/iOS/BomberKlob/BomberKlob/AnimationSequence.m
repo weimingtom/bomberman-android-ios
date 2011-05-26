@@ -7,6 +7,9 @@
 //
 
 #import "AnimationSequence.h"
+#import "Application.h"
+#import "BomberKlobAppDelegate.h"
+#import "DBSystem.h"
 
 
 @implementation AnimationSequence
@@ -48,6 +51,13 @@
 }
 
 - (void) playSound {
+	Application *application = ((BomberKlobAppDelegate *) [UIApplication sharedApplication].delegate).app;
+	if (!application.system.mute)
+		sound.volume = application.system.volume/100;
+	else {
+		sound.volume = 0;
+	}
+		
 	[sound play];
 }
 
