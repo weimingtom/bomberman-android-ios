@@ -1,0 +1,7 @@
+<objects>
+	<undestructible name="grass1" hit="0" level="0" fireWall="0" damages="0">
+		<animation name="idle" canLoop="false" sound="">
+			<framerect top="270" left="120" bottom="300" right="150" delayNextFrame="0" />
+		</animation>
+	</undestructible>        
+</objects>
