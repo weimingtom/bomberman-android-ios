@@ -96,7 +96,7 @@
 			
 			
 	\subsubsection*{Vue}
-		Ensuite, la vue représentera l'interface graphique de notre éditeur de carte. La principale difficulté pour réaliser l'interface graphique était de devoir rentrer toutes les informations nécessaires pour l'éditeur de carte dans un écran de type smartphone \footnote{Traduit littéralement comme \og téléphone intéligent \fg \, en français, c'est un terme utilisé pour désigner les téléphones évolués, qui possèdent des fonctions similaires à celles des assistants personnels. Certains peuvent lire des vidéos, des MP3 et se voir ajouter des programmes spécifiques.}. Après plusieurs prototypes d'interface, nous avons décide de séparer l'interface en trois parties. Tout d'abord la plus grande partie, l'affichage de la carte, qui comment étant la principale information à afficher, nous avons essayé de maximiser sa taille. Ensuite un menu à droite permettant au joueur de changer d'outil. Et la dernière partie affiche les différents éléments permettant de controler l'éditeur de carte. L'utilisateur aura juste à choisir l'outil qu'il veut placer sur la carte grâce au menu de droite et ensuite lui suffira d'appuier sur la carte pour placer un bloc dessus.
+		Ensuite, la vue représentera l'interface graphique de notre éditeur de carte. La principale difficulté pour réaliser l'interface graphique était de devoir rentrer toutes les informations nécessaires pour l'éditeur de carte dans un écran de type \gls{smartphone}. Après plusieurs prototypes d'interface, nous avons décide de séparer l'interface en trois parties. Tout d'abord la plus grande partie, l'affichage de la carte, qui comment étant la principale information à afficher, nous avons essayé de maximiser sa taille. Ensuite un menu à droite permettant au joueur de changer d'outil. Et la dernière partie affiche les différents éléments permettant de controler l'éditeur de carte. L'utilisateur aura juste à choisir l'outil qu'il veut placer sur la carte grâce au menu de droite et ensuite lui suffira d'appuier sur la carte pour placer un bloc dessus.
 		
 %		\begin{figure}
 			\begin{center}
@@ -222,7 +222,7 @@
 			
 			La force de cet algorithme est le temps de calcul et l'exactitude des résultats, contrairement à Dijkstra qui lui fournit toujours le meilleur résultat (le plus court chemin entre deux points) mais dans un temps d'exécution beaucoup plus long que l'algorithme de A*.
 			
-			Sachant qu'il peut y avoir jusqu'à trois bots \footnote{Bot (diminutif de robot) désigne un personnage contrôlé par l'ordinateur.} et que l'intelligence artificielle doit régulièrement recalculer son chemin en fonction des actions effectuées par les autres joueurs, nous avons donc choisi l'algorithme de A*.
+			Sachant qu'il peut y avoir jusqu'à trois \glspl{bot} et que l'intelligence artificielle doit régulièrement recalculer son chemin en fonction des actions effectuées par les autres joueurs, nous avons donc choisi l'algorithme de A*.
 		
 			Maintenant que l'on sait quel algorithme utiliser pour rechercher un chemin dans un graphe, nous allons voir en détail comment marche l'algorithme de A*.
 		
@@ -358,8 +358,8 @@
 	
 	\paragraph{Moteur\\}
 	
-	Pour ce qui est du moteur. Celui-ci est représenté par une classe "Engine". Cette classe va contenir l'ensemble des methodes qui vont permettre de d'établir les collisions. C'est aussi cette classe qui s'occuppe de mettre à jour les bombes ainsi que l'IA du jeu. 
-	Une instance d'un moteur est associé à une partie dont le nom de classe est "Game". Cette classe "Game" est abstraite et représente une partie avec toutes les options qu'elle contient. C'est à dire qu'elle possède des attributs permettant de décrire le type de partie, un tableau avec chaque joueur de la partie, ainsi que le carte du jeu. La classe possède toutes les méthodes d'initialisation, de mise à jour, de dessins et de fin de la partie. Enfin pour différencier les différents types de parties nous avons utiliser le pattern \footnote{Un pattern est un modèle de conception en informatique} décorateur. Ainsi il y aura deux grands types de parties: les parties solitaires et les parties multijoueurs. Puis ces parties sont décorés par le type de partie: survivor \footnote{Le mode survivor est un mode où chaque joueur à un nombre de vie limité et dont le gagnant est celui qui sera le dernier a être en vie} ou death match\footnote{Le mode death match est un mode où il y a un temps limité et dont le joueur gagnant est celui qui a tué le plus d'ennemis}.
+	Pour ce qui est du moteur. Celui-ci est représenté par une classe "Engine". Cette classe va contenir l'ensemble des méthodes qui vont permettre d'établir les collisions. C'est aussi cette classe qui s'occuppe de mettre à jour les bombes ainsi que l'IA du jeu. 
+	Une instance d'un moteur est associée à une partie dont le nom de classe est "Game". Cette classe "Game" est abstraite et représente une partie avec toutes les options qu'elle contient. C'est à dire qu'elle possède des attributs permettant de décrire le type de partie, un tableau avec chaque joueur de la partie, ainsi que le carte du jeu. La classe possède toutes les méthodes d'initialisation, de mise à jour, de dessins et de fin de la partie. Enfin pour différencier les différents types de parties nous avons utiliser le \gls{pattern} décorateur. Ainsi il y aura deux grands types de parties: les parties solitaires et les parties multijoueurs. Puis ces parties sont décorés par le type de partie: \gls{survivor} ou \gls{death_match}.
 	
 	Ensuite pour ce qui est des cartes, une classe abstraite nommé "Map" contient le nom et la taille de la carte ainsi qu'un tableau contenant la position initial de chaque joueur sur la carte. Puis une classe "GameMap" qui hérite de map permet de dessiner la carte a l'écran, elle se compose d'une image représentant le sol puis d'un tableau d'objets animés qui permet de représenter l'ensemble du reste des objets. Ensuite nous utilisons un autre type de carte qui va permettre de faciliter les collisions, que ce soit pour un joueur humain ou pour une intelligence artificielle. Cette classe est appelé "CollisionMap" et contient une matrice d'objet "CollisionCase" ainsi qu'un tableau qui contient l'ensemble des bombes posés sur la carte. Les "CollisionCase" sont composé de deux tableaux. Chaque valeur d'un des tableau est associé à une valeur de l'autre talbeau. Un tableau \textit{types} contient les différents types de danger ou d'objet  qu'il existe sur cette case et un tableau \textit{counters} permettra en fonction de chaque type de compter le nombre de fois que ce danger ou objet est présent sur cette case. Par exemple on peut très bien avoir une case qui est dans le champ d'explosion de quatres bombes et qui contient un bloc de type destructible. Ainsi le tableau \textit{type} contiendra deux champs , un pour le type zone dangereuse et un autre pour le type bloc destructible puis le tableau \textit{counters} contiendra donc dans sa case associé à la case zone dangereuse une valeur égale à quatre et et une valeur de un pour l'autre. 
 		
@@ -388,7 +388,7 @@
 		
 		\subsubsection{Tile Mapping}
 
-		La gestion des images a été une partie très importante de l'analyse. Car le développement mobile impose plusieurs contraintes, notament la gestion de la mémoire et la vitesse de calcul. Nous nous sommes donc inspiré des premiers jeux consoles comme Super Mario Bros ou Zelda qui ont été développé sur les premieres consoles comme la NES\footnote{La Nintendo Entertainment System, ou NES, est une console de jeux vidéo 8 bits} ou la GameBoy\footnote{La Game Boy  est une console de jeux vidéo portable à la puissance comparable à celle de la NES}. Nous avons donc conçu le moteur du jeu selon le principe du Tile Mapping\footnote{Le Tile Mapping est une technique de modélisation graphique} pour minimiser l'utilisation des ressources des téléphones.
+		La gestion des images a été une partie très importante de l'analyse. Car le développement mobile impose plusieurs contraintes, notament la gestion de la mémoire et la vitesse de calcul. Nous nous sommes donc inspiré des premiers jeux consoles comme Super Mario Bros ou Zelda qui ont été développé sur les premieres consoles comme la \gls{nes} ou la \gls{game_boy}. Nous avons donc conçu le moteur du jeu selon le principe du \gls{tile_mapping} pour minimiser l'utilisation des ressources des téléphones.
 		
 		Le principe du Tile Mapping est d'utiliser des petites images que nous appelerons \textit{tiles}. Ces tiles sont contenu dans une image appelé sprite (cf ci-dessous).
 		Ensuite une matrice de nombre entier est utilisé pour représenter l'environnement du jeu. Chaque nombre entier représente un tile. Puis grâce à cette association, la carte sera dessiné à l'écran selon la matrice. Voici un exemple :
@@ -401,7 +401,7 @@
 		
 		\subsubsection{La gestion des images et du son}
 		
-		Chaque image, tile et chaque son dont est composé le jeu sont chargé au lancement de l'application. Tous les tiles sont stocké dans des images appelés sprites. Un sprite est donc un ensemble d'image. L'ensemble des tiles sont stockés dans différents sprites. Il y a un sprite pour les bombes, un pour les joueurs et un autre pour le reste des objets. Chaque sprite contient l'ensemble des images des objets qu'il représente. Chaque sprite est associé à un fichier XML \footnote{ Extensible Markup Language, (langage de balisage extensible) est un langage informatique de balisage générique}. Le fichier XML peut être réprésenté sous forme d'un arbre. Les fichiers XML ressemble tous plus au moins a ce genre d'arborescence: 
+		Chaque image, tile et chaque son dont est composé le jeu sont chargé au lancement de l'application. Tous les tiles sont stocké dans des images appelés sprites. Un sprite est donc un ensemble d'image. L'ensemble des tiles sont stockés dans différents sprites. Il y a un sprite pour les bombes, un pour les joueurs et un autre pour le reste des objets. Chaque sprite contient l'ensemble des images des objets qu'il représente. Chaque sprite est associé à un fichier \gls{xml}. Le fichier XML peut être réprésenté sous forme d'un arbre. Les fichiers XML ressemble tous plus au moins a ce genre d'arborescence: 
 		
 		\includegraphics[width=15cm]{./Analyse/Img/exampleXmlBomberklob.eps}
 		
@@ -467,27 +467,24 @@
 	\paragraph{JSON\\}	
 		Soucieux des performances et de la rapidité des échanges entre applications et
 		serveur, nous avons mis en place un protocole de communication client/serveur
-		où les messages transitant sont des flux JSON\footnote{JavaScript Object
-		Notation :  format de données textuel issu du JavaScript (ECMAScript pour plus
-		exact) où il était employé comme une syntaxe pour décrire les valeurs des
-		instances d’objets}. 	
-		Contrairement au XML qui peut représenter des données orientées document,
-		JSON se focalise sur la description d’objets.
-		Un autre avantage reconnu de JSON par rapport à XML est qu’il est nettement
+		où les messages transitant sont des flux \gls{json}. 	
+		Contrairement au \gls{xml} qui peut représenter des données orientées document,
+		\gls{json} se focalise sur la description d’objets.
+		Un autre avantage reconnu de \gls{json} par rapport à \gls{xml} est qu’il est nettement
 		moins verbeux que ce dernier.
-		Quoi qu’il en soit JSON reconnait la philosophie des services web exposant
+		Quoi qu’il en soit \gls{json} reconnait la philosophie des services web exposant
 		une interface d’échange : il s’agit
 		d’envoyer et de recevoir des informations dans un format facilement manipulable par
-		le protocole de transport HTTP.
+		le protocole de transport \gls{http}.
 		
 		
-		Voilà pourquoi le JSON semblait être un format de données d'échanges optimal
+		Voilà pourquoi le \gls{json} semblait être un format de données d'échanges optimal
 		pour véhiculer le plus d'informations avec une taille moindre. Il est aussi en
 		adéquation avec notre politique d'utilisation web pour un serveur.
 		De plus étant beaucoup utilisé, nos deux
-		langages mettent à disposition des outils de sérialisation de leurs objets en JSON.
+		langages mettent à disposition des outils de sérialisation de leurs objets en \gls{json}
 		
-		Ci-dessous un exemple concret de notre protocole de communication JSON entre
+		Ci-dessous un exemple concret de notre protocole de communication \gls{json} entre
 		serveur et application cliente.
 		
 			
