@@ -100,7 +100,7 @@ static DataBase *_dataBase = nil;
     // if it's the first time that the application is launched, we need to add values in System table.
     if (sqlite3_step(statement) == SQLITE_DONE) {
         [self initSystemTable];
-        [self initMapTable];        
+        [self initMapTable];  
     }
 }
 
