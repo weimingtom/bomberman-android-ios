@@ -9,6 +9,7 @@
 \usepackage[pdftex]{hyperref} %Liens dans table de matieres
 \usepackage{fancyhdr}
 \usepackage{geometry}
+\usepackage{listings}
 \usepackage{url}
 \usepackage{pdfpages}
 \usepackage{multicol}
@@ -33,7 +34,7 @@
 		\begin{minipage}{.9\linewidth}
 			#1 
 		\end{minipage}
-  	}\\
+  	}\\\usepackage{listings}
 }
 
 % Title Page
@@ -100,7 +101,9 @@
 
 	\input{Manuel/Manuel.tex}
 
-	
+\chapter{Réutilisabilité}
+
+	\input{Reutilisabilite/reutilisabilite.tex}
 
 \chapter{Discussion}
 
