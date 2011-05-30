@@ -1,4 +1,4 @@
-package com.klob.Bomberklob.resources;
+package com.klob.Bomberklob.game;
 
 public enum ColisionMapObjects {
 

@@ -6,7 +6,6 @@ import com.klob.Bomberklob.objects.HumanPlayer;
 import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.PlayerAnimations;
-import com.klob.Bomberklob.resources.EditorMap;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 

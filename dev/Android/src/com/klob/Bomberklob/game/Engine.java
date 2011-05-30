@@ -1,25 +1,12 @@
 package com.klob.Bomberklob.game;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-
 import android.graphics.Canvas;
-import android.util.Log;
 
 import com.klob.Bomberklob.objects.Bomb;
-import com.klob.Bomberklob.objects.BotPlayer;
-import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.ObjectsAnimations;
 import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.objects.exceptions.BombPowerException;
-import com.klob.Bomberklob.resources.ColisionMapObjects;
-import com.klob.Bomberklob.resources.PathFindingNode;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
@@ -27,43 +14,15 @@ public class Engine {
 
 	private Single single;
 
-	private Point nextTile = new Point(), currentTile = new Point(), tileUpLeft, tileUpRight, tileDownLeft, tileDownRight, playerPosition, playerObjectif;
-	private int size,x, y;
-
-
-	private boolean bombBoolean = true;
-	private Thread bombThread;	
-	private ConcurrentHashMap<Point, Bomb> bombs;	
-
-	private Iterator<Bomb> bombsIterator;
-
-	/* Pathfinding */
-	private Map<Point, PathFindingNode> openList;
-	private Map<Point, PathFindingNode> closeList;
-	//private ArrayList<Point> openListArray;
-	private int H, F, G, minimumStrok;
-
-	private Map<Point, Integer> distance;
-	private Map<Point, PlayerAnimations> direction;
-	private List<Integer> vect;
+	private Point nextTile = new Point(), currentTile = new Point(), tileUpLeft, tileUpRight, tileDownLeft, tileDownRight, playerPosition;
+	private int size;
 
 	/* Constructeur -------------------------------------------------------- */
 
 	public Engine(String mapName, int enemies, String gametype, boolean random, int difficulty) {
 		this.single = new Single(mapName, enemies, gametype, random, difficulty);
 		this.size = ResourcesManager.getSize();
-		this.bombs = new ConcurrentHashMap<Point, Bomb>();
-		this.x = 0;
-		this.y = 0;
-		this.openList = new HashMap<Point, PathFindingNode>();
-		//this.openListArray = new ArrayList<Point>();
-		this.closeList = new HashMap<Point, PathFindingNode>();
-		this.distance = new HashMap<Point, Integer>();
-		this.direction = new HashMap<Point, PlayerAnimations>();
-		this.vect = new ArrayList<Integer>();
 	}
-
-
 
 	/* Getters ------------------------------------------------------------- */
 
@@ -75,32 +34,7 @@ public class Engine {
 
 	public void setSingle(Single single) {
 		this.single = single;
-	}
-
-	public void setBombThreadRunning(boolean bombBoolean2) {
-		this.bombBoolean = bombBoolean2;
-		if ( this.bombBoolean && (this.bombThread == null || this.bombThread.getState() == Thread.State.TERMINATED)) {
-			this.bombThread = new Thread() {
-				@Override
-				public void run() {
-					Log.i("Bombs Thread","Thread started");
-					while (bombBoolean) {
-						try {
-							sleep(100);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}						
-						for(Entry<Point, Bomb> entry : bombs.entrySet()) {
-							entry.getValue().updateTime();
-							single.map.colisionMapUpdate(entry.getValue());
-						}
-					}
-					Log.i("Bombs Thread","Thread done");
-				};
-			};
-			this.bombThread.start();
-		}
-	}
+	}	
 
 	/* Méthodes publiques -------------------------------------------------- */		
 
@@ -109,7 +43,7 @@ public class Engine {
 		if ( player != null ) {
 			Point p = ResourcesManager.coToTile(player.getPosition().x+(ResourcesManager.getSize()/2), player.getPosition().y+(ResourcesManager.getSize()/2));
 
-			if ( this.bombs.get(p) == null ) {
+			if ( this.single.getBombs().get(p) == null ) {
 				if ( player.getBombNumber() > 0 ) {
 
 					/* On crée une nouvelle bombe */
@@ -122,7 +56,7 @@ public class Engine {
 					bomb.playCurrentAnimationSound();
 
 					/* On l'ajoute dans la hash map de bombes */
-					this.bombs.put(p, bomb);
+					this.single.getBombs().put(p, bomb);
 
 					/* Zones dangereuses */
 					this.single.map.colisionMapUpdate(bomb);
@@ -140,20 +74,10 @@ public class Engine {
 
 	public void onDraw(Canvas canvas, int size) {
 		this.single.onDraw(canvas,size);
-
-		/* FIXME */
-		for (this.bombsIterator = bombs.values().iterator() ; this.bombsIterator.hasNext() ;){
-			this.bombsIterator.next().onDraw(canvas, size); 
-		}
 	}
 
 	public void update() {
 		Player[] players = this.single.getPlayers();
-		ColisionMapObjects[][] colisionMap;
-
-		/* Bombes -------------------------------------------------- */
-
-		this.updateBombs();			
 
 		/* Joueurs ------------------------------------------------- */
 
@@ -181,108 +105,13 @@ public class Engine {
 							}
 						}
 						else {
-							this.playerObjectif = players[i].getObjectif();
 							this.playerPosition = players[i].getPosition();
-							colisionMap = this.single.map.getColisionMap();
 							this.tileUpLeft = ResourcesManager.coToTile(this.playerPosition.x,this.playerPosition.y);
 							this.tileUpRight = ResourcesManager.coToTile(this.playerPosition.x+ResourcesManager.getSize()-1,this.playerPosition.y);
 							this.tileDownRight = ResourcesManager.coToTile(this.playerPosition.x+ResourcesManager.getSize()-1,this.playerPosition.y+ResourcesManager.getSize()-1);
 							this.tileDownLeft = ResourcesManager.coToTile(this.playerPosition.x,this.playerPosition.y+ResourcesManager.getSize()-1);
 
-							/* IA */
-							if ( i != 0 && players[i].getPosition() != null ) {
-								/*Si le bot n'a pas d'objectif*/
-								if ( this.playerPosition.x == this.playerObjectif.x && this.playerPosition.y == this.playerObjectif.y ) {
-
-									int difficulty = ((BotPlayer) players[i]).getDifficulty();
-
-									/* Defensif (On est dans une zone dangereuse) */
-									if ( colisionMap[this.tileUpLeft.x][this.tileUpLeft.y] == ColisionMapObjects.DANGEROUS_AREA || colisionMap[this.tileUpLeft.x][this.tileUpLeft.y] == ColisionMapObjects.BOMB) {
-
-										this.playerObjectif = safeAroundArea(this.tileUpLeft, colisionMap);                
-
-										if ( this.playerObjectif.x == this.tileUpLeft.x && this.playerObjectif.y == this.tileUpLeft.y ) {
-											this.playerObjectif = pathFinding(this.tileUpLeft, colisionMap);
-										}
-									}
-									/* Offensif */
-									else {
-
-										int timeBomb = Integer.MAX_VALUE;
-
-										for(Point entry : bombs.keySet()) {
-											if ( players[i].equals(bombs.get(entry).getPlayer())) {
-												timeBomb = Math.min(bombs.get(entry).getTime(),timeBomb);
-											}
-										}
-
-										if ( timeBomb > 15 ) {
-											if ( (int)(Math.random() * (20-(10*difficulty))) == 0) {
-												if ( 0 != difficulty && players[0].getPosition() != null ) {
-													Point prout = ResourcesManager.coToTile(players[0].getPosition().x, players[0].getPosition().y);
-													this.playerObjectif = pathFinding(this.tileUpLeft, prout,colisionMap);
-													if ( colisionMap[this.playerObjectif.x][this.playerObjectif.y] == ColisionMapObjects.BLOCK && players[i].getBombNumber() > 0) {
-														this.playerObjectif = iaPushBomb(players[i], colisionMap.clone());
-													}
-													else if ( colisionMap[this.playerObjectif.x][this.playerObjectif.y] == ColisionMapObjects.EMPTY && players[i].getBombNumber() > 0 && this.playerObjectif.x == prout.x && this.playerObjectif.y == prout.y) {
-														this.playerObjectif = iaPushBomb(players[i], colisionMap.clone());
-													}
-													else if ( colisionMap[this.playerObjectif.x][this.playerObjectif.y] != ColisionMapObjects.EMPTY ) {
-														this.playerObjectif.x = this.tileUpLeft.x;
-														this.playerObjectif.y = this.tileUpLeft.y;
-													}
-												}/*
-												else {
-													this.playerObjectif = safeAroundArea(this.tileUpLeft, colisionMap);
-												}*/
-											}
-										}
-										else {
-											this.playerObjectif.x = this.tileUpLeft.x;
-											this.playerObjectif.y = this.tileUpLeft.y;
-										}
-									}
-									this.playerObjectif.x = this.playerObjectif.x*ResourcesManager.getSize();
-									this.playerObjectif.y = this.playerObjectif.y*ResourcesManager.getSize();									
-								}
-
-								if ( this.playerPosition.x != this.playerObjectif.x || this.playerPosition.y != this.playerObjectif.y ) {
-
-									if ( this.playerPosition.x < this.playerObjectif.x && this.playerPosition.y < this.playerObjectif.y ) {
-										players[i].setCurrentAnimation(PlayerAnimations.DOWN_RIGHT);
-									}
-									else if ( this.playerPosition.x > this.playerObjectif.x && this.playerPosition.y < this.playerObjectif.y ) {
-										players[i].setCurrentAnimation(PlayerAnimations.DOWN_LEFT);
-									}
-									else if ( this.playerPosition.x > this.playerObjectif.x && this.playerPosition.y > this.playerObjectif.y ) {
-										players[i].setCurrentAnimation(PlayerAnimations.UP_LEFT);
-									}
-									else if ( this.playerPosition.x < this.playerObjectif.x && this.playerPosition.y > this.playerObjectif.y ) {
-										players[i].setCurrentAnimation(PlayerAnimations.UP_RIGHT);
-									}
-									else if ( this.playerPosition.x < this.playerObjectif.x ) {
-										players[i].setCurrentAnimation(PlayerAnimations.RIGHT);
-									}
-									else if ( this.playerPosition.x > this.playerObjectif.x  ) {
-										players[i].setCurrentAnimation(PlayerAnimations.LEFT);
-									}
-									else if ( this.playerPosition.y > this.playerObjectif.y ) {
-										players[i].setCurrentAnimation(PlayerAnimations.UP);
-									}
-									else if ( this.playerPosition.y < this.playerObjectif.y ) {
-										players[i].setCurrentAnimation(PlayerAnimations.DOWN);
-									}
-									players[i].setObjectif(this.playerObjectif);
-									move(players[i]);
-								}
-								else {
-									stopPlayer(players[i]);
-								}
-							}
-							else {
-								move(players[i]);
-							}
-
+							move(players[i]);
 
 							/* On vérifie que le joueur n'est pas sur une case lui causant des dommages */
 							if ( players[i].isDestructible() ) {
@@ -307,394 +136,8 @@ public class Engine {
 	}
 
 	public void restartGame () {		
-		/* Remise à 0 du vecteur de bombes */
-		this.bombs.clear();
-
-		/* Thread des bombes mis à l'arrêt */
-		this.setBombThreadRunning(false);
-
 		this.single.restartGame();		
-	}
-
-	public Point safeAroundArea(Point point1, ColisionMapObjects[][] colisionMap) {
-
-		int x = point1.x;
-		int y = point1.y;
-
-		vect.clear();
-		vect.add(1);
-		vect.add(2);
-		vect.add(3);
-		vect.add(4);
-		vect.add(5);
-		vect.add(6);
-		vect.add(7);
-		vect.add(8);
-
-		do {
-			int i = vect.remove((int)(Math.random() * vect.size()));
-
-			switch (i) {            
-			case 1:
-				if ( colisionMap[x-1][y] == ColisionMapObjects.EMPTY ) {
-					x--;
-				}
-				break;
-			case 2:
-				if ( colisionMap[x+1][y] == ColisionMapObjects.EMPTY ) {
-					x++;
-				}
-				break;
-			case 3:
-				if ( colisionMap[x][y-1] == ColisionMapObjects.EMPTY ) {
-					y--;
-				}
-				break;
-			case 4:
-				if ( colisionMap[x][y+1] == ColisionMapObjects.EMPTY ) {
-					y++;
-				}
-				break;
-			case 5:
-				if ( colisionMap[x-1][y-1] == ColisionMapObjects.EMPTY ) {
-					if ( colisionMap[x-1][y] == ColisionMapObjects.EMPTY ) {
-						if ( colisionMap[x][y-1] == ColisionMapObjects.EMPTY ) {
-							x--;
-							y--;
-						}
-					}
-				}
-				break;
-			case 6:
-				if ( colisionMap[x+1][y+1] == ColisionMapObjects.EMPTY ) {
-					if ( colisionMap[x+1][y] == ColisionMapObjects.EMPTY ) {
-						if ( colisionMap[x][y+1] == ColisionMapObjects.EMPTY ) {
-							x++;
-							y++;
-						}
-					}
-				}
-				break;
-			case 7:
-				if ( colisionMap[x+1][y-1] == ColisionMapObjects.EMPTY ) {
-					if ( colisionMap[x+1][y] == ColisionMapObjects.EMPTY ) {
-						if ( colisionMap[x][y-1] == ColisionMapObjects.EMPTY ) {
-							x++;
-							y--;
-						}
-					}
-				}
-				break;
-			case 8:
-				if ( colisionMap[x-1][y+1] == ColisionMapObjects.EMPTY ) {
-					if ( colisionMap[x-1][y] == ColisionMapObjects.EMPTY ) {
-						if ( colisionMap[x][y+1] == ColisionMapObjects.EMPTY ) {
-							x--;
-							y++;
-						}
-					}
-				}
-				break;
-			}
-		} while ( !vect.isEmpty() && x == point1.x && y == point1.y );
-
-		return new Point(x,y);
-	}
-
-	public Point pathFinding(Point playerTile, ColisionMapObjects[][] colisionMap) {
-
-		PlayerAnimations pa = null;
-		Point point = new Point(), position;
-
-		this.distance.put(ResourcesManager.getPoint(playerTile.x, playerTile.y), 1);
-
-		if ( colisionMap[playerTile.x+1][playerTile.y] == ColisionMapObjects.DANGEROUS_AREA ) {
-			this.distance.put(ResourcesManager.getPoint(playerTile.x+1, playerTile.y), 1);
-			this.direction.put(ResourcesManager.getPoint(playerTile.x+1, playerTile.y), PlayerAnimations.RIGHT);
-		}
-
-		if ( colisionMap[playerTile.x-1][playerTile.y] == ColisionMapObjects.DANGEROUS_AREA ) {
-			this.distance.put(ResourcesManager.getPoint(playerTile.x-1, playerTile.y), 1);
-			this.direction.put(ResourcesManager.getPoint(playerTile.x-1, playerTile.y), PlayerAnimations.LEFT);
-		}
-
-		if ( colisionMap[playerTile.x][playerTile.y+1] == ColisionMapObjects.DANGEROUS_AREA ) {
-			this.distance.put(ResourcesManager.getPoint(playerTile.x, playerTile.y+1), 1);
-			this.direction.put(ResourcesManager.getPoint(playerTile.x, playerTile.y+1), PlayerAnimations.DOWN);
-		}
-
-		if ( colisionMap[playerTile.x][playerTile.y-1] == ColisionMapObjects.DANGEROUS_AREA ) {
-			this.distance.put(ResourcesManager.getPoint(playerTile.x, playerTile.y-1), 1);
-			this.direction.put(ResourcesManager.getPoint(playerTile.x, playerTile.y-1), PlayerAnimations.UP);
-		}
-
-		for (int d = 1; d < 20; d++) {
-			for ( int h = 1; h < ResourcesManager.MAP_WIDTH-1 ; h++ ) {
-
-				for ( int v = 1 ; v < ResourcesManager.MAP_HEIGHT-1 ; v++ ) {
-
-					position = ResourcesManager.getPoint(h, v);
-					point.x = position.x;
-					point.y = position.y;
-
-					if ( this.distance.get(ResourcesManager.getPoint(h, v)) == Integer.valueOf(d) ) {
-
-						point.y = v+1;
-						if ( this.distance.get(point) == null ) {
-							this.distance.put(point, 0);
-						}
-
-						if ( this.distance.get(point) == Integer.valueOf(0) ) {
-							if ( colisionMap[point.x][point.y] == ColisionMapObjects.EMPTY ) {
-								pa = this.direction.get(ResourcesManager.getPoint(h, v));
-								break;
-							}
-							else if ( colisionMap[point.x][point.y] == ColisionMapObjects.DANGEROUS_AREA ){
-								this.direction.put(ResourcesManager.getPoint(h, v+1), this.direction.get(ResourcesManager.getPoint(h, v)));
-								this.distance.put(ResourcesManager.getPoint(h, v+1), d+1);
-							}
-						}
-
-						point.y = v-1;
-						if ( this.distance.get(point) == null ) {
-							this.distance.put(point, 0);
-						}
-
-						if ( this.distance.get(point) == Integer.valueOf(0) ) {
-							if ( colisionMap[point.x][point.y] == ColisionMapObjects.EMPTY ) {
-								pa = this.direction.get(ResourcesManager.getPoint(h, v));
-								break;
-							}
-							else if ( colisionMap[point.x][point.y] == ColisionMapObjects.DANGEROUS_AREA ) {
-								this.direction.put(ResourcesManager.getPoint(h, v-1), this.direction.get(ResourcesManager.getPoint(h, v)));
-								this.distance.put(ResourcesManager.getPoint(h, v-1), d+1);
-							}
-						}
-
-						point.x = h+1;
-						point.y = v;
-						if ( this.distance.get(point) == null ) {
-							this.distance.put(point, 0);
-						}
-
-						if ( this.distance.get(point) == Integer.valueOf(0) ) {
-							if ( colisionMap[point.x][point.y] == ColisionMapObjects.EMPTY ) {
-								pa = this.direction.get(ResourcesManager.getPoint(h, v));
-								break;
-							}
-							else if ( colisionMap[point.x][point.y] == ColisionMapObjects.DANGEROUS_AREA ) {
-								this.direction.put(ResourcesManager.getPoint(h+1, v), this.direction.get(ResourcesManager.getPoint(h, v)));
-								this.distance.put(ResourcesManager.getPoint(h+1, v), d+1);
-							}
-						}
-
-						point.x = h-1;
-						if ( this.distance.get(point) == null ) {
-							this.distance.put(point, 0);
-						}
-
-						if ( this.distance.get(point) == Integer.valueOf(0) ) {
-							if ( colisionMap[point.x][point.y] == ColisionMapObjects.EMPTY ) {
-								pa = this.direction.get(ResourcesManager.getPoint(h, v));
-								break;
-							}
-							else if ( colisionMap[point.x][point.y] == ColisionMapObjects.DANGEROUS_AREA ){
-								this.direction.put(ResourcesManager.getPoint(h-1, v), this.direction.get(ResourcesManager.getPoint(h, v)));
-								this.distance.put(ResourcesManager.getPoint(h-1, v), d+1);
-							}
-						}
-					}
-				}
-
-				if ( pa != null ) {
-					break;
-				}
-			}
-
-			if ( pa != null ) {
-				break;
-			}
-		}
-
-		this.distance.clear();
-		this.direction.clear();
-
-		if ( pa == PlayerAnimations.RIGHT) {
-			point.x = playerTile.x+1;
-			point.y = playerTile.y;
-		}
-		else if ( pa == PlayerAnimations.LEFT) {
-			point.x = playerTile.x-1;
-			point.y = playerTile.y;
-		}
-		else if ( pa == PlayerAnimations.UP ) {
-			point.x = playerTile.x;
-			point.y = playerTile.y-1;
-		}
-		else if ( pa == PlayerAnimations.DOWN ) {
-			point.x = playerTile.x;
-			point.y = playerTile.y+1;
-		}
-		else {
-			point.x = playerTile.x;
-			point.y = playerTile.y;
-		}
-		
-		return point;
-	}
-
-	public Point pathFinding(Point sourcePoint, Point destinationPoint, ColisionMapObjects[][] colisionMap) {
-
-		openList.clear();
-		closeList.clear();
-		//openListArray.clear();
-
-		ConcurrentHashMap<Point, Objects> animatedObjects = this.single.map.getAnimatedObjects();
-
-		Point tile = new Point(), source = new Point(sourcePoint.x, sourcePoint.y), res = new Point();
-		openList.put(source, new PathFindingNode(0, 0, 0, source));
-		//openListArray.add(source);
-		int i, j;
-
-		do {
-
-			minimumStrok = Integer.MAX_VALUE;
-			/*
-			i = 0;
-			j = 0;
-			for ( ; i < this.openListArray.size() ; i++ ) {
-				if ( openList.get(openListArray.get(i)).F <= minimumStrok) {
-					minimumStrok = openList.get(openListArray.get(i)).F;
-					tile = openListArray.get(i);
-					j = i;
-				}
-			}
-			openListArray.remove(j);
-			*/
-			
-			for (Entry<Point, PathFindingNode> entry : openList.entrySet()) {
-                if ( entry.getValue().F <= minimumStrok) {
-                        minimumStrok = entry.getValue().F;
-                        tile = entry.getKey();
-                }
-			}
-			
-			closeList.put(tile, openList.remove(tile));
-
-			for (i = tile.x-1 ; i < tile.x+2 ; i++ ) {
-				for (j = tile.y-1 ; j < tile.y+2 ; j++ ) {
-
-					if ( closeList.get(ResourcesManager.getPoint(i, j)) == null) {
-
-						if ( colisionMap[i][j] == ColisionMapObjects.BLOCK ) {
-
-							if ( animatedObjects.get(ResourcesManager.getPoint(i, j)) != null ) {
-
-								if ( i == tile.x || j == tile.y ) {
-
-									H = (Math.abs(destinationPoint.x-i) + Math.abs(destinationPoint.y-j))*10;
-
-									addInOpenList(40, i, j, tile);
-								}
-							}
-							else {
-								closeList.put(ResourcesManager.getPoint(i, j), new PathFindingNode(0, 0, 0, tile));
-							}
-						}
-						else if ( colisionMap[i][j] == ColisionMapObjects.EMPTY ) {
-
-							H = (Math.abs(destinationPoint.x-i) + Math.abs(destinationPoint.y-j))*10;
-
-							if ( i == tile.x || j == tile.y ) {                                                       
-								addInOpenList(10, i, j, tile);
-							}
-							else {
-								if ( i > tile.x && colisionMap[tile.x+1][tile.y] == ColisionMapObjects.EMPTY) {
-									if ( j > tile.y && colisionMap[tile.x][tile.y+1] == ColisionMapObjects.EMPTY) {
-										addInOpenList(14, i, j, tile);
-									}
-									else if ( colisionMap[tile.x][tile.y-1] == ColisionMapObjects.EMPTY ){
-										addInOpenList(14, i, j, tile);
-									}
-								}
-								else if ( i < tile.x && colisionMap[tile.x-1][tile.y] == ColisionMapObjects.EMPTY) {
-									if ( j > tile.y && colisionMap[tile.x][tile.y+1] == ColisionMapObjects.EMPTY) {
-										addInOpenList(14, i, j, tile);
-									}
-									else if ( colisionMap[tile.x][tile.y-1] == ColisionMapObjects.EMPTY ){
-										addInOpenList(14, i, j, tile);
-									}
-								}
-							}
-						}
-						else if ( colisionMap[i][j] == ColisionMapObjects.FIRE ) {
-
-							H = (Math.abs(destinationPoint.x-i) + Math.abs(destinationPoint.y-j))*10;
-
-							if ( i == tile.x || j == tile.y ) {                                                       
-								addInOpenList(15, i, j, tile);
-							}
-							else {
-								if ( i > tile.x && colisionMap[tile.x+1][tile.y] == ColisionMapObjects.EMPTY) {
-									if ( j > tile.y && colisionMap[tile.x][tile.y+1] == ColisionMapObjects.EMPTY) {
-										addInOpenList(14, i, j, tile);
-									}
-									else if ( colisionMap[tile.x][tile.y-1] == ColisionMapObjects.EMPTY ){
-										addInOpenList(14, i, j, tile);
-									}
-								}
-								else if ( i < tile.x && colisionMap[tile.x-1][tile.y] == ColisionMapObjects.EMPTY) {
-									if ( j > tile.y && colisionMap[tile.x][tile.y+1] == ColisionMapObjects.EMPTY) {
-										addInOpenList(14, i, j, tile);
-									}
-									else if ( colisionMap[tile.x][tile.y-1] == ColisionMapObjects.EMPTY ){
-										addInOpenList(14, i, j, tile);
-									}
-								}
-							}
-						}
-						else {
-							closeList.put(ResourcesManager.getPoint(i, j), new PathFindingNode(0, 0, 0, tile));
-						}
-					}
-				}
-			}
-		} while ( closeList.get(destinationPoint) == null && !openList.isEmpty() ) ;
-
-		if ( closeList.get(destinationPoint) != null )  {
-
-			res.set(destinationPoint.x,destinationPoint.y);
-
-			while ( closeList.get(res).father != source ) {
-				res.set(closeList.get(res).father.x, closeList.get(res).father.y);
-			}	
-		}
-		else {
-			res.set(source.x,source.y);
-		}
-
-		return res;
-	}
-
-	private void addInOpenList(int value, int i, int j, Point currentTile) {
-		
-		Point tile = ResourcesManager.getPoint(i, j);
-
-		G = value+closeList.get(currentTile).G;
-
-		F = G+H;
-
-		if ( openList.get(tile) == null ) {
-			openList.put(tile, new PathFindingNode(F, G, H, currentTile));
-			//this.openListArray.add(tile);
-		}
-		else if ( G < openList.get(tile).G ) {
-			openList.get(tile).F = F;
-			openList.get(tile).G = G;
-			openList.get(tile).father = currentTile;
-		}
-	}
-
+	}	
 
 	/* Méthodes privées ---------------------------------------------------- */
 
@@ -727,35 +170,34 @@ public class Engine {
 
 	private void moveUp(Player player) {
 
-		this.x = player.getPosition().x;
-		this.y = player.getPosition().y;
+		Point position = player.getPosition();
 		ColisionMapObjects[][] colisionMap = this.single.map.getColisionMap();
 
-
+		
 		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
-			if ( this.y > this.size ) {
+			if ( position.y > this.size ) {
 
 				if (player.getObjectif() != null) {
-					if (player.getObjectif().y == this.y) {
+					if (player.getObjectif().y == position.y) {
 						break;
 					}
 				}
 
-				this.nextTile = ResourcesManager.coToTile(this.x,this.y-1);
-				this.currentTile = ResourcesManager.coToTile(this.x,this.y);
+				this.nextTile = ResourcesManager.coToTile(position.x,position.y-1);
+				this.currentTile = ResourcesManager.coToTile(position.x,position.y);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
 					if ( colisionMap[this.nextTile.x][this.nextTile.y] != ColisionMapObjects.BLOCK && colisionMap[this.nextTile.x][this.nextTile.y] != ColisionMapObjects.GAPE  && colisionMap[this.nextTile.x][this.nextTile.y] != ColisionMapObjects.BOMB) {
-						if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
-							this.y--;
+						if ( ( (this.currentTile.x*this.size) <= position.x) && ((position.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
+							player.moveUp();
 						}
 						else {
 							if ( colisionMap[this.nextTile.x+1][this.nextTile.y] != ColisionMapObjects.BLOCK && colisionMap[this.nextTile.x+1][this.nextTile.y] != ColisionMapObjects.GAPE && colisionMap[this.nextTile.x+1][this.nextTile.y] != ColisionMapObjects.BOMB) {
-								this.y--;                                                               
+								player.moveUp();
 							}
 							else {
-								if ( this.x < ((this.currentTile.x*this.size)+(this.size/2)) ) {
-									this.x--;
+								if ( position.x < ((this.currentTile.x*this.size)+(this.size/2)) ) {
+									player.moveLeft();
 								}
 								else {
 									break;
@@ -765,8 +207,8 @@ public class Engine {
 					}
 					else {
 						if ( colisionMap[this.nextTile.x+1][this.nextTile.y] != ColisionMapObjects.BLOCK && colisionMap[this.nextTile.x+1][this.nextTile.y] != ColisionMapObjects.GAPE && colisionMap[this.nextTile.x+1][this.nextTile.y] != ColisionMapObjects.BOMB) {
-							if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
-								this.x++;
+							if ( position.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
+								player.moveRight();
 							}
 							else {
 								break;
@@ -778,46 +220,44 @@ public class Engine {
 					}
 				}
 				else {
-					this.y--;
+					player.moveUp();
 				}
 			}
 			else {
 				break;
 			}
 		}
-		player.setPosition(this.x, this.y);
 	}
 
 	private void moveDown(Player player) {
 
-		this.x = player.getPosition().x;
-		this.y = player.getPosition().y;
+		Point position = player.getPosition();
 		ColisionMapObjects[][] colisionMap = this.single.map.getColisionMap();
 
 		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
-			if ( this.y < (this.size*(this.single.map.getHeight()-1)) ) {
+			if ( position.y < (this.size*(this.single.map.getHeight()-1)) ) {
 
 				if (player.getObjectif() != null) {
-					if (player.getObjectif().y == this.y) {
+					if (player.getObjectif().y == position.y) {
 						break;
 					}
 				}
 
-				this.nextTile = ResourcesManager.coToTile(this.x,this.y+this.size);
-				this.currentTile = ResourcesManager.coToTile(this.x,this.y+this.size-1);
+				this.nextTile = ResourcesManager.coToTile(position.x,position.y+this.size);
+				this.currentTile = ResourcesManager.coToTile(position.x,position.y+this.size-1);
 
 				if ( this.nextTile.y != this.currentTile.y ) {
 					if ( colisionMap[this.nextTile.x][this.nextTile.y] != ColisionMapObjects.BLOCK && colisionMap[this.nextTile.x][this.nextTile.y] != ColisionMapObjects.GAPE && colisionMap[this.nextTile.x][this.nextTile.y] != ColisionMapObjects.BOMB) {
-						if ( ( (this.currentTile.x*this.size) <= this.x) && ((this.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
-							this.y++;
+						if ( ( (this.currentTile.x*this.size) <= position.x) && ((position.x+this.size) <= ((this.currentTile.x*this.size)+this.size)) ) {
+							player.moveDown();
 						}
 						else {
 							if ( colisionMap[this.nextTile.x+1][this.nextTile.y] != ColisionMapObjects.BLOCK && colisionMap[this.nextTile.x+1][this.nextTile.y] != ColisionMapObjects.GAPE && colisionMap[this.nextTile.x+1][this.nextTile.y] != ColisionMapObjects.BOMB) {
-								this.y++;                                                               
+								player.moveDown();
 							}
 							else {
-								if ( this.x < ((this.currentTile.x*this.size)+(this.size/2)) ) {
-									this.x--;
+								if ( position.x < ((this.currentTile.x*this.size)+(this.size/2)) ) {
+									player.moveLeft();
 								}
 								else {
 									break;
@@ -827,8 +267,8 @@ public class Engine {
 					}
 					else {
 						if ( colisionMap[this.nextTile.x+1][this.nextTile.y] != ColisionMapObjects.BLOCK && colisionMap[this.nextTile.x+1][this.nextTile.y] != ColisionMapObjects.GAPE && colisionMap[this.nextTile.x+1][this.nextTile.y] != ColisionMapObjects.BOMB) {
-							if ( this.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
-								this.x++;
+							if ( position.x > ((this.currentTile.x*this.size)+(this.size/2)) ) {
+								player.moveRight();
 							}
 							else {
 								break;
@@ -840,46 +280,44 @@ public class Engine {
 					}
 				}
 				else {
-					this.y++;
+					player.moveDown();
 				}                               
 			}
 			else {
 				break;
 			}
-		}               
-		player.setPosition(this.x, this.y);
+		}
 	}
 
 	private void moveRight(Player player) {
 
-		this.x = player.getPosition().x;
-		this.y = player.getPosition().y;
+		Point position = player.getPosition();
 		ColisionMapObjects[][] colisionMap = this.single.map.getColisionMap();
 
 		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
-			if ( this.x < (this.size*(this.single.map.getWidth()-1)) ) {
+			if ( position.x < (this.size*(this.single.map.getWidth()-1)) ) {
 
 				if (player.getObjectif() != null) {
-					if (player.getObjectif().x == this.x) {
+					if (player.getObjectif().x == position.x) {
 						break;
 					}
 				}
 
-				this.nextTile = ResourcesManager.coToTile(this.x+this.size,this.y);
-				this.currentTile = ResourcesManager.coToTile(this.x+this.size-1,this.y);
+				this.nextTile = ResourcesManager.coToTile(position.x+this.size,position.y);
+				this.currentTile = ResourcesManager.coToTile(position.x+this.size-1,position.y);
 
 				if ( this.nextTile.x != this.currentTile.x ) {
 					if ( colisionMap[this.nextTile.x][this.nextTile.y] != ColisionMapObjects.BLOCK && colisionMap[this.nextTile.x][this.nextTile.y] != ColisionMapObjects.GAPE && colisionMap[this.nextTile.x][this.nextTile.y] != ColisionMapObjects.BOMB) {
-						if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
-							this.x++;
+						if ( ( (this.currentTile.y*this.size) <= position.y) && ((position.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
+							player.moveRight();
 						}
 						else {
 							if ( colisionMap[this.nextTile.x][this.nextTile.y+1] != ColisionMapObjects.BLOCK && colisionMap[this.nextTile.x][this.nextTile.y+1] != ColisionMapObjects.GAPE && colisionMap[this.nextTile.x][this.nextTile.y+1] != ColisionMapObjects.BOMB) {
-								this.x++;                                                               
+								player.moveRight();
 							}
 							else {
-								if ( this.y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
-									this.y--;
+								if ( position.y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
+									player.moveUp();
 								}
 								else {
 									break;
@@ -889,8 +327,8 @@ public class Engine {
 					}
 					else {
 						if ( colisionMap[this.nextTile.x][this.nextTile.y+1] != ColisionMapObjects.BLOCK && colisionMap[this.nextTile.x][this.nextTile.y+1] != ColisionMapObjects.GAPE && colisionMap[this.nextTile.x][this.nextTile.y+1] != ColisionMapObjects.BOMB) {
-							if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
-								this.y++;
+							if ( position.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
+								player.moveDown();
 							}
 							else {
 								break;
@@ -902,46 +340,44 @@ public class Engine {
 					}
 				}
 				else {
-					this.x++;
+					player.moveRight();
 				}
 			}
 			else {
 				break;
 			}
-		}               
-		player.setPosition(this.x, this.y);  
+		}
 	}
 
 	private void moveLeft(Player player) {
 
-		this.x = player.getPosition().x;
-		this.y = player.getPosition().y;
+		Point position = player.getPosition();
 		ColisionMapObjects[][] colisionMap = this.single.map.getColisionMap();
 
 		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
-			if ( this.x > this.size ) {
+			if ( position.x > this.size ) {
 
 				if (player.getObjectif() != null) {
-					if (player.getObjectif().x == this.x) {
+					if (player.getObjectif().x == position.x) {
 						break;
 					}
 				}
 
-				this.nextTile = ResourcesManager.coToTile(this.x-1,this.y);
-				this.currentTile = ResourcesManager.coToTile(this.x,this.y);
+				this.nextTile = ResourcesManager.coToTile(position.x-1,position.y);
+				this.currentTile = ResourcesManager.coToTile(position.x,position.y);
 
 				if ( this.nextTile.x != this.currentTile.x ) {
 					if ( colisionMap[this.nextTile.x][this.nextTile.y] != ColisionMapObjects.BLOCK && colisionMap[this.nextTile.x][this.nextTile.y] != ColisionMapObjects.GAPE && colisionMap[this.nextTile.x][this.nextTile.y] != ColisionMapObjects.BOMB) {
-						if ( ( (this.currentTile.y*this.size) <= this.y) && ((this.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
-							this.x--;
+						if ( ( (this.currentTile.y*this.size) <= position.y) && ((position.y+this.size) <= ((this.currentTile.y*this.size)+this.size)) ) {
+							player.moveLeft();
 						}
 						else {
 							if ( colisionMap[this.nextTile.x][this.nextTile.y+1] != ColisionMapObjects.BLOCK && colisionMap[this.nextTile.x][this.nextTile.y+1] != ColisionMapObjects.GAPE && colisionMap[this.nextTile.x][this.nextTile.y+1] != ColisionMapObjects.BOMB) {
-								this.x--;                                                               
+								player.moveLeft();
 							}
 							else {
-								if ( this.y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
-									this.y--;
+								if ( position.y < ((this.currentTile.y*this.size)+(this.size/2)) ) {
+									player.moveUp();
 								}
 								else {
 									break;
@@ -951,8 +387,8 @@ public class Engine {
 					}
 					else {
 						if ( colisionMap[this.nextTile.x][this.nextTile.y+1] != ColisionMapObjects.BLOCK && colisionMap[this.nextTile.x][this.nextTile.y+1] != ColisionMapObjects.GAPE && colisionMap[this.nextTile.x][this.nextTile.y+1] != ColisionMapObjects.BOMB) {
-							if ( this.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
-								this.y++;
+							if ( position.y > ((this.currentTile.y*this.size)+(this.size/2)) ) {
+								player.moveDown();
 							}
 							else {
 								break;
@@ -964,16 +400,14 @@ public class Engine {
 					}
 				}
 				else {
-					this.x--;
+					player.moveLeft();
 				}
 			}
 			else {
 				break;
 			}
-		}               
-		player.setPosition(this.x, this.y);                  
+		}
 	}
-
 
 	private void upRight(Player player) {           
 		moveRight(player);
@@ -995,360 +429,4 @@ public class Engine {
 		moveDown(player);
 	}
 
-	public void stopPlayer(Player player) {
-
-		String animation = player.getCurrentAnimation();
-
-		if ( animation == PlayerAnimations.RIGHT.getLabel()) {
-			player.setCurrentAnimation(PlayerAnimations.STOP_RIGHT);
-		}
-		else if ( animation == PlayerAnimations.LEFT.getLabel()) {
-			player.setCurrentAnimation(PlayerAnimations.STOP_LEFT);
-		}
-		else if ( animation == PlayerAnimations.UP.getLabel()) {
-			player.setCurrentAnimation(PlayerAnimations.STOP_UP);
-		}
-		else if ( animation == PlayerAnimations.DOWN.getLabel()) {
-			player.setCurrentAnimation(PlayerAnimations.STOP_DOWN);
-		}
-		else if ( animation == PlayerAnimations.DOWN_RIGHT.getLabel()) {
-			player.setCurrentAnimation(PlayerAnimations.STOP_DOWN_RIGHT);
-		}
-		else if ( animation == PlayerAnimations.DOWN_LEFT.getLabel()) {
-			player.setCurrentAnimation(PlayerAnimations.STOP_DOWN_LEFT);
-		}
-		else if ( animation == PlayerAnimations.UP_RIGHT.getLabel()) {
-			player.setCurrentAnimation(PlayerAnimations.STOP_UP_RIGHT);
-		}
-		else if ( animation == PlayerAnimations.UP_LEFT.getLabel()) {
-			player.setCurrentAnimation(PlayerAnimations.STOP_UP_LEFT);
-		}
-	}
-
-	private void updateBombs() {
-
-		ColisionMapObjects[][] colisionMap = this.single.map.getColisionMap();
-		ConcurrentHashMap<Point, Objects> animatedObjects = this.single.map.getAnimatedObjects();
-		Bomb bomb = null;
-		Objects object;
-
-		for(Entry<Point, Bomb> entry : bombs.entrySet()) {
-
-			bomb = bombs.get(entry.getKey());
-
-			/* On met à jour l'affichage de la bombe */
-			bomb.update();
-
-			/* Si la bombe doit exploser */
-			if ( bomb.timeElapsed() && bomb.getCurrentAnimation().equals(ObjectsAnimations.ANIMATE.getLabel())) {
-				/* On passe son animation à DESTROY */
-				bomb.setCurrentAnimation(ObjectsAnimations.DESTROY);
-			}
-			/* Si la bombe a comme animation DESTROY et qu'elle est finie alors on ajoute les flammes et on supprime la bombe */
-			else if ( bomb.hasAnimationFinished() && bomb.getCurrentAnimation().equals(ObjectsAnimations.DESTROY.getLabel())) {
-
-				Point p = ResourcesManager.coToTile(bomb.getPosition().x, bomb.getPosition().y);
-				object = ResourcesManager.getObjects().get("firecenter").copy();
-				object.setPosition(new Point(p.x*size, p.y*size));                          
-				animatedObjects.put(p, object);
-				colisionMap[p.x][p.y] = ColisionMapObjects.FIRE;
-
-				/* UP */
-				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-					/* Si une bombe est présente */
-					if ( this.bombs.get(ResourcesManager.getPoint(p.x, p.y-k)) != null ) {
-						this.bombs.get(ResourcesManager.getPoint(p.x, p.y-k)).destroy();
-					}
-					/* Si il n'y a pas de block */
-					else if ( colisionMap[p.x][p.y-k] != ColisionMapObjects.BLOCK) {
-						/* On affiche le feu */
-						if ( k < bomb.getPower()-1 ) {
-							object = ResourcesManager.getObjects().get("firevertical").copy();
-						}
-						else {
-							object = ResourcesManager.getObjects().get("fireup").copy();
-						}
-						object.setPosition(new Point(p.x*size, (p.y-k)*size));
-						animatedObjects.put(new Point(p.x,p.y-k), object);
-						colisionMap[p.x][p.y-k] = ColisionMapObjects.FIRE;
-					}
-					/* Si il y a un block */
-					else {
-						/* Si il n'est pas destructible */
-						if ( animatedObjects.get(ResourcesManager.getPoint(p.x, p.y-k)) == null ) {
-							/* On break */
-							break;
-						}
-						/* Si c'est du feu */
-						else if ( colisionMap[p.x][p.y-k] == ColisionMapObjects.FIRE ) {
-							if ( k < bomb.getPower()-1 ) {
-								object = ResourcesManager.getObjects().get("firevertical").copy();
-							}
-							else {
-								object = ResourcesManager.getObjects().get("fireup").copy();
-							}
-							object.setPosition(new Point(p.x*size, (p.y-k)*size));
-							animatedObjects.put(new Point(p.x,p.y-k), object);
-						}
-						/* Si il est destructible */
-						else {
-							/* On le detruit */
-							animatedObjects.get(ResourcesManager.getPoint(p.x, p.y-k)).destroy();
-							/* Si il ne laisse pas passer le feu */
-							if ( animatedObjects.get(ResourcesManager.getPoint(p.x, p.y-k)).isFireWall() ) {
-								/* On break */
-								break;
-							}
-						}
-					}
-				}
-
-				/* DOWN */
-				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-					/* Si une bombe est présente */
-					if ( this.bombs.get(ResourcesManager.getPoint(p.x, p.y+k)) != null ) {
-						this.bombs.get(ResourcesManager.getPoint(p.x, p.y+k)).destroy();
-					}
-					/* Si il n'y a pas de block */
-					else if ( colisionMap[p.x][p.y+k] != ColisionMapObjects.BLOCK ) {
-						/* On affiche le feu */
-						if ( k < bomb.getPower()-1 ) {
-							object = ResourcesManager.getObjects().get("firevertical").copy();
-						}
-						else {
-							object = ResourcesManager.getObjects().get("firedown").copy();
-						}
-						object.setPosition(new Point(p.x*size, (p.y+k)*size));
-						animatedObjects.put(new Point(p.x,p.y+k), object);
-						colisionMap[p.x][p.y+k] = ColisionMapObjects.FIRE;
-					}
-					/* Si il y a un block */
-					else {
-						/* Si il n'est pas destructible */
-						if ( animatedObjects.get(ResourcesManager.getPoint(p.x, p.y+k)) == null ) {
-							/* On break */
-							break;
-						}
-						/* Si c'est du feu */
-						else if ( colisionMap[p.x][p.y+k] == ColisionMapObjects.FIRE ) {
-							if ( k < bomb.getPower()-1 ) {
-								object = ResourcesManager.getObjects().get("firevertical").copy();
-							}
-							else {
-								object = ResourcesManager.getObjects().get("firedown").copy();
-							}
-							object.setPosition(new Point(p.x*size, (p.y+k)*size));
-							animatedObjects.put(new Point(p.x,p.y+k), object);
-						}
-						/* Si il est destructible */
-						else {
-							/* On le detruit */
-							animatedObjects.get(ResourcesManager.getPoint(p.x, p.y+k)).destroy();
-							/* Si il ne laisse pas passer le feu */
-							if ( animatedObjects.get(ResourcesManager.getPoint(p.x, p.y+k)).isFireWall() ) {
-								/* On break */
-								break;
-							}
-						}
-					}
-				}
-
-				/* LEFT */
-				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-					/* Si une bombe est présente */
-					if ( this.bombs.get(ResourcesManager.getPoint(p.x-k, p.y)) != null ) {
-						this.bombs.get(ResourcesManager.getPoint(p.x-k, p.y)).destroy();
-					}
-					/* Si il n'y a pas de block */
-					else if ( colisionMap[p.x-k][p.y] != ColisionMapObjects.BLOCK ) {
-						/* On affiche le feu */
-						if ( k < bomb.getPower()-1 ) {
-							object = ResourcesManager.getObjects().get("firehorizontal").copy();
-						}
-						else {
-							object = ResourcesManager.getObjects().get("fireleft").copy();
-						}
-						object.setPosition(new Point((p.x-k)*size, p.y*size));
-						animatedObjects.put(new Point(p.x-k,p.y), object);
-						colisionMap[p.x-k][p.y] = ColisionMapObjects.FIRE;
-					}
-					/* Si il y a un block */
-					else {
-						/* Si il n'est pas destructible */
-						if ( animatedObjects.get(ResourcesManager.getPoint(p.x-k, p.y)) == null ) {
-							/* On break */
-							break;
-						}
-						/* Si c'est du feu */
-						else if ( colisionMap[p.x-k][p.y] == ColisionMapObjects.FIRE ) {
-							if ( k < bomb.getPower()-1 ) {
-								object = ResourcesManager.getObjects().get("firehorizontal").copy();
-							}
-							else {
-								object = ResourcesManager.getObjects().get("fireleft").copy();
-							}
-							object.setPosition(new Point((p.x-k)*size, p.y*size));
-							animatedObjects.put(new Point(p.x-k,p.y), object);
-						}
-						/* Si il est destructible */
-						else {
-							/* On le detruit */
-							animatedObjects.get(ResourcesManager.getPoint(p.x-k, p.y)).destroy();
-							/* Si il ne laisse pas passer le feu */
-							if ( animatedObjects.get(ResourcesManager.getPoint(p.x-k, p.y)).isFireWall() ) {
-								/* On break */
-								break;
-							}
-						}
-					}
-				}
-
-				/* RIGHT */
-				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-					/* Si une bombe est présente */
-					if ( this.bombs.get(ResourcesManager.getPoint(p.x+k, p.y)) != null ) {
-						this.bombs.get(ResourcesManager.getPoint(p.x+k, p.y)).destroy();
-					}
-					/* Si il n'y a pas de block */
-					else if ( colisionMap[p.x+k][p.y] != ColisionMapObjects.BLOCK ) {
-						/* On affiche le feu */
-						if ( k < bomb.getPower()-1 ) {
-							object = ResourcesManager.getObjects().get("firehorizontal").copy();
-						}
-						else {
-							object = ResourcesManager.getObjects().get("fireright").copy();
-						}
-						object.setPosition(new Point((p.x+k)*size, p.y*size));
-						animatedObjects.put(new Point(p.x+k,p.y), object);
-						colisionMap[p.x+k][p.y] = ColisionMapObjects.FIRE;
-					}
-					/* Si il y a un block */
-					else {
-						/* Si il n'est pas destructible */
-						if ( animatedObjects.get(ResourcesManager.getPoint(p.x+k, p.y)) == null ) {
-							/* On break */
-							break;
-						}
-						/* Si c'est du feu */
-						else if ( colisionMap[p.x+k][p.y] == ColisionMapObjects.FIRE ) {
-							if ( k < bomb.getPower()-1 ) {
-								object = ResourcesManager.getObjects().get("firehorizontal").copy();
-							}
-							else {
-								object = ResourcesManager.getObjects().get("fireright").copy();
-							}
-							object.setPosition(new Point((p.x+k)*size, p.y*size));
-							animatedObjects.put(new Point(p.x+k,p.y), object);
-						}
-						/* Si il est destructible */
-						else {
-							/* On le detruit */
-							animatedObjects.get(ResourcesManager.getPoint(p.x+k, p.y)).destroy();
-							/* Si il ne laisse pas passer le feu */
-							if ( animatedObjects.get(ResourcesManager.getPoint(p.x+k, p.y)).isFireWall() ) {
-								/* On break */
-								break;
-							}
-						}
-					}
-				}
-
-				/* Puis on supprime la bombe */
-				bomb.getPlayer().increaseBombs();
-				bombs.remove(entry.getKey());
-			}
-		}
-	}
-
-	private Point iaPushBomb(Player player, ColisionMapObjects[][] colisionMap) {
-
-		Point point1 = player.getPosition(), p = new Point();
-		point1 = ResourcesManager.coToTile(point1.x, point1.y);
-
-		/* Ajouter une bombe */
-		Point bombPoint = ResourcesManager.coToTile(player.getPosition().x+(size/2), player.getPosition().y+(size/2));
-
-		if ( this.bombs.get(bombPoint) == null ) {
-			if ( player.getBombNumber() > 0 ) {
-
-				/* On crée une nouvelle bombe */
-				Bomb bomb = new Bomb(player.getBombSelected(), ResourcesManager.getBombsAnimations().get(player.getBombSelected()), ObjectsAnimations.ANIMATE, true, 1, false, 0, 1, player);
-
-				/* Coordonnées de la bombe posée */
-				bomb.setPosition(ResourcesManager.tileToCo(bombPoint.x, bombPoint.y));
-
-				boolean up, down, left, right;
-				up = down = left = right = true;
-
-				/* CENTER */
-				colisionMap[bombPoint.x][bombPoint.y] = ColisionMapObjects.BOMB;
-
-				for ( int k = 1 ; k < bomb.getPower() ; k++ ) {
-
-					if ( up ) {
-						if ( colisionMap[bombPoint.x][bombPoint.y-k] != ColisionMapObjects.BLOCK && colisionMap[bombPoint.x][bombPoint.y-k] != ColisionMapObjects.BOMB && colisionMap[bombPoint.x][bombPoint.y-k] != ColisionMapObjects.DAMAGE && colisionMap[bombPoint.x][bombPoint.y-k] != ColisionMapObjects.FIRE) {
-							colisionMap[bombPoint.x][bombPoint.y-k] = ColisionMapObjects.DANGEROUS_AREA;
-						}
-						else {
-							up = false;
-						}
-					}
-
-					if ( down ) {
-						if ( colisionMap[bombPoint.x][bombPoint.y+k] != ColisionMapObjects.BLOCK && colisionMap[bombPoint.x][bombPoint.y+k] != ColisionMapObjects.BOMB && colisionMap[bombPoint.x][bombPoint.y+k] != ColisionMapObjects.DAMAGE && colisionMap[bombPoint.x][bombPoint.y+k] != ColisionMapObjects.FIRE) {
-							colisionMap[bombPoint.x][bombPoint.y+k] = ColisionMapObjects.DANGEROUS_AREA;
-						}
-						else {
-							down = false;
-						}
-					}
-
-					if ( left ) {
-						if ( colisionMap[bombPoint.x-k][bombPoint.y] != ColisionMapObjects.BLOCK && colisionMap[bombPoint.x-k][bombPoint.y] != ColisionMapObjects.BOMB && colisionMap[bombPoint.x-k][bombPoint.y] != ColisionMapObjects.DAMAGE && colisionMap[bombPoint.x-k][bombPoint.y] != ColisionMapObjects.FIRE) {
-							colisionMap[bombPoint.x-k][bombPoint.y] = ColisionMapObjects.DANGEROUS_AREA;
-						}
-						else {
-							left = false;
-						}
-					}
-
-					if ( right ) {
-						if ( colisionMap[bombPoint.x+k][bombPoint.y] != ColisionMapObjects.BLOCK && colisionMap[bombPoint.x+k][bombPoint.y] != ColisionMapObjects.BOMB && colisionMap[bombPoint.x+k][bombPoint.y] != ColisionMapObjects.DAMAGE && colisionMap[bombPoint.x+k][bombPoint.y] != ColisionMapObjects.FIRE) {
-							colisionMap[bombPoint.x+k][bombPoint.y] = ColisionMapObjects.DANGEROUS_AREA;
-						}
-						else {
-							right = false;
-						}
-					}
-				}
-
-				/* Chercher une chemin de sortie */
-				p.x = point1.x;
-				p.y = point1.y;
-				p = pathFinding(point1, colisionMap);
-
-				/* Si il existe une sortie */
-				if ( p.x != point1.x || p.y != point1.y ) {
-
-					/* On joue la musique */
-					bomb.playCurrentAnimationSound();
-
-					/* On l'ajoute dans la hash map de bombes */
-					this.bombs.put(bombPoint, bomb);
-
-					/* Zones dangereuses */
-					this.single.map.setColisionMap(colisionMap);
-
-					/* On diminue la quantité des bombes que peut poser le joueur */
-					try {
-						player.setBombNumber(player.getBombNumber()-1);
-					} catch (BombPowerException e) {
-						e.printStackTrace();
-					}
-
-				}
-			}
-		}
-		return p;
-	}
 }
