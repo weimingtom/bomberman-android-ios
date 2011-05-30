@@ -23,11 +23,20 @@
 /// @name Initializing Engine
 ///--------------------------
 
-/** Initializes the `Engine` with a `Game`. */
+/**  Initializes the `Engine` with a `Map`.
+ 
+ @param mapName The map's name.
+ @return the engine.
+ */
 - (id) initWithMapName:(NSString *)mapName;
 
-/** Initializes the `Engine` with a `Game`. */
+/**  Initializes the `Engine` with a `Game`.
+ 
+ @param gameValue The game used to initialize the engine.
+ @return the engine.
+ */
 - (id) initWithGame:(Game *) gameValue;
+
 
 ///----------------------------------------
 /// @name Managing the Collision of Objects
@@ -45,6 +54,10 @@
  */
 - (void) collisionWithPlayer: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue bomb:(Bomb *) aBomb;
 
+/** Lets see if the object is in collision with a bomb planted on the game by advancing of x and y.
+ 
+ @return `YES` if the object is in collision with a bomb, `NO` otherwise.
+ */
 - (BOOL) isInCollisionWithABomb: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue;
 
 
@@ -78,20 +91,28 @@
 /** Allows you to manage the movements to the Right-Top corner. */
 - (void) moveRightTop:(Player *)player ;
 
+/** Allows you to stop the movements to the Top. */
 - (void) stopTop:(Player *)player;
 
+/** Allows you to stop the movements to the Bottom. */
 - (void) stopDown:(Player *)player;
 
+/** Allows you to stop the movements to the Left. */
 - (void) stopLeft:(Player *)player;
 
+/** Allows you to stop the movements to the Right. */
 - (void) stopRight:(Player *)player;
 
+/** Allows you to stop the movements to the Left-Top corner. */
 - (void) stopLeftTop:(Player *)player;
 
+/** Allows you to stop the movements to the Right-Top corner. */
 - (void) stopRightTop:(Player *)player;
 
+/** Allows you to stop the movements to the Left-Bottom corner. */
 - (void) stopLeftDown:(Player *)player;
 
+/** Allows you to stop the movements to the Right-Bottom corner. */
 - (void) stopRightDown:(Player *)player;
 
 
@@ -112,10 +133,17 @@
 /** Allows to verify if there are bomb to explode on the map. */
 - (BOOL) thereAreBombToExplode;
 
-/** Allows to display bomb's fire when a bomb explodes and to destroy objects in collision with it. */
+/** Allows to display bomb's fire when a bomb explodes and to destroy objects in collision with it.
+ 
+ @param bomb The bomb that we will display the flames.
+ */
 - (void) displayFire:(Bomb *) bomb;
 
-/** Allows to plant a Bomb on the game. */
+/** Allows to plant a Bomb on the game. 
+ 
+ @param bomb The bomb which will be planted by th eplayer.
+ @param player The player wich will plant the bomb.
+ */
 - (void)plantingBomb:(Bomb *)bomb owner:(Player *)owner;
 
 
@@ -125,7 +153,10 @@
 /// @name Manage threads
 ///------------------------
 
-/** Allows to pause all the threads of the Engine and the Game. */
+/** Allows to pause all the threads of the Engine and the Game. 
+ 
+ @param enable This boolean permit to pause or to stop the pause of the thread.
+ */
 - (void) pauseThread:(BOOL) enable;
 
 /** Allows to cancel all the threads of the Engine and the Game. */
@@ -146,15 +177,31 @@
 /** Allows to update the bot players. */
 - (void) updatePlayers;
 
-/** Allows to know if the game has been started. */
+/** Allows to know if the game has been started. 
+ 
+ @return `YES` if the game has been started, `NO` otherwise.
+ */
 - (BOOL) gameIsStarted;
+
+/** Allows to make and action of a bot. 
+ 
+ @param botPlayer The botPlayer wich will make the action.
+ */
 - (void)makeActionBot:(BotPlayer *)botPlayer;
 
 /**Allows to update the game's map. */
 - (void) updateMap;
 
+/**Allows to get the human player of the game. 
+ 
+ @return the human player of the game.
+ */
 - (Player *) getHumanPlayer;
 
+/**Allows to get the number of player of the game. 
+ 
+ @return the number of player.
+ */
 - (NSInteger) nbPlayers;
 
 @end
