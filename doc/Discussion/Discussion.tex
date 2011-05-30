@@ -1,6 +1,42 @@
-\section{Problèmes}
-	\input{Discussion/Parties/Problemes.tex}
+\section{Difficultés}
+	Lors du développement de l'application, nous avons rencontré de nombreuse difficultés.
 	
+	Tout d'abord la principale difficulté était le fait que nous devions développer une application mobile, ce qui nous limitait au niveau des ressources disponible. De plus nous avions jamais développé une application sous \gls{android} et \gls{ios}.
+	
+	\subsection{Android}
+		La difficulte que nous avons eu durant le développement de l'application sous \gls{android} était d'implémenter le multi-touch pour que le joueur puisse à la fois bouger et poser une bombe.
+	
+	\subsection{iOS}
+		% TODO: Mettre garbage collector dans le glossaire.
+		Pour \gls{ios}, la principale difficulté a été d'apprendre l'\gls{objective-c} car c'est un langage qui était totalement nouveau, malgrès le fait qu'il est relativement similaire au \gls{java}. De plus, ce dernier ne posséde pas de garbage collector pour \gls{ios}, ce qui nous a obligé de gérer la mémoire manuellement, ce que nous avions jamais fait.
+	
+	\subsection{Serveur}
+		% TODO: Mettre servlet dans le glossaire
+		Enfin, pour le serveur, nous avons eu des problèmes los du déploiment local du serveur d'application et aussi des servlets car nous avions jamais réalisé ces derniers. La communication entre le serveur d'application est la base de données, nous a aussi posé des problèmes.
+
+
+\section{Problèmes}
+	
+	\subsection{Mobile}
+		Le problème majeur a été de tester notre appliction. Tout d'abord au début du projet, nous ne possédions pas de téléphone sous \gld{android}. Ensuite au niveau d'\gls{ios}, nous avons pas pu tester notre application sur un \gls{iphone} car il faut obligatoirement posséder un compte au centre de développement d'Apple (ce dernier coût 99\$ par an), ce que nous pouvions pas nous payer.
 		
+		% TODO: Vérifier le terme "nouveau langage"
+		L'autre problème était de savoir si nous allons utiliser \gls{opengl_es} pour le développement de l'application. Ce qui nous aurait permi d'avoir un code portable donc il aurait été compatible pour \gls{android} et \gls{ios}. Grâce à cette portabilité, cela nous aurait permi de développer qu'un code source et donc ça nous aurait fait gagné du temps en revanche il aurait encore fallu apprendre un nouveau langage.
+
+	
+	\subsection{Serveur}
+		% TODO: Vérifier cette partie (voir avec Ludo)
+		Au niveau du serveur, nous avons eu un problème de pour déployer ce dernier sur internet.
+
+	
 \section{Améliorations}
-	\input{Discussion/Parties/Ameliorations.tex}
+	% TODO: Disponible en annexe ?
+	Le développement de ce type de jeu permet d'ajouter un grand nombres d'améliorations. Notamment la gestion des bonus et des malus qui rendent le jeu beaucoup plus amusant et qui est disponible en annexe. Il y a aussi la gestion de différents types de parties, comme: la capture de drapeau,  les parties en équipe, etc. Nous aurions aussi pu ajouter un mode histoire pour les plus gourmands et pour rendre le jeu plus attractif. Puis une des améliorations les plus importantes, est l'ajout du mode multijoueur en WI-FI au niveau national (puis international ?) car ce dernier n'existe pas encore sur mobile et aurait très bien pu révolutionner le jeu bomberman sur mobile.
+
+
+\subsection{Serveur}
+	\begin{itemize}
+		\item{Pooling}
+		\item{Session}
+	\end{itemize}
+
