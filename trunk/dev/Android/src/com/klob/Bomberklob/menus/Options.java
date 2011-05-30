@@ -59,7 +59,7 @@ public class Options extends Activity implements View.OnClickListener{
 	        
 		mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 		
-		/** initialisation de la barre de menu en fonction de la valeur de la bd **/
+		/* initialisation de la barre de menu en fonction de la valeur de la bd */
 		if(Model.getSystem().getVolume() == 0){
         	mute.setChecked(true);
         	soundVolume.setEnabled(false);
@@ -94,9 +94,9 @@ public class Options extends Activity implements View.OnClickListener{
 			}
 		}
 		
-		/** 
+		/* 
 		 * écouteur du Check mute 
-		 **/
+		 */
 		this.mute.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
                     if (isChecked) {
@@ -113,9 +113,9 @@ public class Options extends Activity implements View.OnClickListener{
 		});
 	}
 	
-	/** 
+	/* 
 	 * écouteur de changement de valeur de la SeekBar 
-	 **/
+	 */
 	OnSeekBarChangeListener OnSeekBarProgress =
     	new OnSeekBarChangeListener() {
 
@@ -131,10 +131,10 @@ public class Options extends Activity implements View.OnClickListener{
 	    	}
     	};
 	
-	/** 
+	/* 
 	 * les boutons up and down du son
 	 * TODO a perfectionner notamment avec le mute 
-	 **/
+	 */
 	public boolean onKeyDown(int keyCode, KeyEvent event){
 		if(!mute.isChecked()){
 			switch( keyCode ){

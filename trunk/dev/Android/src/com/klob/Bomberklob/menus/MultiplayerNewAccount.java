@@ -179,7 +179,7 @@ public class MultiplayerNewAccount  extends Activity implements View.OnClickList
 		URL url;
 		String password = md5(userAccountPassword1.getText().toString());
 		String userName = userAccountName.getText().toString();
-		String response = null;
+		String response = "";
 		try {
 //			"http://klob.s20.eatj.com/BomberklobServer/inscription"
 			url = new URL("http://10.0.2.2:8181/BomberklobServer/inscription");
@@ -189,7 +189,7 @@ public class MultiplayerNewAccount  extends Activity implements View.OnClickList
 				connection.setDoOutput(true);
 				connection.connect();
 				
-				/**
+				/*
 				 * on commence deja par tester l'envoi d'idents TODO une fois la
 				 * bd faites sur le serveur faire un test de disponibilité
 				 * 

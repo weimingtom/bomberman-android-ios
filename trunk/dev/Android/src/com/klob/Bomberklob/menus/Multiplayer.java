@@ -23,7 +23,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.model.Model;
 
@@ -151,7 +150,7 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 	    return "";
 	}
 
-	/**
+	/*
 	 * simple fonction de vérification de chaîne de caractères
 	 * @param chaine
 	 * @return true/false

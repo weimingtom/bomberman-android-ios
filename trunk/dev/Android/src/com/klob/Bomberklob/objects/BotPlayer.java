@@ -35,6 +35,8 @@ public class BotPlayer extends Player {
 	private Map<Point, PlayerAnimations> direction;
 	private List<Integer> vect;
 	
+	private ArrayList<Player> enemies;
+	private int enemy;
 
 	public BotPlayer(String imageName, Hashtable<String, AnimationSequence> animations, PlayerAnimations currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber, int immortal, int difficulty, Single single) {
 		super(imageName, animations, currentAnimation, hit, level, fireWall, damages, life, powerExplosion, timeExplosion, speed, shield, bombNumber, immortal);
@@ -46,6 +48,7 @@ public class BotPlayer extends Player {
 		this.direction = new HashMap<Point, PlayerAnimations>();
 		this.vect = new ArrayList<Integer>();
 		this.single = single;
+		this.enemies = new ArrayList<Player>();
 	}
 
 	public BotPlayer(BotPlayer botPlayer) {
@@ -58,6 +61,7 @@ public class BotPlayer extends Player {
 		this.direction = new HashMap<Point, PlayerAnimations>();
 		this.vect = new ArrayList<Integer>();
 		this.single = botPlayer.single;
+		this.enemies = botPlayer.enemies;
 	}
 	
 	/* Getters ------------------------------------------------------------- */
@@ -73,6 +77,11 @@ public class BotPlayer extends Player {
 			this.difficulty = difficulty;
 		}
 	}
+	
+	public void setEnnemies(ArrayList<Player> enemies) {
+		this.enemies = enemies;
+		chooseEnemy();
+	}
 
 	/* Méthodes publiques -------------------------------------------------- */
 	
@@ -84,91 +93,104 @@ public class BotPlayer extends Player {
 	@Override
 	public void update () {
 		super.update();
-		ColisionMapObjects[][] colisionMap = single.getMap().getColisionMap();
-		Point tileUpLeft = ResourcesManager.coToTile(this.position.x,this.position.y), playerObjectif;
 		
-		/*Si le bot n'a pas d'objectif*/
-		if ( this.position.x == this.objectif.x && this.position.y == this.objectif.y ) {
+		if ( !this.enemies.isEmpty() && this.position != null && !currentAnimation.equals(PlayerAnimations.TOUCHED.getLabel())) {
+			ColisionMapObjects[][] colisionMap = single.getMap().getColisionMap();
+			Point tileUpLeft = ResourcesManager.coToTile(this.position.x,this.position.y), playerObjectif = new Point(this.objectif.x, this.objectif.y);
 			
-			/* Defensif (On est dans une zone dangereuse) */
-			if ( colisionMap[tileUpLeft.x][tileUpLeft.y] == ColisionMapObjects.DANGEROUS_AREA || colisionMap[tileUpLeft.x][tileUpLeft.y] == ColisionMapObjects.BOMB) {
-
-				playerObjectif = safeAroundArea(tileUpLeft, colisionMap);                
-
-				if ( this.objectif.x == tileUpLeft.x && this.objectif.y == tileUpLeft.y ) {
-					playerObjectif = pathFinding(tileUpLeft, colisionMap);
-				}
+			
+			if ( this.enemies.get(enemy).getPosition() == null ) {
+				this.enemies.remove(enemy);
+				chooseEnemy();
 			}
-			/* Offensif */
-			else {
-
-				int timeBomb = Integer.MAX_VALUE;
-/*
-				for(Point entry : bombs.keySet()) {
-					if ( equals(bombs.get(entry).getPlayer())) {
-						timeBomb = Math.min(bombs.get(entry).getTime(),timeBomb);
+			
+			/*Si le bot n'a pas d'objectif*/
+			if ( this.position.x == this.objectif.x && this.position.y == this.objectif.y ) {
+				
+				/* Defensif (On est dans une zone dangereuse) */
+				if ( colisionMap[tileUpLeft.x][tileUpLeft.y] == ColisionMapObjects.DANGEROUS_AREA || colisionMap[tileUpLeft.x][tileUpLeft.y] == ColisionMapObjects.BOMB) {
+	
+					playerObjectif = safeAroundArea(tileUpLeft, colisionMap);                
+	
+					if ( playerObjectif.x == tileUpLeft.x && playerObjectif.y == tileUpLeft.y ) {
+						playerObjectif = pathFinding(tileUpLeft, colisionMap);
 					}
 				}
-*/
-				/*if ( timeBomb > 15 ) {*/
-					if ( (int)(Math.random() * (20-(10*this.difficulty))) == 0) {/*
-						if ( 0 != difficulty && players[0].getPosition() != null ) {
-							Point prout = ResourcesManager.coToTile(players[0].getPosition().x, players[0].getPosition().y);
-							playerObjectif = pathFinding(tileUpLeft, prout,colisionMap);
-							if ( colisionMap[playerObjectif.x][playerObjectif.y] == ColisionMapObjects.BLOCK && getBombNumber() > 0) {
-								playerObjectif = iaPushBomb(players[i], colisionMap.clone());
-							}
-							else if ( colisionMap[this.objectif.x][this.objectif.y] == ColisionMapObjects.EMPTY && getBombNumber() > 0 && this.objectif.x == prout.x && this.objectif.y == prout.y) {
-								playerObjectif = pushBomb(players[i], colisionMap.clone());
-							}
-							else if ( colisionMap[this.objectif.x][this.objectif.y] != ColisionMapObjects.EMPTY ) {
-								this.objectif.x = tileUpLeft.x;
-								this.objectif.y = tileUpLeft.y;
-							}
-						}/*
-						else {*/
-							playerObjectif = safeAroundArea(tileUpLeft, colisionMap);
-					}
-					/*	}
-					}
-				}*/
+				/* Offensif */
 				else {
-					playerObjectif = tileUpLeft;
+					int timeBomb = Integer.MAX_VALUE;
+	
+					for(Point entry : this.single.getBombs().keySet()) {
+						if ( equals(this.single.getBombs().get(entry).getPlayer())) {
+							timeBomb = Math.min(this.single.getBombs().get(entry).getTime(),timeBomb);
+						}
+					}
+	
+					if ( timeBomb > 15 ) {
+						if ( (int)(Math.random() * (20-(10*this.difficulty))) == 0) {
+							if ( 0 != difficulty ) {
+								Point prout = ResourcesManager.coToTile(enemies.get(enemy).getPosition().x, enemies.get(enemy).getPosition().y);
+								playerObjectif = pathFinding(tileUpLeft, prout,colisionMap);
+								if ( colisionMap[playerObjectif.x][playerObjectif.y] == ColisionMapObjects.BLOCK && getBombNumber() > 0) {
+									playerObjectif = pushBomb(colisionMap.clone());
+								}
+								else if ( colisionMap[playerObjectif.x][playerObjectif.y] == ColisionMapObjects.EMPTY && getBombNumber() > 0 && playerObjectif.x == prout.x && playerObjectif.y == prout.y) {
+									playerObjectif = pushBomb(colisionMap.clone());
+								}
+								else if ( colisionMap[playerObjectif.x][playerObjectif.y] != ColisionMapObjects.EMPTY ) {
+									playerObjectif.x = tileUpLeft.x;
+									playerObjectif.y = tileUpLeft.y;
+								}
+							}
+							else {
+								playerObjectif = safeAroundArea(tileUpLeft, colisionMap);
+								if ( (int)(Math.random() * (20-(10*difficulty))) == 0) {
+									playerObjectif = pushBomb(colisionMap.clone());
+								}
+							}
+						}
+						else {
+							playerObjectif.set(tileUpLeft.x,tileUpLeft.y);
+						}
+					}
+					else {
+						playerObjectif = tileUpLeft;
+					}
+				}
+				this.objectif.x = playerObjectif.x*ResourcesManager.getSize();
+				this.objectif.y = playerObjectif.y*ResourcesManager.getSize();									
+			}
+	
+			if ( this.position.x != this.objectif.x || this.position.y != this.objectif.y ) {
+	
+				if ( this.position.x < this.objectif.x && this.position.y < this.objectif.y ) {
+					setCurrentAnimation(PlayerAnimations.DOWN_RIGHT);
+				}
+				else if ( this.position.x > this.objectif.x && this.position.y < this.objectif.y ) {
+					setCurrentAnimation(PlayerAnimations.DOWN_LEFT);
+				}
+				else if ( this.position.x > this.objectif.x && this.position.y > this.objectif.y ) {
+					setCurrentAnimation(PlayerAnimations.UP_LEFT);
+				}
+				else if ( this.position.x < this.objectif.x && this.position.y > this.objectif.y ) {
+					setCurrentAnimation(PlayerAnimations.UP_RIGHT);
+				}
+				else if ( this.position.x < this.objectif.x ) {
+					setCurrentAnimation(PlayerAnimations.RIGHT);
+				}
+				else if ( this.position.x > this.objectif.x  ) {
+					setCurrentAnimation(PlayerAnimations.LEFT);
+				}
+				else if ( this.position.y > this.objectif.y ) {
+					setCurrentAnimation(PlayerAnimations.UP);
+				}
+				else if ( this.position.y < this.objectif.y ) {
+					setCurrentAnimation(PlayerAnimations.DOWN);
 				}
 			}
-			this.objectif.x = playerObjectif.x*ResourcesManager.getSize();
-			this.objectif.y = playerObjectif.y*ResourcesManager.getSize();									
-		}
-
-		if ( this.position.x != this.objectif.x || this.position.y != this.objectif.y ) {
-
-			if ( this.position.x < this.objectif.x && this.position.y < this.objectif.y ) {
-				setCurrentAnimation(PlayerAnimations.DOWN_RIGHT);
+			else {
+				stopPlayer();
 			}
-			else if ( this.position.x > this.objectif.x && this.position.y < this.objectif.y ) {
-				setCurrentAnimation(PlayerAnimations.DOWN_LEFT);
-			}
-			else if ( this.position.x > this.objectif.x && this.position.y > this.objectif.y ) {
-				setCurrentAnimation(PlayerAnimations.UP_LEFT);
-			}
-			else if ( this.position.x < this.objectif.x && this.position.y > this.objectif.y ) {
-				setCurrentAnimation(PlayerAnimations.UP_RIGHT);
-			}
-			else if ( this.position.x < this.objectif.x ) {
-				setCurrentAnimation(PlayerAnimations.RIGHT);
-			}
-			else if ( this.position.x > this.objectif.x  ) {
-				setCurrentAnimation(PlayerAnimations.LEFT);
-			}
-			else if ( this.position.y > this.objectif.y ) {
-				setCurrentAnimation(PlayerAnimations.UP);
-			}
-			else if ( this.position.y < this.objectif.y ) {
-				setCurrentAnimation(PlayerAnimations.DOWN);
-			}
-		}
-		else {
-			stopPlayer();
 		}
 	}
 	
@@ -622,5 +644,12 @@ public class BotPlayer extends Player {
 			}
 		}
 		return p;
+	}
+
+	private void chooseEnemy() {		
+		if ( !enemies.isEmpty() ) {
+			this.enemy =  (int) (Math.random() * enemies.size());
+			System.out.println("RES : " + this.enemy);
+		}
 	}
 }

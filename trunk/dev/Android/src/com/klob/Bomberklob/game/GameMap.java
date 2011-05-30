@@ -17,6 +17,7 @@ import android.util.Log;
 import com.klob.Bomberklob.resources.Map;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
+import com.klob.Bomberklob.editor.EditorMap;
 import com.klob.Bomberklob.objects.Bomb;
 import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.ObjectsAnimations;

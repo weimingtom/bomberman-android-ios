@@ -58,6 +58,16 @@ public class Single extends Game {
 				colors.remove(j);
 			}
 		}
+		
+		for (int i = 1 ; i < this.players.length ; i++ ) {
+			ArrayList<Player> enemies = new ArrayList<Player>();
+			for (int j = 0 ; j < this.players.length ; j++ ) {
+				if ( i != j ) {
+					enemies.add(this.players[j]);
+				}
+			}
+			((BotPlayer) this.players[i]).setEnnemies(enemies);
+		}
 	}
 	
 	public void pauseGame() {
