@@ -147,18 +147,18 @@
 		Pour facilité le développement mais aussi ça réutilisabilité, nous avons découpé la vue de l'éditeur de carte en trois zones. Chaqu'une de ces vues est associée à un controlleur qui permettra de faire la liaison avec le modèle. Pour concevoir les vues nous avons utilisé la classe UIView qui est prévue pour réaliser des vues pour une interface graphique sur iPhone. 
 			
 		\begin{center}
-			\includegraphics[width=11cm]{./Developpement/Img/carte.pdf}
+			\includegraphics[width=11cm]{./Developpement/Img/carte.eps}
 		\end{center}
 		Tout d'abord, la vue la plus important que nous avons créé, c'est la vue affichant la carte permettant au joueur d'intéragir avec celle-ci et de pouvoir créer des cartes selon ses envies. Pour réaliser cette intéraction, nous avons dû surcharger trois methodes de la classe \textit{UIResponder} : \textit{touchesBegan}, \textit{touchesMoved} et \textit{touchesEnded} permettant de gérer tous les évènement générés lorsque l'utilisateur appuiera sur la vue. La methode \textit{touchesBegan} permet de récupérer l'évènement lorsque l'utilisateur va appuyer sur la vue, grâce à cette évènement, on peut savoir à quelle position l'utilisateur à pressé la vue. Ensuite pour réccupérer l'évènement lorsque l'utilisateur continu d'appuyer sur l'écran, il nous suffit d'utiliser \textit{touchesMoved}. Et pour finir lorsque l'utilisateur retire son doigt de la vue, nous utilisons la méthode \textit{touchesEnded} qui nous permettra par exemple de savoir où l'utilisateur à retiré son doigt de la vue. A l'aide de ces trois methodes, nous avons implémenté les différents gestes que l'ulisateur peut effectuer pour créer une carte. Pour dessiner la carte, nous avons dû surcharger la methode \textit{- (void)draw:(CGContextRef)context}, celle-ci permet de modifier le comportement de l'affichage de la vue et notamme elle donne la possibilité de dessiner n'import quel objet dans la vue.
 		
 		\begin{center}
-			\includegraphics{./Developpement/Img/menu_droite.pdf}
+%			\includegraphics{./Developpement/Img/menu_droite.pdf}
 		\end{center}
 			
 		Ensuite, nous avons créer une vue permettant de changer d'objet que l'on veut mettre sur la carte. Cette dernière se trouve à gauche de la carte. Dans cette vue, nous avons des \textit{UIButton} permettant de créer des boutons, mais la partie la plus important de la vue c'est la liste déroulante pour choisir l'objet que l'on placer sur la carte. Cette liste déroulante est une vue que nous avons dû implémenter, la particularité de cette liste c'est qu'elle est générique ce qui permet de l'utiliser dans plusieurs vues différentes et notamment dans les menus pour afficher le choix des cartes. Grâce à celle-ci l'utilisateur peut changer d'objet selectionné en exerçant un simple mouvement vertical du doigt.
 			
 		\begin{center}
-			\includegraphics[width=11cm]{./Developpement/Img/menu_haut.pdf}
+%			\includegraphics[width=11cm]{./Developpement/Img/menu_haut.pdf}
 		\end{center}
 		Enfin la dernière vue que nous avons réalisé, est une vue contenant plusieurs \textit{UIButton} mais aussi un \textit{UISegmentedControl} qui permet de basculer du mode affichage complet (dessiner tous les éléments de la carte) de la carte, au mode d'affichage partiel (qui affiche que le sol et cache les blocs de la carte) facilitant la modification du sol malgrès les blocs.
 			
