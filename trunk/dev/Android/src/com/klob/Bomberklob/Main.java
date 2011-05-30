@@ -22,10 +22,10 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.klob.Bomberklob.editor.EditorMap;
 import com.klob.Bomberklob.menus.Home;
 import com.klob.Bomberklob.menus.NewAccountOffline;
 import com.klob.Bomberklob.model.Model;
-import com.klob.Bomberklob.resources.EditorMap;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 

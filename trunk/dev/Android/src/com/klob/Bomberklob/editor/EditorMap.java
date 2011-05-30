@@ -1,4 +1,4 @@
-package com.klob.Bomberklob.resources;
+package com.klob.Bomberklob.editor;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,6 +13,8 @@ import android.graphics.Canvas;
 import android.util.Log;
 
 import com.klob.Bomberklob.resources.Map;
+import com.klob.Bomberklob.resources.Point;
+import com.klob.Bomberklob.resources.ResourcesManager;
 import com.klob.Bomberklob.objects.Objects;
 
 public class EditorMap extends Map {

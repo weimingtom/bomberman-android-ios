@@ -77,7 +77,7 @@ public class GameControllerSingle extends GameController {
 	@Override
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
-		this.engine.setBombThreadRunning(enabled);
+		this.engine.getSingle().setBombThreadRunning(enabled);
 	}
 	
 	/* Méthodes publiques -------------------------------------------------- */

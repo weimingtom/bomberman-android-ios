@@ -298,7 +298,7 @@
 				\begin{tabular}{|c|c|c|} \hline
 				  & Editeur de carte & Jeu    \\\hline 
 				Meilleur des cas & 337 & 1    \\\hline
-				Pire des cas     & 534 & 198  \\\hline		
+				Pire des cas     & 534 & 229  \\\hline		
 				\end{tabular}
 			\end{center}
 			
@@ -388,6 +388,23 @@
 			
 			De cette façon il est rapide de savoir si un joueur rentre en collision avec
 			un objet quelconque ou si celui-ci subit des dommages.
+			
+			\subparagraph{Exemple}
+			
+				\begin{itemize}
+				  \item Carte originale :
+				  
+						\begin{center}						
+							\includegraphics[width=115mm,height=71mm]{Developpement/Img/mapcolision_1.eps}
+						\end{center}				  		
+				  
+				  \item Carte de colision :
+				  
+						\begin{center}						
+							\includegraphics[width=115mm,height=102mm]{Developpement/Img/mapcolision_2.eps}
+						\end{center}
+						
+				\end{itemize}
 		
 
 			\subparagraph{Deplacements\\}
@@ -426,7 +443,7 @@
 				  		$\,$
 				  		
 						\begin{center}						
-							\includegraphics[width=336px,height=168px]{Developpement/Img/ex2.eps}
+							\includegraphics[width=168px,height=84px]{Developpement/Img/ex2.eps}
 						\end{center}
 						
 				  		$\,$				  		
@@ -447,14 +464,14 @@
 				  		  traversables, il n'y a donc qu'à déplacer le joueur vers le haut.
 
 							\begin{center}						
-								\includegraphics[width=336px,height=168px]{Developpement/Img/ok2.eps}
+								\includegraphics[width=168px,height=84px]{Developpement/Img/ok2.eps}
 							\end{center}
 
 				  		  \item Le second est celui où la ou les cases en face sont des murs, il
 				  		  n'y a alors rien à faire, le personnage ne bouge pas.
 				  		  				  		  
 				  		  	\begin{center}						
-								\includegraphics[width=336px,height=168px]{Developpement/Img/ko2.eps}
+								\includegraphics[width=168px,height=84px]{Developpement/Img/ko2.eps}
 							\end{center}
 							
 				  		  \item C'est à partir de ce cas que l'on rencontre le glissement cité
@@ -469,14 +486,14 @@
 				  		  face de la case et monte normalement.
 				  		  
 				  		  	\begin{center}						
-								\includegraphics[width=168px,height=168px]{Developpement/Img/ko3.eps}
+								\includegraphics[width=84px,height=84px]{Developpement/Img/ko3.eps}
 							\end{center}
 				  		  
 				  		  \item Le dernier cas est l'opposé du précédent et marche de la même
 				  		  manière.
 				  		  
 				  		  	\begin{center}						
-								\includegraphics[width=168px,height=168px]{Developpement/Img/ko4.eps}
+								\includegraphics[width=84px,height=84px]{Developpement/Img/ko4.eps}
 							\end{center}
 				  		  
 				  		\end{enumerate}

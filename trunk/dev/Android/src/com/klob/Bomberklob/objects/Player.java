@@ -186,6 +186,22 @@ public abstract class Player extends Objects {
 
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), rect, this.rect, this.paint);
 	}
+	
+	public void moveUp() {
+		this.position.y--;
+	}
+	
+	public void moveDown() {
+		this.position.y++;
+	}
+	
+	public void moveLeft() {
+		this.position.x--;
+	}
+	
+	public void moveRight() {
+		this.position.x++;
+	}
 
 	@Override
 	public boolean isDestructible() {
@@ -224,6 +240,34 @@ public abstract class Player extends Objects {
 
 		if (immortal > 0 ){
 			immortal--;
+		}
+	}
+	
+	public void stopPlayer() {
+
+		if ( this.currentAnimation ==  PlayerAnimations.RIGHT.getLabel()) {
+			setCurrentAnimation(PlayerAnimations.STOP_RIGHT);
+		}
+		else if ( this.currentAnimation ==  PlayerAnimations.LEFT.getLabel()) {
+			setCurrentAnimation(PlayerAnimations.STOP_LEFT);
+		}
+		else if ( this.currentAnimation ==  PlayerAnimations.UP.getLabel()) {
+			setCurrentAnimation(PlayerAnimations.STOP_UP);
+		}
+		else if ( this.currentAnimation ==  PlayerAnimations.DOWN.getLabel()) {
+			setCurrentAnimation(PlayerAnimations.STOP_DOWN);
+		}
+		else if ( this.currentAnimation ==  PlayerAnimations.DOWN_RIGHT.getLabel()) {
+			setCurrentAnimation(PlayerAnimations.STOP_DOWN_RIGHT);
+		}
+		else if ( this.currentAnimation ==  PlayerAnimations.DOWN_LEFT.getLabel()) {
+			setCurrentAnimation(PlayerAnimations.STOP_DOWN_LEFT);
+		}
+		else if ( this.currentAnimation ==  PlayerAnimations.UP_RIGHT.getLabel()) {
+			setCurrentAnimation(PlayerAnimations.STOP_UP_RIGHT);
+		}
+		else if ( this.currentAnimation ==  PlayerAnimations.UP_LEFT.getLabel()) {
+			setCurrentAnimation(PlayerAnimations.STOP_UP_LEFT);
 		}
 	}
 }
