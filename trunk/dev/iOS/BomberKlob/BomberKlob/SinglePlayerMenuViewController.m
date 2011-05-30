@@ -1,11 +1,3 @@
-//
-//  SinglePlayerMenuViewController.m
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 10/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "SinglePlayerMenuViewController.h"
 #import "GameViewControllerSingle.h"
 #import "GlobalGameViewControllerSingle.h"
@@ -32,7 +24,11 @@
         MapMenu *menu = [[MapMenu alloc] initWithFrame:CGRectMake(0, 5, 480, 142) controller:self imageWidth:170 imageHeight:115 imageMargin:-20 reductionPercentage:20 items:application.maps images:images displayNameOwner:NO];
         
         [self.view addSubview:menu];
+        
+        [images release];
+        [menu release];
     }
+    
     return self;
 }
 
