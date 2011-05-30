@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.menus.Home;
+import com.klob.Bomberklob.model.Model;
 import com.klob.Bomberklob.objects.Bomb;
 import com.klob.Bomberklob.objects.ObjectsAnimations;
 import com.klob.Bomberklob.objects.Player;
@@ -255,13 +256,20 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		this.singlePlayerLinearLayoutMenu = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutMenu);
 		this.singlePlayerLinearLayoutStart = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutStart);
 		this.singlePlayerLinearLayoutStartImage = (ImageView) findViewById(R.id.SinglePlayerLinearLayoutStartImage);
-		this.singlePlayerLinearLayoutEndImageView = (ImageView) findViewById(R.id.SinglePlayerLinearLayoutEndImageView);
+		this.singlePlayerLinearLayoutEndImageView = (ImageView) findViewById(R.id.SinglePlayerLinearLayoutEndImageView);		
 
 		this.singlePlayerLinearLayoutEndImageView.setImageBitmap(null);
 
 		this.singlePlayerLinearLayoutEnd.setVisibility(View.INVISIBLE);
 		this.singlePlayerLinearLayoutMenu.setVisibility(View.INVISIBLE);
 		this.singlePlayerLinearLayoutMultiTouch.setVisibility(View.INVISIBLE);
+		
+		if ( Model.getUser().getMenuPosition() == 1) {		
+			LinearLayout singlePlayerLinearLayoutGame = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutGame);
+			LinearLayout singlePlayerLinearLayoutEditorController = (LinearLayout) findViewById(R.id.SinglePlayerLinearLayoutEditorController);
+			singlePlayerLinearLayoutGame.removeView(singlePlayerLinearLayoutEditorController);
+			singlePlayerLinearLayoutGame.addView(singlePlayerLinearLayoutEditorController);
+		}
 
 		this.initGame();		
 	}
@@ -487,12 +495,7 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 						this.imageName[i] = s;
 					}
 					
-					if ( i == 0 ) {
-						handler.sendMessage(handler.obtainMessage(5));
-					}
-					else {
-						j++;
-					}
+					j++;
 				}
 				else {
 					s = p[i].getImageName()+PlayerAnimations.IDLE.getLabel();
@@ -505,7 +508,12 @@ public class SinglePlayerLayout extends Activity implements View.OnClickListener
 		}
 
 		if ( j == bundle.getInt("enemies") ) {
-			handler.sendMessage(handler.obtainMessage(6));
+			if ( p[0].getCurrentAnimation().equals(PlayerAnimations.KILL.getLabel()) ) {
+				handler.sendMessage(handler.obtainMessage(5));
+			}
+			else {				
+				handler.sendMessage(handler.obtainMessage(6));
+			}
 		}
 	}
 
