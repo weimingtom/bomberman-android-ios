@@ -2,7 +2,7 @@
 
 @class DataBase;
 
-
+/** The `DBUser` class aims to manage the differents characteristic of user in database. */
 @interface DBUser : NSObject {
     
     DataBase *dataBase;
