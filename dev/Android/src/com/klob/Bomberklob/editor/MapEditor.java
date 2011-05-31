@@ -9,6 +9,12 @@ import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
+/**
+ * 
+ * MapEditor
+ *
+ */
+
 public class MapEditor {
 
 	private EditorMap map;
@@ -16,6 +22,10 @@ public class MapEditor {
 
 	/* Constructeur -------------------------------------------------------- */
 
+	/**
+	 * Create an instance of MapEditor
+	 * @param mapName The name of the map to load
+	 */
 	public MapEditor (String mapName) {
 		this.players = new Player[4];
 		this.map = new EditorMap();
@@ -24,12 +34,21 @@ public class MapEditor {
 
 	/* Getteurs ------------------------------------------------------------ */
 
+	/**
+	 * Return the current map
+	 * @return The current map
+	 */
 	public EditorMap getMap() {
 		return map;
 	}
 
 	/* Méthodes publiques -------------------------------------------------- */
 
+	/**
+	 * Add an object in the map
+	 * @param objects Object to add
+	 * @param position Tile position of the object
+	 */
 	public void addObject (Objects objects, Point point) {
 		if ( point.x >= 0 && point.x < map.getBlocks().length && point.y >= 0 && point.y < map.getBlocks()[0].length) {
 			if ( objects.getLevel() == 0 ) {
@@ -72,6 +91,11 @@ public class MapEditor {
 		}
 	}	
 
+	/**
+	 * Load a map
+	 * @param s Name of the map
+	 * @return Returns true if the map is loaded false otherwise
+	 */
 	public void loadMap(String mapName) {
 
 		if ( !map.loadMap(mapName) ) {
@@ -111,6 +135,13 @@ public class MapEditor {
 		}
 	}
 
+	/**
+	 * Draws the current map in the canvas according to the desired size
+	 * 
+	 * @param canvas A canvas
+	 * @param size The desired size
+	 */
+	
 	public void onDraw(Canvas canvas, boolean level) {
 		if ( !level ) {
 			for (int j = 0 ; j < map.getGrounds()[0].length ; j++) {
