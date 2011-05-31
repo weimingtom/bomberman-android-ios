@@ -1,11 +1,3 @@
-//
-//  User.m
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 28/03/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "DBUser.h"
 #import "DataBase.h"
 
