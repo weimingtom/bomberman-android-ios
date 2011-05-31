@@ -42,14 +42,14 @@
 	\subsection{XML}
 	
 		Le fait d'avoir utilisé le \gls{xml} permet de pouvoir modifier les diverses caractéristiques de nos
-		ressources sans necessiter la moidre modification du code source.
+		ressources sans necessiter la moindre modification du code source.
 	
 		\subsubsection{Internationalisation}
 		
 			Dans notre jeu, nous avons pris en charge le support de l'internationalisation.
-			Pour cela, nous avons dédié de créer pour chaque langue un fichier \gls{xml} contenant
-			la globalité des mots apparaissants dans notre application.
-			Si l'utilisateur souhaite en rajouter une nouvelle langue, il lui suffira d'ajouter
+			Pour cela, nous avons décidé de créer pour chaque langue un fichier
+			\gls{xml} contenant la globalité des mots apparaissant dans notre application.
+			Si l'utilisateur souhaite rajouter une nouvelle langue, il lui suffira d'ajouter
 			un fichier \gls{xml} dans le répertoire correspondant à la langue voulu et d'y traduire
 			tous les mots présents dans les \gls{xml} des langues déjà existants.
 	
@@ -72,5 +72,22 @@
 			Il en est de même pour les différentes caractéristiques de notre objet.		
 
 \section{Serveur}
+
+	\subsection{Modèles de conception}
+	Tout comme le côté client, l'architecture du serveur utilise le pattern
+	décorateur. Ce dernier permettra de rajoûter des types de parties officielles,
+	et concernera donc toutes les parties multijoueurs.
+	
+	\subsection{Fonctionnalités}
+	En ce qui concerne les fonctionnalités, là aussi il est facilement possible de
+	les étendres. En effet à chaques servlet correspond une fonctionnalité, il 
+	sera seulement nécessaire de créer de nouvelles servlet, et de les incorporer
+	au serveur.
+	
+	La base de données peut elle aussi être complété par exemple par la sauvegarde
+	de scores d'utilisateurs et permettre le partage. En fait étant donné sa
+	simplicité, un rajoût de table de manière raisonné et réfléchie, est facilement
+	envisageable.	
+	
 
 	\subsection{Servlets}
