@@ -1,11 +1,3 @@
-//
-//  System.m
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 29/03/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "DBSystem.h"
 #import "DBUser.h"
 #import "DataBase.h"

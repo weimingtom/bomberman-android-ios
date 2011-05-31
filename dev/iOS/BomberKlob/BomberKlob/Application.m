@@ -1,11 +1,3 @@
-//
-//  Application.m
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 28/03/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "Application.h"
 #import "DBUser.h"
 #import "DBSystem.h"

@@ -1,11 +1,3 @@
-//
-//  DataBase.m
-//  BomberKlob
-//
-//  Created by Benjamin Tardieu on 03/04/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #import "DataBase.h"
 #import "DBMap.h"
 #import "DBUser.h"

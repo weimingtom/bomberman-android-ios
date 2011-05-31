@@ -219,9 +219,9 @@
     
     if (application.user.userName == nil) {
         modifyPassword.enabled = NO;
-        autoLogin.on = application.user.connectionAuto;
+        autoLogin.on = application.user.isConnectionAuto;
         autoLogin.enabled = NO;
-        rememberPassword.on = application.user.rememberPassword;
+        rememberPassword.on = application.user.isRememberPassword;
         rememberPassword.enabled = NO;
     }
     
