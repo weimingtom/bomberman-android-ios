@@ -19,23 +19,54 @@ public abstract class Player extends Objects {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	//FIXME private ???[] bombsTypes;
-
+	/**
+	 * Bombs selected by the player
+	 */
 	protected String bombSelected = "normal";
-
+	
+	/**
+	 * Explosive power of its bombs
+	 */
 	protected int powerExplosion;
+	
+	/**
+	 * Time of explosion of his bombs
+	 */
 	protected int timeExplosion;
+	
+	/**
+	 * Player's speed
+	 */
 	protected int speed;
+	
+	/**
+	 * Player's life
+	 */
 	protected int life;
+	
+	/**
+	 * Player's shield
+	 */
 	protected int shield;
+	
+	/**
+	 * Number of bombs the player
+	 */
 	protected int bombNumber;
+	
+	/**
+	 * Number of seconds of immortality Player
+	 */
 	protected int immortal; 
 
-	protected Point objectif;
+	/**
+	 * Objective of the player
+	 */
+	protected Point objective;
 
 
 	/* Constructeurs ------------------------------------------------------- */
-
+	
 	public Player(String imageName, Hashtable<String, AnimationSequence> animations, PlayerAnimations currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, int powerExplosion, int timeExplosion, int speed, int shield, int bombNumber, int immortal) {
 		super(imageName, animations, currentAnimation.getLabel(), hit, level, fireWall, damages);
 		this.powerExplosion = powerExplosion;
@@ -45,7 +76,7 @@ public abstract class Player extends Objects {
 		this.life = life;
 		this.bombNumber = bombNumber;
 		this.immortal = immortal;
-		this.objectif = new Point();
+		this.objective = new Point();
 	}
 
 	public Player(Player player) {
@@ -57,17 +88,24 @@ public abstract class Player extends Objects {
 		this.shield = player.shield;
 		this.bombNumber = player.bombNumber;
 		this.immortal = player.immortal;
-		this.objectif = player.objectif;
+		this.objective = player.objective;
 	}
 
 	/* Setters ------------------------------------------------------------- */
 
-
-	public void setObjectif(Point objectif) {
-		this.objectif.x = objectif.x;
-		this.objectif.y = objectif.y;
+	/**
+	 * Updates the player's objective
+	 * @param objective The player's objective
+	 */
+	public void setObjectif(Point objective) {
+		this.objective.x = objective.x;
+		this.objective.y = objective.y;
 	}
 
+	/**
+	 * Updates the player's speed
+	 * @param speed The player's speed
+	 */	
 	public void setSpeed(int speed) throws PlayersSpeedException {
 		if ( speed > 0 ) {
 			this.speed = speed;
@@ -77,6 +115,10 @@ public abstract class Player extends Objects {
 		}
 	}
 
+	/**
+	 * Updates the player's power bombs
+	 * @param bombPower The player's power bombs
+	 */	
 	public void setBombPower(int bombPower) throws BombPowerException {
 		if ( bombPower > 0) {
 			this.powerExplosion = bombPower;
@@ -86,6 +128,10 @@ public abstract class Player extends Objects {
 		}
 	}       
 
+	/**
+	 * Updates the number of bombs the player
+	 * @param bombPower The number of bombs the player
+	 */	
 	public void setBombNumber(int bombNumber) throws BombPowerException {
 		if ( bombNumber >= 0) {
 			this.bombNumber = bombNumber;
@@ -95,6 +141,10 @@ public abstract class Player extends Objects {
 		}
 	}
 
+	/**
+	 * Updates the player's time bombs
+	 * @param bombTime The player's time bombs
+	 */	
 	public void setBombTime(int bombTime) throws TimeBombException {
 		if ( bombTime > 1 ) {
 			this.timeExplosion = bombTime;
@@ -104,6 +154,10 @@ public abstract class Player extends Objects {
 		}
 	}
 
+	/**
+	 * Updates the player's shield
+	 * @param shield The player's shield
+	 */	
 	public void setShield(int shield) throws ShieldException {
 		if ( shield >= 0 ) {
 			this.shield = shield;
@@ -140,7 +194,7 @@ public abstract class Player extends Objects {
 	/* Getters ------------------------------------------------------------- */
 
 	public Point getObjectif() {
-		return objectif;
+		return objective;
 	}
 
 	public int getPowerExplosion() {
@@ -159,10 +213,18 @@ public abstract class Player extends Objects {
 		return this.life;
 	}
 
+	/**
+	 * Returns the value of the player shield
+	 * @return The value of the player shield
+	 */
 	public int getShield() {
 		return this.shield;
 	}
 
+	/**
+	 * Returns the number of bombs the player
+	 * @return The number of bombs the player
+	 */
 	public int getBombNumber() {
 		return this.bombNumber;
 	}
@@ -187,18 +249,31 @@ public abstract class Player extends Objects {
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("players"), rect, this.rect, this.paint);
 	}
 	
+	/**
+	 * Move the player one pixel up
+	 */
 	public void moveUp() {
 		this.position.y--;
 	}
 	
+	/**
+	 * Move the player one pixel down
+	 */
 	public void moveDown() {
 		this.position.y++;
 	}
+	
+	/**
+	 * Move the player from one pixel to the left
+	 */
 	
 	public void moveLeft() {
 		this.position.x--;
 	}
 	
+	/**
+	 * Move the player from one pixel to the right
+	 */
 	public void moveRight() {
 		this.position.x++;
 	}
@@ -211,12 +286,18 @@ public abstract class Player extends Objects {
 		return true;
 	}
 
+	/**
+	 * Reduces the player's life
+	 */
 	public void decreaseLife() {
 		if ( this.life > 0 ) {
 			this.life--;
 		}
 	}
 
+	/**
+	 * Increases the player's bombs
+	 */
 	public void increaseBombs() {
 		this.bombNumber++;
 	}
@@ -243,6 +324,9 @@ public abstract class Player extends Objects {
 		}
 	}
 	
+	/**
+	 * Stop player
+	 */
 	public void stopPlayer() {
 
 		if ( this.currentAnimation ==  PlayerAnimations.RIGHT.getLabel()) {

@@ -37,6 +37,9 @@ import com.klob.Bomberklob.resources.ObjectsGallery;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
+/**
+ * Class representing the layout of the map editor
+ */
 public class EditorLayout extends Activity implements View.OnClickListener {
 
 	private EditorController editorController;
@@ -227,6 +230,7 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 		super.onPause();
 	}
 
+	@Override
 	public void onClick(View arg0) {
 		if ( this.menu == arg0 ) {
 			this.menu.setClickable(false);
@@ -290,5 +294,5 @@ public class EditorLayout extends Activity implements View.OnClickListener {
 			startActivity(intent);
 			this.finish();
 		}
-	}	
+	}
 }
