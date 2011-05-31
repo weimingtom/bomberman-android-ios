@@ -2,12 +2,12 @@
 
 	Il nous a paru important lors de la réalisation de ce projet
 	de mettre au point un code facilement améliorable et surtout
-	réutilisable par le spersonnes qui souhaiteraient personnaliser
+	réutilisable par les personnes qui souhaiteraient personnaliser
 	le jeu à leur façon.
 	
 	C'est pourquoi un des points primordial à été tout d'abord de
-	rédiger notre code ainsi que notre documentation totallement 
-	en Anglais afin qu'une majorité de personne puisse les comprendre.
+	rédiger notre code ainsi que notre documentation totalement 
+	en anglais afin qu'une majorité de personne puissent les comprendre.
 
 \section{Client}
 
@@ -15,10 +15,10 @@
 	
 		\subsubsection{MVC}
 		
-			Le Modèle-Vue-Contrôleur est une architecture et une méthode de
-			conception qui organise l'interface homme-machine (IHM) d'une 
-			application logicielle.
-			Pour cela il divise l'IHM en un modèle (modèle de données),
+			Le \gls{mvc} est une architecture et une méthode de
+			conception qui organise l'\gls{ihm} d'une 
+			application.
+			Pour cela, il divise l'\gls{ihm} en un modèle (modèle de données),
 			une vue (présentation, interface utilisateur) et un contrôleur
 			(gestion des événements, synchronisation), chacun ayant un rôle
 			précis dans l'interface.
@@ -46,8 +46,8 @@
 	
 		\subsubsection{Internationalisation}
 		
-			Dans notre jeu nous avons prit en charge le support de l'internationalisation.
-			Pour cela nous nous avons dédié à chaque langue un fichier \gls{xml} contenant
+			Dans notre jeu, nous avons pris en charge le support de l'internationalisation.
+			Pour cela, nous avons dédié de créer pour chaque langue un fichier \gls{xml} contenant
 			la globalité des mots apparaissants dans notre application.
 			Si l'utilisateur souhaite en rajouter une nouvelle langue, il lui suffira d'ajouter
 			un fichier \gls{xml} dans le répertoire correspondant à la langue voulu et d'y traduire
@@ -55,8 +55,8 @@
 	
 		\subsubsection{Personnalisation}
 	
-			Là aussi l'utilisation du \gls{xml} montre ses avantages lors de la personnalisation
-			des diverses ressources mises à disponibilité de l'utilisateur.
+			Là aussi, l'utilisation du \gls{xml} montre ses avantages lors de la personnalisation
+			des diverses ressources mises à disposition de l'utilisateur.
 			
 			Prenons par exemple le code \gls{xml} d'un objet indestructible :
 			
@@ -64,12 +64,12 @@
 		
 			\begin{footnotesize}
 				\lstset{tabsize=1, frame=shadowbox, rulesepcolor=\color{gray}}
-				%\lstinputlisting{./Reutilisabilite/code/objects.xml}
+				\lstinputlisting{./Reutilisabilite/code/objects.xml}
 			\end{footnotesize}
 			
-			Si l'on souhaite associer un son à cet objet il suffit d'éditer l'attribut \emph{sound}
+			Si l'on souhaite associer un son à cet objet, il suffit d'éditer l'attribut \emph{sound}
 			et de rajouter le nom de celui que l'on souhaite.
-			Il est en de même pour les différentes caractéristiques de notre objet.		
+			Il en est de même pour les différentes caractéristiques de notre objet.		
 
 \section{Serveur}
 
