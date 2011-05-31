@@ -159,10 +159,6 @@
 }
 
 
-- (void)restart {
-    
-}
-
 
 - (void)addAnimatedObject:(Objects *)object {
     @synchronized (self) {
