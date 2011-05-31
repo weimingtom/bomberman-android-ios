@@ -17,6 +17,9 @@ import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 import com.klob.Bomberklob.objects.Objects;
 
+/**
+ *	Map of the map editor
+ */
 public class EditorMap extends Map {
 	
 	/**
@@ -29,6 +32,10 @@ public class EditorMap extends Map {
 	
 	/* Constructeur -------------------------------------------------------- */
 
+	/**
+	 * Default constructor
+	 */
+	
 	public EditorMap() {
 		super();
 		this.grounds = new Objects[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
@@ -37,26 +44,47 @@ public class EditorMap extends Map {
 	
 	/* Getteurs ------------------------------------------------------------ */
 	
+	/**
+	 * Returns Objects present at ground level
+	 * @return Objects present at ground level
+	 */
 	public Objects[][] getGrounds() {
 		return this.grounds;
 	}
 
+	/**
+	 * Returns Objects present at the first level
+	 * @return Objects present at the first level
+	 */
 	public Objects[][] getBlocks() {
 		return this.blocks;
 	}
 	
 	/* Setteurs ------------------------------------------------------------ */
 	
-	public void setGround(Objects[][] ground) {
-		this.grounds = ground;
+	/**
+	 * Updates the table of ground object
+	 * @param grounds The new table of ground object
+	 */
+	public void setGround(Objects[][] grounds) {
+		this.grounds = grounds;
 	}
 
+	/**
+	 * Updates the table of block object
+	 * @param blocks The new table of block object
+	 */
 	public void setBlocks(Objects[][] blocks) {
 		this.blocks = blocks;
 	}
 	
 	/* onDraws ------------------------------------------------------------- */
 
+	/**
+	 * Draw all objects of the map
+	 * @param canvas A canvas
+	 * @param size The desired size
+	 */
 	public void editorOnDraw(Canvas canvas, int size) {
 		for (int i = 0; i < this.grounds.length ; i++) {
 			for (int j = 0; j < this.grounds[0].length ; j++) {
@@ -71,6 +99,11 @@ public class EditorMap extends Map {
 		}
 	}
 
+	/**
+	 * Draw only items on the ground
+	 * @param canvas A canvas
+	 * @param size The desired size
+	 */
 	public void groundsOnDraw(Canvas canvas, int size) {
 		for (int i = 0; i < this.grounds.length ; i++) {
 			for (int j = 0; j < this.grounds[0].length ; j++) {
@@ -81,6 +114,11 @@ public class EditorMap extends Map {
 		}
 	}
 
+	/**
+	 * Draw only items on the first level
+	 * @param canvas A canvas
+	 * @param size The desired size
+	 */
 	public void blocksOnDraw(Canvas canvas, int size) {
 		for (int i = 0; i < this.blocks.length ; i++) {
 			for (int j = 0; j < this.blocks[0].length ; j++) {
@@ -93,6 +131,10 @@ public class EditorMap extends Map {
 	
 	/* Méthodes publiques -------------------------------------------------- */
 	
+	/**
+	 * Save the current map
+	 * @return Returns true if the map is saved false otherwise
+	 */
 	public boolean saveMap() {
 
 		for (int i = 0 ; i < this.players.length ; i ++ ) {
@@ -128,6 +170,11 @@ public class EditorMap extends Map {
 		return true;
 	}
 	
+	/**
+	 * Load a map
+	 * @param s Name of the map
+	 * @return Returns true if the map is loaded false otherwise
+	 */
 	public boolean loadMap(String s) {
 
 		EditorMap map = null;	
@@ -172,6 +219,9 @@ public class EditorMap extends Map {
 		return false;
 	}
 	
+	/**
+	 * Resize the map according to screen resolution
+	 */
 	public void resize() {
 		for (int i = 0; i < this.grounds.length ; i++) {
 			for (int j = 0; j < this.grounds[0].length ; j++) {
@@ -187,16 +237,32 @@ public class EditorMap extends Map {
 		Log.i("Map", "--------- Map resized --------");
 	}
 	
+	/**
+	 * Add a ground object in the map
+	 * @param o Ground object
+	 * @param p Poistion of the ground object
+	 */
 	public void addGround(Objects o, Point p) {
 		o.setPosition(new Point(p.x*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
 		this.grounds[p.x][p.y] = o;
 	}
-
+	
+	/**
+	 * Add a block object in the map
+	 * @param o Block object
+	 * @param p Position of the block object
+	 */
 	public void addBlock(Objects o, Point p) {
 		o.setPosition(new Point(p.x*ResourcesManager.getSize(), p.y*ResourcesManager.getSize()));
 		this.blocks[p.x][p.y] = o;
 	}
 
+	
+	/**
+	 * Add a new player in the current map
+	 * @param p Position of the player
+	 * @return The player's position in the tabular of player
+	 */
 	public int addPlayer(Point p) {
 		if ( this.blocks[p.x][p.y] != null ) {
 			this.blocks[p.x][p.y] = null;
@@ -210,14 +276,27 @@ public class EditorMap extends Map {
 		return -1;
 	}
 
+	/**
+	 * Delete a ground object in the map
+	 * @param p Position in tile of the ground object
+	 */
 	public void deleteGround(Point p) {
 		this.grounds[p.x][p.y] = null;
 	}
 
+	/**
+	 * Delete a block object in the map
+	 * @param p Position in tile of the block object
+	 */
 	public void deleteBlock(Point p) {
 		this.blocks[p.x][p.y] = null;
 	}
 
+	/**
+	 * Delete a player in the map
+	 * @param p Position in pixel of the player
+	 * @return integer representing the position of the player in the tabular otherwise -1
+	 */
 	public int deletePlayer(Point p) {
 		for (int i = 0 ; i < this.players.length ; i++ ) {
 			if (this.players[i] != null && this.players[i].x == p.x && this.players[i].y == p.y ) {
@@ -228,6 +307,10 @@ public class EditorMap extends Map {
 		return -1;
 	}
 
+	/**
+	 * Destroy the block
+	 * @param p Position in tile of the block
+	 */
 	public void destroyBlock(Point p) {
 		this.blocks[p.x][p.y].destroy();
 	}

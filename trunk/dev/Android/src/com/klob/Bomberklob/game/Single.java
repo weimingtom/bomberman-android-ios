@@ -17,6 +17,9 @@ import com.klob.Bomberklob.objects.PlayerAnimations;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
+/**
+ * Single game
+ */
 public class Single extends Game {
 
 	private int difficulty, size;
@@ -70,10 +73,9 @@ public class Single extends Game {
 		}
 	}
 	
-	public void pauseGame() {
-
-	}
-	
+	/**
+	 * Restart current game
+	 */
 	public void restartGame() {
 
 		/* Remise à 0 du vecteur de bombes */
@@ -100,6 +102,9 @@ public class Single extends Game {
 		this.map.update();
 	}
 	
+	/**
+	 * Updates all the bombs of the game
+	 */
 	private void updateBombs() {
 
 		ColisionMapObjects[][] colisionMap = map.getColisionMap();

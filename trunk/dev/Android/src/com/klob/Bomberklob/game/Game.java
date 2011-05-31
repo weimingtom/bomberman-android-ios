@@ -10,19 +10,45 @@ import android.util.Log;
 import com.klob.Bomberklob.objects.Bomb;
 import com.klob.Bomberklob.objects.Player;
 import com.klob.Bomberklob.resources.Point;
-
+/**
+ * 
+ * Abstract class of games
+ *
+ */
 public abstract class Game {
 
+	/**
+	 * Map of the game
+	 */
 	protected GameMap map;
+	
+	/**
+	 * Array of players
+	 */
 	protected Player[] players;
+	
+	/**
+	 * Game type
+	 */
 	protected GameType gameType;
+	
+	/**
+	 * Time of the game
+	 */
 	protected String time;
 
+	/**
+	 * True if the players are positioned randomly false otherwise
+	 */
 	protected boolean random;	
+	
+	/**
+	 * Hash map containing the bombs of the game
+	 */
+	protected ConcurrentHashMap<Point, Bomb> bombs;
 	
 	private boolean bombBoolean = true;
 	private Thread bombThread;	
-	protected ConcurrentHashMap<Point, Bomb> bombs;
 	private Iterator<Bomb> bombsIterator;
 
 	/* Constructeurs  ------------------------------------------------------ */
@@ -50,6 +76,10 @@ public abstract class Game {
 	
 	/* Threads ------------------------------------------------------------- */
 	
+	/**
+	 * Start or stop the thread that update the bombs
+	 * @param bombBoolean2 A boolean
+	 */
 	public void setBombThreadRunning(boolean bombBoolean2) {
 		this.bombBoolean = bombBoolean2;
 		if ( this.bombBoolean && (this.bombThread == null || this.bombThread.getState() == Thread.State.TERMINATED)) {
@@ -77,22 +107,34 @@ public abstract class Game {
 	
 	/* Getters ------------------------------------------------------------- */
 
+	/**
+	 * Returns the map of the current game
+	 * @return The map of the current game
+	 */
 	public GameMap getMap() {
 		return map;
 	}
 
+	/**
+	 * Returns the array of players of the game
+	 * @return The array of players of the game
+	 */	
 	public Player[] getPlayers() {
 		return players;
 	}
 
+	/**
+	 * Returns the type of the game
+	 * @return The type of the game
+	 */	
 	public GameType getGameType() {
 		return gameType;
 	}
-
-	public boolean isRandom() {
-		return random;
-	}
-		
+	
+	/**
+	 * Returns the Hashmap containing the bombs of the game
+	 * @return The Hashmap containing the bombs of the game
+	 */	
 	public ConcurrentHashMap<Point, Bomb> getBombs() {
 		return this.bombs;
 	}
@@ -103,6 +145,12 @@ public abstract class Game {
 
 	public abstract void pushBomb(Player player);
 
+	/**
+	 * Draws the current game in the canvas according to the desired size
+	 * 
+	 * @param canvas A canvas
+	 * @param size The desired size
+	 */
 	public void onDraw(Canvas canvas, int size) {
 		
 		this.map.onDraw(canvas, size);

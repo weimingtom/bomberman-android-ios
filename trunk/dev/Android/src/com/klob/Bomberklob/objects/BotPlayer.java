@@ -138,7 +138,7 @@ public class BotPlayer extends Player {
 		
 		if ( !this.enemies.isEmpty() && this.position != null && !currentAnimation.equals(PlayerAnimations.TOUCHED.getLabel())) {
 			ColisionMapObjects[][] colisionMap = single.getMap().getColisionMap();
-			Point tileUpLeft = ResourcesManager.coToTile(this.position.x,this.position.y), playerObjectif = new Point(this.objectif.x, this.objectif.y);
+			Point tileUpLeft = ResourcesManager.coToTile(this.position.x,this.position.y), playerObjectif = new Point(this.objective.x, this.objective.y);
 			
 			
 			if ( this.enemies.get(enemy).getPosition() == null ) {
@@ -147,7 +147,7 @@ public class BotPlayer extends Player {
 			}
 			
 			/*Si le bot n'a pas d'objectif*/
-			if ( this.position.x == this.objectif.x && this.position.y == this.objectif.y ) {
+			if ( this.position.x == this.objective.x && this.position.y == this.objective.y ) {
 				
 				/* Defensif (On est dans une zone dangereuse) */
 				if ( colisionMap[tileUpLeft.x][tileUpLeft.y] == ColisionMapObjects.DANGEROUS_AREA || colisionMap[tileUpLeft.x][tileUpLeft.y] == ColisionMapObjects.BOMB) {
@@ -199,34 +199,34 @@ public class BotPlayer extends Player {
 						playerObjectif = tileUpLeft;
 					}
 				}
-				this.objectif.x = playerObjectif.x*ResourcesManager.getSize();
-				this.objectif.y = playerObjectif.y*ResourcesManager.getSize();									
+				this.objective.x = playerObjectif.x*ResourcesManager.getSize();
+				this.objective.y = playerObjectif.y*ResourcesManager.getSize();									
 			}
 	
-			if ( this.position.x != this.objectif.x || this.position.y != this.objectif.y ) {
+			if ( this.position.x != this.objective.x || this.position.y != this.objective.y ) {
 	
-				if ( this.position.x < this.objectif.x && this.position.y < this.objectif.y ) {
+				if ( this.position.x < this.objective.x && this.position.y < this.objective.y ) {
 					setCurrentAnimation(PlayerAnimations.DOWN_RIGHT);
 				}
-				else if ( this.position.x > this.objectif.x && this.position.y < this.objectif.y ) {
+				else if ( this.position.x > this.objective.x && this.position.y < this.objective.y ) {
 					setCurrentAnimation(PlayerAnimations.DOWN_LEFT);
 				}
-				else if ( this.position.x > this.objectif.x && this.position.y > this.objectif.y ) {
+				else if ( this.position.x > this.objective.x && this.position.y > this.objective.y ) {
 					setCurrentAnimation(PlayerAnimations.UP_LEFT);
 				}
-				else if ( this.position.x < this.objectif.x && this.position.y > this.objectif.y ) {
+				else if ( this.position.x < this.objective.x && this.position.y > this.objective.y ) {
 					setCurrentAnimation(PlayerAnimations.UP_RIGHT);
 				}
-				else if ( this.position.x < this.objectif.x ) {
+				else if ( this.position.x < this.objective.x ) {
 					setCurrentAnimation(PlayerAnimations.RIGHT);
 				}
-				else if ( this.position.x > this.objectif.x  ) {
+				else if ( this.position.x > this.objective.x  ) {
 					setCurrentAnimation(PlayerAnimations.LEFT);
 				}
-				else if ( this.position.y > this.objectif.y ) {
+				else if ( this.position.y > this.objective.y ) {
 					setCurrentAnimation(PlayerAnimations.UP);
 				}
-				else if ( this.position.y < this.objectif.y ) {
+				else if ( this.position.y < this.objective.y ) {
 					setCurrentAnimation(PlayerAnimations.DOWN);
 				}
 			}
