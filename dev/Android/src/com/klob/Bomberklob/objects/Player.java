@@ -220,7 +220,7 @@ public abstract class Player extends Objects {
 	public void increaseBombs() {
 		this.bombNumber++;
 	}
-
+	
 	@Override
 	public void destroy() {
 		currentAnimation = PlayerAnimations.KILL.getLabel();

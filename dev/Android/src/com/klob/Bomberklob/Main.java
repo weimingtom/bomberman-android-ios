@@ -5,8 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,7 +25,6 @@ import com.klob.Bomberklob.editor.EditorMap;
 import com.klob.Bomberklob.menus.Home;
 import com.klob.Bomberklob.menus.NewAccountOffline;
 import com.klob.Bomberklob.model.Model;
-import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
 public class Main extends Activity {
