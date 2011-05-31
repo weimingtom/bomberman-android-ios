@@ -78,13 +78,13 @@
 
 /** Plants a bomb.
  
- @param bomb 
+ @param bomb The bomb that will be plant.
  */
 - (void)bombPlanted:(Bomb *)bomb;
 
-/**
+/** Explodes a bomb.
  
- @param bomb 
+ @param bomb The bomb that will be explod.
  */
 - (void)bombExploded:(Bomb *)bomb;
 
@@ -93,51 +93,51 @@
 /// @name Checking Case
 ///--------------------
 
-/**
+/** Return `YES` if the case at position (i, j) is traversable by player, otherwise `NO`.
  
- @param i 
- @param j 
- @return 
+ @param i The abscissa value.
+ @param j The orderly value.
+ @return `YES` if the case at position (i, j) is traversable by player, otherwise `NO`.
  */
 - (BOOL)isTraversableByPlayer:(NSInteger)i j:(NSInteger)j;
 
-/**
+/** Return `YES` if the case at position (i, j) is traversable by fire, otherwise `NO`.
  
- @param i 
- @param j 
- @return 
+ @param i The abscissa value.
+ @param j The orderly value.
+ @return `YES` if the case at position (i, j) is traversable by fire, otherwise `NO`.
  */
 - (BOOL)isTraversableByFire:(NSInteger)i j:(NSInteger)j;
 
-/**
+/** Return `YES` if the case at position (i, j) is a bomb, otherwise `NO`.
  
- @param i 
- @param j 
- @return 
+ @param i The abscissa value.
+ @param j The orderly value.
+ @return `YES` if the case at position (i, j) is a bomb, otherwise `NO`.
  */
 - (BOOL)isBomb:(NSInteger)i j:(NSInteger)j;
 
-/**
+/** Retruns `YES` if the case at position (i, j) is a fire, otherwise `NO`.
  
- @param i 
- @param j 
- @return 
+ @param i The abscissa value.
+ @param j The orderly value.
+ @return `YES` if the case at position (i, j) is a fire, otherwise `NO`.
  */
 - (BOOL)isFire:(NSInteger)i j:(NSInteger)j;
 
-/**
+/** Retruns `YES` if the case at position (i, j) is a dangerous area, otherwise `NO`.
  
- @param i 
- @param j 
- @return 
+ @param i The abscissa value.
+ @param j The orderly value.
+ @return `YES` if the case at position (i, j) is a dangerous area, otherwise `NO`.
  */
 - (BOOL)isDangerousArea:(NSInteger)i j:(NSInteger)j;
 
-/**
+/** Retruns `YES` if the case at position (i, j) is a destructible block, otherwise `NO`.
  
- @param i 
- @param j 
- @return 
+ @param i The abscissa value.
+ @param j The orderly value.
+ @return `YES` if the case at position (i, j) is a destructible block, otherwise `NO`.
  */
 - (BOOL)isDestructibleBlock:(NSInteger)i j:(NSInteger)j;
 
@@ -146,25 +146,25 @@
 /// @name Other Methods
 ///--------------------
 
-/**
+/** Retruns the adjacent cases of `node`.
  
- @param node 
- @param arrived  
- @return 
+ @param node The current node.
+ @param arrived  The arrived.
+ @return The adjacent cases of `node`.
  */
 - (NSArray *)adjacentCases:(Node *)node arrived:(Position *)arrived;
 
-/**
+/** Computes the heuristic Manhattan cost.
  
- @param start 
- @param arrived  
- @return 
+ @param start The start.
+ @param arrived The arrived.
+ @return The heuristic Manhattan cost.
  */
 - (NSInteger)heuristicManhattan:(Position *)start arrived:(Position *)arrived;
 
-/**
+/** Return the number of case.
  
- @return 
+ @return The number of case.
  */
 - (NSInteger)nbCase;
 
