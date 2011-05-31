@@ -26,6 +26,8 @@ import flexjson.JSONDeserializer;
 
 /**
  * Servlet implementation class ServletInscription
+ * Servlet permitting the inscription of an user on the system and the database
+ * It replies its userKey
  */
 public class ServletInscription extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 1L;
