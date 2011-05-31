@@ -8,19 +8,23 @@
 	
 	Nous avons pour ce faire établi un diagramme d'activité reflettant les
 	différents parcours possibles par un utilisateur lors de sa navigation dans
-	l'application (voir section modélisation p\pageref{activité}).
+	l'application
+	\footnote{
+		\hyperlink{Modélisation}{Modélisation}
+		\og voir section \ref{Modelisation}, page \pageref{Modelisation}.\fg
+	}.
 		
 \subsection{Jeu}
 		
 	Le jeu est la partie la plus importante du projet. 
-	Il se decompose en trois parties : le model, la vue et le controlleur. 
+	Il se decompose en trois éléments : le model, la vue et le controlleur. 
 	Le modèle est composé du moteur physique, du moteur de rendu ainsi que de la
-	hierarchie de classe permettant de representer l'ensemble des objets du jeu. 
-	La vue quant à elle est composée d'objets graphiques simples (Bouttons, images, ... ) 
+	hierarchie de classes permettant de representer l'ensemble des objets du jeu. 
+	La vue quant à elle est composée d'objets graphiques simples (bouttons, images, ... ) 
 	et d'une partie reprèsentant le jeu. Elle se doit d'être ergonomique et de permettre
-	à l'utilisateur de pouvoir jouer très simplement. Le controlleur permettra de faire 
-	le lien entre les actions de l'utilisateur sur le modèle. Cette décomposition permettra dans 
-	le futur de pouvoir modifier facilement le modèle et/ou la vue.
+	à l'utilisateur de pouvoir jouer très simplement. Le controlleur fait
+	le lien entre les actions de l'utilisateur sur le modèle. Cette décomposition aura
+	l'avantage de pouvoir modifier facilement le modèle et/ou la vue.
 		
 	L'application se doit de pouvoir changer de langue, avec comme langues initiales le francais et l'anglais.
 	Elle doit permettre à l'utilisateur de jouer à des parties solitaires ou multijoueur. 
