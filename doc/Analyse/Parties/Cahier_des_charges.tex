@@ -9,17 +9,17 @@
 \subsection{Jeu}
 		
 	Le jeu est la partie la plus importante du projet. 
-	Il se decompose en trois éléments : le model, la vue et le controlleur. 
+	Il se decompose en trois éléments : le modèle, la vue et le contrôlleur. 
 	Le modèle est composé du moteur physique, du moteur de rendu ainsi que de la
 	hierarchie de classes permettant de representer l'ensemble des objets du jeu. 
 	La vue quant à elle est composée d'objets graphiques simples (bouttons, images, ... ) 
 	et d'une partie reprèsentant le jeu. Elle se doit d'être ergonomique et de permettre
-	à l'utilisateur de pouvoir jouer très simplement. Le controlleur fait
+	à l'utilisateur de pouvoir jouer très simplement. Le contrôlleur fait
 	le lien entre les actions de l'utilisateur sur le modèle. Cette décomposition aura
 	l'avantage de pouvoir modifier facilement le modèle et/ou la vue.
 		
 	L'application doit aussi pouvoir changer de langue, avec comme langues initiales le francais et l'anglais.
-	Elle doit permettre à l'utilisateur de jouer à des parties solitaires ou multijoueur. 
+	Elle doit permettre à l'utilisateur de jouer à des parties solitaires ou multijoueurs. 
 	Ce dernier possèdera un compte hors ligne et en ligne.		
 	Le premier servira à personnaliser son profil comme par exemple pour modifier
 	la couleur du joueur, changer son pseudo ou encore à enregistrer les informations
@@ -32,19 +32,19 @@
 	Un menu d'aide doit apparaitre afin d'aider le joueur à comprendre le but du jeu et comment jouer. 
 	Ce dernier est simple et très explicite étant donné la large tranche d'âge des utilisateurs que vise cette application.		
 	Ensuite un éditeur de carte permettra aux utilisateurs de créer un large choix de cartes
-	grâce à une multitude de différents objets qui les composeront. Ces dernieres pourront être seulement utilisées en mode solitaire.
+	grâce à une multitude de différents objets qui les composeront. Ces dernières pourront être seulement utilisées en mode solitaire.
 	Pour les parties solitaires une intelligence artificielle avec trois niveaux de difficulté 
 	devra permettre à un joueur débutant, intermédiaire ou confirmé de jouer comme bon lui semble pour pouvoir améliorer sa maniere de jouer.
 	
 \subsection{Serveur}
 	
-	Le serveur représente la partie réseau de notre projet et rend fonctionnel le jeu entre plusieurs téléphones via des parties multijoueur (qu'ils soient de type
+	Le serveur représente la partie réseau de notre projet et rend fonctionnel le jeu entre plusieurs téléphones via des parties multijoueurs (qu'ils soient de type
 	\gls{ios} ou \gls{android}). Autrement dit il servira d'hebergeur pour les parties et
 	il se chargera de l'intéraction entre les joueurs, via leur mobile.
 	
 	Il devra être capable d'enregistrer des inscriptions de nouveaux joueurs, avec
 	vérification afin qu'il n'y ait pas de doublon. Ces derniers seront inscrits dans 
 	la base de données du serveur. Les joueurs devraient ainsi
-	pouvoir se connecter en utilisant le couple nom d'utilisateur/mot de passe,
+	pouvoir se connecter en utilisant le couple nom d'utilisateur / mot de passe,
 	préalablement choisi. Suite à cela les utilisateurs seront à même de lister
 	les parties en cours, ils pourront choisir de créer des parties ou de les rejoindres.
