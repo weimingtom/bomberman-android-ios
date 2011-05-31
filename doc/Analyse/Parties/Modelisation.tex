@@ -1,50 +1,84 @@
 \subsection{Général}
-	Le fait de développer des applications \gls{ios} et \gls{android}, nous a imposé le choix du langage. En effet pour développer des applications \gls{iphone}, il faut utiliser le langage \gls{objective-c}, puis  pour les applications \gls{android} c'est le langage \gls{java} qui est utilisé. C'est deux langages ont une syntaxe complétement différente mais sont quand même très proche car ce sont des langages orientés objets. Grâce à cela nous avons pu mettre au point une modélisation générale de l'application que nous avons ensuite adapté à chaque langage.\\
+	Le fait de développer des applications \gls{ios} et \gls{android}, nous a 
+	imposé le choix du langage.
+	En effet pour développer des applications \gls{iphone}, il faut utiliser 
+	le langage \gls{objective-c}.
+	Pour les applications \gls{android} c'est le langage \gls{java} qui est 
+	utilisé.
+	
+	Ces deux langages ont une syntaxe complétement différente mais sont quand 
+	même très proches car ce sont des langages orientés objets.
+	Grâce à cela nous avons pu mettre au point une modélisation générale de 
+	l'application que nous avons ensuite adapté à chaque langage.\\
 			
-	Nous avons décidé de développer en anglais car premièrement c'est la langue la plus utilisé dans le monde de la programmation et deuxièmement car la syntaxe des langages est toujours en anglais. Cela permettra à n'importe quel utilisateur de n'importe quelle nationalité de comprendre le code de l'application.\\
+	Nous avons décidé de développer en anglais car premièrement c'est la langue
+	la plus utilisée dans le monde de la programmation et deuxièmement car la 
+	syntaxe des langages est toujours en anglais.
+	Cela permettra à n'importe quel utilisateur de n'importe quelle nationalité 
+	de comprendre le code de l'application.\\
 			
-	La documentation des deux applications est également en anglais. Cette documentation permettra à tout utilisateur de comprendre le fonctionnement de l'application.
-	Nous avons créé une documentation pour l'application \gls{iphone} et pour l'application \gls{android}. Chacune de ces documentations est au format \gls{html} et sera donc directement visible grâce à un navigateur Web.\\
+	La documentation des deux applications est également en anglais.
+	Cette documentation permettra à tout utilisateur de comprendre le 
+	fonctionnement de celle-ci, que ce soit sur \gls{iphone} ou \gls{android}.
+	
+	Chacune d'elles est au format \gls{html} et sera donc directement visible 
+	grâce à un navigateur Web.\\
 			
-	Pour ce qui est de la modélisation globale du projet, nous avons choisi de développer les deux applications selon le modèle \gls{mvc}. Ce dernier est une architecture et une méthode de conception qui organise l'\gls{ihm} d'une application logicielle. 
+	Pour ce qui est de la modélisation globale du projet, nous avons choisi de 
+	développer les deux applications selon le modèle \gls{mvc}.
+	Ce dernier est une architecture et une méthode de conception qui organise 
+	l'\gls{ihm} d'une application logicielle. 
 			
-	Le modèle représente le comportement de l'application : traitements des données, interactions avec la base de données, etc. Il décrit et contient les données manipulées par l'application. Il assure la gestion de ces données et garantit leur intégrité.
+	Le modèle représente le comportement de l'application : traitements des
+	 données, interactions avec la base de données, etc.
+	Il décrit et contient les données manipulées par l'application, assure 
+	la gestion de ces données et garantit leur intégrité.
 			
-	La vue correspond à l'interface avec laquelle l'utilisateur interagit. Sa première tâche est de présenter les résultats renvoyés par le modèle. Sa seconde tâche est de recevoir toutes les actions de l'utilisateur (clic de souris, sélection d'une entrée, boutons, etc).
+	La vue correspond à l'interface avec laquelle l'utilisateur interagit.
+	Sa première tâche est de présenter les résultats renvoyés par le modèle.
+	La seconde est de recevoir toutes les actions de l'utilisateur 
+	(clic de souris, sélection d'une entrée, boutons, etc).
 			
-	Le contrôleur prend en charge la gestion des événements de synchronisation pour mettre à jour la vue ou le modèle et les synchroniser. Il reçoit tous les événements de l'utilisateur et enclenche les actions à effectuer.
+	Le contrôleur prend en charge la gestion des événements de synchronisation 
+	pour mettre à jour la vue ou le modèle et les synchroniser.
+	Il reçoit tous les événements de l'utilisateur et enclenche les actions 
+	à effectuer.
 			
-	Grâce à cette méthode de conception le code est décomposé en trois parties bien distinctes qui permettent la maintenance et l'amélioration du projet. Cela permet aussi de modifier chacune des trois parties sans avoir à modifier les deux autres. Cela permet par exemple de changer de vue et avoir des interfaces graphiques différentes.
+	Grâce à cette méthode de conception le code est décomposé en trois parties 
+	bien distinctes qui permettent la maintenance et l'amélioration du projet.
+	Cela permet aussi d'améliorer chacune des trois parties sans avoir à 
+	modifier les deux autres.
+	Par exemple de changer de vue et donc avoir des interfaces graphiques différentes.
 			
 \subsection{Menus}
 
 	Au démarrage de l'application vous arrivez sur un menu d'accueil. Depuis
 	celui-ci vous pourrez accéder à l'aide, à la liste des comptes locaux ou à la
 	création d'un nouveau compte local.
-	Les menus de l'application ont été réalisés pour que l'utilisateur puisse les utiliser de manière intuitive. Ils se divisent en quatre grandes sections.
+	
+	Ils se divisent en quatre grandes sections.
 		
-	Vous avez tout d'abord la section de création de parties locales. Vous aurez
-	accès à une liste de cartes ainsi qu'au réglage de difficulté des \glspl{bot}, leur
-	nombre et le temps de jeu. Le type de partie sera une fonctionnalité à venir.
-	Vous n'aurez plus qu'à créer la partie configurée.
+	Premièrement la section de création de parties locales dans laquelle l'utilisateur
+	pourra choisir parmit une liste de cartes celle sur laquelle il désire jouer.
+	Le réglage de la difficulté des \glspl{bot}, leur nombre et le temps de jeu.
 		
 	Dans la même catégorie se trouve la section des parties multijoueurs. En
 	accédant à celle-ci vous allez pouvoir vous connecter à votre compte
-	multijoueur, ou le créer s'il n'est pas déjà fait. Vous accèderez ensuite à la liste
-	des parties multijoueurs, que vous pourrez rejoindre, ou choisir de créer la
+	multijoueur ou le créer s'il n'est pas déjà fait. Vous accèderez ensuite à la liste
+	des parties multijoueurs, que vous pourrez rejoindre ou choisir de créer la
 	votre. Dans le menu création le principe est proche des parties locales.
 		
-	Suite à ces deux sections vient ensuite l'éditeur de cartes. C'est depuis ce
-	menu que vous créerez une nouvelle map de jeu local ou éditerez l'une d'entre elles. Choisisez votre nom de carte et l'éditeur
-	s'ouvrira ensuite à vous. Il vous sera possible, à la fin, d'enregistrer votre
-	carte si vous désirez la conserver et l'utiliser comme carte de jeu.
+	Suite à ces deux sections vient ensuite l'éditeur de cartes.
+	C'est depuis ce menu que vous créerez une nouvelle map de jeu local ou 
+	éditerez l'une d'entre elles.
 		
-	Et enfin vient le menu des options. Depuis ce dernier vous pourrez gérer vos
+	Enfin vient le menu des options où vous pourrez gérer vos
 	préférences sytèmes telles que le volume ou la langue de
 	l'application(anglais, français).
-	Une sous-section de gestionnaire de profil est aussi présente. Une édition de vos comptes locaux, multijoueurs ou même
-	vos paramètres de jeu comme la position du menu, sont modifiable depuis ce
-	menu à onglets.
+	Une sous-section de gestionnaire de profil est aussi présente.
+	Une édition de vos comptes locaux, multijoueurs ou même
+	vos paramètres de jeu comme la position du menu, sont modifiable depuis ce 
+	menu.
 	
 	\begin{figure}
 		\label{activité}
@@ -58,39 +92,43 @@
 		but de stocker plusieurs types de données.
 				
 		En effet dès lors qu'un compte local est créé sur le téléphone dans la
-		table PlayerAccount, il est possible de conserver ses préférences de joueur
-		tel que la couleur du joueur, le pseudonyme ou même ses paramètres de connexion multijoueur. 
-		Vous pourrez créer autant de comptes locaux que vous désirez, et il
-		sera possible possible d'éditer ou choisir son compte.
+		table PlayerAccount, il est possible de conserver ses préférences telles 
+		que la couleur du joueur, le pseudonyme ou même ses paramètres de connexion multijoueur.
 				
-		L'application est par ailleur en mesure de conserver
+		L'application est par ailleurs en mesure de conserver
 		les valeurs sonores, la langue et même le dernier utilisateur de
-		l'application, grâce à un son id qui est clé étrangère dans la table System(attribut lastUser).
+		l'application grâce à un son identifiant qui est clé étrangère dans la table System(attribut lastUser).
 				
 		De plus l'application sera délivrée avec quelques cartes officielles, mais
 		l'utilisateur aura libre droit de créer ses propres cartes de jeu via un
 		éditeur. Elles seront alors stockées dans la table Map avec toujours une
-		clé étrangère vers l'id de son créateur(owner). \\
+		clé étrangère vers l'identifiant de son créateur. \\
 		
 		\newpage
 				
 		\begin{figure}
 			\includegraphics[width=11cm]{./Analyse/Img/menu_bdd.eps}
 			\caption{Diagramme de classe Base de données}
-		\end{figure}
-		
-		
-		
-						
-	\paragraph{Scénarios}
-	
+		\end{figure}	
 	
 \subsection{Editeur de carte}	
 
-	L'éditeur de carte est une fonctionnalité qui va permettre à un utilisateur de créer facilement ses propres cartes pour ensuite y jouer dessus contre l'intéligence artificielle. Après avoir réfléchi sur toutes les fonctionnalités que l'éditeur de carte devait remplir, nous avons retenu celles-ci : permettre à l'utilisateur de créer une nouvelle carte, mais aussi de charger une ancienne carte précèdemment créée. Ensuite lui donner la possibilité de modifier le sol de la carte et aussi ajouter ou supprimer des blocs de la carte et enfin la dernière fonctionnalité que l'éditeur de carte implémente c'est de pouvoir placer les différents points de départ des joueurs sur la carte.
+	L'éditeur de carte est une fonctionnalité qui va permettre à un utilisateur
+	 de créer facilement ses propres cartes pour ensuite y jouer dessus contre 
+	 l'intelligence artificielle.
+	 
+	Après avoir réfléchi sur toutes les fonctionnalités que l'éditeur de carte 
+	devait remplir, nous avons retenu celles-ci : permettre à l'utilisateur de 
+	d'en créer une nouvelle, mais aussi de pouvoir charger une ancienne carte 
+	précèdemment créée.
+	
+	Il peut de modifier le sol de la carte, ajouter ou supprimer des blocs de 
+	la carte et enfin placer les différents points de départ des joueurs sur 
+	la carte.
 		
-	Pour réaliser cette partie de l'application, nous avons utilisé le modèle de conception MVC pour diviser le code de l'éditeur de carte. Grâce a cette décomposition, le code est plus lisible et plus facile à réutiliser. 
-			
+	Pour réaliser cette partie de l'application, nous avons aussi utilisé le 
+	modèle de conception MVC.
+
 	\subsubsection*{Modèle}
 		La partie modèle va contenir toute les données de l'éditeur de carte. Les cartes sont les principales données qu'il va devoir manipuler. Pour cela nous avons décidé de la réprésenter sous la forme de deux matrices, la première représentant les objets du premier niveau (le sol) et la deusième la matrice du second niveau (les blocs, les points de départ des joueurs, etc).
 			
@@ -98,25 +136,27 @@
 	\subsubsection*{Vue}
 		Ensuite, la vue représentera l'interface graphique de notre éditeur de carte. La principale difficulté pour réaliser l'interface graphique était de devoir rentrer toutes les informations nécessaires pour l'éditeur de carte dans un écran de type \gls{smartphone}. Après plusieurs prototypes d'interface, nous avons décide de séparer l'interface en trois parties. Tout d'abord la plus grande partie, l'affichage de la carte, qui comment étant la principale information à afficher, nous avons essayé de maximiser sa taille. Ensuite un menu à droite permettant au joueur de changer d'outil. Et la dernière partie affiche les différents éléments permettant de controler l'éditeur de carte. L'utilisateur aura juste à choisir l'outil qu'il veut placer sur la carte grâce au menu de droite et ensuite lui suffira d'appuier sur la carte pour placer un bloc dessus.
 		
-%		\begin{figure}
-			\begin{center}
-				\includegraphics[width=11cm]{./Analyse/Img/14-Editeur_de_niveau.eps}
-			\end{center} 
-%		 	\caption{Poulpy est multicolore}
-%		 	\label{Poulpy est multicolore}
-%		\end{figure}
-			
+		\begin{center}
+			\includegraphics[width=11cm]{./Analyse/Img/14-Editeur_de_niveau.eps}
+		\end{center} 
 			
 	\subsubsection*{Controleur}
-		Pour finir le controleur aurra pour but de faire la liaison entre les données du modèle et de la vue. Chaque vue possède son controleur, et il y a un controleur gobal possédant les controleurs de chaque vue.
+		
+		Pour finir le contrôleur aura pour but de faire la liaison entre les 
+		données du modèle et de la vue.
+		Chaque vue possède son controleur.
+		Il y a un controleur gobal possédant les controleurs de chaque vue.
 			
 
 \subsection{Jeu}
 	\subsubsection{Intelligence artificielle}
-		Comme nous avons vu dans le cahier des charges, nous avons mis en place une integellence artificielle permettant à un joueur de jouer en solotaire.
 	
-		Tout d'abord nous avons du réfléchir à toutes les actions que les bots pourraient effectuer, lors d'une partie.
-		
+		Comme nous avons vu dans le cahier des charges, nous avons mis en 
+		place une intelligence artificielle permettant à un joueur de jouer 
+		en solotaire.
+	
+		Tout d'abord nous avons dû réfléchir à toutes les actions que les 
+		\glspl{bots} pourraient effectuer, lors d'une partie.
 		
 		L'intelligence artificielle dans notre jeu utilise des algorithmes de \gls{recherche_op}.
 		
@@ -303,70 +343,157 @@
 		\item{Diagramme classe}
 	\end{itemize}
 	
-	Comme vue dans le cahier des charges, l'application est divisée en trois grandes parties: le modèle, la vue et le contrôlleur.
+	Comme vue dans le cahier des charges, l'application est divisée en 
+	trois grandes parties: le modèle, la vue et le contrôlleur.
 	
 	\subsubsection{Modèle}
 	
-	Le modèle constitue la \textit{base} de notre projet. C'est sur celui-ci que nous avons construit le reste de l'application. Nous avons modélisé celui-ci de manière à ce qu'il soit clair et simple. Ce dernier ce décompose en trois sous-partie: la partie hierarchie des objets, la partie moteur puis la partie éditeur de carte.\\
-	
+		Le modèle constitue la \textit{base} de notre projet.
+		C'est sur celui-ci que nous avons construit le reste de l'application.
+		Ce dernier se décompose en trois sous-partie: la partie hierarchie des objets, la partie moteur puis la partie éditeur de carte.\\
+		
 	\paragraph{Hierarchie des objets \\}
 	
-	Pour concevoir la hierarchie des objets, il a fallu tout d'abord dinstinguer la totalité des objets qui seraient disponible dans le jeu ainsi que leurs différences et leur point communs.  Nous avons donc distingué quatre grands types d'objets: les objets destructibles, les objets indestructibles, les objet animés ainsi que les objets inanimés. En sachant que les objets pouvaient être destructibles-animés, destructible-inanimés, indestructible-animés ou indestructible-inanimés. Nous avons choisi que tout objet serait considéré comme un objet animé pour éviter des soucis de modélisation. Ainsi les objets possèderont tous une sequence d'animation d'images qui sera dessiné a l'écran. Cette derniere sera répété dans le cas d'une animation qui se répété et qui comporte plusieurs images, sinon si elle possède simplement qu'une seule image, seule cette image sera dessiné a l'écran. Nous avons ensuite dinstingué une multitude de point communs entre les différents objets dont voici le nom de l'attribut et leur utilité : 
+		Pour concevoir la hierarchie des objets, il a fallu tout d'abord 
+		dinstinguer la totalité des objets qui seraient disponibles dans 
+		le jeu ainsi que leurs différences et leur point communs.
+		
+		Pour cela nous avons donc distingué quatre grands types d'objets:
+		\begin{itemize}
+		  \item Les destructibles
+		  \item Les indestructibles
+		  \item Les animés
+		  \item Les inanimés
+		\end{itemize}
+		
+		En sachant que les objets pouvaient être destructibles-animés, 
+		destructible-inanimés, indestructible-animés ou indestructible-inanimés.
+		Nous avons choisi que tout objet serait considéré comme un objet animé 
+		pour éviter des soucis de modélisation.
+		Ainsi les objets possèderont tous une sequence d'animation d'images qui
+		 sera dessinée à l'écran.
+		Cette dernière sera tournera en boucle dans le cas d'une animation 
+		qui se répété et qui comporte plusieurs images, sinon si elle possède 
+		simplement qu'une seule image.
+		Nous avons ensuite dinstingué une multitude de point communs entre 
+		les différents objets dont voici le nom des attributs et leur utilité : 
 	
 	\begin{description}
 		\item [\textit{position}]{indique la position en pixel de l'objet sur l'écran}
 		\item [\textit{nom}]{indique le nom de l'objet}
-		\item [\textit{hit}]{est à 1 si l'objet peut être touché par une explosion (0, sinon)}
-		\item [\textit{level}]{est à 1 si l'objet est animés (0,sinon)}
+		\item [\textit{hit}]{est à 1 si l'objet ne peut être traversé par un joueur}
+		\item [\textit{level}]{est à 0 si l'objet est sur le sol, 1 sinon}
 		\item [\textit{fireWall}]{est à 1 si l'objet ne laisse pas passer les flammes des explosions (0,sinon)}
-		\item [\textit{damages}]{indique si l'objet peut infliger des domages}
-		\item [\textit{idle}]{est une image qui représente l'objet en général}
+		\item [\textit{damages}]{indique si l'objet peut infliger des dommages}
+		\item [\textit{idle}]{est une image qui représente l'objet en son état dit de repos}
 		\item [\textit{animates}]{est une table de hachage contenant l'ensemble des images composant la sequence d'animation de l'objet (vide si inanimés)}
 		\item [\textit{destroy}]{est une table de hachage contenant l'ensemble des images composant la sequence d'animation de destruction de l'objet (vide si indestructible)}
 		\item [\textit{currentFrame}]{permet de connaitre le numéro de l'image courante de la sequence d'animation en cours d'affichage}
 	\end{description}
 
-	Nous avons donc décider de concevoir une classe "Object"  pour modéliser toutes ces propriétés que les objets ont en commun. Cette classe sera abstraite car tout objet est destructible ou indestructible et cela sera décris dans des classes plus spécialisés.
+		Nous avons donc décidé de concevoir une classe "Objects" pour modéliser
+		 toutes ces propriétés que les objets ont en commun.
+		 
+		Cette classe sera abstraite car tout objet est destructible ou 
+		indestructible et cela sera décris dans des classes plus spécialisés.
 	
-	 Ensuite nous avons pensé a créer deux autres classes: "Destructible" et "Undestructible" pour les objets destructible et indestructible. Ces deux classes héritent de "Object" car elles sont des objets. Ce qui différencie ces deux classes est le champ \textit{life} qui permet de savoir combien de fois l'objet doit etre touché par une bombe avant d'être detruit.
+	 	Ensuite nous avons pensé à créer deux autres classes: "Destructible" 
+	 	et "Undestructible" pour les objets destructible et indestructible.
+	 	Ces deux classes héritent de "Objects" car elles sont des objets.
+	 	
+	 	Ce qui différencie ces deux classes est le champ \textit{life} qui 
+	 	permet de savoir combien de fois l'objet doit etre touché par une 
+	 	bombe avant d'être detruit.
 	
-	Nous avons ensuite dinstingué deux autres types d"objets encore plus spécifique: Les joueurs et les bombes. Ces derniers sont des objets destructibles puisqu'il ne dure pas toute la partie selon le mode de jeu.
+		Nous avons ensuite dinstingué deux autres types d"objets encore plus spécifiques :
+		Les joueurs et les bombes.
+		Ces derniers sont des objets destructibles puisqu'ils ne durent pas 
+		toute la partie selon le mode de jeu.
 	
-	Les bombes possèdent deuxnouveaux attributs qui les différentie des autres objets: 
-	\begin{description}
-		\item [\textit{type}]{permet de connaitre le type de bombe}
-		\item [\textit{owner}]{permet de connaitre le joueur qui a posé la bombe}
-	\end{description}
+		Les bombes possèdent deux nouveaux attributs qui les différentient 
+		des autres objets :
+		
+			\begin{description}
+				\item [\textit{type}]{permet de connaitre le type de bombe}
+				\item [\textit{owner}]{Joueur qui ayant posé la bombe}
+			\end{description}
+			
+		Quant à la classe joueur celle-ci possède encore d'autres attributs :
+		
+		\begin{description}
+			\item [\textit{color}]{Affiche à l'écran le joueur avec sa bonne couleur}
+			\item [\textit{bombsTypes}]{Type de bombe qu'il peut poser}
+			\item [\textit{powerExplosion}]{Porté d'explosion de ses bombes}
+			\item [\textit{timeExplosion}]{Temps d'explosion de ses bombes}
+			\item [\textit{speed}]{Vitesse du joueur}
+			\item [\textit{shield}]{Valeur du bouclier}
+			\item [\textit{bombNumbers}]{Nombre maximum de bombes que le joueur peut poser}
+			\item [\textit{isTouched}]{Permet de savoir si le joueur viens d'être touché}
+			\item [\textit{isKilled}]{Permet de savoir si le joueur est mort}
+			\item [\textit{isInvincible}]{Permet de savoir si le joueur est invincible}
+		\end{description}
 	
-	Quand à la classe joueur celle-ci possède encore d'autres attributs: 
-	\begin{description}
-		\item [\textit{color}]{permet d'afficher à l'écran le joueur avec sa bonne couleur}
-		\item [\textit{bombsTypes}]{permet de connaitre le type de bombe qu'il peut poser}
-		\item [\textit{powerExplosion}]{permet de connaitre la porté d'explosion de ses bombes}
-		\item [\textit{timeExplosion}]{permet de connaitre le temps d'explosion des bombes}
-		\item [\textit{speed}]{permet de connaitre la vitesse du joueur}
-		\item [\textit{shield}]{permet de connaitre la valeur du bouclier}
-		\item [\textit{bombNumbers}]{permet de connaitre le nombre maximum de bombes que le joueur peut poser}
-		\item [\textit{isTouched}]{permet de savoir si le joueur viens d'être touché}
-		\item [\textit{isKilled}]{permet de savoir si le joueur est mort}
-		\item [\textit{isInvincible}]{permet de savoir si le joueur est invincible}
-	\end{description}
-	
-	Cette hierarchie de classe nous permettra donc de modéliser l'ensemble des objets que le jeu pourra afficher.
-	
+		Cette hierarchie de classe nous permettra donc de modéliser l'ensemble 
+		des objets que le jeu pourra afficher.
 	
 	
 	\paragraph{Moteur\\}
 	
-	Pour ce qui est du moteur. Celui-ci est représenté par une classe "Engine". Cette classe va contenir l'ensemble des méthodes qui vont permettre d'établir les collisions. C'est aussi cette classe qui s'occuppe de mettre à jour les bombes ainsi que l'IA du jeu. 
-	Une instance d'un moteur est associée à une partie dont le nom de classe est "Game". Cette classe "Game" est abstraite et représente une partie avec toutes les options qu'elle contient. C'est à dire qu'elle possède des attributs permettant de décrire le type de partie, un tableau avec chaque joueur de la partie, ainsi que le carte du jeu. La classe possède toutes les méthodes d'initialisation, de mise à jour, de dessins et de fin de la partie. Enfin pour différencier les différents types de parties nous avons utiliser le \gls{pattern} décorateur. Ainsi il y aura deux grands types de parties: les parties solitaires et les parties multijoueurs. Puis ces parties sont décorés par le type de partie: \gls{survivor} ou \gls{death_match}.
+		Pour ce qui est du moteur.
+		Celui-ci est représenté par une classe "Engine".
+		Cette classe va contenir l'ensemble des méthodes qui vont permettrent 
+		d'établir les collisions.
+		C'est aussi cette classe qui s'occuppe de mettre à jour les bombes 
+		ainsi que l'\gls{ia} du jeu.
+		
+		Une instance d'un moteur est associée à une partie dont le nom de classe est "Game".
+		Cette classe "Game" est abstraite et représente une partie avec toutes les options qu'elle contient.
+		
+		C'est à dire qu'elle possède des attributs permettant de décrire le type de partie,
+		un tableau avec chaque joueur de la partie, ainsi que le carte du jeu.
+		La classe possède toutes les méthodes d'initialisation, de mise à jour,
+		 de dessins et de fin de la partie.
+		
+		Enfin pour différencier les différents types de parties nous avons utilisé
+		 le \gls{pattern} décorateur.
+		 Ainsi il y aura deux grands types de parties: les parties solitaires 
+		 et les parties multijoueurs.
+		 Puis ces parties sont décorés par le type de partie: \gls{survivor} ou \gls{death_match}.
 	
-	Ensuite pour ce qui est des cartes, une classe abstraite nommé "Map" contient le nom et la taille de la carte ainsi qu'un tableau contenant la position initial de chaque joueur sur la carte. Puis une classe "GameMap" qui hérite de map permet de dessiner la carte a l'écran, elle se compose d'une image représentant le sol puis d'un tableau d'objets animés qui permet de représenter l'ensemble du reste des objets. Ensuite nous utilisons un autre type de carte qui va permettre de faciliter les collisions, que ce soit pour un joueur humain ou pour une intelligence artificielle. Cette classe est appelé "CollisionMap" et contient une matrice d'objet "CollisionCase" ainsi qu'un tableau qui contient l'ensemble des bombes posés sur la carte. Les "CollisionCase" sont composé de deux tableaux. Chaque valeur d'un des tableau est associé à une valeur de l'autre talbeau. Un tableau \textit{types} contient les différents types de danger ou d'objet  qu'il existe sur cette case et un tableau \textit{counters} permettra en fonction de chaque type de compter le nombre de fois que ce danger ou objet est présent sur cette case. Par exemple on peut très bien avoir une case qui est dans le champ d'explosion de quatres bombes et qui contient un bloc de type destructible. Ainsi le tableau \textit{type} contiendra deux champs , un pour le type zone dangereuse et un autre pour le type bloc destructible puis le tableau \textit{counters} contiendra donc dans sa case associé à la case zone dangereuse une valeur égale à quatre et et une valeur de un pour l'autre. 
+		Ensuite pour ce qui est des cartes, une classe abstraite nommé "Map" 
+		contient le nom et la taille de la carte ainsi qu'un tableau contenant 
+		la position initial de chaque joueur sur la carte.
+		
+		Puis une classe "GameMap" qui hérite de map permet de dessiner 
+		la carte a l'écran lors du jeu.
+		Elle se compose d'une image représentant le sol puis d'un tableau 
+		d'objets animés qui permet de représenter l'ensemble du reste des objets.
+		
+		Ensuite nous utilisons un autre type de carte qui va permettre de 
+		faciliter les collisions, que ce soit pour un joueur humain ou pour 
+		une intelligence artificielle.
+		Cette classe est appelé "CollisionMap" et contient une matrice d'objet 
+		"CollisionCase" ainsi qu'un tableau qui contient l'ensemble des bombes 
+		posées sur la carte.
+		Les "CollisionCase" sont composées de deux tableaux.
+		Chaque valeur d'un des tableau est associée à une valeur de l'autre tableau.
+		Un tableau \textit{types} contient les différents types de danger ou d'objets 
+		qui existent sur cette case ainsi qu'un tableau \textit{counters} permettant 
+		en fonction de chaque type de compter le nombre de fois que ce danger ou objet 
+		est présent sur cette case.
+		Par exemple on peut très bien avoir une case qui est dans le champ d'explosion
+		de quatres bombes et qui contient un bloc de type destructible.
+		
+		Ainsi le tableau \textit{type} contiendra deux champs, un pour le 
+		type zone dangereuse et un autre pour le type bloc destructible puis 
+		le tableau \textit{counters} contiendra donc dans sa case associée à 
+		la case zone dangereuse une valeur égale à quatre et et une valeur de
+		un pour l'autre.
 		
 	
 	\subsubsection{Vue}
 	
-	L'interface graphique du jeu est décomposé en trois partie. Une partie qui représente le menu d'information de la partie, une autre qui réprésente le menu des actions possibles du joueurs et une dernière qui représente la partie en cours. 
+		L'interface graphique du jeu est décomposée en trois partie. Une partie qui représente le menu d'information de la partie, une autre qui réprésente le menu des actions possibles du joueurs et une dernière qui représente la partie en cours. 
 	Le menu d'information se situe en haut de l'écran. Il permet d'afficher le score des joueurs, le temps lors d'une partie death match ainsi que les bonus du joueurs (le nombre de bombes qu'il peut poser, la portée de l'explosion des bombes, la vitesse du joueur et les bonus de vie) et de mettre le jeu en pause.
 	Le menu d'action se situe à droite de l'écran. Il permet à l'utilisateur de poser les bombes grâce à un bouton et aussi de changer de type de bombes grâce à une liste déroulante.
 	Quand à la partie, elle est afficher au centre de l'écran et prend le maximum de place possible pour que le jeu soit le plus visible possible. Elle permet d'afficher la carte ainsi que les joueurs et les bombes. Mais elle sert aussi à écouter les mouvements du doigt de l'utilisateur pour modifier les coordonnées du joueur dans le modèle pour pouvoir ensuite rafraichir l'écran et voir le joueur se deplacer.
