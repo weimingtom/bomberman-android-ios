@@ -148,202 +148,13 @@
 		Il y a un controleur gobal possédant les controleurs de chaque vue.
 			
 
-\subsection{Jeu}
-	\subsubsection{Intelligence artificielle}
-	
-		Comme nous avons vu dans le cahier des charges, nous avons mis en 
-		place une intelligence artificielle permettant à un joueur de jouer 
-		en solotaire.
-	
-		Tout d'abord nous avons dû réfléchir à toutes les actions que les 
-		\glspl{bot} pourraient effectuer, lors d'une partie.
-		
-		L'intelligence artificielle dans notre jeu utilise des algorithmes de \gls{recherche_op}.
-		
-		Pour une meilleure expérience de jeu nous avons séparé l'intelligence artificielle en trois niveaux.
-		
-		$\,$
-		
-		\begin{itemize}
-		  \item Facile
-		  \item Moyenne
-		  \item Difficile
-		\end{itemize}
-		
-		$\,$
-		
-		Nous avons utilisé deux types d'algorithmes de \gls{recherche_op} basés sur le \gls{pathfinding}.
-		
-		\paragraph{Pathfinding}
-		
-			Le premier algorithme basé sur le parcours en largeur est utilisé quel que soit
-			le niveau de l'intelligence artificelle choisie contrairement au second qui n'est utilisé
-			que pour la difficulté moyenne et difficile.
-		
-		\subparagraph{Parcours en largeur\\}
-		
-			L'algorithme du parcours en largeur dans notre cas, consiste à partir d'un sommet S,
-			lister d'abord tous les voisins de S pour ensuite les explorer un par un.
-			Ici nous allons donc regarder toutes les cases autour de nous puis regarder
-			tous leurs voisins et cela ainsi de suite jusqu'à trouver un point
-			correspondant à nos attentes.
-			
-			Le contexte est le suivant, un \gls{bot} découvre qu'il est sur la trajectoire
-			d'explosion d'une bombe est va donc fuir vers la case sûr la plus proche or
-			il n'a aucune idée d'où elle se trouve.
-			
-			L'image suivante représentera la situation initiale :
-			
-			\begin{center}
-				\includegraphics[width=8cm]{./Analyse/Img/largeur_0.eps}
-			\end{center}
-			
-			Comme dit précédemment il n'y a que les murs ou les bombes que l'on ne peut
-			pas traverser sinon tous les autres objets ou joueurs sont traversables.
-			Nous considerons que les bombes ont ici un champs d'explosion en nombre de
-			cases de 5.			
-			
-			Représentons la carte ci-dessus d'une façon plus parlante en remplacant les
-			divers objets mis à par le joueur par des couleurs leur correspondant, à
-			savoir :
-			
-			\begin{center}
-				\includegraphics[width=8cm]{./Analyse/Img/largeur_1.eps}
-			\end{center}
-			
-			Mettons nous à present à la place du \gls{bot}.
-			
-			Nous allons donner un poid aux cases que nous allons parcourir
-			correspondant à la distance par rapport à la case initiale, ainsi qu'une
-			direction qui correspondra à la direction initiale que le \gls{bot} devra empruter
-			pour utiliser ce chemin, c'est à dire par exemple que tout chemin découvert
-			dont l'origine est une case à droite de la notre aura comme direction droite.
-			
-			A partir d'une case donnée, nous ne regarderons que les voisines ayant un poids de 0
-			car si leur poids est différent cela voudra dire que nous les avons déjà vu precedemment et bien évidemment,
-			nous ignorerons les murs ainsi que les bombes.
-			
-			Nous avons changé la valeur des cases intraversables pour ne pas confondre avec le poids des cases visitées.			
-			
-			Appliquons l'algorithme de parcours en largeur aux cases voisines de la notre.
-			
-			
-			\begin{center}
-				\includegraphics[width=8cm]{./Analyse/Img/largeur_2.eps}
-			\end{center}
-			
-			
-			Toutes les cases découvertes étant considérées comme dangereuses (voir le schéma précédent) nous continuons à appliquer l'\gls{algorithme} jusqu'à arriver à notre but.
-			
-			\begin{center}
-				\includegraphics[width=8cm]{./Analyse/Img/largeur_3.eps}
-				
-				$\,$
-				
-				\includegraphics[width=8cm]{./Analyse/Img/largeur_4.eps}
-			\end{center}
-			
-			Ici nous avons découvert une case non dangeureuse en $(13,6)$.
-			
-			Nous récupérons donc la direction enregistrée dans cette case et bougeons en fonction de celle-ci.
-			
-			Si plusieurs cases avaient été découvertes le choix aurait été arbitraire car elles auraient toutes été à la même distance.
-			
-			$\,$
-			
-		\subparagraph{A*\\}
-		
-			L'action la plus importante que l'intelligence artificielle doit savoir faire c'est de pouvoir se déplacer librement sur la carte en fonction des différents objets présents sur la carte et des actions effectuées par les autres joueurs.
-		
-			L'algorithme de recherche A* a pour but de rechercher un chemin
-			dans un graphe entre un nœud initial et un nœud final tous deux préalablement
-			définis. A* permet de trouver l'un des meilleurs (mais pas forcément le
-			meilleur) chemins existant entre un point A et un point B (il retourne le premier chemin trouvé).
-			
-			La force de cet algorithme est le temps de calcul et l'exactitude des résultats, contrairement à Dijkstra qui lui fournit toujours le meilleur résultat (le plus court chemin entre deux points) mais dans un temps d'exécution beaucoup plus long que l'algorithme de A*.
-			
-			Sachant qu'il peut y avoir jusqu'à trois \glspl{bot} et que l'intelligence artificielle doit régulièrement recalculer son chemin en fonction des actions effectuées par les autres joueurs, nous avons donc choisi l'algorithme de A*.
-		
-			Maintenant que l'on sait quel algorithme utiliser pour rechercher un chemin dans un graphe, nous allons voir en détail comment marche l'algorithme de A*.
-		
-			Pour comprendre comment l'algorithme marche, nous allons nous aider d'un
-			dessin représentent une carte avec un point A (départ) affiché en vert, un
-			point B (arrivée) en rouge, et où les cases en bleu représentent les murs.
-		
-			\begin{center}
-				\includegraphics[width=8cm]{./Analyse/Img/Grille.eps}
-			\end{center}
-		
-			La premier chose que l'on peut observer, c'est que la carte est divisée en
-			cases. Chaque case de la matrice représente un node qui peut être soit
-			traversable, soit non traversable. Dans l'application, il n'y a que les murs
-			ou les bombes que l'on ne peut pas traverser sinon tous les autres objets
-			ou joueurs sont traversables. Le but de l'algorithme est donc de
-			trouver un chemin entre A et B en évitant les murs.
-			
-		
-			Durant le déroulement de l'algorithme, nous avons utilisé deux listes qui contiennent des cases de la carte.
-			Il y a une liste dite \og listeOuverte \fg \, et l'autre \og listeFermée \fg.
-			La listeOuvrete contient une liste de cases qui pourraient éventuellement faire partie du chemin, mais pas forcément, pour le moment elle sera vide.
-			Plus précisément c'est une liste de cases que nous devons vérifier.
-			Ensuite, au niveau de la listeFermée, elle contient toutes les cases que nous
-			aurons déjà vérifiées, au début de l'excution, elle contient que le point de départ (B3).
-			
-		
-			Commencons les explications du déroulement de l'algorithme.
-			Tout d'abord, il faut savoir qu'un joueur peut se déplacer dans toutes les
-			directions, donc nous allons ajouter toutes les cases adjacentes à la
-			listeOuvert qui sont traversables, il y en a huit (A2, B2, C2, A3, C3, A4, B4, C4).
-			
-			
-			Ce qui nous donne :
-		
-			\begin{center}
-				\includegraphics[width=8cm]{./Analyse/Img/Grille2.eps}
-			\end{center}
-		
-			Les carrés avec un contour rouge sont les carrés présents dans la
-			listeOuverte et les carrés qui ont une couleur un peu plus foncée que les
-			autres sont ceux qui se trouvent dans la listeFermée.
-		
-			Maintenant pour choisir la case par laquelle on doit passer, nous devons rajouter trois données \og F \fg , \og G \fg \, et \og H \fg:
-			\begin{description}
-				\item[G : ]{c'est le coût de mouvement pour aller de la case A à une case donnée sur la grille, en suivant le chemin généré jusqu'à cette dernière.}
-				\item[H :]{c'est l'heuristique, c'est à dire le coût estimé pour allé du point courant à l'arrivé. Comme nous ne connaissons pas vraiment la distance qu'il nous reste à parcourir, car toutes sortes d'obstacle peuvent se trouver sur notre chemin (objet non traversable). Donc nous allons devoir l'approximer grâce à une fonction, pour la calculer nous avons choisi d'utiliser l'heuristique de Manhattan, qui consiste à compter le nombre de bloc (à vol d'oiseau et sans prendre les diagonales) qui lui reste à parcourir.}
-				\item[F :]{c'est G + H}
-			\end{description} 
-		
-			Chaque case de la listeOuverte ou de la listeFermée vont devoir possèder toutes ces données, plus les coordonnées de leur père, c'est à dire les coordonnées de la case qui vient de les ajouter dans la la listeOuverte. Pour calculer G, nous allons assigner un coût de 10 pour chaque déplacement horizontal ou vertical, et un coût de 14 pour un mouvement en diagonale. Nous utilisons ces données car la distance nécessaire pour se déplacer est la racine carrée de 2, ou approximativement 1.41 fois le coût d'un déplacement vertical ou horizontal. Nous utiliserons donc 10 et 14 pour des raisons de simplification. Par conséquent, nous allons multiplier par 10 le coût H pour qu'il soit cohérent par rapport à G.
-	
-			Donc maintenant, nous devons avoir cette matrice :
-			\begin{center}
-				\includegraphics[width=8cm]{./Analyse/Img/Grille3.eps}
-			\end{center}
-		
-			Après avoir ajouté toutes les cases adjacentes à la case courant, il suffit de prendre la case qui a le plus petit coût F et ensuite de la rajouter dans la listeFermée et de la supprimer de la listeOuverte. Nous obtenons donc :
-			\begin{center}
-				\includegraphics[width=8cm]{./Analyse/Img/Grille4.eps}
-			\end{center}
-		
-			Ensuite on regarde toutes les cases adjacentes à la dernière case ajoutée dans la listeFermée. Si elles se trouvent déjà dans la listeOuverte, on vérifit que leurs coût soient inférieur au coût de la case correspondante déjà dans la listeOuverte, si oui alors on la remplace sinon on ne fait rien.
-		
-			Pour finir on répète cette opération jusqu'on arrive à la case d'arrivée, nous obtenons ça :
-			\begin{center}
-				\includegraphics[width=8cm]{./Analyse/Img/Grille5.eps}
-			\end{center}
-		
-			Pour finir, il nous suffit juste de récupérer la case d'arrivée et de regarder son père, puis de repéter cette opération avec la case obtenu jusqu'à arriver à la case de dépard. Grâce à ça nous obtenons cette dernière étape de l'algorithme :
-			\begin{center}
-				\includegraphics[width=8cm]{./Analyse/Img/Grille6.eps}
-			\end{center}
-		
-			Comme nous pouvons levoir sur le schéma precedent, le chemin qu'a trouvé l'algorithme de A* est le suivant : $ B3 \rightarrow C4 \rightarrow C5 \rightarrow D5 \rightarrow E5 \rightarrow F4 \rightarrow F3 $. L'algorithme aurait pu d'autre chemin équivalent à celui-ci mais le principe de cette algorithme c'est de renvoyer le permier chemin qu'il trouve.
+	\subsection{jeu}
 	
 	Comme vue dans le cahier des charges, l'application est divisée en 
 	trois grandes parties: le modèle, la vue et le contrôlleur.
 	
 	\begin{center}
-		\includegraphics[scale=0.43, angle=90]{./Analyse/Img/BomberblocDiagramme.eps}
+		\includegraphics[scale=0.41, angle=90]{./Analyse/Img/BomberblocDiagramme.eps}
 	\end{center}
 	
 	\subsubsection{Modèle}
@@ -649,6 +460,197 @@
 			que lui indique le document XML, ainsi que ses sequences d'animations.
 			Ensuite lorsqu'un objet devra être utilisé dans le jeu, il suffira d'utiliser 
 			une copie de l'objet déja chargé en mémoire pour éviter d'avoir à reparcourir le fichier.
+			
+			
+	\subsubsection{Intelligence artificielle}
+	
+		Comme nous avons vu dans le cahier des charges, nous avons mis en 
+		place une intelligence artificielle permettant à un joueur de jouer 
+		en solotaire.
+	
+		Tout d'abord nous avons dû réfléchir à toutes les actions que les 
+		\glspl{bot} pourraient effectuer, lors d'une partie.
+		
+		L'intelligence artificielle dans notre jeu utilise des algorithmes de \gls{recherche_op}.
+		
+		Pour une meilleure expérience de jeu nous avons séparé l'intelligence artificielle en trois niveaux.
+		
+		$\,$
+		
+		\begin{itemize}
+		  \item Facile
+		  \item Moyenne
+		  \item Difficile
+		\end{itemize}
+		
+		$\,$
+		
+		Nous avons utilisé deux types d'algorithmes de \gls{recherche_op} basés sur le \gls{pathfinding}.
+		
+		\paragraph{Pathfinding}
+		
+			Le premier algorithme basé sur le parcours en largeur est utilisé quel que soit
+			le niveau de l'intelligence artificelle choisie contrairement au second qui n'est utilisé
+			que pour la difficulté moyenne et difficile.
+		
+		\subparagraph{Parcours en largeur\\}
+		
+			L'algorithme du parcours en largeur dans notre cas, consiste à partir d'un sommet S,
+			lister d'abord tous les voisins de S pour ensuite les explorer un par un.
+			Ici nous allons donc regarder toutes les cases autour de nous puis regarder
+			tous leurs voisins et cela ainsi de suite jusqu'à trouver un point
+			correspondant à nos attentes.
+			
+			Le contexte est le suivant, un \gls{bot} découvre qu'il est sur la trajectoire
+			d'explosion d'une bombe est va donc fuir vers la case sûr la plus proche or
+			il n'a aucune idée d'où elle se trouve.
+			
+			L'image suivante représentera la situation initiale :
+			
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/largeur_0.eps}
+			\end{center}
+			
+			Comme dit précédemment il n'y a que les murs ou les bombes que l'on ne peut
+			pas traverser sinon tous les autres objets ou joueurs sont traversables.
+			Nous considerons que les bombes ont ici un champs d'explosion en nombre de
+			cases de 5.			
+			
+			Représentons la carte ci-dessus d'une façon plus parlante en remplacant les
+			divers objets mis à par le joueur par des couleurs leur correspondant, à
+			savoir :
+			
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/largeur_1.eps}
+			\end{center}
+			
+			Mettons nous à present à la place du \gls{bot}.
+			
+			Nous allons donner un poid aux cases que nous allons parcourir
+			correspondant à la distance par rapport à la case initiale, ainsi qu'une
+			direction qui correspondra à la direction initiale que le \gls{bot} devra empruter
+			pour utiliser ce chemin, c'est à dire par exemple que tout chemin découvert
+			dont l'origine est une case à droite de la notre aura comme direction droite.
+			
+			A partir d'une case donnée, nous ne regarderons que les voisines ayant un poids de 0
+			car si leur poids est différent cela voudra dire que nous les avons déjà vu precedemment et bien évidemment,
+			nous ignorerons les murs ainsi que les bombes.
+			
+			Nous avons changé la valeur des cases intraversables pour ne pas confondre avec le poids des cases visitées.			
+			
+			Appliquons l'algorithme de parcours en largeur aux cases voisines de la notre.
+			
+			
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/largeur_2.eps}
+			\end{center}
+			
+			
+			Toutes les cases découvertes étant considérées comme dangereuses (voir le schéma précédent) nous continuons à appliquer l'\gls{algorithme} jusqu'à arriver à notre but.
+			
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/largeur_3.eps}
+				
+				$\,$
+				
+				\includegraphics[width=8cm]{./Analyse/Img/largeur_4.eps}
+			\end{center}
+			
+			Ici nous avons découvert une case non dangeureuse en $(13,6)$.
+			
+			Nous récupérons donc la direction enregistrée dans cette case et bougeons en fonction de celle-ci.
+			
+			Si plusieurs cases avaient été découvertes le choix aurait été arbitraire car elles auraient toutes été à la même distance.
+			
+			$\,$
+			
+		\subparagraph{A*\\}
+		
+			L'action la plus importante que l'intelligence artificielle doit savoir faire c'est de pouvoir se déplacer librement sur la carte en fonction des différents objets présents sur la carte et des actions effectuées par les autres joueurs.
+		
+			L'algorithme de recherche A* a pour but de rechercher un chemin
+			dans un graphe entre un nœud initial et un nœud final tous deux préalablement
+			définis. A* permet de trouver l'un des meilleurs (mais pas forcément le
+			meilleur) chemins existant entre un point A et un point B (il retourne le premier chemin trouvé).
+			
+			La force de cet algorithme est le temps de calcul et l'exactitude des résultats, contrairement à Dijkstra qui lui fournit toujours le meilleur résultat (le plus court chemin entre deux points) mais dans un temps d'exécution beaucoup plus long que l'algorithme de A*.
+			
+			Sachant qu'il peut y avoir jusqu'à trois \glspl{bot} et que l'intelligence artificielle doit régulièrement recalculer son chemin en fonction des actions effectuées par les autres joueurs, nous avons donc choisi l'algorithme de A*.
+		
+			Maintenant que l'on sait quel algorithme utiliser pour rechercher un chemin dans un graphe, nous allons voir en détail comment marche l'algorithme de A*.
+		
+			Pour comprendre comment l'algorithme marche, nous allons nous aider d'un
+			dessin représentent une carte avec un point A (départ) affiché en vert, un
+			point B (arrivée) en rouge, et où les cases en bleu représentent les murs.
+		
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/Grille.eps}
+			\end{center}
+		
+			La premier chose que l'on peut observer, c'est que la carte est divisée en
+			cases. Chaque case de la matrice représente un node qui peut être soit
+			traversable, soit non traversable. Dans l'application, il n'y a que les murs
+			ou les bombes que l'on ne peut pas traverser sinon tous les autres objets
+			ou joueurs sont traversables. Le but de l'algorithme est donc de
+			trouver un chemin entre A et B en évitant les murs.
+			
+		
+			Durant le déroulement de l'algorithme, nous avons utilisé deux listes qui contiennent des cases de la carte.
+			Il y a une liste dite \og listeOuverte \fg \, et l'autre \og listeFermée \fg.
+			La listeOuvrete contient une liste de cases qui pourraient éventuellement faire partie du chemin, mais pas forcément, pour le moment elle sera vide.
+			Plus précisément c'est une liste de cases que nous devons vérifier.
+			Ensuite, au niveau de la listeFermée, elle contient toutes les cases que nous
+			aurons déjà vérifiées, au début de l'excution, elle contient que le point de départ (B3).
+			
+		
+			Commencons les explications du déroulement de l'algorithme.
+			Tout d'abord, il faut savoir qu'un joueur peut se déplacer dans toutes les
+			directions, donc nous allons ajouter toutes les cases adjacentes à la
+			listeOuvert qui sont traversables, il y en a huit (A2, B2, C2, A3, C3, A4, B4, C4).
+			
+			
+			Ce qui nous donne :
+		
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/Grille2.eps}
+			\end{center}
+		
+			Les carrés avec un contour rouge sont les carrés présents dans la
+			listeOuverte et les carrés qui ont une couleur un peu plus foncée que les
+			autres sont ceux qui se trouvent dans la listeFermée.
+		
+			Maintenant pour choisir la case par laquelle on doit passer, nous devons rajouter trois données \og F \fg , \og G \fg \, et \og H \fg:
+			\begin{description}
+				\item[G : ]{c'est le coût de mouvement pour aller de la case A à une case donnée sur la grille, en suivant le chemin généré jusqu'à cette dernière.}
+				\item[H :]{c'est l'heuristique, c'est à dire le coût estimé pour allé du point courant à l'arrivé. Comme nous ne connaissons pas vraiment la distance qu'il nous reste à parcourir, car toutes sortes d'obstacle peuvent se trouver sur notre chemin (objet non traversable). Donc nous allons devoir l'approximer grâce à une fonction, pour la calculer nous avons choisi d'utiliser l'heuristique de Manhattan, qui consiste à compter le nombre de bloc (à vol d'oiseau et sans prendre les diagonales) qui lui reste à parcourir.}
+				\item[F :]{c'est G + H}
+			\end{description} 
+		
+			Chaque case de la listeOuverte ou de la listeFermée vont devoir possèder toutes ces données, plus les coordonnées de leur père, c'est à dire les coordonnées de la case qui vient de les ajouter dans la la listeOuverte. Pour calculer G, nous allons assigner un coût de 10 pour chaque déplacement horizontal ou vertical, et un coût de 14 pour un mouvement en diagonale. Nous utilisons ces données car la distance nécessaire pour se déplacer est la racine carrée de 2, ou approximativement 1.41 fois le coût d'un déplacement vertical ou horizontal. Nous utiliserons donc 10 et 14 pour des raisons de simplification. Par conséquent, nous allons multiplier par 10 le coût H pour qu'il soit cohérent par rapport à G.
+	
+			Donc maintenant, nous devons avoir cette matrice :
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/Grille3.eps}
+			\end{center}
+		
+			Après avoir ajouté toutes les cases adjacentes à la case courant, il suffit de prendre la case qui a le plus petit coût F et ensuite de la rajouter dans la listeFermée et de la supprimer de la listeOuverte. Nous obtenons donc :
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/Grille4.eps}
+			\end{center}
+		
+			Ensuite on regarde toutes les cases adjacentes à la dernière case ajoutée dans la listeFermée. Si elles se trouvent déjà dans la listeOuverte, on vérifit que leurs coût soient inférieur au coût de la case correspondante déjà dans la listeOuverte, si oui alors on la remplace sinon on ne fait rien.
+		
+			Pour finir on répète cette opération jusqu'on arrive à la case d'arrivée, nous obtenons ça :
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/Grille5.eps}
+			\end{center}
+		
+			Pour finir, il nous suffit juste de récupérer la case d'arrivée et de regarder son père, puis de repéter cette opération avec la case obtenu jusqu'à arriver à la case de dépard. Grâce à ça nous obtenons cette dernière étape de l'algorithme :
+			\begin{center}
+				\includegraphics[width=8cm]{./Analyse/Img/Grille6.eps}
+			\end{center}
+		
+			Comme nous pouvons levoir sur le schéma precedent, le chemin qu'a trouvé l'algorithme de A* est le suivant : $ B3 \rightarrow C4 \rightarrow C5 \rightarrow D5 \rightarrow E5 \rightarrow F4 \rightarrow F3 $. L'algorithme aurait pu d'autre chemin équivalent à celui-ci mais le principe de cette algorithme c'est de renvoyer le permier chemin qu'il trouve.
 
 
 \subsection{Réseau}
