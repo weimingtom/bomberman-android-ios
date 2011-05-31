@@ -136,6 +136,29 @@
 
 	\hypertarget{Editeur de carte}{}
 	\label{Editeur de carte}
+	
+	\subsubsection{Général}
+		\paragraph{Moteur de rendu\\}
+			Pour modéliser la carte que le joueur est en train de construire, nous avons décidé de la représenter sous forme de deux matrices. 
+			
+			Tout d'abord la matrice contenant tous les éléments représentant le sol.
+			\begin{center}
+				\includegraphics{./Developpement/Img/image1.png}
+			\end{center}
+			Cette première matrice sera déssinée en premier sur la carte.
+			
+			Ensuite, la deuxième matrice qui sera déssinée au dessus de la précédente contient tous les blocs du décor avec lesquels les joueurs pourront intéragir. 
+			\begin{center}
+				\includegraphics{./Developpement/Img/image2.png}
+			\end{center}
+			
+			Grâce à ces deux matrices, les joueurs pourront à tout moment modifier les éléments de la première matrice ou de la deuxième.
+			
+			En fusionnant ces deux matrices, nous obtenons la carte compléte.
+			\begin{center}
+				\includegraphics{./Developpement/Img/image3.png}
+			\end{center}
+			
 
 	\subsubsection{Le modèle}
 		La carte est la principale information que l'éditeur de carte doit gérer. Pour représenter une carte, nous avons choisi de la représenter sous la forme de deux matrices ayant les mêmes dimensions que la carte. La première matrice contient des \textit{Objects} représentant le sol et la deusième contient elle aussi des \textit{Objects} mais ces derniers représentent des blocs et non le sol. Pour gérer les deux matrice nous avons utilisé des \textit{NSMutableArray} qui sont des tableaux Objective-C que l'on peut modifier, ils contiennent eux aussi des \textit{NSMutableArray} car il n'existe pas des constructeurs de matrice comme en JAVA. Ensuite l'autre information que la carte doit possèder c'est la position de départ des joueurs. Nous avons utilisé un \textit{NSMutableDictionary} permettant de faire la liaison entre la couleur du joueur et son point de départ. 
