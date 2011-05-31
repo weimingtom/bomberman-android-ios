@@ -57,7 +57,7 @@
 		
 		
 		Les écouteurs présents dans les classes java permettent à leur tour d'écouter les évènements utilisateurs
-		ou système et réagir en fonction, comme l'accès au menu suivant ou le lancement
+		ou systèmes et réagir en fonction, comme l'accès au menu suivant ou le lancement
 		d'un partie. 
 		
 		
@@ -96,9 +96,9 @@
 		
 	Comme Android, nous avons utilisé les widgets pour réaliser notre interface graphique. iOS fournit lui aussi une API couplée à une documentation très complète facilitant la réalisation d'une interface utilisateur ergonomique. Parmi les widgets les plus utiles, nous retrouvons les UIView, UITableView, UITableViewCell, UILabel, UITextField, UIButton qui permettent respectivement de créer une vue, un tableau, une cellule du tableau, des labels, des champs de texte et des boutons.
 	
-	Pour manipuler ces différents composants graphiques, il est possible et beaucoup plus pratique d'utiliser Interface Builder pour réaliser des menus. Interface builder permet de gagner du temps lors de la réalisation d'une interface graphique standard (de type menu). Cette réalisation est possible via un outil visuel et non des lignes de code,  Interface Builder va créer des fichiers \gls{xib} qui vont générer à la compilation des fichiers \gls{nib}. Ce dernier stock les informations relative à l'interface sous forme d'un fichier \gls{xml}. Nous avons pas besoin de savoir réellement comment cela fonctionne car il est inutile de modifier directement le fichier \gls{xml}.
+	Pour manipuler ces différents composants graphiques, il est possible et beaucoup plus pratique d'utiliser Interface Builder pour réaliser des menus. Interface builder permet de gagner du temps lors de la réalisation d'une interface graphique standard (de type menu). Cette réalisation est possible via un outil visuel et non des lignes de code,  Interface Builder va créer des fichiers \gls{xib} qui vont générer à la compilation des fichiers \gls{nib}. Ce dernier stock les informations relative à l'interface sous forme d'un fichier \gls{xml}. Nous n'avons pas besoin de savoir réellement comment cela fonctionne car il est inutile de modifier directement le fichier \gls{xml}.
 	
-	Ensuite pour contrôler les différents élements de l'interface préalablement créés avec Interface Builder, il suffit de les lier au code de la vue via ce dernier. Grâce à ces liaisons, il nous sera possible de les modifiers ou les contrôler avec du code et donc de pouvoir les accorder avec les données du modèle.
+	Ensuite pour contrôler les différents éléments de l'interface préalablement créés avec Interface Builder, il suffit de les lier au code de la vue via ce dernier. Grâce à ces liaisons, il nous sera possible de les modifier ou les contrôler avec du code et donc de pouvoir les accorder avec les données du modèle.
 	
 	La gestion des écouteurs se fait grâce au même procédé qui est utilisé pour lier les éléments de l'interface avec la vue sauf que cela créera une méthode au lieu de créer un champ. Voici un exemple d'écouteur :
 	
@@ -121,7 +121,7 @@
 		}
 	\end{verbatim}
 	
-	Pour finir, l'un des principaux point de la gestion de l'\gls{ihm} repose sur le modèle \gls{mvc}. Donc chaque vue doit être associée à un controlleur.
+	Pour finir, l'un des principaux point de la gestion de l'\gls{ihm} repose sur le modèle \gls{mvc}. Donc chaque vue doit être associée à un contrôleur.
 				
 		\subsubsection{Première utilisation}
 	C'est au premier lancement de l'application que vont s'initialiser les données sur le mobile.
@@ -145,7 +145,7 @@
 		\end{center} 
 	Ce dernier est obligatoire afin de pouvoir utiliser l'application. L'utilisateur renseigne son pseudonyme
 	pour son profil, qui est ensuite inséré dans la base de données.
-	Le menu principal apparait alors.
+	Le menu principal apparaît alors.
 	\begin{center}						
 			\includegraphics[scale=0.3]{Developpement/Img/3.eps}
 		\end{center} 
@@ -183,7 +183,7 @@
 	
 	
 	\subsubsection{Création partie solo}
-	La section la plus interressante concerne bien évidement la création de parties
+	La section la plus intéressante concerne bien évidement la création de parties
 	locales. Vous aurez la possibilité de configurer ces dernières suivant vos
 	attentes. Cette configuration passe par le choix de la carte de jeu, officielle
 	ou au préalablement créée, mais aussi la difficulté des adversaires(\gls{bot})
@@ -200,7 +200,7 @@
 	Cette section est très proche de la création de parties locales. La seule
 	différence notable concerne le choix du nombre d'adversaire. Puisqu'il s'agit
 	de parties multijoueurs, les adversaires ne seront pas des \gls{bot} mais bel
-	est bien des humains. 
+	et bien des humains. 
 	Là encore dès que vos choix de configurations seront faits, vous pourrez
 	choisir de créer la partie. Cette dernière s'initialisera sur le serveur, et ne
 	débutera que lorsque le nombre de joueurs requis sera complété. Une page
@@ -221,7 +221,7 @@
 			\begin{center}
 				\includegraphics{./Developpement/Img/image1.png}
 			\end{center}
-			Cette première matrice sera déssinée en premier sur la carte.
+			Cette première matrice sera dessinée en premier sur la carte.
 			
 			Ensuite, la deuxième matrice sera déssinée au dessus de la précédente. Elle contient tous les blocs du décor avec lesquels les joueurs pourront intéragir. 
 			\begin{center}
@@ -230,21 +230,21 @@
 			
 			Grâce à ces deux matrices, les joueurs pourront à tout moment modifier les éléments de la première ou de la deuxième.
 			
-			En fusionnant ces deux matrices, nous obtenons la carte compléte.
+			En fusionnant ces deux matrices, nous obtenons la carte complète.
 			\begin{center}
 				\includegraphics{./Developpement/Img/image3.png}
 			\end{center}
 			
 
 	\subsubsection{Le modèle}
-		La carte est la principale information que l'éditeur de carte doit gérer. Pour représenter une carte, nous avons choisi de la représenter sous la forme de deux matrices ayant les mêmes dimensions que la carte. La première matrice contient des \textit{Object} représentant le sol et la deuxième contient elle aussi des \textit{Object} mais ces derniers représentent des blocs et non le sol. Pour gérer les deux matrices nous avons utilisé des \textit{NSMutableArray} qui sont des tableaux \gls{objective-c} que l'on peut modifier, ils contiennent eux aussi des \textit{NSMutableArray} car il n'existe pas des constructeurs de matrice comme en JAVA. Ensuite l'autre information que la carte doit possèder c'est la position de départ des joueurs. Nous avons utilisé un \textit{NSMutableDictionary} permettant de faire la liaison entre la couleur du joueur et son point de départ. 
+		La carte est la principale information que l'éditeur de carte doit gérer. Pour représenter une carte, nous avons choisi de la représenter sous la forme de deux matrices ayant les mêmes dimensions que la carte. La première matrice contient des \textit{Object} représentant le sol et la deuxième contient elle aussi des \textit{Object} mais ces derniers représentent des blocs et non le sol. Pour gérer les deux matrices nous avons utilisé des \textit{NSMutableArray} qui sont des tableaux \gls{objective-c} que l'on peut modifier, ils contiennent eux aussi des \textit{NSMutableArray} car il n'existe pas des constructeurs de matrice comme en JAVA. Ensuite l'autre information que la carte doit posséder c'est la position de départ des joueurs. Nous avons utilisé un \textit{NSMutableDictionary} permettant de faire la liaison entre la couleur du joueur et son point de départ. 
 			
-		Lorsque l'utilisateur a terminé de créer ça carte, il a besoin de la sauvegarder. Pour cela nous avons donc utilisé la sérialisation des objets. Lors de l'enregistrement de la carte un fichier \og .klob \fg  est généré. Ce dernier contient les informations nécessaires pour la reconstruction de la carte. Pour reconstruire une carte, il suffit de désérialiser le contenu du fichier \og .klob \fg correspondant. Pour utiliser la serialisation en 
-		\gls{objective-c}, nous avons juste besoin d'implémenter le protocol \textit{NSCoding} qui comporte deux méthode à définir : 
+		Lorsque l'utilisateur a terminé de créer sa carte, il a besoin de la sauvegarder. Pour cela nous avons donc utilisé la sérialisation des objets. Lors de l'enregistrement de la carte un fichier \og .klob \fg  est généré. Ce dernier contient les informations nécessaires pour la reconstruction de la carte. Pour reconstruire une carte, il suffit de désérialiser le contenu du fichier \og .klob \fg correspondant. Pour utiliser la serialisation en 
+		\gls{objective-c}, nous avons juste besoin d'implémenter le protocole \textit{NSCoding} qui comporte deux méthode à définir : 
 		\textit{- (id)initWithCoder:(NSCoder *)aDecoder} permettant de déserialisé et \textit{- (void)encodeWithCoder:(NSCoder *)aCoder} s'occupant de la serialisation.
 	
 	\subsubsection{La vue}
-		Pour faciliter le développement mais aussi ça réutilisabilité, nous avons découpé la vue de l'éditeur de carte en trois zones. Chacune de ces vues est associée à un contrôlleur qui permet de faire la liaison avec le modèle. Pour concevoir les vues nous avons utilisé la classe UIView qui est prévue pour réaliser une interface graphique sur iPhone. 
+		Pour faciliter le développement mais aussi ça réutilisabilité, nous avons découpé la vue de l'éditeur de carte en trois zones. Chacune de ces vues est associée à un contrôleur qui permet de faire la liaison avec le modèle. Pour concevoir les vues nous avons utilisé la classe UIView qui est prévue pour réaliser une interface graphique sur iPhone. 
 			
 		\begin{center}
 			\includegraphics[width=11cm]{./Developpement/Img/carte.eps}
@@ -265,7 +265,7 @@
 			
 	\subsubsection{Le controlleur}
 		
-		Le contrôleur est une partie très importante de l'architecture \gls{mvc}, il permet de faire le lien entre les interactions de l'utilisateur sur l'éditeur de carte et les données relatives à celui-ci. Nous avons  donc créé des objets de type \textit{UIViewControler}. Ces derniers nous ont permis de réaliser cette liaison. Grâce à celle-ci, le modèle et la vue sont complètement indépendants ce qui permet de changer de vue sans avoir besoin de modifier le modèle. Comme nous avons divisé l'éditeur de carte en plusieurs sous vues, nous avons donc créé un contrôleur pour chacune d'entre elles. Chacun de ces contrôleurs possède eux-même un contrôleur global qui sera le seul à contacter diréctement le modèle. Lorsqu'un utilisateur va réaliser une action dans la vue de l'éditeur de carte, cette dernière va appeler une méthode de son contrôleur directe, qui lui appellera une méthode du contrôleur global, qui se chargera d'appeler la bonne méthode du modèle en fonction de l'action effectuée par l'utilisateur. 
+		Le contrôleur est une partie très importante de l'architecture \gls{mvc}, il permet de faire le lien entre les interactions de l'utilisateur sur l'éditeur de carte et les données relatives à celui-ci. Nous avons  donc créé des objets de type \textit{UIViewControler}. Ces derniers nous ont permis de réaliser cette liaison. Grâce à celle-ci, le modèle et la vue sont complètement indépendants ce qui permet de changer de vue sans avoir besoin de modifier le modèle. Comme nous avons divisé l'éditeur de carte en plusieurs sous vues, nous avons donc créé un contrôleur pour chacune d'entre elles. Chacun de ces contrôleurs possède lui-même un contrôleur global qui sera le seul à contacter directement le modèle. Lorsqu'un utilisateur va réaliser une action dans la vue de l'éditeur de carte, cette dernière va appeler une méthode de son contrôleur directe, qui lui appellera une méthode du contrôleur global, qui se chargera d'appeler la bonne méthode du modèle en fonction de l'action effectuée par l'utilisateur. 
 
 
 
@@ -325,7 +325,7 @@
 			Un autre exemple est celui d'un sol inanimé tel que l'herbe. Dans le cas où
 			il n'y a aucun bloc (destructible) au dessus en début de partie, il en sera
 			de même à la fin. Il ne nous est pas nécessaire à chaque
-			rafraichissement de regarder si un bloc existe dessus. Ce test se fait en
+			rafraîchissement de regarder si un bloc existe dessus. Ce test se fait en
 			début de partie est sera valide jusqu'à la fin de celle-ci.
 			
 			
@@ -334,7 +334,7 @@
 			
 			
 			Si l'on avait eu un sol animé représentant de l'eau, il aurait été composé de
-			plusieurs images et aurait donc necessité un rafraichissement constant.
+			plusieurs images et aurait donc necessité un rafraîchissement constant.
 
 			$\,$
 			
@@ -508,7 +508,7 @@
 				\end{itemize}
 		
 
-			\subparagraph{Deplacements\\}
+			\subparagraph{Déplacements\\}
 			
 				$\,$
 			
@@ -576,7 +576,7 @@
 							
 				  		  \item C'est à partir de ce cas que l'on rencontre le glissement cité
 				  		  plus haut.
-				  		  Ici nous le joueur essaie de monter mais la case de gauche correspond à un
+				  		  Ici le joueur essaie de monter mais la case de gauche correspond à un
 				  		  mur. Etant donné la petitesse des écrans et la rapidité à laquelle le
 				  		  jeu se déroule il serait embêtant pour l'utilisateur de devoir se
 				  		  décaler à droite de façon à être bien en face de la case libre.
