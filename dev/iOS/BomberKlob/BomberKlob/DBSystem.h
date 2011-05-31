@@ -34,6 +34,7 @@
 /** Initializes and returns a newly allocated `DBSystem` object with the specified volume, language and last user.
  
  @param aVolume The application volume.
+ @param aMute The mute variable.
  @param aLanguage The application language.
  @param anUser The last user of application.
  @return A newly allocated `DBSystem`object with the specified volume, language and last user.

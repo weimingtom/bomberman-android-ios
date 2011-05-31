@@ -67,52 +67,100 @@
 /// @name Managing the Movements of Players
 ///----------------------------------------
 
-/** Allows you to manage the movements to the Top. */
+/** Allows you to manage the movements to the Top. 
+ 
+ @param player The player who must move.
+ */
 - (void) moveTop:(Player *)player ;
 
-/** Allows you to manage the movements to the Bottom. */
+/** Allows you to manage the movements to the Bottom. 
+ 
+ @param player The player who must move.
+ */
 - (void) moveDown:(Player *)player ;
 
-/** Allows you to manage the movements to the Left. */
+/** Allows you to manage the movements to the Left. 
+ 
+ @param player The player who must move.
+ */
 - (void) moveLeft:(Player *)player ;
 
-/** Allows you to manage the movements to the Right. */
+/** Allows you to manage the movements to the Right. 
+ 
+ @param player The player who must move.
+ */
 - (void) moveRight:(Player *)player ;
 
-/** Allows you to manage the movements to the Left-Top corner. */
+/** Allows you to manage the movements to the Left-Top corner. 
+ 
+ @param player The player who must move.
+ */
 - (void) moveLeftTop:(Player *)player ;
 
-/** Allows you to manage the movements to the Left-Bottom corner. */
+/** Allows you to manage the movements to the Left-Bottom corner. 
+ 
+ @param player The player who must move.
+ */
 - (void) moveLeftDown:(Player *)player ;
 
-/** Allows you to manage the movements to the Right-Bottom corner. */
+/** Allows you to manage the movements to the Right-Bottom corner. 
+ 
+ @param player The player who must move.
+ */
 - (void) moveRightDown:(Player *)player ;
 
-/** Allows you to manage the movements to the Right-Top corner. */
+/** Allows you to manage the movements to the Right-Top corner. 
+ 
+ @param player The player who must move.
+ */
 - (void) moveRightTop:(Player *)player ;
 
-/** Allows you to stop the movements to the Top. */
+/** Allows you to stop the movements to the Top. 
+ 
+ @param player The player who must move.
+ */
 - (void) stopTop:(Player *)player;
 
-/** Allows you to stop the movements to the Bottom. */
+/** Allows you to stop the movements to the Bottom. 
+ 
+ @param player The player who must move.
+ */
 - (void) stopDown:(Player *)player;
 
-/** Allows you to stop the movements to the Left. */
+/** Allows you to stop the movements to the Left. 
+ 
+ @param player The player who must move.
+ */
 - (void) stopLeft:(Player *)player;
 
-/** Allows you to stop the movements to the Right. */
+/** Allows you to stop the movements to the Right. 
+ 
+ @param player The player who must move.
+ */
 - (void) stopRight:(Player *)player;
 
-/** Allows you to stop the movements to the Left-Top corner. */
+/** Allows you to stop the movements to the Left-Top corner. 
+ 
+ @param player The player who must move.
+ */
 - (void) stopLeftTop:(Player *)player;
 
-/** Allows you to stop the movements to the Right-Top corner. */
+/** Allows you to stop the movements to the Right-Top corner. 
+ 
+ @param player The player who must move.
+ */
 - (void) stopRightTop:(Player *)player;
 
-/** Allows you to stop the movements to the Left-Bottom corner. */
+/** Allows you to stop the movements to the Left-Bottom corner. 
+ 
+ @param player The player who must move.
+ */
 - (void) stopLeftDown:(Player *)player;
 
-/** Allows you to stop the movements to the Right-Bottom corner. */
+/** Allows you to stop the movements to the Right-Bottom corner. 
+ 
+ @param player The player who must move.
+ */
 - (void) stopRightDown:(Player *)player;
 
 
