@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class ServletCreateGame
+ * Servlet permitting the creation of a game by an user identified 
  */
 public class ServletCreateGame extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 1L;

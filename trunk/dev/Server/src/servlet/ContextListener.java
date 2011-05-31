@@ -13,21 +13,17 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 
-
 /**
- * Servlet implementation class ContextListener
+ *  Servlet implementation class ContextListener
+ * After the initialisation of the Server, engines instance will be created
+ * parties are added to the test, it will thereafter
+ * when creating parties that this schema will be applied
+ * engines is an object shared by all servlet
  */
 public class ContextListener implements ServletContextListener{
 
 	public void contextDestroyed(ServletContextEvent event) {}
 
-
-	/**
-	 * After the initialisation of the Server, engines instance will be created
-	 * parties are added to the test, it will thereafter
-	 * when creating parties that this schema will be applied
-	 * engines is an object shared by all servlet
-	 */
 	public void contextInitialized(ServletContextEvent event) {
 		//Nous avons accès à l'objet ServletContext via l'objet ServletContextEvent
 		Engines engines = new Engines();

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class ServletManageGame
+ * Servlet used during multiplayer games, managing the games and all the interactions
  */
 public class ServletManageGame extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 1L;

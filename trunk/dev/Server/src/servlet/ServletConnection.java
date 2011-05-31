@@ -27,6 +27,8 @@ import flexjson.JSONDeserializer;
 
 /**
  * Servlet implementation class ServletConnection
+ * Servlet permitting the connection of an user to the server
+ * It replies its userKey
  */
 public class ServletConnection extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 1L;

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class ServletConnectionGame
+ * Servlet permitting the connection of an user identified to a current game
  */
 public class ServletConnectionGame extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 1L;

@@ -18,6 +18,7 @@ import game.Engines;
 
 /**
  * Servlet implementation class ServletGamesList
+ * Servlet permitting the listing of the current games in list to the claimant user 
  */
 public class ServletGamesList extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 1L;
