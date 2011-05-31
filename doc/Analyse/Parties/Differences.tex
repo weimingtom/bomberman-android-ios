@@ -1,2 +1,14 @@
-Lors du développement sous en \gls{android} et \gls{ios}, nous avons été confronté à divers problèmes. Notamment des problèmes liés aux différences entre ces deux \glspl{os}. Dans un premier temps, le langage utilisé n'est pas le même, le premier utilise le langage \gls{java} alors que l'autre utilise l'\gls{objective-c}. Ces deux langages étant des langages orientés objets, la difficulté réside surtout dans la différence des syntaxes.
-Ensuite, lors de l'implémentation de notre diagramme de classe notre premier soucis a été les différences de modélisation des vues et des controlleurs. En effet sous \gls{android}, les écouteurs d'une vue sont directement situés dans le controlleur de cette dernière alors que sous \gls{ios} les écouteurs peuvent être implémentés soit dans la vue soit dans son controlleur. Pour respecter au maximum le modèle \gls{mvc}, nous avons choisi de placer les écouteurs dans la vue sous \gls{ios} (ce qui est recommandé par Apple). 
+Lors du développement sous en \gls{android} et \gls{ios}, nous avons été
+ confronté à divers problèmes.
+Notamment des problèmes liés aux différences entre ces deux \glspl{os}.
+Dans un premier temps, le langage utilisé n'est pas le même, le premier utilise
+ le langage \gls{java} alors que l'autre utilise l'\gls{objective-c}.
+ Ces deux langages étant des langages orientés objets, la difficulté réside
+ surtout dans la différence de la syntaxe.
+Ensuite, lors de l'implémentation de notre diagramme de classe notre premier
+ soucis a été les différences de modélisation des vues et des controlleurs.
+ En effet sous \gls{android}, les écouteurs d'une vue sont directement situés
+ dans le controlleur de cette dernière alors que sous \gls{ios} les écouteurs
+ peuvent être implémentés soit dans la vue soit dans son controlleur.
+Pour respecter au maximum le modèle \gls{mvc}, nous avons choisi de placer les
+écouteurs dans la vue sous \gls{ios} (ce qui est recommandé par Apple). 
