@@ -18,6 +18,11 @@ public class Destructible extends Objects {
 		this.life = life;
 	}
 	
+	/**
+	 * Creates a copy of the destructible object
+	 * @param destructible The destructible object to copy
+	 */
+	
 	public Destructible(Destructible destructible) {
 		super(destructible);
 		this.life = destructible.life;
@@ -25,16 +30,25 @@ public class Destructible extends Objects {
 	
 	/* Setters ------------------------------------------------------------- */
 	
+	/**
+	 * Updates the life of the object
+	 * @return The life of the object
+	 */
 	public void setLife(int life) {
 		this.life = life;
 	}
 	
 	/* Getters ------------------------------------------------------------- */
 	
+	/**
+	 * Returns the object life
+	 * @return The object life
+	 */
+	
 	public int getLifeNumber() {
 		return this.life;
 	}
-	
+
 	/* Méthodes publiques -------------------------------------------------- */
 	
 	@Override
