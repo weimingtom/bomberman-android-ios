@@ -12,6 +12,11 @@ import com.klob.Bomberklob.objects.exceptions.TimeBombException;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
+/**
+ * 
+ * Class representing players in general
+ *
+ */
 public abstract class Player extends Objects {
 
 	/**
@@ -167,18 +172,18 @@ public abstract class Player extends Objects {
 		}
 	}
 
+	/**
+	 * Updates in seconds immortality of the player
+	 * @param immortal Immortality in seconds of the player
+	 */
 	public void setImmortal(int immortal) {
 		this.immortal = immortal;
 	}
 
-	public void setPointX(int x) {
-		this.position.x = x;
-	}
-
-	public void setPointY(int y) {
-		this.position.y = y;
-	}
-
+	/**
+	 * Updates the current animation player
+	 * @param animation the new animation player
+	 */
 	public void setCurrentAnimation(PlayerAnimations animation) {
 		if ( animations.get(currentAnimation) != null && !currentAnimation.equals(animation.getLabel())) {
 			this.currentAnimation = animation.getLabel();
@@ -187,27 +192,57 @@ public abstract class Player extends Objects {
 		}
 	}
 
-	public String getBombSelected() {
-		return bombSelected;
-	}
 
 	/* Getters ------------------------------------------------------------- */
 
-	public Point getObjectif() {
+	/**
+	 * Return the name of the current bomb selected
+	 * @return The name of the current bomb selected
+	 */
+	public String getBombSelected() {
+		return bombSelected;
+	}
+	
+	/**
+	 * Return the current objective of the player
+	 * @return The current objective of the player
+	 */
+	
+	public Point getObjective() {
 		return objective;
 	}
+	
+	/**
+	 * Return the power of explosion of bombs the player
+	 * @return The power of explosion of bombs the player
+	 */
 
 	public int getPowerExplosion() {
 		return this.powerExplosion;
 	}
+	
+	/**
+	 * Return the time of explosion of bombs the player
+	 * @return The time of explosion of bombs the player
+	 */
 
 	public int getTimeExplosion() {
 		return this.timeExplosion;
 	}
+	
+	/**
+	 * Returns the speed of the player
+	 * @return The speed of the player
+	 */
 
 	public int getSpeed() {
 		return this.speed;
 	}
+	
+	/**
+	 * Returns the life of the player
+	 * @return The life of the player
+	 */
 
 	public int getLife() {
 		return this.life;

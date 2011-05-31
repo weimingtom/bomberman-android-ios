@@ -14,6 +14,12 @@ import com.klob.Bomberklob.resources.PathFindingNode;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
+/**
+ * 
+ * Class of artificial intelligence
+ *
+ */
+
 public class BotPlayer extends Player {
 	
 	/**

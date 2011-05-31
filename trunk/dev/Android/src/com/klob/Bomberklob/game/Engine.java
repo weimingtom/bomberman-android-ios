@@ -215,8 +215,8 @@ public class Engine {
 		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
 			if ( position.y > this.size ) {
 
-				if (player.getObjectif() != null) {
-					if (player.getObjectif().y == position.y) {
+				if (player.getObjective() != null) {
+					if (player.getObjective().y == position.y) {
 						break;
 					}
 				}
@@ -275,8 +275,8 @@ public class Engine {
 		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
 			if ( position.y < (this.size*(this.single.map.getHeight()-1)) ) {
 
-				if (player.getObjectif() != null) {
-					if (player.getObjectif().y == position.y) {
+				if (player.getObjective() != null) {
+					if (player.getObjective().y == position.y) {
 						break;
 					}
 				}
@@ -335,8 +335,8 @@ public class Engine {
 		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
 			if ( position.x < (this.size*(this.single.map.getWidth()-1)) ) {
 
-				if (player.getObjectif() != null) {
-					if (player.getObjectif().x == position.x) {
+				if (player.getObjective() != null) {
+					if (player.getObjective().x == position.x) {
 						break;
 					}
 				}
@@ -395,8 +395,8 @@ public class Engine {
 		for (int i = 0 ; i < (ResourcesManager.getSize()/4)*player.getSpeed() ; i++ ) {
 			if ( position.x > this.size ) {
 
-				if (player.getObjectif() != null) {
-					if (player.getObjectif().x == position.x) {
+				if (player.getObjective() != null) {
+					if (player.getObjective().x == position.x) {
 						break;
 					}
 				}
