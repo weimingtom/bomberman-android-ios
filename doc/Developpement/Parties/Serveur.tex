@@ -1,6 +1,6 @@
 \subsection{Servlet}
 	
-	Comme expliqué précédement, notre serveur est conçu grace aux \glspl{servlet}.
+	Comme expliqué précédement, notre serveur est conçu grâce aux \glspl{servlet}.
 	Après avoir décrit leur fonctionnement, nous allons montrer dans cette partie
 	comment elles ont été utilisées.
 		
@@ -9,7 +9,7 @@
 		ServletContext est crée. Sa méthode contextInitialized(ServletContextEvent event) sera alors appelée, 
 		permettant ainsi de définir des objets communs à toutes les
 		\glspl{servlet}, tels qu'un accesseur à la base de données, ou le tableau qui
-		contenant les utilisateurs connectés. Les requêtes font appel à la fonction
+		contenant les utilisateurs connectés. Les requêtes font appels à la fonction
 		post des \glspl{servlet}. Le flux entrant étant de type \gls{json}, il faut
 		désérialiser le flux dans un objet correspondant. Exemple l'utilisateur envoie son nom d'utilisateur ansi que son mot de passe crypté
 		dans un tableau, sérialisé en \gls{json}.
@@ -47,7 +47,7 @@
 		En effet, lors des inscriptions ou connexion au serveur pour le mode
 		multijoueur, les mots de passes sont tout d'abord cryptés côté client et
 		ensuite encapsulés dans un flux \gls{json}, pour être envoyés au serveur. Il
-		stockera ainsi la chaine de caractères extraite de l'objet déserialisé. De cette
+		stockera ainsi la chaîne de caractères extraite de l'objet déserialisé. De cette
 		manière à aucun moment les données confidentielles ne transiteront en clair.
 		
 		De plus un mécanisme semblable aux sessions est en place. Dans la
