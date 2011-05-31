@@ -30,11 +30,11 @@
 - (id)initWithMapName:(NSString *)mapName;
 
 
-///
+///----------------------------------------------------
 /// @name Primitive Methods to Initialize or Save a Map
-///
+///----------------------------------------------------
 
-/**  */
+/** Initializes basic map. */
 - (void)initBasicMap;
 
 /** Saves the map in nameMap.klob file.
@@ -116,7 +116,7 @@
 /// @name Drawing Methods
 ///----------------------
 
-/** Draws the map in the context.
+/** Draws the map in context.
  
  @param context The view context.
  @see draw:alpha:
@@ -126,7 +126,7 @@
  */
 - (void)draw:(CGContextRef)context;
 
-/** Draws the map in the context with an alpha.
+/** Draws the map in context with an alpha.
  
  @param context The view context.
  @param alpha The drawing alpha.
@@ -137,7 +137,7 @@
  */
 - (void)draw:(CGContextRef)context alpha:(CGFloat)alpha;
 
-/** Draws the players in the context.
+/** Draws the players in context.
  
  @param context The view context.
  @see draw:
@@ -147,7 +147,7 @@
  */
 - (void)drawPlayers:(CGContextRef)context;
 
-/** Draws the players in the context with an alpha.
+/** Draws the players in context with an alpha.
  
  @param context The view context.
  @param alpha The drawing alpha.
@@ -158,7 +158,7 @@
  */
 - (void)drawPlayers:(CGContextRef)context alpha:(CGFloat)alpha;
 
-/** Draws the map and players in the context with an alpha. 
+/** Draws the map and players in context with an alpha. 
  
  @param context The view context.
  @param alpha The drawing alpha.
