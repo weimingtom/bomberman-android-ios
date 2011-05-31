@@ -22,6 +22,12 @@ import com.klob.Bomberklob.objects.Bomb;
 import com.klob.Bomberklob.objects.Objects;
 import com.klob.Bomberklob.objects.ObjectsAnimations;
 
+/**
+ * 
+ * Map used in multiplayer and solo
+ *
+ */
+
 public class GameMap extends Map {
 
 	/**

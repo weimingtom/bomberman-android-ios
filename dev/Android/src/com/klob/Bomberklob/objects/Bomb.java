@@ -17,6 +17,20 @@ public class Bomb extends Destructible {
 	protected int time;
 	protected Player player;
 
+	/**
+	 * Create a bomb with the following parameters
+	 * 
+	 * @param imageName The name of the image representing the object
+	 * @param animations The HashMap animation the object
+	 * @param currentAnimation The current animation the object
+	 * @param hit If the object is traversable
+	 * @param level The level which is the object
+	 * @param fireWall If the object blocks fire
+	 * @param damages The number of damage that makes the object
+	 * @param life Object life
+	 * @param player The player who planted the bomb
+	 */
+	
 	public Bomb(String imageName, Hashtable<String, AnimationSequence> animations, ObjectsAnimations currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, Player player) {
 		super(imageName, animations, currentAnimation, hit, level, fireWall, damages, life);
 		this.player = player;
@@ -26,6 +40,10 @@ public class Bomb extends Destructible {
 		}
 	}
 
+	/**
+	 * Create a copy of the bomb passed in parameter
+	 * @param bombs Bomb object
+	 */
 	public Bomb(Bomb bombs) {
 		super(bombs);
 		this.power = bombs.power;
@@ -33,17 +51,25 @@ public class Bomb extends Destructible {
 		this.player = bombs.player;
 	}
 
+	/**
+	 * Return the power of the bomb
+	 * @return The power of the bomb
+	 */
 	public int getPower() {
 		return power;
 	}
 
+	/**
+	 * Return the remaining time before the explosion of the bomb
+	 * @return The remaining time before the explosion of the bomb
+	 */
 	public int getTime() {
 		return time;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Return the player possessing the bomb
+	 * @return The player possessing the bomb
 	 */
 	public Player getPlayer() {
 		return player;
@@ -63,7 +89,7 @@ public class Bomb extends Destructible {
 	}
 
 	/**
-	 * Returns true if the bomb is destructible
+	 * Return true if the bomb is destructible
 	 * 
 	 * @return True if the bomb is destructible
 	 */	
@@ -92,7 +118,7 @@ public class Bomb extends Destructible {
 	}
 
 	/**
-	 * Returns true if the time of explosion of the bomb is over
+	 * Return true if the time of explosion of the bomb is over
 	 * 
 	 * @return True if the time of explosion of the bomb is over
 	 */

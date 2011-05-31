@@ -13,7 +13,14 @@ public class FrameInfo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Rect of coordinates of the image
+	 */
 	public transient Rect rect = new Rect();
+	
+	/**
+	 * Time for the next image
+	 */
 	public int nextFrameDelay;
 	public transient int top, left, bottom, right;
 

@@ -18,7 +18,7 @@ import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
 /**
- * Single game
+ * Class representing the solo parts of the game
  */
 public class Single extends Game {
 
@@ -27,6 +27,9 @@ public class Single extends Game {
 	
 	/* Constructeur -------------------------------------------------------- */
 
+	/**
+	 * Create a single player game
+	 */
 	public Single(String mapName, int enemies, String gametype, boolean random, int difficulty) {
 		super(mapName, enemies, gametype, random);
 		this.difficulty = difficulty;
