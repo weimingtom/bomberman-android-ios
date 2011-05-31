@@ -472,11 +472,11 @@
 		Ensuite nous utilisons un autre type de carte qui va permettre de 
 		faciliter les collisions, que ce soit pour un joueur humain ou pour 
 		une intelligence artificielle.
-		Cette classe est appelé "CollisionMap" et contient une matrice d'objet 
+		Cette classe est appelé "CollisionMap" et contient une matrice d'objets
 		"CollisionCase" ainsi qu'un tableau qui contient l'ensemble des bombes 
 		posées sur la carte.
 		Les "CollisionCase" sont composées de deux tableaux.
-		Chaque valeur d'un des tableau est associée à une valeur de l'autre tableau.
+		Chaque valeur d'un des tableaux est associée à une valeur de l'autre tableau.
 		Un tableau \textit{types} contient les différents types de danger ou d'objets 
 		qui existent sur cette case ainsi qu'un tableau \textit{counters} permettant 
 		en fonction de chaque type de compter le nombre de fois que ce danger ou objet 
@@ -493,48 +493,162 @@
 	
 	\subsubsection{Vue}
 	
-		L'interface graphique du jeu est décomposée en trois partie. Une partie qui représente le menu d'information de la partie, une autre qui réprésente le menu des actions possibles du joueurs et une dernière qui représente la partie en cours. 
-	Le menu d'information se situe en haut de l'écran. Il permet d'afficher le score des joueurs, le temps lors d'une partie death match ainsi que les bonus du joueurs (le nombre de bombes qu'il peut poser, la portée de l'explosion des bombes, la vitesse du joueur et les bonus de vie) et de mettre le jeu en pause.
-	Le menu d'action se situe à droite de l'écran. Il permet à l'utilisateur de poser les bombes grâce à un bouton et aussi de changer de type de bombes grâce à une liste déroulante.
-	Quand à la partie, elle est afficher au centre de l'écran et prend le maximum de place possible pour que le jeu soit le plus visible possible. Elle permet d'afficher la carte ainsi que les joueurs et les bombes. Mais elle sert aussi à écouter les mouvements du doigt de l'utilisateur pour modifier les coordonnées du joueur dans le modèle pour pouvoir ensuite rafraichir l'écran et voir le joueur se deplacer.
+		L'interface graphique du jeu est décomposée en trois parties.
+		Une partie qui représente le menu d'information de la partie, 
+		une autre qui réprésente le menu des actions possibles du joueurs 
+		et une dernière qui représente la partie en cours.
+		
+		Le menu d'information se situe en haut de l'écran.
+		Il permet d'afficher le score des joueurs, le temps lors d'une partie 
+		death match ainsi que les bonus du joueurs (le nombre de bombes qu'il 
+		peut poser, la portée de l'explosion des bombes, la vitesse du joueur 
+		et les bonus de vie) et de mettre le jeu en pause.
+		
+		Le menu d'action se situe à droite de l'écran.
+		Il permet à l'utilisateur de poser les bombes grâce à un bouton 
+		et aussi de changer de type de bombes grâce à une liste déroulante.
 	
+		Quant à la partie, elle est affichée au centre de l'écran et prend le 
+		maximum de place possible pour que le jeu soit le plus visible.
+		Elle permet d'afficher la carte ainsi que les joueurs et les bombes.
+		Mais elle sert aussi à écouter les mouvements du doigt de l'utilisateur
+		pour modifier les coordonnées du joueur dans le modèle pour pouvoir 
+		ensuite rafraichir l'écran et voir le joueur se deplacer.	
 	
 	
 	\subsubsection{Controlleur}
 	
-	Le controlleur va permettre de faire la liaison entre la vue et le modèle. La majorité de ces méthodes sont appelé lorsque l'utilisateur interagie avec la vue. Ces méthodes vont par la suite modifier le modèle qui va permettre de mettre à jour la vue. Le controlleur est divisé en quatre sous-controlleur. Chacun des trois premiers est respectivement associé à l'une des trois vues cité ci-dessus. Puis le quatrième est plus général, il permet de faire la liaison entre les trois autres controlleurs. Car en effet chacune des actions effectués sur l'une des  vue peut modifier l'une des deux autres.
+		Le controlleur va permettre de faire la liaison entre la vue et le modèle.
+		La majorité de ces méthodes sont appelées lorsque l'utilisateur interagit avec la vue.
+		Ces méthodes vont par la suite modifier le modèle qui va permettre de mettre à jour la vue.
+		Le controlleur est divisé en quatre sous-controlleurs.
+		Chacun des trois premiers est respectivement associé à l'une des trois vues cité ci-dessus.
+		Puis le quatrième est plus général, il permet de faire la liaison entre les trois autres controlleurs.
+		Car en effet chacune des actions effectuées sur l'une des vues peut modifier l'une des deux autres.
 	
 	\subsubsection{GamePlay}
-	Nous avons choisi d'établir un gameplay immersif. C'est à dire que notre interface graphique sera utilisée de manière souple et intuitive. Notre gameplay est divisé en trois parties: les déplacements, la pose des bombes et la gestion des différents types de bombes.
+	
+		Nous avons choisi d'établir un gameplay immersif.
+		Notre gameplay est divisé en trois parties: les déplacements, la pose des bombes et la gestion des différents types de bombes.
 		
-		Pour ce qui est des déplacements du joueurs. Nous avons décidé que l'utilisateur utiliserais toute la surface de l'écran pour se déplacer. Ainsi si il veut se déplacer vers la droite, il fait glisser sont doigt de la gauche vers la droite, puis tant qu'il restera appuyer sur l'écran, le joueur continura de se déplacer. Cette manière de se déplacer est précise et très intuitive contrairement à l'utilisation d'un joystick virtuel ou de l'accéléromètre.
+		Pour ce qui est des déplacements du joueurs, nous avons décidé que 
+		l'utilisateur utiliserait toute la surface de l'écran pour se déplacer.
+		Ainsi si il veut se déplacer vers la droite, il fait glisser sont doigt 
+		de la gauche vers la droite, puis tant qu'il restera appuyé sur l'écran,
+		le joueur continura de se déplacer.
+		Cette manière de se déplacer est précise et très intuitive contrairement
+		à l'utilisation d'un joystick virtuel ou de l'accéléromètre.
 		
-		Pour la pause des bombes un simple boutton est mis en évidence en bas à droite de l'écran. Celui-ci est assez gros pour que l'utilisateur n'est pas à appuyer sur une zone trop précise en cas de manipulation rapide.
+		Pour la pause des bombes un simple boutton est mit en évidence en bas à
+		 droite de l'écran.
+		 Celui-ci est assez gros pour que l'utilisateur n'est pas à appuyer sur
+		 une zone trop précise en cas de manipulation rapide.
 		
-		Puis pour le choix des différentes bombes, une simple liste déroulante est mise en évidence à droite du jeu, pour pouvoir changer de bombe rapidement.\\
+		Puis pour le choix des différentes bombes, une simple liste déroulante 
+		est mise en évidence à droite du jeu.\\
 		
 		\subsubsection{Tile Mapping}
 
-		La gestion des images a été une partie très importante de l'analyse. Car le développement mobile impose plusieurs contraintes, notament la gestion de la mémoire et la vitesse de calcul. Nous nous sommes donc inspiré des premiers jeux consoles comme Super Mario Bros ou Zelda qui ont été développé sur les premieres consoles comme la \gls{nes} ou la \gls{game_boy}. Nous avons donc conçu le moteur du jeu selon le principe du \gls{tile_mapping} pour minimiser l'utilisation des ressources des téléphones.
+			La gestion des images a été une partie très importante de l'analyse
+			car le développement mobile impose plusieurs contraintes, notamment 
+			la gestion de la mémoire et la vitesse d'affichage.
+			
+			Nous nous sommes donc inspirés des premiers jeux consoles comme 
+			Super Mario Bros ou Zelda qui ont été développés sur les premières 
+			consoles comme la \gls{nes} ou la \gls{game_boy}.
+			Nous avons donc conçu le moteur du jeu selon le principe du \gls{tile_mapping} 
+			pour minimiser l'utilisation des ressources des téléphones.
 		
-		Le principe du Tile Mapping est d'utiliser des petites images que nous appelerons \textit{tiles}. Ces tiles sont contenu dans une image appelé sprite (cf ci-dessous).
-		Ensuite une matrice de nombre entier est utilisé pour représenter l'environnement du jeu. Chaque nombre entier représente un tile. Puis grâce à cette association, la carte sera dessiné à l'écran selon la matrice. Voici un exemple :
+			Le principe du Tile Mapping est d'utiliser des petites images que nous appelerons \textit{tiles}.
+			Ces tiles sont toutes contenues dans une image.
+			Ensuite une matrice de nombre entier est utilisé pour représenter l'environnement du jeu.
+			Chaque nombre entier représente un tile.
+			Puis grâce à cette association, la carte sera dessiné à l'écran selon la matrice.
+			Voici un exemple :
 		
-		\includegraphics[width=15cm]{./Analyse/Img/tileMapping.eps}
+			\includegraphics[width=15cm]{./Analyse/Img/tileMapping.eps}
 		
+			Pour pouvoir animer certains de ces objets nous avons utilisé des sprites.
+			Les sprites contrairement aux tile sont un ensemble d'images représentant
+			une animation.
 		
-		Nous avons donc repris ce principe et nous l'avons amélioré. En effet grâce à la programmation objet, les entiers sont réprésenté directement par des objets contenant le tile qui le représente. Ainsi, nous stockons dans une matrice tous les objets inanimés (les objets dont le tile restera le meme tout le long de la partie) et nous parcourons cette matrice pour dessiner chaque objet à sa position pour obtenir une nouvelle image au format png. Ainsi à chaque rafraichissement de l'écran, seule la nouvelle image est dessiné et non pas chaque tile. Cette méthode permet d'éviter un parcours intempestif de la matrice.
-		Ensuite pour le reste des objets (les objets animés composés d'une sequence de tiles) nous avons décidé de les stocker dans une table de hachage dont la clé est la position de l'objet (pour y accéder plus rapidement). Ainsi à chaque rafraichissement de l'écran on va dessiner l'image des objets inanimés puis parcourir entierement la table de hachage et dessiner le tile courant de la sequence d'animation de chaque objet.
+			Nous avons donc repris ce principe et nous l'avons amélioré.
+			En effet grâce à la programmation objet, les entiers sont réprésenté directement par des objets
+			contenant les tiles/sprites qui les représentent.
+			
+			Ainsi, nous stockons dans une matrice tous les objets inanimés
+			(les objets dont le tile restera le meme tout le long de la partie)
+			et nous parcourons cette matrice pour dessiner chaque objet à sa 
+			position pour obtenir une nouvelle image au format png.
+			A chaque rafraichissement de l'écran, seule la nouvelle image est dessinée 
+			et non pas chaque tile.
+			Cette méthode permet d'éviter un parcours intempestif de la matrice.
+			
+			Ensuite pour le reste des objets dit animés (repésentés par des sprites)
+			nous avons décidé de les stocker dans une table de hachage dont la 
+			clé est la position de l'objet (pour y accéder plus rapidement).
+			Lors du rafraichissement de l'écran on parcourra entierement la 
+			table de hachage et l'on dessinera l'image courante de la sequence 
+			d'animation de chaque objet.
 		
 		\subsubsection{La gestion des images et du son}
 		
-		Chaque image, tile et chaque son dont est composé le jeu sont chargé au lancement de l'application. Tous les tiles sont stocké dans des images appelés sprites. Un sprite est donc un ensemble d'image. L'ensemble des tiles sont stockés dans différents sprites. Il y a un sprite pour les bombes, un pour les joueurs et un autre pour le reste des objets. Chaque sprite contient l'ensemble des images des objets qu'il représente. Chaque sprite est associé à un fichier \gls{xml}. Le fichier XML peut être réprésenté sous forme d'un arbre. Les fichiers XML ressemble tous plus au moins a ce genre d'arborescence: 
+			Chaque image et chaque son dont est composé le jeu sont chargés au lancement de l'application.
+ 			
+ 			Afin de pouvoir ajouter facilement un objet et le modifier sans avoir à toucher au code
+ 			source, nous avons décidé d'opter pour les stocker sur des fichiers au format \gls{xml}
+ 			Les fichiers \gls{xml} ressemblent tous plus au moins a ce genre d'arborescence: 
 		
 		\includegraphics[width=15cm]{./Analyse/Img/exampleXmlBomberklob.eps}
 		
-		Chaque fichier XML commence par une balise racine permettant de lister les objets qu'elle contient (\textit{<objects>}). Ensuite chaque objet est décris par une balise  qui contient le type, le nom de l'objet ainsi que l'ensemble de ses propriétés. La propriété \textit{hit} est à 1 si l'objet peut être touché par une explosion (0, sinon), le champ \textit{level} est à 1 si l'objet est animés (0,sinon), le champ \textit{fireWall} est à 1 si l'objet ne laisse pas passer les flammes des explosions, le champ \textit{life} indique le nombre de fois que l'objet doit etre touché par des flammes pour qu'il soit entierement détruit, et enfin le champ \textit{damages} indique si l'objet peut infliger des domages. Par exemple \textit{<destructible name="herb" hit="1" level="1" fireWall="1" life="1" damages="0">} décris un objet de type \textit{destructible}, qui peut-etre touché par des flammes, qui est animé, ne laisse pas passer les flammes des bombes, possede une vie,  n'inflige pas de domage et dont le nom est \textit{herb} . Ensuite chaque objet possède au plus trois balises animations (sauf pour les joueurs). Tout objet possède au moins la premiere balise:  <animation name="idle" canLoop="false" sound="sound\_path"> qui est celle dont le nom est \textit{idle}. Elle représente l'image standard de l'objet. Par exemple pour un objet bombe, ce sera l'image qui sera affiché dans la liste des bombes pour pouvoir selectionner ses bombes. Le champs \textit{canLoop} permet de savoir si l'image doit être répété en boucle et le champ \textit{sound} contient le chemin d'acces au fichier de son de l'animation si elle en possede un. Il y a ensuite la même balise mais dont le nom est \textit{animate}, celle-ci contiendra toutes les sequences d'images d'un objet qui est animés. Puis la dernière est celle dont le nom est \textit{destroy}. Cette derniere contiendra l'ensemble des images composant la sequences d'animation de destruction de l'objet. Enfin chaque balise de type animation contient des balises de type \textit{framerect}. Ces balises permettent de donner la position de chaque image de la séquence d'animation dans le sprite ainsi que le delay de rafraichissement entre chaque image. Par exemple \textit{<framerect top="60" left="30" bottom="90" right="60" delayNextFrame="1" />} représente une image dont le bord du haut est situé à 30pixels, le bord du bas à 90pixels, le bord de gauche à 30pixels et le bord de droite à 60pixels en partant du coin en haut à gauche du sprite. Puis pour le champ \textit{delayNextFrame} celui-ci informe que l'image suivante sera déclenché apres un delay de 1s.\\
+			Chaque fichier \gls{xml} commence par une balise racine permettant 
+			de lister les objets qu'elle contient (\textit{<objects>}).
+			Ensuite chaque objet est décris par une balise  qui contient le type,
+			le nom de l'objet ainsi que l'ensemble de ses propriétés.
+			
+			La propriété \textit{hit} est à 1 si l'objet n'est pas traversable par un joueur (0, sinon), 
+			le champ \textit{level} est à 1 si l'objet se trouve au premier niveau de la carte (0,sinon), 
+			le champ \textit{fireWall} est à 1 si l'objet ne laisse pas passer les flammes des explosions, 
+			le champ \textit{life} indique le nombre de fois que l'objet doit etre touché
+			et enfin le champ \textit{damages} indique si l'objet peut infliger des domages.
+			
+			Par exemple \textit{<destructible name="herb" hit="1" level="1" fireWall="1" life="1" damages="0">} 
+			décris un objet de type \textit{destructible}, qui n'est pas traversable, se trouvant au niveau
+			1 sur la carte, ne laissant pas passer les flammes des bombes, possedant une vie, 
+			n'infligeant pas de dommage et dont le nom est \textit{herb}.
+			
+			Ensuite chaque objet possède au plus trois balises animations (sauf pour les joueurs).
+			Tout objet possède au moins la premiere balise: 
+			<animation name="idle" canLoop="false" sound="sound\_path"> 
+			qui est celle dont le nom est \textit{idle}.
+			
+			Elle représente l'image standard de l'objet.
+			Par exemple pour un objet bombe, ce sera l'image qui sera affichée dans la liste des bombes 
+			pour pouvoir selectionner ses bombes.
+			Le champs \textit{canLoop} permet de savoir si l'animation doit être répétée en boucle 
+			et le champ \textit{sound} contient le chemin d'accès au fichier de son de l'animation 
+			si elle en possede un.
+			
+			Il y a ensuite la balise mais dont le nom est \textit{animate}, celle-ci contiendra *
+			toutes les sequences d'images d'un objet qui est animés.
+			La dernière est celle dont le nom est \textit{destroy} et qui contiendra 
+			l'ensemble des images composant la sequences d'animation de destruction de l'objet.
+			Enfin chaque balise de type animation contient des balises de type \textit{framerect}.
+			Ces balises permettent de donner la position de chaque image de la séquence d'animation
+			dans la bitmap globale ainsi que le delai de rafraichissement entre chaque image.
+			Par exemple \textit{<framerect top="60" left="30" bottom="90" right="60" delayNextFrame="1" />}
+			représente une image dont le bord du haut est situé à 30pixels, le bord du bas à 90pixels, 
+			le bord de gauche à 30pixels et le bord de droite à 60pixels en partant du coin en haut à 
+			gauche de l'image globale.
+			Puis pour le champ \textit{delayNextFrame} celui-ci informe que l'image suivante sera déclenchée 
+			apres un delay de 1s.\\
 		
-		Grâce à cette modélisation, l'application va parcourir au démarrage l'ensemble des fichiers XML et va créer une table de hachage pour chaque ensemble d'objet du fichier. Lors de ce parcours, l'application va instancier chaque objet avec toutes propriétés que lui indique le document XML, ainsi que ses sequences d'animation. Ensuite lorsqu'un objet devra être utilisé dans le jeu, il suffira d'utiliser une copie de l'objet déja chargé en mémoire pour éviter de devoir reparcourir le fichier.
+			Grâce à cette modélisation, l'application va parcourir au démarrage l'ensemble des fichiers 
+			XML et va créer une table de hachage pour chaque ensemble d'objet du fichier.
+			Lors de ce parcours, l'application va instancier chaque objet avec toutes propriétés 
+			que lui indique le document XML, ainsi que ses sequences d'animations.
+			Ensuite lorsqu'un objet devra être utilisé dans le jeu, il suffira d'utiliser 
+			une copie de l'objet déja chargé en mémoire pour éviter d'avoir à reparcourir le fichier.
 
 
 \subsection{Réseau}
@@ -558,10 +672,11 @@
 		Les six éléments situés sur la partie haute du schéma
 		ci-dessous(respectivement ServletInscription, ServletConnection,
 		ServletGamesList, ServletCreateGame, ServletConnectionGame et
-		ServletManageGame), représente les différentes tâches qu'un utilisateur
+		ServletManageGame), représentent les différentes tâches qu'un utilisateur
 		puisse demander au serveur. Elles sont reliées à une classe nommée
 		ContextListener, qui leur permettra d'accéder aux mêmes données sans qu'il y
-		ait de conflits. La partie basse représente les objets qui seront utilisés pour les parties en multijoueurs. 
+		ait de conflit. La partie basse représente les objets qui seront utilisés 
+		pour les parties en multijoueur. 
 		Bien évidemment ces objets sont très proches de ceux utilisés dans les parties
 		locales(Schéma 3.3).
 		
@@ -571,7 +686,7 @@
 		d'application nommé Apache Tomcat. Il s'agit d'un conteneur libre de
 		servlets Java 2 Enterprise Edition, mais il fait aussi office de serveur
 		Web.\\
-		Un scénarios probable serait qu'un utilisateur désire jouer
+		Un scénario probable serait qu'un utilisateur désire jouer
 		en ligne contre de vrais joueurs. 
 		Il passera par l'inscription et créera son compte sur le
 		serveur(Inscription). Une fois cette étape obligatoire faite, il choisira
@@ -590,6 +705,7 @@
 		
 		
 	\paragraph{JSON\\}	
+	
 		Soucieux des performances et de la rapidité des échanges entre applications et
 		serveur, nous avons mis en place un protocole de communication client/serveur
 		où les messages transitant sont des flux \gls{json}. 	
