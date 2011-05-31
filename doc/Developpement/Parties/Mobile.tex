@@ -276,10 +276,10 @@
 	
 		Au sein d'un jeu vidéo plusieurs types de moteurs sont mis en place.
 		Chacun a un travail bien précis.
-		Ici nous en retrouvons trois au total à savoir un pour le rendu graphique, un
-		pour s'occuper de la physique et un dernier gerant les actions de
-		l'intelligence artificielle.
-		Commencons par le moteur de rendu.
+		Ici nous en trouvons trois au total à savoir un pour le rendu graphique, un
+		pour s'occuper des interactions joueurs et objets. En enfin un dernier gérant
+		les actions de l'intelligence artificielle.
+		Commençons par le moteur de rendu.
 	
 		\paragraph{Moteur de rendu\\}
 		
@@ -292,11 +292,10 @@
 				\hyperlink{Editeur de carte}{Editeur de carte}
 				\og voir section \ref{Editeur de carte}, page \pageref{Editeur de carte}.\fg
 			}
-			le moteur de rendu se doit être beaucoup plus léger car le jeu doit dans son
-			ensemble rester le plus fluide afin d'offrir à l'utilisateur une meilleure
-			experience vu qu'ici il faut en plus de gérer le rendu, s'occuper du
-			physique
-			\footnote{
+			le moteur de rendu se doit d'être beaucoup plus léger. En effet le jeu doit
+			dans son ensemble rester le plus fluide afin d'offrir à l'utilisateur une meilleure
+			experience. Il faut savoir qu'ici en plus de gérer le rendu, l'application
+			doit s'occuper des interactions joueurs et objets \footnote{
 				\hyperlink{Moteur physique}{Moteur physique}
 				\og voir section \ref{Moteur physique}, page \pageref{Moteur physique}.\fg
 			}.
@@ -315,20 +314,20 @@
 			$\,$	
 			
 			L'utilisateur ne pourra plus modifier la carte à sa guise et sera
-			entièrement dépendant du moteur physique\footnotemark[3] c'est à dire par
-			exemple qu'ici un bloc indestructible sera présent tout au long de la
+			entièrement dépendant du moteur physique\footnotemark[3]. Par
+			exemple un bloc indestructible sera présent tout au long de la
 			partie et ne pourra pas être supprimé, il n'est donc plus necessaire de
-			savoir quel type de sol se trouve dessous, de plus comme celui-ci ne peut pas
+			savoir quel type de sol se trouve dessous. De plus comme celui-ci ne peut pas
 			être détruit et qu'il n'est pas animé son état sera toujours le même et ne
 			correspondra qu'à une seule et unique image.
 			
 			$\,$			
 			
-			Un autre exemple est celui d'un sol inanimé tel que l'herbe où si il n'y a
-			aucun bloc (destructible) au dessus en début de partie il en sera de même à
-			la fin donc il ne nous est pas necessaire à chaque rafraichissement de
-			regarder si un bloc existe dessus, ce test se fait en début de partie est
-			sera valide jusqu'à la fin de celle-ci.
+			Un autre exemple est celui d'un sol inanimé tel que l'herbe. Dans le cas où
+			il n'y a aucun bloc (destructible) au dessus en début de partie, il en sera
+			de même à la fin. Il ne nous est pas nécessaire à chaque
+			rafraichissement de regarder si un bloc existe dessus. Ce test se fait en
+			début de partie est sera valide jusqu'à la fin de celle-ci.
 			
 			
 			Cette remarque s'applique sur tous les objets dits \emph{non animés} dont
@@ -352,20 +351,20 @@
 			
 			Si ce bloc est destructible alors il nous est obligatoire de savoir ce qui se
 			trouve en dessous.
-			Nous allons donc stocker ce bloc dans une hashmap dont les cléfs sont les
-			coordonnées de l'objet et dont la valeur est l'objet lui même et dessiner le
+			Nous allons donc stocker ce bloc dans une hashmap dont les clefs sont les
+			coordonnées de l'objet et dont la valeur est l'objet lui même, et dessiner le
 			sol sur l'image citée au dessus.
 			
-			Si ce bloc est indestructible alors inutile de mémorisé le sol se trouvant
+			Si ce bloc est indestructible alors inutile de mémoriser le sol se trouvant
 			au dessous.
 			
-			Sinon s'il n'existe pas de bloc nous allons regarder si le sol est animé, si
-			oui alors nous le stockons dans la hashmap comme un bloc destructible sinon
-			nous le dessinons dans l'image comme un objet inanimé.
+			Sinon s'il n'existe pas de bloc nous allons regarder si le sol est animé. Si
+			tel est le cas, alors nous le stockons dans la hashmap comme un bloc
+			destructible, sinon nous le dessinons dans l'image comme un objet inanimé.
 			
 			$\,$
 			
-			Voici un exemple concret de la methode décrite au dessus :
+			Voici un exemple concret de la méthode décrite au dessus :
 				
 
 			\begin{figure}[!h]			
@@ -388,11 +387,11 @@
 			
 			\newpage
 
-			Les avantages d'avoir utilisé une telle structure est qu'ici au lieu de
-			parcourir les 21*13*2 cases des deux matrices à chaque rafraichissement
+			Les avantages d'avoir utilisé une telle structure sont les suivants. Ici au
+			lieu de parcourir les 21*13*2 cases des deux matrices à chaque rafraichissement
 			(c'est à dire toutes les 50 millisecondes environ) et d'afficher au minimum
 			21*13 objets pour le sol et 64 objets pour les bordures si la carte est vide
-			donc énormement plus si il existe d'autres objets, nous n'affichons qu'une
+			(donc énormement plus si il existe d'autres objets), nous n'affichons qu'une
 			image plus au maximum 197 objets.
 			
 			\begin{center}
@@ -404,9 +403,9 @@
 			\end{center}
 			
 			Le meilleur des cas ici décrit une carte vide donc composée que de sol non
-			animé ansi que des bordures de la carte, ce qui représente dans le nouveau
+			animé ansi que des bordures de la carte. Cela représente dans le nouveau
 			moteur de rendu une seule et unique image contrairement à l'ancien où chaque
-			objet étant affiché indépendament cela equivaut à 337 objets.
+			objet étant affiché indépendament, ce qui était équivalent à 337 objets.
 			
 			$\,$
 			
@@ -415,13 +414,13 @@
 			
 			$\,$
 			
-			Nous voyons très clairement les différences de coûts entre les deux methodes
+			Nous voyons très clairement les différences de coûts entre les deux méthodes
 			de rendu et l'optimisation qu'engendre la deuxième.
 			
 			De plus ici l'utilisation de la hashmap permet dans un premier temps de
-			retrouver directement un objet de par ses coordonnées mais aussi de ne pas
-			avoir à parcourir $n$ cases vides comme lors de l'utilisation des matrices
-			car au fur et à mesure de la partie il existera de moins en moins d'objets
+			retrouver directement un objet de par ses coordonnées, mais aussi de ne pas
+			avoir à parcourir $n$ cases vides comme lors de l'utilisation des matrices.
+			Au fur et à mesure de la partie il existera de moins en moins d'objets,
 			donc garder une structure aussi grosse qu'une matrice n'est pas optimal.
 		
 		\paragraph{Moteur physique\\}
@@ -438,8 +437,9 @@
 			
 			
 			Ici notre moteur physique se contentera simplement de s'occuper des diverses
-			colisions qu'auront les joueurs avec l'environnement les entourant ansi que
-			les intéractions qu'auront les divers objets du décors entre eux ainsi qu'avec les joueurs.
+			collisions qu'auront les joueurs avec l'environnement les entourant. Mais
+			aussi les intéractions qu'auront les divers objets du décors entre eux
+			ainsi qu'avec les joueurs.
 
 			$\,$		
 			
@@ -448,8 +448,8 @@
 				\hyperlink{Moteur de rendu}{Moteur de rendu}
 				\og voir section \ref{Moteur de rendu}, page \pageref{Moteur de rendu}.\fg
 			}
-			le moteur physique d'un jeu doit être optimal dans les traitements qu'il a à
-			effectuer vu que son utilisation est permanente au cour du jeu.
+			le moteur physique d'un jeu doit être optimal dans les traitements qu'il doit
+			effectuer, étant donnée son utilisation permanente au cour du jeu.
 			
 			
 			Afin d'optimiser ces traitements lors des collisions nous avons fusionné les
@@ -474,18 +474,18 @@
 				DAMAGE & Une zone de dommages (piques, lasers, etc \ldots) \\\hline
 				DANGEROUS\_AREA & Une zone dangereuse\\\hline
 				BOMB & Une bombe\\\hline
-				FIRE & Feu resultant de l'explosion d'une bombe\\\hline
+				FIRE & Feu résultant de l'explosion d'une bombe\\\hline
 				\end{tabular}
 			\end{center}
 			
 			Les zones dangereuses sont les zones qui seront touchées lors de l'explosion
-			d'une bombe, ces zones sont spécifique à l'intelligence artificielle et leur
+			d'une bombe. Ces zones sont spécifiques à l'intelligence artificielle et leur
 			permettent de savoir si elles sont en danger ou non.
 			
 			
 			$\,$
 			
-			Cette matrice est mise à jour lors de la pose et de l'explosion d'une bombe
+			Cette matrice est mise à jour lors de la pose et de l'explosion d'une bombe.
 			
 			De cette façon il est rapide de savoir si un joueur rentre en collision avec
 			un objet quelconque ou si celui-ci subit des dommages.
@@ -499,7 +499,7 @@
 							\includegraphics[width=115mm,height=71mm]{Developpement/Img/mapcolision_1.eps}
 						\end{center}				  		
 				  
-				  \item Carte de colision :
+				  \item Carte de collision :
 				  
 						\begin{center}						
 							\includegraphics[width=115mm,height=102mm]{Developpement/Img/mapcolision_2.eps}
@@ -515,31 +515,30 @@
 				Globalement la gestion des mouvements est identique sur Android comme sur
 				iOS.
 				Elle consiste à poser le doigt sur l'écran et à le faire glisser dans la
-				direction souhaitée ainsi le personnage avancera jusqu'à que le doigt soit
-				relevé.				
+				direction souhaitée. Ainsi le personnage avancera jusqu'à ce que le doigt
+				soit relevé.				
 				
-				Quant à la gestion des colisions bien que chaque équipe utilise la matrice
-				décrite ci dessus, les façons de concevoir la chose ont divergé proposant au
-				final deux méthodes de rendu.
-				Dans chacune le joueur se deplace verticalement, horizontalement ainsi qu'en
-				diagonales.
+				Quant à la gestion des collisions bien que chaque équipe utilise la matrice
+				décrite ci dessus, les façons de concevoir la chose ont divergé amenant à
+				l'élaboration de deux méthodes de rendu. Dans chacune le joueur se deplace
+				verticalement, horizontalement ainsi qu'en diagonale.
 				
 				\begin{enumerate}
-				  \item Colisions sous Android
+				  \item Collisions sous Android
 				  
-				  		Le principe de collisions sous Android a été de façon à faire ``glisser''
-				  		ou non le joueur lorsqu'il rencontre des obstacles.
+				  		Le principe de collisions sous Android a été conçu de manière à faire
+				  		``glisser'' ou non le joueur lorsqu'il rencontre des obstacles.
 				  		
 				  		
 				  		Pour cela nous allons étudier un mouvement qui sera celui vers le haut
 				  		afin de mieux comprendre ce terme.
-				  		Nous aurions pu prendre n'importe quel aute mouvement cela serait revenu
-				  		au même.
+				  		Nous aurions pu prendre n'importe quel autre mouvement cela serait
+				  		revenu au même point.
 				  		
 				  		Il faut juste retenir qu'au mieux le joueur est dans une case et au pire
-				  		dans deux et non dans quatre car lors d'un déplacement nous n'allons
-				  		regarder que la face correspondant à cette direction comme le montre
-				  		l'image ci-dessous
+				  		dans deux et non dans quatre. En effet lors d'un déplacement nous
+				  		n'allons regarder que la face correspondant à cette direction comme le montre
+				  		l'image ci-dessous:
 				  		
 				  		$\,$
 				  		
@@ -554,10 +553,10 @@
 				  		
 				  		
 				  		Nous partons du principe qu'il n'y a pas de vérification à faire tant
-				  		que le joueur ne change pas de case car du moment où il y est entré
-				  		c'est qu'elle est entierement traversable.
+				  		que le joueur ne change pas de case, car du moment où il y est entré
+				  		c'est qu'elle est entièrement traversable.
 				  		
-				  		Il existe donc quatres types de colisions possibles :
+				  		Il existe donc quatres types de collisions possibles :
 				  		
 				  		\begin{enumerate}
 
@@ -578,11 +577,11 @@
 				  		  \item C'est à partir de ce cas que l'on rencontre le glissement cité
 				  		  plus haut.
 				  		  Ici nous essayons de monter mais la case de gauche correspond à un
-				  		  mur, étant donné la petitesse des écrans et la rapidité à laquelle le
-				  		  jeu se déroule il serait embetant pour l'utilisateur de devoir se
-				  		  decaler à droite de façon à être bien en face de la case libre.
+				  		  mur. Etant donné la petitesse des écrans et la rapidité à laquelle le
+				  		  jeu se déroule il serait embêtant pour l'utilisateur de devoir se
+				  		  décaler à droite de façon à être bien en face de la case libre.
 				  		  Nous avons donc pris en compte le cas où le joueur aurait dépassé la
-				  		  moitié du bloc intraversable, dans ce cas là nous le faisons glisser
+				  		  moitié du bloc intraversable. Dans ce cas là nous le faisons glisser
 				  		  sur la droite de façon à ce que celui-ci se place convenablement en
 				  		  face de la case et monte normalement.
 				  		  
@@ -590,8 +589,8 @@
 								\includegraphics[width=84px,height=84px]{Developpement/Img/ko3.eps}
 							\end{center}
 				  		  
-				  		  \item Le dernier cas est l'opposé du précédent et marche de la même
-				  		  manière.
+				  		  \item Le dernier cas est l'opposé du précédent et fonctionne de la
+				  		  même manière.
 				  		  
 				  		  	\begin{center}						
 								\includegraphics[width=84px,height=84px]{Developpement/Img/ko4.eps}
@@ -602,9 +601,24 @@
 				  
 				  \item Collisions sous iOS
 				
-				Le principe des collisions sous IOS a été réflechie de maniere a ce que les déplacements soit fluides et que les collisions avec des blocs ne freinnent pas la fluidité du jeu. Car en effet lors des collisions, si le joueur doit passer entre deux blocs, celui-ci doit passer au pixel pret. Cela implique que l'utilisateur doit être très minutieu dans ses déplacements et cela rend le jeu casiment injouable lors de passage entre deux blocs. Donc pour remédier à ce problème nous avons décidé d'établir un système de marge sous IOS . C'est à dire que lors de la collision avec un bloc. On va vérifier si au moin un pixel du joueur touche au moins un pixel du bloc moins une marge. Voici le tout en image:
+				Le principe des collisions sous IOS a été réfléchi de manière a ce que les
+				déplacements soient fluides et que les collisions avec des blocs ne
+				freinent pas la fluidité du jeu. Car en effet lors des collisions, 
+				si le joueur doit passer entre deux blocs, 
+				celui-ci doit passer au pixel prêt. Cela implique que l'utilisateur doit
+				être très minutieux dans ses déplacements et cela rend le jeu casiment
+				injouable lors de passage entre deux blocs. 
+				Donc pour remédier à ce problème nous avons décidé d'établir un système de marge sous IOS.
+				C'est à dire que lors de la collision avec un bloc. 
+				On va vérifier si au moins un pixel du joueur touche au moins un pixel du
+				bloc moins une marge. 
+				Voici le tout en image:
 
-				Il faut donc que le rectangle rouge entourant le joueur ne touche aucun autre rectangle rouge entourant les blocs pour que le joueur puisse se déplacer. Les rectangles entourant les blocs sont réduit grâce à la marge (fleche jaune) pour permettre à l'utilisateur de passer facilement.
+				Il faut donc que le rectangle rouge entourant 
+				le joueur ne touche aucun autre rectangle rouge entourant
+				les blocs, pour que le joueur puisse se déplacer. Les rectangles délimitant
+				les blocs sont réduits grâce à la marge (fleche jaune) pour permettre à
+				l'utilisateur de passer facilement.
 				
 				$\,$
 				  		

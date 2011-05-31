@@ -13,11 +13,10 @@
 		Au lancement du serveur la classe ContextListener est invoquée lorsque l'objet
 		ServletContext est crée. Sa méthode contextInitialized(ServletContextEvent event) sera alors appelée, 
 		permettant ainsi de définir des objets communs à toutes les
-		\glspl{servlet}, tels qu'un accesseur à la base de données, ou le tableau qui va
-		contenir les utilisateurs connectés.	
-		Les requêtes font appel à la fonction post des \glspl{servlet}. Le flux entrant étant
-		de type \gls{json}, il faut déserialiser le flux dans un objet correspondant. Exemple
-		l'utilisateur envoie son nom d'utilisateur ansi que son mot de passe crypté
+		\glspl{servlet}, tels qu'un accesseur à la base de données, ou le tableau qui
+		contenant les utilisateurs connectés. Les requêtes font appel à la fonction
+		post des \glspl{servlet}. Le flux entrant étant de type \gls{json}, il faut
+		désérialiser le flux dans un objet correspondant. Exemple l'utilisateur envoie son nom d'utilisateur ansi que son mot de passe crypté
 		dans un tableau, sérialisé en \gls{json}.
 		Pour pouvoir récupérer les informations nous procédons comme suit: 
 		
@@ -63,14 +62,14 @@
 		d'utilisateurs connectés.
 		Cette userKey est ensuite nécessaire pour contacter les \glspl{servlet}
 		suivantes. Si cet identifiant n'est pas envoyé ou n'est pas présent dans le tableau des
-		utilisateurs connectés, il sera alors impossible d'accéder aux ressources du
-		serveur.
+		utilisateurs connectés, il sera alors impossible à l'utilisateur d'accéder aux
+		ressources du serveur.
 		
 \subsection{BDD}
 
 	La base de données du serveur n'est pas très complexe. En effet elle ne fait
-	qu'accueillir les couples (nom d'utilisateur,password) des utilisateurs dans la
-	table Users. 
+	qu'accueillir les couples (nom d'utilisateur, password) des utilisateurs dans
+	la table Users. 
 	Pour son accès, chaque \gls{servlet} peut récupérer un objet de type
 	Connection, instancié à l'initialisation du serveur. Il permettra à son tour
 	de récuperer un objet de type Statement. L'application va l'employer pour
@@ -85,7 +84,7 @@
 		     "INSERT into Users VALUES ('"+ username +"','"+password+"')");
 	\end{verbatim}
 	
-	Bien evidemment cette adresse est remplacée par une variable, elle aussi
+	Bien évidemment cette adresse est remplacée par une variable, elle aussi
 	présente dans le ContextListener, contenant la véritable adresse de la base de
 	données.
 	
