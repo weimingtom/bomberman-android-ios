@@ -123,13 +123,91 @@
 	
 	Pour finir, l'un des principaux point de la gestion de l'interface graphique repose sur le modèle MVC et donc chaque vue doit être associée à un controlleur.
 				
-	\subsubsection{Première utilisation}
+		\subsubsection{Première utilisation}
+	C'est au premier lancement de l'application que vont s'initialiser des données
+	dans le mobile, nécessaire au fonctionnement de cette dernière.
+	Durant celle-ci plusieurs étapes cruciales vont se dérouler. Tout d'abord la
+	base de données SQLite locale va être crée. Elle sera nécessaire pour les
+	comptes utilisateurs mais aussi les préférences systèmes et les cartes de jeu.
+	Ensuite les ressources nécessaires vont être récupérées depuis le fichier XML.
+	Elles vont être utilisées pour l'instanciation des objets requis pour le notre
+	jeu. 
+		\begin{center}						
+			\includegraphics[scale=0.6]{Developpement/Img/1.eps}
+		\end{center}
+	Une fois ces étapes réalisées, les cartes des jeu vont être copiées dans
+	le repertoire du téléphone. Celles-ci seront des cartes officielles permettant
+	le jeu dès le premier lancement.Enfin la base de données est initialisée.
+	
 	\subsubsection{Création utilisateur}
+	Dès lors que toutes ces initialisation sont achevées avec succès, la page de
+	création compte local est enfin affichée.
+		\begin{center}						
+			\includegraphics[scale=0.6]{Developpement/Img/2.eps}
+		\end{center} 
+	Ce dernier est obligatoire afin de pouvoir utiliser l'application. L'utilisateur renseigne son pseudonyme
+	pour son profil, qui est ensuite inséré dans la base de données.
+	Le menu principal apparait alors.
+	\begin{center}						
+			\includegraphics[scale=0.3]{Developpement/Img/3.eps}
+		\end{center} 
+	
 	\subsubsection{Gestion utilisateur}
+	A tout moment l'utilisateur a la possibilité d'éditer ses profils, qu'ils
+	soient locaux ou multijoueurs. Cette gestion est une section du menu Option.
+		\begin{center}						
+			\includegraphics[scale=0.6]{Developpement/Img/5.eps}
+			\includegraphics[scale=0.6]{Developpement/Img/6.eps}
+		\end{center}
+	Pour le local il pourra change de pseudonyme, tout en respectant l'unicité de
+	ce dernier dans la base de données, ainsi que de choisir sa couleur de
+	personnage. Pour finir il aura le choix de positionner le menu lors du jeu à sa
+	guise, suivant s'il est gaucher ou droitier.
+	
 	\subsubsection{Gestion des préférences système}
-	\subsubsection{Création de carte (charger)}
-	\subsubsection{Création partie solo (tout)}
-	\subsubsection{Création partie multi (officielle)}
+		\begin{center}						
+			\includegraphics[scale=0.6]{Developpement/Img/4.eps}
+		\end{center}
+	Via le menu d'Option présent dans le menu d'accueil, l'utilisateur peut
+	modifier le son de l'application ainsi que la langue utilisée dans cette
+	dernière.
+	
+	\subsubsection{Création de carte}
+	La création de carte est un fonctionnalité plus qu'interessante puisqu'elle
+	vous permet comme son nom l'indique de créer vos propre maps et de jouer
+	dessus. Vous n'aurez pour cela qu'a renseigner un nom de map non existant. 
+	\begin{center}						
+			\includegraphics[scale=0.6]{Developpement/Img/10.eps}
+			\includegraphics[scale=0.6]{Developpement/Img/11.eps}
+		\end{center}
+	Il vous sera possible par la suite de les éditer et de les modifier à souhait,
+	en laissant libre cours à votre imagination.
+	
+	
+	\subsubsection{Création partie solo}
+	La section la plus interressante concerne bien évidement la création de parties
+	locales. Vous aurez la possibilité de configurer ces dernières suivant vos
+	attentes. Cette configuration passe par le choix de la carte de jeu, officielle
+	ou au préalablement créee, mais aussi la difficulté des adversaires(\gls{bot})
+	et leur nombre avec le temps de jeu.
+		\begin{center}						
+			\includegraphics[scale=0.4]{Developpement/Img/7.eps}
+		\end{center} 
+	Enfin le type de partie souhaité est lui
+	aussi inclus dans les paramètres de jeu. Une fois vos préférences appliquées
+	vous n'aurez plus qu'à lancer la partie, qui débutera quelques instants après.
+	
+	
+	\subsubsection{Création partie multi}
+	Cette section est très proche de la création de parties locales. La seule
+	différence notable concerne le choix du nombre d'adversaire. Puisqu'il s'agit
+	de parties multijoueurs, les adversaires ne seront pas des \gls{bot} mais bel
+	est bien des humains. 
+	Là encore dès que vos choix de configurations seront faits, vous pourrez
+	choisir de créer la partie. Cette dernière s'initialisera sur le serveur, et ne
+	débutera que lorsque le nombre de joueurs requis sera complété. Une page
+	d'attente vous sera alors affichée.
+	
 			
 
 \subsection{Editeur de carte}
