@@ -118,8 +118,8 @@
 	 l'intelligence artificielle.
 	 
 	Après avoir réfléchi sur toutes les fonctionnalités que l'éditeur de carte 
-	devait remplir, nous avons retenu celles-ci : permettre à l'utilisateur d'en créer une nouvelle,
-	 mais aussi de pouvoir charger une ancienne carte 
+	devait remplir, nous avons retenu celles-ci : permettre à l'utilisateur 
+	d'en créer une nouvelle, mais aussi de pouvoir charger une ancienne carte 
 	précèdemment créée.
 	
 	Il peut modifier le sol de la carte, ajouter ou supprimer des blocs de 
@@ -127,25 +127,25 @@
 	la carte.
 		
 	Pour réaliser cette partie de l'application, nous avons aussi utilisé le 
-	modèle de conception MVC.
+	modèle de conception \gls{mvc}.
 
 	\subsubsection*{Modèle}
-		La partie modèle va contenir toutes les données de l'éditeur de carte. Les cartes sont les principales données qu'il va devoir manipuler. Pour cela nous avons décidé de la réprésenter sous la forme de deux matrices, la première représentant les objets du premier niveau (le sol) et la deuxième la matrice du second niveau (les blocs, les points de départ des joueurs, etc).
+		La partie modèle va contenir toutes les données de l'éditeur de carte. Les cartes sont les principales données qu'il va devoir manipuler. Pour cela, nous avons décidé de la réprésenter sous la forme de deux matrices, la première représentant les objets du premier niveau (le sol) et la deuxième la matrice du second niveau (les blocs).
 			
 			
 	\subsubsection*{Vue}
-		Ensuite, la vue représentera l'interface graphique de notre éditeur de carte. La principale difficulté pour réaliser l'interface graphique était de devoir rentrer toutes les informations nécessaires pour l'éditeur de carte dans un écran de type \gls{smartphone}. Après plusieurs prototypes d'interface, nous avons décidé de séparer l'interface en trois parties. Tout d'abord la plus grande partie, l'affichage de la carte, qui comme étant la principale information à afficher, nous avons essayé de maximiser sa taille. Ensuite un menu à droite permettant au joueur de changer d'outil. Et la dernière partie affiche les différents éléments permettant de contrôler l'éditeur de carte. L'utilisateur aura juste à choisir l'outil qu'il veut placer sur la carte grâce au menu de droite et ensuite lui suffira d'appuyer sur la carte pour placer un bloc dessus.
+		Ensuite, la vue représentera l'interface graphique de notre éditeur de carte. La principale difficulté pour réaliser l'interface graphique était de devoir rentrer toutes les informations nécessaires pour l'éditeur de carte dans un écran de type \gls{smartphone}. Après plusieurs prototypes d'interface, nous avons décidé de séparer l'interface en trois parties. Tout d'abord la plus grande partie, l'affichage de la carte, qui comme étant la principale information à afficher, nous avons essayé de maximiser sa taille. Ensuite un menu à droite permettant au joueur de changer d'outil. Et la dernière partie affiche les différents éléments permettant de contr�ler l'éditeur de carte. L'utilisateur aura juste à choisir l'outil qu'il veut placer sur la carte grâce au menu de droite et ensuite il lui suffira d'appuyer sur la carte pour placer un bloc dessus.
 		
 		\begin{center}
 			\includegraphics[width=11cm]{./Analyse/Img/14-Editeur_de_niveau.eps}
 		\end{center} 
 			
-	\subsubsection*{Controleur}
+	\subsubsection*{Contrôleur}
 		
-		Pour finir le contrôleur aura pour but de faire la liaison entre les 
+		Pour finir, le contrôleur a pour but de faire la liaison entre les 
 		données du modèle et de la vue.
-		Chaque vue possède son controleur.
-		Il y a un controleur gobal possédant les controleurs de chaque vue.
+		Chaque vue possède son contrôleur.
+		Il y a un contrôleur gobal possédant les contrôleurs de chaque vue.
 			
 
 	\subsection{jeu}
@@ -468,12 +468,12 @@
 		place une intelligence artificielle permettant à un joueur de jouer 
 		en solotaire.
 	
-		Tout d'abord nous avons dû réfléchir à toutes les actions que les 
+		Tout d'abord, nous avons dû réfléchir à toutes les actions que les 
 		\glspl{bot} pourraient effectuer, lors d'une partie.
 		
 		L'intelligence artificielle dans notre jeu utilise des algorithmes de \gls{recherche_op}.
 		
-		Pour une meilleure expérience de jeu nous avons séparé l'intelligence artificielle en trois niveaux.
+		Pour une meilleure expérience de jeu, nous avons séparé l'intelligence artificielle en trois niveaux.
 		
 		$\,$
 		
@@ -490,14 +490,14 @@
 		\paragraph{Pathfinding}
 		
 			Le premier algorithme basé sur le parcours en largeur est utilisé quel que soit
-			le niveau de l'intelligence artificelle choisie contrairement au second qui n'est utilisé
+			le niveau de l'intelligence artificelle choisi contrairement au second qui n'est utilisé
 			que pour la difficulté moyenne et difficile.
 		
 		\subparagraph{Parcours en largeur\\}
 		
 			L'algorithme du parcours en largeur dans notre cas, consiste à partir d'un sommet S,
 			lister d'abord tous les voisins de S pour ensuite les explorer un par un.
-			Ici nous allons donc regarder toutes les cases autour de nous puis regarder
+			Ici nous allons donc regarder toutes les cases autour de nous, puis regarder
 			tous leurs voisins et cela ainsi de suite jusqu'à trouver un point
 			correspondant à nos attentes.
 			
@@ -514,10 +514,10 @@
 			Comme dit précédemment il n'y a que les murs ou les bombes que l'on ne peut
 			pas traverser sinon tous les autres objets ou joueurs sont traversables.
 			Nous considerons que les bombes ont ici un champs d'explosion en nombre de
-			cases de 5.			
+			cases de 4.			
 			
 			Représentons la carte ci-dessus d'une façon plus parlante en remplacant les
-			divers objets mis à par le joueur par des couleurs leur correspondant, à
+			divers objets (mis à part le joueur) par des couleurs leur correspondant, à
 			savoir :
 			
 			\begin{center}
@@ -526,14 +526,14 @@
 			
 			Mettons nous à present à la place du \gls{bot}.
 			
-			Nous allons donner un poid aux cases que nous allons parcourir
+			Nous allons donner un poids aux cases que nous allons parcourir
 			correspondant à la distance par rapport à la case initiale, ainsi qu'une
 			direction qui correspondra à la direction initiale que le \gls{bot} devra empruter
 			pour utiliser ce chemin, c'est à dire par exemple que tout chemin découvert
 			dont l'origine est une case à droite de la notre aura comme direction droite.
 			
-			A partir d'une case donnée, nous ne regarderons que les voisines ayant un poids de 0
-			car si leur poids est différent cela voudra dire que nous les avons déjà vu precedemment et bien évidemment,
+			A partir d'une case donnée, nous ne regarderons que les voisines ayant un poids de 0,
+			car si leur poids est différent cela voudra dire que nous les avons déjà vu précédemment et bien évidemment,
 			nous ignorerons les murs ainsi que les bombes.
 			
 			Nous avons changé la valeur des cases intraversables pour ne pas confondre avec le poids des cases visitées.			
@@ -546,7 +546,7 @@
 			\end{center}
 			
 			
-			Toutes les cases découvertes étant considérées comme dangereuses (voir le schéma précédent) nous continuons à appliquer l'\gls{algorithme} jusqu'à arriver à notre but.
+			Toutes les cases découvertes étant considérées comme dangereuses (voir le schéma précédent), nous continuons à appliquer l'\gls{algorithme} jusqu'à arriver à notre but.
 			
 			\begin{center}
 				\includegraphics[width=8cm]{./Analyse/Img/largeur_3.eps}
@@ -560,7 +560,7 @@
 			
 			Nous récupérons donc la direction enregistrée dans cette case et bougeons en fonction de celle-ci.
 			
-			Si plusieurs cases avaient été découvertes le choix aurait été arbitraire car elles auraient toutes été à la même distance.
+			Si plusieurs cases avaient été découvertes, le choix aurait été arbitraire car elles auraient toutes été à la même distance.
 			
 			$\,$
 			
