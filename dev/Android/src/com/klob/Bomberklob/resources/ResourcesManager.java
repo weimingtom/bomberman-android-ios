@@ -159,6 +159,9 @@ public class ResourcesManager {
 
 	/* Méthodes publiques -------------------------------------------------- */
 
+	/**
+	 * Initialize the bitmaps of the game
+	 */
 	public static void bitmapsInitialisation() {
 
 		XmlResourceParser xpp = context.getResources().getXml(R.xml.bitmaps);
@@ -209,6 +212,9 @@ public class ResourcesManager {
 		Log.i("ResourcesManager","----------      Bitmaps loaded      ----------");
 	}
 
+	/**
+	 * Initialize the object of the game
+	 */
 	public static void objectsInitialisation() {
 
 		XmlResourceParser xpp = context.getResources().getXml(R.xml.objects);
@@ -300,6 +306,9 @@ public class ResourcesManager {
 		Log.i("ResourcesManager","--------------- Objects loaded ---------------");
 	}
 
+	/**
+	 * Initialize players
+	 */
 	public static void playersInitialisation() {
 
 		XmlResourceParser xpp = context.getResources().getXml(R.xml.players);
@@ -383,6 +392,9 @@ public class ResourcesManager {
 		System.out.println("--------------- Player Loaded ----------------");
 	}
 
+	/**
+	 * Initialize bomb
+	 */
 	public static void bombsInitialisation() {
 
 		XmlResourceParser xpp = context.getResources().getXml(R.xml.bombs);
@@ -451,6 +463,9 @@ public class ResourcesManager {
 		Log.i("ResourcesManager","---------------- Bombs loaded  ---------------");
 	}
 
+	/**
+	 * Initialize sounds
+	 */
 	public static void soundsInitialisation() {
 
 		soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 100);
@@ -461,10 +476,19 @@ public class ResourcesManager {
 
 	}
 
+	/**
+	 * Play the desired sound
+	 * @param s The name of the sound
+	 * @return The identifier of the sound
+	 */
 	public static int playSoundPool(String s) {
 		return soundPool.play(sounds.get(s), Model.getSystem().getVolume(), Model.getSystem().getVolume(), 1, 0, 1f);
 	}
 
+	/**
+	 * Stop the desired sound
+	 * @param s The name of the sound
+	 */
 	public static void stopSoundPool(String s) {
 		soundPool.stop(sounds.get(s));
 	}
@@ -478,7 +502,6 @@ public class ResourcesManager {
 	 */
 	
 	
-	// FIXME
 	public static Point coToTile(int x, int y) {
 		
 		x /= size;
