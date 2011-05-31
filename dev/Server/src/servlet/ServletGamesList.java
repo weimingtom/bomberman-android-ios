@@ -41,7 +41,10 @@ public class ServletGamesList extends HttpServlet implements Servlet {
 	}
 
 	/**
+	 * Servlet of games List, method getting informations by post
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @param HttpServletRequest
+	 * @param HttpServletResponse
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BufferedReader req=new BufferedReader(new InputStreamReader(request.getInputStream()));
@@ -51,9 +54,8 @@ public class ServletGamesList extends HttpServlet implements Servlet {
 			if(message.length() > 0){
 				
 				// vérification que l'utilisateur s'est connecté
-//				HashMap<String, String> users = (HashMap<String, String>) getServletContext().getAttribute("usersOnline");
-//				if(users.containsKey(message)){
-									
+				HashMap<String, String> users = (HashMap<String, String>) getServletContext().getAttribute("usersOnline");
+				if(users.containsKey(message)){		
 					System.out.println(message);
 					
 					response.setContentType("text/html");
@@ -62,12 +64,12 @@ public class ServletGamesList extends HttpServlet implements Servlet {
 					Engines engines = (Engines) getServletContext().getAttribute("engines");
 	          	  	jsonSerializer.serialize(engines.gamesList(),writer);
 	          	  	writer.flush();
-//				}
-//				else{
-//					System.out.println(":: "+ message.length());
-//					writer.write("ERROR");
-//					writer.flush();
-//				}
+				}
+				else{
+					System.out.println(":: "+ message.length());
+					writer.write("ERROR");
+					writer.flush();
+				}
 			}
 	}
 

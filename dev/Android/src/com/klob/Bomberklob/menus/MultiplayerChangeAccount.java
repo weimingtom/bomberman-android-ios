@@ -59,6 +59,11 @@ public class MultiplayerChangeAccount extends Activity implements View.OnClickLi
 		super.onPause();
 	}
 	
+	/**
+	 * function md5 encryption for passwords
+	 * @param password
+	 * @return passwordEncrypted
+	 */
 	private static final String md5(final String password) {
 	    try {
 	        
@@ -81,18 +86,19 @@ public class MultiplayerChangeAccount extends Activity implements View.OnClickLi
 	    return "";
 	}
 	
-	private boolean testerString(String chaine){
+	/**
+	 * checking function string
+	 * @param string
+	 * @return true/false
+	 */
+	private boolean testString(String chaine){
 		if(chaine.contains("\t") || chaine.contains("\n") || chaine.contains("\r") || chaine.contains(" ") || chaine.equals("")){
 			return false;
 		}
 		return true;
 	}
 	
-	/** 
-	 * FIXME vérification à faire avec serveur ou bd locale ? 
-	 * 		si local comment determiner couple username/password valide puisque userId !=
-	 * TODO faire la liaison avec le serveur
-	 */
+
 	public void onClick(View view) {
 		Intent intent = null;
 		if(view == valid){
@@ -100,11 +106,11 @@ public class MultiplayerChangeAccount extends Activity implements View.OnClickLi
 				int userId = Model.getSystem().getDatabase().getLastUserId();
 				String pwd = md5(password.getText().toString());
 				
-				if( !testerString(userName.getText().toString()) || !testerString(password.getText().toString()) ){
+				if( !testString(userName.getText().toString()) || !testString(password.getText().toString()) ){
 		 			Toast.makeText(MultiplayerChangeAccount.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
 		 		}
 				else if (Model.getSystem().getDatabase().isGoodMultiUser(userId, userName.getText().toString(), pwd)){
-					/** FIXME modif et test à faire ici **/
+					// FIXME modif et test à faire ici
 					intent = new Intent(MultiplayerChangeAccount.this, ProfileManager.class);
 				}
 				else{

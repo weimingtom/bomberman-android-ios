@@ -21,26 +21,24 @@ public class ContextListener implements ServletContextListener{
 
 	public void contextDestroyed(ServletContextEvent event) {}
 
+
 	/**
-	 * A l'initialisation du Serveur l'objet engines sera crée 
-	 * les parties ajoûtés sont la pour le test, ce sera par la suite
-	 * lors de création de parties que ce schémas sera appliqué
-	 * engines est un objet partagé par toutes les servlet
+	 * After the initialisation of the Server, engines instance will be created
+	 * parties are added to the test, it will thereafter
+	 * when creating parties that this schema will be applied
+	 * engines is an object shared by all servlet
 	 */
 	public void contextInitialized(ServletContextEvent event) {
 		//Nous avons accès à l'objet ServletContext via l'objet ServletContextEvent
 		Engines engines = new Engines();
 		
 		
-		engines.addGame("Bezinga", "alarache", "torino", 2);
-		engines.addGame("Mukata", "hardcore", "fired", 3);
-		engines.addGame("Loufla", "free4all", "opened", 4);
+		engines.addGame(null, null, "Bezinga", "alarache", "torino", 2);
+		engines.addGame(null, null, "Mukata", "hardcore", "fired", 3);
+		engines.addGame(null, null, "Loufla", "free4all", "opened", 4);
 		event.getServletContext().setAttribute("engines", engines);
 		
-		/**
-		 * Connexion à la bdd, locale..
-		 * Pas de système de pooling pour le moment
-		 */
+		// Connexion à la bdd, locale..Pas de système de pooling pour le moment
 		String dbClassName = "com.mysql.jdbc.Driver";
 		String CONNECTIONBD = "jdbc:mysql://127.0.0.1/Bomberklob";
 //		String CONNECTIONBD = "jdbc:mysql://127.0.0.1:8889/Bomberklob";
@@ -56,9 +54,7 @@ public class ContextListener implements ServletContextListener{
 				connection = DriverManager.getConnection(CONNECTIONBD, p);
 				System.out.println("Connexion BDD Succeeded");
 				
-				/**
-				 * création de la mini bdd
-				 */
+				// création de la mini bdd
 				Statement theStatement = connection.createStatement();
 				boolean insert = theStatement.execute("Create Table IF NOT EXISTS Users(userName VARCHAR(20) PRIMARY KEY UNIQUE NOT NULL, password VARCHAR(50) DEFAULT NULL)");
 				System.out.println("Creation table "+ insert);
@@ -74,9 +70,7 @@ public class ContextListener implements ServletContextListener{
 			e.printStackTrace();
 		}
 		
-		/**
-		 * HashMap des joueurs en lignes la clé étant leur userKey ou id de session
-		 */
+		//HashMap des joueurs en lignes la clé étant leur userKey ou id de session
 		HashMap<String, String> usersOnline = new HashMap<String, String>();
 		event.getServletContext().setAttribute("usersOnline", usersOnline);
 		

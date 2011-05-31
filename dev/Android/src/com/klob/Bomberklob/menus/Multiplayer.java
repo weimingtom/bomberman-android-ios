@@ -11,7 +11,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.StringTokenizer;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,9 +22,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.model.Model;
-
 import flexjson.JSONSerializer;
 
 public class Multiplayer extends Activity implements View.OnClickListener {
@@ -38,12 +37,8 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 	private EditText userAccountPassword;
 	private CheckBox password;
 	private CheckBox connectionAuto;
-	
 	private HttpURLConnection connectionServ;
 	
-	/*
-	 * menu de connexion multijoueurs
-	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         
@@ -74,11 +69,9 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 		};
 		
 		this.userAccountName = (EditText) findViewById(R.id.MultiPlayerGameEditTextName);
-//		this.userAccountName.setText(Model.getUser().getUserName());
 		this.userAccountName.setFilters(new InputFilter[]{filter});
 		
 		this.userAccountPassword = (EditText) findViewById(R.id.MultiPlayerGameEditTextPassword);
-//		this.userAccountPassword.setText(Model.getUser().getPassword());
 		this.userAccountPassword.setFilters(new InputFilter[]{filter});
 		
 		this.password = (CheckBox) findViewById(R.id.MultiPlayerGameCheckBoxPassword);
@@ -88,26 +81,8 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 			userAccountPassword.setText(Model.getUser().getPassword());
 		}
 		
-//		if ( Model.getUser().getRememberPassword() ) {
-//			this.password.setChecked(true);
-//		}
-		
-		
-		
-		
 		this.connectionAuto = (CheckBox) findViewById(R.id.MultiPlayerGameCheckBoxConnection);
-//		this.connectionAuto.setOnCheckedChangeListener(new OnCheckedChangeListener() { 
-//
-//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { 
-//				if (isChecked && userAccountPassword.getText().toString().equals("") || userAccountName.getText().toString().equals("")) {
-//					connectionAuto.setChecked(false);
-//					Toast.makeText(MultiPlayer.this, R.string.MultiPlayerConnectionErrorAutoConnection , Toast.LENGTH_SHORT).show();
-//				}
-//				else {
-//					password.setChecked(true);
-//				}
-//			}
-//		});
+
 		if(Model.getUser().getConnectionAuto()){
 			int userId = Model.getSystem().getDatabase().getLastUserId();
 			String userName = Model.getUser().getUserName();
@@ -126,7 +101,7 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 	
 	
 	/**
-	 * fonction de cryptage md5 pour les mots de passe
+	 * function md5 encryption for passwords
 	 * @param password
 	 * @return passwordEncrypted
 	 */
@@ -152,9 +127,9 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 	    return "";
 	}
 
-	/*
-	 * simple fonction de vérification de chaîne de caractères
-	 * @param chaine
+	/**
+	 * checking function string
+	 * @param string
 	 * @return true/false
 	 */
 	private boolean testString(String chaine){
@@ -191,7 +166,10 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 	
 	
 	
-	
+	/**
+	 * function connection to the server using the identifiers entered
+	 * @return true if authentificated and connected, false sinon
+	 */
 	public boolean connection() {
 		URL url;
 		boolean response = false;
@@ -199,7 +177,8 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 		String userName = userAccountName.getText().toString();
 		
 		try {
-
+				
+			// adresse du serveur et de la servlet correspondante
 			url = new URL("http://10.0.2.2:8181/BomberklobServer/connection");
 			System.out.println(url.toString());
 			try {
@@ -207,11 +186,7 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 				connectionServ.setDoOutput(true);
 				connectionServ.connect();
 				
-				/**
-				 * on commence deja par tester l'envoi d'idents TODO une fois la
-				 * bd faites sur le serveur faire un test de disponibilité
-				 * 
-				 */
+				// on commence déjà par tester l'envoie d'idents 
 				String[] identifier = { userName, password };
 
 				// message à envoyer à la servlet
@@ -238,8 +213,7 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 				while ((line = reader.readLine()) != null) {
 					sbf.append(line);
 				}
-				Log.i("@@@@@", "==> " + sbf);
-				
+								
 				/**
 				 * récupération de l'identification de Session
 				 */
@@ -252,9 +226,7 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 						userKey = token.substring(token.indexOf("=") + 1, token.length()).trim();						
 					}
 				}
-				Log.i("COOKIE", "** "+userKey);
-				
-				
+								
 				if(sbf.toString().equals("OK")){
 					response = true;
 				}
@@ -267,119 +239,52 @@ public class Multiplayer extends Activity implements View.OnClickListener {
 		}
 		connectionServ.disconnect();
 		return response;
-	}
+	}	
 	
 	
 	
-	
-	
-	public void onClick(View view) {
+public void onClick(View view) {
 		
 		Intent intent = null;
 		boolean bool = false;
-		
-//		// Si le nom d'utilisateur a été mit à jour
-//		if ( !this.userAccountName.getText().toString().equals("") && !Model.getUser().getUserName().equals(this.userAccountName.getText().toString()) && this.userAccountName.getText().toString().indexOf(" ") == -1) {		
-//			Model.getUser().setUserName(this.userAccountName.getText().toString());
-//			bool = true;
-//		}
-//		
-//		// Si la checkbox de mémorisation du mot de passe a été cochée
-//		if ( this.password.isChecked() ) {
-//			if ( !Model.getUser().getRememberPassword() ) {
-//				Model.getUser().setRememberPassword(true);
-//				bool = true;
-//			}
-//			
-//			if ( !this.userAccountPassword.getText().toString().equals("") && !this.userAccountPassword.equals(Model.getUser().getPassword())) {
-//				Model.getUser().setPassword(this.userAccountPassword.getText().toString());
-//				bool = true;
-//			}
-//		}
-//		else {
-//			if ( Model.getUser().getRememberPassword() ) {
-//				Model.getUser().setRememberPassword(false);
-//				Model.getUser().setPassword("");
-//				bool = true;
-//			}
-//		}
-//		
-//		// Si la checkbox de connexion auto a été cochée
-//		if ( this.connectionAuto.isChecked() ) {
-//			if ( !Model.getUser().getConnectionAuto() ) {
-//				Model.getUser().setConnectionAuto(true);
-//				bool = true;
-//			}
-//		}
-//		
-//		if (bool) {
-//			Model.getSystem().getDatabase().updateUser(Model.getUser());
-//		}
-//		
-//		if(view == this.connection){
-//			if ( !Model.getUser().getUserName().equals("") && !Model.getUser().getPassword().equals("")) {
-//				//FIXME Appeler le serveur
-//			}
-//			else {
-//				Toast.makeText(MultiPlayer.this, R.string.MultiPlayerConnectionErrorAutoConnection , Toast.LENGTH_SHORT).show();
-//			}
-//		}
+
 		if( view == connection){
-//			try {
+			
 				int userId = Model.getSystem().getDatabase().getLastUserId();
 				String pwd = md5(userAccountPassword.getText().toString());
-				
-//				Log.i("lastUserId", ">>> " + Model.getSystem().getDatabase().getUserIdByName(Model.getUser().getPseudo()) + " >>> " + Model.getUser().getPseudo() + " >>> " + Model.getUser().getPassword());
-//				Log.i("lastUserIdSystemPassword", ">>> " + Model.getSystem().getDatabase().getUser(userId).getPassword() );
-//				Log.i("pwd lol ", md5("lol"));
-				
-//				if( !testString(userAccountName.getText().toString()) || !testString(userAccountPassword.getText().toString()) ){
-//
-//		 			Toast.makeText(Multiplayer.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
-//		 		}
-//				else{
-//					if(connection()){
-//						Toast.makeText(Multiplayer.this, "Authentifié", Toast.LENGTH_SHORT).show();
+							
+				if( !testString(userAccountName.getText().toString()) || !testString(userAccountPassword.getText().toString()) ){
+		 			Toast.makeText(Multiplayer.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
+		 		}
+				else{
+					if(connection()){
+						if(password.isChecked()){
+							Model.getUser().setRememberPassword(true);
+							Model.getSystem().getDatabase().updateSavePwdUser(userId, 1);
+						}
+						else if (!password.isChecked()) {
+							Model.getUser().setRememberPassword(false);
+							Model.getSystem().getDatabase().updateSavePwdUser(userId, 0);
+						}
+						/** auto connect **/
+						if(connectionAuto.isChecked()){
+								Model.getUser().setConnectionAuto(true);
+								Model.getUser().setRememberPassword(true);
+								Model.getSystem().getDatabase().updateAutoConnectUser(userId, 1);
+						}
+						else if (!connectionAuto.isChecked()) {
+							Model.getUser().setConnectionAuto(false);
+							Model.getSystem().getDatabase().updateAutoConnectUser(userId, 0);
+						}
+					
+						Toast.makeText(Multiplayer.this, "Authentifié", Toast.LENGTH_SHORT).show();
 						intent = new Intent(Multiplayer.this,MultiplayerHome.class);
 						startActivity(intent);
-//					}
-//					else{
-//						Toast.makeText(Multiplayer.this, "ErrorAuth", Toast.LENGTH_SHORT).show();
-//					}
-//					
-//				}
-//				else if (Model.getSystem().getDatabase().isGoodMultiUser(userId, userAccountName.getText().toString(), pwd)){
-//					/** save password **/
-//					if(password.isChecked()){
-//							Model.getUser().setRememberPassword(true);
-//							Model.getSystem().getDatabase().updateSavePwdUser(userId, 1);
-//					}
-//					else if (!password.isChecked()) {
-//						Model.getUser().setRememberPassword(false);
-//						Model.getSystem().getDatabase().updateSavePwdUser(userId, 0);
-//					}
-//					/** auto connect **/
-//					if(connectionAuto.isChecked()){
-//							Model.getUser().setConnectionAuto(true);
-//							Model.getUser().setRememberPassword(true);
-//							Model.getSystem().getDatabase().updateAutoConnectUser(userId, 1);
-//					}
-//					else if (!connectionAuto.isChecked()) {
-//						Model.getUser().setConnectionAuto(false);
-//						Model.getSystem().getDatabase().updateAutoConnectUser(userId, 0);
-//					}
-//					intent = new Intent(Multiplayer.this, MultiplayerHome.class);
-//					startActivity(intent);
-//				}
-//				else{
-//
-//					Toast.makeText(Multiplayer.this, R.string.ErrorAuth, Toast.LENGTH_SHORT).show();
-//				}
-//			} catch (SQLException e) {
-//
-//				Toast.makeText(Multiplayer.this, "ErrorAuth", Toast.LENGTH_SHORT).show();
-//				e.printStackTrace();
-//			}
+					}
+					else{
+						Toast.makeText(Multiplayer.this, R.string.ErrorIdentification, Toast.LENGTH_SHORT).show();
+					}
+				}
 		}
 		else if(view == this.newAccount){
 			intent = new Intent(Multiplayer.this, MultiplayerNewAccount.class);
