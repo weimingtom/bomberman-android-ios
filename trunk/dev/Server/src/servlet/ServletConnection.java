@@ -53,7 +53,10 @@ public class ServletConnection extends HttpServlet implements Servlet {
 	}
 
 	/**
+	 * Servlet of Connection, method getting informations by post
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @param HttpServletRequest
+	 * @param HttpServletResponse
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			BufferedReader req = new BufferedReader(new InputStreamReader(request.getInputStream()));
@@ -65,10 +68,8 @@ public class ServletConnection extends HttpServlet implements Servlet {
 				response.setContentType("text/html");
 				session = request.getSession();
 
-				/**
-				 * désérialisation des infos envoyé par l'utilisateur dans une
-				 * arraylist
-				 */
+				// désérialisation des infos envoyé par l'utilisateur
+				// dans une arraylist
 				JSONDeserializer<ArrayList<String>> jsonDeserializer = new JSONDeserializer<ArrayList<String>>();
 				ArrayList<String> identifiers;
 				identifiers = jsonDeserializer.deserialize(message);
@@ -86,7 +87,7 @@ public class ServletConnection extends HttpServlet implements Servlet {
 					String dbClassName = "com.mysql.jdbc.Driver";
 
 					
-					 // FIXME moyen le root quand même un user avec simple droits serait mieux
+					 // FIXME le root deviendra user
 					try {
 						Class.forName(dbClassName);
 						Properties p = new Properties();
@@ -105,7 +106,6 @@ public class ServletConnection extends HttpServlet implements Servlet {
 				}
 				// test de la conformité couple username//password avec celui de la bd
 				try {
-					/** TODO ERROR sera pour une erreur système à gérer plus bas **/
 					if (connection()) {
 						writer.write("OK");
 					} else {
@@ -124,9 +124,8 @@ public class ServletConnection extends HttpServlet implements Servlet {
 		}
 		
 		/**
-		 * méthode permettant d'être sûr que la bd est accessible et la connexion
-		 * valide
-		 * 
+		 * method to be sure that the database is available and the connection
+ 		 * valid
 		 * @param connection
 		 * @return boolean
 		 */
@@ -154,7 +153,7 @@ public class ServletConnection extends HttpServlet implements Servlet {
 		}
 
 		/**
-		 * méthode de connection avec vérification de l'existance de l'userName
+		 * connection method with verification of the existence of userName
 		 * @return boolean
 		 * @throws SQLException
 		 */

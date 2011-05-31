@@ -18,7 +18,6 @@ public class ServletConnectionGame extends HttpServlet implements Servlet {
      */
     public ServletConnectionGame() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

@@ -53,8 +53,12 @@ public class ServletInscription extends HttpServlet implements Servlet {
 		out.println("<h1>Servlet d'inscription des membres</h1>");	}
 
 	/**
+	 * Servlet of inscription, method getting informations by post
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @param HttpServletRequest
+	 * @param HttpServletResponse
 	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BufferedReader req = new BufferedReader(new InputStreamReader(request.getInputStream()));
 		OutputStreamWriter writer = new OutputStreamWriter(response.getOutputStream());
@@ -102,7 +106,6 @@ public class ServletInscription extends HttpServlet implements Servlet {
 				}
 			}
 			try {
-				/** TODO ERROR sera pour une erreur système à gérer plus bas **/ 
 				if( inscription() ){
 					writer.write("OK");
 				}
@@ -123,7 +126,8 @@ public class ServletInscription extends HttpServlet implements Servlet {
 	
 	
 	/**
-	 * méthode permettant d'être sûr que la bd est accessible et la connexion valide
+	 * method to be sure that the database is available and the connection
+	 * valid
 	 * @param connection
 	 * @return boolean
 	 */
@@ -145,7 +149,7 @@ public class ServletInscription extends HttpServlet implements Servlet {
 		}
 	
 	/**
-	 * méthode d'inscription avec vérification de l'existance de l'userName 
+	 * registration method with verification of the existence of userName
 	 * @return boolean
 	 * @throws SQLException
 	 */

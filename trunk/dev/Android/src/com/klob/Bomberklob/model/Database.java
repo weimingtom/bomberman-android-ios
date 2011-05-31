@@ -15,23 +15,29 @@ public class Database extends SQLiteOpenHelper{
     private static String DB_NAME = "Klob";
     private SQLiteDatabase base; 
   
-
+    /**
+     * Constructor of the Database
+     * @param context
+     */
     public Database(Context context) {
     	super(context, DB_NAME, null, 1);
     	base = getWritableDatabase();
     }	
  
  
-    @Override
+    /**
+     * Redefinition of the method close
+     */
 	public synchronized void close() {
- 
     	    if(base != null)
     		    base.close();
     	    super.close();
- 
 	}
  
-	@Override
+	/**
+	 * Method called on the creation of Database
+	 * @param SQLiteDatabase Database concerned
+	 */
 	public void onCreate(SQLiteDatabase db) {
 		
 		db.execSQL("CREATE TABLE PlayerAccount (id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -74,15 +80,18 @@ public class Database extends SQLiteOpenHelper{
 	}
 	
 	
-	/** Ajouts à la base de donnée **/
 	
-	/** ajout compte hors ligne **/
-	public long newAccount(String nomCompte){
+	/**
+	 * Create a new local account
+	 * @param pseudo
+	 * @return the row ID of the newly inserted row, or -1 if an error occurred 
+	 */
+	public long newAccount(String pseudo){
 		base = getWritableDatabase();
 
 		ContentValues entree = new ContentValues();
 		
-		entree.put("pseudo", nomCompte);
+		entree.put("pseudo", pseudo);
 		long var = base.insert("PlayerAccount", null, entree);
 		
 		base.close();
@@ -90,7 +99,12 @@ public class Database extends SQLiteOpenHelper{
 	}
 	
 	
-	/** ajout d'une map **/
+	/**
+	 * Add a new map
+	 * @param name 
+	 * @param owner
+	 * @param i 
+	 */
 	public void newMap(String name, String owner, int i){		
 		this.base = this.getWritableDatabase();
         int res = this.base.rawQuery("SELECT * FROM Map WHERE name ='"+name+"' ", null).getCount();
@@ -112,9 +126,13 @@ public class Database extends SQLiteOpenHelper{
 	}
 	
 	
-	/** Mise à jour des données **/
-	
-	/** ajout compte multijoueur **/
+	/** 
+	 * Create a new multiplayer account
+	 * @param userId
+	 * @param userName
+	 * @param pwd
+	 * @return true if OK, false else
+	 */
 	public boolean addAccountMulti(int userId, String userName, String pwd) {
 		base = getWritableDatabase();
 		ContentValues entree = new ContentValues();
@@ -129,7 +147,11 @@ public class Database extends SQLiteOpenHelper{
 
 	}	
 	
-	/** mise à jour du volume **/
+	/**
+	 * Update the system volume
+	 * @param volume
+	 * @return int the value
+	 */
 	public int setVolume(int volume){
 		if(volume < 100){
 			base = getWritableDatabase();
@@ -150,7 +172,10 @@ public class Database extends SQLiteOpenHelper{
 		}
 	}
 	
-	/** mise à jour dernier utilisateur **/
+	/**
+	 * Upgrade the last user in the system 
+	 * @param pseudonymAccount
+	 */
 	public void setLastUser(String pseudonymAccount) {
 		this.base = this.getWritableDatabase();
 		Cursor cursor = this.base.rawQuery("SELECT id FROM PlayerAccount WHERE pseudo ='"+pseudonymAccount+"' ", null);
@@ -164,7 +189,12 @@ public class Database extends SQLiteOpenHelper{
 		base.close();
 	}
 	
-	/** update couleur du joueur **/
+	/** 
+	 * Update color player concerned
+	 * @param userId
+	 * @param color
+	 * @return true if OK, false else
+	 */
 	public boolean updateColorUser(int userId, String color){
 		base = getWritableDatabase();
 		boolean res;
@@ -175,10 +205,15 @@ public class Database extends SQLiteOpenHelper{
 		
 		base.close();
 		return res;	
-		
 	}
 	
-	/** update côté menu du joueur **/
+	/**
+	 * Update the side of the menu
+	 * @param userId
+	 * @param side
+	 * @return true if OK, false else
+	 */
+
 	public boolean updateMenuUser(int userId, int side){
 		base = getWritableDatabase();
 		boolean res;
@@ -189,10 +224,14 @@ public class Database extends SQLiteOpenHelper{
 		
 		base.close();
 		return res;	
-		
 	}
 	
-	/** update connexion auto **/
+	/** 
+	 * Update the auto connection of the user concerned
+	 * @param userId
+	 * @param auto
+	 * @return true if OK, false else
+	 */
 	public boolean updateAutoConnectUser(int userId, int auto){
 		base = getWritableDatabase();
 		boolean res;
@@ -206,7 +245,12 @@ public class Database extends SQLiteOpenHelper{
 		
 	}
 	
-	/** update sauvegarde mot de passe **/
+	/**
+	 * Update the save password of the user concerned
+	 * @param userId
+	 * @param save
+	 * @return true if OK, false else
+	 */
 	public boolean updateSavePwdUser(int userId, int save){
 		base = getWritableDatabase();
 		boolean res;
@@ -219,7 +263,12 @@ public class Database extends SQLiteOpenHelper{
 		return res;	
 	}
 	
-	/** update userName **/
+	/** 
+	 * Update the username of user concerned
+	 * @param userId
+	 * @param userName
+	 * @return true if OK, false else
+	 */
 	public boolean updateUserName(int userId, String userName){
 		base = getWritableDatabase();
 		boolean res;
@@ -230,10 +279,15 @@ public class Database extends SQLiteOpenHelper{
 		
 		base.close();
 		return res;	
-		
 	}
 	
-	/** update password **/
+	/** 
+	 * Update the password of multiplayer account of user concerned
+	 * @param userId
+	 * @param oldPassword
+	 * @param newPassword
+	 * @return true if OK, false else
+	 */
 	public boolean updatePassword(int userId, String oldPassword, String newPassword){
 		base = getWritableDatabase();
 		boolean res;
@@ -246,7 +300,11 @@ public class Database extends SQLiteOpenHelper{
 		return res;		
 	}
 	
-	/** update language **/
+	/**
+	 * Update the system language
+	 * @param language
+	 * @return true if OK, false else
+	 */
 	public boolean setLanguage(String language){
 		base = getWritableDatabase();
 		boolean res;
@@ -259,7 +317,10 @@ public class Database extends SQLiteOpenHelper{
 		return res;		
 	}
 	
-	/** 	 **/
+	/**
+	 * Update the user of the application
+	 * @param user
+	 */
 	public void updateUser (User user) {
 		this.base = this.getReadableDatabase();
 		
@@ -280,6 +341,11 @@ public class Database extends SQLiteOpenHelper{
 		base.close();
 	}
 	
+	/**
+	 * Update the pseudo of the user concerned
+	 * @param oldPseudo
+	 * @param newPseudo
+	 */
 	public void changePseudo(String oldPseudo, String newPseudo) {
 		
 		this.base = this.getReadableDatabase();
@@ -291,11 +357,11 @@ public class Database extends SQLiteOpenHelper{
 		base.close();
 	}
 	
-	
-	
-	/** Appel aux valeurs **/
-	
-	/** appel au dernier utilisateur retournant son id **/
+
+	/** 
+	 * Return the userId of the last user
+	 * @return  userId
+	 */
 	public int getLastUserId(){
 		base = getReadableDatabase();
 	    int lastUser = -1;
@@ -312,7 +378,10 @@ public class Database extends SQLiteOpenHelper{
 		return lastUser;
 	}
 	
-	/** appel au dernier utilisateur retournant son nom **/
+	/** 
+	 * Return the pseudo of the las user
+	 * @return pseudo
+	 */
 	public String getLastUserName(){
 		base = getReadableDatabase();
 	    String lastUser = "";
@@ -336,7 +405,10 @@ public class Database extends SQLiteOpenHelper{
 		return lastUser;
 	}
 	
-	/** FIXME **/
+	/**
+	 * Return the last user id of the system
+	 * @return userId
+	 */
 	public int getLastUser() {
 		
 		int res = -1;
@@ -355,12 +427,16 @@ public class Database extends SQLiteOpenHelper{
 		return res;
 	}	
 	
-	/** appel de l'id par son pseudo **/
-	public int getUserIdByName(String userName){
+	/** 
+	 * Return userId by passing the pseudo
+	 * @param userName
+	 * @return userId
+	 */
+	public int getUserIdByName(String pseudo){
 		base = getReadableDatabase();
 	    int user = -1;
 	    
-	    Cursor cursorId = base.rawQuery("select id from PlayerAccount where pseudo ='"+ userName +"' ", null);		
+	    Cursor cursorId = base.rawQuery("select id from PlayerAccount where pseudo ='"+ pseudo +"' ", null);		
 		if (cursorId.moveToFirst()) {
 	        	user = cursorId.getInt(0);
 		}
@@ -372,7 +448,11 @@ public class Database extends SQLiteOpenHelper{
 		return user;	
 	}
 	
-	/** appel aux informations complètes d'un utilisateur par son id  **/
+	/** 
+	 * Return the user'sinformations by this userId
+	 * @param lastUserId
+	 * @return ArrayList<String>
+	 */
 	public ArrayList<String> getUserInfoById(int lastUserId){
 		ArrayList<String> spinnerArray = new ArrayList<String>();
 		
@@ -404,7 +484,10 @@ public class Database extends SQLiteOpenHelper{
 			
 	}
 	
-	/** retourne la liste des utilisateurs locaux **/
+	/** 
+	 * Get the list of the system's users
+	 * @return ArrayList<String>
+	 */
 	public ArrayList<String> getAccountsPseudos(){
 		ArrayList<String> spinnerArray = new ArrayList<String>();
 		
@@ -429,7 +512,10 @@ public class Database extends SQLiteOpenHelper{
 		return spinnerArray;
 	}
 	
-	/** retourne la liste des map**/	
+	/**
+	 * Return the list of maps	
+	 * @return Vector<Map>
+	 */
 	public Vector<Map> getMaps() {
 		
 		Vector<Map> vec = new Vector<Map>();
@@ -448,7 +534,11 @@ public class Database extends SQLiteOpenHelper{
 		return vec;
 	}
 	
-	/** Retourne l'instance de l'utilisateur correspondant à son pseudo **/
+	/**
+	 * Return the instance of user concerned by the pseudo
+	 * @param pseudonymAccount
+	 * @return User
+	 */
 	public User getUser(String pseudonymAccount) {
 		
 		User user = null;
@@ -464,6 +554,11 @@ public class Database extends SQLiteOpenHelper{
 		return user;
 	}
 	
+	/**
+	 * Return the instance of user concerned by the userID
+	 * @param id
+	 * @return User
+	 */
 	public User getUser(int id) {
 		
 		User user = null;
@@ -472,15 +567,18 @@ public class Database extends SQLiteOpenHelper{
 		if (cursor.moveToFirst()) {
 			Log.i("Database", "----- Player loaded -----\nPseudo : " + cursor.getString(1) + "\nUserName : " + cursor.getString(2) + "\nPassword : " + cursor.getString(3) + "\nAutoConnection : " + cursor.getInt(4) + "\nRememberPassword : " + cursor.getInt(5) + "\nColor : " + cursor.getString(6) + "\nMenu Position : " + cursor.getString(7) + "\nGame won : " + cursor.getInt(8) + "\nGame lost : " + cursor.getInt(9) + "\n-------------------------\n");
 			user = new User(cursor.getString(1), cursor.getString(2), cursor.getString(3), (cursor.getInt(4) == 0 ? false : true), (cursor.getInt(5) == 0 ? false : true), cursor.getString(6), cursor.getInt(7), cursor.getInt(8), cursor.getInt(9));
-		}
+		}	
 		cursor.close();
 		base.close();
 		
 		return user;
 	}
 	
-	/** retourne la langue utilisée par le System **/
-public String getLanguage() {
+	/**
+	 * Return the system language
+	 * @return String
+	 */
+	public String getLanguage() {
 		
 		String res = null;
 		this.base = this.getReadableDatabase();
@@ -497,7 +595,10 @@ public String getLanguage() {
 		return res;
 	}
 	
-	/** retourne le volume **/
+	/**
+	 * Return the system volume
+	 * @return int
+	 */
 	public int getVolume(){
 		base = getReadableDatabase();
 		Cursor cursor;
@@ -516,9 +617,11 @@ public String getLanguage() {
 	}
 	
 	
-	/** Test booléens **/
-	
-	/** le nom de compte hors ligne existe-t-il déjà **/
+	/**
+	 * Is this pseudo exist?
+	 * @param pseudonymAccount
+	 * @return true if OK, false else
+	 */
 	public boolean existingAccount(String pseudonymAccount) {
 		this.base = this.getReadableDatabase();
 		
@@ -537,7 +640,11 @@ public String getLanguage() {
 		return false;
 	}
 	
-	/** le nom de map existe-t-il déjà **/
+	/**
+	 * Is this map exist?
+	 * @param mapName
+	 * @return true if OK, false else
+	 */
 	public boolean existingMap(String mapName) {
 		this.base = this.getReadableDatabase();
 		int res = this.base.rawQuery("SELECT name FROM Map WHERE name ='"+mapName+"' ", null).getCount();
@@ -546,7 +653,11 @@ public String getLanguage() {
 		return res == 0 ? false : true;
 	}
 	
-	/** userName et password multi correspondent au bon userId ? **/
+	/**
+	 * Is this good multiplayer identifiers?
+	 * @param userId userName password
+	 * @return true if OK, false else
+	 */
 	public boolean isGoodMultiUser(int userId, String userName, String password) throws java.sql.SQLException{
 		
 		base = getReadableDatabase();

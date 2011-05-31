@@ -3,7 +3,6 @@ package com.klob.Bomberklob.menus;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
@@ -20,13 +19,11 @@ public class MultiplayerAccountEdit extends Activity implements View.OnClickList
 	
 	private Button cancel;
 	private Button validate;
-	
 	private EditText userName;
 	private EditText oldPass;
 	private EditText newPass;
 	private EditText confirmPass;
 
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
                 
@@ -70,13 +67,23 @@ public class MultiplayerAccountEdit extends Activity implements View.OnClickList
 		super.onPause();
 	}
 	
-	private boolean testerString(String chaine){
+	/**
+	 * checking function string
+	 * @param string
+	 * @return true/false
+	 */
+	private boolean testString(String chaine){
 		if(chaine.contains("\t") || chaine.contains("\n") || chaine.contains("\r") || chaine.contains(" ")){
 			return false;
 		}
 		return true;
 	}
 	
+	/**
+	 * function md5 encryption for passwords
+	 * @param password
+	 * @return passwordEncrypted
+	 */
 	private static final String md5(final String password) {
 	    try {
 	        
@@ -99,22 +106,25 @@ public class MultiplayerAccountEdit extends Activity implements View.OnClickList
 	    return "";
 	}
     
+	
 	public void onClick(View v) {
 		
 		Intent intent = null;
 		
+		// validation du menu
 		if( v == this.validate ){
 			int userId = Model.getSystem().getLastUser();
 			String pwd =  md5(oldPass.getText().toString());
 			String newPwd =  md5(newPass.getText().toString());
 			
-			if(!testerString(userName.getText().toString()) ||
-					!testerString(oldPass.getText().toString()) ||
-					!testerString(newPass.getText().toString()) ||
-					!testerString(confirmPass.getText().toString())){
+			// vérification des textes saisis
+			if(!testString(userName.getText().toString()) ||
+					!testString(oldPass.getText().toString()) ||
+					!testString(newPass.getText().toString()) ||
+					!testString(confirmPass.getText().toString())){
 	 			Toast.makeText(MultiplayerAccountEdit.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
 			}
-			/** TODO les deux tests de chaine vide et chaine contenant espace peuvent être fusionnés **/
+
 			else if(oldPass.getText().toString().compareTo("")!=0 &&
 						newPass.getText().toString().compareTo("")!=0 && 
 						confirmPass.getText().toString().compareTo("")!=0 && 
@@ -124,19 +134,14 @@ public class MultiplayerAccountEdit extends Activity implements View.OnClickList
 						Toast.makeText(MultiplayerAccountEdit.this, R.string.ErrorPassword,Toast.LENGTH_SHORT).show();
 					} else
 						try {
+							// les anciens paramètre saisis sont corrects
 							if(Model.getSystem().getDatabase().isGoodMultiUser(userId, userName.getText().toString(), pwd)){
 							
-								/* test de correspondance mot de passe et username avec serveur */
-								/* TODO test de disponibilité du userName sur le serveur si userId différent sinon mettre à jour */
-								/* mettre a jour bdd */
-								/* mettre a jour profil current User */
-								/* à modifier puisque l'utilisateur ne modifie pas tout à la fois */
 								Model.getSystem().getDatabase().updatePassword(userId, pwd, newPwd);
 								Model.getSystem().getDatabase().updateUserName(userId, userName.getText().toString());
 								Model.getUser().setUserName(userName.getText().toString());
 								Model.getUser().setPassword(newPwd);
 								
-						//FIXME		Toast.makeText(MultiplayerAccountEdit.this, R.string.ProfilManagementSavedOk,Toast.LENGTH_SHORT).show();
 								intent = new Intent(MultiplayerAccountEdit.this, ProfileManager.class);
 							}
 							else{
@@ -149,9 +154,6 @@ public class MultiplayerAccountEdit extends Activity implements View.OnClickList
 						}
 					
 				}
-			/* sinon possibilité de tester new password vide et userName différent de l'ancien
-			 * => correspond à un simple changement de username
-			 */
 			else{
 				Toast.makeText(MultiplayerAccountEdit.this, R.string.ErrorAutoConnection, Toast.LENGTH_SHORT).show();
 			}
