@@ -46,7 +46,7 @@
  
  @return `YES` if the object is in collision, `NO` otherwise.
  */
-- (BOOL) isInCollision: (Objects *) player: (NSInteger) xValue: (NSInteger) yValue;
+- (BOOL) isInCollision:(Objects *)player :(NSInteger) xValue: (NSInteger) yValue;
 
 
 /** Lets see if the object is in collisions with a player. If Yes the player will be destroy.
