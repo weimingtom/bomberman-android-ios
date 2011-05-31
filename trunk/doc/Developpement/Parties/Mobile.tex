@@ -2,14 +2,12 @@
 	\subsubsection{API et widget}
 	\paragraph{Android\\}
 		Afin de créer les différents menus de notre application, Android met à la
-		disposition des developpeurs une API\footnote{API : Application Programming
-		Interface, c'est un ensemble de classes mis à disposition par une
-		bibliothèque logicielle.} très bien fournie. Parmis celle-ci le package Widget
+		disposition des développeurs une \gls{api} très bien fournie. Parmis celle-ci le package \gls{widget}
 		nous a été très utile. 
 		
-		Grâce à ce dernier de nombreux objets ont été utilisé
+		Grâce à ce dernier de nombreux objets ont été utilisés
 		afin de mettre en oeuvre et rendre pleinement fonctionnel nos menus.
-		Parmi les plus utilisés il y a eu bien sûr Button, TextView, CheckBox et
+		Parmi les plus utilisés il y a eu bien sûr: Button, TextView, CheckBox et
 		EditText pour les plus explicites. Les objets comme Spinner, SeekBar et
 		Gallery étant respectivement utilisés pour les menus déroulants, les barres de
 		progression et les galeries d'images pour la sélection de cartes de jeu.
@@ -38,8 +36,8 @@
 			Spinner sp = (Spinner)findViewById(R.id.accounts);
 		\end{verbatim}
 		
-		On peut remarquer que cette méthode accepte en paramètre un int et non un
-		String comme on pourrait s’y attendre. En effet, l’id est exprimé sous forme de constante int, on
+		On peut remarquer que cette méthode accepte en paramètre un entier et non une
+		chaine de caractère  comme on pourrait s’y attendre. En effet, l’id est exprimé sous forme de constante entière (int), on
 		ne passe pas à la méthode la chaîne de caractères proprement dite. Grâce à cela, la
 		méthode est sûre et on évite ainsi les erreurs à l’exécution qu’on pourrait avoir si on
 		spécifiait un id ne correspondant à aucun widget.
@@ -56,8 +54,8 @@
 		agencement originel.		
 		
 		
-		Les listeners présents dans	les classes java permettent à leur tour d'écouter les évènements utilisateurs
-		ou system et réagir en fonction comme l'accès au menu suivant ou le lancement
+		Les écouteurs présents dans les classes java permettent à leur tour d'écouter les évènements utilisateurs
+		ou système et réagir en fonction comme l'accès au menu suivant ou le lancement
 		d'un partie. 
 		
 		
@@ -94,13 +92,13 @@
 		
 	\paragraph{iOS\\}
 		
-		Comme Android, nous avons utilisé les widgets \footnote{Widget est un élément de base d'une interface graphique  avec lequel un utilisateur peut interagir  (par exemple : une fenêtre, une zone de texte, un bouton, etc).} pour réaliser notre interface graphique. iOS fournit lui aussi une API couplet à une documentation très complète facilitant la réalisation d'une interface utilisateur ergonomique. Parmi les widgets les plus utile, nous retrouvons les UIView, UITableView, UITableViewCell, UILabel, UITextField, UIButton qui permettent respectivement de créer une vue, un tableau, une cellule du tableau, des labels, des champs de texte et des boutons.
+	Comme Android, nous avons utilisé les widgets pour réaliser notre interface graphique. iOS fournit lui aussi une API couplée à une documentation très complète facilitant la réalisation d'une interface utilisateur ergonomique. Parmi les widgets les plus utile, nous retrouvons les UIView, UITableView, UITableViewCell, UILabel, UITextField, UIButton qui permettent respectivement de créer une vue, un tableau, une cellule du tableau, des labels, des champs de texte et des boutons.
 	
-	Pour manipuler ces différentes composant graphique, il est possible et beaucoup plus pratique d'uliser Interface Builder pour réaliser des menus. Interface builder permet de gagner du temps lors de la réalisation d'une interface graphique standard (de type menu). Cette réalisation est possible via un outil visuel et non des lignes de code,  Interface Builder va créer des fichiers xib \footnote{xib est l'acronyme de Xml Interface Buillder.} qui vont générer à la compilation des fichiers nib \footnote{nib es l'acronyme de NeXT Interface Builder.}. Ce dernier stock les informations relative à l'interface sous forme d'un fichier xml, mais nous avons pas besion de savoir réellemet comme ça fonctionne car il est inutile de modifier directement le fichier xml.
+	Pour manipuler ces différents composant graphique, il est possible et beaucoup plus pratique d'uliser Interface Builder pour réaliser des menus. Interface builder permet de gagner du temps lors de la réalisation d'une interface graphique standard (de type menu). Cette réalisation est possible via un outil visuel et non des lignes de code,  Interface Builder va créer des fichiers \gls{xib} qui vont générer à la compilation des fichiers \gls{nib}. Ce dernier stock les informations relative à l'interface sous forme d'un fichier \gls{xml}. Nous avons pas besion de savoir réellemet comme ça fonctionne car il est inutile de modifier directement le fichier \gls{xml}.
 	
-	Ensuite pour controller les différents l'élements de l'interface préalablement créées avec Interface Builder, il suiffit de les lier au code de la vue via ce dernier. Grâce a ces liaisons, il nous sera possible de les modifiers ou les controllers avec du code et donc de pouvoir les accorder avec les données du modèle.
+	Ensuite pour controller les différents l'élements de l'interface préalablement créées avec Interface Builder, il suiffit de les lier au code de la vue via ce dernier. Grâce a ces liaisons, il nous sera possible de les modifiers ou les contrôler avec du code et donc de pouvoir les accorder avec les données du modèle.
 	
-	La gestion des écouteurs se fait grâce au même procédé qui est utilisé pour lier les éléments de l'interface avec la vue sauf que ça créra une métohde au lieu de créer un champs. Voilà un exemple d'écouteur :
+	La gestion des écouteurs se fait grâce au même procédé qui est utilisé pour lier les éléments de l'interface avec la vue sauf que ça créera une méthode au lieu de créer un champ. Voici un exemple d'écouteur :
 	
 	\begin{verbatim}
 		- (void)playerAction:(id)sender {
@@ -121,27 +119,25 @@
 		}
 	\end{verbatim}
 	
-	Pour finir, l'un des principaux point de la gestion de l'interface graphique repose sur le modèle MVC et donc chaque vue doit être associée à un controlleur.
+	Pour finir, l'un des principaux point de la gestion de l'\gls{ihm} repose sur le modèle \gls{mvc}. Donc chaque vue doit être associée à un controlleur.
 				
 		\subsubsection{Première utilisation}
-	C'est au premier lancement de l'application que vont s'initialiser des données
-	dans le mobile, nécessaire au fonctionnement de cette dernière.
+	C'est au premier lancement de l'application que vont s'initialiser les données sur le mobile.
 	Durant celle-ci plusieurs étapes cruciales vont se dérouler. Tout d'abord la
-	base de données SQLite locale va être crée. Elle sera nécessaire pour les
-	comptes utilisateurs mais aussi les préférences systèmes et les cartes de jeu.
-	Ensuite les ressources nécessaires vont être récupérées depuis le fichier XML.
-	Elles vont être utilisées pour l'instanciation des objets requis pour le notre
-	jeu. 
+	base de données \gls{sqlite} locale va être créée. Elle sera nécessaire pour les
+	comptes utilisateurs mais aussi pour les préférences systèmes et les cartes de jeu.
+	Ensuite les ressources nécessaires vont être récupérées depuis le fichier \gls{xml}.
+	Elles vont être utilisées pour l'instanciation des objets requis pour le jeu. 
 		\begin{center}						
 			\includegraphics[scale=0.6]{Developpement/Img/1.eps}
 		\end{center}
-	Une fois ces étapes réalisées, les cartes des jeu vont être copiées dans
-	le repertoire du téléphone. Celles-ci seront des cartes officielles permettant
-	le jeu dès le premier lancement.Enfin la base de données est initialisée.
+	Une fois ces étapes réalisées, les cartes du jeu vont être copiées dans
+	le répertoire du téléphone. Celles-ci seront des cartes officielles permettant
+	de jouer dès le premier lancement.
 	
 	\subsubsection{Création utilisateur}
 	Dès lors que toutes ces initialisation sont achevées avec succès, la page de
-	création compte local est enfin affichée.
+	création de compte local est enfin affichée.
 		\begin{center}						
 			\includegraphics[scale=0.6]{Developpement/Img/2.eps}
 		\end{center} 
@@ -153,29 +149,29 @@
 		\end{center} 
 	
 	\subsubsection{Gestion utilisateur}
-	A tout moment l'utilisateur a la possibilité d'éditer ses profils, qu'ils
-	soient locaux ou multijoueurs. Cette gestion est une section du menu Option.
+	A tout moment l'utilisateur a la possibilité d'éditer son profil, qu'il
+	soit local ou multijoueur. Cette gestion est une section du menu Option.
 		\begin{center}						
 			\includegraphics[scale=0.6]{Developpement/Img/5.eps}
 			\includegraphics[scale=0.6]{Developpement/Img/6.eps}
 		\end{center}
-	Pour le local il pourra change de pseudonyme, tout en respectant l'unicité de
+	Pour le profil local il pourra changer de pseudonyme, tout en respectant l'unicité de
 	ce dernier dans la base de données, ainsi que de choisir sa couleur de
-	personnage. Pour finir il aura le choix de positionner le menu lors du jeu à sa
-	guise, suivant s'il est gaucher ou droitier.
+	personnage. Pour finir il aura le choix de positionner le menu à sa
+	guise, suivant qu'il soit gaucher ou droitier.
 	
 	\subsubsection{Gestion des préférences système}
 		\begin{center}						
 			\includegraphics[scale=0.6]{Developpement/Img/4.eps}
 		\end{center}
-	Via le menu d'Option présent dans le menu d'accueil, l'utilisateur peut
+	Grâce au menu d'Option, l'utilisateur peut
 	modifier le son de l'application ainsi que la langue utilisée dans cette
 	dernière.
 	
 	\subsubsection{Création de carte}
-	La création de carte est un fonctionnalité plus qu'interessante puisqu'elle
-	vous permet comme son nom l'indique de créer vos propre maps et de jouer
-	dessus. Vous n'aurez pour cela qu'a renseigner un nom de map non existant. 
+	La création de carte est une fonctionnalité plus qu'interessante puisqu'elle
+	vous permet comme son nom l'indique de créer vos propre cartes et de jouer
+	dessus. Vous n'aurez pour cela qu'a renseigner un nom de carte non existant. 
 	\begin{center}						
 			\includegraphics[scale=0.6]{Developpement/Img/10.eps}
 			\includegraphics[scale=0.6]{Developpement/Img/11.eps}
@@ -188,13 +184,13 @@
 	La section la plus interressante concerne bien évidement la création de parties
 	locales. Vous aurez la possibilité de configurer ces dernières suivant vos
 	attentes. Cette configuration passe par le choix de la carte de jeu, officielle
-	ou au préalablement créee, mais aussi la difficulté des adversaires(\gls{bot})
+	ou préalablement créée, mais aussi la difficulté des adversaires(\gls{bot})
 	et leur nombre avec le temps de jeu.
 		\begin{center}						
 			\includegraphics[scale=0.4]{Developpement/Img/7.eps}
 		\end{center} 
 	Enfin le type de partie souhaité est lui
-	aussi inclus dans les paramètres de jeu. Une fois vos préférences appliquées
+	aussi inclus dans les paramètres de jeu. Une fois vos préférences choisies
 	vous n'aurez plus qu'à lancer la partie, qui débutera quelques instants après.
 	
 	
@@ -225,12 +221,12 @@
 			\end{center}
 			Cette première matrice sera déssinée en premier sur la carte.
 			
-			Ensuite, la deuxième matrice qui sera déssinée au dessus de la précédente contient tous les blocs du décor avec lesquels les joueurs pourront intéragir. 
+			Ensuite, la deuxième matrice sera déssinée au dessus de la précédente. Elle contient tous les blocs du décor avec lesquels les joueurs pourront intéragir. 
 			\begin{center}
 				\includegraphics{./Developpement/Img/image2.png}
 			\end{center}
 			
-			Grâce à ces deux matrices, les joueurs pourront à tout moment modifier les éléments de la première matrice ou de la deuxième.
+			Grâce à ces deux matrices, les joueurs pourront à tout moment modifier les éléments de la première ou de la deuxième.
 			
 			En fusionnant ces deux matrices, nous obtenons la carte compléte.
 			\begin{center}
@@ -239,24 +235,24 @@
 			
 
 	\subsubsection{Le modèle}
-		La carte est la principale information que l'éditeur de carte doit gérer. Pour représenter une carte, nous avons choisi de la représenter sous la forme de deux matrices ayant les mêmes dimensions que la carte. La première matrice contient des \textit{Objects} représentant le sol et la deusième contient elle aussi des \textit{Objects} mais ces derniers représentent des blocs et non le sol. Pour gérer les deux matrice nous avons utilisé des \textit{NSMutableArray} qui sont des tableaux Objective-C que l'on peut modifier, ils contiennent eux aussi des \textit{NSMutableArray} car il n'existe pas des constructeurs de matrice comme en JAVA. Ensuite l'autre information que la carte doit possèder c'est la position de départ des joueurs. Nous avons utilisé un \textit{NSMutableDictionary} permettant de faire la liaison entre la couleur du joueur et son point de départ. 
+		La carte est la principale information que l'éditeur de carte doit gérer. Pour représenter une carte, nous avons choisi de la représenter sous la forme de deux matrices ayant les mêmes dimensions que la carte. La première matrice contient des \textit{Object} représentant le sol et la deuxième contient elle aussi des \textit{Object} mais ces derniers représentent des blocs et non le sol. Pour gérer les deux matrices nous avons utilisé des \textit{NSMutableArray} qui sont des tableaux Objective-C que l'on peut modifier, ils contiennent eux aussi des \textit{NSMutableArray} car il n'existe pas des constructeurs de matrice comme en JAVA. Ensuite l'autre information que la carte doit possèder c'est la position de départ des joueurs. Nous avons utilisé un \textit{NSMutableDictionary} permettant de faire la liaison entre la couleur du joueur et son point de départ. 
 			
-		Lorsque l'utilisateur à terminé de créer ça carte, il a besoin de la sauvegarder. Pour cela nous avons donc utilisé la sérialisation des objets et lors de l'enregistrement de la carte ça génère un fichier \og .klob \fg \, qui contiendra les informations necessaires pour la reconstruction de la carte lors de son chargement qui la reconstruira en la déserialisant. Pour utiliser la serialisation en Objective-C, nous avons juste besoin implémenter le protocol \textit{NSCoding} qui comporte deux methode à définir : 
+		Lorsque l'utilisateur à terminé de créer ça carte, il a besoin de la sauvegarder. Pour cela nous avons donc utilisé la sérialisation des objets. Lors de l'enregistrement de la carte un fichier \og .klob \fg \ est généré. Ce dernier contient les informations nécessaires pour la reconstruction de la carte. Pour reconstruire une carte, il suffit de désérialiser le contenu du fichier .klob correspondant. Pour utiliser la serialisation en \gls{objective-c), nous avons juste besoin implémenter le protocol \textit{NSCoding} qui comporte deux méthode à définir : 
 		\textit{- (id)initWithCoder:(NSCoder *)aDecoder} permettant de déserialisé et \textit{- (void)encodeWithCoder:(NSCoder *)aCoder} s'occupant de la serialisation.
 	
 	\subsubsection{La vue}
-		Pour facilité le développement mais aussi ça réutilisabilité, nous avons découpé la vue de l'éditeur de carte en trois zones. Chaqu'une de ces vues est associée à un controlleur qui permettra de faire la liaison avec le modèle. Pour concevoir les vues nous avons utilisé la classe UIView qui est prévue pour réaliser des vues pour une interface graphique sur iPhone. 
+		Pour faciliter le développement mais aussi ça réutilisabilité, nous avons découpé la vue de l'éditeur de carte en trois zones. Chaqu'une de ces vues est associée à un contrôlleur qui permet de faire la liaison avec le modèle. Pour concevoir les vues nous avons utilisé la classe UIView qui est prévue pour réaliser une interface graphique sur iPhone. 
 			
 		\begin{center}
 			\includegraphics[width=11cm]{./Developpement/Img/carte.eps}
 		\end{center}
-		Tout d'abord, la vue la plus important que nous avons créé, c'est la vue affichant la carte permettant au joueur d'intéragir avec celle-ci et de pouvoir créer des cartes selon ses envies. Pour réaliser cette intéraction, nous avons dû surcharger trois methodes de la classe \textit{UIResponder} : \textit{touchesBegan}, \textit{touchesMoved} et \textit{touchesEnded} permettant de gérer tous les évènement générés lorsque l'utilisateur appuiera sur la vue. La methode \textit{touchesBegan} permet de récupérer l'évènement lorsque l'utilisateur va appuyer sur la vue, grâce à cette évènement, on peut savoir à quelle position l'utilisateur à pressé la vue. Ensuite pour réccupérer l'évènement lorsque l'utilisateur continu d'appuyer sur l'écran, il nous suffit d'utiliser \textit{touchesMoved}. Et pour finir lorsque l'utilisateur retire son doigt de la vue, nous utilisons la méthode \textit{touchesEnded} qui nous permettra par exemple de savoir où l'utilisateur à retiré son doigt de la vue. A l'aide de ces trois methodes, nous avons implémenté les différents gestes que l'ulisateur peut effectuer pour créer une carte. Pour dessiner la carte, nous avons dû surcharger la methode \textit{- (void)draw:(CGContextRef)context}, celle-ci permet de modifier le comportement de l'affichage de la vue et notamme elle donne la possibilité de dessiner n'import quel objet dans la vue.
+		Tout d'abord, la vue la plus importante que nous avons créé est la vue affichant la carte. Elle permet au joueur d'intéragir avec celle-ci et de pouvoir créer des cartes selon ses envies. Pour réaliser cette intéraction, nous avons dû surcharger trois methodes de la classe \textit{UIResponder} : \textit{touchesBegan}, \textit{touchesMoved} et \textit{touchesEnded} permettant de gérer tous les évènement générés lorsque l'utilisateur appuiera sur la vue. La methode \textit{touchesBegan} permet de récupérer l'évènement lorsque l'utilisateur va appuyer sur la vue, grâce à cette évènement, on peut savoir à quelle position l'utilisateur à pressé la vue. Ensuite pour récupérer l'évènement lorsque l'utilisateur fais glisser son doigt sur l'écran, il nous suffit d'utiliser \textit{touchesMoved}. Et pour finir lorsque l'utilisateur retire son doigt, nous utilisons la méthode \textit{touchesEnded}. A l'aide de ces trois méthodes, nous avons implémenté les différents gestes que l'utilisateur peut effectuer pour créer une carte. Pour dessiner la carte, nous avons dû surcharger la methode \textit{- (void)draw:(CGContextRef)context}. Celle-ci permet de modifier le comportement de l'affichage de la vue mais elle donne aussi la possibilité de dessiner n'importe quel objet.
 		
 		\begin{center}
 %			\includegraphics{./Developpement/Img/menu_droite.pdf}
 		\end{center}
 			
-		Ensuite, nous avons créer une vue permettant de changer d'objet que l'on veut mettre sur la carte. Cette dernière se trouve à gauche de la carte. Dans cette vue, nous avons des \textit{UIButton} permettant de créer des boutons, mais la partie la plus important de la vue c'est la liste déroulante pour choisir l'objet que l'on placer sur la carte. Cette liste déroulante est une vue que nous avons dû implémenter, la particularité de cette liste c'est qu'elle est générique ce qui permet de l'utiliser dans plusieurs vues différentes et notamment dans les menus pour afficher le choix des cartes. Grâce à celle-ci l'utilisateur peut changer d'objet selectionné en exerçant un simple mouvement vertical du doigt.
+		Ensuite, nous avons créé une vue permettant de sélectionner les objets que l'utilisateur peut mettre sur la carte. Cette dernière se trouve à droite de la carte. Dans cette dernière, nous avons des \textit{UIButton} permettant de supprimer des objets ou encore pour changer le type d'objet à placer sur la carte. Mais le plus important de cette vue est la liste déroulante qui permet de choisir l'objet que l'on veut placer sur la carte. Cette liste déroulante n'étais pas un \gls{widget} de base et nous avons donc dû l'implémenter. La particularité de cette liste est qu'elle est générique, ce qui permet de l'utiliser dans plusieurs cas différents, notamment dans les menus pour afficher le choix des cartes. Grâce à celle-ci l'utilisateur peut changer d'objet selectionné en exerçant un simple mouvement vertical du doigt.
 			
 		\begin{center}
 %			\includegraphics[width=11cm]{./Developpement/Img/menu_haut.pdf}
@@ -266,7 +262,7 @@
 			
 	\subsubsection{Le controlleur}
 		
-		Le controlleur est une partie très important de l'architecture MVC, elle permet de faire le lien en les interactions que l'utilisateur effectue dans l'éditeur de carte et les données relative à celui-ci. Nous avons  donc créé des objets de type \textit{UIViewControler}, ces objets nous ont permis de réaliser cette liason. Grâce à celle-ci, le modèle et la vue sont complètement indépend ce qui permet de pouvoir changer totalement de vue sans avoir besoin de modifier le modèle. Comme nous avons divisé l'éditeur de carte en plusieurs sous vues, nous avons donc créé un \og pseudo \fg controlleur (car se ne sont pas des \textit{UIViewControler} mais seulement des objets normaux) pour chaqu'une entre elles, elle même possède un controlleur global qui lui sera bien un \textit{UIViewControler}. Lorsqu'un utilisateur va réaliser une action dans la vue de l'éditeur de carte, cette dernière va appeler une methode de son pseudo controleur, qui lui appelera une methode du controlleur global, qui se chargera d'appeler la bonne methode du modèle en fonction de l'action effectuée par l'utilisateur. 
+		Le controlleur est une partie très importante de l'architecture \gls{mvc}, elle permet de faire le lien entre les interactions de l'utilisateur sur l'éditeur de carte et les données relatives à celui-ci. Nous avons  donc créé des objets de type \textit{UIViewControler}, ces objets nous ont permis de réaliser cette liaison. Grâce à celle-ci, le modèle et la vue sont complètement indépendants ce qui permet de changer de vue sans avoir besoin de modifier le modèle. Comme nous avons divisé l'éditeur de carte en plusieurs sous vues, nous avons donc créé un contrôlleur pour chacune d'entre elles. Chacun de ces contrôlleur possède eux-même un contrôleur global qui sera le seul à contacter diréctement le modèle. Lorsqu'un utilisateur va réaliser une action dans la vue de l'éditeur de carte, cette dernière va appeler une methode de son contrôleur directe, qui lui appelera une methode du contrôleur global, qui se chargera d'appeler la bonne méthode du modèle en fonction de l'action effectuée par l'utilisateur. 
 
 
 
