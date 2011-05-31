@@ -12,6 +12,9 @@ import com.klob.Bomberklob.resources.Paint;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
+/**
+ * Class representing abstracts objects
+ */
 public abstract class Objects implements Serializable {
 
 	/**
