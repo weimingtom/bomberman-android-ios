@@ -25,6 +25,10 @@
 @property (nonatomic) BOOL official;
 
 
+///----------------------------------
+/// @name Initializing a DBMap Object
+///----------------------------------
+
 /** Initializes and returns a newly allocated `DBMap` object with the specified name, owner and anOfficial value. 
  
  @param aName Map name.
