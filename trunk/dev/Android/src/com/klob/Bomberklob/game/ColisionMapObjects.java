@@ -2,7 +2,13 @@ package com.klob.Bomberklob.game;
 
 public enum ColisionMapObjects {
 
+	/**
+	 * An empty area
+	 */
 	EMPTY(0),
+	/**
+	 * An area containing a block
+	 */
 	BLOCK(1),
 	GAPE(2),
 	DAMAGE(3),

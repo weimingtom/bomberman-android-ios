@@ -10,6 +10,10 @@ import com.klob.Bomberklob.objects.exceptions.BombPowerException;
 import com.klob.Bomberklob.resources.Point;
 import com.klob.Bomberklob.resources.ResourcesManager;
 
+/**
+ * Class representing the game engine
+ */
+
 public class Engine {
 
 	private Single single;
@@ -19,6 +23,14 @@ public class Engine {
 
 	/* Constructeur -------------------------------------------------------- */
 
+	/**
+	 * Creates an engine according to the parameters passed
+	 * @param mapName Name of the map
+	 * @param enemies Number of enemies
+	 * @param gametype Type of the game
+	 * @param random True if players are placed randomly
+	 * @param difficulty Difficulty of the enemies
+	 */
 	public Engine(String mapName, int enemies, String gametype, boolean random, int difficulty) {
 		this.single = new Single(mapName, enemies, gametype, random, difficulty);
 		this.size = ResourcesManager.getSize();
@@ -26,18 +38,32 @@ public class Engine {
 
 	/* Getters ------------------------------------------------------------- */
 
+	/**
+	 * Returns an instance of the current single game
+	 * @return An instance of the current single game
+	 */
+	
 	public Single getSingle() {
 		return single;
 	}
 
 	/* Setters ------------------------------------------------------------- */
 
+	/**
+	 * Updates the instance of the current single game
+	 * @param The instance of the current single game
+	 */
+	
 	public void setSingle(Single single) {
 		this.single = single;
 	}	
 
 	/* Méthodes publiques -------------------------------------------------- */		
 
+	/**
+	 * Allows a player to place a bomb on the map
+	 * @param The player who wants to plant a bomb
+	 */
 	public void pushBomb(Player player) {
 
 		if ( player != null ) {
@@ -72,10 +98,19 @@ public class Engine {
 		}
 	}
 
+	/**
+	 * Draws the current single game in the canvas according to the desired size
+	 * 
+	 * @param canvas A canvas
+	 * @param size The desired size
+	 */
 	public void onDraw(Canvas canvas, int size) {
 		this.single.onDraw(canvas,size);
 	}
 
+	/**
+	 * Update the current single game
+	 */	
 	public void update() {
 		Player[] players = this.single.getPlayers();
 
@@ -135,6 +170,9 @@ public class Engine {
 		this.single.update();
 	}
 
+	/**
+	 * Restart the curent single game
+	 */
 	public void restartGame () {		
 		this.single.restartGame();		
 	}	
