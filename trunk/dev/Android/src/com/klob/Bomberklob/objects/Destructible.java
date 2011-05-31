@@ -36,7 +36,7 @@ public class Destructible extends Objects {
 	}
 	
 	/**
-	 * Create a copy of the passed as destructible parameter
+	 * Create a copy of the destructible parameter
 	 * @param destructible Destructible object
 	 */
 	public Destructible(Destructible destructible) {

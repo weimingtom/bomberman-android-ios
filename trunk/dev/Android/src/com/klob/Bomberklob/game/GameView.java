@@ -5,6 +5,12 @@ import android.view.SurfaceHolder;
 
 import com.klob.Bomberklob.resources.ResourcesManager;
 
+/**
+ * 
+ * Class representing the view during the game
+ *
+ */
+
 public class GameView extends Thread {
 	
 	private SurfaceHolder surfaceHolder;
