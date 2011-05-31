@@ -70,7 +70,7 @@
 
 /** Adds a ground element thanks to his position.
  
- @param ground The ground has to add.
+ @param ground The ground to add.
  @param position The position ground.
  @see addBlock:position:
  @see addPlayer:color:
@@ -79,7 +79,7 @@
 
 /** Adds a block thanks to his position.
  
- @param block The block ...
+ @param block The block to add.
  @param position The position block.
  @see addGround:position:
  @see addPlayer:color:
