@@ -217,20 +217,20 @@
 			
 			Tout d'abord la matrice contenant tous les éléments représentant le sol.
 			\begin{center}
-				\includegraphics{./Developpement/Img/image1.png}
+				%\includegraphics{./Developpement/Img/image1.png}
 			\end{center}
 			Cette première matrice sera déssinée en premier sur la carte.
 			
 			Ensuite, la deuxième matrice sera déssinée au dessus de la précédente. Elle contient tous les blocs du décor avec lesquels les joueurs pourront intéragir. 
 			\begin{center}
-				\includegraphics{./Developpement/Img/image2.png}
+				%\includegraphics{./Developpement/Img/image2.png}
 			\end{center}
 			
 			Grâce à ces deux matrices, les joueurs pourront à tout moment modifier les éléments de la première ou de la deuxième.
 			
 			En fusionnant ces deux matrices, nous obtenons la carte compléte.
 			\begin{center}
-				\includegraphics{./Developpement/Img/image3.png}
+				%\includegraphics{./Developpement/Img/image3.png}
 			\end{center}
 			
 
@@ -273,7 +273,7 @@
 		Au sein d'un jeu vidéo plusieurs types de moteurs sont mis en place.
 		Chacun a un travail bien précis.
 		Ici nous en trouvons trois au total à savoir un pour le rendu graphique, un
-		pour s'occuper des interactions joueurs et objets. En enfin un dernier gérant
+		pour s'occuper des interactions entre objets (que ce soit des joueurs, des bombes ou autres). Et enfin un dernier gérant
 		les actions de l'intelligence artificielle.
 		Commençons par le moteur de rendu.
 	
@@ -291,25 +291,25 @@
 			le moteur de rendu se doit d'être beaucoup plus léger. En effet le jeu doit
 			dans son ensemble rester le plus fluide afin d'offrir à l'utilisateur une meilleure
 			experience. Il faut savoir qu'ici en plus de gérer le rendu, l'application
-			doit s'occuper des interactions joueurs et objets \footnote{
-				\hyperlink{Moteur physique}{Moteur physique}
-				\og voir section \ref{Moteur physique}, page \pageref{Moteur physique}.\fg
-			}.
-			, de l'intelligence artificielle
+			doit s'occuper de l'intelligence artificielle
 			\footnote{
 				\hyperlink{IA}{IA}
 				\og voir section \ref{IA}, page \pageref{IA}.\fg
 			}.
-			et des divers sons
+			, des divers sons
 			\footnote{
 				\hyperlink{Sons}{Sons}
 				\og voir section \ref{Sons}, page \pageref{Sons}.\fg
-			}.
-			qui seront joués au cours de la partie.		
+			} et des interactions entre objets
+			 \footnote{
+				\hyperlink{Moteur physique}{Moteur physique}
+				\og voir section \ref{Moteur physique}, page \pageref{Moteur physique}.\fg
+			}..
+			qui seront gérés en cours de partie.		
 			
 			$\,$	
 			
-			L'utilisateur ne pourra plus modifier la carte à sa guise et sera
+			L'utilisateur ne pourra plus modifier la carte et sera
 			entièrement dépendant du moteur physique\footnotemark[3]. Par
 			exemple un bloc indestructible sera présent tout au long de la
 			partie et ne pourra pas être supprimé, il n'est donc plus necessaire de
@@ -347,7 +347,7 @@
 			
 			Si ce bloc est destructible alors il nous est obligatoire de savoir ce qui se
 			trouve en dessous.
-			Nous allons donc stocker ce bloc dans une hashmap dont les clefs sont les
+			Nous allons donc stocker ce bloc dans une table de hachage dont les clefs sont les
 			coordonnées de l'objet et dont la valeur est l'objet lui même, et dessiner le
 			sol sur l'image citée au dessus.
 			
@@ -355,7 +355,7 @@
 			au dessous.
 			
 			Sinon s'il n'existe pas de bloc nous allons regarder si le sol est animé. Si
-			tel est le cas, alors nous le stockons dans la hashmap comme un bloc
+			tel est le cas, alors nous le stockons dans la table de hachage comme un bloc
 			destructible, sinon nous le dessinons dans l'image comme un objet inanimé.
 			
 			$\,$
@@ -392,6 +392,7 @@
 			
 			\begin{center}
 				\begin{tabular}{|c|c|c|} \hline
+				\multicolumn{3}{c}{Compléxité en nombre d'objet à afficher} \\\hline
 				  & Editeur de carte & Jeu    \\\hline 
 				Meilleur des cas & 337 & 1    \\\hline
 				Pire des cas     & 534 & 229  \\\hline		
@@ -413,7 +414,7 @@
 			Nous voyons très clairement les différences de coûts entre les deux méthodes
 			de rendu et l'optimisation qu'engendre la deuxième.
 			
-			De plus ici l'utilisation de la hashmap permet dans un premier temps de
+			De plus ici l'utilisation de la table de hachage permet dans un premier temps de
 			retrouver directement un objet de par ses coordonnées, mais aussi de ne pas
 			avoir à parcourir $n$ cases vides comme lors de l'utilisation des matrices.
 			Au fur et à mesure de la partie il existera de moins en moins d'objets,
@@ -572,7 +573,7 @@
 							
 				  		  \item C'est à partir de ce cas que l'on rencontre le glissement cité
 				  		  plus haut.
-				  		  Ici nous essayons de monter mais la case de gauche correspond à un
+				  		  Ici nous le joueur essaie de monter mais la case de gauche correspond à un
 				  		  mur. Etant donné la petitesse des écrans et la rapidité à laquelle le
 				  		  jeu se déroule il serait embêtant pour l'utilisateur de devoir se
 				  		  décaler à droite de façon à être bien en face de la case libre.
@@ -597,14 +598,14 @@
 				  
 				  \item Collisions sous iOS
 				
-				Le principe des collisions sous IOS a été réfléchi de manière a ce que les
+				Le principe des collisions sous \gls{ios} a été réfléchi de manière a ce que les
 				déplacements soient fluides et que les collisions avec des blocs ne
 				freinent pas la fluidité du jeu. Car en effet lors des collisions, 
 				si le joueur doit passer entre deux blocs, 
 				celui-ci doit passer au pixel prêt. Cela implique que l'utilisateur doit
 				être très minutieux dans ses déplacements et cela rend le jeu casiment
 				injouable lors de passage entre deux blocs. 
-				Donc pour remédier à ce problème nous avons décidé d'établir un système de marge sous IOS.
+				Donc pour remédier à ce problème nous avons décidé d'établir un système de marge sous \gls{ios}.
 				C'est à dire que lors de la collision avec un bloc. 
 				On va vérifier si au moins un pixel du joueur touche au moins un pixel du
 				bloc moins une marge. 
@@ -619,7 +620,7 @@
 				$\,$
 				  		
 				\begin{center}						
-	%				\includegraphics[width=168px,height=84px]{Developpement/Img/mouvementCollision.pdf}
+			%		\includegraphics[width=168px,height=84px]{Developpement/Img/mouvementCollision.pdf}
 				\end{center}
 						
 				$\,$	
