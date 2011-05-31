@@ -26,6 +26,8 @@ import android.widget.Toast;
 import com.klob.Bomberklob.R;
 import com.klob.Bomberklob.model.Model;
 
+import flexjson.JSONSerializer;
+
 public class MultiplayerNewAccount  extends Activity implements View.OnClickListener{
 
 	private TextView userPseudo;
@@ -200,8 +202,8 @@ public class MultiplayerNewAccount  extends Activity implements View.OnClickList
 				OutputStreamWriter writer = new OutputStreamWriter(
 						connection.getOutputStream());
 				
-//				JSONSerializer jsonSerializer = new JSONSerializer();
-//				jsonSerializer.serialize(identifier, writer);
+				JSONSerializer jsonSerializer = new JSONSerializer();
+				jsonSerializer.serialize(identifier, writer);
 				writer.flush();
 
 				if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {

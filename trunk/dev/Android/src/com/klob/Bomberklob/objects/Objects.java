@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.util.Hashtable;
 
 import android.graphics.Canvas;
-import android.graphics.ColorFilter;
 import android.graphics.Rect;
 
 import com.klob.Bomberklob.resources.Paint;
@@ -20,26 +19,74 @@ public abstract class Objects implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Name of the image
+	 */
 	protected String imageName;
+	
+	/**
+	 * Boolean saying if the object is traversable or not
+	 */
 	protected boolean hit;
+	
+	/**
+	 * Level of the object on the map
+	 */
 	protected int level;
+	
+	/**
+	 * Damage Item
+	 */
 	protected int damages;
+	
+	/**
+	 * 
+	 */
 	protected boolean fireWall;
+	
+	/**
+	 * Position of the object
+	 */
 	protected Point position;
 
+	/**
+	 * Object's animations
+	 */
 	protected Hashtable<String, AnimationSequence> animations = new Hashtable<String, AnimationSequence>();
+	
+	/**
+	 * Current animation
+	 */
 	protected String currentAnimation;
+	
+	/**
+	 * Current frame
+	 */
 	protected int currentFrame;
+	
+	/**
+	 * Delay for the next animation
+	 */
 	protected int waitDelay;
+	
+	/**
+	 * Sound of the current animation
+	 */
 	protected String sound = "";
+	
+	/**
+	 * Rectangular coordinates of the image of the current animation
+	 */
 	protected transient Rect rect;
 
-	//TODO
-	protected ColorFilter cf;
+	/**
+	 * 
+	 */
 	protected Paint paint;
 
 
 	/* Contructeur --------------------------------------------------------- */
+
 
 	public Objects(String imageName, Hashtable<String, AnimationSequence> animations, String currentAnimation, boolean hit, int level, boolean fireWall, int damages) {
 		this.imageName = imageName;
@@ -115,34 +162,50 @@ public abstract class Objects implements Serializable {
 		return imageName;
 	}
 
+	/**
+	 * Returns animations of the object
+	 * @return Animations of the object
+	 */
 	public Hashtable<String, AnimationSequence> getAnimations() {
 		return this.animations;
 	}
 
+	/**
+	 * Return the current animation
+	 * @return The current animation
+	 */
 	public String getCurrentAnimation() {
 		return this.currentAnimation;
 	}
 
+	/**
+	 * Return the current frame
+	 * @return The current frame
+	 */
 	public int getCurrentFrame() {
 		return this.currentFrame;
 	}
 
+	/**
+	 * Return the delay of the current frame
+	 * @return The delay of the current frame
+	 */
 	public int getWaitDelay() {
 		return this.waitDelay;
 	}
 
-	public Paint getPaint() {
-		return this.paint;
-	}
-
-	public ColorFilter getColorFilter() {
-		return this.cf;
-	}
-
+	/**
+	 * Returns damages of the object
+	 * @return Damages of the object
+	 */
 	public int getDamage() {
 		return this.damages;
 	}
 
+	/**
+	 * Return the rectangle corresponding to the coordinates of the image of the object
+	 * @return The rectangle corresponding to the coordinates of the image of the object
+	 */
 	public Rect getRect() {
 		return this.animations.get(this.currentAnimation).sequence.get(this.currentFrame).rect;
 	}
@@ -160,7 +223,7 @@ public abstract class Objects implements Serializable {
 	/**
 	 * Updates the position of the object
 	 * @param x The position on the abscissa
-	 * @param y The position on the ordinate
+	 * @param y The position on the orderly
 	 */
 	public void setPosition(int x, int y) {
 		this.position.x = x;
@@ -168,8 +231,8 @@ public abstract class Objects implements Serializable {
 	}
 
 	/**
-	 * 
-	 * @param animations
+	 * Updates animations of the object
+	 * @param animations of the object
 	 */
 	public void setAnimations(Hashtable<String, AnimationSequence> animations) {
 		this.animations = animations;
