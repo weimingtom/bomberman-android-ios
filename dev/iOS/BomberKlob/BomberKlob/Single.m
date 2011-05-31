@@ -12,7 +12,7 @@
 
 @implementation Single
 
-@synthesize time;
+@synthesize time, timerThread, timeCondition, isPaused;
 
 - (id)init {
     self = [super init];

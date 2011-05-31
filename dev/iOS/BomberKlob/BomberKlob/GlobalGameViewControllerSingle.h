@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+/** The `Player` class allows to represent a player. */
 @class GameActionViewController, GameInformationViewController, GameViewControllerSingle, Engine, RessourceManager,PauseMenuGame, Position, Player;
 
 

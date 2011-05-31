@@ -44,18 +44,28 @@
 
 /** Lets see if the object is in collisions by advancing of x and y.
  
+ @param player The object wich want to know if it's in collision.
+ @param xValue The x value of deplacement of the object.
+ @param yValue The y value of deplacement of the object.
  @return `YES` if the object is in collision, `NO` otherwise.
  */
 - (BOOL) isInCollision:(Objects *)player :(NSInteger) xValue: (NSInteger) yValue;
 
 
-/** Lets see if the object is in collisions with a player. If Yes the player will be destroy.
-
+/** Lets see if the bomb is in collisions with a player. If Yes the player will be destroy.
+ 
+ @param object The object wich want to know if it's in collision.
+ @param xValue The x value of deplacement of the object.
+ @param yValue The y value of deplacement of the object.
+ @param aBomb The wich want to know if it's in collision with a player.
  */
 - (void) collisionWithPlayer: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue bomb:(Bomb *) aBomb;
 
 /** Lets see if the object is in collision with a bomb planted on the game by advancing of x and y.
  
+ @param object The object wich want to know if it's in collision.
+ @param xValue The x value of deplacement of the object.
+ @param yValue The y value of deplacement of the object.
  @return `YES` if the object is in collision with a bomb, `NO` otherwise.
  */
 - (BOOL) isInCollisionWithABomb: (Objects *) object: (NSInteger) xValue: (NSInteger) yValue;
@@ -69,97 +79,97 @@
 
 /** Allows you to manage the movements to the Top. 
  
- @param player The player who must move.
+ @param player The player wich want to do the movement.
  */
 - (void) moveTop:(Player *)player ;
 
 /** Allows you to manage the movements to the Bottom. 
  
- @param player The player who must move.
+ @param player The player wich want to do the movement.
  */
 - (void) moveDown:(Player *)player ;
 
 /** Allows you to manage the movements to the Left. 
  
- @param player The player who must move.
+ @param player The player wich want to do the movement.
  */
 - (void) moveLeft:(Player *)player ;
 
 /** Allows you to manage the movements to the Right. 
  
- @param player The player who must move.
+ @param player The player wich want to do the movement.
  */
 - (void) moveRight:(Player *)player ;
 
 /** Allows you to manage the movements to the Left-Top corner. 
  
- @param player The player who must move.
+ @param player The player wich want to do the movement.
  */
 - (void) moveLeftTop:(Player *)player ;
 
 /** Allows you to manage the movements to the Left-Bottom corner. 
  
- @param player The player who must move.
+ @param player The player wich want to do the movement.
  */
 - (void) moveLeftDown:(Player *)player ;
 
 /** Allows you to manage the movements to the Right-Bottom corner. 
  
- @param player The player who must move.
+ @param player The player wich want to do the movement.
  */
 - (void) moveRightDown:(Player *)player ;
 
 /** Allows you to manage the movements to the Right-Top corner. 
  
- @param player The player who must move.
+ @param player The player wich want to do the movement.
  */
 - (void) moveRightTop:(Player *)player ;
 
 /** Allows you to stop the movements to the Top. 
  
- @param player The player who must move.
+ @param player The player wich want to stop the movement.
  */
 - (void) stopTop:(Player *)player;
 
 /** Allows you to stop the movements to the Bottom. 
  
- @param player The player who must move.
+ @param player The player wich want to stop the movement.
  */
 - (void) stopDown:(Player *)player;
 
 /** Allows you to stop the movements to the Left. 
  
- @param player The player who must move.
+ @param player The player wich want to stop the movement.
  */
 - (void) stopLeft:(Player *)player;
 
-/** Allows you to stop the movements to the Right. 
+/** Allows you to stop the movements to the Right.
  
- @param player The player who must move.
+ @param player The player wich want to stop the movement.
  */
 - (void) stopRight:(Player *)player;
 
-/** Allows you to stop the movements to the Left-Top corner. 
+/** Allows you to stop the movements to the Left-Top corner.
  
- @param player The player who must move.
+ @param player The player wich want to stop the movement.
  */
 - (void) stopLeftTop:(Player *)player;
 
 /** Allows you to stop the movements to the Right-Top corner. 
  
- @param player The player who must move.
+ @param player The player wich want to stop the movement.
  */
 - (void) stopRightTop:(Player *)player;
 
 /** Allows you to stop the movements to the Left-Bottom corner. 
  
- @param player The player who must move.
+ @param player The player wich want to stop the movement.
  */
 - (void) stopLeftDown:(Player *)player;
 
 /** Allows you to stop the movements to the Right-Bottom corner. 
  
- @param player The player who must move.
+ @param player The player wich want to stop the movement.
  */
 - (void) stopRightDown:(Player *)player;
 
