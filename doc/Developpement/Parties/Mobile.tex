@@ -217,20 +217,20 @@
 			
 			Tout d'abord la matrice contenant tous les éléments représentant le sol.
 			\begin{center}
-				%\includegraphics{./Developpement/Img/image1.png}
+				\includegraphics{./Developpement/Img/image1.png}
 			\end{center}
 			Cette première matrice sera déssinée en premier sur la carte.
 			
 			Ensuite, la deuxième matrice sera déssinée au dessus de la précédente. Elle contient tous les blocs du décor avec lesquels les joueurs pourront intéragir. 
 			\begin{center}
-				%\includegraphics{./Developpement/Img/image2.png}
+				\includegraphics{./Developpement/Img/image2.png}
 			\end{center}
 			
 			Grâce à ces deux matrices, les joueurs pourront à tout moment modifier les éléments de la première ou de la deuxième.
 			
 			En fusionnant ces deux matrices, nous obtenons la carte compléte.
 			\begin{center}
-				%\includegraphics{./Developpement/Img/image3.png}
+				\includegraphics{./Developpement/Img/image3.png}
 			\end{center}
 			
 
@@ -251,13 +251,13 @@
 		Tout d'abord, la vue la plus importante que nous avons créé est la vue affichant la carte. Elle permet au joueur d'intéragir avec celle-ci et de pouvoir créer des cartes selon ses envies. Pour réaliser cette intéraction, nous avons dû surcharger trois methodes de la classe \textit{UIResponder} : \textit{touchesBegan}, \textit{touchesMoved} et \textit{touchesEnded} permettant de gérer tous les évènement générés lorsque l'utilisateur appuiera sur la vue. La methode \textit{touchesBegan} permet de récupérer l'évènement lorsque l'utilisateur va appuyer sur la vue, grâce à cette évènement, on peut savoir à quelle position l'utilisateur à pressé la vue. Ensuite pour récupérer l'évènement lorsque l'utilisateur fais glisser son doigt sur l'écran, il nous suffit d'utiliser \textit{touchesMoved}. Et pour finir lorsque l'utilisateur retire son doigt, nous utilisons la méthode \textit{touchesEnded}. A l'aide de ces trois méthodes, nous avons implémenté les différents gestes que l'utilisateur peut effectuer pour créer une carte. Pour dessiner la carte, nous avons dû surcharger la methode \textit{- (void)draw:(CGContextRef)context}. Celle-ci permet de modifier le comportement de l'affichage de la vue mais elle donne aussi la possibilité de dessiner n'importe quel objet.
 		
 		\begin{center}
-%			\includegraphics{./Developpement/Img/menu_droite.pdf}
+			\includegraphics{./Developpement/Img/menu_droite.pdf}
 		\end{center}
 			
 		Ensuite, nous avons créé une vue permettant de sélectionner les objets que l'utilisateur peut mettre sur la carte. Cette dernière se trouve à droite de la carte. Dans cette dernière, nous avons des \textit{UIButton} permettant de supprimer des objets ou encore pour changer le type d'objet à placer sur la carte. Mais le plus important de cette vue est la liste déroulante qui permet de choisir l'objet que l'on veut placer sur la carte. Cette liste déroulante n'étais pas un \gls{widget} de base et nous avons donc dû l'implémenter. La particularité de cette liste est qu'elle est générique, ce qui permet de l'utiliser dans plusieurs cas différents, notamment dans les menus pour afficher le choix des cartes. Grâce à celle-ci l'utilisateur peut changer d'objet selectionné en exerçant un simple mouvement vertical du doigt.
 			
 		\begin{center}
-%			\includegraphics[width=11cm]{./Developpement/Img/menu_haut.pdf}
+			\includegraphics[width=11cm]{./Developpement/Img/menu_haut.pdf}
 		\end{center}
 		Enfin la dernière vue que nous avons réalisé, est une vue contenant plusieurs \textit{UIButton} mais aussi un \textit{UISegmentedControl} qui permet de basculer du mode affichage complet (dessiner tous les éléments de la carte) de la carte, au mode d'affichage partiel (qui affiche que le sol et cache les blocs de la carte) facilitant la modification du sol malgrès les blocs.
 			
