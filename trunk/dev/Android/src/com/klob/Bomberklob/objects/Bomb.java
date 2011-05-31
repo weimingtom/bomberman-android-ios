@@ -16,7 +16,6 @@ public class Bomb extends Destructible {
 	protected int power;
 	protected int time;
 	protected Player player;
-	//FIXME protected ??? type
 
 	public Bomb(String imageName, Hashtable<String, AnimationSequence> animations, ObjectsAnimations currentAnimation, boolean hit, int level, boolean fireWall, int damages, int life, Player player) {
 		super(imageName, animations, currentAnimation, hit, level, fireWall, damages, life);
@@ -42,12 +41,16 @@ public class Bomb extends Destructible {
 		return time;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Player getPlayer() {
 		return player;
 	}
 
 	/* Méthodes publiques -------------------------------------------------- */
-
+	
 	@Override
 	public void onDraw(Canvas canvas,int size) {
 
@@ -59,26 +62,47 @@ public class Bomb extends Destructible {
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("bombs"), this.getRect(), this.rect, null);
 	}
 
-	// FIXME Pour les mines
+	/**
+	 * Returns true if the bomb is destructible
+	 * 
+	 * @return True if the bomb is destructible
+	 */	
 	@Override
 	public boolean isDestructible() {
 		return true;
 	}
-
+	
+	/**
+	 * Creates a copy of the bomb
+	 * 	 * 
+	 * @return A copy of the bomb
+	 */
 	@Override
 	public Bomb copy() {
 		return new Bomb(this);
 	}
 
+	
+	/**
+	 * Destroy the bomb
+	 */
 	@Override
 	public void destroy() {
 		time = 0;               
 	}
 
+	/**
+	 * Returns true if the time of explosion of the bomb is over
+	 * 
+	 * @return True if the time of explosion of the bomb is over
+	 */
 	public boolean timeElapsed() {
 		return (time == 0);
 	}
 
+	/**
+	 * Updates the time bomb
+	 */
 	public void updateTime() {
 		if ( time > 0 ) {
 			time--;

@@ -83,18 +83,34 @@ public abstract class Objects implements Serializable {
 		return this.hit;
 	}
 
+	/**
+	 * Returns the object level in the map
+	 * @return The object level in the map
+	 */
 	public int getLevel() {
 		return this.level;
 	}
 
+	/**
+	 * Returns true if the object blocks the fire
+	 * @return True if the object blocks the fire
+	 */
 	public boolean isFireWall() {
 		return this.fireWall;
 	}
 
+	/**
+	 * Returns the object's position
+	 * @return An point containing the object's position
+	 */
 	public Point getPosition() {
 		return this.position;
 	}
 
+	/**
+	 * Returns the image name of the object
+	 * @return The image name of the object
+	 */
 	public String getImageName() {
 		return imageName;
 	}
@@ -133,19 +149,36 @@ public abstract class Objects implements Serializable {
 
 	/* Setteurs ------------------------------------------------------------ */
 
+	/**
+	 * Updates the position of the object
+	 * @return position The position of the object
+	 */
 	public void setPosition(Point position) {
 		this.position = position;
 	}
 	
+	/**
+	 * Updates the position of the object
+	 * @param x The position on the abscissa
+	 * @param y The position on the ordinate
+	 */
 	public void setPosition(int x, int y) {
 		this.position.x = x;
 		this.position.y = y;
 	}
 
+	/**
+	 * 
+	 * @param animations
+	 */
 	public void setAnimations(Hashtable<String, AnimationSequence> animations) {
 		this.animations = animations;
 	}
 
+	/**
+	 * Updates the current animation
+	 * @param animation The animation required
+	 */
 	public void setCurrentAnimation(ObjectsAnimations animation) {
 		if ( animations.get(currentAnimation) != null ) {
 			this.currentAnimation = animation.getLabel();
@@ -161,10 +194,22 @@ public abstract class Objects implements Serializable {
 
 	/* Méthodes abstraites publiques --------------------------------------- */
 
+	/**
+	 * Returns a copy of the current object
+	 * @return A copy of the current object
+	 */
 	public abstract Objects copy();
 
+	/**
+	 * Returns true if the current object is destructible
+	 * @return True if the current object is destructible
+	 */
 	public abstract boolean isDestructible();
 
+	
+	/**
+	 * Update the current objet
+	 */	
 	public void update() {
 
 		if(waitDelay==0) {
@@ -189,8 +234,16 @@ public abstract class Objects implements Serializable {
 		}
 	}
 
+	/**
+	 * Destroys the object
+	 */
 	public abstract void destroy();
 
+	/**
+	 * Returns true if the current animation is over
+	 * 
+	 * @return True if the current animation is over
+	 */
 	public boolean hasAnimationFinished() {
 		AnimationSequence as = animations.get(currentAnimation);
 		if(currentFrame == as.sequence.size()-1 && this.waitDelay == 0) {
@@ -199,6 +252,13 @@ public abstract class Objects implements Serializable {
 		return false;
 	}
 
+	
+	/**
+	 * Draws the current object in the canvas according to the desired size
+	 * 
+	 * @param canvas A canvas
+	 * @param size The desired size
+	 */
 	public void onDraw(Canvas canvas,int size) {
 
 		Rect rect = this.getRect();
@@ -216,6 +276,9 @@ public abstract class Objects implements Serializable {
 		canvas.drawBitmap(ResourcesManager.getBitmaps().get("objects"), rect, this.rect, this.paint);
 	}
 
+	/**
+	 * Plays the sound of the current animation
+	 */
 	public void playCurrentAnimationSound() {
 		if ( !sound.equals("") ) {
 			ResourcesManager.playSoundPool(this.sound);
