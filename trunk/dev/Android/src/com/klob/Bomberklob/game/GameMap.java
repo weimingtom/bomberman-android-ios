@@ -44,6 +44,10 @@ public class GameMap extends Map {
 	
 	private Iterator<Objects> objectsIterator;
 
+	/**
+	 * Default constructor
+	 */
+	
 	public GameMap() {
 		super();
 		this.colisionMap = new ColisionMapObjects[ResourcesManager.MAP_WIDTH][ResourcesManager.MAP_HEIGHT];
@@ -54,22 +58,38 @@ public class GameMap extends Map {
 
 	/* Getteurs ------------------------------------------------------------ */
 
+	/**
+	 * Returns the HashMap of animated objects
+	 * @return The HashMap of animated objects
+	 */
 	public ConcurrentHashMap<Point, Objects> getAnimatedObjects() {
 		return animatedObjects;
 	}
 
+	/**
+	 * Return the colision map
+	 * @return The colision map
+	 */
 	public ColisionMapObjects[][] getColisionMap() {
 		return colisionMap;
 	}
 
 	/* Setteurs ------------------------------------------------------------ */
 
+	/**
+	 * Update the colision map
+	 */
 	public void setColisionMap(ColisionMapObjects[][] colisionMap) {
 		this.colisionMap = colisionMap;
 	}
 
 	/* Méthodes publiques -------------------------------------------------- */
 
+	/**
+	 * Load a map
+	 * @param s Name of the map
+	 * @return Returns true if the map is loaded false otherwise
+	 */
 	public boolean loadMap(String s) {
 
 		EditorMap map = null;   
@@ -143,6 +163,11 @@ public class GameMap extends Map {
 
 	/* Méthodes publiques -------------------------------------------------- */
 
+	/**
+	 * Draw all objects of the map
+	 * @param canvas A canvas
+	 * @param size The desired size
+	 */
 	public void onDraw(Canvas canvas, int size) {
 
 		canvas.drawBitmap(bm, 0, 0, null);
@@ -152,6 +177,9 @@ public class GameMap extends Map {
 		}
 	}
 
+	/**
+	 * Updates all the objects in the map
+	 */
 	public void update() {
 		for(Point entry : animatedObjects.keySet()) {
 			Objects o = animatedObjects.get(entry);
@@ -166,6 +194,9 @@ public class GameMap extends Map {
 		}
 	}
 
+	/**
+	 * Restart the current game
+	 */
 	public void restart() {         
 		this.animatedObjects.clear();
 
@@ -183,6 +214,10 @@ public class GameMap extends Map {
 		}
 	}
 
+	/**
+	 * Update the colision map with bomb in parameter
+	 * @param bomb A bomb object
+	 */
 	public void colisionMapUpdate(Bomb bomb) {
 
 		Point bombPosition = ResourcesManager.coToTile(bomb.getPosition().x, bomb.getPosition().y);

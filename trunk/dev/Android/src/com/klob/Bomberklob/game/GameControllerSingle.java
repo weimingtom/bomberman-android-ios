@@ -7,7 +7,11 @@ import android.view.SurfaceHolder;
 import android.widget.FrameLayout;
 
 import com.klob.Bomberklob.objects.PlayerAnimations;
-
+/**
+ * 
+ * Controller of the solo parts
+ *
+ */
 public class GameControllerSingle extends GameController {
 	
 	private Engine engine;
@@ -82,6 +86,9 @@ public class GameControllerSingle extends GameController {
 	
 	/* Méthodes publiques -------------------------------------------------- */
 	
+	/**
+	 * Restart the current game
+	 */
 	public void restartGame() {
 		this.isRestart = true;
 		
